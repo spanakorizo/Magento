@@ -1,6 +1,6 @@
 /*
 
 !.gitignore
-!code/
-!design/
-!etc/
+!/code/
+!/design/
+!/etc/
