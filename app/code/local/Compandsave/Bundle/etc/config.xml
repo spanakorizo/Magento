@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Compandsave_Bundle>
+           <version>0.0.1</version>       
+        </Compandsave_Bundle>
+    </modules>
+    <global>
+    	<models>
+			<compandsave_bundle>
+    		 	<class>Compandsave_Bundle_Model</class>
+			 </compandsave_bundle>
+		</models>
+	</global>
+
+</config>
