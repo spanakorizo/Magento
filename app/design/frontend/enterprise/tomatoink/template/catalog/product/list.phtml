@@ -71,7 +71,7 @@ echo $_productCollection->count();
     <?php foreach ($_productCollection as $_product): ?> 
 
    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a>
-    <?php if (++$i == 4 ) {echo "<br>";$i=0;} ?>
+    <?php if (++$count == 4 ) {echo "<br>";$count=0;} ?>
 
 
 
