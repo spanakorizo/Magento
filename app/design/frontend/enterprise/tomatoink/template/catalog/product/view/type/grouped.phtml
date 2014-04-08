@@ -61,12 +61,24 @@
     <tbody>
     <?php if ($_hasAssociatedProducts): ?>
     <?php foreach ($_associatedProducts as $_item): ?>
-        <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+        
+	<?php //get product url ?>
+	<?php $product_url = $_item->getProductUrl();
+	      $pro_url_array = explode("/", $product_url);
+	      $product_url = "";	      
+for ($i=0;$i<(count($pro_url_array)-2);$i++) {
+			$product_url .= $pro_url_array[$i] . "/";
+		}
+	      $product_url .= $_item->getUrlKey() . ".html";
+  ?>
+	<?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
         <tr>
-            <td><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" /></td>
+            <td><a href="<?php echo $product_url; ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" /></a></td>
             <td>
-                <a href="//www.buycheapink.org/index.php/<?php echo $_item->getUrlKey()?>.html"><?php echo $this->escapeHtml($_item->getName()) ?></a><br />
-                <span><?php echo $_item->getShortDescription()?></span>
+                <!-- <a href="<?php echo $_item->getProductUrl()?>.html"><?php echo $this->escapeHtml($_item->getName()) ?></a><br /> !-->
+		
+		<a href="<?php echo $product_url?>"><?php echo $this->escapeHtml($_item->getName()) ?></a><br />                
+<span><?php echo $_item->getShortDescription()?></span>
             </td>
             <?php if ($this->getCanShowProductPrice($_product)): ?>
             <td class="a-right">
