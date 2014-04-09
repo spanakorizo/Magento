@@ -6,13 +6,35 @@
         </Compandsave_Catalog>
     </modules>
     <global>
-    	<models>
-    		<catalog>
-    <rewrite>
-        <convert_adapter_category>Compandsave_Catalog_Model_Convert_Adapter_Category</convert_adapter_category>
-    </rewrite>
-</catalog>
-</models>
-</global>
+        <models>
+            <catalog>
+                <rewrite>
+                    <convert_adapter_category>Compandsave_Catalog_Model_Convert_Adapter_Category</convert_adapter_category>
+                    <product_type_grouped>Compandsave_Catalog_Model_Product_Type_Grouped</product_type_grouped>
+                </rewrite>
+            </catalog>
 
+            <compandsave_catalog>
+                <class>Compandsave_Catalog_Model</class>
+            </compandsave_catalog>
+        </models>
+		<blocks>
+			<adminhtml>
+                <rewrite>
+                    <catalog_product_edit_tab_super_group>Compandsave_Catalog_Block_Adminhtml_Product_Edit_Tab_Super_Group</catalog_product_edit_tab_super_group>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+		<catalog>
+			<product>
+				<type>
+					<grouped>
+						<allow_product_types>
+							<bundle/>
+						</allow_product_types>
+					</grouped>
+				</type>
+			</product>
+		</catalog>
+</global>
 </config>
