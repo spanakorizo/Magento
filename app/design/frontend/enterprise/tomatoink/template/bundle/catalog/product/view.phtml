@@ -58,7 +58,7 @@ $_product = $this->getProduct();
                     <?php echo $this->getChildHtml('extrahint') ?>
                     <?php echo $this->getChildHtml('bundleSummary') ?> 
  
-                    <!-- <?php echo $this->getChildHtml('customize_button') ?> !-->
+                    <!-- <?php //echo $this->getChildHtml('customize_button') ?> !-->
                     <?php if (!$this->hasOptions()):?>
                         <?php if($_product->isSaleable()): ?>
                         
@@ -132,7 +132,7 @@ $_product = $this->getProduct();
                     <h1><?php echo $this->__('Customize %s', $_helper->productAttribute($_product, $_product->getName(), 'name')) ?></h1>
                     <a href="#" onclick="Enterprise.Bundle.end(); return false;"><small>&lsaquo;</small> Go back to product detail</a>
                 </div>
-                <!-- <?php echo $this->getChildHtml('bundleSummary') ?> !-->
+                <!-- <?php //echo $this->getChildHtml('bundleSummary') ?> !-->
                 <?php if ($this->getChildChildHtml('container1')):?>
                     <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
                 <?php elseif ($this->getChildChildHtml('container2')):?>
