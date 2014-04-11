@@ -33,12 +33,15 @@
 ?>
 <?php $_helper = $this->helper('catalog/output'); ?>
 <?php $_product = $this->getProduct(); ?>
+<?php echo $_product->getTypeId(); ?>
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
 <div id="messages_product_view"><?php echo $this->getMessagesBlock()->setEscapeMessageFlag(true)->toHtml() ?></div>
 <div class="product-view">
+    <?php if ($_product->getTypeId() != "grouped"): ?>
     <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+    <?php endif; ?>
         <?php echo $this->getBlockHtml('formkey') ?>
         <div class="no-display">
             <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
@@ -60,12 +63,14 @@
                     <?php echo $this->getChildHtml('extrahint') ?>
 
                     <?php if (!$this->hasOptions()):?>
+                        <?php if ($_product->getTypeId() != "grouped"): ?>
                         <div class="add-to-box">
                             <?php if($_product->isSaleable()): ?>
                                 <?php echo $this->getChildHtml('addtocart') ?>
                             <?php endif; ?>
                             <?php echo $this->getChildHtml('addto') ?>
                         </div>
+                    <?php endif; ?>
                     <?php else:?>
                         <?php if ($_product->isSaleable() && $this->hasOptions() && $this->getChildChildHtml('container1') ):?>
                             <div class="options-container-small">
@@ -120,7 +125,9 @@
                 <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
             </div>
         <?php endif;?>
+        <?php if ($_product->getTypeId() != "grouped"): ?>
     </form>
+        <?php endif; ?>
         <?php echo $this->getChildHtml('relatedProducts') ?>
         <?php echo $this->getChildHtml('upsell_products') ?>
         <?php echo $this->getChildHtml('productTagList') ?>
