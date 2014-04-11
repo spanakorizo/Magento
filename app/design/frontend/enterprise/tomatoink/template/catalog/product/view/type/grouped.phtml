@@ -103,7 +103,7 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
                 <br><br>
                 <input type="button" value="Add To Cart" name="<?php echo $_item->getId() ?>" onclick="addproduct_query(this.name)">
                 <br><br> !-->
-                <form action="<?php echo Mage::$this->helper('checkout/cart')->getAddUrl($_item); ?>" method="post" id="product_addtocart_form_<?php echo $_item->getId()?>">
+                <form action="<?php echo $this->helper('checkout/cart')->getAddUrl($_item); ?>" method="post" id="product_addtocart_form_<?php echo $_item->getId()?>">
 <?php
 
 // If we have a bundle:
