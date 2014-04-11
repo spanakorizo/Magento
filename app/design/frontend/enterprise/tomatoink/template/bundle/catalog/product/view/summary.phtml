@@ -44,7 +44,7 @@
         <div class="clearer"></div>
         <?php //echo $this->getChildHtml('', true, true);?>
         <?php echo $this->getChildHtml('bundle_prices');?>
-        <form action="<?php echo Mage::$this->helper('checkout/cart')->getAddUrl($_product); ?>" method="post" id="product_addtocart_form_<?php echo $_product->getId()?>">
+        <form action="<?php echo $this->helper('checkout/cart')->getAddUrl($_product); ?>" method="post" id="product_addtocart_form_<?php echo $_product->getId()?>">
 <?php
 
 // If we have a bundle:
