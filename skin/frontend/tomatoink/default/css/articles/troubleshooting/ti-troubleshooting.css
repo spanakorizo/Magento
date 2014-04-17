@@ -1,0 +1,128 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Megan Prior-Pfeifer
+
+Created for Troubleshooting page at TomatoInk.com
+
+- General
+- Color Troubleshooting section
+- Index Follow
+
+Color Reference:
+green: #4ca62e;
+
+Naming convention: add ti_ts_ prefix
+ 
+*/
+/*********************************************************/
+
+
+.ti_ts_yellow-tab-note {
+	display:inline-block;
+	width:240px; 
+	padding:5px; 
+	border:1px solid #dddddd; 
+	margin-top:35px;
+	}
+	
+/*Color troubleshooting section, added by Megan Prior-Pfeifer 8-9-2013*/
+
+table.ti_ts_color-chart{
+	width: 575px;
+	cellspacing:0;
+	vertical-align:middle;
+	border:none;
+	font-family:Arial, Verdana, sans-serif;
+	font-size:12px;
+}
+
+table.ti_ts_color-chart td {
+	text-align:center;
+	font-family:Arial, Verdana, sans-serif;
+	font-size:12px;	
+}
+
+span.ti_ts_color {
+	color:#FFF;
+}
+
+.ti_ts_main-color {
+	width:65px;
+        height:65px;	
+}
+
+.ti_ts_col_1 {
+	width:150px;	
+}
+
+.ti_ts_col_2 {
+	width:75px;	
+}
+
+.ti_ts_col_3 {
+	width:160px;
+        height:32px;	
+}
+
+.ti_ts_blue {
+	background:#1c0b5b;
+}
+
+.ti_ts_red {
+	background:#c40026;
+}
+
+.ti_ts_green {
+	background:#008742;
+}
+
+.ti_ts_cyan {
+	color:#FFF;
+	width:65px;
+	height:32px;
+	background:#009EDB;
+}
+
+.ti_ts_magenta {
+	color:#FFF;
+	width:65px;
+	height:32px;
+	background:#CD0065;
+}
+
+.ti_ts_yellow {
+	color:#009EDB;
+	width:65px;
+	height:32px;
+	background:#FDF200;
+}
+
+/* -- Index Follow --*/
+
+#ti_ts_container{
+	height:3950px;	
+}
+
+#ti_ts_indexbox_1{
+	
+}
+
+#ti_ts_indexbox_2{
+	
+}
+
+#ti_ts_indexbox_3{
+	
+}
+
+#ti_ts_section_two{
+	position:absolute;
+	right:0px;
+	height:900px 
+}
+
+#ti_ts_divider_2{
+	
+}
