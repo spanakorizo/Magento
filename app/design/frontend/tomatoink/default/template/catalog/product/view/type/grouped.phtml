@@ -1,0 +1,159 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Grouped product data template
+ *
+ * @see Mage_Catalog_Block_Product_View_Media
+ * @see Mage_Catalog_Block_Product_View_Type_Grouped
+ */
+?>
+<?php $this->setPreconfiguredValue(); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $_associatedProducts = $this->getAssociatedProducts(); ?>
+<?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+<?php if ($this->displayProductStockStatus()): ?>
+    <?php if ($_product->isAvailable() && $_hasAssociatedProducts): ?>
+        <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>
+    <?php else: ?>
+        <p class="availability out-of-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('Out of stock') ?></span></p>
+    <?php endif; ?>
+<?php endif; ?>
+<?php echo $this->getChildHtml('product_type_data_extra') ?>
+<table class="data-table grouped-items-table" id="super-product-table">
+    <col />
+    <col />
+    <col width="1" />
+    <thead>
+        <tr>
+            <th><?php echo $this->__('Product Name') ?></th>
+            <?php if ($this->getCanShowProductPrice($_product)): ?>
+            <th class="a-right"><?php echo $this->__('Price') ?></th>
+            <?php endif; ?>
+            <?php if ($_product->isSaleable()): ?>
+            <th class="a-center"><?php echo $this->__('Qty') ?></th>
+            <?php endif; ?>
+        </tr>
+    </thead>
+    <tbody>
+    <?php if ($_hasAssociatedProducts): ?>
+    <?php $formKey = Mage::getSingleton('core/session')->getFormKey();?>
+    <?php foreach ($_associatedProducts as $_item): ?>
+        
+	<?php //get product url ?>
+	<?php $product_url = $_item->getProductUrl();
+	      $pro_url_array = explode("/", $product_url);
+	      $product_url = "";	
+          $checkout_url = "";      
+for ($i=0;$i<(count($pro_url_array)-2);$i++) {
+			$product_url .= $pro_url_array[$i] . "/";
+		}
+            $checkout_url = $product_url;
+            //$product_url .= $_item->getUrlKey() . ".html";
+            $product_url .= $pro_url_array[count($pro_url_array)-1];
+  ?>
+	<?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
+        <tr>
+            <td><a href="<?php echo $product_url; ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" /></a></td>
+            <td>
+                <!-- <a href="<?php //echo $_item->getProductUrl()?>.html"><?php //echo $this->escapeHtml($_item->getName()) ?></a><br /> !-->
+		
+		<a href="<?php echo $product_url?>"><?php echo $this->escapeHtml($_item->getName()) ?></a><br />                
+<span><?php echo $_item->getShortDescription()?></span>
+            </td>
+            <?php if ($this->getCanShowProductPrice($_product)): ?>
+            <td class="a-right">
+                <?php if ($this->getCanShowProductPrice($_item)): ?>
+                <?php echo $this->getPriceHtml($_item, true) ?>
+                <?php echo $this->getTierPriceHtml($_item) ?>
+                <?php endif; ?>
+            </td>
+            
+			
+
+
+		<?php endif; ?>
+            <?php if ($_product->isSaleable()): ?>
+            <td class="a-center">
+            <?php if ($_item->isSaleable()) : ?>
+                 <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" id = "product_qty_<?php echo $_item->getId(); ?>" value="<?php echo $_item->getQty()*1 ?>" title="<?php echo $this->__('Qty') ?>" class="input-text qty" />
+                <br><br>
+                <!-- customize bundle button !-->
+                <input type="button" value="Add To Cart" name="<?php echo $_item->getId(); ?>" onclick="addproduct_query(this.name)">
+
+                <?php
+                $bundle_url = "";
+                    if ($_item->getTypeId() == 'bundle'){
+                        
+                        $selectionCollection = $_item->getTypeInstance(true)->getSelectionsCollection(
+                        $_item->getTypeInstance(true)->getOptionsIds($_item), $_item
+                    );
+
+                    foreach($selectionCollection as $option) {
+                        $bundle_url .= "?bundle_option[" . $option->option_id  . "]=" . $option->selection_id . "&bundle_option_qty[" . $option->option_id . "]=";
+                    }//end: foreach $selectionCollection
+
+                } // end: if $_item == bundle 
+                ?>
+                <input type="hidden" value="<?php echo $bundle_url; ?>" id="bundle_<?php echo $_item->getId() ?>">
+                <br><br> 
+
+
+
+            <?php else: ?>
+                <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+            <?php endif; ?>
+            </td>
+            <?php endif; ?>
+
+
+        </tr>
+    <?php endforeach; ?>
+    <?php else: ?>
+       <tr>
+           <td colspan="<?php if ($_product->isSaleable()): ?>4<?php else : ?>3<?php endif; ?>"><?php echo $this->__('No options of this product are available.') ?></td>
+       </tr>
+    <?php endif; ?>
+    </tbody>
+</table>
+<script type="text/javascript">decorateTable('super-product-table')</script>
+
+<script type="text/javascript">
+function addproduct_query(product_id) {
+
+    var addtocart_url = "<?php echo $checkout_url;?>" + "checkout/cart/add/product/" + product_id + "/qty/";
+    var qty_id = "product_qty_" + product_id;
+    var product_qty = document.getElementById(qty_id).value;
+    if (product_qty==0) product_qty=1;
+    addtocart_url += product_qty + "/form_key/" + "<?php echo $formKey;?>";// + "/<?php //echo $bundle_option; ?>"
+    
+    var bundle_product = document.getElementById('bundle_' + product_id)
+    if (bundle_product.value != "") addtocart_url += bundle_product.value + product_qty;
+    //alert(addtocart_url);
+    window.location = addtocart_url;
+}
+
+</script> 

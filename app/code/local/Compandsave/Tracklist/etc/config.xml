@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Compandsave_Tracklist>
+           <version>0.0.1</version>       
+        </Compandsave_Tracklist>
+    </modules>
+    <global>
+    	<models>
+        	<compandsave_tracklist>
+				<class>Compandsave_Tracklist_Model</class>
+			</compandsave_tracklist>
+		</models>
+	</global>
+</config>

@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Compandsave_Additem>
+           <version>0.0.2</version>       
+        </Compandsave_Additem>
+    </modules>
+    <global>
+    	<models>
+			<compandsave_additem>
+    		 	<class>Compandsave_Additem_Model</class>
+			</compandsave_additem>
+		</models>
+		<resources>
+            <compandsave_additem_setup>
+                <setup>
+                    <module>Compandsave_Additem</module>
+                </setup>
+            </compandsave_additem_setup>
+        </resources>
+	</global>
+</config>

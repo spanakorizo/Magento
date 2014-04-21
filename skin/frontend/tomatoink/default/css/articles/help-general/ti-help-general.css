@@ -1,0 +1,201 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Sam Chao
+
+Created for Help (General) page at TomatoInk.com
+
+Color Reference:
+green: #4ca62e;
+
+Naming convention: add ti_hg_ prefix
+ 
+*/
+/*********************************************************/
+
+
+/****Text****/
+
+
+.ti_hg_content h2 {
+	margin:0;
+	font-size:1.8em; 
+	color:#333333; 
+	font-weight:bold; 
+	line-height:2.3em;
+}
+.ti_hg_content h4 {
+	font-size:1.4em; 
+	font-weight:bold; 
+}
+.ti_hg_content h5 {
+	color:#4ca62e; 
+	font-weight:bold; 
+	margin:2px 0 0 0;
+	font-size:0.9em;
+}
+.ti_hg_subTag_margin {
+	margin-left:20px;
+}
+
+/****Global****/
+.ti_hg_divider {
+	margin-bottom:40px;
+	border-color:#8ad260;
+}
+.ti_hg_3clo {
+	height:110px;
+	margin-top:30px;
+	border-right: 1px dotted #CCC;
+}
+.ti_hg_3clo div, .ti_hg_3clo ul {
+	margin-left:20px;
+	padding-right:10px;
+}
+/*.ti_hg_center2Col {
+	margin-left:25px;
+}*/
+.ti_hg_heading, .ti_hg_order, .ti_hg_troubleshoot, .ti_hg_payment, .ti_hg_warranty, .ti_hg_cartridge, .ti_hg_shipping, .ti_hg_account, .ti_hg_policy, .ti_hg_title1 {
+	float:left;
+}
+.ti_hg_subtitle {
+	height:auto;
+	border-color:#8ad260;
+}
+.ti_hg_frame {
+	background:#f7f7f7;
+	padding:5px 20px;
+	border-top:4px solid white;
+	border-bottom:3px solid white; 
+	overflow:hidden;
+}
+.ti_hg_frame td {
+	vertical-align:middle !important;
+}
+.ti_hg_icon_help{
+	background:url(../../../images/articles/help-general/help.png) no-repeat; 
+	margin-right:10px;
+	margin-top:2px;
+}
+
+/****All About Order****/
+.ti_hg_content {
+	float:left;
+	margin:1em 0;
+}
+.ti_hg_noBorder {
+	border:0;
+}
+.ti_hg_heading {
+	background-position: 0 -370px;
+	width:23px;
+	height:23px;
+	margin-left: 9px;
+	margin-top: 11px;
+}
+.ti_hg_order{
+	background-position:0 0;
+	width:47px; 
+	height:41px;
+}
+.ti_hg_pushUD {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+/****Ink Troubleshooting****/
+
+.ti_hg_textWidth {
+	width:300px;
+}
+.ti_hg_troubleshoot {
+	background-position:0 -41px; 
+	width:47px; 
+	height:47px;
+}
+.ti_hg_payment {
+	background-position:0 -88px; 
+	width: 47px; 
+	height:47px;
+}
+.ti_hg_cartridge {
+	background-position:0 -209px;
+	width: 47px; 
+	height:46px;
+}
+.ti_hg_shipping {
+	background-position:0 -136px;
+	width: 47px; 
+	height:32px;
+}
+.ti_hg_account {
+	background-position:0 -255px;
+	width: 47px; 
+	height:47px;
+}
+.ti_hg_warranty {
+	background-position:0 -167px;
+	width: 47px; 
+	height:42px;
+}
+.ti_hg_policy {
+	background-position:0 -302px;
+	width: 47px; 
+	height:47px;
+}
+.ti_hg_tomato {
+	background-position:0 -397px;
+	width:50px;
+	height:57px;
+}
+.ti_hg_btn_view_more {
+	border-radius:50px; 
+	-moz-border-radius:50px; 
+	-webkit-border-radius:50px;
+	background:#f2fce2; 
+	border:1px solid #ddeebf; 
+	padding:10px 15px; 
+	margin:15px 0 50px 0; 
+	overflow:hidden;
+}
+.ti_hg_btn_view_more:hover {
+	border:1px solid #95c73e;
+}
+.ti_hg_btn_view_more_s{
+	width:70px; 
+	margin:15px 0 50px 0;
+}
+
+.ti_hg_btn_view_more .ti_hg_arrow, .ti_hg_btn_view_more_s .ti_hg_arrow {
+	background-position:0 -349px; 
+	width:19px; 
+	height:19px; 
+	margin:0 0 0 5px;
+}
+.ti_hg_btn_view_more_s:hover .ti_hg_arrow {
+	animation:flipArrow 1s infinite;
+}
+	@keyframes flipArrow
+	{
+	0% {transform:scaleX(1);}
+	50% {transform:scaleX(0);}
+	100% {transform:scaleX(1);}
+	}
+
+/****Contact TomatoInk****/
+
+.ti_hg_tomatoman{
+	width:50px; 
+	height:57px; 
+	float:right;
+	margin-top:15px;
+	background-position: 0 -397px;
+}
+#ti_hg_help_contact_info {
+	margin-top:30px;
+}
+#ti_hg_help_contact_info td{
+	padding:1px 30px 1px 0;
+	color:#333; 
+	font-size:12px;
+}
