@@ -1,5 +1,7 @@
 <div id="ti_footer_row" class="btcf">
 	<div class="ti_cms_contain">
+
+
 		<div id="ti_footer_home_hide" class="clear">
 			<div class="ti_footer_top_block two_third">
 				<div id="ti_footer_email_cta" class="one_fourth">
@@ -24,6 +26,10 @@
 				</p>
 			</div>
 		</div>
+		<script type="text/javascript">
+        	var ti_current_url = window.location.href;
+        	if (ti_current_url == "<?php echo $this->getUrl('') ?>") document.getElementById('ti_footer_home_hide').style.display="none";
+        </script>
 		<div class="ti_footer_links_block one_third clear">
 			<h2>Company</h2>
 			<ul class="ti_menu">

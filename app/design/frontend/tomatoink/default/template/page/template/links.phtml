@@ -1,0 +1,75 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * @see Mage_Page_Block_Template_Links
+ */
+?>
+<ul class="ti_header_toplinks">
+
+						<li id="ti_header_account"><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a>
+							<ul >
+								<li><a href=""><span>Sign In</span></a></li>
+								<li><a href=""><span>My Account</span></a></li>
+								<li><a href=""><span>My Profile</span></a></li>
+								<li><a href=""><span>My Orders</span></a></li>
+								<li><a href=""><span>Sign Out</span></a></li>
+							</ul>
+
+
+						</li>
+						<li id="ti_header_cart"><a href=""><span>Cart</span>(0)</a></li>
+						<li id="ti_header_help"><a href=""><span>Need help?</span></a>
+							<ul>
+								<li><a href=""><span>Track Orders</span></a></li>
+								<li><a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','TomatoInk Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;" class="lt_green"><span id="ti_header_livechat">Live Chat (Online)</span></a></li>
+								<li><a href="{{store url='troubleshooting-tips'}}" target="_blank" class="lt_green">Troubleshooting page</a></li>
+								<li><a href=""><span>Call us</span></a></li>
+								<li><a href=""><span>Leave a Ticket</span></a></li>
+							</ul>
+
+
+
+						</li>
+</ul>
+
+
+<!-- 
+
+						<div class="ti_cms_gradient_block" id="ti_header_support">
+								<p>We're open M-F, 8am-5pm PST</p>
+								<ul>
+									<li>Call us at 1-877-777-0127</li>
+									<li>Talk to us on <a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','TomatoInk Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;" class="lt_green">live chat</a></li>
+									<li>Visit our <a href="{{store url='troubleshooting-tips'}}" target="_blank" class="lt_green">troubleshooting page</a></li>
+								</ul>
+							</div>
+
+
+
+
+!-->

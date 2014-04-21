@@ -65,8 +65,13 @@ function change_readmore(_more, _less) {
 
 	//Toggle coupon code
 	jQuery("#ti_main_coupon_arrow").click(function(){
-		jQuery("#ti_header_click_coupon").slideToggle("fast");
+		jQuery("#ti_header_click_coupon").slideToggle("fast", function() {
+			//if (jQuery('ti_header_click_coupon').css("display") == "none") alert("close");//jQuery("#ti_main_coupon_arrow").css("background", "url('../images/ti-assets/header-coupon-arrow-2.png') no-repeat scroll center top transparent;");
+		//else alert("open");//jQuery("#ti_main_coupon_arrow").css("background", "url('../images/ti-assets/header-coupon-arrow.png') no-repeat scroll center top transparent;");
+		//alert(jQuery('ti_header_click_coupon').css("display"));
+		});
 		jQuery("#ti_header_coupon_desc").slideToggle("fast");
+		
 	});
 
 

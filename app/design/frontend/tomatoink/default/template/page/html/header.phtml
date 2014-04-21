@@ -38,21 +38,9 @@
 					<p><strong>Free shipping on orders of $50 or more!</strong> Reg: $3.99</p>
 				</div>
 				<div class="ti_header_top_block">
-					<ul>
-						<li id="ti_header_help"><a rel="nofollow"><span>Support</span></a>
-							<div class="ti_cms_gradient_block" id="ti_header_support">
-								<p>We're open M-F, 8am-5pm PST</p>
-								<ul>
-									<li>Call us at 1-877-777-0127</li>
-									<li>Talk to us on <a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','TomatoInk Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;" class="lt_green">live chat</a></li>
-									<li>Visit our <a href="{{store url='troubleshooting-tips'}}" target="_blank" class="lt_green">troubleshooting page</a></li>
-								</ul>
-							</div>
-						</li>
-						<li id="ti_header_account"><a href=""><span>Login</span></a></li>
-						<li id="ti_header_cart"><a href=""><span>Cart</span>(0)</a></li>
-						<li id="ti_header_tracking"><a href=""><span>Order tracking</span></a></li>
-					</ul>
+					
+						<?php echo $this->getChildHtml('topLinks') ?>
+					
 				</div>
 			</div>
 		</div>
@@ -101,14 +89,14 @@
 								</div>
 				<?php endif?>
 			</div>
-			<div class="ti_header_top_block ti_hide_767 ti_logo_bar" id="ti_site_block">
+			<!-- <div class="ti_header_top_block ti_hide_767 ti_logo_bar" id="ti_site_block">
 				<div class="ti_input_bar" id="ti_header_site_search">
 					<form id="nxt-ac-form" onsubmit="return submitSearch5();" action="http://search.tomatoink.com/search" method="get" name="form5">
 						<input type="text" name="keywords" autocomplete="off" value="Type your ink or printer model..." id="search_v5_5" onfocus="if(this.value=='Type your ink or printer model...')this.value='';" onblur="if(this.value=='')this.value='Type your ink or printer model...';" onkeypress="return handleEnter5(this,event)">
 						<input type="submit" border="0" onclick="submitSearch5();" value="Search" name="imageField">
 					</form>
 				</div>
-			</div>
+			</div> !-->
 		</div>
 		<div id="ti_header_nav_main">
 			<div class="ti_cms_contain btcf">
@@ -200,5 +188,16 @@
 			</div>
 		</div>
 	</div>
+<?php  if ($this->helper('customer')->isLoggedIn()) echo "logged In"; else echo "Not Logged In";  ?>
+<?php $cart = Mage::getModel('checkout/cart')->getQuote();
+//$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsCount();
+echo "<br>Total " . $total_num;
+foreach ($cart->getAllItems() as $item) {
 
+    $productId = $item->getProduct()->getId();
+    $productqty = $item->getQty();
+    $productPrice = $item->getProduct()->getPrice();
+    echo  "<br>" . $productId . " " . $productPrice . " " . $productqty;
+} ?>
 	<!--Body content follows here-->
