@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Compandsave_CatalogAttribute>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Compandsave_CatalogAttribute>
+    </modules>
+</config>
