@@ -44,11 +44,16 @@ class Compandsave_Variable_Block_Adminhtml_Coupon_Grid
 			'options' => $CouponSingleton->getType()
         ));
 		
-		$this->addColumn('name', array(
+		$this->addColumn('value', array(
 			'header' => $this->_getHelper()->__('Value'),
 			'type' => 'text',
 			'index' => 'value',
 		));
+		$this->addColumn('expiry_date', array(
+            'header' => $this->_getHelper()->__('Expiry Date'),
+            'type' => 'date',
+            'index' => 'expiry_date',
+        ));
         $this->addColumn('created_at', array(
             'header' => $this->_getHelper()->__('Created'),
             'type' => 'datetime',

@@ -23,12 +23,19 @@
 
 <body>
 	<div id="ti_header_row">
+		<?php $getModel = Mage::getResourceModel('compandsave_variable/coupon_collection')
+				->addFieldToFilter('entity_type_id','Coupon')
+				->addFieldToFilter('status','1')
+				->addFieldToFilter('visibility','1')
+				->getFirstItem()
+				->load();
+		?>
 		<div class="ti_cms_contain ti_hide_479" id="ti_main_coupon">
 			<p id="ti_header_click_coupon"><span>Fresh Deals</span><br>Get this month's coupon.</p>
 			<p id="ti_header_coupon_desc">
-				<span id="ti_header_coupon_info"></span><br>
-				<span id="ti_header_coupon_code"></span><br>
-				<span id="ti_header_coupon_exp" class="ti_small_text"></span>
+				<span id="ti_header_coupon_info"><?php echo $getModel['description'];?></span><br>
+				<span id="ti_header_coupon_code"><?php echo $getModel['value']; ?></span><br>
+				<span id="ti_header_coupon_exp" class="ti_small_text"><?php echo $getModel['expiry_date']; ?></span>
 			</p>
 			<div id="ti_main_coupon_arrow"></div>
 		</div>

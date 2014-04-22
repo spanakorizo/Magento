@@ -49,6 +49,14 @@ class Compandsave_Variable_Block_Adminhtml_Coupon_Edit_Form
                 'input' => 'textarea',
                 'required' => false,
             ),
+			'expiry_date' => array(
+                'label' => $this->__('Expiry Date'),
+                'input' => 'date',
+				'time'  => false,
+				'image' => $this->getSkinUrl('images/grid-cal.gif'),
+				'format'    => Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT),
+                'required' => true,
+            ),
             'visibility' => array(
                 'label' => $this->__('Visibility'),
                 'input' => 'select',
