@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Compandsave_CatalogAttribute>
+            <version>0.0.1</version>
+        </Compandsave_CatalogAttribute>
+    </modules>
+    <global>
+        <resources>
+            <compandsave_catalogattribute_setup>
+                <setup>
+                    <module>Compandsave_CatalogAttribute</module>
+                </setup>
+            </compandsave_catalogattribute_setup>
+        </resources>
+        <helpers>
+            <compandsave_catalogattribute>
+                <class>Compandsave_CatalogAttribute_Helper</class>
+            </compandsave_catalogattribute>
+        </helpers>
+    </global>
+</config>
