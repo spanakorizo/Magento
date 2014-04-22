@@ -55,9 +55,10 @@ function change_readmore(_more, _less) {
 
 
 
-/*****************************************************************/
-/*    coupon code slide                    */
-/* Megan                                   */
+/*************************************/
+/*    coupon code slide              */
+/* Megan                             */
+/*************************************/
 	//toggles visibility of support menu
 	jQuery("#ti_header_help").click(function(){
 		jQuery("#ti_header_support").slideToggle("slow");
@@ -66,10 +67,11 @@ function change_readmore(_more, _less) {
 	//Toggle coupon code
 	jQuery("#ti_main_coupon_arrow").click(function(){
 		jQuery("#ti_header_click_coupon").slideToggle("fast", function() {
-			//if (jQuery('ti_header_click_coupon').css("display") == "none") alert("close");//jQuery("#ti_main_coupon_arrow").css("background", "url('../images/ti-assets/header-coupon-arrow-2.png') no-repeat scroll center top transparent;");
-		//else alert("open");//jQuery("#ti_main_coupon_arrow").css("background", "url('../images/ti-assets/header-coupon-arrow.png') no-repeat scroll center top transparent;");
-		//alert(jQuery('ti_header_click_coupon').css("display"));
-		});
+			//if (jQuery('ti_header_click_coupon').css("display") == "none") alert("close");//
+		//else alert("open");//
+		if (document.getElementById("ti_header_click_coupon").style.display == "none") jQuery("#ti_main_coupon_arrow").css("background-image", "url('../skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow-2.png')");
+		else {jQuery("#ti_main_coupon_arrow").css("background-image", "url('../skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow.png')");}
+		});//url("http://www.866ink.com/magentoEE/images/ti-assets/header-coupon-arrow.png")
 		jQuery("#ti_header_coupon_desc").slideToggle("fast");
 		
 	});

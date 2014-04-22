@@ -20,7 +20,7 @@ class Compandsave_Variable_Block_Adminhtml_Coupon_Grid
         /**
          * When a grid row is clicked, this is where the user should
          * be redirected to, the method editAction of Adminhtml
-         * CouponController.php in BrandDirectory module.
+         * CouponController.php in Variable module.
          */
         return $this->getUrl('compandsave_variable_admin/coupon/edit',array('id' => $row->getId()));
     }

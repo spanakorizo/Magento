@@ -9,10 +9,29 @@
 				</div>
 				<div class="three_fourth">
 					<div id="ti_footer_emailSubmit" class="ti_input_bar">
-						<form action="mailto:meganp@compandsave.com" method="post" enctype="text/plain">
-							<input type="text" name="mail" value="Your Email" onfocus="if(this.value=='Your Email')this.value='';" onblur="if(this.value=='')this.value='Your Email';">
-							<input type="submit" value="Signup">
-						</form>
+<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+    <div class="form-subscribe">
+    <div class="form-subscribe-header">
+        <label for="newsletter"><?php echo $this->__('Sign Up for Our Newsletter:') ?></label>
+    </div>
+        <div class="v-fix"><input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" /></div>
+        <!--<button type="submit" class="button" title="<?php //echo $this->__('Subscribe') ?>"><span><span><?php //echo $this->__('Subscribe') ?></span></span></button> !-->
+        <button type="button" id="subscribe_submit" class="button" title="<?php echo $this->__('Subscribe') ?>"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+    </div>
+</form>
+<script type="text/javascript">
+//<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+//]]>
+</script>
+
+<script type="text/javascript">
+jQuery("#subscribe_submit").click(function() {
+	jQuery("#newsletter-validate-detail").submit(function() {
+		window.location.href="http://www.866ink.com/magentoEE/index.php/newsletter/";
+	});
+}); 
+</script>
 					</div>
 				</div>
 			</div>
