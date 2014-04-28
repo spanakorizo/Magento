@@ -1,4 +1,10 @@
 <?php
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+?>
+
+<?php
 /**
  * Magento Enterprise Edition
  *
@@ -118,7 +124,19 @@ class Compandsave_Newsletter_Model_Subscriber extends Mage_Newsletter_Model_Subs
         }
 
 //add subscriber name
-        $this->setSubscriberFname("Peter");
+        //$this->setSubscriberFname("Peter");
+        if ($_POST['subscriber_firstname']) {
+                $firstname     = $_POST['subscriber_firstname'];
+                $this->setSubscriberFname($firstname);
+            }
+        if ($_POST['subscriber_lastname']) {
+                $lastname     = $_POST['subscriber_lastname'];
+                $this->setSubscriberLname($lastname);
+            }
+        if ($_POST['subscriber_freq']) {
+                $subscribe_freq = $_POST['subscriber_freq'];
+                $this->setSubscriberFreq($subscribe_freq);
+            } 
 
         $this->setIsStatusChanged(true);
 
@@ -222,7 +240,6 @@ class Compandsave_Newsletter_Model_Subscriber extends Mage_Newsletter_Model_Subs
             $this->setStoreId($customer->getStoreId())
                 ->setEmail($customer->getEmail());
         }
-        $this->setSubscriberFname("Peter");
         $this->save();
         $sendSubscription = $customer->getData('sendSubscription') || $sendInformationEmail;
         if (is_null($sendSubscription) xor $sendSubscription) {

@@ -23,7 +23,7 @@
 
 <body>
 	<div id="ti_header_row">
-		<?php $getModel = Mage::getResourceModel('compandsave_variable/coupon_collection')
+		<?php $getCouponModel = Mage::getResourceModel('compandsave_variable/coupon_collection')
 				->addFieldToFilter('entity_type_id','Coupon')
 				->addFieldToFilter('status','1')
 				->addFieldToFilter('visibility','1')
@@ -33,9 +33,9 @@
 		<div class="ti_cms_contain ti_hide_479" id="ti_main_coupon">
 			<p id="ti_header_click_coupon"><span>Fresh Deals</span><br>Get this month's coupon.</p>
 			<p id="ti_header_coupon_desc">
-				<span id="ti_header_coupon_info"><?php echo $getModel['description'];?></span><br>
-				<span id="ti_header_coupon_code"><?php echo $getModel['value']; ?></span><br>
-				<span id="ti_header_coupon_exp" class="ti_small_text"><?php echo $getModel['expiry_date']; ?></span>
+				<span id="ti_header_coupon_info"><?php echo $getCouponModel['description'];?></span><br>
+				<span id="ti_header_coupon_code"><?php echo $getCouponModel['value']; ?></span><br>
+				<span id="ti_header_coupon_exp" class="ti_small_text"><?php echo $getCouponModel['expiry_date']; ?></span>
 			</p>
 			<div id="ti_main_coupon_arrow"></div>
 		</div>
@@ -195,16 +195,52 @@
 			</div>
 		</div>
 	</div>
-<?php  if ($this->helper('customer')->isLoggedIn()) echo "logged In"; else echo "Not Logged In";  ?>
-<?php $cart = Mage::getModel('checkout/cart')->getQuote();
-//$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
-$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsCount();
-echo "<br>Total " . $total_num;
-foreach ($cart->getAllItems() as $item) {
 
-    $productId = $item->getProduct()->getId();
-    $productqty = $item->getQty();
-    $productPrice = $item->getProduct()->getPrice();
-    echo  "<br>" . $productId . " " . $productPrice . " " . $productqty;
-} ?>
+<?php 
+$cart = Mage::getModel('checkout/cart')->getQuote();
+//$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+$total_num = $cart->getItemsCount();
+if ($total_num == "") $total_num=0;
+
+$grandtotal = $cart->getSubtotal();
+$shopptingcarthtml="";
+foreach ($cart->getAllItems() as $item) {
+$shopptingcarthtml .= "<div class='one_half'><img class='block_center' src='" . $item->getProduct()->getImageUrl() . "'></img></div><div class='one_half'><p>" . $item->getProduct()->getName() . "</p></div><div class='ti_cms_separator'></div>";
+    //$productId = $item->getProduct()->getId();
+    //$productqty = $item->getQty();
+    //$productPrice = $item->getProduct()->getPrice();
+
+} 
+if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . $grandtotal . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "firecheckout/'><strong>Checkout</strong></a></p>";
+?>
+
+
+
+<!-- Global Variable Section !-->
+<script type="text/javascript">
+/*****************************************/
+/* toplinks: login section/cart section  */
+/* Author: Yiyang     Date 4/25/2014     */
+/*****************************************/
+
+
+
+var ti_global_islogin = "<?php  if ($this->helper('customer')->isLoggedIn()) echo true; else echo false;  ?>";
+var ti_global_total   = "<?php echo $total_num ?>";
+jQuery(document).ready(function() {
+//my account signin/signout
+if (ti_global_islogin) {jQuery('#ti_header_login').hide();}
+else {jQuery('#ti_header_logout').hide();}
+
+//shopping cart count
+jQuery('#ti_header_cartcount').html(ti_global_total);
+
+//shopping cart item
+var ti_header_shoppingcartblock = document.getElementById('ti_header_cartitems');
+ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
+
+
+});
+
+</script>
 	<!--Body content follows here-->

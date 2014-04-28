@@ -1,0 +1,93 @@
+<div class="selector_holder">
+		<h3>Cartridge Selector Tools</h3>
+        <p>You can use keyword or brand names on the top of the page to search your printer cartridges. Or, try our 2-step cartridge finder below.</p>
+        <form name="search-box" method="get" id="search-box">
+            <table id="two-step-search" cellpadding="0" cellspacing="0" border="0" width="100%">
+                <tbody>
+                    <tr valign="top">
+
+                        <td>
+                            <div style="text-align: left; font-size: 1.3rem; font-weight: bold;">Choose your brand</div>
+                            <div id="brand_div" style="text-align: center">
+                                <select name="" id="brand" style="width: 90%; text-align: left">
+                                    <option value="">select the brand</option>
+                                    <?php
+                                   $category = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('parent_id',2)->load();
+
+                                    foreach($category as $item){
+
+                                      $name = Mage::getModel('catalog/category')->load($item->getId());
+                                      echo '<option value="'.$item->getId().'">'.$name->getName().'</option>';
+                                    }
+
+                                  ?>
+
+                            </div>
+
+                        </td>
+                    </tr>
+                    <tr valign="top">
+                        <td>
+                            <div style="text-align: left; font-size: 1.3rem; font-weight: bold;">Choose series/cartridge #</div>
+                            <div id="series_div" style="text-align: center">
+                                <select disabled="" name="" id="series" style="width:90%; text-align: left">
+                                    <option value="" selected="">select your printer series</option>
+                                </select>
+                            </div>
+                            <div id="cartridge_div" style="text-align: center">
+                                <select disabled="" name="" id="cartridge" style="width: 90%; text-align: left">
+                                    <option value="" selected="">select your printer cartridge</option>
+                                </select>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+</div>
+<script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
+<script>
+$(function(){
+    $("#brand").change(function() {
+	    document.getElementById("series").disabled=false;
+        var dataString = $(this).val();
+		$.post("productselector/ajax/index",{id : dataString},function(data){
+			$('#series').html(data);
+		});
+        /* new Ajax.Request( "productselector/ajax/index", {
+            method: "post",
+            parameters: {
+              id : dataString
+            },
+            cache: false,
+            onSuccess: function(transport) {
+              $('#series').html(transport.responseText);
+            }
+        }); */
+    });
+    $("#series").change(function() {
+
+        var dataString = $(this).val();
+        if(dataString > 0){
+            document.getElementById("cartridge").disabled=false;
+
+            new Ajax.Request( "productselector/ink/index", {
+                method: "post",
+                parameters: {
+                  id : dataString
+                },
+                cache: false,
+                onSuccess: function(transport) {
+                  $('#cartridge').html(transport.responseText);
+                }
+            });
+        }
+    });
+
+    $("#cartridge").change(function() {
+        var id=$(this).val();
+        window.open("https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/"+ id, "_self");
+    });
+});
+
+</script>

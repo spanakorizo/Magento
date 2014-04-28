@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Compandsave_Productselector>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Compandsave_Productselector>
+		<depends>
+			<Mage_Catalog/>
+		</depends>
+    </modules>
+</config>

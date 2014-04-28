@@ -9,29 +9,19 @@
 				</div>
 				<div class="three_fourth">
 					<div id="ti_footer_emailSubmit" class="ti_input_bar">
-<form action="<?php echo $this->getFormActionUrl() ?>" method="post" id="newsletter-validate-detail">
+<form action="<?php echo $this->getUrl(''); ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
     <div class="form-subscribe">
     <div class="form-subscribe-header">
         <label for="newsletter"><?php echo $this->__('Sign Up for Our Newsletter:') ?></label>
     </div>
         <div class="v-fix"><input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" /></div>
-        <!--<button type="submit" class="button" title="<?php //echo $this->__('Subscribe') ?>"><span><span><?php //echo $this->__('Subscribe') ?></span></span></button> !-->
-        <button type="button" id="subscribe_submit" class="button" title="<?php echo $this->__('Subscribe') ?>"><span><span><?php echo $this->__('Subscribe') ?></span></span></button>
+     	<button type="submit" class="button" title="<?php echo $this->__('Subscribe') ?>"><span><span><?php echo $this->__('Subscribe') ?></span></span></button> 
+
     </div>
 </form>
-<script type="text/javascript">
-//<![CDATA[
-    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
-//]]>
-</script>
 
-<script type="text/javascript">
-jQuery("#subscribe_submit").click(function() {
-	jQuery("#newsletter-validate-detail").submit(function() {
-		window.location.href="http://www.866ink.com/magentoEE/index.php/newsletter/";
-	});
-}); 
-</script>
+
+
 					</div>
 				</div>
 			</div>
@@ -45,10 +35,19 @@ jQuery("#subscribe_submit").click(function() {
 				</p>
 			</div>
 		</div>
+		<!-- check if it is home and hide footer subscribe section !-->
 		<script type="text/javascript">
         	var ti_current_url = window.location.href;
         	if (ti_current_url == "<?php echo $this->getUrl('') ?>") document.getElementById('ti_footer_home_hide').style.display="none";
         </script>
+<!-- valify the subscript form !-->
+        <script type="text/javascript">
+//<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+//]]>
+</script>
+
+
 		<div class="ti_footer_links_block one_third clear">
 			<h2>Company</h2>
 			<ul class="ti_menu">

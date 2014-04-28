@@ -6,14 +6,24 @@ Author: Megan Prior-Pfeifer
 
 Table of Contents:
 1. Global
+	- Responsive
+	- Text colors
 2. Text
 3. Elements
 	- Inputs
+	- Select
+	- Social media
+	- Lists
+	- Images
 4. Header
 	- Navigation
+	- Search
+	- Coupon
 5. Footer
 6. Home Content
-7. Responsive
+7. Block Content
+	- Product
+8. Responsive
 
 Created for global css at TomatoInk.com
 
@@ -49,16 +59,12 @@ Naming convention: add ti_cms_ prefix
 html{font-size:62.5%;}
 body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-serif; color:#333; text-align:left; }
 .clear {clear:both;}
-.white{color:#fff;}
-.dk_green{color:#31590b;}
-.lt_green{color:#559a13;}
-.orange{color:#e67921;}
-.lt_orange{color:#fd8524;}
-.lt_brown{color:#f7e8db;}
 .brder-lt{border-left:2px #ccc solid;}
 .brder-rt{border-right:2px #ccc solid;}
 .brder-all{border:2px #ccc solid;}
 .ti_cms_contain{width:1000px;margin:auto;}
+.block_center{margin:0 auto;}
+.text_center{text-align:center;}
 
 /*responsive*/
 .one_third, .two_third,
@@ -66,16 +72,20 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .three_fourth {margin:0 auto;display:block;float:left;padding:1%;}
 .one_third{width:31%;}
 .one_third.middle{margin: 0 .5%;}
-.two_third{width:65%;}
+.two_third{width:64%;}
 .one_half{width:48%;}
 .one_fourth{width:23%;}
 .three_fourth{width:73%;}
 .one{width:98%;}
+.full{width:90%; padding:5%;}
 
 /*text colors*/
 .dgTxt{color:#31590b;}
 .lgTxt{color:#559a13;}
 .altTxt{color:#e67921;}
+.white{color:#fff;}
+.ltAlt{color:#fd8524;}
+.ltNeutral{color:#f7e8db;}
 
 .ti_cms_gradient_block{
 	background: #ffffff; /* Old browsers */
@@ -99,11 +109,8 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 
 h1, h2, h3, h4, h5, h6{
 	font-family:'raleway';
-	font-feature-settings: "lnum";
-	-moz-font-feature-settings: "lnum";
-	-webkit-font-feature-settings: "lnum";
-	-ms-font-feature-settings: "lnum";
-	-o-font-feature-settings: "lnum";
+	font-feature-settings: "lnum";-moz-font-feature-settings: "lnum";-webkit-font-feature-settings: "lnum";-ms-font-feature-settings: "lnum";-o-font-feature-settings: "lnum";
+	margin:.5em 0;
 }
 
 h1 { 
@@ -118,7 +125,7 @@ h2 {
 
 h3 { 
 	font-size:2.0em;
-	 font-weight:bold;
+	font-weight:bold;
 }
 
 h4 { 
@@ -138,17 +145,17 @@ h6 {
 
 p {
 	font-size:1.6em;
+	margin:.5em 0;
 }
 
 a { 
 	text-decoration:underline; 
-	transition:all .4s;
-	-webkit-transition:all .4s;
+	transition:text-decoration .4s;-webkit-transition:text-decoration .4s;
+	color:#333;
 }
 
 a:hover{
-	transition:all .4s;
-	-webkit-transition:all .4s; 
+	text-decoration:none;
 }
 
 strong{
@@ -163,6 +170,20 @@ strong{
 
 .ti_small_text{
 	font-size:.8em;
+}
+
+.ti_green_head{
+	text-align:center;
+	color:#559a13;
+	text-shadow: -.5px -.5px 0 #333, 1px 1px 0px #ECECEC;
+	line-height:1.1em;
+}
+
+.ti_orange_head{
+	text-align:center;
+	color:#e67921;
+	text-shadow: -.5px -.5px 0 #333, 1px 1px 0px #ECECEC;
+	line-height:1.1em;
 }
 
 
@@ -185,15 +206,14 @@ strong{
   margin:auto;
   padding:.5em;  
   position: relative;
-  transition:all .6s linear;
-  -webkit-transition:all .6s linear;
   background:url('../images/ti-assets/paper-bg_559a13.jpg') repeat;
 }
 
 
-input {
+input,
+.ti_button {
   font:300 2.4em/1em 'Raleway', Verdana, sans-serif;
-  padding:1%;
+  padding:2%;
   border-radius:.25em;
   -webkit-border-radius:.25em;
   -moz-border-radius:.25em;
@@ -201,6 +221,8 @@ input {
   border:none;
   margin:1%;
   -webkit-appearance: none;
+  vertical-align:middle;
+  display:inline-block;
 }
 
 input[type="text"] {
@@ -208,9 +230,13 @@ input[type="text"] {
   box-shadow: 3px 3px 3px rgba(0,0,0,.4) inset;
   -webkit-box-shadow: 3px 3px 3px rgba(0,0,0,.4) inset;
   cursor:text;
+  border:1px solid #559a13
+  transition:color .4s;
+  -webkit-transition:color .4s;
 }
 
-input[type="submit"] {
+input[type="submit"], 
+.ti_button {
   color:#fff;
   text-shadow:.5px .5px 1px rgba(0,0,0,.4);
   box-shadow: 3px 3px 3px rgba(0,0,0,.4);
@@ -218,15 +244,16 @@ input[type="submit"] {
   -webkit-box-shadow: 3px 3px 3px rgba(0,0,0,.4);
   background: #e67921; 
   cursor:pointer;
-  transition:.4s;
-  display:inline-block;
+  transition:background .4s;
+  -webkit-transition:background .4s;
 }
 
 input[type="text"]:hover{
 	color:#31590b;
 }
 
-input[type="submit"]:hover{
+input[type="submit"]:hover,
+.ti_button:hover{
 	background: #fd8524;
 }
 
@@ -235,7 +262,7 @@ input[type="submit"]:hover{
 }
 
 .ti_input_bar input[type="submit"]{
-	width:32%;
+	width:30%;
 }
 
 
@@ -264,8 +291,6 @@ select{
   	margin:auto;
  	padding:.5em;  
  	position: relative;
- 	transition:all .6s linear;
-  	-webkit-transition:all .6s linear;
   	background:url('../images/ti-assets/paper-bg_559a13.jpg') repeat;
 }
 
@@ -311,7 +336,7 @@ p.ti_social_media{
 /* -- Lists --*/
 
 ul {
-
+	font-size:1.6em;
 }
 
 ul>li{
@@ -324,14 +349,10 @@ ul>li{
     cursor:pointer;
     overflow:hidden;
     display:inline-block;
-    transition:all .4s; 
-	-webkit-transition:all .4s; 
 }
 
 .ti_menu>li:hover{
     height:auto;
-    transition:all .4s; 
-	-webkit-transition:all .4s; 
 }
 
 .ti_sub-menu{
@@ -350,8 +371,8 @@ ul>li{
 }
 
 .ti_sub-menu>li:hover, .ti_menu a:hover{
-	transition:all .4s; 
-	-webkit-transition:all .4s; 
+	transition:text-decoration .4s; 
+	-webkit-transition:text-decoration .4s; 
 }
 
 /* -- Images --*/
@@ -396,11 +417,14 @@ img{
 .ti_header_top_block ul{
 	float:right;
 	position:relative;
+	font-size:1em;
+	margin:.5em auto;
 }
 
 .ti_header_top_block ul li{
 	display:inline-block;
 	position:relative;
+	margin:.5em auto;
 }
 
 .ti_header_top_block ul li:hover{
@@ -435,11 +459,24 @@ img{
 	z-index:2;
 }
 
+#ti_header_nav_main ul{
+	font-size:1em;
+}
+
 #ti_header_nav_main li{
 	display:inline-block;
 	list-style-type:none;
-	padding:0 2.5em 0 0;
+	padding:0 2em;
 	position:relative;
+}
+
+#ti_header_nav_main li:first-child,
+#ti_header_nav_main li.first{
+	padding-left:0;
+}
+#ti_header_nav_main li:last-child,
+#ti_header_nav_main li.last{
+	padding-right:0;
 }
 
 #ti_header_nav_main li:hover,
@@ -448,8 +485,6 @@ img{
 #ti_header_nav_main li:target{
 	height:auto;
 	overflow:visible;
-	transition:all .4s; 
-	-webkit-transition:all .4s; 
 }
 
 #ti_header_nav_main .ti_menu li a span{
@@ -471,6 +506,7 @@ img{
 	display:block;
 	position:absolute;
 	z-index:10;
+	margin-top:2px;
 }
 
 #ti_header_nav_main li .ti_sub-menu li{
@@ -478,8 +514,6 @@ img{
 	height:auto;
 	padding:2%;
 	margin:0;
-	transition:all .4s; 
-	-webkit-transition:all .4s; 
 }
 
 .menu_three_col{
@@ -510,9 +544,13 @@ img{
 	width:96%;
 }
 
+.ti_header_top_block p,
+#ti_header_nav_main p{
+	color:#f7e8db;
+}
+
 #ti_header_nav_main li .ti_sub-menu li:hover{
-	transition:all .4s; 
-	-webkit-transition:all .4s; 
+
 }
 
 #ti_header_nav_main li .ti_sub-menu li a{
@@ -550,67 +588,99 @@ img{
 	border: none;
 	box-shadow:none;
 	-webkit-appearance:none;
-	width:110%;
+	width:115%;
 	background:transparent;
+	padding:1%;
 }
 
 #ti_header_search_mini input{
 	font-size:1.6em;
-	float:left;
 	box-shadow:none;
 	margin:0;
 }
 
 #ti_header_search_mini input[type="submit"]{
 	margin: 0 0 0 3%;
-	padding:.5%;
 }
 
 #ti_header_quick_links ul li{
 	overflow:visible;
 }
 
-#ti_header_help ul{
-	margin:5px 0px 0px 15px;
-	padding:0;
-	float:left;
-}
-
-#ti_header_support{
+.ti_cms_dropContent{
 	display:none;
 	z-index: 1000;
 	position: absolute;
-	top: 2.5em;
-	width: 250px;
-	font-size: 1em;
+	/*margin-top: 1em;*/
+	min-width: 200px;
 	color: #333;
+	padding:5px;
+	left: 50%;
+	margin-left: -100px;
 }
 
-#ti_header_support li{
-	display:list-item;
+.ti_cms_dropContent:after {
+  	width: 0px;
+	height: 0px;
+	position: absolute;
+	border-style: solid;
+	border-width: 10px;
+	border-color: transparent transparent #F7E8DB;
+	content: "";
+	top: -20px; 
+	left: 50%;
+	margin-left: -5px;
 }
 
-#ti_header_support a,
-#ti_header_support p,
-#ti_header_support li {
-	font-size:12px;
+.ti_cms_dropContent ul{
+	float:left;
 }
 
-#ti_header_support p{
+.ti_cms_dropContent ul li{
+	margin:0;
+	clear:both;
+	padding:1%;
+}
+
+.ti_cms_dropContent a,
+.ti_cms_dropContent p,
+.ti_cms_dropContent li {
+	font-size:1.2em;
+	text-decoration:none;
+}
+
+.ti_cms_dropContent a{
+	border-bottom: 3px solid transparent;
+}
+
+.ti_cms_dropContent a:hover{
+	border-bottom: 3px solid #E67921;
+}
+
+.ti_cms_dropContent p{
 	color:#333;
+	font-size:1.6em;
+}
+
+.ti_cms_dropContent img{
+	width:100%;
+}
+
+.ti_cms_dropContent .ti_button,
+.ti_cms_dropContent input{
+	box-shadow:none;
+	text-shadow:none;
 }
 
 
 /* Search */
 #ti_header_mainSearch{
-	display:inline-block;
-	width:100%;
+	display:block;
 	position:absolute;
 	z-index:5;
 	top:15em;
-}
-
-#ti_header_mainSearch .ti_input_bar{
+	left:50%;
+	margin-left:-30%;
 	width:55%;
 }
 
@@ -696,10 +766,6 @@ img{
 	display:none;
 }
 
-.ti_header_top_block p,
-#ti_header_nav_main p{
-	color:#f7e8db;
-}
 
 #ti_header_nav_main p{
 	text-align:center;
@@ -723,6 +789,10 @@ img{
 	width:50%;
 	float:left;
 	margin:1em auto;
+}
+
+.ti_footer_links_block ul{
+	font-size:1em;
 }
 
 #ti_footer_row li,
@@ -785,7 +855,11 @@ img{
 /* -----------------------------------*/
 /* ------>> 7. Block Content <<<------*/
 /* -----------------------------------*/
-/* ------- Prefix: ti_cms_block_ -----*/
+/* --------- Prefix: ti_cms_ ---------*/
+
+.ti_cms_breadcrumb{
+	padding:15px 0;
+}
 
 .ti_cms_block_headerBar-green{
 	width:100%;
@@ -804,7 +878,7 @@ img{
 }
 
 .ti_cms_block_qty{
-	font:1.2em/1em 'Raleway', Verdana, sans-serif;
+	font:1.2em/1.5em 'Raleway', Verdana, sans-serif;
 	font-feature-settings: "lnum";
 	-moz-font-feature-settings: "lnum";
 	-webkit-font-feature-settings: "lnum";
@@ -821,6 +895,85 @@ img{
 .ti_cms_block_qty input[type="text"]{
 	width:30px;
 }
+
+#ti_product_stockAlert{
+	margin-left:2.5em;
+}
+
+.ti_cms_separator{
+	height:4px;
+	margin:.5em;
+	background:#559a13;
+	clear:both;
+}
+
+/* Products */
+/* ------- Prefix: ti_product_ -----*/
+
+.ti_product_image{
+	width:100%;
+}
+
+.ti_product_thumb{
+	outline:1px solid #559a13;
+	width:100%;
+}
+
+.ti_product_thumb:active,
+.ti_product_thumb:focus{
+	outline:3px solid #559a13;
+}
+
+.ti_product_infoBlock{
+	text-align:center;
+	margin-top:1em;
+}
+
+.ti_product_infoBlock h1,
+.ti_product_infoBlock h5{
+	margin:0;
+	line-height: 1.1em;
+}
+
+.ti_product_infoBlock ul{
+
+}
+
+.ti_product_infoBlock li{
+	text-align:left;
+	background:url("../images/ti-assets/checkmark.png") no-repeat 0 3px;
+    padding-left: 20px;
+}
+
+#ti_product_ourPrice{
+
+}
+
+#ti_product_brandPrice{
+	text-decoration: line-through;
+}
+
+/* Product Ratings*/
+.ti_product_rating{
+	width:83px;
+	height:19px;
+	background:url("../images/ti-assets/star-rating.png") no-repeat;
+	display:inline-block;
+	vertical-align:middle;
+	margin-right:5px;
+}
+
+.star0 {background-position: 0 0;}
+.star0_5 {background-position: 0px -18px;}
+.star1 {background-position: 0px -36px;}
+.star1_5 {background-position: 0px -54px;}
+.star2 {background-position: 0px -72px;}
+.star2_5 {background-position: 0px -90px;}
+.star3 {background-position: 0px -108px;}
+.star3_5 {background-position: 0px -126px;}
+.star4 {background-position: 0px -144px;}
+.star4_5 {background-position: 0px -162px;}
+.star5 {background-position: 0px -180px;}
 
 /* -----------------------------------*/
 /* -------->> 8. Responsive <<<-------*/
@@ -848,14 +1001,14 @@ img{
 		min-width:800px;
 	}
 
-	#ti_header_mainSearch .ti_input_bar{
+	#ti_header_mainSearch .ti_input_barContainer{
 		background:none;
 		box-shadow:none;
 		-webkit-box-shadow:none;
 	}
 
 	#ti_header_nav_main li{
-		padding:0px 1.5em 0px 0px;
+		padding:0px 1.4em;
 	}
 
 	.ti_header_top_block,
@@ -875,6 +1028,12 @@ img{
 
 	.ti_header_top_block ul{
 		float:left;
+	}
+
+	.ti_cms_dropContent,
+	.ti_cms_dropContent:after{
+		left:0;
+		margin-left:0;
 	}
 
 	#ti_main_coupon{
@@ -931,7 +1090,7 @@ img{
 
 	#ti_main_coupon{
 		z-index:3;
-		top:30px;
+		top:55px;
 	}
 
 	#ti_header_quick_links{
@@ -952,6 +1111,34 @@ img{
 
 	.ti_cms_block_related img{
 		max-height:150px;
+	}
+
+	.ti_product_image{
+		width:60%;
+		padding:3%;
+		float:left;
+	}
+
+	.ti_product_thumb_block{
+		width:34%;
+		float:left;
+	}
+
+	.ti_product_thumb_block .one_fourth{
+		width:48%;
+	}
+
+	.menu_two_col, .menu_three_col {
+	    width: 110px;
+	}
+
+	.menu_two_col li,
+	.menu_three_col li {
+	    width: 98%;
+	}
+
+	.ti_cms_dropContent{
+		min-width:0px;
 	}
 
 	#ti_footer_email_cta{
@@ -996,32 +1183,20 @@ img{
 		float:none;
 	}
 
-	.ti_header_top_block ul{
-		padding:0;
-		margin:0 auto;
-		float:none;
-		display:block;
-		width:80%;
-	}
-
-	.ti_header_top_block ul li{
-		float:left;
-		text-align:center;
-		padding:0;
-		font-size: 1em;
-	}
-
-	.ti_header_top_block ul li:last-child{
-		margin-right:0;
-	}
-
 	#ti_header_quick_links{
 		z-index: 20;
 		position: relative;
 	}
 
+	.ti_header_top_block ul {
+		float: none;
+		margin: 0 auto;
+		display: block;
+		max-width: 250px;
+	}
+
 	#ti_header_search_mini input{
-		width:47%;
+		max-width:46%;
 	}
 
 	.ti_header_top_block p{
