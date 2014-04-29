@@ -52,7 +52,7 @@ error_reporting(E_ALL);
 <div id="ti_cms_product_container" class="btcf">
 
         <div class="ti_cms_contain">
-            <div class="two_fifth" style="margin-left:200px">
+            <div class="two_fifth">
                 <?php echo $this->getChildHtml('media') ?>
             </div>
             <div class="three_fifth ti_cms_gradient_block">
@@ -64,8 +64,8 @@ error_reporting(E_ALL);
                     <div class="ti_cms_separator"></div>
                     <div class="btcf">
                         <div class="one_half ti_product_infoBlock">
-                            <h1 class="altTxt" id="ti_product_ourPrice">$<?php echo $_product->getPrice(); ?></h1>
-                            <h5>brand-name: <span id="ti_product_brandPrice">$<?php echo $_product->getMsrp(); ?></span></h5>
+                            <h1 class="altTxt" id="ti_product_ourPrice">$<?php echo round($_product->getPrice(),2); ?></h1>
+                            <h5>brand-name: <span id="ti_product_brandPrice">$<?php echo round($_product->getMsrp(),2); ?></span></h5>
                             <div class="ti_cms_block_qty">
                                 <form>
 

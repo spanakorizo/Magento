@@ -208,13 +208,13 @@ if ($total_num == "") $total_num=0;
 $grandtotal = $cart->getSubtotal();
 $shopptingcarthtml="";
 foreach ($cart->getAllItems() as $item) {
-$shopptingcarthtml .= "<div class='one_half'><img class='block_center' src='" . $item->getProduct()->getImageUrl() . "'></img></div><div class='one_half'><p>" . $item->getProduct()->getName() . "</p></div><div class='ti_cms_separator'></div>";
+$shopptingcarthtml .= "<div class='one_half'><a href='" . $this->getUrl('') . $item->getProduct()->getUrlKey() . ".html'><img class='block_center' src='" . $this->helper('catalog/image')->init(Mage::getModel('catalog/product')->load($item->getProductId()), 'small_image') . "'></img></a></div><a href='" . $this->getUrl('') . $item->getProduct()->getUrlKey() . ".html'><div class='one_half'><p>" . $item->getProduct()->getName() . "</p></div></a><div class='ti_cms_separator'></div>";
     //$productId = $item->getProduct()->getId();
     //$productqty = $item->getQty();
     //$productPrice = $item->getProduct()->getPrice();
 
 } 
-if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . $grandtotal . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "firecheckout/'><strong>Checkout</strong></a></p>";
+if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . round($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "firecheckout/'><strong>Checkout</strong></a></p>";
 ?>
 
 
