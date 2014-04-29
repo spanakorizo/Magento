@@ -48,8 +48,8 @@
     <?php if (($related_id[$i]== "") && ($i<4)) $related_id[$i] = $related_backup[$i]; ?>
 <?php $_related_item = Mage::getModel('catalog/product')->load($related_id[$i]);?>
     <div class="ti_cms_block_related one_fourth">
-        <a href="<?php $_related_item->getProductUrl() ?>"><p><?php echo $_related_item->getName() ?></p></a>
-        <a href="<?php $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
+        <a href="<?php echo $_related_item->getProductUrl() ?>"><p><?php echo $_related_item->getName() ?></p></a>
+        <a href="<?php echo $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
 
         <h3 class="orange">Our price: $<?php echo number_format($_related_item->getPrice(), 2) ?></h3>
         <div class="ti_cms_block_qty">

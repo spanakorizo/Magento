@@ -125,9 +125,14 @@ error_reporting(E_ALL);
 <?php echo $this->getChildHtml('relatedProducts') ?>
 
 <script type="text/javascript">
-jQuery('#ti_product_qtyDiscount').click(function() {
-    jQuery('#ti_product_qtyDiscountDrop').slideToggle("slow");
+
+jQuery('#ti_product_qtyDiscount').click(function(e) {
+    jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  jQuery("#ti_product_qtyDiscountDrop").stop(true, true).slideToggle("fast");
+  e.stopPropagation();
 });
+
+
 </script>
 <?php else: ?>
 

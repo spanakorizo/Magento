@@ -114,16 +114,22 @@ function change_readmore(_more, _less) {
     $("#ti_header_accountDrop").slideToggle("fast");
   });
 */
-	$("#ti_header_help").hover(function(){
-		$("#ti_header_helpDrop").slideToggle("fast");
+	$("#ti_header_help").click(function(e){
+		jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+		$("#ti_header_helpDrop").stop(true, true).slideToggle("fast");
+		e.stopPropagation();
 	});
 
-  $("#ti_header_cart").hover(function(){
-    $("#ti_header_cartDrop").slideToggle("fast");
+  $("#ti_header_cart").click(function(e){
+  	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+    $("#ti_header_cartDrop").stop(true, true).slideToggle("fast");
+    e.stopPropagation();
   });
 
-  $("#ti_header_account").hover(function(){
-    $("#ti_header_accountDrop").slideToggle("fast");
+  $("#ti_header_account").click(function(e){
+  	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+    $("#ti_header_accountDrop").stop(true, true).slideToggle("fast");
+    e.stopPropagation();
   });
 	//Toggle coupon code
 	jQuery("#ti_main_coupon_arrow").click(function(){
@@ -141,3 +147,8 @@ function change_readmore(_more, _less) {
 
 
 }); //end of document ready
+
+//hide drop content when clicking on anywhere else
+jQuery(document).click(function () {
+  jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+});
