@@ -1,7 +1,7 @@
 <?php
 $cat_id = $_POST['id'];
 echo '<option value="" selected="">select your printer cartridge</option>';
-var_dump($cat_id);
+
 $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
 $nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
 $coreResource = Mage::getSingleton('core/resource');
@@ -10,45 +10,44 @@ $entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTyp
 $store_id = 0;//Mage::app()->getStore()->getId();
 $attrbTable = $coreResource->getTableName('catalog_product_entity_varchar');
 //get group product id
+$relationtable = $coreResource->getTableName('catalog_product_link');
 $prdtable = $coreResource->getTableName('catalog_category_product');
 $select = $conn->select()
 		->from($prdtable,array('product_id'))
 		->where('category_id = ?',$cat_id);
-$result = array_unique($conn->fetchCol($select)); //get unique value from array to remove multiple product ID
-
+$result = $conn->fetchCol($select); //get product ID from category
 if(!empty($result)){
-	$result_new = array();
+    $simple_prd_array = array();
 	foreach( $result as $grp_id){	
-		$relationtable = $coreResource->getTableName('catalog_product_link');
 		$select = $conn->select()
 			->from($relationtable,array('linked_product_id'))
-			->where('product_id = ?',$grp_id['product_id'])
+			->where('product_id = ?',$grp_id)
 			->where('link_type_id = ?',Mage_Catalog_Model_Product_Link::LINK_TYPE_GROUPED);
-		$result = $conn->fetchCol($select);
-		$result_new = array_push($result_new, $result);
-	}
-	$result_all = array_unique($result_new);
-	var_dump($result_all);
-	if(!empty($result_all)){
-		foreach($result_all as $product_id){
-		//$product_model = Mage::getModel('catalog/product')->load($product_id);
-			$sel = $conn->select()
-				->from($attrbTable, array('entity_id','value'))
-				->where('entity_type_id = ?', $entityTypeId)
-				->where('attribute_id = ?', $nameId)
-				->where('store_id = ?',$store_id)
-				->where('entity_id = ?',$product_id['linked_product_id']);
-		  //echo '<option value="'.$product_model->getId().'">'.$product_model->getName().'</option>';*/
-		  $product = $conn->fetchAll($sel);
-		  foreach($product as $product_arr)
-			  echo '<option value="'.$product_arr['entity_id'].'">'.$product_arr['value'].'</option>';
+		$result_all = $conn->fetchCol($select);
+        $simple_prd_array = array_merge($simple_prd_array,$result_all);
 
-	  }
-	}
-		
-	
-}
-else{
-	echo '<option value="0">No Product Found</option>';
+    }
+
+    $result_simple = array_unique($simple_prd_array);
+
+    if(!empty($result_simple)){
+        foreach($result_simple as $product_id){
+        //$product_model = Mage::getModel('catalog/product')->load($product_id);
+            $sel = $conn->select()
+                ->from($attrbTable, array('entity_id','value'))
+                ->where('entity_type_id = ?', $entityTypeId)
+                ->where('attribute_id = ?', $nameId)
+                ->where('store_id = ?',$store_id)
+                ->where('entity_id = ?',$product_id);
+        $product = $conn->fetchAll($sel);;
+        foreach($product as $product_arr)
+            echo '<option value="'.$product_arr['entity_id'].'">'.$product_arr['value'].'</option>';
+
+      }
+    }
+    else{
+      echo '<option value="0">No Product Found</option>';
+
+    }
 
 }

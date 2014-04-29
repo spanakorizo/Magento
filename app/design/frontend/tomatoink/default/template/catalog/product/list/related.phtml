@@ -95,7 +95,7 @@ function addproduct_query(product_id) {
     addtocart_url += product_qty + "/form_key/" + "<?php echo $formKey;?>";// + "/<?php //echo $bundle_option; ?>"
     
     var bundle_product = document.getElementById('bundle_' + product_id)
-    if (bundle_product.value != "") addtocart_url += bundle_product.value + product_qty;
+    if (bundle_product && bundle_product.value != "") addtocart_url += bundle_product.value + product_qty;
     //alert(addtocart_url);
     window.location = addtocart_url;
 }
