@@ -4,4 +4,9 @@ class Compandsave_Productselector_InkController extends Mage_Core_Controller_Fro
 		$this->loadLayout();
 		$this->renderLayout();
 	}
+	
+	public function simpleAction(){
+		$this->loadLayout();
+		$this->renderLayout();
+	}
 }

@@ -9,12 +9,17 @@
 
 	<productselector_ajax_index>
         <reference>
-			<block type="compandsave_productselector/ajaxlist" name="root" as="ajaxlist" template="productselector/ajaxlist.phtml" />
+			<block type="compandsave_productselector/ajaxlist" name="root" as="ajaxlist" output="toHtml" template="productselector/ajaxlist.phtml" />
         </reference>
 	</productselector_ajax_index>
     <productselector_ink_index>
         <reference>
-            <block type="compandsave_productselector/inklist" name="root" as="inklist" template="productselector/inklist.phtml" />
+            <block type="compandsave_productselector/inklist" name="root" as="inklist" output="toHtml" template="productselector/inklist.phtml" />
         </reference>
     </productselector_ink_index>
+	<productselector_ink_simple>
+        <reference>
+            <block type="compandsave_productselector/inklist" name="root" as="simplelist" output="toHtml" template="productselector/simplelist.phtml" />
+        </reference>
+    </productselector_ink_simple>
 </layout>

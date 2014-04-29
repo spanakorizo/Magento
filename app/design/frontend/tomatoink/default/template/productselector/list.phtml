@@ -47,12 +47,17 @@
 </div>
 <script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
 <script>
-$(function(){
-    $("#brand").change(function() {
+jQuery.noConflict();
+jQuery(function(){
+    jQuery("#brand").change(function() {
 	    document.getElementById("series").disabled=false;
-        var dataString = $(this).val();
-		$.post("productselector/ajax/index",{id : dataString},function(data){
-			$('#series').html(data);
+		document.getElementById("cartridge").disabled=false;
+        var dataString = jQuery(this).val();
+		jQuery.post("productselector/ajax/index",{id : dataString},function(data){
+			jQuery('#series').html(data);
+		});
+		jQuery.post("productselector/ink/simple",{id : dataString},function(data){
+			jQuery('#cartridge').html(data);
 		});
         /* new Ajax.Request( "productselector/ajax/index", {
             method: "post",
@@ -65,9 +70,9 @@ $(function(){
             }
         }); */
     });
-    $("#series").change(function() {
+    jQuery("#series").change(function() {
 
-        var dataString = $(this).val();
+        var dataString = jQuery(this).val();
         if(dataString > 0){
             document.getElementById("cartridge").disabled=false;
 
@@ -78,14 +83,14 @@ $(function(){
                 },
                 cache: false,
                 onSuccess: function(transport) {
-                  $('#cartridge').html(transport.responseText);
+                  jQuery('#cartridge').html(transport.responseText);
                 }
             });
         }
     });
 
-    $("#cartridge").change(function() {
-        var id=$(this).val();
+    jQuery("#cartridge").change(function() {
+        var id=jQuery(this).val();
         window.open("https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/"+ id, "_self");
     });
 });

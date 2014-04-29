@@ -69,13 +69,19 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 /*responsive*/
 .one_third, .two_third,
 .one_half, .one_fourth,
-.three_fourth {margin:0 auto;display:block;float:left;padding:1%;}
+.three_fourth,
+.one_fifth, .two_fifth,
+.three_fifth, .four_fifth {margin:0 auto;display:block;float:left;padding:1%;}
 .one_third{width:31%;}
 .one_third.middle{margin: 0 .5%;}
 .two_third{width:64%;}
 .one_half{width:48%;}
 .one_fourth{width:23%;}
 .three_fourth{width:73%;}
+.one_fifth{width:18%;}
+.two_fifth{width:38%;}
+.three_fifth{width:58%;}
+.four_fifth{width:78%;}
 .one{width:98%;}
 .full{width:90%; padding:5%;}
 
@@ -84,6 +90,7 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .lgTxt{color:#559a13;}
 .altTxt{color:#e67921;}
 .white{color:#fff;}
+.dark{color:#333;}
 .ltAlt{color:#fd8524;}
 .ltNeutral{color:#f7e8db;}
 
@@ -97,11 +104,9 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 	background: radial-gradient(ellipse at center,  #ffffff 60%,#fff6ee 99%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fff6ee',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	padding: 1%;
-	border:1px solid #f7e8db;
+	outline:1px solid #f7e8db;
 	border-bottom: 7px solid #71b62f;
 }
-
-
 
 /* -----------------------------------*/
 /* ---------->> 2. Text <<<-----------*/
@@ -225,14 +230,21 @@ input,
   display:inline-block;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="number"] {
   color:#559a13;
   box-shadow: 3px 3px 3px rgba(0,0,0,.4) inset;
   -webkit-box-shadow: 3px 3px 3px rgba(0,0,0,.4) inset;
   cursor:text;
-  border:1px solid #559a13
+  border:1px solid #559a13;
   transition:color .4s;
   -webkit-transition:color .4s;
+	font-family:'Raleway', Verdana, sans-serif;
+	font-feature-settings: "lnum";
+	-moz-font-feature-settings: "lnum";
+	-webkit-font-feature-settings: "lnum";
+	-ms-font-feature-settings: "lnum";
+	-o-font-feature-settings: "lnum";
 }
 
 input[type="submit"], 
@@ -248,7 +260,8 @@ input[type="submit"],
   -webkit-transition:background .4s;
 }
 
-input[type="text"]:hover{
+input[type="text"]:hover,
+input[type="number"]:hover{
 	color:#31590b;
 }
 
@@ -257,7 +270,8 @@ input[type="submit"]:hover,
 	background: #fd8524;
 }
 
-.ti_input_bar input[type="text"]{
+.ti_input_bar input[type="text"],
+.ti_input_bar input[type="number"]{
 	width:60%;
 }
 
@@ -611,10 +625,9 @@ img{
 	display:none;
 	z-index: 1000;
 	position: absolute;
-	/*margin-top: 1em;*/
 	min-width: 200px;
 	color: #333;
-	padding:5px;
+	padding:20px 5px 5px;
 	left: 50%;
 	margin-left: -100px;
 }
@@ -625,9 +638,9 @@ img{
 	position: absolute;
 	border-style: solid;
 	border-width: 10px;
-	border-color: transparent transparent #F7E8DB;
+	border-color: transparent transparent #E67921;
 	content: "";
-	top: -20px; 
+	top: 0; 
 	left: 50%;
 	margin-left: -5px;
 }
@@ -892,7 +905,8 @@ img{
 	font:1em/1em 'Raleway', Verdana, sans-serif;
 }
 
-.ti_cms_block_qty input[type="text"]{
+.ti_cms_block_qty input[type="text"],
+.ti_cms_block_qty input[type="number"]{
 	width:30px;
 }
 
@@ -911,17 +925,20 @@ img{
 /* ------- Prefix: ti_product_ -----*/
 
 .ti_product_image{
-	width:100%;
+	width:80%;
 }
 
 .ti_product_thumb{
 	outline:1px solid #559a13;
 	width:100%;
+	opacity:.8;
 }
 
 .ti_product_thumb:active,
-.ti_product_thumb:focus{
+.ti_product_thumb:focus,
+.ti_product_thumb:hover{
 	outline:3px solid #559a13;
+	opacity:1;
 }
 
 .ti_product_infoBlock{
@@ -939,7 +956,7 @@ img{
 
 }
 
-.ti_product_infoBlock li{
+.ti_product_checklist li{
 	text-align:left;
 	background:url("../images/ti-assets/checkmark.png") no-repeat 0 3px;
     padding-left: 20px;
@@ -951,6 +968,42 @@ img{
 
 #ti_product_brandPrice{
 	text-decoration: line-through;
+}
+
+#ti_product_qtyDiscount{
+	font-family:'Raleway', Verdana, sans-serif;
+	font-feature-settings: "lnum";
+	-moz-font-feature-settings: "lnum";
+	-webkit-font-feature-settings: "lnum";
+	-ms-font-feature-settings: "lnum";
+	-o-font-feature-settings: "lnum";
+	list-style: none;
+}
+
+#ti_product_qtyDiscountDrop{
+	margin-left:-50px;
+}
+
+#ti_product_qtyDiscountDrop p{
+	font-size:.9em;
+	text-align:left;
+	font-family:'Raleway', Verdana, sans-serif;
+	font-feature-settings: "lnum";
+	-moz-font-feature-settings: "lnum";
+	-webkit-font-feature-settings: "lnum";
+	-ms-font-feature-settings: "lnum";
+	-o-font-feature-settings: "lnum";
+	line-height:1em;
+}
+
+#ti_product_qtyDiscountDrop table{
+	border:none;
+	width:100%;
+}
+
+#ti_product_qtyDiscountDrop td{
+	width:48%;
+	padding:0 1%;
 }
 
 /* Product Ratings*/
@@ -1036,6 +1089,16 @@ img{
 		margin-left:0;
 	}
 
+	#ti_product_qtyDiscountDrop{
+		left:50%;
+		margin-left:-50px;
+	}
+
+	#ti_product_qtyDiscountDrop:after{
+		left:50%;
+		margin-left:-5px;
+	}
+
 	#ti_main_coupon{
 		left:auto;
 		right:0;
@@ -1100,12 +1163,15 @@ img{
 
 	.one_third, .two_third,
 	.one_half, .one_fourth,
-	.three_fourth, .one_third.middle {
+	.three_fourth, .one_third.middle,
+	.one_fifth, .two_fifth,
+	.three_fifth, .four_fifth {
 		width:100%;
 		margin: 0 auto .5em;
 	}
 
-	.ti_cms_block_related.one_fourth{
+	.ti_cms_block_related.one_fourth,
+	.one_half.ti_product_infoBlock{
 		width:48%;
 	}
 

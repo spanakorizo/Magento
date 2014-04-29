@@ -59,10 +59,13 @@
 			<div class="ti_header_top_block ti_hide_767 ti_logo_bar" id="ti_home_block">
 				<?php if ($this->getIsHomePage()):?>
 				<div class="ti_input_bar" id="ti_header_home_email">
-					<form action="mailto:meganp@compandsave.com" method="post" enctype="text/plain">
-						<input type="text" name="mail" value="Your Email" onfocus="if(this.value=='Your Email')this.value='';" onblur="if(this.value=='')this.value='Your Email';">
-						<input type="submit" value="Sign Up">
-					</form>
+
+					<form action="<?php echo $this->getUrl(''); ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
+        <input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" />
+     	<button type="submit" class="button" title="<?php echo $this->__('Subscribe') ?>"><span><span><?php echo $this->__('Sign Up') ?></span></span></button> 
+
+
+         </form>
 				</div>
 				<?php else:?>
 				<?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
@@ -115,7 +118,7 @@
 					<li><a href="<?php echo $this->getUrl('') ?>lexmark-printer-cartridges.html"><span>Lexmark</span></a></li>
 					<li><a href="<?php echo $this->getUrl('') ?>samsung-printer-ink-toner.html"><span>Samsung</span></a></li>
 					<li><a href="<?php echo $this->getUrl('') ?>dell-cartridges.html"><span>Dell</span></a></li>
-					<li><a href="#"><span>More Brands
+					<li><a href=""><span>More Brands
 						<ul class="ti_sub-menu menu_three_col ti_cms_gradient_block" id="ti_header_brandsMenu">
 							<li><a href="<?php echo $this->getUrl('') ?>kodak-printer-ink-toner.html"><span>Kodak</span></a></li>
 							<li><a href="<?php echo $this->getUrl('') ?>konica-minolta-printer-ink-toner-cartridges.html"><span>Konica-Minolta</span></a></li>
