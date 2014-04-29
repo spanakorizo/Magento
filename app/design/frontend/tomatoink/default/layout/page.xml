@@ -50,8 +50,6 @@ Default layout, loads most of the pages
                 <action method="addJs"><script>mage/cookies.js</script></action>
                  <action method="addJs"><script>jquery/jquery-1.11.0.js</script></action> 
                 <action method="addItem"><type>skin_js</type><name>js/ti-global/ti-global-functions.js</name></action>
-                <action method="addItem"><type>skin_js</type><name>js/ti-global/ti-monthly-deal.js</name></action>
-                <action method="addItem"><type>skin_css</type><name>css/ti-styles.css</name></action>
                 <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
 
                 <action method="addItem"><type>skin_js</type><name>js/scripts.js</name></action>
@@ -63,7 +61,8 @@ Default layout, loads most of the pages
 				<action method="addCss"><stylesheet>css/productselector.css</stylesheet></action>	
                 <action method="addItem"><type>js</type><name>lib/ds-sleight.js</name><params/><if>lt IE 7</if></action>
                 <action method="addItem"><type>skin_js</type><name>js/iehover-fix.js</name><params/><if>lt IE 7</if></action>
-            </block>
+                <action method="addItem"><type>skin_css</type><name>css/ti-styles.css</name></action>            
+</block>
 
             <block type="core/text_list" name="after_body_start" as="after_body_start" translate="label">
                 <label>Page Top</label>
