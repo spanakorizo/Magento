@@ -48,7 +48,7 @@ error_reporting(E_ALL);
 </script>
 
 
-<?php if ($_product->getTypeId() == "simple") :?>
+<?php if ($_product->getTypeId() == "simple" or $_product->getTypeId() == "bundle") :?>
 <div id="ti_cms_product_container" class="btcf">
 
         <div class="ti_cms_contain">
@@ -70,6 +70,19 @@ error_reporting(E_ALL);
                                 <form>
 
                                     <p class="lgTxt"><span class="ti_small_text" id="ti_product_stockAlert"><?php $stockItem = $_product->getStockItem(); if($stockItem->getIsInStock()) {echo "In stock!";} else {echo "Out of stock!";} ?></span><br>Qty: <input type="number" name="qty_<?php echo $_product->getId() ?>" maxlength="3" id = "product_qty_<?php echo $_product->getId(); ?>" value="0"/></input> <input type="button" value="Add To Cart" name="<?php echo $_product->getId(); ?>" onclick="addproduct_query(this.name)"></input></p>
+                                    <?php
+                                        $bundle_url = "";
+                                        if ($_product->getTypeId() == 'bundle'){
+                                            $selectionCollection = $_product->getTypeInstance(true)->getSelectionsCollection(
+                                            $_product->getTypeInstance(true)->getOptionsIds($_product), $_product);
+
+                                            foreach($selectionCollection as $option) {
+                                            $bundle_url .= "?bundle_option[" . $option->option_id  . "]=" . $option->selection_id . "&bundle_option_qty[" . $option->option_id . "]=";
+                                            }//end: foreach $selectionCollection
+
+                                        } // end: if $_related_item == bundle 
+                                    ?>
+                                    <input type="hidden" value="<?php echo $bundle_url; ?>" id="bundle_<?php echo $_product->getId() ?>">
                                 </form>
                             </div>
                         </div>
@@ -114,26 +127,32 @@ error_reporting(E_ALL);
                             <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
                             </p>
                             <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-                            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52e6afc917c637c1"></script>
+                            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52e6afc917c637c1"></script> 
                             <!-- AddThis Button END -->
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
-    </div>
+
+</div>
+
 <?php echo $this->getChildHtml('relatedProducts') ?>
 
 <script type="text/javascript">
 
 jQuery('#ti_product_qtyDiscount').click(function(e) {
     jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-  jQuery("#ti_product_qtyDiscountDrop").stop(true, true).slideToggle("fast");
+if (!jQuery("#ti_product_qtyDiscountDrop").is(":visible")) 
+  jQuery("#ti_product_qtyDiscountDrop").stop(true, true).slideDown("fast");
   e.stopPropagation();
 });
 
 
 </script>
+
+
+
+
 <?php else: ?>
 
 
@@ -233,6 +252,9 @@ jQuery('#ti_product_qtyDiscount').click(function(e) {
          <?php //echo $this->getChildHtml('productTagList') ?> 
         <?php //echo $this->getChildHtml('product_additional_data') ?>
 </div>
+
+
+
 
 
 <?php endif; ?>

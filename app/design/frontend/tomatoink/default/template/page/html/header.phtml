@@ -48,7 +48,7 @@
 
 				<a href="<?php echo $this->getUrl('') ?>"><img src="<?php echo $this->getSkinUrl('images/ti-assets/ti-logo.png') ?>" alt="Save up to 80% on ink cartridges, toner, and printer accessories at TomatoInk!" id="ti_header_logo"/></a>
 			</div>
-			<div class="ti_header_top_block ti_hide_767 ti_logo_bar" id="ti_home_block">
+			<div class="ti_header_top_block ti_hide_767 ti_logo_bar">
 				<?php if ($this->getIsHomePage()):?>
 				<div class="ti_input_bar" id="ti_header_home_email">
 
@@ -61,36 +61,35 @@
 				</div>
 				<?php else:?>
 				<?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
-				<div id="keyword_search">
-					<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
-
-						<table cellpadding="0" cellspacing="0" border="0">
-							<tr>
-								<td id="search_input_style">
-								<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search" value="Find your cartridge or printer model" onfocus="if (this.value == 'Find your cartridge or printer model') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge or printer model';}" size="45"/>
-								</td>
-								<td class="search_submit_fix"><input type="submit" name="Submit" id="search_submit" value="Search" title="<?php echo $this->__('Search') ?>"> </td>
-								</tr>
-                            
-							</table>
+					<div class="ti_input_bar" id="ti_header_site_search">
+						<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+							<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
+							<input type="submit" name="Submit" id="search_submit" value="Search" title="<?php echo $this->__('Search') ?>">
 							<div id="search_autocomplete" class="search-autocomplete"></div>
-        <script type="text/javascript">
-        //<![CDATA[
-            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
-            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
-        //]]>
-        </script>
-								</form>
-							
-								<div id="search_help"><a name="search help" rel="nofollow">click here for search help<span>There are a few ways to find your cartridge or printer model:<br />
-								1. check your old cartridges for a reference number.   <br />
-								2.  find your printer model which should appear on the sticker on your printer.<br />
-								3. refer to your printer manual to identify the cartridge codes.  <br />
-								You may type either cartridge code or printer model into the search box to search. Please contact us if you have any further questions.  </span></a>
-								</div>
-								</div>
+	        <script type="text/javascript">
+	        //<![CDATA[
+	            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
+	            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+	        //]]>
+	        </script>
+						</form>
+					</div>	
+					<ul id="ti_header_searchHelp">		
+						<li><a rel="nofollow"><span class="ti_small_text lgTxt">Click here for search help</span></a>
+							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_searchHelpDrop">
+								<p><span class="ti_small_text">There are a few ways to find your cartridge or printer model:</span></p>
+								<ol>
+									<li><span class="ti_small_text">Check your old cartridges for a reference number.</span></li>
+									<li><span class="ti_small_text">Find your printer model which should appear on the sticker on your printer.</span></li>
+									<li><span class="ti_small_text">Refer to your printer manual to identify the cartridge codes.</span></li>
+								</ol>
+								<p><span class="ti_small_text">You may type either cartridge code or printer model into the search box to search. Please contact us if you have any further questions.</span></p>
+							</div>
+						</li>
+					</ul>
+				</div>
 				<?php endif?>
-			</div>
+		</div>
 			<!-- <div class="ti_header_top_block ti_hide_767 ti_logo_bar" id="ti_site_block">
 				<div class="ti_input_bar" id="ti_header_site_search">
 					<form id="nxt-ac-form" onsubmit="return submitSearch5();" action="http://search.tomatoink.com/search" method="get" name="form5">

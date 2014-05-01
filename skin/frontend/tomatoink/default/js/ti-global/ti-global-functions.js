@@ -116,19 +116,30 @@ function change_readmore(_more, _less) {
 */
 	$("#ti_header_help").click(function(e){
 		jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-		$("#ti_header_helpDrop").stop(true, true).slideToggle("fast");
+		if (!$("#ti_header_helpDrop").is(":visible")) 
+			$("#ti_header_helpDrop").stop(true, true).slideDown("fast");
+		
 		e.stopPropagation();
 	});
 
   $("#ti_header_cart").click(function(e){
   	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  	if (!$("#ti_header_cartDrop").is(":visible")) 
     $("#ti_header_cartDrop").stop(true, true).slideToggle("fast");
     e.stopPropagation();
   });
 
   $("#ti_header_account").click(function(e){
   	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  	if (!$("#ti_header_accountDrop").is(":visible")) 
     $("#ti_header_accountDrop").stop(true, true).slideToggle("fast");
+    e.stopPropagation();
+  });
+
+   $("#ti_header_searchHelp").click(function(e){
+  	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  	if (!$("#ti_header_searchHelpDrop").is(":visible")) 
+    $("#ti_header_searchHelpDrop").stop(true, true).slideToggle("fast");
     e.stopPropagation();
   });
 	//Toggle coupon code

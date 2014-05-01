@@ -36,18 +36,23 @@
 <?php $related_backup = array("7904", "7919", "7896", "7910"); ?>
 
 <?php $related_id = $__item->getRelatedProductIds() ?>
+
 <div class="ti_cms_contain">
         <div class="ti_cms_block_headerBar-green">
         <h1 class="white">Customers also viewed:</h1>
-    </div>
+        </div>
 
-<?php $related_total = count($related_id)>4?count($related_id):4; ?>
-
+<?php //$related_total = count($related_id)>4?count($related_id):4; 
+$related_total = 4;
+?>
 
 <?php for ($i=0;$i<$related_total; $i++): ?>
+
     <?php if (($related_id[$i]== "") && ($i<4)) $related_id[$i] = $related_backup[$i]; ?>
 <?php $_related_item = Mage::getModel('catalog/product')->load($related_id[$i]);?>
     <div class="ti_cms_block_related one_fourth">
+
+
         <a href="<?php echo $_related_item->getProductUrl() ?>"><p><?php echo $_related_item->getName() ?></p></a>
         <a href="<?php echo $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
 
@@ -79,10 +84,7 @@ Qty: <input type="text" name="qty_<?php echo $_related_item->getId() ?>" maxleng
     </div>
 <?php endfor; ?>
 
-
-    
 </div>
-
 
 <!-- Add to Cart Button Script !-->
 <script type="text/javascript">
@@ -105,3 +107,4 @@ function addproduct_query(product_id) {
 
 
 <?php endif;?>
+

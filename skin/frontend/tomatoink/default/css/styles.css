@@ -18,7 +18,7 @@
  * needs please refer to http://www.magentocommerce.com for more information.
  *
  * @category    design
- * @package     enterprise_default
+ * @package     tomatoink_default
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
@@ -86,8 +86,8 @@ ul,ol         { list-style:none; }
 /* ======================================================================================= */
 
 /* Layout ================================================================================ */
-.wrapper { background:#fff; padding-bottom:20px; }
-.page { width:940px; margin:0 auto; text-align:center; }
+/*.wrapper { background:#fff; padding-bottom:20px; }
+.page { width:100%; margin:0 auto; text-align:left; }
 .page-print { background:#fff; padding:20px; text-align:left; }
 .page-popup { padding:20px; text-align:left; }
 .page-empty { background:#fff; padding:20px; text-align:left; }
@@ -337,8 +337,11 @@ p.error-msg { border-color:#e9581f; background-color:#fff5f3; color:#d91a00; }
 .page-title { margin-bottom:20px; padding:23px 20px 11px; background:#f6f6f6 url(../images/bkg_page-title.gif) repeat-x 0 0; border-bottom:1px solid #cfcfcf; }
 .page-title .link-rss { float:right; margin-top:8px; }
 .page-title h1,
-.page-title h2 { font:normal 22px/27px Arial, Helvetica, sans-serif; color:#d12c01; }
-
+.page-title h2 { 
+	font:normal 22px/27px Arial, Helvetica, sans-serif;  
+	font-weight:bold;
+	color:#333333;
+}
 .title-buttons { text-align:right; }
 .title-buttons h1,
 .title-buttons h2,

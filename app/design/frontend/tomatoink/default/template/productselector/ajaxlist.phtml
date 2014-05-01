@@ -1,37 +1,40 @@
 <?php
-echo '<option value="" selected="">select your printer series</option>';
+echo '<option value="0" selected="">select your printer series</option>';
 $cat_id = $_POST['id'];
 // =====  new block ======//
 $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
-$nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
+$nameId = $eavAttribute->getIdByCode('catalog_category', 'name');
 $coreResource = Mage::getSingleton('core/resource');
 $conn = $coreResource->getConnection('core_read');
-$entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+$CatEntityTypeId = Mage::getModel('eav/entity')->setType('catalog_category')->getTypeId();
 $store_id = 0;//Mage::app()->getStore()->getId();
-$attrbTable = $coreResource->getTableName('catalog_product_entity_varchar');
+$attrbTable = $coreResource->getTableName('catalog_category_entity_varchar');
 $relationtable = $coreResource->getTableName('catalog_category_product');
+$subcatTable = $coreResource->getTableName('catalog_category_entity');
 $select = $conn->select()
-		->from($relationtable,array('product_id'))
-		->where('category_id = ?',$cat_id);
-$result = $conn->fetchAll($select);	
+		->from($subcatTable,array('entity_id'))
+		->where('parent_id = ?',$cat_id)
+		->where('entity_type_id = ? ',$CatEntityTypeId)
+		->where('level = ? ', '3');
+$result = $conn->fetchCol($select);	
 //$result = $this->getSeries($cat_id);
 
 if(!empty($result)){
-  foreach($result as $product_id){
+  foreach($result as $subcate_id){
     //$product_model = Mage::getModel('catalog/product')->load($product_id);
 	
 	$sel = $conn->select()
 				->from($attrbTable, array('entity_id','value'))
-				->where('entity_type_id = ?', $entityTypeId)
+				->where('entity_type_id = ?', $CatEntityTypeId)
 				->where('attribute_id = ?', $nameId)
 				->where('store_id = ?',$store_id)
-				->where('entity_id = ?',$product_id['product_id']);
+				->where('entity_id = ?',$subcate_id);
 	//return $this->prd_arr = $conn->fetchAll($sel);
-	$product = $conn->fetchAll($sel);
+	$subcate_arr = $conn->fetchAll($sel);
      // echo '<option value="'.$product_model->getId().'">'.$product_model->getName().'</option>';
 	 //$product = $this->getProductID($product_id);
-     foreach($product as $product_arr)
-	 echo '<option value="'.$product_arr['entity_id'].'">'.$product_arr['value'].'</option>';
+     foreach($subcate_arr as $subcate_name_value)
+	 echo '<option value="'.$subcate_name_value['entity_id'].'">'.$subcate_name_value['value'].'</option>';
 	
   }
 }
