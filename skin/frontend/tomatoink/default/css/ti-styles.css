@@ -39,10 +39,9 @@ Naming convention: add ti_cms_ prefix
  
 */
 /*********************************************************/
-
 * {
-  margin:0;
-  padding:0;  
+    margin: 0px;
+    padding: 0px;
 }
 
 /* -- Clearfix --*/
@@ -180,6 +179,38 @@ strong{
 	font-weight:bold;
 }
 
+sup{
+	vertical-align:text-top;
+}
+
+sub{
+	vertical-align:text-bottom;
+}
+
+blockquote{
+	text-align:left;
+	padding: 10px 20px;
+}
+
+blockquote h2:before{
+	content:'\201C';
+	display:block;
+	position:absolute;
+	left: 5px;
+	font-size: 5em;
+	top: 0;
+}
+
+blockquote h2:after{
+	content:'\201D';
+	display:block;
+	position:absolute;
+	right: 5px;
+	bottom: 0;
+	font-size: 5em;
+}
+
+
 .ti_decor{
 	border-bottom: 1px dotted rgb(204, 204, 204);
 	color: rgb(153, 153, 153);
@@ -217,10 +248,10 @@ strong{
 }
 
 .ti_input_bar{
-  border-radius:20px;
-  -moz-border-radius:20px;
-  -webkit-border-radius:20px;
-  -o-border-radius:20px;
+  border-radius:.25em;
+  -moz-border-radius:.25em;
+  -webkit-border-radius:.25em;
+  -o-border-radius:.25em;
   margin:auto;
   padding:.5em;  
   position: relative;
@@ -228,7 +259,7 @@ strong{
 }
 
 
-input,
+input, button,
 .ti_button {
   font:300 2.4em/1em 'Raleway', Verdana, sans-serif;
   padding:2%;
@@ -261,7 +292,7 @@ input[type="number"] {
 }
 
 input[type="submit"], 
-.ti_button {
+.ti_button, button {
   color:#fff;
   text-shadow:.5px .5px 1px rgba(0,0,0,.4);
   box-shadow: 3px 3px 3px rgba(0,0,0,.4);
@@ -278,7 +309,7 @@ input[type="number"]:hover{
 	color:#31590b;
 }
 
-input[type="submit"]:hover,
+input[type="submit"]:hover, button:hover,
 .ti_button:hover{
 	background: #fd8524;
 }
@@ -288,7 +319,8 @@ input[type="submit"]:hover,
 	width:60%;
 }
 
-.ti_input_bar input[type="submit"]{
+.ti_input_bar input[type="submit"],
+.ti_input_bar button{
 	width:30%;
 }
 
@@ -371,16 +403,38 @@ p.ti_social_media{
 
 /* -- Lists --*/
 
-ul {
+ul, ol {
 	font-size:1.6em;
 }
 
 ol{
 	list-style: decimal;
+	list-style-position: outside;
+}
+
+ol li{
+	padding-left:15px;
 }
 
 ul>li{
 	/*overflow:hidden;*/
+}
+
+ul.ti_bullet{
+	margin: 0.75em 0;
+    padding: 0 1em;
+    list-style: none;
+}
+
+ul.ti_bullet li:before { 
+    content: "";
+    display: block;
+    height: 5px;
+    width: 5px;
+    left: -1em;
+    top: 0.9em;
+    background:#559a13;
+    position: relative;
 }
 
 .ti_menu>li{
@@ -426,6 +480,104 @@ img{
 table{
 	border:none;
 	width:100%;
+	border-collapse: collapse;
+}
+td, th{
+	padding:2px;
+}
+
+th{
+	font-weight:bold;
+}
+
+.ti_cms_infoTable th{
+	width:25%;
+}
+
+.ti_cms_infoTable tr:hover{
+	background:#f7e8db;
+}
+
+.ti_cms_infoTable tr:hover th,
+.ti_cms_infoTable tr:hover th h1,
+.ti_cms_infoTable tr:hover th h2,
+.ti_cms_infoTable tr:hover th h3,
+.ti_cms_infoTable tr:hover th p{
+	color:#e67921;
+}
+
+/* -- Icons --*/
+
+@font-face {
+	font-family: 'ti-icons';
+	src:url('../media/ti-fonts/ti-icons.eot');
+	src:url('../media/ti-fonts/ti-icons.eot') format('embedded-opentype'),
+		url('../media/ti-fonts/ti-icons.woff') format('woff'),
+		url('../media/ti-fonts/ti-icons.ttf') format('truetype'),
+		url('../media/ti-fonts/ti-icons.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before, 
+[class^="icon-"]:after, [class*=" icon-"]:after {
+		font-family: 'ti-icons';
+}
+
+.ti_product_cta .icon-ico-warranty:before,
+.ti_product_cta .icon-ico-guarantee:before {
+	font-size: 2.2em;
+	position: absolute;
+	margin-left: -1.25em;
+
+}
+
+.ti_product_cta .icon-angle-right:after{
+	font-size: 2em;
+	position: absolute;
+	margin-left: .5em;
+	margin-top: -.5em;
+}
+
+.icon-globe:before {
+	content: "\f0ac";
+}
+.icon-truck:before {
+	content: "\f0d1";
+}
+.icon-envelope:before {
+	content: "\f0e0";
+}
+.icon-angle-left:before {
+	content: "\f104";
+}
+.icon-angle-right:after {
+	content: "\f105";
+}
+.icon-angle-up:before {
+	content: "\f106";
+}
+.icon-angle-down:before {
+	content: "\f107";
+}
+.icon-ico-warranty:before {
+	content: "\e600";
+}
+.icon-ico-guarantee:before  {
+	content: "\e601";
 }
 
 
@@ -461,14 +613,16 @@ table{
 	margin:.5em auto;
 }
 
-.ti_header_top_block ul{
+.ti_header_top_block ul,
+.ti_header_top_block ol{
 	float:right;
 	position:relative;
 	font-size:1em;
 	margin:.5em auto;
 }
 
-.ti_header_top_block ul li{
+.ti_header_top_block ul li,
+.ti_header_top_block ol li{
 	display:inline-block;
 	position:relative;
 	margin:.5em auto;
@@ -484,13 +638,14 @@ table{
 	text-decoration:none;
 }
 
-.ti_header_top_block > ul > li > a:after{
+.ti_header_top_block > ul > li:after{
 	display:inline-block;
 	content:"|";
 	margin:0 .6em;
+	font-size:1.6em;
 }
 
-.ti_header_top_block ul li:last-child a:after{
+.ti_header_top_block ul li:last-child:after{
 	display:none;
 }
 
@@ -534,10 +689,10 @@ table{
 	overflow:visible;
 }
 
-#ti_header_nav_main .ti_menu li a,
+/*#ti_header_nav_main .ti_menu li a,
 #ti_header_nav_main .ti_menu li a:hover{
 	border:none;
-}
+}*/
 
 #ti_header_nav_main .ti_menu li a span{
 	color:#ffeddd;
@@ -547,18 +702,17 @@ table{
 	line-height: 2.5em;
 }
 
-#ti_header_nav_main .ti_menu li a span:hover,
+/*#ti_header_nav_main .ti_menu li a span:hover,
 #ti_header_nav_main .ti_menu li a span:active,
 #ti_header_nav_main .ti_menu li a span:focus,
 #ti_header_nav_main .ti_menu li a span:target{
 	border-bottom:3px solid #e67921;
-}
+}*/
 
 #ti_header_nav_main li .ti_sub-menu{
 	display:block;
 	position:absolute;
 	z-index:10;
-	margin-top:2px;
 }
 
 #ti_header_nav_main li .ti_sub-menu li{
@@ -601,12 +755,20 @@ table{
 	color:#f7e8db;
 }
 
-#ti_header_nav_main li .ti_sub-menu li:hover{
+#ti_header_nav_main li .ti_sub-menu li{
+	border-bottom:3px solid transparent;
+}
 
+#ti_header_nav_main li .ti_sub-menu li:hover{
+	border-bottom:3px solid #e67921;
 }
 
 #ti_header_nav_main li .ti_sub-menu li a{
 	display:block;
+	border:none;
+}
+
+#ti_header_nav_main li .ti_sub-menu li a:hover{
 	border:none;
 }
 
@@ -730,11 +892,16 @@ table{
 
 #ti_header_site_search{
 	background:none;
+	padding-bottom:0;
+}
+
+#ti_header_site_search ul li{
+	margin-top:0;
 }
 
 #ti_header_searchHelp{
 	float:none;
-	margin:0 1em;
+	margin: 0px 1em -1em;
 }
 
 #ti_header_searchHelpDrop{
@@ -890,12 +1057,24 @@ table{
 /* ------- Prefix: ti_cms_home_ ------*/
 
 .ti_cms_home_block{
-	margin: 0px .5% 1em;
-	width: 30%;
+	width: 28%;
+	margin-bottom:20px;
+	outline:none;
+	border:1px solid #f7e8db;
+	border-bottom: 7px solid #71b62f;
+	padding:20px;
+	text-align:center;
+}
+
+.ti_cms_home_block img{
+	max-width:80%;
+	margin:0 auto;
 }
 
 #ti_header_home_email{
 	background:none;
+	margin:1em auto;
+	width:100%;
 }
 
 #ti_cms_home_container{
@@ -969,6 +1148,10 @@ table{
 	clear:both;
 }
 
+.ti_cms_block_gutter{
+	width:1%;
+}
+
 /* Brand blocks */
 
 .ti_cms_block_brandVA a{
@@ -1025,14 +1208,13 @@ table{
 	line-height: 1.1em;
 }
 
-.ti_product_infoBlock ul{
-
+ul.ti_product_checklist{
+	list-style:url('../images/ti-assets/checkmark.png');
 }
 
 .ti_product_checklist li{
 	text-align:left;
-	background:url("../images/ti-assets/checkmark.png") no-repeat 0 3px;
-    padding-left: 20px;
+    margin-left: 30px;
 }
 
 #ti_product_ourPrice{
@@ -1077,6 +1259,12 @@ table{
 #ti_product_qtyDiscountDrop td{
 	width:48%;
 	padding:0 1%;
+}
+
+.ti_product_cta{
+	width:50%;
+	float:left;
+	margin:.5em auto;
 }
 
 /* Product Ratings*/
@@ -1143,24 +1331,30 @@ table{
 		margin:0;
 		width:100%;
 	}
+	.ti_header_top_block{
+		margin: 1em 0 0;
+	}
 
 	.ti_logo_bar{
-		width:auto;
+		max-width:50%;
 		float:left;
 	}
 
-	#ti_home_block, #ti_site_block{
-		margin:1em 0 0 1em;
+	.ti_cms_home_block{
+		width:44%;
 	}
 
 	.ti_header_top_block ul{
 		float:left;
 	}
 
-	.ti_cms_dropContent,
-	.ti_cms_dropContent:after{
+	.ti_cms_dropContent{
 		left:0;
 		margin-left:0;
+	}
+
+	.ti_cms_dropContent:after{
+		left:10%;
 	}
 
 	#ti_product_qtyDiscountDrop{
@@ -1168,9 +1362,14 @@ table{
 		margin-left:-50px;
 	}
 
-	#ti_product_qtyDiscountDrop:after{
+	#ti_product_qtyDiscountDrop:after,
+	#ti_header_searchHelpDrop:after{
 		left:50%;
 		margin-left:-5px;
+	}
+
+	#ti_header_searchHelpDrop{
+		left:50%;
 	}
 
 	#ti_main_coupon{
@@ -1238,18 +1437,22 @@ table{
 	.one_third, .two_third,
 	.one_half, .one_third.middle,
 	.one_fifth, .two_fifth,
-	.three_fifth, .four_fifth {
-		width:100%;
+	.three_fifth, .four_fifth,
+	#ti_footer_email_cta.three_fourth,
+	#ti_footer_email_cta.one_fourth,
+	.ti_footer_top_block .three_fourth,
+	.ti_footer_top_block .one_fourth {
+		width:98%;
 		margin: 0 auto 15px;
 	}
 
-	.one_fourth, .three_fourth,
-	.ti_cms_block_related{
-		width:48%;
+	.ti_cms_home_block{
+		width:42%;
 	}
 
 	.ti_cms_block_brandVA,
-	.ti_cms_block_brandVB{
+	.ti_cms_block_brandVB,
+	.one_half.ti_product_infoBlock{
 		width:47%;
 	}
 
@@ -1285,6 +1488,11 @@ table{
 		min-width:0px;
 	}
 
+	#ti_product_qtyDiscountDrop{
+		left:0;
+		margin-left:50px;
+	}
+
 	#ti_footer_email_cta{
 		text-align:center;
 	}
@@ -1311,8 +1519,18 @@ table{
 	.ti_cms_block_related,
 	.ti_cms_block_brandVA,
 	.ti_cms_block_brandVB{
-		width:100%;
+		width:98%;
 		margin: 0 auto 15px;
+	}
+
+	.one_fourth, .three_fourth,
+	.ti_cms_block_related,
+	.ti_product_thumb_block.one_fourth{
+		width:48%;
+	}
+
+	.ti_cms_home_block{
+		width:94%;
 	}
 
 	.ti_cms_contain{
@@ -1364,7 +1582,9 @@ table{
 		font-size:1.2em;
 	}
 
-	.ti_hide_479{
+	.ti_hide_479, .ti_product_cta .icon-ico-warranty:before,
+	.ti_product_cta .icon-ico-guarantee:before,
+	.ti_product_cta .icon-angle-right:after{
 		display:none;
 	}
 

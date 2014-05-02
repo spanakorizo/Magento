@@ -157,6 +157,38 @@ function change_readmore(_more, _less) {
 
 
 
+/****************************************/
+/* qty number input limit  */
+/* Yiyang 5-1-2014         */
+/******************************/
+//click qty input -> show empty
+jQuery(".qty").focus(function() {
+  if (jQuery(this).val() == 0) jQuery(this).val('');
+});
+//click other input-> show zero
+jQuery(".qty").blur(function() {
+  if (jQuery(this).val() == '') jQuery(this).val('0');
+});
+//input char, input-> show empty
+var ti_qty_previous="";
+  jQuery(".qty").keypress(function() {
+    ti_qty_previous = jQuery(this).val();
+    if (ti_qty_previous.match(/\D/)) ti_qty_previous = "";
+  });
+
+  jQuery(".qty").keyup(function() {
+    if (jQuery(this).val().match(/\D/)) jQuery(this).val(ti_qty_previous);
+  });
+
+
+
+
+
+
+
+
+
+
 }); //end of document ready
 
 //hide drop content when clicking on anywhere else

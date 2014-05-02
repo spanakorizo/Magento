@@ -138,8 +138,8 @@ ul,ol         { list-style:none; }
 /* Form Elements */
 input,select,textarea,button { font:12px Arial, Helvetica, sans-serif; vertical-align:middle; color:#444; }
 input.input-text,select,textarea { background:#fff; border:1px solid #c7c7c7; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x; }
-input.input-text,textarea { padding:2px 2px; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x; }
-select { padding:1px; }
+input.input-text,textarea { /*padding:2px 2px; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x;*/ }
+select { /*padding:1px; */}
 select option { padding-right:10px; }
 select.multiselect option { padding:2px 2px; border-bottom:1px solid #bbb; }
 select.multiselect option:last-child { border-top:0; }
@@ -153,9 +153,9 @@ input.disabled { background:#f6f6f6 !important; color:#bbb !important; }
 button.button::-moz-focus-inner { padding:0; border:0; } /* FF Fix */
 button.button { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
 
-button.button { border:0; padding:0; margin:0; background:transparent; /* line-height:21px; */ overflow:visible; cursor:pointer; vertical-align:middle; }
+button.button { /*border:0; padding:0; margin:0; background:transparent; line-height:21px; overflow:visible; cursor:pointer; vertical-align:middle;*/ }
 
-a.button,
+/*a.button,
 button.button span,
 a.button span,
 button.button span span { background-color:transparent; background-image:url(../images/bkg_btn.gif); background-repeat:no-repeat; }
@@ -170,7 +170,7 @@ a.button { line-height:20px; }
 button.button:active span span { margin:0; }
 button.btn-small span { font-size:11px; line-height:14px; padding:1px 9px 0; }
 button.disabled { cursor:default !important; bottom:0 !important; right:0 !important; }
-button.disabled span { cursor:default !important; color:#bbb !important; }
+button.disabled span { cursor:default !important; color:#bbb !important; }*/
 
 /* Form Highlight */
 /*input.input-text:focus,select:focus,textarea:focus {}*/

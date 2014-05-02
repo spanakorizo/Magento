@@ -35,6 +35,22 @@
 <?php $_product = $this->getProduct(); ?>
 <?php $_associatedProducts = $this->getAssociatedProducts(); ?>
 <?php $_hasAssociatedProducts = count($_associatedProducts) > 0; ?>
+
+<script type="text/javascript">
+    var ti_global_productlist = new Array();
+    <?php if ($_product->isAvailable() && $_hasAssociatedProducts): ?>
+        <?php for ($i=0; $i<count($_associatedProducts); $i++): ?>
+            ti_global_productlist[<?php echo $i; ?>] = new Array();
+            ti_global_productlist[<?php echo $i; ?>][0] = "<?php echo $_associatedProducts[$i]->getSku(); ?>";
+            ti_global_productlist[<?php echo $i; ?>][1] = "<?php echo $_associatedProducts[$i]->getName(); ?>";
+            ti_global_productlist[<?php echo $i; ?>][2] = "<?php echo round($_associatedProducts[$i]->getPrice(), 2); ?>";
+        <?php endfor; ?>
+    <?php endif; ?>
+</script>
+
+
+
+
 <?php if ($this->displayProductStockStatus()): ?>
     <?php if ($_product->isAvailable() && $_hasAssociatedProducts): ?>
         <p class="availability in-stock"><?php echo $this->__('Availability:') ?> <span><?php echo $this->__('In stock') ?></span></p>

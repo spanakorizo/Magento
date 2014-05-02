@@ -14,6 +14,13 @@
   		</style>
 	<![endif]-->
 
+
+	<script type="text/javascript">
+		var homepage = "<?php if ($this->getIsHomePage()) echo 'true'; else echo 'false'?>";
+		var ti_global_url = "<?php echo $this->getUrl('');?>";
+	</script>
+
+
 	<div id="ti_header_row">
 		<?php $getCouponModel = Mage::getResourceModel('compandsave_variable/coupon_collection')
 				->addFieldToFilter('entity_type_id','Coupon')
@@ -110,7 +117,7 @@
 					<li><a href="<?php echo $this->getUrl('') ?>samsung-printer-ink-toner.html"><span>Samsung</span></a></li>
 					<li><a href="<?php echo $this->getUrl('') ?>dell-cartridges.html"><span>Dell</span></a></li>
 					<li><a href=""><span>More Brands
-						<ul class="ti_sub-menu menu_three_col ti_cms_gradient_block" id="ti_header_brandsMenu">
+						<ul class="ti_sub-menu menu_three_col ti_cms_border_block" id="ti_header_brandsMenu">
 							<li><a href="<?php echo $this->getUrl('') ?>kodak-printer-ink-toner.html"><span>Kodak</span></a></li>
 							<li><a href="<?php echo $this->getUrl('') ?>konica-minolta-printer-ink-toner-cartridges.html"><span>Konica-Minolta</span></a></li>
 							<li><a href="<?php echo $this->getUrl('') ?>okidata-printer-ink-toner.html"><span>Okidata</span></a></li>
@@ -135,7 +142,7 @@
 						</ul>
 					</span></a></li>
 					<li><a href="#"><span>Accessories</span></a>
-						<ul class="ti_sub-menu menu_two_col ti_cms_gradient_block" id="ti_header_lastMenu">
+						<ul class="ti_sub-menu menu_two_col ti_cms_border_block" id="ti_header_lastMenu">
 							<li><a href="<?php echo $this->getUrl('') ?>usb-printer-cables.html"><span>Cables</span></a></li>
 							<li><a href="<?php echo $this->getUrl('') ?>printer-supply.html"><span>Photo Paper</span></a></li>
 						</ul>
@@ -193,7 +200,8 @@
 <?php 
 $cart = Mage::getModel('checkout/cart')->getQuote();
 //$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
-$total_num = $cart->getItemsCount();
+//$total_num = $cart->getItemsCount();
+$total_num = $cart->getItemsQty();
 if ($total_num == "") $total_num=0;
 
 $grandtotal = $cart->getSubtotal();
@@ -220,6 +228,8 @@ if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><spa
 
 
 var ti_global_islogin = "<?php  if ($this->helper('customer')->isLoggedIn()) echo true; else echo false;  ?>";
+var ti_global_customerid = "";
+if (ti_global_islogin) ti_global_customerid = "<?php if ($this->helper('customer')->isLoggedIn()) echo Mage::getSingleton('customer/session')->getCustomer()->getId(); ?>";
 var ti_global_total   = "<?php echo $total_num ?>";
 jQuery(document).ready(function() {
 //my account signin/signout
