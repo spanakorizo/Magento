@@ -98,6 +98,8 @@ function change_readmore(_more, _less) {
 /* Megan                             */
 /*************************************/
 
+    var ti_header_arrowup = ti_global_url + "skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow.png"; 
+    var ti_header_arrowdown = ti_global_url + "skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow-2.png"; 
 
 
 	//toggles visibility of quicklinks menu
@@ -148,8 +150,9 @@ function change_readmore(_more, _less) {
 			//if (jQuery('ti_header_click_coupon').css("display") == "none") alert("close");//
 		//else alert("open");//
 
-		if (document.getElementById("ti_header_click_coupon").style.display == "none") jQuery("#ti_main_coupon_arrow").css("background-image", "url('../skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow-2.png')");
-		else {jQuery("#ti_main_coupon_arrow").css("background-image", "url('../skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow.png')");}
+
+		if (document.getElementById("ti_header_click_coupon").style.display == "none") jQuery("#ti_main_coupon_arrow").css("background-image", "url('" + ti_header_arrowdown + "')");
+		else {jQuery("#ti_main_coupon_arrow").css("background-image", "url('" + ti_header_arrowup + "')");}
 		});//url("http://www.866ink.com/magentoEE/images/ti-assets/header-coupon-arrow.png")
 		jQuery("#ti_header_coupon_desc").slideToggle("fast");
 		
@@ -181,6 +184,24 @@ var ti_qty_previous="";
   });
 
 
+/***************************************/
+/*   Display Small Navigation          */
+/* Author: Yiyang     Date: 5/5/2014   */
+/***************************************/
+var ti_header_smallnav = document.getElementById('ti_header_breadcrumbs');
+if (typeof ti_global_pagetype != "undefined" && ti_global_pagetype == "brand") {
+  ti_header_smallnav.innerHTML = " Home > " + ti_global_pagename; 
+}
+else if (typeof ti_global_pagetype != "undefined" && ti_global_pagetype == "grouped") {
+  ti_header_smallnav.innerHTML = " Home > " + ti_global_printerbrand + " > " + ti_global_pagename; 
+}
+else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "simple" || ti_global_pagetype == "bundle")) {
+  var ti_header_sku_arr = ti_global_productcode.split("-");
+  if (getUrlVars()["printer"] != undefined)
+    {ti_header_smallnav.innerHTML = " Home > " + ti_header_sku_arr[1] + " > " + ti_global_prev_printer + " > " + ti_global_pagename;}
+  else 
+    ti_header_smallnav.innerHTML = " Home > " + ti_header_sku_arr[1] + " > " + ti_global_pagename;
+}
 
 
 
@@ -190,6 +211,11 @@ var ti_qty_previous="";
 
 
 }); //end of document ready
+
+
+
+
+
 
 //hide drop content when clicking on anywhere else
 jQuery(document).click(function () {

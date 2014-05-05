@@ -485,7 +485,7 @@ ul.links li.last .separator { display:none; }
 .reward-checkout { margin:0; }
 
 /* Class: std - styles for admin-controlled content */
-.std ul,
+/*.std ul,
 .std ol,
 .std dl,
 .std p,
@@ -520,7 +520,7 @@ ul.links li.last .separator { display:none; }
 
 ul.disc li { padding-left:10px; background:url(../images/bkg_bulletsm.gif) no-repeat 0 0.5em; }
 .std ul.disc li { padding-left:0; background:none; }
-
+*/
 /* Misc */
 .link-rss { background:url(../images/icon_rss.gif) 100% 1px no-repeat; padding-right:18px; white-space:nowrap; }
 .link-rss:hover { color:#f58550; }

@@ -18,6 +18,8 @@
 	<script type="text/javascript">
 		var homepage = "<?php if ($this->getIsHomePage()) echo 'true'; else echo 'false'?>";
 		var ti_global_url = "<?php echo $this->getUrl('');?>";
+		ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
+		
 	</script>
 
 
@@ -47,6 +49,50 @@
 					
 						<?php echo $this->getChildHtml('topLinks') ?>
 					
+				</div>
+				<div class="ti_header_nav_block clear">
+					<div id="ti_header_nav_mini">
+						<select>
+							<option selected="selected" disabled="disabled">Shop by...</option>
+							<option>HP</option>
+							<option>Brother</option>
+							<option>Epson</option>
+							<option>Canon</option>
+							<option>Lexmark</option>
+							<option>Samsung</option>
+							<option>Dell</option>
+							<option>Kodak</option>
+							<option>Konica-Minolta</option>
+							<option>Okidata</option>
+							<option>Xerox</option>
+							<option>Kyocera-Mita</option>
+							<option>Pitney Bowes</option>
+							<option>Sharp</option>
+							<option>IBM</option>
+							<option>Ricoh</option>
+							<option>Apple</option>
+							<option>Compaq</option>
+							<option>Apollo</option>
+							<option>AstroJet</option>
+							<option>Bryce</option>
+							<option>Hasler</option>
+							<option>Mimaki</option>
+							<option>Mutoh</option>
+							<option>NeoPost</option>
+							<option>Rena</option>
+							<option>Roland</option>
+							<option>Secap</option>
+							<option>Accessories</option>
+						</select>
+					</div>
+				</div>
+				<div class="ti_header_nav_block">
+					<div id="ti_header_search_mini">
+						<form id="nxt-ac-form" onsubmit="return submitSearch5();" action="http://search.tomatoink.com/search" method="get" name="form5">
+							<input type="text" name="keywords" autocomplete="off" value="Type ink or printer model" id="search_v5_5" onfocus="if(this.value=='Type ink or printer model')this.value='';" onblur="if(this.value=='')this.value='Type ink or printer model';" onkeypress="return handleEnter5(this,event)">
+							<input type="submit" border="0" onclick="submitSearch5();" value="Find Ink" name="imageField">
+						</form>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -148,54 +194,10 @@
 						</ul>
 					</li>
 				</ul>
-				<div class="ti_header_nav_block">
-					<div id="ti_header_nav_mini">
-						<select>
-							<option selected="selected" disabled="disabled">Shop by...</option>
-							<option>HP</option>
-							<option>Brother</option>
-							<option>Epson</option>
-							<option>Canon</option>
-							<option>Lexmark</option>
-							<option>Samsung</option>
-							<option>Dell</option>
-							<option>Kodak</option>
-							<option>Konica-Minolta</option>
-							<option>Okidata</option>
-							<option>Xerox</option>
-							<option>Kyocera-Mita</option>
-							<option>Pitney Bowes</option>
-							<option>Sharp</option>
-							<option>IBM</option>
-							<option>Ricoh</option>
-							<option>Apple</option>
-							<option>Compaq</option>
-							<option>Apollo</option>
-							<option>AstroJet</option>
-							<option>Bryce</option>
-							<option>Hasler</option>
-							<option>Mimaki</option>
-							<option>Mutoh</option>
-							<option>NeoPost</option>
-							<option>Rena</option>
-							<option>Roland</option>
-							<option>Secap</option>
-							<option>Accessories</option>
-						</select>
-					</div>
-				</div>
-				<div class="ti_header_nav_block">
-					<div id="ti_header_search_mini">
-						<form id="nxt-ac-form" onsubmit="return submitSearch5();" action="http://search.tomatoink.com/search" method="get" name="form5">
-							<input type="text" name="keywords" autocomplete="off" value="Model #" id="search_v5_5" onfocus="if(this.value=='Model #')this.value='';" onblur="if(this.value=='')this.value='Model #';" onkeypress="return handleEnter5(this,event)">
-							<input type="submit" border="0" onclick="submitSearch5();" value="Find Ink" name="imageField">
-						</form>
-					</div>
-				</div>
 				<p id="ti_secondary_coupon" class="clear"><strong>This month's special offer:</strong> <span id="ti_secondary_coupon_info"></span> <strong class="ti_secondary_coupon_code" id="ti_secondary_coupon_code"></strong>. <span id="ti_secondary_coupon_exp"></span></p>
 			</div>
 		</div>
-	</div>
+	<div id="ti_header_breadcrumbs"></div>
 
 <?php 
 $cart = Mage::getModel('checkout/cart')->getQuote();

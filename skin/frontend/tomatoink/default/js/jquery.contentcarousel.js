@@ -228,6 +228,8 @@
                         });
 
                         // adds events to the mouse
+                        //tempary block this function by Yiyang
+                        /*
                         $el.bind('mousewheel.contentcarousel', function(e, delta) {
                             if(delta > 0) {
                                 if( cache.isAnimating ) return false;
@@ -240,7 +242,7 @@
                                 aux.navigate( 1, $el, $wrapper, settings, cache );
                             }
                             return false;
-                        });
+                        }); */
 
                     });
                 }

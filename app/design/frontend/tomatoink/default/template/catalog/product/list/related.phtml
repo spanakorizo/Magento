@@ -59,16 +59,16 @@
         <?php $_related_item = Mage::getModel('catalog/product')->load($related_id[$i]);?>
 
              <div class="ti_related_item_one_fourth ti_related_item_one_fourth-<?php echo $i + 1; ?>">
-                <div class="ti_related_content_container">
+                <div class="ti_related_content_container ti_block_inner">
                     <div class="ti_related_product_title">
                         <p><a href="<?php $_related_item->getProductUrl() ?>"><?php echo $this->__($_related_item->getName()) ?></a></p>
                     </div>
 
                     <a href="<?php $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
 
-                    <h3 class="orange"><?php echo $this->__('Our price: $').' '.number_format($_related_item->getPrice(), 2) ?></h3>
+                    <h3 class="altTxt"><?php echo $this->__('Our price: $').' '.number_format($_related_item->getPrice(), 2) ?></h3>
                     <div class="ti_cms_block_qty">
-                        <p class="lt_green">
+                        <p class="lgTxt">
                             <?php echo $this->__('Qty:') ?><input type="text" name="qty_<?php echo $_related_item->getId() ?>" maxlength="12" id = "product_qty_<?php echo $_related_item->getId(); ?>" value="0" class="input-text qty" />
 
                             <!-- customize bundle button !-->
