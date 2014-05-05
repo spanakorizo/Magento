@@ -1,82 +1,87 @@
-<div class="selector_holder">
-		<h3>Cartridge Selector Tools</h3>
-        <p>You can use keyword or brand names on the top of the page to search your printer cartridges. Or, try our 2-step cartridge finder below.</p>
-        <form name="search-box" id="search-box">
-            <table id="two-step-search" cellpadding="0" cellspacing="0" border="0" width="100%">
-                <tbody>
-                    <tr valign="top">
+<div class="ti_ink_selector_holder">
+	
+	<h1 class="ti_green_head">Ink Selector Tools</h1>
+	<p>Please Select your printer Brand/Series/Model for your Ink / Cartridge </p>
+	<div style="width:100%;position:relative;float:left">
+			
+            <div class="ti_ink_selector_div">
+				<div id="ti_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
+				<div id="ti_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
+                <h3>Choose Printer Brand</h3>
+                <select name="" id="ti_brand_selector" class="ti_select_text">
+                    <option value="">select the brand</option>
+                    <?php
+                    $category = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('parent_id',2)->load();
 
-                        <td>
-                            <div style="text-align: left; font-size: 1.3rem; font-weight: bold;">Choose your brand</div>
-                            <div id="brand_div" style="text-align: center">
-                                <select name="" id="brand" style="width: 90%; text-align: left;color: #000">
-                                    <option value="">select the brand</option>
-                                    <?php
-                                   $category = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('parent_id',2)->load();
+                    foreach($category as $item){
 
-                                    foreach($category as $item){
+                        $name = Mage::getModel('catalog/category')->load($item->getId());
+                        echo '<option value="'.$item->getId().'">'.$name->getName().'</option>';
+                    }
 
-                                      $name = Mage::getModel('catalog/category')->load($item->getId());
-                                      echo '<option value="'.$item->getId().'">'.$name->getName().'</option>';
-                                    }
+                    ?>
+                </select>
+            </div>
+            <div class="ti_ink_selector_div">
+                <h3>Choose Printer Series</h3>
+                <select disabled="" name="" id="ti_series_selector" class="ti_select_text">
+                    <option value="0" selected="">select your printer series</option>
+                </select>
+            </div>
+            <div class="ti_ink_selector_div">
+                <h3>Choose Model/Cartridge</h3>
 
-                                  ?>
+                <select disabled="" name="" id="ti_cartridge_selector" class="ti_select_text">
+                    <option value="" selected="">select your printer cartridge</option>
+                </select>
+            </div>
 
-                            </div>
 
-                        </td>
-                    </tr>
-                    <tr valign="top">
-                        <td>
-                            <div style="text-align: left; font-size: 1.3rem; font-weight: bold;">Choose series/cartridge #</div>
-                            <div id="series_div" style="text-align: center">
-                                <select disabled="" name="" id="series" style="width:90%; text-align: left;color: #000">
-                                    <option value="0" selected="">select your printer series</option>
-                                </select>
-                            </div>
-                            <div id="cartridge_div" style="text-align: center">
-                                <select disabled="" name="" id="cartridge" style="width: 90%; text-align: left;color: #000">
-                                    <option value="" selected="">select your printer cartridge</option>
-                                </select>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
+	</div>
 </div>
 <script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
 <script>
 jQuery.noConflict();
 jQuery(function(){
-    jQuery("#brand").change(function() {
-	    document.getElementById("series").disabled=false;
-		document.getElementById("cartridge").disabled=false;
+    jQuery("#ti_brand_selector").change(function() {
+	    document.getElementById("ti_series_selector").disabled=true;
+		document.getElementById("ti_cartridge_selector").disabled=true;
+		document.getElementById("ti_brand_selector").disabled=true;
         var dataString = jQuery(this).val();
 		jQuery.post("productselector/ajax/index",{id : dataString},function(data){
-			jQuery('#series').html(data);
+			jQuery('#ti_series_selector').html(data);
 		});
-		jQuery.post("productselector/ink/simple",{id : dataString},function(data){
-			jQuery('#cartridge').html(data);
-		});
-        /* new Ajax.Request( "productselector/ajax/index", {
+		/*jQuery.post("productselector/ink/simple",{id : dataString},function(data){
+			jQuery('#ti_cartridge_selector').html(data);
+		});*/
+        jQuery("#ti_ajax_loading_ink").show();
+        jQuery(".ti_ink_selector_holder").fadeTo('slow',.4);
+        new Ajax.Request("productselector/ink/simple", {
             method: "post",
             parameters: {
               id : dataString
             },
             cache: false,
             onSuccess: function(transport) {
-              $('#series').html(transport.responseText);
+				jQuery('#ti_cartridge_selector').html(transport.responseText);
+				jQuery("#ti_ajax_loading_ink").hide();
+				jQuery(".ti_ink_selector_holder").fadeTo('slow',1.0);
+				document.getElementById("ti_series_selector").disabled=false;
+				document.getElementById("ti_cartridge_selector").disabled=false;
+				document.getElementById("ti_brand_selector").disabled=false;
             }
-        }); */
+        });
     });
-    jQuery("#series").change(function() {
+    jQuery("#ti_series_selector").change(function() {
 
         var dataString = jQuery(this).val();
 		
         if(dataString > 0){
-            document.getElementById("cartridge").disabled=false;
-
+			document.getElementById("ti_series_selector").disabled=true;
+			document.getElementById("ti_cartridge_selector").disabled=true;
+			document.getElementById("ti_brand_selector").disabled=true;
+            jQuery("#ti_ajax_loading_series").show();
+			jQuery(".ti_ink_selector_holder").fadeTo('slow',.4);
             new Ajax.Request( "productselector/ink/index", {
                 method: "post",
                 parameters: {
@@ -84,13 +89,18 @@ jQuery(function(){
                 },
                 cache: false,
                 onSuccess: function(transport) {
-                  jQuery('#cartridge').html(transport.responseText);
+					jQuery('#ti_cartridge_selector').html(transport.responseText);
+					jQuery("#ti_ajax_loading_series").hide();
+					jQuery(".ti_ink_selector_holder").fadeTo('slow',1.0);
+					document.getElementById("ti_series_selector").disabled=false;
+					document.getElementById("ti_cartridge_selector").disabled=false;
+					document.getElementById("ti_brand_selector").disabled=false;
                 }
             });
         }
     });
 
-    jQuery("#cartridge").change(function() {
+    jQuery("#ti_cartridge_selector").change(function() {
         var id=jQuery(this).val();
         window.open("https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/"+ id, "_self");
     });

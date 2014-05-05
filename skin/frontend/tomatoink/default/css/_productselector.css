@@ -1,0 +1,7 @@
+.selector_holder{
+color:#E67921;
+border-radius: 5px; background: #559A13; color:#fff; padding: 2%; box-shadow: 0 0 5px rgba(230,121,33,1.0);margin:1% 1% 5%}
+.selector_holder p{
+font-size: 1.3rem; text-align: justify;}
+.selector_holder h3{
+font-size: 1.6rem; text-align: justify;font-family: 'Oleo Script','Raleway',serif;text-shadow: 2px 2px #000;}
