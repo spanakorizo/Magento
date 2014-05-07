@@ -1,0 +1,38 @@
+<?php
+$cat_id = $_POST['id'];
+$eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
+$nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+$store_id = 0;//Mage::app()->getStore()->getId();
+$attrbTable = $coreResource->getTableName('catalog_product_entity_varchar');
+$CatPrdTable = $coreResource->getTableName('catalog_category_product');
+
+$select = $conn->select()
+    ->from($CatPrdTable,array('product_id'))
+    ->where('category_id = ?',$cat_id)
+    ->where('position = ? ', '1');
+$result = $conn->fetchCol($select);
+
+if(!empty($result)){
+    foreach($result as $product_id){
+
+        $sel = $conn->select()
+            ->from($attrbTable, array('entity_id','value'))
+            ->where('entity_type_id = ?', $entityTypeId)
+            ->where('attribute_id = ?', $nameId)
+            ->where('store_id = ?',$store_id)
+            ->where('entity_id = ?',$product_id);
+
+        $product = $conn->fetchAll($sel);;
+        foreach($product as $product_arr){
+
+            echo '<div class="ti_subcat_product_gid_one_forth"><p><a href="https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/'.$product_arr['entity_id'].'" >'.$product_arr['value'].'</a></p></div>';
+
+
+        }
+
+    }
+}
+
