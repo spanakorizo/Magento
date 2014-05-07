@@ -325,7 +325,7 @@ input[type="submit"]:hover, button:hover,
 }
 
 .ti_button_large{
-	font-size:3em;
+	font-size:2.8em;
 	font-weight:bold;
 	padding:1.5%;
 }
@@ -1106,6 +1106,7 @@ th{
 
 #ti_footer_copyright_row{
 	font-size:.8em;
+	background:#fff;
 }
 
 #ti_footer_email_cta{
