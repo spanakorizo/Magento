@@ -173,6 +173,50 @@ if (!jQuery("#ti_product_qtyDiscountDrop").is(":visible"))
 </script>
 
 
+<?php elseif ($_product->getTypeId() == "grouped") :?>
+    <?php $ti_printer_brand = $_product->getModelNo(); ?>
+<div id="ti_cms_printer_container" class="btcf">
+        <div class="ti_cms_contain btcf">
+            <div class="two_third ti_cms_gradient_block">
+                <h1 class="ti_green_head"><span class='ti_printer_brand'></span>&nbsp;<?php echo $ti_printer_brand; ?>&nbsp;Ink Cartridges and Printing Supplies</h1>
+                <p>We carry printer ink cartridges for your <span class='ti_printer_brand'></span>&nbsp;<?php echo $ti_printer_brand; ?>&nbsp;at a discounted price with the same quality and satisfaction you would get from brand name cartridges. Our high quality inkjet cartridges were professionally re-engineered in a manufacturing facility that uses state of the art processes to ensure that this product will print as well as their brand name counterparts.</p>
+                <div class="ti_product_cta">
+                    <a href=""><h3 class="ti_orange_head icon-ico-warranty icon-angle-right">Our ink will never void<br class="ti_hide_479"> your printer's warranty.</h3></a>
+                </div>
+                <div class="ti_product_cta">
+                    <a href=""><h3 class="ti_orange_head icon-ico-guarantee icon-angle-right">All ink comes with a 1 year<br class="ti_hide_479"> money back guarantee.</h3></a>
+                </div>
+            </div>
+            <div class="one_third">
+                <div class="full text_center">
+                    <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" class="block_center ti_printer_image"/>
+                    <p><a href="" class="altTxt ti_small_text"><strong><span class='ti_printer_brand'></span>&nbsp;<?php echo $ti_printer_brand; ?>&nbsp;technical support and driver download support</strong></a></p>
+                </div>
+            </div>
+        </div>
+   <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+
+
+
+
+        <?php echo $this->getChildHtml('product_type_data') ?>
+
+
+   </form>
+
+
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $('.ti_printer_brand').html(ti_global_printerbrand);
+});
+
+</script>
 
 
 <?php else: ?>

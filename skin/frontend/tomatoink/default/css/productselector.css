@@ -3,5 +3,19 @@
 .ti_ink_selector_div{width:100%;margin:0;float:left;position:relative}
 .ti_ink_selector_div h3{text-align: left}
 .ti_select_text{width: 100%; text-align: left;color: #000}
-#ti_ajax_loading_ink,#ti_ajax_loading_series {width:100%;height: 100%; position: absolute;float: left;display: none; opacity: 1.0; z-index: 99999}
-#ti_ajax_loading_ink img,#ti_ajax_loading_series img{max-width:120px;max-height: 120px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}
+#ti_ajax_loading_ink ,#ti_ajax_loading_series,#ti_ajax_cat_loading_ink{display: block;width:100%;height: 100%; position: absolute;float: left;display: none; opacity: 1.0; z-index: 99999}
+#ti_ajax_loading_ink img,#ti_ajax_loading_series img{display: block;max-width:120px;max-height: 120px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}
+
+#ti_ajax_cat_loading_ink img{display: block;max-width:80px;max-height: 80px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}
+
+/* this part of css for category page */
+.ti_category_one_forth{width: 23%;position: relative; display: block; float: left; padding: 0 1%}
+.ti_category_content_container{width: 100%;position: relative; display: block; float: left}
+.ti_category_product_selector_box {
+    background: radial-gradient(ellipse at center center , #FFF 60%, #FFF6EE 99%) repeat scroll 0% 0% transparent;
+    padding: 1%;
+    outline: 1px solid #F7E8DB;
+    border-bottom: 7px solid #71B62F;
+}
+.ti_header_left_align{color: #559A13;line-height: 1.1em; text-shadow: -0.5px -0.5px 0 #333333, 1px 1px 0 #ECECEC;text-align: left}
+.ti_subcat_product_gid_one_forth{width:19%; position: relative;float: left; display: block; padding: 0.5% 0.5%}

@@ -11,13 +11,15 @@
                 <select name="" id="ti_brand_selector" class="ti_select_text">
                     <option value="">select the brand</option>
                     <?php
-                    $category = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('parent_id',2)->load();
-
-                    foreach($category as $item){
-
-                        $name = Mage::getModel('catalog/category')->load($item->getId());
-                        echo '<option value="'.$item->getId().'">'.$name->getName().'</option>';
-                    }
+                    $category_model = Mage::getModel('catalog/category')->load(2);
+					$subcategoryIds = $category_model->getChildren();
+					$subCatIds = explode(',',$subcategoryIds);	
+					$collection = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->load();
+					
+					foreach($collection as $item){
+				
+						echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
+					}
 
                     ?>
                 </select>

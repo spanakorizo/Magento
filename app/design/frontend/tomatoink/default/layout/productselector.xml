@@ -19,7 +19,12 @@
     </productselector_ink_index>
 	<productselector_ink_simple>
         <reference>
-            <block type="compandsave_productselector/inklist" name="root" as="simplelist" output="toHtml" template="productselector/simplelist.phtml" />
+            <block type="compandsave_productselector/inklist" name="root" as="inklist" output="toHtml" template="productselector/simplelist.phtml" />
         </reference>
     </productselector_ink_simple>
+    <productselector_category_index>
+        <reference>
+            <block type="compandsave_productselector/categorylist" name="root" as="categorylist" output="toHtml" template="productselector/categorylist.phtml" />
+        </reference>
+    </productselector_category_index>
 </layout>
