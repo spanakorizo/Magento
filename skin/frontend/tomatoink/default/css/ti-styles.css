@@ -527,11 +527,11 @@ th{
 
 @font-face {
 	font-family: 'ti-icons';
-	src:url('../media/ti-fonts/ti-icons.eot');
-	src:url('../media/ti-fonts/ti-icons.eot') format('embedded-opentype'),
-		url('../media/ti-fonts/ti-icons.woff') format('woff'),
-		url('../media/ti-fonts/ti-icons.ttf') format('truetype'),
-		url('../media/ti-fonts/ti-icons.svg') format('svg');
+	src:url('../fonts/ti-fonts/ti-icons.eot');
+	src:url('../fonts/ti-fonts/ti-icons.eot') format('embedded-opentype'),
+		url('../fonts/ti-fonts/ti-icons.woff') format('woff'),
+		url('../fonts/ti-fonts/ti-icons.ttf') format('truetype'),
+		url('../fonts/ti-fonts/ti-icons.svg') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }

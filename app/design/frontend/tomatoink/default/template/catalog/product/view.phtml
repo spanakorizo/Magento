@@ -242,7 +242,7 @@ error_reporting(E_ALL);
                         foreach($related_printer as $ti_compatible_printerid) {
                            $ti_compatible_printer = Mage::getModel('catalog/product')->load($ti_compatible_printerid); 
                              if ($printer_count == 1) echo "<tr>";
-                             echo "<td><p><a src='https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/" . $ti_compatible_printerid . "'>";
+                             echo "<td><p><a src='" . $this->getUrl('') . "catalog/product/view/id/" . $ti_compatible_printerid . "'>";
                              echo $ti_compatible_printer->getName();
                              echo "</a></p></td>";
 
