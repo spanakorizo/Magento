@@ -124,9 +124,9 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
             $product_url .= $pro_url_array[count($pro_url_array)-1];
   ?>
     <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
-        <a href="<?php echo $product_url?>"><p><?php echo $this->escapeHtml($_item->getName()) ?></p></a> 
+        <a href="<?php echo $product_url?>?printer=<?php echo $_product->getId(); ?>"><p><?php echo $this->escapeHtml($_item->getName()) ?></p></a> 
         
-        <a href="<?php echo $product_url; ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" /></a>
+        <a href="<?php echo $product_url; ?>?printer=<?php echo $_product->getId(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" /></a>
             
                 <!-- <a href="<?php //echo $_item->getProductUrl()?>.html"><?php //echo $this->escapeHtml($_item->getName()) ?></a><br /> !-->
         
@@ -150,6 +150,7 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
 
                              <input type="button" value="Add To Cart" class="ti_button_large" name="<?php echo $_item->getId(); ?>" onclick="addproduct_query(this.name)"></input></p>
                         </div>
+                        <p>We've sold <?php echo round($_item->getOrderedQty()) ?> of this product.</p>
                 <?php
                 $bundle_url = "";
                     if ($_item->getTypeId() == 'bundle'){

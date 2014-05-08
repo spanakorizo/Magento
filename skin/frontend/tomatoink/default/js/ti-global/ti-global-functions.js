@@ -48,7 +48,14 @@ for (i=0;i<ARRcookies.length;i++)
 /* Version: 0.0.1 */
 /*******************************************************/
 
+
+
 jQuery(document).ready(function($){
+
+
+
+  //can't work 
+  /*
 	$('a[href^="#"]').on('click',function (e) {
 	    e.preventDefault();
 
@@ -62,7 +69,7 @@ jQuery(document).ready(function($){
 	    });
 	});
 
-
+*/
 
 
 /*****************************************************************/

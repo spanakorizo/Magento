@@ -136,10 +136,10 @@ ul,ol         { list-style:none; }
 /* Global Styles ========================================================================= */
 
 /* Form Elements */
-input,select,textarea,button { font:12px Arial, Helvetica, sans-serif; vertical-align:middle; color:#444; }
+/*input,select,textarea,button { font:12px Arial, Helvetica, sans-serif; vertical-align:middle; color:#444; }
 input.input-text,select,textarea { background:#fff; border:1px solid #c7c7c7; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x; }
-input.input-text,textarea { /*padding:2px 2px; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x;*/ }
-select { /*padding:1px; */}
+input.input-text,textarea { padding:2px 2px; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x;}
+select {padding:1px;}
 select option { padding-right:10px; }
 select.multiselect option { padding:2px 2px; border-bottom:1px solid #bbb; }
 select.multiselect option:last-child { border-top:0; }
@@ -151,9 +151,9 @@ input.radio { font-size:10px !important; }
 input.qty { width:2.5em !important; }
 input.disabled { background:#f6f6f6 !important; color:#bbb !important; }
 button.button::-moz-focus-inner { padding:0; border:0; } /* FF Fix */
-button.button { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
+/*button.button { -webkit-border-fit:lines; }/* /* <- Safari & Google Chrome Fix */
 
-button.button { /*border:0; padding:0; margin:0; background:transparent; line-height:21px; overflow:visible; cursor:pointer; vertical-align:middle;*/ }
+/*button.button { border:0; padding:0; margin:0; background:transparent; line-height:21px; overflow:visible; cursor:pointer; vertical-align:middle; }*/
 
 /*a.button,
 button.button span,
@@ -381,10 +381,10 @@ p.error-msg { border-color:#e9581f; background-color:#fff5f3; color:#d91a00; }
 .pager-only .pages { margin:0; }
 
 /* Sorter */
-/*.sorter { font-size:11px; margin:0 0 0; padding:3px 20px; background:#f5f5f5 url(../images/bkg_pager.gif) repeat-x 0 0; border-top:1px solid #ddd; color:#333; }*/
+/*.sorter { font-size:11px; margin:0 0 0; padding:3px 20px; background:#f5f5f5 url(../images/bkg_pager.gif) repeat-x 0 0; border-top:1px solid #ddd; color:#333; }
 .sorter p { margin:0; }
 .sorter select { padding:0; margin-bottom:1px; }
-.sorter .view-mode { float:left; line-height:20px; white-space:nowrap; }
+.sorter .view-mode { float:left; line-height:20px; white-space:nowrap; }*/
 .sorter .view-mode label { float:left; margin:0 5px 0 0; }
 .sorter .view-mode a.list-fix,
 .sorter .view-mode a.list,
@@ -2583,4 +2583,4 @@ address.copyright { margin-top:6px; }
 .product-view .product-shop:after { display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
 /* ======================================================================================= */
 
-.guest-select {width:305px !important;}
+.guest-select {width:305px !imp

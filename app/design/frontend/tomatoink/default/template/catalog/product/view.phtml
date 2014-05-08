@@ -142,14 +142,26 @@ error_reporting(E_ALL);
                             </ul>
                         </div>
                         <div class="one_half ti_product_infoBlock">
+                         <div id="fb-root"></div>
+
+                        <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=406893882783987"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script> 
                             <!--AddThis Button BEGIN - Please consult with Mehmet about what to include here-->
                             <p class="addthis_toolbox addthis_default_style">
-                            <a class="addthis_button_facebook_like" fb:like:layout="button"></a>
-                            <a class="addthis_button_tweet" data-count="none"></a>
-                            <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+                                <div class="fb-like" id = 'ti_product_fb' data-href="" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
+                                <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+                            <a id = 'ti_product_pin' href="" data-pin-do="buttonPin" data-pin-config="none" data-pin-color="red"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
                             </p>
-                            <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-                            <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-52e6afc917c637c1"></script> 
+                            <!-- facebook !-->
+                            <script type="text/javascript">
+                                document.getElementById('ti_product_fb').setAttribute('data-href', window.location.href);
+                            </script> 
+
+                            <!-- tweeter !-->
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                            <!-- Pin it !-->
+                            <script>document.getElementById('ti_product_pin').href="//www.pinterest.com/pin/create/button/?url=" + encodeURIComponent(window.location.href) + "&media=" + encodeURIComponent('<?php echo $_product->getImageUrl() ?>') + "&description=TomatoinkTest";</script>
+                            <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
                             <!-- AddThis Button END -->
                         </div>
                     </div>

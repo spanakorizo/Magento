@@ -4,4 +4,8 @@ class Compandsave_Productselector_CategoryController extends Mage_Core_Controlle
         $this->loadLayout();
         $this->renderLayout();
     }
+	public function modelAction(){
+        $this->loadLayout();
+        $this->renderLayout();
+    }
 }

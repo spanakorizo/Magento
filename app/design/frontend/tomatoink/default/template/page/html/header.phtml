@@ -1,7 +1,7 @@
 
 	
 	<!--Fonts for all pages-->
-	<link href='http://fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
+	<link href='//fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
 	<script type="text/javascript" src="//use.typekit.net/mbd0rqf.js"></script>
 	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
 	<!--end fonts-->
@@ -14,10 +14,10 @@
   		</style>
 	<![endif]-->
 
-
+	<?php $current_url = $this->getUrl(''); ?>
 	<script type="text/javascript">
 		var homepage = "<?php if ($this->getIsHomePage()) echo 'true'; else echo 'false'?>";
-		var ti_global_url = "<?php echo $this->getUrl('');?>";
+		var ti_global_url = "<?php echo $current_url;?>";
 		ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
 		
 	</script>
@@ -52,27 +52,27 @@
 				</div>
 				<div class="ti_header_nav_block clear">
 					<div id="ti_header_nav_mini">
-						<select>
+						<select id="ti_header_mininav">
 							<option selected="selected" disabled="disabled">Shop by...</option>
-							<option>HP</option>
-							<option>Brother</option>
-							<option>Epson</option>
-							<option>Canon</option>
-							<option>Lexmark</option>
-							<option>Samsung</option>
-							<option>Dell</option>
-							<option>Kodak</option>
-							<option>Konica-Minolta</option>
-							<option>Okidata</option>
-							<option>Xerox</option>
-							<option>Kyocera-Mita</option>
-							<option>Pitney Bowes</option>
-							<option>Sharp</option>
-							<option>IBM</option>
-							<option>Ricoh</option>
-							<option>Apple</option>
-							<option>Compaq</option>
-							<option>Apollo</option>
+							<option value="hp-compatible-toner-cartridge.html">HP</option>
+							<option value="brother-printer-ink-toner.html">Brother</option>
+							<option value="epson-cartridges.html">Epson</option>
+							<option value="canon-printer-ink-cartridges.html">Canon</option>
+							<option value="lexmark-printer-cartridges.html">Lexmark</option>
+							<option value="samsung-printer-ink-toner.html">Samsung</option>
+							<option value="dell-cartridges.html">Dell</option>
+							<option value="kodak-printer-ink-toner.html">Kodak</option>
+							<option value="konica-minolta-printer-ink-toner-cartridges.html">Konica-Minolta</option>
+							<option value="okidata-printer-ink-toner.html">Okidata</option>
+							<option value="xerox-printer-ink-toner.html">Xerox</option>
+							<option value="kyocera-mita-printer-ink-laser-toner.html">Kyocera-Mita</option>
+							<option value="pitney-bowes-ink-toner-cartridges.html">Pitney Bowes</option>
+							<option value="sharp-printer-ink-toner.html">Sharp</option>
+							<option value="ibm-printer-ink-toner.html">IBM</option>
+							<option value="ricoh-printer-ink-toner.html">Ricoh</option>
+							<option value="apple-printer-ink-toner.html">Apple</option>
+							<option value="compaq-printer-ink-toner.html">Compaq</option>
+							<option value="apollo-printer-ink-toner.html">Apollo</option>
 							<option>AstroJet</option>
 							<option>Bryce</option>
 							<option>Hasler</option>
@@ -84,14 +84,39 @@
 							<option>Secap</option>
 							<option>Accessories</option>
 						</select>
+						<script type="text/javascript">
+							jQuery("#ti_header_mininav").change(function() {
+
+        						var dataString = jQuery(this).val();
+								window.location.href = ti_global_url + dataString;
+
+        
+
+        					});
+						</script>
 					</div>
 				</div>
 				<div class="ti_header_nav_block">
 					<div id="ti_header_search_mini">
-						<form id="nxt-ac-form" onsubmit="return submitSearch5();" action="http://search.tomatoink.com/search" method="get" name="form5">
+						<!-- <form id="nxt-ac-form" onsubmit="return submitSearch5();" action="http://search.tomatoink.com/search" method="get" name="form5">
 							<input type="text" name="keywords" autocomplete="off" value="Type ink or printer model" id="search_v5_5" onfocus="if(this.value=='Type ink or printer model')this.value='';" onblur="if(this.value=='')this.value='Type ink or printer model';" onkeypress="return handleEnter5(this,event)">
 							<input type="submit" border="0" onclick="submitSearch5();" value="Find Ink" name="imageField">
+						</form> !-->
+						<?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
+						<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+							<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
+							<input type="submit" name="Submit" id="search_submit" value="Search" title="<?php echo $this->__('Search') ?>">
+							
+	        <script type="text/javascript">
+	        //<![CDATA[
+	            //var searchForm = new Varien.searchForm('search_mini_form2', 'search2', '<?php echo $this->__('Search entire store here...') ?>');
+	            //searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+	        //]]>
+	        </script>
 						</form>
+
+
+
 					</div>
 				</div>
 			</div>
@@ -99,13 +124,13 @@
 		<div class="ti_cms_contain btcf">
 			<div class="ti_header_top_block ti_logo_bar">
 
-				<a href="<?php echo $this->getUrl('') ?>"><img src="<?php echo $this->getSkinUrl('images/ti-assets/ti-logo.png') ?>" alt="Save up to 80% on ink cartridges, toner, and printer accessories at TomatoInk!" id="ti_header_logo"/></a>
+				<a href="<?php echo $current_url ?>"><img src="<?php echo $this->getSkinUrl('images/ti-assets/ti-logo.png') ?>" alt="Save up to 80% on ink cartridges, toner, and printer accessories at TomatoInk!" id="ti_header_logo"/></a>
 			</div>
 			<div class="ti_header_top_block ti_hide_767 ti_logo_bar">
 				<?php if ($this->getIsHomePage()):?>
 				<div class="ti_input_bar" id="ti_header_home_email">
 
-					<form action="<?php echo $this->getUrl(''); ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
+					<form action="<?php echo $current_url; ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
         <input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" />
      	<button type="submit" class="button" title="<?php echo $this->__('Subscribe') ?>"><span><span><?php echo $this->__('Sign Up') ?></span></span></button> 
 
@@ -155,27 +180,27 @@
 		<div id="ti_header_nav_main">
 			<div class="ti_cms_contain btcf">
 				<ul class="ti_menu ti_hide_767">
-					<li><a href="<?php echo $this->getUrl('') ?>hp-compatible-toner-cartridge.html"><span>HP</span></a></li>
-					<li><a href="<?php echo $this->getUrl('') ?>brother-printer-ink-toner.html"><span>Brother</span></a></li>
-					<li><a href="<?php echo $this->getUrl('') ?>epson-cartridges.html"><span>Epson</span></a></li>
-					<li><a href="<?php echo $this->getUrl('') ?>canon-printer-ink-cartridges.html"><span>Canon</span></a></li>
-					<li><a href="<?php echo $this->getUrl('') ?>lexmark-printer-cartridges.html"><span>Lexmark</span></a></li>
-					<li><a href="<?php echo $this->getUrl('') ?>samsung-printer-ink-toner.html"><span>Samsung</span></a></li>
-					<li><a href="<?php echo $this->getUrl('') ?>dell-cartridges.html"><span>Dell</span></a></li>
+					<li><a href="<?php echo $current_url ?>hp-compatible-toner-cartridge.html"><span>HP</span></a></li>
+					<li><a href="<?php echo $current_url ?>brother-printer-ink-toner.html"><span>Brother</span></a></li>
+					<li><a href="<?php echo $current_url ?>epson-cartridges.html"><span>Epson</span></a></li>
+					<li><a href="<?php echo $current_url ?>canon-printer-ink-cartridges.html"><span>Canon</span></a></li>
+					<li><a href="<?php echo $current_url ?>lexmark-printer-cartridges.html"><span>Lexmark</span></a></li>
+					<li><a href="<?php echo $current_url ?>samsung-printer-ink-toner.html"><span>Samsung</span></a></li>
+					<li><a href="<?php echo $current_url ?>dell-cartridges.html"><span>Dell</span></a></li>
 					<li><a href=""><span>More Brands
 						<ul class="ti_sub-menu menu_three_col ti_cms_border_block" id="ti_header_brandsMenu">
-							<li><a href="<?php echo $this->getUrl('') ?>kodak-printer-ink-toner.html"><span>Kodak</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>konica-minolta-printer-ink-toner-cartridges.html"><span>Konica-Minolta</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>okidata-printer-ink-toner.html"><span>Okidata</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>xerox-printer-ink-toner.html"><span>Xerox</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>kyocera-mita-printer-ink-laser-toner.html"><span>Kyocera-Mita</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>pitney-bowes-ink-toner-cartridges.html"><span>Pitney Bowes</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>sharp-printer-ink-toner.html"><span>Sharp</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>ibm-printer-ink-toner.html"><span>IBM</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>ricoh-printer-ink-toner.html"><span>Ricoh</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>apple-printer-ink-toner.html"><span>Apple</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>compaq-printer-ink-toner.html"><span>Compaq</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>apollo-printer-ink-toner.html"><span>Apollo</span></a></li>
+							<li><a href="<?php echo $current_url ?>kodak-printer-ink-toner.html"><span>Kodak</span></a></li>
+							<li><a href="<?php echo $current_url ?>konica-minolta-printer-ink-toner-cartridges.html"><span>Konica-Minolta</span></a></li>
+							<li><a href="<?php echo $current_url ?>okidata-printer-ink-toner.html"><span>Okidata</span></a></li>
+							<li><a href="<?php echo $current_url ?>xerox-printer-ink-toner.html"><span>Xerox</span></a></li>
+							<li><a href="<?php echo $current_url ?>kyocera-mita-printer-ink-laser-toner.html"><span>Kyocera-Mita</span></a></li>
+							<li><a href="<?php echo $current_url ?>pitney-bowes-ink-toner-cartridges.html"><span>Pitney Bowes</span></a></li>
+							<li><a href="<?php echo $current_url ?>sharp-printer-ink-toner.html"><span>Sharp</span></a></li>
+							<li><a href="<?php echo $current_url ?>ibm-printer-ink-toner.html"><span>IBM</span></a></li>
+							<li><a href="<?php echo $current_url ?>ricoh-printer-ink-toner.html"><span>Ricoh</span></a></li>
+							<li><a href="<?php echo $current_url ?>apple-printer-ink-toner.html"><span>Apple</span></a></li>
+							<li><a href="<?php echo $current_url ?>compaq-printer-ink-toner.html"><span>Compaq</span></a></li>
+							<li><a href="<?php echo $current_url ?>apollo-printer-ink-toner.html"><span>Apollo</span></a></li>
 							<li><a href=""><span>AstroJet</span></a></li>
 							<li><a href=""><span>Bryce</span></a></li>
 							<li><a href=""><span>Hasler</span></a></li>
@@ -189,21 +214,23 @@
 					</span></a></li>
 					<li><a href="#"><span>Accessories</span></a>
 						<ul class="ti_sub-menu menu_two_col ti_cms_border_block" id="ti_header_lastMenu">
-							<li><a href="<?php echo $this->getUrl('') ?>usb-printer-cables.html"><span>Cables</span></a></li>
-							<li><a href="<?php echo $this->getUrl('') ?>printer-supply.html"><span>Photo Paper</span></a></li>
+							<li><a href="<?php echo $current_url ?>usb-printer-cables.html"><span>Cables</span></a></li>
+							<li><a href="<?php echo $current_url ?>printer-supply.html"><span>Photo Paper</span></a></li>
 						</ul>
 					</li>
 				</ul>
 				<p id="ti_secondary_coupon" class="clear"><strong>This month's special offer:</strong> <span id="ti_secondary_coupon_info"></span> <strong class="ti_secondary_coupon_code" id="ti_secondary_coupon_code"></strong>. <span id="ti_secondary_coupon_exp"></span></p>
 			</div>
 		</div>
-	<div id="ti_header_breadcrumbs"></div>
+	<div class="ti_cms_contain btcf">
+		<div id="ti_header_breadcrumbs"></div>
+	</div>
 
 <?php 
 $cart = Mage::getModel('checkout/cart')->getQuote();
 //$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
 //$total_num = $cart->getItemsCount();
-$total_num = $cart->getItemsQty();
+$total_num = round($cart->getItemsQty());
 if ($total_num == "") $total_num=0;
 
 $grandtotal = $cart->getSubtotal();
@@ -233,10 +260,10 @@ var ti_global_islogin = "<?php  if ($this->helper('customer')->isLoggedIn()) ech
 var ti_global_customerid = "";
 if (ti_global_islogin) ti_global_customerid = "<?php if ($this->helper('customer')->isLoggedIn()) echo Mage::getSingleton('customer/session')->getCustomer()->getId(); ?>";
 var ti_global_total   = "<?php echo $total_num ?>";
-jQuery(document).ready(function() {
+jQuery(document).ready(function($) {
 //my account signin/signout
-if (ti_global_islogin) {jQuery('#ti_header_login').hide();}
-else {jQuery('#ti_header_logout').hide();}
+if (ti_global_islogin) {$('#ti_header_login').hide();}
+else {$('#ti_header_logout').hide();}
 
 //shopping cart count
 jQuery('#ti_header_cartcount').html(ti_global_total);

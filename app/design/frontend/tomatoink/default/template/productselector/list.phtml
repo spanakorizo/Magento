@@ -1,46 +1,55 @@
-<div class="ti_ink_selector_holder">
+<!--<div class="ti_ink_selector_holder">-->
 	
-	<h1 class="ti_green_head">Ink Selector Tools</h1>
-	<p>Please Select your printer Brand/Series/Model for your Ink / Cartridge </p>
+	<h1 class="ti_green_head">Ink Search</h1>
+	<!--<p>Please Select your printer Brand/Series/Model for your Ink / Cartridge </p>
 	<div style="width:100%;position:relative;float:left">
-			
-            <div class="ti_ink_selector_div">
-				<div id="ti_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
-				<div id="ti_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
-                <h3>Choose Printer Brand</h3>
-                <select name="" id="ti_brand_selector" class="ti_select_text">
-                    <option value="">select the brand</option>
+		<div class="ti_ink_selector_div">-->
+        <div class="ti_select_barContainerBorder btcf">
+            <div class="ti_select_barContainer btcf">    
+
+    			<div id="ti_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
+    			<div id="ti_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
+               <!--<h3>Choose Printer Brand</h3>-->
+                <select name="" id="ti_brand_selector">
+                    <option value="">Brand</option>
                     <?php
                     $category_model = Mage::getModel('catalog/category')->load(2);
-					$subcategoryIds = $category_model->getChildren();
-					$subCatIds = explode(',',$subcategoryIds);	
-					$collection = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->load();
-					
-					foreach($collection as $item){
-				
-						echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
-					}
+    				$subcategoryIds = $category_model->getChildren();
+    				$subCatIds = explode(',',$subcategoryIds);	
+    				$collection = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->load();
+    				
+    				foreach($collection as $item){
+    			
+    					echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
+    				}
 
                     ?>
                 </select>
             </div>
-            <div class="ti_ink_selector_div">
-                <h3>Choose Printer Series</h3>
-                <select disabled="" name="" id="ti_series_selector" class="ti_select_text">
-                    <option value="0" selected="">select your printer series</option>
+        </div>
+        <!--<div class="ti_ink_selector_div">-->
+        <div class="ti_select_barContainerBorder btcf">
+            <div class="ti_select_barContainer btcf">
+                <!--<h3>Choose Printer Series</h3>-->
+                <select disabled="" name="" id="ti_series_selector">
+                    <option value="0" selected="">Series</option>
                 </select>
             </div>
-            <div class="ti_ink_selector_div">
-                <h3>Choose Model/Cartridge</h3>
+        </div>
+        <!--<div class="ti_ink_selector_div">-->
+        <div class="ti_select_barContainerBorder btcf">
+            <div class="ti_select_barContainer btcf">
+                <!--<h3>Choose Model/Cartridge</h3>-->
 
-                <select disabled="" name="" id="ti_cartridge_selector" class="ti_select_text">
-                    <option value="" selected="">select your printer cartridge</option>
+                <select disabled="" name="" id="ti_cartridge_selector">
+                    <option value="" selected="">Model</option>
                 </select>
             </div>
+        </div>
 
 
-	</div>
-</div>
+	<!--</div>
+</div>-->
 <script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
 <script>
 jQuery.noConflict();

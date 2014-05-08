@@ -1,5 +1,6 @@
 <?php
 $cat_id = $_POST['id'];
+$cat_name = $_POST['name'];
 $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
 $nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
 $coreResource = Mage::getSingleton('core/resource');
@@ -14,7 +15,7 @@ $select = $conn->select()
     ->where('category_id = ?',$cat_id)
     ->where('position = ? ', '1');
 $result = $conn->fetchCol($select);
-
+//echo '<div id="ti_series_name" class="ti_cms_block_headerBar-green"><h1 class="white">'. $cat_name .' Series </h1></div>';
 if(!empty($result)){
     foreach($result as $product_id){
 
@@ -25,10 +26,11 @@ if(!empty($result)){
             ->where('store_id = ?',$store_id)
             ->where('entity_id = ?',$product_id);
 
-        $product = $conn->fetchAll($sel);;
+        $product = $conn->fetchAll($sel);
+		
         foreach($product as $product_arr){
 
-            echo '<div class="ti_subcat_product_gid_one_forth"><p><a href="https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/'.$product_arr['entity_id'].'" >'.$product_arr['value'].'</a></p></div>';
+            echo '<div class="ti_subcat_product_gid_one_fifth"><p><a href="https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/'.$product_arr['entity_id'].'" >'.$product_arr['value'].'</a></p></div>';
 
 
         }

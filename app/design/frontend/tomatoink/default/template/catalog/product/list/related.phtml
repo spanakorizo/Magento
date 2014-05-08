@@ -61,10 +61,9 @@
              <div class="ti_related_item_one_fourth ti_related_item_one_fourth-<?php echo $i + 1; ?>">
                 <div class="ti_related_content_container ti_block_inner">
                     <div class="ti_related_product_title">
-                        <p><a href="<?php $_related_item->getProductUrl() ?>"><?php echo $this->__($_related_item->getName()) ?></a></p>
+                        <p><a href="<?php echo $_related_item->getProductUrl() ?>"><?php echo $this->__($_related_item->getName()) ?></a></p>
                     </div>
-
-                    <a href="<?php $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
+                    <a href="<?php echo $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
 
                     <h3 class="altTxt"><?php echo $this->__('Our price: $').' '.number_format($_related_item->getPrice(), 2) ?></h3>
                     <div class="ti_cms_block_qty">

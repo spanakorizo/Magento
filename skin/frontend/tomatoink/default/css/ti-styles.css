@@ -292,6 +292,7 @@ input[type="number"] {
 }
 
 input[type="submit"], 
+input[type="button"], 
 .ti_button, button {
   color:#fff;
   text-shadow:.5px .5px 1px rgba(0,0,0,.4);
@@ -345,6 +346,9 @@ select{
 	width: 115%;
 	font-size: 1.6em;
 	padding: 5px 0;
+	border-radius: 0.25em;
+	-moz-border-radius: 0.25em;
+	-webkit-border-radius: 0.25em;
 }
 
 .ti_select_barContainer{
@@ -355,6 +359,9 @@ select{
 	padding: 0;
 	overflow: hidden;
 	font-size: 1.6em;
+	border-radius: 0.25em;
+	-moz-border-radius: 0.25em;
+	-webkit-border-radius: 0.25em;
 }
 
 .ti_select_barContainerBorder{
@@ -1157,7 +1164,7 @@ th{
 /* -----------------------------------*/
 /* --------- Prefix: ti_cms_ ---------*/
 
-.ti_cms_breadcrumb{
+#ti_header_breadcrumbs{
 	padding:15px 0;
 }
 
@@ -1719,10 +1726,4 @@ ul.ti_product_checklist{
 }
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
-
-	#ti_header_row, #ti_footer_row, #ti_cms_home_container, #ti_footer_copyright_row{
-		min-width:480px;
-	}
-
-}
+@media only screen 
