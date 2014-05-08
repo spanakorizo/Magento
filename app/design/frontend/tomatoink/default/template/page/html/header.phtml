@@ -224,6 +224,9 @@
 		</div>
 	<div class="ti_cms_contain btcf">
 		<div id="ti_header_breadcrumbs"></div>
+		<?php if ($this->getIsHomePage()):?>
+			<style type="text/css"> #ti_header_breadcrumbs {display:none;} </style>
+		<?php endif; ?>
 	</div>
 
 <?php 

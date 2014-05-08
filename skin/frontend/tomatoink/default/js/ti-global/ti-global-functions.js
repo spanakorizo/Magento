@@ -197,17 +197,17 @@ var ti_qty_previous="";
 /***************************************/
 var ti_header_smallnav = document.getElementById('ti_header_breadcrumbs');
 if (typeof ti_global_pagetype != "undefined" && ti_global_pagetype == "brand") {
-  ti_header_smallnav.innerHTML = " Home > " + ti_global_pagename; 
+  ti_header_smallnav.innerHTML = "<p>Home > " + ti_global_pagename + "</p> "; 
 }
 else if (typeof ti_global_pagetype != "undefined" && ti_global_pagetype == "grouped") {
-  ti_header_smallnav.innerHTML = " Home > " + ti_global_printerbrand + " > " + ti_global_pagename; 
+  ti_header_smallnav.innerHTML = "<p>Home > " + ti_global_printerbrand + " > " + ti_global_pagename + "</p> "; 
 }
 else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "simple" || ti_global_pagetype == "bundle")) {
   var ti_header_sku_arr = ti_global_productcode.split("-");
   if (getUrlVars()["printer"] != undefined)
-    {ti_header_smallnav.innerHTML = " Home > " + ti_header_sku_arr[1] + " > " + ti_global_prev_printer + " > " + ti_global_pagename;}
+    {ti_header_smallnav.innerHTML = "<p>Home > " + ti_header_sku_arr[1] + " > " + ti_global_prev_printer + " > " + ti_global_pagename; + "</p> "}
   else 
-    ti_header_smallnav.innerHTML = " Home > " + ti_header_sku_arr[1] + " > " + ti_global_pagename;
+    ti_header_smallnav.innerHTML = "<p>Home > " + ti_header_sku_arr[1] + " > " + ti_global_pagename + "</p> ";
 }
 
 

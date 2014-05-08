@@ -57,38 +57,43 @@
     var ti_global_pagename = "<?php echo $_category->getName(); ?>";
 </script>
 
-<div class="ti_category_content_container">
-    <div style="width: 73%;position: relative; display: block; float: left; padding: 0 1%">
-        <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
-            <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
-        <?php endif; ?>
-        <h1 class="ti_header_left_align"><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
-        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<!--<div class="ti_category_content_container">
+    <div style="width: 73%;position: relative; display: block; float: left; padding: 0 1%">-->
+    <div class="ti_cms_contain">
+        <div class="three_fourth">
+            <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+                <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+            <?php endif; ?>
+            <h1 class="ti_header_left_align"><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+            <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 
-        <?php if($_imgUrl): ?>
-            <p><?php echo $_imgHtml ?>
-            <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+            <?php if($_imgUrl): ?>
+                <p><?php echo $_imgHtml ?>
+                <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+                    <p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
+                <?php endif; ?>
+                </p>
+
+            <?php else: ?>
+                <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
                 <p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
-            <?php endif; ?>
-            </p>
+                <?php endif; ?>
 
-        <?php else: ?>
-            <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
-            <p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
             <?php endif; ?>
-
-        <?php endif; ?>
-    </div>
-    <div class="ti_category_one_forth ti_category_product_selector_box">
-        <div class="ti_ink_selector_holder">
+         </div>
+    <!--<div class="ti_category_one_forth ti_category_product_selector_box">
+        <div class="ti_ink_selector_holder">-->
+        <div class="one_fourth ti_cms_gradient_block">
             <h1 class="ti_green_head">Ink Search</h1>
-            <div style="width:100%;position:relative;float:left">
+            <!--<div style="width:100%;position:relative;float:left">
 
                 <div class="ti_ink_selector_div">
-                    <h3>Choose Printer Series</h3>
+                    <h3>Choose Printer Series</h3>-->
+            <div class="ti_select_barContainerBorder btcf">
+                <div class="ti_select_barContainer btcf">
                     <div id="ti_ajax_cat_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
-                    <select name="" id="ti_series_selector" class="ti_select_text">
-                        <option value="0" selected="">select your printer series</option>
+                    <select name="" id="ti_series_selector">
+                        <option value="0" selected="">Series</option>
                         <?php
                         $category_model = Mage::getModel('catalog/category')->load($currentCategoryId);
                         $subcategoryIds = $category_model->getChildren();
@@ -103,40 +108,40 @@
                         ?>
                     </select>
                 </div>
-                <div class="ti_ink_selector_div">
-                    <h3>Choose Model/Cartridge</h3>
+            </div>
+                <!--<div class="ti_ink_selector_div">-->
+            <div class="ti_select_barContainerBorder btcf">
+                <div class="ti_select_barContainer btcf">
+                    <!--<h3>Choose Model/Cartridge</h3>-->
 
-                    <select disabled="" name="" id="ti_cartridge_selector" class="ti_select_text">
-                        <option value="" selected="">select your printer cartridge</option>
+                    <select disabled="" name="" id="ti_cartridge_selector">
+                        <option value="" selected="">Model</option>
                     </select>
                 </div>
-
-
+            </div>
+        </div>
+<!--</div>
+<div class="ti_category_content_container">-->
+        <div class="one ti_hide_479">
+            <div class="ti_input_bar">
+                <div class="ti_input_barContainer">
+                    <?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
+                        <!--<div class="ti_input_bar">-->
+                    <form id="search_mini_form2" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+                        <input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search2" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
+                        <input type="submit" name="Submit" id="search_submit2" value="Search" title="<?php echo $this->__('Search') ?>">
+                        <div id="search_autocomplete" class="search-autocomplete"></div>
+                        <script type="text/javascript">
+                        //<![CDATA[
+                            var searchForm2 = new Varien.searchForm('search_mini_form2', 'search2', '<?php echo $this->__('Search entire store here...') ?>');
+                            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+                        //]]>
+                        </script>
+                <!--</div>-->
+                </div>
             </div>
         </div>
     </div>
-
-</div>
-<div class="ti_category_content_container">
-    <div class="one ti_hide_479">
-        <div class="ti_input_bar">
-            <div class="ti_input_barContainer">
-                <?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
-                    <div class="ti_input_bar">
-                        <form id="search_mini_form2" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
-                            <input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search2" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
-                            <input type="submit" name="Submit" id="search_submit2" value="Search" title="<?php echo $this->__('Search') ?>">
-                            <div id="search_autocomplete" class="search-autocomplete"></div>
-            <script type="text/javascript">
-            //<![CDATA[
-                var searchForm2 = new Varien.searchForm('search_mini_form2', 'search2', '<?php echo $this->__('Search entire store here...') ?>');
-                searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
-            //]]>
-            </script>
-            </div>
-        </div>
-    </div>
-</div>
 <div class="ti_category_content_container">
     <?php   foreach($collection as $series):?>
             <div class="ti_series_one_forth" id="<?php echo $series->name; ?>-<?php echo $series->entity_id; ?>">
@@ -144,7 +149,7 @@
                     <img src="<?php if($series->getImageUrl()) echo $series->getImageUrl(); else echo $this->getSkinUrl('images/dummy-printer.jpg');?>" style="max-height: 160px; max-width: 80%; margin:5px 10%"/>
                 </div>
 
-                <p style="text-align: center"><a href="#" style="text-decoration: none"><?php echo $series->getName(); ?> Series</a></p>
+                <p><a href="#" style="text-decoration: none"><?php echo $series->getName(); ?> Series</a></p>
             </div>
     <?php   endforeach;?>
 </div>
