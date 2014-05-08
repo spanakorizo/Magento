@@ -1,0 +1,35 @@
+<layout version="0.1.0">
+	<!--<default>
+		<reference name="right">
+			<block type="compandsave_productselector/list" name="productselector" template="productselector/list.phtml" before="cart_sidebar" />
+			<remove name="cart_sidebar" />
+			<action method="addItem"><type>skin_css</type><name>css/productselector.css</name></action>
+        </reference>
+	</default>-->
+
+	<productselector_ajax_index>
+        <reference>
+			<block type="compandsave_productselector/ajaxlist" name="root" as="ajaxlist" output="toHtml" template="productselector/ajaxlist.phtml" />
+        </reference>
+	</productselector_ajax_index>
+    <productselector_ink_index>
+        <reference>
+            <block type="compandsave_productselector/inklist" name="root" as="inklist" output="toHtml" template="productselector/inklist.phtml" />
+        </reference>
+    </productselector_ink_index>
+	<productselector_ink_simple>
+        <reference>
+            <block type="compandsave_productselector/inklist" name="root" as="inklist" output="toHtml" template="productselector/simplelist.phtml" />
+        </reference>
+    </productselector_ink_simple>
+    <productselector_category_index>
+        <reference>
+            <block type="compandsave_productselector/categorylist" name="root" as="categorylist" output="toHtml" template="productselector/categorylist.phtml" />
+        </reference>
+    </productselector_category_index>
+	<productselector_category_model>
+        <reference>
+            <block type="compandsave_productselector/categorylist" name="root" as="modellist" output="toHtml" template="productselector/modellist.phtml" />
+        </reference>
+    </productselector_category_model>
+</layout>

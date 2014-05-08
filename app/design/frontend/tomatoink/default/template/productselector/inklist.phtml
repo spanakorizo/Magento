@@ -1,0 +1,43 @@
+<?php
+$cat_id = $_POST['id'];
+echo '<option value="" selected="">Select your Printer Model</option>';
+
+$eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
+$nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+$store_id = 0;//Mage::app()->getStore()->getId();
+$attrbTable = $coreResource->getTableName('catalog_product_entity_varchar');
+$CatPrdTable = $coreResource->getTableName('catalog_category_product');
+$relationtable = $coreResource->getTableName('catalog_product_link');
+//===== get product under series name =====//
+$select = $conn->select()
+		->from($CatPrdTable,array('product_id'))
+		->where('category_id = ?',$cat_id)
+		->where('position = ? ', '1');
+$result = $conn->fetchCol($select);	
+
+if(!empty($result)){
+	foreach($result as $product_id){
+	//$product_model = Mage::getModel('catalog/product')->load($product_id);
+		$sel = $conn->select()
+			->from($attrbTable, array('entity_id','value'))
+			->where('entity_type_id = ?', $entityTypeId)
+			->where('attribute_id = ?', $nameId)
+			->where('store_id = ?',$store_id)
+			->where('entity_id = ?',$product_id);
+	  //echo '<option value="'.$product_model->getId().'">'.$product_model->getName().'</option>';*/
+	  $product = $conn->fetchAll($sel);;
+	  foreach($product as $product_arr)
+		  echo '<option value="'.$product_arr['entity_id'].'">'.$product_arr['value'].'</option>';
+
+  }
+}
+else{
+	  
+  ?><script>
+           window.open("http://localhost/magento/index.php/catalog/category/view/id/"+ <?php echo $cat_id; ?>, "_self");
+    </script><?Php
+
+}

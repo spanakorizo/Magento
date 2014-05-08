@@ -25,6 +25,13 @@
  */
 /* @var $this Enterprise_TargetRule_Block_Catalog_Product_List_Related */
 ?>
+    <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.easing.1.3.js') ?>"></script>
+    <!-- the jScrollPane script -->
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.mousewheel.js') ?>"></script>
+    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.contentcarousel.js') ?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/jquery.jscrollpane.css') ?>" />
+    <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/ti-related-slider.css') ?>" />
 
 <?php $__item = $this->getProduct() ?>
 
@@ -33,53 +40,68 @@
 
 <?php $formKey = Mage::getSingleton('core/session')->getFormKey();?>
 <!-- if product doesn't have 4 related products, add accessories instead !-->
-<?php $related_backup = array("7904", "7919", "7896", "7910"); ?>
+<?php $related_backup = array("7904", "7919", "7896", "7910");
+    //$related_backup = array("4", "5", "6", "7");
+    ?>
 
 <?php $related_id = $__item->getRelatedProductIds() ?>
-<div class="ti_cms_contain">
-        <div class="ti_cms_block_headerBar-green">
-        <h1 class="white">Customers also viewed:</h1>
+<div class="ti_cms_contain_related">
+    <div class="ti_cms_block_headerBar-green">
+        <h1 class="white"><?php echo $this->__('Customers also viewed:') ?></h1>
     </div>
 
-<?php $related_total = count($related_id)>4?count($related_id):4; ?>
+    <?php $related_total = count($related_id)>4?count($related_id):4; ?>
 
+    <div id="ti_related_container" class="ti_related_container">
+        <div class="ti_related_wrapper">
+        <?php for ($i=0;$i<$related_total; $i++): ?>
+            <?php if (($related_id[$i]== "") && ($i<4)) $related_id[$i] = $related_backup[$i]; ?>
+        <?php $_related_item = Mage::getModel('catalog/product')->load($related_id[$i]);?>
 
-<?php for ($i=0;$i<$related_total; $i++): ?>
-    <?php if (($related_id[$i]== "") && ($i<4)) $related_id[$i] = $related_backup[$i]; ?>
-<?php $_related_item = Mage::getModel('catalog/product')->load($related_id[$i]);?>
-    <div class="ti_cms_block_related one_fourth">
-        <a href="<?php $_related_item->getProductUrl() ?>"><p><?php echo $_related_item->getName() ?></p></a>
-        <a href="<?php $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
+             <div class="ti_related_item_one_fourth ti_related_item_one_fourth-<?php echo $i + 1; ?>">
+                <div class="ti_related_content_container ti_block_inner">
+                    <div class="ti_related_product_title">
+                        <p><a href="<?php echo $_related_item->getProductUrl() ?>"><?php echo $this->__($_related_item->getName()) ?></a></p>
+                    </div>
+                    <a href="<?php echo $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
 
-        <h3 class="orange">Our price: $<?php echo number_format($_related_item->getPrice(), 2) ?></h3>
-        <div class="ti_cms_block_qty">
-<p class="lt_green">
-Qty: <input type="text" name="qty_<?php echo $_related_item->getId() ?>" maxlength="12" id = "product_qty_<?php echo $_related_item->getId(); ?>" value="0" class="input-text qty" />
+                    <h3 class="altTxt"><?php echo $this->__('Our price: $').' '.number_format($_related_item->getPrice(), 2) ?></h3>
+                    <div class="ti_cms_block_qty">
+                        <p class="lgTxt">
+                            <?php echo $this->__('Qty:') ?><input type="text" name="qty_<?php echo $_related_item->getId() ?>" maxlength="12" id = "product_qty_<?php echo $_related_item->getId(); ?>" value="0" class="input-text qty" />
 
-<!-- customize bundle button !-->
-                <input type="button" value="Add To Cart" name="<?php echo $_related_item->getId(); ?>" onclick="addproduct_query(this.name)"></p>
+                            <!-- customize bundle button !-->
+                            <input type="button" value="Add To Cart" name="<?php echo $_related_item->getId(); ?>" onclick="addproduct_query(this.name)"></p>
 
-                <?php
-                $bundle_url = "";
-                    if ($_related_item->getTypeId() == 'bundle'){
-                        
-                        $selectionCollection = $_related_item->getTypeInstance(true)->getSelectionsCollection(
-                        $_related_item->getTypeInstance(true)->getOptionsIds($_related_item), $_related_item
-                    );
+                        <?php
+                        $bundle_url = "";
+                        if ($_related_item->getTypeId() === 'bundle'){
 
-                    foreach($selectionCollection as $option) {
-                        $bundle_url .= "?bundle_option[" . $option->option_id  . "]=" . $option->selection_id . "&bundle_option_qty[" . $option->option_id . "]=";
-                    }//end: foreach $selectionCollection
+                            $selectionCollection = $_related_item->getTypeInstance(true)->getSelectionsCollection(
+                                $_related_item->getTypeInstance(true)->getOptionsIds($_related_item), $_related_item
+                            );
 
-                } // end: if $_related_item == bundle 
-                ?>
-                <input type="hidden" value="<?php echo $bundle_url; ?>" id="bundle_<?php echo $_related_item->getId() ?>">
+                            foreach($selectionCollection as $option) {
+                                $bundle_url .= "?bundle_option[" . $option->option_id  . "]=" . $option->selection_id . "&bundle_option_qty[" . $option->option_id . "]=";
+                            }//end: foreach $selectionCollection
+
+                        } // end: if $_related_item == bundle
+                        ?>
+                        <input type="hidden" value="<?php echo $bundle_url; ?>" id="bundle_<?php echo $_related_item->getId() ?>">
+                        <!--<a href="#" class="ti-more">more...</a>-->
+                    </div>
+
+                </div>
+                <!--<div class="ti_related_content_wrapper">
+                    <a href="#" class="ti-close">close</a>
+                    <p><?php /*echo $this->__($_related_item->getDescription()) */?></p>
+                </div>-->
+
+            </div>
+        <?php endfor; ?>
 
         </div>
     </div>
-<?php endfor; ?>
-
-
     
 </div>
 
@@ -100,8 +122,13 @@ function addproduct_query(product_id) {
     window.location = addtocart_url;
 }
 
-</script> 
+</script>
 
+<script type="text/javascript">
+    jQuery( document ).ready(function() {
+        jQuery('#ti_related_container').contentcarousel();
+    });
 
+</script>
 
 <?php endif;?>

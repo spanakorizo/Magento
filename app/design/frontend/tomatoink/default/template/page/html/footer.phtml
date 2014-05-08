@@ -9,20 +9,22 @@
 				</div>
 				<div class="three_fourth">
 					<div id="ti_footer_emailSubmit" class="ti_input_bar">
-						<form action="mailto:meganp@compandsave.com" method="post" enctype="text/plain">
-							<input type="text" name="mail" value="Your Email" onfocus="if(this.value=='Your Email')this.value='';" onblur="if(this.value=='')this.value='Your Email';">
-							<input type="submit" value="Signup">
-						</form>
+						<form action="<?php echo $this->getUrl(''); ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
+					        <input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" />
+					     	<button type="submit" class="button" title="<?php echo $this->__('Subscribe') ?>">
+					     		<span><span><?php echo $this->__('Sign Up') ?></span></span>
+					     	</button> 
+				        </form>
 					</div>
 				</div>
 			</div>
 			<div class="ti_footer_top_block one_third">
 				<p class="ti_social_media">
-					<a href="http://www.facebook.com/tomatoinktoner" target="_blank" class="ti_social_media_btn fb"></a>
-					<a href="http://twitter.com/tomatoinktoner" target="_blank" class="ti_social_media_btn tw"></a>
-					<a href="https://plus.google.com/u/0/112582653541709057320" target="_blank" class="ti_social_media_btn gg"></a>
-					<a href="http://blog.tomatoink.com/" target="_blank" class="ti_social_media_btn bl"></a>
-					<a href="http://pinterest.com/tomatoinktoner/" target="_blank" class="ti_social_media_btn pn"></a>
+					<a href="http://www.facebook.com/tomatoinktoner" target="_blank" class="ti_social_media_btn fb"><span>Facebook</span></a>
+					<a href="http://twitter.com/tomatoinktoner" target="_blank" class="ti_social_media_btn tw"><span>Twitter</span></a>
+					<a href="https://plus.google.com/u/0/112582653541709057320" target="_blank" class="ti_social_media_btn gg"><span>Google+</span></a>
+					<a href="http://blog.tomatoink.com/" target="_blank" class="ti_social_media_btn bl"><span>Blogger</span></a>
+					<a href="http://pinterest.com/tomatoinktoner/" target="_blank" class="ti_social_media_btn pn"><span>Pinterest</span></a>
 				</p>
 			</div>
 		</div>
@@ -33,42 +35,35 @@
 		<div class="ti_footer_links_block one_third clear">
 			<h2>Company</h2>
 			<ul class="ti_menu">
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
+				<li><a href="{{store url='about'}}"><span>About Us</span></a></li>
+				<li><a href="{{store url='about'}}"><span>Contact Us</span></a></li>
+				<li><a href="{{store url='privacy_policy'}}"><span>Privacy Policy</span></a></li>
+				<li><a href="{{store url='terms'}}"><span>Terms &amp; Conditions</span></a></li>
+				<li><a href="{{store url='wholesale'}}"><span>Corporate Account</span></a></li>
+				<li><a href="{{store url='become_reseller'}}"><span>Reseller Program</span></a></li>
+				<li><a href="http://www.shareasale.com/shareasale.cfm?merchantID=40756" target="_blank"><span>Become an Affiliate</span></a></li>
 			</ul>
 		</div>
 		<div class="ti_footer_links_block one_third middle">
 			<h2>Resources</h2>
 			<ul class="ti_menu">
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
+				<li><a href="{{store url='shipping_policy'}}"><span>Shipping Policy</span></a></li>
+				<li><a href="{{store url='return_policy'}}"><span>Return Policy</span></a></li>
+				<li><a href="{{store url='low_price_guarantee'}}"><span>Low Price Guarantee</span></a></li>
+				<li><a href="{{store url='ink_toner_troubleshooting'}}"><span>Ink Troubleshooting</span></a></li>
+				<li><a href="{{store url='about'}}"><span>Ink Knowledge Base</span></a></li>
+				<li><a href="{{store url='about'}}"><span>Printer Support &amp; Driver</span></a></li>
+				<li><a href="{{store url='environmentally_friendly_printer_cartridges'}}"><span>Environment Friendly Inks</span></a></li>
 			</ul>
 		</div>
+		
 		<div class="ti_footer_links_block one_third">
 			<h2>Account</h2>
 			<ul class="ti_menu">
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
-				<li><a href=""><span>About</span></a></li>
+				<li><a href="{{store url='myaccount'}}"><span>My Account</span></a></li>
+				<li><a href="{{store url='about'}}"><span>View Cart</span></a></li>
+				<li><a href="{{store url='order_tracking'}}"><span>Order Status</span></a></li>
+				<li><a href="{{store url='myaccount_help'}}"><span>Help</span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -76,7 +71,7 @@
 <div id="ti_footer_copyright_row" class="btcf">
 	<div class="ti_cms_contain">
 		<div class="ti_footer_block">
-			<p class="clear">Copyright &copy; 2014 TomatoInk &bull; 39120 Argonaut Way &bull; Fremont Hub #532 &bull; Fremont, CA 94538 &bull; All Rights Reserved</p>
+			<p class="clear">Copyright <?php echo $this->getCopyright() ?></p>
 		</div>
 		<div class="ti_footer_block">
 			<a href="https://www.mcafeesecure.com/RatingVerify?ref=www.tomatoink.com" target="_blank" class="ti-footer-security">
@@ -85,3 +80,12 @@
 		</div>
 	</div>
 </div>
+
+
+
+<script type="text/javascript">
+//<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail');
+//]]>
+</script>
+<?php echo $this->getChildHtml('jsfooter') ?>

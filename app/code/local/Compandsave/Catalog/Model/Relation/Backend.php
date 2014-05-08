@@ -8,7 +8,10 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 	
 	public function MappingAutoAfterProductCreate($product){
 		
-		if($product->getTypeId() === 'simple' ){// and getMappingSku() != ''
+		$product_ids = $product->getCompatibleCatid(); //find the value of Mapping category ID
+		
+		
+		if($product->getTypeId() === 'simple' && $product_ids != null){// and getCompatibleCatid() != ''
 
             $childId = $product->getId(); //get simple product ID
 
@@ -33,12 +36,12 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 
             }
 
-			$product_ids = $product->getMappingSku();
+			
             if( $product_ids != ''){
                 $map_prd_id_arr = explode(',',$product_ids);
                 foreach($map_prd_id_arr as $item){
 
-                    $get_product = Mage::getModel('catalog/product')->loadByAttribute('sku',$item);
+                    $get_product = Mage::getModel('catalog/product')->loadByAttribute('categoryid',$item);
                     if(!empty($get_product)){
                         $parentId = $get_product->getId(); //get group product ID
 
@@ -48,10 +51,10 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 
             }
 
-
+			unset($product);
 
         }
-        if($product->getTypeId() === 'bundle' ){// and getMappingSku() != ''
+        else if($product->getTypeId() === 'bundle' ){// and getCompatibleCatid() != ''
 			
             $bundle_product_id = $product->getId(); //get bundle product ID
 			
@@ -135,7 +138,7 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 					$products_links->assign ("grouped",$group_product_id,$bundle_product_id);
 				}
 			}
-
+			unset($product);
         }
 		
 		return true;
@@ -153,8 +156,10 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 		foreach($affectedEntityIds as $id){
 
 			$product = Mage::getModel('catalog/product')->load($id);
+			
+			$product_ids = $product->getCompatibleCatid();
 
-			if($product->getTypeId() === 'simple' ){// and getMappingSku() != ''
+			if($product->getTypeId() === 'simple' && $product_ids != ''){// and getCompatibleCatid() != ''
 
                 $childId = $product->getId(); //get simple product ID
 
@@ -179,12 +184,12 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 
                 }
 
-				$product_ids = $product->getMappingSku();
+				
 				if( $product_ids != ''){
 					$map_prd_id_arr = explode(',',$product_ids);
 					foreach($map_prd_id_arr as $item){
 
-						$get_product = Mage::getModel('catalog/product')->loadByAttribute('sku',$item);
+						$get_product = Mage::getModel('catalog/product')->loadByAttribute('categoryid',$item);
 						if(!empty($get_product)){
 							$parentId = $get_product->getId(); //get group product ID
 
@@ -196,7 +201,7 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 				}
 
 			}
-			
+			unset($product);
 			
 		}
 		

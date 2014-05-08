@@ -18,7 +18,7 @@
  * needs please refer to http://www.magentocommerce.com for more information.
  *
  * @category    design
- * @package     enterprise_default
+ * @package     tomatoink_default
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
@@ -86,8 +86,8 @@ ul,ol         { list-style:none; }
 /* ======================================================================================= */
 
 /* Layout ================================================================================ */
-.wrapper { background:#fff; padding-bottom:20px; }
-.page { width:940px; margin:0 auto; text-align:center; }
+/*.wrapper { background:#fff; padding-bottom:20px; }
+.page { width:100%; margin:0 auto; text-align:left; }
 .page-print { background:#fff; padding:20px; text-align:left; }
 .page-popup { padding:20px; text-align:left; }
 .page-empty { background:#fff; padding:20px; text-align:left; }
@@ -136,10 +136,10 @@ ul,ol         { list-style:none; }
 /* Global Styles ========================================================================= */
 
 /* Form Elements */
-input,select,textarea,button { font:12px Arial, Helvetica, sans-serif; vertical-align:middle; color:#444; }
+/*input,select,textarea,button { font:12px Arial, Helvetica, sans-serif; vertical-align:middle; color:#444; }
 input.input-text,select,textarea { background:#fff; border:1px solid #c7c7c7; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x; }
-input.input-text,textarea { padding:2px 2px; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x; }
-select { padding:1px; }
+input.input-text,textarea { padding:2px 2px; background:#fff url(../images/bkg_input.gif) 0 0 repeat-x;}
+select {padding:1px;}
 select option { padding-right:10px; }
 select.multiselect option { padding:2px 2px; border-bottom:1px solid #bbb; }
 select.multiselect option:last-child { border-top:0; }
@@ -151,11 +151,11 @@ input.radio { font-size:10px !important; }
 input.qty { width:2.5em !important; }
 input.disabled { background:#f6f6f6 !important; color:#bbb !important; }
 button.button::-moz-focus-inner { padding:0; border:0; } /* FF Fix */
-button.button { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
+/*button.button { -webkit-border-fit:lines; }/* /* <- Safari & Google Chrome Fix */
 
-button.button { border:0; padding:0; margin:0; background:transparent; /* line-height:21px; */ overflow:visible; cursor:pointer; vertical-align:middle; }
+/*button.button { border:0; padding:0; margin:0; background:transparent; line-height:21px; overflow:visible; cursor:pointer; vertical-align:middle; }*/
 
-a.button,
+/*a.button,
 button.button span,
 a.button span,
 button.button span span { background-color:transparent; background-image:url(../images/bkg_btn.gif); background-repeat:no-repeat; }
@@ -170,7 +170,7 @@ a.button { line-height:20px; }
 button.button:active span span { margin:0; }
 button.btn-small span { font-size:11px; line-height:14px; padding:1px 9px 0; }
 button.disabled { cursor:default !important; bottom:0 !important; right:0 !important; }
-button.disabled span { cursor:default !important; color:#bbb !important; }
+button.disabled span { cursor:default !important; color:#bbb !important; }*/
 
 /* Form Highlight */
 /*input.input-text:focus,select:focus,textarea:focus {}*/
@@ -337,8 +337,11 @@ p.error-msg { border-color:#e9581f; background-color:#fff5f3; color:#d91a00; }
 .page-title { margin-bottom:20px; padding:23px 20px 11px; background:#f6f6f6 url(../images/bkg_page-title.gif) repeat-x 0 0; border-bottom:1px solid #cfcfcf; }
 .page-title .link-rss { float:right; margin-top:8px; }
 .page-title h1,
-.page-title h2 { font:normal 22px/27px Arial, Helvetica, sans-serif; color:#d12c01; }
-
+.page-title h2 { 
+	font:normal 22px/27px Arial, Helvetica, sans-serif;  
+	font-weight:bold;
+	color:#333333;
+}
 .title-buttons { text-align:right; }
 .title-buttons h1,
 .title-buttons h2,
@@ -378,10 +381,10 @@ p.error-msg { border-color:#e9581f; background-color:#fff5f3; color:#d91a00; }
 .pager-only .pages { margin:0; }
 
 /* Sorter */
-.sorter { font-size:11px; margin:0 0 0; padding:3px 20px; background:#f5f5f5 url(../images/bkg_pager.gif) repeat-x 0 0; border-top:1px solid #ddd; color:#333; }
+/*.sorter { font-size:11px; margin:0 0 0; padding:3px 20px; background:#f5f5f5 url(../images/bkg_pager.gif) repeat-x 0 0; border-top:1px solid #ddd; color:#333; }
 .sorter p { margin:0; }
 .sorter select { padding:0; margin-bottom:1px; }
-.sorter .view-mode { float:left; line-height:20px; white-space:nowrap; }
+.sorter .view-mode { float:left; line-height:20px; white-space:nowrap; }*/
 .sorter .view-mode label { float:left; margin:0 5px 0 0; }
 .sorter .view-mode a.list-fix,
 .sorter .view-mode a.list,
@@ -401,8 +404,8 @@ p.error-msg { border-color:#e9581f; background-color:#fff5f3; color:#d91a00; }
 .sorter .view-mode a.grid-fix { background-position:-24px -58px; }
 .sorter .view-mode strong.grid-fix { background-position:-24px -87px;; }
 
-.sorter .sort-by { float:right; line-height:20px; }
-.sorter .link-feed {}
+/*.sorter .sort-by { float:right; line-height:20px; }
+.sorter .link-feed {} */
 
 /* Toolbar */
 .toolbar { margin-top:-1px; }
@@ -482,7 +485,7 @@ ul.links li.last .separator { display:none; }
 .reward-checkout { margin:0; }
 
 /* Class: std - styles for admin-controlled content */
-.std ul,
+/*.std ul,
 .std ol,
 .std dl,
 .std p,
@@ -517,7 +520,7 @@ ul.links li.last .separator { display:none; }
 
 ul.disc li { padding-left:10px; background:url(../images/bkg_bulletsm.gif) no-repeat 0 0.5em; }
 .std ul.disc li { padding-left:0; background:none; }
-
+*/
 /* Misc */
 .link-rss { background:url(../images/icon_rss.gif) 100% 1px no-repeat; padding-right:18px; white-space:nowrap; }
 .link-rss:hover { color:#f58550; }
@@ -2548,7 +2551,7 @@ address.copyright { margin-top:6px; }
 .cms-index-index .block-featured li.item:after,
 .title-buttons:after,
 .pager:after,
-.sorter:after,
+/*.sorter:after,*/
 .ratings:after,
 .add-to-box:after,
 .add-to-cart:after,
@@ -2580,4 +2583,4 @@ address.copyright { margin-top:6px; }
 .product-view .product-shop:after { display:block; content:"."; clear:both; font-size:0; line-height:0; height:0; overflow:hidden; }
 /* ======================================================================================= */
 
-.guest-select {width:305px !important;}
+.guest-select {width:305px !imp

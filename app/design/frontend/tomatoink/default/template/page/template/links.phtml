@@ -31,31 +31,35 @@
 ?>
 <ul class="ti_header_toplinks">
 
-						<li id="ti_header_account"><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a>
-							<ul >
-								<li><a href=""><span>Sign In</span></a></li>
-								<li><a href=""><span>My Account</span></a></li>
-								<li><a href=""><span>My Profile</span></a></li>
-								<li><a href=""><span>My Orders</span></a></li>
-								<li><a href=""><span>Sign Out</span></a></li>
-							</ul>
-
-
+						<li id="ti_header_account"><a rel="nofollow"><span>My Account</span></a>
+							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_accountDrop">
+								<ul class="ti_sub-menu menu_two_col">
+									<li id="ti_header_login"><a href="<?php echo $this->getUrl('') ?>customer/account/login/"><span>Sign In</span></a></li>
+									<li><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a></li>
+									<li><a href="<?php echo $this->getUrl('') ?>customer/account/index/"><span>My Profile</span></a></li>
+									<li><a href="<?php echo $this->getUrl('') ?>sales/order/history/"><span>My Orders</span></a></li>
+									<li id="ti_header_logout"><a href="<?php echo $this->getUrl('') ?>customer/account/logout/"><span>Sign Out</span></a></li>
+								</ul>
+							</div>
 						</li>
-						<li id="ti_header_cart"><a href=""><span>Cart</span>(0)</a></li>
-						<li id="ti_header_help"><a href=""><span>Need help?</span></a>
-							<ul>
-								<li><a href=""><span>Track Orders</span></a></li>
-								<li><a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','TomatoInk Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;" class="lt_green"><span id="ti_header_livechat">Live Chat (Online)</span></a></li>
-								<li><a href="{{store url='troubleshooting-tips'}}" target="_blank" class="lt_green">Troubleshooting page</a></li>
-								<li><a href=""><span>Call us</span></a></li>
-								<li><a href=""><span>Leave a Ticket</span></a></li>
-							</ul>
-
-
-
+						<li id="ti_header_cart"><a rel="nofollow"><span>Cart</span>(<span id="ti_header_cartcount">0</span>)</a>
+							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_cartDrop">
+								<p><strong>Currently in your cart:</strong></p>
+								<div id="ti_header_cartitems"></div>
+							</div>
 						</li>
-</ul>
+						<li id="ti_header_help"><a rel="nofollow" rel="nofollow"><span>Need help?</span></a>
+							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_helpDrop">
+								<ul class="ti_sub-menu menu_two_col">
+									<li><a href=""><span>Track Orders</span></a></li>
+									<li><a href=""><span>Call us</span></a></li>
+									<li><a href=""><span>Leave a Ticket</span></a></li>
+									<li><a href="{{store url='troubleshooting-tips'}}" target="_blank">Troubleshooting page</a></li>
+									<li><a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','TomatoInk Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;" class="lt_green"><span id="ti_header_livechat">Live Chat (Online)</span></a></li>
+								</ul>
+							</div>
+						</li>
+					</ul>
 
 
 <!-- 

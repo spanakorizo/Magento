@@ -1,0 +1,53 @@
+<?php
+$cat_id = $_POST['id'];
+echo '<option value="" selected="">select your printer cartridge</option>';
+
+$eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
+$nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+$store_id = 0;//Mage::app()->getStore()->getId();
+$attrbTable = $coreResource->getTableName('catalog_product_entity_varchar');
+//get group product id
+$relationtable = $coreResource->getTableName('catalog_product_link');
+$prdtable = $coreResource->getTableName('catalog_category_product');
+$select = $conn->select()
+		->from($prdtable,array('product_id'))
+		->where('category_id = ?',$cat_id);
+$result = $conn->fetchCol($select); //get product ID from category
+if(!empty($result)){
+    $simple_prd_array = array();
+	foreach( $result as $grp_id){	
+		$select = $conn->select()
+			->from($relationtable,array('linked_product_id'))
+			->where('product_id = ?',$grp_id)
+			->where('link_type_id = ?',Mage_Catalog_Model_Product_Link::LINK_TYPE_GROUPED);
+		$result_all = $conn->fetchCol($select);
+        $simple_prd_array = array_merge($simple_prd_array,$result_all);
+
+    }
+
+    $result_simple = array_unique($simple_prd_array);
+
+    if(!empty($result_simple)){
+        foreach($result_simple as $product_id){
+        //$product_model = Mage::getModel('catalog/product')->load($product_id);
+            $sel = $conn->select()
+                ->from($attrbTable, array('entity_id','value'))
+                ->where('entity_type_id = ?', $entityTypeId)
+                ->where('attribute_id = ?', $nameId)
+                ->where('store_id = ?',$store_id)
+                ->where('entity_id = ?',$product_id);
+        $product = $conn->fetchAll($sel);;
+        foreach($product as $product_arr)
+            echo '<option value="'.$product_arr['entity_id'].'">'.$product_arr['value'].'</option>';
+
+      }
+    }
+    else{
+      echo '<option value="0">No Product Found</option>';
+
+    }
+
+}
