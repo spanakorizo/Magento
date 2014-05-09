@@ -322,7 +322,7 @@ input[type="submit"]:hover, button:hover,
 
 .ti_input_bar input[type="submit"],
 .ti_input_bar button{
-	width:30%;
+	width:32%;
 }
 
 .ti_button_large{
@@ -346,9 +346,6 @@ select{
 	width: 115%;
 	font-size: 1.6em;
 	padding: 5px 0;
-	border-radius: 0.25em;
-	-moz-border-radius: 0.25em;
-	-webkit-border-radius: 0.25em;
 }
 
 .ti_select_barContainer{
@@ -596,6 +593,36 @@ th{
 .icon-ico-guarantee:before  {
 	content: "\e601";
 }
+.icon-home:before {
+	content: "\e604";
+}
+.icon-droplet:before {
+	content: "\e605";
+}
+.icon-phone:before {
+	content: "\e606";
+}
+.icon-print:before {
+	content: "\e607";
+}
+.icon-bubbles:before {
+	content: "\e602";
+}
+.icon-lock:before {
+	content: "\e603";
+}
+.icon-leaf:before {
+	content: "\e608";
+}
+.icon-happy:before {
+	content: "\e609";
+}
+.icon-minus:before {
+	content: "\e60a";
+}
+.icon-plus:before {
+	content: "\e60b";
+}
 
 
 /* -----------------------------------*/
@@ -706,6 +733,13 @@ th{
 	overflow:visible;
 }
 
+#ti_header_nav_main li:hover ul.ti_cms_border_block,
+#ti_header_nav_main li:active ul.ti_cms_border_block,
+#ti_header_nav_main li:focus ul.ti_cms_border_block,
+#ti_header_nav_main li:target ul.ti_cms_border_block{
+	outline: 1px solid #71B62F;
+}
+
 #ti_header_nav_main .ti_menu li a span{
 	color:#ffeddd;
 	font-size:1.8em;
@@ -718,6 +752,7 @@ th{
 	display:block;
 	position:absolute;
 	z-index:10;
+	outline:0;
 }
 
 #ti_header_nav_main li .ti_sub-menu li{
@@ -1086,7 +1121,7 @@ th{
 }
 
 .ti_footer_links_block ul{
-	font-size:1em;
+	font-size:.8em;
 }
 
 #ti_footer_row li,
@@ -1105,8 +1140,8 @@ th{
 }
 
 .ti_footer_links_block ul.ti_menu li{
-	width:50%;
-	margin:0;
+	width:48%;
+	margin:1%;
 	float:left;
 	font-size: 1.6em;
 }
@@ -1250,7 +1285,7 @@ th{
 	opacity:0.8;
 }
 
-.ti_cms_block_brandVB:hover{
+.ti_cms_block_brandVB .ti_cms_border_block:hover{
 	opacity:1;
 	outline:5px solid #71b62f;
 }

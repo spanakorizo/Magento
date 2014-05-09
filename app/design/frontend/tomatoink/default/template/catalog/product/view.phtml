@@ -51,15 +51,33 @@ error_reporting(E_ALL);
     $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]) ;
     echo $_printer_cat->getName();
     ?>";
+    var ti_global_printerbrand_url = "<?php echo $_printer_cat->getUrlKey() ?>";
      <?php endif; ?>
+     <?php if ($_product->getTypeId() == "simple"): ?>
+        <?php 
+            if ($_GET["printer"] != "") {
+                $printerid = $_GET['printer'];
+                $_printer_model = Mage::getModel('catalog/product')->load($printerid);
+                
+            }
+            else { 
+                $printerid = current(explode( ",", $_product->getCompatibleCatid()));
+                $_printer_model = Mage::getModel('catalog/product')->loadByAttribute('categoryid', $printerid);
 
-     <?php if ($_GET["printer"] != ""): ?>
-     var ti_global_prev_printer = "<?php 
-        $printerid = $_GET['printer'];
-        $_printer_model = Mage::getModel('catalog/product')->load($printerid) ;
-        echo $_printer_model->getName();
-      ?>";
+        } ?>
+        var ti_global_prev_printer = "<?php 
+            
+            
+            echo $_printer_model->getName();
+            ?>";
+        var ti_global_printerbrand_url = "<?php 
+            $printer_cats = $_printer_model->getCategoryIds();
+            $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]);
+            echo $_printer_cat->getUrlKey();
+            ?>";
+      
       <?php endif; ?>
+
 </script>
 
 
@@ -239,10 +257,15 @@ error_reporting(E_ALL);
                         $related_printer = explode(",", $compatiblecatid);
                         $printer_count = 1;
 
-                        foreach($related_printer as $ti_compatible_printerid) {
-                           $ti_compatible_printer = Mage::getModel('catalog/product')->load($ti_compatible_printerid); 
+
+                    $PrinterCollection = Mage::getModel('catalog/product')->getCollection()
+                    ->addAttributeToSelect('*')//put your custom attribute code here
+                    ->addFieldToFilter('categoryid',$related_printer);
+
+                        foreach($PrinterCollection as $ti_compatible_printer) {
+                            
                              if ($printer_count == 1) echo "<tr>";
-                             echo "<td><p><a src='" . $this->getUrl('') . "catalog/product/view/id/" . $ti_compatible_printerid . "'>";
+                             echo "<td><p><a href='" . $this->getUrl('') . "catalog/product/view/id/" . $ti_compatible_printer->getId() . "'>";
                              echo $ti_compatible_printer->getName();
                              echo "</a></p></td>";
 

@@ -3,7 +3,7 @@ $cat_id = $_POST['id'];
 echo '<option value="" selected="">select your printer cartridge</option>';
 
 $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
-$nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
+$nameId = $eavAttribute->getIdByCode('catalog_product', 'vendor_partno');
 $coreResource = Mage::getSingleton('core/resource');
 $conn = $coreResource->getConnection('core_read');
 $entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
