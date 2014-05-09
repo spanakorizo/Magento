@@ -62,36 +62,19 @@
             <div class="ti_cms_contain btcf">
                 <div class="ti_printer_sortBar btcf">
                     <div class="ti_printer_sortBlock sorter">
-                        <div class="two_third sort-by">
-                            <div class="ti_sort_block">
-                                <h2 class="lgTxt ltWeight">Sort by:</h2>
-                            </div>
-                            <div class="ti_sort_block">
-                                
-                                    <div class="ti_select_barContainer btcf" id="ti_select_productSort">
-                                        <select>
-                                            <option selected="selected">Most popular</option>
-                                            <option>Lowest price</option>
-                                            <option>Highest price</option>
-                                            <option>Alphabetical</option>
-                                        </select>
-                                    </div>
-                                
-                            </div>
+                        <div class="one_half sort-by">
                             <div class="view-mode">
                                 <div class="ti_sort_block">
-                                    <h2 class="lgTxt ltWeight"><a id="ti_group_grid">Grid</a>&nbsp;<a id="ti_group_list">List</a></h2>
+                                    <h2 class="lgTxt ltWeight">View as:</h2>
                                 </div>
-                                <!--<div class="ti_sort_block">
-                                    <strong class="grid ti-grid" title="Grid"></strong>
-                                    <strong class="list ti-list" title="List"></strong>
-                                    <a class="grid ti-grid" title="Grid"></a>
-                                    <a class="list ti-list" title="List"></a>
-                                </div>!-->
+                                <div class="ti_sort_block">
+                                    <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
+                                    <a class="list ti-list" title="List" id="ti_group_list"></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="one_third">
+                    <div class="one_half">
 
                         <button type="button" title="Add to Cart" class="ti_button_large" onclick="productAddToCartForm.submit(this)"><span>+ Add multiple to cart</span></button>
                     </div>
@@ -146,7 +129,7 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
                 <!-- customize bundle button !-->
                 
                         <div class="ti_cms_block_qty">
-                            <p class="lgTxt">Qty: <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="12" id = "product_qty_<?php echo $_item->getId(); ?>" value="<?php echo $_item->getQty()*1 ?>" class="input-text qty" /></input>
+                            <p class="lgTxt">Qty: <input type="text" name="super_group[<?php echo $_item->getId() ?>]" maxlength="3" id = "product_qty_<?php echo $_item->getId(); ?>" value="<?php echo $_item->getQty()*1 ?>" class="input-text qty" /></input>
 
                              <input type="button" value="Add To Cart" class="ti_button_large" name="<?php echo $_item->getId(); ?>" onclick="addproduct_query(this.name)"></input></p>
                         </div>
@@ -188,37 +171,19 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
             <div class="ti_cms_contain btcf">
                 <div class="ti_printer_sortBar btcf">
                     <div class="ti_printer_sortBlock sorter">
-                        <div class="two_third sort-by">
-                            <div class="ti_sort_block">
-                                <h2 class="lgTxt ltWeight">Sort by:</h2>
-                            </div>
-                            <div class="ti_sort_block">
-                                
-                                    <div class="ti_select_barContainer btcf" id="ti_select_productSort">
-                                        <select>
-                                            <option selected="selected">Most popular</option>
-                                            <option>Lowest price</option>
-                                            <option>Highest price</option>
-                                            <option>Alphabetical</option>
-                                        </select>
-                                    </div>
-                                
-                            </div>
+                        <div class="one_half sort-by">
                             <div class="view-mode">
                                 <div class="ti_sort_block">
-                                    <h2 class="lgTxt ltWeight"><a id="ti_group_grid">Grid</a>&nbsp;<a id="ti_group_list">List</a></h2>
+                                    <h2 class="lgTxt ltWeight">View as:</h2>
                                 </div>
-                                <!--<div class="ti_sort_block">
-                                    <strong class="grid ti-grid" title="Grid"></strong>
-                                    <strong class="list ti-list" title="List"></strong>
-                                    <a class="grid ti-grid" title="Grid"></a>
-                                    <a class="list ti-list" title="List"></a>
-                                </div>!-->
+                                <div class="ti_sort_block">
+                                    <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
+                                    <a class="list ti-list" title="List" id="ti_group_list"></a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div class="one_third">
-
+                    <div class="one_half">
                         <button type="button" title="Add to Cart" class="ti_button_large" onclick="productAddToCartForm.submit(this)"><span>+ Add multiple to cart</span></button>
                     </div>
                 </div>

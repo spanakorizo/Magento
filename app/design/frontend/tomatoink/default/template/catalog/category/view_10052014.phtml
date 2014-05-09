@@ -150,7 +150,6 @@
                     <a href="#">
                         <img src="<?php if($series->getImageUrl()) echo $series->getImageUrl(); else echo $this->getSkinUrl('images/dummy-printer.jpg');?>"/>
                     </a>
-                    <p><a href="#" style="text-decoration: none"><?php echo $series->getName(); ?> Series</a></p>
                 </div>
 
                 <!--<p><a href="#"><?php echo $series->getName(); ?> Series</a></p>-->
@@ -159,19 +158,15 @@
     </div>
 <!--<div class="ti_category_content_container">-->
     <div class="btcf">
-    	<h1 id="ti_show_all_series-<?php echo $currentCategoryId; ?>" class="ti_show_hide_series lgTxt ltWeight"><a href="#">( + ) Show All Series</a></h1>
+    	<h1 id="ti_show_all_series-<?php echo $currentCategoryId; ?>" class="ti_show_hide_series lgTxt ltWeight"><a href="#">Show/Hide all series</a></h1>
     </div>
 
     <div id="ti_all_series_list">
         <?php foreach($collection as $item): ?>
-        <div class="ti_cms_block_headerBar-green">
-            <div id="ti_series_name" style="margin: 0.5em 0em">
-                <p class="ti_series_header_sign_minus" id="ti_series_header_sign-<?php echo $item->getId()?>" style="display: inline; text-decoration: none; font-size: 1.5em; cursor: pointer">( + )</p>
-                <h1 class="white" style="display: inline;padding: 0.5em"><?php echo $item->getName()?> Series</h1>
+        <div class="ti_cms_block_headerBar-green" id="ti_series_display-<?php echo $item->getId()?>" style="display: none">
+            <div id="ti_series_name">
+                <h1 class="white"><?php echo $item->getName()?></h1>
             </div>
-
-            <div class="ti_series_header" id="ti_series_display-<?php echo $item->getId()?>" style="display: none; position: relative; float: left; width: 100%; height: auto">
-
             <?php $select = $conn->select()
                     ->from($CatPrdTable,array('product_id'))
                     ->where('category_id = ?',$item->getId())
@@ -181,27 +176,26 @@
                 if(!empty($result)){
                     foreach($result as $product_id){
 
-                        $sel = $conn->select()
-                            ->from($attrbTable, array('entity_id','value'))
-                            ->where('entity_type_id = ?', $entityTypeId)
-                            ->where('attribute_id = ?', $nameId)
-                            ->where('store_id = ?',$store_id)
-                            ->where('entity_id = ?',$product_id);
+                    $sel = $conn->select()
+                        ->from($attrbTable, array('entity_id','value'))
+                        ->where('entity_type_id = ?', $entityTypeId)
+                        ->where('attribute_id = ?', $nameId)
+                        ->where('store_id = ?',$store_id)
+                        ->where('entity_id = ?',$product_id);
 
-                        $product = $conn->fetchAll($sel);
+                    $product = $conn->fetchAll($sel);
 
-                        foreach($product as $product_arr){
+                    foreach($product as $product_arr){
 
-                            echo '<div class="ti_subcat_product_gid_one_fifth"><p><a href="' . $this->getUrl('') . 'catalog/product/view/id/'.$product_arr['entity_id'].'" >'.$product_arr['value'].'</a></p></div>';
+                        echo '<div class="ti_subcat_product_gid_one_fifth"><p><a href="' . $this->getUrl('') . 'catalog/product/view/id/'.$product_arr['entity_id'].'" >'.$product_arr['value'].'</a></p></div>';
 
-
-                        }
 
                     }
 
                 }
+            }
             ?>
-            </div>
+
         </div>
         <?php endforeach;?>
     </div>
@@ -217,46 +211,15 @@
             var y=jQuery(this).attr("id");
             var x= y.split("-");
             var id = x[1];
-            jQuery(".ti_series_header").hide();
+            jQuery(".ti_cms_block_headerBar-green").hide();
             jQuery("#ti_series_display-" + id).show(e);
-            jQuery(".ti_series_header_sign_minus").html('<a href="#" style="text-decoration: none"> ( + ) </a>');
-            jQuery("#ti_series_header_sign-" + id ).html('<a href="#" style="text-decoration: none"> ( - ) </a>');
             //jQuery("html, body").scrollTop(jQuery(".ti_cms_block_headerBar-green").offset().top);
             return false;
         });
-
-        jQuery('.ti_series_header_sign_minus').click(function(e){
-            e.preventDefault();
-            var y=jQuery(this).attr("id");
-            var x= y.split("-");
-            var id = x[1];
-            if(jQuery("#ti_series_display-" + id).is(":visible")){
-                jQuery("#ti_series_display-" + id).hide();
-                jQuery("#ti_series_header_sign-" + id ).html('<a href="#" style="text-decoration: none" > ( + ) </a>');
-            }
-            else{
-                jQuery("#ti_series_display-" + id).show();
-                jQuery("#ti_series_header_sign-" + id ).html('<a href="#" style="text-decoration: none" > ( - ) </a>');
-            }
-            return false;
-        });
-
-
 		jQuery(".ti_show_hide_series").click(function(e) {
 			e.preventDefault();
-            /*jQuery(".ti_series_header").hide();
-            jQuery(".ti_cms_block_headerBar-green").toggle();*/
-            if(jQuery(".ti_series_header").is(":visible")){
-                jQuery(".ti_series_header").hide();
-                jQuery(".ti_series_header_sign_minus").html('<a href="#" style="text-decoration: none" > ( + ) </a>');
-                jQuery(".ti_show_hide_series").html('<a href="#" style="text-decoration: none" >( + ) Show All Series</a>');
-            }
-            else{
-                jQuery(".ti_series_header").show();
-                jQuery(".ti_series_header_sign_minus").html('<a href="#" style="text-decoration: none" > ( - ) </a>');
-                jQuery(".ti_show_hide_series").html('<a href="#" style="text-decoration: none" >( - ) Hide All Series</a>');
-            }
-            //jQuery(".ti_series_header").toggle(e);
+            jQuery(".ti_cms_block_headerBar-green").hide();
+            jQuery(".ti_cms_block_headerBar-green").toggle(e);
 			return false;
         });
 		

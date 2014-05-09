@@ -108,26 +108,17 @@ function change_readmore(_more, _less) {
     var ti_header_arrowup = ti_global_url + "skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow.png"; 
     var ti_header_arrowdown = ti_global_url + "skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow-2.png"; 
 
+/***********************************************************************/
+/*  top links/coupon code/search help/need more slidetoggle function   */
+/*    Author: Yiyang     5-9-2014                                      */
+/***********************************************************************/
 
-	//toggles visibility of quicklinks menu
-	/*
-	$("#ti_header_help").click(function(){
-		$("#ti_header_helpDrop").slideToggle("fast");
-	});
-
-  $("#ti_header_cart").click(function(){
-    $("#ti_header_cartDrop").slideToggle("fast");
-  });
-
-  $("#ti_header_account").click(function(){
-    $("#ti_header_accountDrop").slideToggle("fast");
-  });
-*/
 	$("#ti_header_help").click(function(e){
 		jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
 		if (!$("#ti_header_helpDrop").is(":visible")) 
 			$("#ti_header_helpDrop").stop(true, true).slideDown("fast");
-		
+
+		coupon_slideback();
 		e.stopPropagation();
 	});
 
@@ -135,6 +126,7 @@ function change_readmore(_more, _less) {
   	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
   	if (!$("#ti_header_cartDrop").is(":visible")) 
     $("#ti_header_cartDrop").stop(true, true).slideToggle("fast");
+  coupon_slideback();
     e.stopPropagation();
   });
 
@@ -142,6 +134,7 @@ function change_readmore(_more, _less) {
   	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
   	if (!$("#ti_header_accountDrop").is(":visible")) 
     $("#ti_header_accountDrop").stop(true, true).slideToggle("fast");
+  coupon_slideback();
     e.stopPropagation();
   });
 
@@ -149,11 +142,13 @@ function change_readmore(_more, _less) {
   	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
   	if (!$("#ti_header_searchHelpDrop").is(":visible")) 
     $("#ti_header_searchHelpDrop").stop(true, true).slideToggle("fast");
+  coupon_slideback();
     e.stopPropagation();
   });
 	//Toggle coupon code
-	jQuery("#ti_main_coupon_arrow").click(function(){
-		jQuery("#ti_header_click_coupon").slideToggle("fast", function() {
+	jQuery("#ti_main_coupon_arrow").click(function(e){
+  jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+	jQuery("#ti_header_click_coupon").slideToggle("fast", function() {
 			//if (jQuery('ti_header_click_coupon').css("display") == "none") alert("close");//
 		//else alert("open");//
 
@@ -162,8 +157,12 @@ function change_readmore(_more, _less) {
 		else {jQuery("#ti_main_coupon_arrow").css("background-image", "url('" + ti_header_arrowup + "')");}
 		});//url("http://www.866ink.com/magentoEE/images/ti-assets/header-coupon-arrow.png")
 		jQuery("#ti_header_coupon_desc").slideToggle("fast");
-		
+		e.stopPropagation();
 	});
+
+
+
+
 
 
 
@@ -194,20 +193,24 @@ var ti_qty_previous="";
 /***************************************/
 /*   Display Small Navigation          */
 /* Author: Yiyang     Date: 5/5/2014   */
+/* Version 2: clickable     5/9/2014   */
 /***************************************/
+
+var ti_breadcrumb_home = "<p><a href='" + ti_global_url + "'>Home</a> &gt; "
+
 var ti_header_smallnav = document.getElementById('ti_header_breadcrumbs');
 if (typeof ti_global_pagetype != "undefined" && ti_global_pagetype == "brand") {
-  ti_header_smallnav.innerHTML = "<p>Home > " + ti_global_pagename + "</p> "; 
+  ti_header_smallnav.innerHTML = ti_breadcrumb_home + ti_global_pagename + "</p> "; 
 }
 else if (typeof ti_global_pagetype != "undefined" && ti_global_pagetype == "grouped") {
-  ti_header_smallnav.innerHTML = "<p>Home > " + ti_global_printerbrand + " > " + ti_global_pagename + "</p> "; 
+  ti_header_smallnav.innerHTML = ti_breadcrumb_home + "<a href='" + ti_global_url + ti_global_printerbrand_url + ".html'>" + ti_global_printerbrand + "</a> &gt; " + ti_global_pagename + "</p> "; 
 }
 else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "simple" || ti_global_pagetype == "bundle")) {
   var ti_header_sku_arr = ti_global_productcode.split("-");
   if (getUrlVars()["printer"] != undefined)
-    {ti_header_smallnav.innerHTML = "<p>Home > " + ti_header_sku_arr[1] + " > " + ti_global_prev_printer + " > " + ti_global_pagename; + "</p> "}
+    {ti_header_smallnav.innerHTML = ti_breadcrumb_home + "<a href='" + ti_global_url + ti_global_printerbrand_url + ".html'>" + ti_header_sku_arr[1] + "</a> &gt; <a href='" + ti_global_url + "catalog/product/view/id/" + getUrlVars()["printer"] + "'>" + ti_global_prev_printer + "</a> &gt; " + ti_global_pagename + "</p> ";}
   else 
-    ti_header_smallnav.innerHTML = "<p>Home > " + ti_header_sku_arr[1] + " > " + ti_global_pagename + "</p> ";
+    ti_header_smallnav.innerHTML = ti_breadcrumb_home + "<a href='" + ti_global_url + ti_global_printerbrand_url + ".html'>" + ti_header_sku_arr[1] + "</a> &gt; " + ti_global_pagename + "</p> ";
 }
 
 
@@ -225,6 +228,18 @@ else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "sim
 
 
 //hide drop content when clicking on anywhere else
-jQuery(document).click(function () {
+jQuery(document).click(function (e) {
   jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  if (e.target.id != "ti_header_coupon_code")
+  coupon_slideback();
+
 });
+
+function coupon_slideback() {
+  var ti_header_arrowup = ti_global_url + "skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow.png"; 
+      if (document.getElementById("ti_header_click_coupon").style.display == "none") {
+  jQuery("#ti_header_click_coupon").slideDown("fast");
+  jQuery("#ti_header_coupon_desc").slideUp("fast");
+  jQuery("#ti_main_coupon_arrow").css("background-image", "url('" + ti_header_arrowup + "')");
+  }
+}
