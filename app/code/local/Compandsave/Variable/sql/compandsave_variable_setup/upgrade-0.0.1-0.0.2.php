@@ -14,4 +14,3 @@ $installer->getConnection()->addColumn(
 		'comment'   => 'Expiry Date'
     )
 );
-?>

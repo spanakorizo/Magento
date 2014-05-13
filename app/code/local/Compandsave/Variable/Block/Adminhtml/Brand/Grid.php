@@ -1,5 +1,5 @@
 <?php
-class Compandsave_Variable_Block_Adminhtml_Coupon_Grid
+class Compandsave_Variable_Block_Adminhtml_Brand_Grid
     extends Mage_Adminhtml_Block_Widget_Grid
 {
     protected function _prepareCollection()
@@ -8,7 +8,7 @@ class Compandsave_Variable_Block_Adminhtml_Coupon_Grid
          * Tell Magento which collection to use to display in the grid.
          */
         $collection = Mage::getResourceModel(
-            'compandsave_variable/coupon_collection'
+            'compandsave_variable/brand_collection'
         );
         $this->setCollection($collection);
 
@@ -22,7 +22,7 @@ class Compandsave_Variable_Block_Adminhtml_Coupon_Grid
          * be redirected to, the method editAction of Adminhtml
          * CouponController.php in BrandDirectory module.
          */
-        return $this->getUrl('compandsave_variable_admin/coupon/edit',array('id' => $row->getId()));
+        return $this->getUrl('compandsave_variable_admin/brand/edit',array('id' => $row->getId()));
     }
 
     protected function _prepareColumns()
@@ -30,31 +30,26 @@ class Compandsave_Variable_Block_Adminhtml_Coupon_Grid
         /**
          * Here, we'll define which columns to display in the grid.
          */
-		$CouponSingleton = Mage::getSingleton('compandsave_variable/coupon');
+		$CouponSingleton = Mage::getSingleton('compandsave_variable/brand');
 		
         $this->addColumn('entity_id', array(
             'header' => $this->_getHelper()->__('ID'),
             'type' => 'number',
             'index' => 'entity_id',
         ));
-		$this->addColumn('entity_type_id', array(
-            'header' => $this->_getHelper()->__('Variable Type'),
-            'type' => 'text',
-            'index' => 'entity_type_id',
-			'options' => $CouponSingleton->getType()
+		$this->addColumn('brand_id', array(
+            'header' => $this->_getHelper()->__('Brand ID'),
+            'type' => 'options',
+            'index' => 'brand_id',
+			'options' => $CouponSingleton->getCategory()
         ));
 		
 		$this->addColumn('value', array(
 			'header' => $this->_getHelper()->__('Value'),
-			'type' => 'text',
+			'type' => 'textarea',
 			'index' => 'value',
 		));
-		$this->addColumn('expiry_date', array(
-            'header' => $this->_getHelper()->__('Expiry Date'),
-            'type' => 'date',
-            'index' => 'expiry_date',
-        ));
-        $this->addColumn('created_at', array(
+		$this->addColumn('created_at', array(
             'header' => $this->_getHelper()->__('Created'),
             'type' => 'datetime',
             'index' => 'created_at',
@@ -91,7 +86,7 @@ class Compandsave_Variable_Block_Adminhtml_Coupon_Grid
                     'caption' => $this->_getHelper()->__('Edit'),
                     'url' => array(
                         'base' => 'compandsave_variable_admin'
-                                  . '/coupon/edit',
+                                  . '/brand/edit',
                     ),
                     'field' => 'id'
                 ),

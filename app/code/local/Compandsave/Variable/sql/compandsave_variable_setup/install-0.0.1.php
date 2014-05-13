@@ -2,11 +2,12 @@
 /* @var $installer Mage_Core_Model_Resource_Setup */
 
 $installer = $this;
-
 $installer->startSetup();
-
-$table = $installer->getConnection()
-    ->newTable($installer->getTable('compandsave_variable/coupon'))
+$tableName = $installer->getTable('compandsave_variable/coupon');
+if ($installer->getConnection()->isTableExists($tableName)){
+    $installer->getConnection()->dropTable($tableName);
+}
+$table = $installer->getConnection()->newTable($tableName)
     ->addColumn('entity_id', Varien_Db_Ddl_Table::TYPE_INTEGER, null, array(
 		'auto_increment' => true,
         'identity'  => true,
@@ -50,4 +51,3 @@ $table = $installer->getConnection()
         array('type' => Varien_Db_Adapter_Interface::INDEX_TYPE_UNIQUE))
 	->setComment('Compandsave Variable Table');
 $installer->getConnection()->createTable($table);
-?>

@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Compandsave_Variable>           
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </Compandsave_Variable>
     </modules>
     <global>
@@ -17,6 +17,9 @@
                     <coupon>
                         <table>compandsave_variable_coupon</table>
                     </coupon>
+                    <brand>
+                        <table>compandsave_variable_brand</table>
+                    </brand>
                 </entities>
             </compandsave_variable_resource>
         </models>

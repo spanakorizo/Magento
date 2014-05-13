@@ -63,13 +63,13 @@
                 <div class="ti_printer_sortBar btcf">
                     <div class="ti_printer_sortBlock sorter">
                         <div class="one_half sort-by">
-                            <div class="view-mode">
+                            <div class="view-mode btcf">
                                 <div class="ti_sort_block">
                                     <h2 class="lgTxt ltWeight">View as:</h2>
                                 </div>
-                                <div class="ti_sort_block">
+                                <div class="ti_sort_block" id="ti_group_sortblock">
                                     <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
-                                    <a class="list ti-list" title="List" id="ti_group_list"></a>
+                                    <a class="list ti-list" title="List" id="ti_group_list" onclick='view_list();'></a>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,18 @@
                 </div>
             </div>
 
+<script type="text/javascript">
+    function view_grid() {
+        jQuery('#ti_group_sortblock').html("<strong class='grid ti-grid' title='Grid' id='ti_group_grid'></strong><a class='list ti-list' title='List' id='ti_group_list' onclick='view_list();'></a>");
+        jQuery('.ti_cms_block_list').attr('class', 'ti_cms_block_grid');
+    };
 
+    function view_list() {
+        jQuery('#ti_group_sortblock').html("<a class='grid ti-grid' title='Grid' id='ti_group_grid' onclick='view_grid();'></a><strong class='list ti-list' title='List' id='ti_group_list'></strong>");
+        jQuery('.ti_cms_block_grid').attr('class', 'ti_cms_block_list');
+    };
+
+</script>
 
 
 <?php //echo $this->getChildHtml('product_type_data_extra') ?>
@@ -92,7 +103,7 @@
                 <?php $formKey = Mage::getSingleton('core/session')->getFormKey();?>
 
 <?php foreach ($_associatedProducts as $_item): ?>
-<div class="ti_cms_block_related one_fourth"> 
+<div class="ti_cms_block_grid"> 
     <div class="ti_block_inner ti_cms_border_block">       
     <?php //get product url ?>
     <?php $product_url = $_item->getProductUrl();
@@ -117,7 +128,7 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
             
                 <?php if ($this->getCanShowProductPrice($_item)): ?>
                  <h3 class="altTxt">Our price: $<?php echo round($_item->getPrice(), 2) ?></h3>
-                <h5>brand-price: <span>$<?php echo round($_item->getMrsp(), 2) ?></span></h5>
+                <h5>brand-price: <span>$<?php echo round($_item->getMsrp(), 2) ?></span></h5>
                 <?php endif; ?>
             <?php endif; ?>
 
@@ -172,7 +183,7 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
                 <div class="ti_printer_sortBar btcf">
                     <div class="ti_printer_sortBlock sorter">
                         <div class="one_half sort-by">
-                            <div class="view-mode">
+                            <div class="view-mode btcf">
                                 <div class="ti_sort_block">
                                     <h2 class="lgTxt ltWeight">View as:</h2>
                                 </div>

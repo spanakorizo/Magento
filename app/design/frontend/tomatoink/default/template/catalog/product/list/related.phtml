@@ -52,12 +52,13 @@
 
     <?php $related_total = count($related_id)>4?count($related_id):4; ?>
 
-    <div id="ti_related_container">
+    <div id="ti_related_container" class="ti_related_wrapper">
         <!--<div class="ti_related_wrapper">-->
         <?php for ($i=0;$i<$related_total; $i++): ?>
             <?php if (($related_id[$i]== "") && ($i<4)) $related_id[$i] = $related_backup[$i]; ?>
         <?php $_related_item = Mage::getModel('catalog/product')->load($related_id[$i]);?>
 
+        <div class="ti_cms_relatedProductWrap-<?php echo $i + 1; ?>">
              <div class="one_fourth ti_cms_block_related ti_cms_block_related-<?php echo $i + 1; ?>">
                 <!--<div class="ti_related_content_container ti_block_inner">
                     <div class="ti_related_product_title">-->
@@ -93,6 +94,7 @@
                 </div>
 
             </div>
+        </div>
                 <!--<div class="ti_related_content_wrapper">
                     <a href="#" class="ti-close">close</a>
                     <p><?php /*echo $this->__($_related_item->getDescription()) */?></p>

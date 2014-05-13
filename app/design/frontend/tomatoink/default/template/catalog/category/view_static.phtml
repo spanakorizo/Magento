@@ -98,7 +98,7 @@
                         $category_model = Mage::getModel('catalog/category')->load($currentCategoryId);
                         $subcategoryIds = $category_model->getChildren();
                         $subCatIds = explode(',',$subcategoryIds);
-                        $collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id','image'))->load();
+                        $collection = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id','image'))->load();
 
                         foreach($collection as $item){
 
@@ -142,58 +142,14 @@
             </div>
         </div>
     <!--- start static code ---->
-<!--<div class="ti_category_content_container">-->
-    <div class="btcf">
-    <?php foreach($collection as $series):?>
-            <div class="ti_cms_block_brandVB one_fourth" id="<?php echo $series->name; ?>-<?php echo $series->entity_id; ?>">
-                <div class="ti_block_inner ti_cms_border_block">
-                    <a href="#">
-                        <img src="<?php if($series->getImageUrl()) echo $series->getImageUrl(); else echo $this->getSkinUrl('images/dummy-printer.jpg');?>"/>
-                    </a>
-                    <p><a href="#" style="text-decoration: none"><?php echo $series->getName(); ?> Series</a></p>
-                </div>
-
-                <!--<p><a href="#"><?php echo $series->getName(); ?> Series</a></p>-->
-            </div>
-    <?php   endforeach;?>
-    </div>
-<!--<div class="ti_category_content_container">-->
-    <div class="btcf">
-    	<h1 id="ti_show_all_series-<?php echo $currentCategoryId; ?>" class="ti_show_hide_series lgTxt ltWeight"><a href="#">+ Show All Series</a></h1>
-    </div>
-
-    <div id="ti_all_series_list">
-        <?php foreach($collection as $item): ?>
-        <div class="ti_cms_block_headerBar-green">
-            <div id="ti_series_name">
-                
-                <h1 class="white"><a class="ti_series_header_sign_minus" id="ti_series_header_sign-<?php echo $item->getId()?>"> + </a><?php echo $item->getName()?> Series</h1>
-            </div>
-
-            <div class="ti_series_header" id="ti_series_display-<?php echo $item->getId()?>" style="display: none">
-
-            <?php
-                $productCollection = Mage::getModel('catalog/product')
-                ->getCollection()
-                ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
-                ->addAttributeToSelect(array('name','url'))
-                ->addAttributeToFilter('category_id', $item->entity_id)
-                ->addAttributeToFilter('status', 1);
-
-                if(!empty($productCollection)){
-
-                    foreach($productCollection as $product_model){
-
-                        echo '<div class="ti_subcat_product_gid_one_fifth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
-
-
-                    }
-                }
-            ?>
-            </div>
-        </div>
-        <?php endforeach;?>
-    </div>
+	<?php $getModel = Mage::getResourceModel('compandsave_variable/brand_collection')
+				->addFieldToFilter('brand_id','3')
+				->addFieldToFilter('status','1')
+				->addFieldToFilter('visibility','1')
+				->getFirstItem()
+				->load();
+				echo $getModel['value'];
+		?>
 	<!--- end static code ---->
 </div><!-- end contain -->
 
