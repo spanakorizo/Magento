@@ -98,10 +98,10 @@ error_reporting(E_ALL);
             <div class="three_fifth ti_cms_gradient_block">
                     <h1 class="ti_green_head"><?php echo $_product->getName(); ?></h1>
                     <p>
-                        <span class="ti_product_rating star0"></span>(No ratings)
+                        <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
                         <a href="#ti_product_details">See product details</a>
                     </p>
-                    <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+                    
                     <div class="ti_cms_separator"></div>
                     <div class="btcf">
                         <div class="one_half ti_product_infoBlock">
