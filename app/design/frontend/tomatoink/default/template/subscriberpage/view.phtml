@@ -10,44 +10,45 @@
 
 </style>
 
-
-
-<h2 id="ti_subpage_message">Thank You for subscription !!! </h2>
-
-
-
-<form action="" method="post" id="ti_subpage_form">
-    <div class="form-subscribe">
-    <div class="form-subscribe-header">
-        <label for="newsletter"><?php echo $this->__('Sign Up for Our Newsletter:') ?></label>
+<div class="ti_cms_contain">
+    <div class="one_third">
+        <img src="<?php echo $this->getSkinUrl('images/ti-home/email.jpg') ?>"/>
     </div>
-        <div class="v-fix"><input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" /></div>
-        <span>FirstName:&nbsp;</span><input id="ti_subpage_fname" type="text"><br>
-        <span>LastName:&nbsp;</span><input id="ti_subpage_lname" type="text"><br>
-        <input type="radio" name="subscriber_freq" value="0" checked>Regular<br>
-<input type="radio" name="subscriber_freq" value="1">Once a Month<br>
-<input type="radio" name="subscriber_freq" value="2">Twice a Month<br>
-     	<button type="button" class="button" id="ti_subpage_submit" title="<?php echo $this->__('Subscribe') ?>"><span><?php echo $this->__('Subscribe') ?></span></button>
-        
+    <div class="two_third">
+        <h1 id="ti_subpage_message">Thank you for subscribing!</h1>
+        <form action="" method="post" id="ti_subpage_form">
+            <div class="form-subscribe">
+                <div class="form-subscribe-header">
+                    <h1><label for="newsletter"><?php echo $this->__('Sign up for our newsletter:') ?></label></h1>
+                </div>
+                <div class="v-fix">
+                    <input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" />
+                </div>
+                <input id="ti_subpage_fname" type="text" value="<?php echo $this->__('Enter your first name') ?>" onclick="this.value=='<?php echo $this->__('Enter your first name') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your first name') ?>':''"><br>
+                <input id="ti_subpage_lname" type="text" value="<?php echo $this->__('Enter your last name') ?>" onclick="this.value=='<?php echo $this->__('Enter your last name') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your last name') ?>':''"><br>
+                <p>
+                    <input type="radio" name="subscriber_freq" value="0" checked>3-4 times per month<br>
+                    <input type="radio" name="subscriber_freq" value="2">Twice a Month<br>
+                    <input type="radio" name="subscriber_freq" value="1">Once a Month
+                </p>
+             	<button type="button" class="button" id="ti_subpage_submit" title="<?php echo $this->__('Subscribe') ?>"><span><?php echo $this->__('Subscribe') ?></span></button>
+            </div>
+        </form>
 
-
+        <!-- Update section !-->
+        <div id="ti_update_form">
+            <p>Do you want to update your subscription information? </p>
+            <input id="ti_update_fname" type="text" value="<?php echo $this->__('Enter your first name') ?>" onclick="this.value=='<?php echo $this->__('Enter your first name') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your first name') ?>':''"><br>
+            <input id="ti_update_lname" type="text" value="<?php echo $this->__('Enter your last name') ?>" onclick="this.value=='<?php echo $this->__('Enter your last name') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your last name') ?>':''"><br>
+            <p>
+                <input type="radio" name="update_freq" value="0" checked>3-4 times per month<br>
+                <input type="radio" name="update_freq" value="2">Twice a Month<br>
+                <input type="radio" name="update_freq" value="1">Once a Month
+            </p>
+                <input type="button" value="Back" onclick="window.history.go(-1);">&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
+        </div>
     </div>
-</form>
-
-<!-- Update section !-->
-<div id="ti_update_form">
-    <p> Do you want to update your subscription information? </p>
-    <span>FirstName:&nbsp;</span><input id="ti_update_fname" type="text"><br>
-    <span>LastName:&nbsp;</span><input id="ti_update_lname" type="text"><br>
-    <input type="radio" name="update_freq" value="0" checked>Regular<br>
-    <input type="radio" name="update_freq" value="1">Once a Month<br>
-    <input type="radio" name="update_freq" value="2">Twice a Month<br>
-    <input type="button" value="back" onclick="window.history.go(-1);">&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
-
 </div>
-
-
-
 
 <script type="text/javascript">
 //<![CDATA[
@@ -96,7 +97,7 @@ jQuery.ajax({
     type: "POST",
     data : formdata,
     success: function(data, textStatus, jqXHR) {
-        jQuery('#ti_subpage_message').html('Thank you for updating!!!');
+        jQuery('#ti_subpage_message').html('Thank you for updating!');
         jQuery('#ti_subpage_form').hide();
         jQuery('#ti_update_form').hide();
 
