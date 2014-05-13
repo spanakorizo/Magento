@@ -7,8 +7,8 @@
         <div class="ti_select_barContainerBorder btcf">
             <div class="ti_select_barContainer btcf">    
 
-    			<div id="ti_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" style="z-index: 99999"/></div>
-    			<div id="ti_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" style="z-index: 99999" /></div>
+    			<div id="ti_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>"/></div>
+    			<div id="ti_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>"/></div>
                <!--<h3>Choose Printer Brand</h3>-->
                 <select name="" id="ti_brand_selector">
                     <option value="">Brand</option>
@@ -16,7 +16,7 @@
                     $category_model = Mage::getModel('catalog/category')->load(2);
     				$subcategoryIds = $category_model->getChildren();
     				$subCatIds = explode(',',$subcategoryIds);	
-    				$collection = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->load();
+    				$collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->load();
     				
     				foreach($collection as $item){
     			

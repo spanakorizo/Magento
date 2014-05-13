@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Compandsave_Functions>           
+            <version>0.0.1</version>
+        </Compandsave_Functions>
+    </modules>
+    <global>
+        <models>
+            <compandsave_functions>
+				<class>Compandsave_Functions_Model</class>
+				<!--<resourceModel>compandsave_Functions_resource</resourceModel>!-->
+            </compandsave_functions>
+            <!--<compandsave_functions_resource>
+				<class>Compandsave_Functions_Model_Resource</class>
+                <entities>
+                    <duplicate>
+                        <table>compandsave_functions_duplicate</table>
+                    </duplicate>
+                </entities>
+            </compandsave_functions_resource>!-->
+        </models>
+		<blocks>
+            <compandsave_functions_adminhtml>
+               <class>Compandsave_Functions_Block_Adminhtml</class>
+            </compandsave_functions_adminhtml>
+        </blocks>
+		<helpers>
+            <compandsave_functions>
+                <class>Compandsave_Functions_Helper</class>
+            </compandsave_functions>
+        </helpers>
+        <!--<resources>
+            <compandsave_variable_setup>
+                <setup>
+                    <module>Compandsave_Variable</module>
+                    <class>Compandsave_Variable_Model_Resource_Setup</class>
+                </setup>
+            </compandsave_variable_setup>
+        </resources> !-->
+    </global>
+	<admin>
+        <routers>
+            <compandsave_functions_admin>
+                <use>admin</use>
+                <args>
+                   <module>Compandsave_Functions_Adminhtml</module>
+                    <frontName>customize-functions</frontName>
+                </args>
+            </compandsave_functions_admin>
+
+        </routers>
+    </admin>
+</config>
