@@ -20,7 +20,8 @@ if(!empty($result)){
         ->getCollection()
         ->addFieldToFilter('entity_id', $result)
         ->addAttributeToFilter('status', 1)
-        ->addAttributeToSelect(array('name','entity_id'));
+        ->addAttributeToSelect(array('name','entity_id'))
+        ->addAttributeToSort('name', 'ASC');
 
 
     foreach($collection as $product_model)
@@ -31,7 +32,7 @@ if(!empty($result)){
 else{
 	  
   ?><script>
-           window.open("http://www.866ink.com/magentoEE/index.php/catalog/category/view/id/"+ <?php echo $cat_id; ?>, "_self");
-    </script><?Php
+           window.open(ti_global_url + "catalog/product/view/id/"+ <?php echo $cat_id; ?>, "_self");
+    </script><?php
 
 }
