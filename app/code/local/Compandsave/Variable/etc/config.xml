@@ -42,6 +42,17 @@
             </compandsave_variable_setup>
         </resources>
     </global>
+	<frontend>
+    <routers>
+        <compandsave_variable>
+            <use>standard</use>
+            <args>
+                <module>Compandsave_Variable</module>
+                <frontName>cronjob</frontName>
+            </args>
+        </compandsave_variable>
+		</routers>  
+	</frontend>
 	<admin>
         <routers>
             <compandsave_variable_admin>
@@ -54,4 +65,16 @@
 
         </routers>
     </admin>
+	<crontab>
+        <jobs>
+            <compandsave_variable>
+                <schedule>
+                    <cron_expr>0 1 * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>compandsave_variable/observer::variable_static_code_insert</model>
+                </run>
+            </compandsave_variable>
+        </jobs>
+    </crontab>
 </config>

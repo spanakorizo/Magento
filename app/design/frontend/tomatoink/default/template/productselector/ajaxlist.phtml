@@ -9,7 +9,15 @@ $collection = Mage::getResourceModel('catalog/category_collection')->addAttribut
 if(!empty($collection)){
     foreach($collection as $item){
 
-        echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
+        $productCollection = Mage::getModel('catalog/product')
+            ->getCollection()
+            ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
+            ->addAttributeToSelect(array('name','url'))
+            ->addAttributeToFilter('category_id', $item->entity_id)
+            ->addAttributeToFilter('status', 1);
+        if($productCollection->count()){
+            echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
+        }
     }
 }
 else{
