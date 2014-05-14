@@ -1,0 +1,303 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+    $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
+    $nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
+    $coreResource = Mage::getSingleton('core/resource');
+    $conn = $coreResource->getConnection('core_read');
+    $entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+    $store_id = 0;//Mage::app()->getStore()->getId();
+    $attrbTable = $coreResource->getTableName('catalog_product_entity_varchar');
+    $CatPrdTable = $coreResource->getTableName('catalog_category_product');
+    $_helper    = $this->helper('catalog/output');
+    $_productCollection = $this->getLoadedProductCollection();
+    $_category  = $this->getCurrentCategory();
+	$currentCategoryId = $_category->getId();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'" /></p>';
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+    }
+?> 
+
+<script type="text/javascript">
+    //online parameter: 
+    var ti_global_pagetype = "brand";
+    var ti_global_pagename = "<?php echo $_category->getName(); ?>";
+</script>
+
+<!--<div class="ti_category_content_container">
+    <div style="width: 73%;position: relative; display: block; float: left; padding: 0 1%">-->
+    <div class="ti_cms_contain">
+        <div class="three_fourth">
+            <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+                <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+            <?php endif; ?>
+            <h1 class="ti_header_left_align"><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+            <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+            <?php if($_imgUrl): ?>
+                <p><?php echo $_imgHtml ?>
+                <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+                    <p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
+                <?php endif; ?>
+                </p>
+
+            <?php else: ?>
+                <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+                <p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
+                <?php endif; ?>
+
+            <?php endif; ?>
+         </div>
+    <!--<div class="ti_category_one_forth ti_category_product_selector_box">
+        <div class="ti_ink_selector_holder">-->
+        <div class="one_fourth ti_cms_gradient_block ti_ink_selector_holder">
+            <h1 class="ti_green_head">Ink Search</h1>
+            <div id="ti_ajax_cat_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
+            <!--<div style="width:100%;position:relative;float:left">
+
+                <div class="ti_ink_selector_div">
+                    <h3>Choose Printer Series</h3>-->
+            <div class="ti_select_barContainerBorder btcf">
+                <div class="ti_select_barContainer btcf">
+                    <select name="" id="ti_series_selector">
+                        <option value="0" selected="">Series</option>
+                        <?php
+                        $category_model = Mage::getModel('catalog/category')->load($currentCategoryId);
+                        $subcategoryIds = $category_model->getChildren();
+                        $subCatIds = explode(',',$subcategoryIds);
+                        $collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id','image'))->load();
+
+                        foreach($collection as $item){
+
+                            echo '<option value="'.$item->getId().'">'.$item->getName().'</option>';
+                        }
+
+                        ?>
+                    </select>
+                </div>
+            </div>
+                <!--<div class="ti_ink_selector_div">-->
+            <div class="ti_select_barContainerBorder btcf">
+                <div class="ti_select_barContainer btcf">
+                    <!--<h3>Choose Model/Cartridge</h3>-->
+
+                    <select disabled="" name="" id="ti_cartridge_selector">
+                        <option value="" selected="">Model</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+<!--</div>
+<div class="ti_category_content_container">-->
+        <div class="one ti_hide_479">
+            <div class="ti_input_bar">
+                <div class="ti_input_barContainer">
+                    <?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
+                        <!--<div class="ti_input_bar">-->
+                    <form id="search_mini_form2" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+                        <input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search2" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
+                        <input type="submit" name="Submit" id="search_submit2" value="Search" title="<?php echo $this->__('Search') ?>">
+                        <div id="search_autocomplete" class="search-autocomplete"></div>
+                        <script type="text/javascript">
+                        //<![CDATA[
+                            var searchForm2 = new Varien.searchForm('search_mini_form2', 'search2', '<?php echo $this->__('Search entire store here...') ?>');
+                            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+                        //]]>
+                        </script>
+                <!--</div>-->
+                </div>
+            </div>
+        </div>
+    <!--- start static code ---->
+<!--<div class="ti_category_content_container">-->
+    <div class="btcf">
+    <?php foreach($collection as $series):?>
+            <div class="ti_cms_block_brandVB" id="<?php echo $series->name; ?>-<?php echo $series->entity_id; ?>">
+                <div class="ti_block_inner ti_cms_border_block">
+                    <a href="#">
+                        <img src="<?php if($series->getImageUrl()) echo $series->getImageUrl(); else echo $this->getSkinUrl('images/dummy-printer.jpg');?>"/>
+                    </a>
+                    <p><a href="#" style="text-decoration: none"><?php echo $series->getName(); ?> Series</a></p>
+                </div>
+
+                <!--<p><a href="#"><?php echo $series->getName(); ?> Series</a></p>-->
+            </div>
+    <?php   endforeach;?>
+    </div>
+<!--<div class="ti_category_content_container">-->
+    <div class="btcf">
+    	<h1 id="ti_show_all_series-<?php echo $currentCategoryId; ?>" class="ti_show_hide_series lgTxt ltWeight"><a href="#">+ Show All Series</a></h1>
+    </div>
+
+    <div id="ti_all_series_list">
+        <?php foreach($collection as $item): ?>
+        <div class="ti_cms_block_headerBar-green">
+            <div id="ti_series_name">
+                
+                <h1 class="white"><a class="ti_series_header_sign_minus" id="ti_series_header_sign-<?php echo $item->getId()?>"> + </a><?php echo $item->getName()?> Series</h1>
+            </div>
+
+            <div class="ti_series_header" id="ti_series_display-<?php echo $item->getId()?>" style="display: none">
+
+            <?php
+                $productCollection = Mage::getModel('catalog/product')
+                ->getCollection()
+                ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
+                ->addAttributeToSelect(array('name','url'))
+                ->addAttributeToFilter('category_id', $item->entity_id)
+                ->addAttributeToFilter('status', 1);
+
+                if(!empty($productCollection)){
+
+                    foreach($productCollection as $product_model){
+
+                        echo '<div class="ti_subcat_product_gid_one_fifth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+
+
+                    }
+                }
+            ?>
+            </div>
+        </div>
+        <?php endforeach;?>
+    </div>
+	<!--- end static code ---->
+</div><!-- end contain -->
+
+<script src="//code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
+<script>
+    jQuery.noConflict();
+    jQuery(function(){
+        jQuery(".ti_cms_block_brandVB").click(function(e) {
+			e.preventDefault();
+            var y=jQuery(this).attr("id");
+            var x= y.split("-");
+            var id = x[1];
+            jQuery(".ti_series_header").hide();
+            jQuery("#ti_series_display-" + id).show(e);
+            jQuery(".ti_series_header_sign_minus").html('<a href="#"> + </a>');
+            jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> - </a>');
+            //jQuery("html, body").scrollTop(jQuery(".ti_cms_block_headerBar-green").offset().top);
+            return false;
+        });
+
+        jQuery('.ti_series_header_sign_minus').click(function(e){
+            e.preventDefault();
+            var y=jQuery(this).attr("id");
+            var x= y.split("-");
+            var id = x[1];
+            if(jQuery("#ti_series_display-" + id).is(":visible")){
+                jQuery("#ti_series_display-" + id).hide();
+                jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> + </a>');
+            }
+            else{
+                jQuery("#ti_series_display-" + id).show();
+                jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> - </a>');
+            }
+            return false;
+        });
+
+
+		jQuery(".ti_show_hide_series").click(function(e) {
+			e.preventDefault();
+            /*jQuery(".ti_series_header").hide();
+            jQuery(".ti_cms_block_headerBar-green").toggle();*/
+            if(jQuery(".ti_series_header").is(":visible")){
+                jQuery(".ti_series_header").hide();
+                jQuery(".ti_series_header_sign_minus").html('<a href="#"> + </a>');
+                jQuery(".ti_show_hide_series").html('<a href="#">+ Show All Series</a>');
+            }
+            else{
+                jQuery(".ti_series_header").show();
+                jQuery(".ti_series_header_sign_minus").html('<a href="#">- </a>');
+                jQuery(".ti_show_hide_series").html('<a href="#">- Hide All Series</a>');
+            }
+            //jQuery(".ti_series_header").toggle(e);
+			return false;
+        });
+		
+		jQuery("#ti_series_selector").change(function() {
+			
+			var dataString = jQuery(this).val();
+			
+			if(dataString > 0){
+				document.getElementById("ti_series_selector").disabled=true;
+				document.getElementById("ti_cartridge_selector").disabled=true;
+				jQuery("#ti_ajax_cat_loading_ink").show();
+				jQuery(".ti_ink_selector_holder").fadeTo('slow',.4);
+				new Ajax.Request( "productselector/ink/index", {
+					method: "post",
+					parameters: {
+					  id : dataString
+					},
+					cache: false,
+					onSuccess: function(transport) {
+						jQuery('#ti_cartridge_selector').html(transport.responseText);
+						jQuery("#ti_ajax_cat_loading_ink").hide();
+						jQuery(".ti_ink_selector_holder").fadeTo('slow',1.0);
+						document.getElementById("ti_series_selector").disabled=false;
+						document.getElementById("ti_cartridge_selector").disabled=false;
+					}
+				});
+			}
+			
+			return false;
+		});
+
+		jQuery("#ti_cartridge_selector").change(function() {
+			var id=jQuery(this).val();
+			window.open(ti_global_url + "catalog/product/view/id/"+ id, "_self");
+		});
+    });
+</script>
+
+
+<script type="text/javascript">
+//scroll down js
+
+jQuery(".ti_cms_block_brandVB").click(function() {
+    scroll(document.getElementById('ti_all_series_list'));
+});
+
+
+function scroll(element) {   
+    jQuery('html,body').animate({
+    scrollTop: element.offsetTop},
+    'slow'); 
+
+}
+
+</script>

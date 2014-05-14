@@ -4,7 +4,7 @@ $cat_id = $_POST['id'];
 $category_model = Mage::getModel('catalog/category')->load($cat_id);
 $subcategoryIds = $category_model->getChildren();
 $subCatIds = explode(',',$subcategoryIds);
-$collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->load();
+$collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->addAttributeToSort('name', 'ASC')->load();
 
 if(!empty($collection)){
     foreach($collection as $item){

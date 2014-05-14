@@ -55,7 +55,7 @@ class Compandsave_Variable_Model_Observer
             $category_model = Mage::getModel('catalog/category')->load($currentCategoryId);
             $subcategoryIds = $category_model->getChildren();
             $subCatIds = explode(',',$subcategoryIds);
-            $collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id','image'))->load();
+            $collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id','image'))->addAttributeToSort('name', 'ASC')->load();
 
             foreach($collection as $item){
                 $productCollection = Mage::getModel('catalog/product')
@@ -64,6 +64,7 @@ class Compandsave_Variable_Model_Observer
                     ->addAttributeToSelect(array('name','url'))
                     ->addAttributeToFilter('category_id', $item->entity_id)
                     ->addAttributeToFilter('status', 1);
+
                 if($productCollection->count()){
                     $this->html .= '<option value="'.$item->getId().'">'.$item->getName().'</option>';
                 }
@@ -113,7 +114,7 @@ class Compandsave_Variable_Model_Observer
                     ->addAttributeToFilter('category_id', $series->entity_id)
                     ->addAttributeToFilter('status', 1);
                 if($productCollection->count()){
-                    $this->html .= '<div class="ti_cms_block_brandVB one_fourth" id="'.$series->name.'-'.$series->entity_id.'">
+                    $this->html .= '<div class="ti_cms_block_brandVB" id="'.$series->name.'-'.$series->entity_id.'">
 							<div class="ti_block_inner ti_cms_border_block">';
 									if($series->getImageUrl()) $this->html .= '<a href="#"><img src="'.$series->getImageUrl().'"/></a>';
                                     else $this->html .= '<a href="#"><img src="'.$block->getSkinUrl("images/dummy-printer.jpg").'"/></a>';
@@ -135,7 +136,8 @@ class Compandsave_Variable_Model_Observer
                     ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
                     ->addAttributeToSelect(array('name','url'))
                     ->addAttributeToFilter('category_id', $item->entity_id)
-                    ->addAttributeToFilter('status', 1);
+                    ->addAttributeToFilter('status', 1)
+                    ->addAttributeToSort('name', 'ASC');
 
                 if($productCollection->count()){
 
@@ -150,14 +152,16 @@ class Compandsave_Variable_Model_Observer
 
 
                     }
-                }
 
-                $this->html .='</div>
+
+                    $this->html .='</div>
 						</div>';
+                }
             }
             $this->html .='</div>
 			</div>';
             $current_day_time = date("Y-m-d H:i:s", Mage::getModel('core/date')->timestamp(time()));
+            $conn->delete($tableName, array('brand_id = ?' => $currentCategoryId));
             $conn->insert($tableName,array('brand_id' => $currentCategoryId , 'value' => $this->html , 'visibility' => '1','status' =>'1','created_at' => $current_day_time, 'updated_at' => $current_day_time));
         }
 

@@ -31,7 +31,8 @@ if(!empty($result)){
             ->getCollection()
             ->addFieldToFilter('entity_id', $result_simple)
             ->addAttributeToFilter('status', 1)
-            ->addAttributeToSelect(array('vendor_partno','entity_id'));
+            ->addAttributeToSelect(array('vendor_partno','entity_id'))
+            ->addAttributeToSort('vendor_partno', 'ASC');
 
 
         foreach($collection as $product_model)

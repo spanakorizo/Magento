@@ -50,9 +50,9 @@
 
 	<!--</div>
 </div>-->
-
+<script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
 <script>
-
+jQuery.noConflict();
 jQuery(function(){
     jQuery("#ti_brand_selector").change(function() {
 	    document.getElementById("ti_series_selector").disabled=true;
@@ -113,7 +113,7 @@ jQuery(function(){
 
     jQuery("#ti_cartridge_selector").change(function() {
         var id=jQuery(this).val();
-        window.open("https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/"+ id, "_self");
+        window.open(ti_global_url + "catalog/product/view/id/"+ id, "_self");
     });
 });
 
