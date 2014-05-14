@@ -190,9 +190,9 @@ div.validation-error { background:url(../images/icon_error.gif) 100% 2px no-repe
 p.required { margin:0; padding:5px 0 7px; text-align:right; width:620px; font-size:11px; color:#f02800; }
 .form-list .validation-advice { width:250px; margin-right:-250px; }
 /* Expiration date and CVV number validation fix */
-.v-fix { float:left; }
+/*.v-fix { float:left; }
 .v-fix .validation-advice { display:block; width:12em; margin-right:-12em; position:relative; }
-
+*/
 /* Fieldset */
 .fieldset { font-size:12px; margin:0 0 16px; }
 .fieldset p { margin:0 0 1.5em; }
@@ -2423,7 +2423,7 @@ p.link-widget-sku a { color:#999; }
 
 
 /* Footer ================================================================================ */
-.footer-before-container { margin:0 0 3px; text-align:center; }
+/*.footer-before-container { margin:0 0 3px; text-align:center; }
 
 .form-subscribe { float:left; width:183px; padding: 0 17px 0 0; }
 .form-subscribe-header { color:#d12c01; font-size:11px; font-weight:bold; text-decoration:none; text-transform:uppercase; }
@@ -2449,7 +2449,7 @@ address.copyright { margin-top:6px; }
 .footer .switcher-store label { display:none; }
 .footer .switcher-store select { padding:0; margin-bottom:1px; }
 .footer .switcher-store ul { float:none; width:auto; padding-left:0; margin-left:0; }
-.footer .switcher-store ul .current { display:none; }
+.footer .switcher-store ul .current { display:none; }*/
 /* ======================================================================================= */
 
 

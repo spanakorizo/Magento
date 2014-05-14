@@ -145,7 +145,7 @@
 <!--<div class="ti_category_content_container">-->
     <div class="btcf">
     <?php foreach($collection as $series):?>
-            <div class="ti_cms_block_brandVB one_fourth" id="<?php echo $series->name; ?>-<?php echo $series->entity_id; ?>">
+            <div class="ti_cms_block_brandVB" id="<?php echo $series->name; ?>-<?php echo $series->entity_id; ?>">
                 <div class="ti_block_inner ti_cms_border_block">
                     <a href="#">
                         <img src="<?php if($series->getImageUrl()) echo $series->getImageUrl(); else echo $this->getSkinUrl('images/dummy-printer.jpg');?>"/>

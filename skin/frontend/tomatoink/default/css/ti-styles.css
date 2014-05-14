@@ -84,7 +84,7 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .two_fifth{width:38%;}
 .three_fifth{width:58%;}
 .four_fifth{width:78%;}
-.one{width:98%;}
+.one{width:100%; padding:0;}
 .full{width:90%; padding-left:5%; padding-right:5%;}
 
 /*text colors*/
@@ -105,14 +105,12 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 	background: -ms-radial-gradient(center, ellipse cover,  #ffffff 60%,#fff6ee 99%); /* IE10+ */
 	background: radial-gradient(ellipse at center,  #ffffff 60%,#fff6ee 99%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fff6ee',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-	padding: 1%;
 	outline:1px solid #f7e8db;
 	border-bottom: 7px solid #71b62f;
 }
 
 .ti_cms_border_block{
 	background: #ffffff; /* Old browsers */
-	padding: 1%;
 	outline:1px solid #71b62f;
 	border-bottom: 7px solid #71b62f;
 }
@@ -263,12 +261,13 @@ input, button,
 .ti_button {
   font:300 2.4em/1em 'Raleway', Verdana, sans-serif;
   padding:1%;
+  margin:1%;
+  max-width:100%;
   border-radius:.25em;
   -webkit-border-radius:.25em;
   -moz-border-radius:.25em;
   -o-border-radius:.25em;
   border:none;
-  margin:1%;
   -webkit-appearance: none;
   vertical-align:middle;
   display:inline-block;
@@ -329,6 +328,12 @@ input[type="submit"]:hover, button:hover,
 	font-size:2.8em;
 	font-weight:bold;
 	padding:1.5%;
+}
+
+.ti_subscribe_label span{
+	width: 100px;
+	display: inline-block;
+	vertical-align: middle;
 }
 
 
@@ -1204,7 +1209,6 @@ th{
 }
 
 .ti_cms_block_headerBar-green{
-	width:100%;
 	padding:0 5px;
 	background:url("../images/ti-assets/paper-bg_559a13.jpg") repeat;
 	clear:both;
@@ -1251,10 +1255,6 @@ th{
 .ti_cms_block_qty input[type="text"],
 .ti_cms_block_qty input[type="number"]{
 	width:30px;
-}
-
-#ti_product_stockAlert{
-	margin-left:2.5em;
 }
 
 .ti_cms_separator{
@@ -1305,6 +1305,10 @@ th{
 	outline:1px solid #559a13;
 	width:100%;
 	opacity:.8;
+}
+
+#ti_product_stockAlert{
+	margin-left:2.5em;
 }
 
 .ti_product_thumb:active,
@@ -1455,10 +1459,10 @@ ul.ti_product_checklist{
 		font-size:.9rem
 	}
 
-	.ti_cms_contain{
+	/*.ti_cms_contain{
 		width:790px;
 		min-width:790px;
-	}
+	}*/
 
 	#ti_header_logo{
 		margin:1em 0;
