@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Compandsave_Catalog>
-           <version>1.0.0.0</version>       
+           <version>1.0.0.0</version>
         </Compandsave_Catalog>
     </modules>
     <global>

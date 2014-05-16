@@ -28,7 +28,7 @@ class Compandsave_Functions_Adminhtml_DuplicateController
         'duplicatepage',
         array('template' => 'cas_functions/duplicate/hello.phtml')
         );*/
-        $block = $this->getLayout()->createBlock('adminhtml/template')->setTemplate('cas_functions/duplicate/hello.phtml');
+        $block = $this->getLayout()->createBlock('adminhtml/template')->setTemplate('cas_functions/duplicate/view.phtml');
         $this->getLayout()->getBlock('content')->append($block);
         
         $this->renderLayout();

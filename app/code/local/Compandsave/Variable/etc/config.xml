@@ -62,14 +62,13 @@
                     <frontName>coupon-admin</frontName>
                 </args>
             </compandsave_variable_admin>
-
         </routers>
     </admin>
 	<crontab>
         <jobs>
             <compandsave_variable>
                 <schedule>
-                    <cron_expr>0 1 * * *</cron_expr>
+                    <cron_expr>* * * * * </cron_expr>
                 </schedule>
                 <run>
                     <model>compandsave_variable/observer::variable_static_code_insert</model>

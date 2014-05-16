@@ -1,0 +1,108 @@
+<?php 
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
+?>
+
+<?php 
+
+	class single_order {
+		public $orderid = "";
+		public $addressid = "";
+		public $orderstatus = "";
+		public $name = "";
+		public $address = "";
+		public $state = "";
+		public $zipcode = "";
+		public $country = "";
+
+		public $order_items = array(); 
+
+		function showcustomer() {
+			echo "<div class='order_info'><div class='customer_info'><h3>" . $this->orderid . "</h3><p>order_status: " . $this->orderstatus . "</p><p>name:&nbsp;" . $this->name . "</p><p>address:&nbsp;" . $this->address . "</p><p>zipcode&nbsp;" .  $this->zipcode . "</p><p>&nbsp;" . $this->state . "&nbsp;" . $this->country . "</div>";
+
+			echo "<div class = 'order_items'>";
+			foreach ($this->order_items as $item) {
+				echo "<div class='order_item'>Qty: " . $item['qty'] . " Name: " . $item['name'] . "</div>";
+			}
+
+			echo "</div></div>";
+		}
+	}
+
+?>
+<?php 
+
+$orders = Mage::getModel('sales/order')->getCollection()
+    ->addFieldToFilter('order_type', 'duplicate')
+    ->addAttributeToSelect('*')
+    ->setOrder('order_type_value');
+
+
+$pre_orderid = "";
+
+foreach ($orders as $order) {
+	if ($pre_orderid == "") echo "<div class='combine_order'>";
+	else if ($pre_orderid != $order->getOrderTypeValue()) echo "</div><div class='combine_order'>";
+	$single_order = new single_order();
+	$single_order->orderid = $order->getEntityId();
+
+	$single_order->orderstatus = $order->getStatus();
+
+	$single_order->addressid = $order->getShippingAddress()->getId();
+	$address = Mage::getModel('sales/order_address')->load($single_order->addressid);
+	// $shippingId is the id you get from order object.
+	$single_order->name = $address->getName();
+	$single_order->address = $address->getStreetFull();
+	$single_order->state = $address->getRegion();
+	$single_order->zipcode = $address->getPostcode();
+	$single_order->country = $address->getCountry();
+	
+     foreach ($order->getAllItems() as $item_collection) {
+     	$item_array = array();
+
+     	$item_array['qty'] = $item_collection->getQtyToInvoice();
+     	$item_array['name'] = $item_collection->getName();
+     	$single_order->order_items[] = $item_array;
+
+
+     }
+
+     $single_order->showcustomer();
+
+     echo "<input type='checkbox' name='itemcheck_" . $order->getOrderTypeValue() . "' value=" . $order->getEntityId() . ">";
+
+if ($pre_orderid != $order->getOrderTypeValue()) {
+    echo "<input type='button' value= 'combine'>";
+	echo "<input type='button' value= 'change to normal order'>";
+	echo "<input type='button' value= 'cancle order'>";
+}
+
+     $pre_orderid = $order->getOrderTypeValue();
+
+/*
+
+    $email = $order->getCustomerEmail();
+    //echo $order->getEntityId() . ": '" . $order->getStatus() . "', " . $email . "', " . $order->getShippingAddress()->getId() . "<br>";
+    echo $order->getEntityId() . ": ";
+    $shippingId = $order->getShippingAddress()->getId();
+    $address = Mage::getModel('sales/order_address')->load($shippingId);
+	// $shippingId is the id you get from order object.
+	$custName = $address->getName();
+	$custAddr = $address->getStreetFull();
+	$region = $address->getRegion();
+	$country = $address->getCountry();
+	echo $custName . " " . $custAddr . " " . $region . " " . $country . "<br>"; */
+}
+
+
+echo "</div>";
+?>
+
+<style type="text/css">
+	.combine_order {
+		border-style:solid;
+	}
+
+
+</style>
