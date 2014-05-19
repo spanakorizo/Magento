@@ -110,7 +110,7 @@ error_reporting(E_ALL);
                             <div class="ti_cms_block_qty">
                                 <form>
 
-                                    <p class="lgTxt"><span class="ti_small_text" id="ti_product_stockAlert"><?php $stockItem = $_product->getStockItem(); if($stockItem->getIsInStock()) {echo "In stock!";} else {echo "Out of stock!";} ?></span><br>Qty: <input type="number" class="input-text qty" name="qty_<?php echo $_product->getId() ?>" maxlength="3" id = "product_qty_<?php echo $_product->getId(); ?>" value="0"/></input> <input type="button" value="Add To Cart" name="<?php echo $_product->getId(); ?>" onclick="addproduct_query(this.name)"></input></p>
+                                    <p class="lgTxt"><span class="ti_small_text" id="ti_product_stockAlert"><?php $stockItem = $_product->getStockItem(); if($stockItem->getIsInStock()) {echo "In stock!";} else {echo "Out of stock!";} ?></span><br>Qty: <input type="text" class="input-text qty" name="qty_<?php echo $_product->getId() ?>" maxlength="3" id = "product_qty_<?php echo $_product->getId(); ?>" value="0"/></input> <input type="button" value="Add To Cart" name="<?php echo $_product->getId(); ?>" onclick="addproduct_query(this.name)"></input></p>
                                     <?php
                                         $bundle_url = "";
                                         if ($_product->getTypeId() == 'bundle'){
@@ -201,21 +201,23 @@ error_reporting(E_ALL);
                     <h1 class="white">Product Details</h1>
                 </div>
                 <div class="ti_cms_gradient_block">
-                    <div class="ti_product_cta">
-                        <a href=""><h3 class="ti_orange_head icon-ico-warranty icon-angle-right">Our ink will never void<br class="ti_hide_479"> your printer's warranty.</h3></a>
+                    <div class="ti_block_inner">
+                        <div class="ti_product_cta">
+                            <a href=""><h3 class="ti_orange_head icon-ico-warranty icon-angle-right">Our ink will never void<br class="ti_hide_479"> your printer's warranty.</h3></a>
+                        </div>
+                        <div class="ti_product_cta">
+                            <a href=""><h3 class="ti_orange_head icon-ico-guarantee icon-angle-right">All ink comes with a 1 year<br class="ti_hide_479"> money back guarantee.</h3></a>
+                        </div>
+                        <div class="ti_cms_separator"></div>
+                        <h2 class="ti_orange_head"><?php echo $_product->getPhotoAlttext(); ?></h2>
+                        <ul class="ti_bullet">
+                            <!--<li>HP 564XL Bulk Set of 11 Packs (3 Black, 2 Photo Black, 2 Cyan, 2 Magenta, 2 Yellow) High Yield Remanufactured Ink Cartridges</li>
+                            <li>3 Black, 2 Photo Black, 2 Cyan, 2 Magenta, 2 Yellow</li>
+                            <li>550 Page Yield @ 5% for Black, 290 Page Yield @ 5% for Photo Black, 750 Page Yield @ 5% for Cyan, Magenta &amp; Yellow</li>!-->
+                            <?php echo $_product->getShortDescription(); ?>
+                        </ul>
+                        <p>These high quality inkjet cartridges were professionally re-engineered in a manufacturing facility that uses state of the art processes to ensure that this product will print as well as their brand name counterparts. These are equipped with Ink Level Indicator chips that allow the system to monitor remaining ink and help you keep track of your ink consumption. These cartridges are the high yield versions of <?php echo $_product->getMpn(); ?> black, photo black, cyan, magenta, and yellow. The product images are for demonstrating purposes only. Actual appearances may vary.</p>
                     </div>
-                    <div class="ti_product_cta">
-                        <a href=""><h3 class="ti_orange_head icon-ico-guarantee icon-angle-right">All ink comes with a 1 year<br class="ti_hide_479"> money back guarantee.</h3></a>
-                    </div>
-                    <div class="ti_cms_separator"></div>
-                    <h2 class="ti_orange_head"><?php echo $_product->getPhotoAlttext(); ?></h2>
-                    <ul class="ti_bullet">
-                        <!--<li>HP 564XL Bulk Set of 11 Packs (3 Black, 2 Photo Black, 2 Cyan, 2 Magenta, 2 Yellow) High Yield Remanufactured Ink Cartridges</li>
-                        <li>3 Black, 2 Photo Black, 2 Cyan, 2 Magenta, 2 Yellow</li>
-                        <li>550 Page Yield @ 5% for Black, 290 Page Yield @ 5% for Photo Black, 750 Page Yield @ 5% for Cyan, Magenta &amp; Yellow</li>!-->
-                        <?php echo $_product->getShortDescription(); ?>
-                    </ul>
-                    <p>These high quality inkjet cartridges were professionally re-engineered in a manufacturing facility that uses state of the art processes to ensure that this product will print as well as their brand name counterparts. These are equipped with Ink Level Indicator chips that allow the system to monitor remaining ink and help you keep track of your ink consumption. These cartridges are the high yield versions of <?php echo $_product->getMpn(); ?> black, photo black, cyan, magenta, and yellow. The product images are for demonstrating purposes only. Actual appearances may vary.</p>
                 </div>
                 <div class="ti_cms_block_headerBar-green">
                     <h1 class="white">Product Specifications</h1>
