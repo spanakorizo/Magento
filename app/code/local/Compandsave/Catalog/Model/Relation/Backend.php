@@ -55,14 +55,20 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 
         }
         else if($product->getTypeId() === 'bundle' ){// and getCompatibleCatid() != ''
-			
+            $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
+            $coreResource = Mage::getSingleton('core/resource');
+            $conn = $coreResource->getConnection('core_read');
+            $conn_write = $coreResource->getConnection('core_write');
+            $AttributeId = $eavAttribute->getIdByCode('catalog_product', 'compatible_catid');
+            $EntityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+            $store_id = Mage::app()->getStore()->getId();
+
+
             $bundle_product_id = $product->getId(); //get bundle product ID
 			
 			$mapping_product_ids = $product->getCompatibleCatid();
 
-			$coreResource = Mage::getSingleton('core/resource');
-			$conn = $coreResource->getConnection('core_read');
-			$conn_write = $coreResource->getConnection('core_write');
+            $attrbTable = $coreResource->getTableName('catalog_product_entity_text');
 			$RelationTable = $coreResource->getTableName('catalog/product_relation'); //get table name for catalog_product_relation
 			$RealtionLinkTable = $coreResource->getTableName('catalog/product_link'); //get table name for catalog_product_link
 			
@@ -97,7 +103,8 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 			}
 			else{
 				///code start for delete existing link
-				
+                $compatible_cat_id = '';
+
 				$bundled_items = array(); //items array
 				
 				$select = $conn->select()
@@ -136,10 +143,13 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 						if($times_number_occurred == $maximum_occurance_group_product){ //if maximum number is equal to count 
 							if($maximum_occurance_group_product == $count){ //ensure maximum occurrence is equal to maximum counter
 								$products_links->assign ("grouped",$group_product_id,$bundle_product_id);
+                                $compatible_cat_id = $group_product_id.','.$compatible_cat_id;
+
 							}
 							else{
 								//if not equal to count but maximum occurance
 								$products_links->assign ("grouped",$group_product_id,$bundle_product_id);
+                                $compatible_cat_id = $group_product_id.','.$compatible_cat_id;
 
 							}
 						}
@@ -148,10 +158,14 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 				else{
 					foreach($group_product as $group_product_id){
 						$products_links->assign ("grouped",$group_product_id,$bundle_product_id);
+                        $compatible_cat_id = $group_product_id.','.$compatible_cat_id;
 					}
 				}
 			}
-			
+            $compatible_cat_id = substr($compatible_cat_id, 0, strlen($compatible_cat_id)-1);
+
+            $conn_write->insert($attrbTable, array('entity_type_id' => $EntityTypeId, 'attribute_id' => $AttributeId,'store_id'=> $store_id,'entity_id'=> $bundle_product_id,'value' => $compatible_cat_id));
+
 			unset($product);
         }
 		

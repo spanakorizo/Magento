@@ -501,7 +501,7 @@ td, th{
 	padding:10px 2px;
 }
 
-th{
+.data-table th {
 	font-weight:bold;
 	background:#559a13;
 	font-size:1.4em;
@@ -1135,6 +1135,32 @@ ul.ti_cart_review li:last-child{
 	width:60%;
 }
 
+.ti_cart_qty{
+	width:12%;
+}
+
+.ti_cart_qty input{
+	float:left;
+}
+
+.ti_cart_image, .ti_cart_desc{
+	float:left;
+	margin:0;
+	display:block;
+} 
+
+.ti_cart_image{
+	width:25%;
+}
+
+.ti_cart_desc{
+	width:75%;
+}
+
+.ti_cart_image img{
+	width:100%;
+}
+
 /* -----------------------------------*/
 /* -------->> 6. Footer <<<-----------*/
 /* -----------------------------------*/
@@ -1695,6 +1721,10 @@ ul.ti_product_checklist{
 		float:none;
 	}
 
+	.button.btn-continue{
+		float:none;
+	}
+
 	#ti_product_qtyDiscountDrop{
 		left:0;
 		margin-left:50px;
@@ -1791,6 +1821,14 @@ ul.ti_product_checklist{
 		display:block;
 		font-size:1.2em;
 		margin-top:0;
+	}
+
+	.ti_cart_image{
+		display:none;
+	}
+
+	.ti_cart_desc{
+		width:100%;
 	}
 
 	.ti_hide_479, .ti_product_cta .icon-ico-warranty:before,
