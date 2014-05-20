@@ -2,9 +2,11 @@
 class Compandsave_Orderfilter_Model_Observer {
 	public function orderfilter(Varien_Event_Observer $observer) {
 
+		$filter_priority = true;
+
 		$order = $observer->getEvent()->getOrder();
 		$addressid = $order->getShippingAddress()->getId();
-		$address = Mage::getModel('sales/order_address')->load($addressid);
+		$shippingaddress = Mage::getModel('sales/order_address')->load($addressid);
 
 /***************************************************/
 /* Description: check duplicate order              */
@@ -22,7 +24,7 @@ class Compandsave_Orderfilter_Model_Observer {
 	//$order = Mage::getModel('sales/order')->load($orderid);
 	//$addressid = $order->getShippingAddress()->getId();
 	//$address = Mage::getModel('sales/order_address')->load($addressid);
-		$street = $address->getStreetFull();
+		$street = $shippingaddress->getStreetFull();
 
 
 
@@ -69,6 +71,89 @@ class Compandsave_Orderfilter_Model_Observer {
 		$order->setOrderType('duplicate');
 	}
 
+
+/***************************************************/
+/* Description: Check Special Customer Order       */
+/*  */
+
+/* Yiyang ???                                */
+/***************************************************/
+
+
+
+
+
+
+
+
+
+/***************************************************/
+/* Description: Order Filter-> USPS/Fedex          */
+/*  Check Order Shipping Method */
+
+/* Yiyang ???                                */
+/***************************************************/
+
+
+
+
+
+/***************************************************/
+/* Description: Order Filter-> Army Check          */
+/*  Check Order Shipping City: APO, DPO, FPO, Guam */
+/* Yiyang   Date:5/20/2014                         */
+/***************************************************/
+$army_city = $shippingaddress->getCity();
+$army_state = $shippingaddress->getState();
+if (strtoupper($army_city) == 'APO' || strtoupper($army_city) == 'DPO' || strtoupper($army_city) == 'FPO' || strtoupper($army_state) == 'GUAM') {
+	$order->setOrderType('Army');
+	$filter_priority = false;
+}
+
+
+/***************************************************/
+/* Description: Order Filter-> Large Order         */
+/*  Check Order Shipping State                     */
+/* Yiyang   Date:5/20/2014                         */
+/***************************************************/
+
+if ($filter_priority && $order->getGrandTotal() >= 150) 	{
+	$shippingstate = strtoupper($shippingaddress->getRegion());
+	$order->setOrderType('Large');
+	$filter_priority = false;
+	if ($shippingstate == "HAWAII" || $shippingstate == "ALASKA" || $shippingstate == "VIRGIN ISLANDS") {
+		$order->setOrderTypeValue('Special');
+	}
+	else 
+		$order->setOrderTypeValue('Regular');
+}
+
+
+
+/***************************************************/
+/* Description: Order Filter-> Large Order         */
+/*  Check Order Shipping State                     */
+/* Yiyang   Date:5/20/2014                         */
+/***************************************************/
+
+if ($filter_priority && $order->getGrandTotal() < 150) 	{
+	$shippingstate = strtoupper($shippingaddress->getRegion());
+	$orderweight = $order->getWeight();
+	if ($orderweight < 0.75) {
+		$order->setOrderType('Autoship');
+	}
+
+	else {
+		$order->setOrderType('Small');
+			if ($shippingstate == "HAWAII" || $shippingstate == "ALASKA" || $shippingstate == "VIRGIN ISLANDS") {
+				$order->setOrderTypeValue('Special');
+			}
+			else 
+				$order->setOrderTypeValue('Regular');
+
+	}
+
+}
 
 
 
