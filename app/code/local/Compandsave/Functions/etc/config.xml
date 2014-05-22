@@ -2,23 +2,26 @@
 <config>
     <modules>
         <Compandsave_Functions>           
-            <version>0.0.2</version>
+            <version>0.0.3</version>
         </Compandsave_Functions>
     </modules>
     <global>
         <models>
             <compandsave_functions>
 				<class>Compandsave_Functions_Model</class>
-				<!--<resourceModel>compandsave_Functions_resource</resourceModel>!-->
+				<resourceModel>compandsave_functions_resource</resourceModel>
             </compandsave_functions>
-            <!--<compandsave_functions_resource>
+            <compandsave_functions_resource>
 				<class>Compandsave_Functions_Model_Resource</class>
                 <entities>
-                    <duplicate>
-                        <table>compandsave_functions_duplicate</table>
-                    </duplicate>
+                    <customerfilter>
+                        <table>compandsave_functions_customerfilter</table>
+                    </customerfilter>
+                    <conditionfilter>
+                        <table>compandsave_functions_conditionfilter</table>
+                    </conditionfilter>
                 </entities>
-            </compandsave_functions_resource>!-->
+            </compandsave_functions_resource>
         </models>
 		<blocks>
             <compandsave_functions_adminhtml>
