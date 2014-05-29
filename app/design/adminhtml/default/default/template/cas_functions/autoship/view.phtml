@@ -1,0 +1,29 @@
+<?php 
+$ship_collection = Mage::getModel('sales/order')->getCollection()
+	->addAttributeToFilter('status', 'pending')
+	->addAttributeToFilter('order_type', 'Autoship')
+	->addAttributeToFilter('order_type_value', 'Autoship')
+	->addAttributeToSelect('*');
+$ship_count = count($ship_collection);
+
+
+$print_collection = Mage::getModel('sales/order')->getCollection()
+	->addAttributeToFilter('status', 'pending')
+	->addAttributeToFilter('order_type', 'Autoship')
+	->addAttributeToFilter('order_type_value', 'Shipped')
+	->addAttributeToSelect('*');
+$print_count = count($print_collection);
+
+
+?>
+<style>
+	.num {
+		font-size: 200%;
+		color: #0099FF;
+		margin-right: 15px;
+	}
+
+</style>
+
+<p><span class='num'><?php echo $ship_count; ?></span>Orders Ready to Ship</p>
+<p><span class='num'><?php echo $print_count; ?></span>Orders Ready to Print</p>

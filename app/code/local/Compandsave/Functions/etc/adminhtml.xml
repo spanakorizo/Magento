@@ -38,6 +38,17 @@
                  <action>compandsave_functions_admin/specialfilter</action>
 
                 </specialfilter>
+                <autoship translate="title"
+                        module="compandsave_functions">
+                    <title>Autoship</title>
+                    <sort_order>12</sort_order>
+
+                    <!--
+                    When the menu is clicked, take the user here.
+                    -->
+                 <action>compandsave_functions_admin/autoship</action>
+
+                </autoship>
             </children>
         </compandsave_functions>
     </menu>
@@ -52,10 +63,18 @@
                         <title>CompAndSave Functions</title>
                         <sort_order>76</sort_order>
                         <children>
-                            <coupon translate="title"
+                            <duplicate_order translate="title"
                                     module="compandsave_functions">
                                 <title>Dupliate Order</title>
-                            </coupon>
+                            </duplicate_order>
+                            <special_filter translate="title"
+                                    module="compandsave_functions">
+                                <title>Special Filter</title>
+                            </special_filter>
+                            <auto_ship translate="title"
+                                    module="compandsave_functions">
+                                <title>Autoship</title>
+                            </auto_ship>
                         </children>
                     </compandsave_functions>
                 </children>

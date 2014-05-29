@@ -89,8 +89,8 @@ $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
     	//check customername
     	
     	
-    	else if (similar_text(strtolower($check_fullname), strtolower($fullname)) > 0.9) {
-    		$filter_priority=false; 
+    	else if (similar_text(strtolower($check_fullname), strtolower($fullname)) > 90) {
+    		$filter_priority=false;
     		$order->setOrderTypeValue('Name');
 			$order->setOrderType('Special');
     	}
@@ -112,14 +112,14 @@ $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
 
 
     	//check customer shipping address with both of billing address and shipping address
-    	else if (( similar_text(strtolower($shipping_street), strtolower($row['ShippingAddress'])) >0.9 ) || ( similar_text(strtolower($shipping_street), strtolower($row['BillingAddress'])) >0.9 )) {
+    	else if (( similar_text(strtolower($shipping_street), strtolower($row['ShippingAddress'])) > 90 ) || ( similar_text(strtolower($shipping_street), strtolower($row['BillingAddress'])) > 90 )) {
     		$filter_priority=false; 
     		$order->setOrderTypeValue('ShippingAddress');
 			$order->setOrderType('Special');
     	}
 
     	//check customer billing address with both of billing address and shipping address
-    	else if (( similar_text(strtolower($billing_street), strtolower($row['ShippingAddress'])) >0.9 ) || ( similar_text(strtolower($billing_street), strtolower($row['BillingAddress'])) >0.9 )) {
+    	else if (( similar_text(strtolower($billing_street), strtolower($row['ShippingAddress'])) > 90 ) || ( similar_text(strtolower($billing_street), strtolower($row['BillingAddress'])) > 90 )) {
     		$filter_priority=false; 
     		$order->setOrderTypeValue('BillingAddress');
 			$order->setOrderType('Special');
@@ -291,6 +291,7 @@ if ($filter_priority && $order->getGrandTotal() < 150) 	{
 	$orderweight = $order->getWeight();
 	if ($orderweight < 0.75) {
 		$order->setOrderType('Autoship');
+		$order->setOrderTypeValue('Autoship');
 	}
 
 	else {
