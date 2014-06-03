@@ -63,7 +63,7 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .brder-rt{border-right:2px #ccc solid;}
 .brder-all{border:2px #ccc solid;}
 .ti_cms_contain{width:1000px;margin:auto;}
-.block_center{margin:0 auto; display:block;}
+.block_center{margin:0 auto; display:block; float:none;}
 .text_center{text-align:center;}
 .ltWeight{font-weight:300;}
 
@@ -233,6 +233,11 @@ blockquote h2:after{
 	line-height:1em;
 }
 
+.ti_headerH1{
+	font-size:3.2em; 
+	font-weight:bold;
+}
+
 
 /* -----------------------------------*/
 /* -------->> 3. Elements <<<---------*/
@@ -262,7 +267,7 @@ input[type="button"],
 input[type="submit"],
 .ti_button {
   font:300 2.4em/1em 'Raleway', Verdana, sans-serif;
-  padding:1%;
+  padding:2% 1%;
   margin:1%;
   max-width:100%;
   border-radius:.25em;
@@ -273,6 +278,7 @@ input[type="submit"],
   -webkit-appearance: none;
   vertical-align:middle;
   display:inline-block;
+  box-sizing:border-box;
 }
 
 input[type="text"],
@@ -306,6 +312,12 @@ input[type="button"],
   -webkit-transition:background .4s;
 }
 
+input[type="submit"].ti_altBtn, 
+input[type="button"].ti_altBtn, 
+.ti_button.ti_altBtn, button.ti_altBtn{
+	background: #559a13; 
+}
+
 input[type="text"]:hover,
 input[type="number"]:hover{
 	color:#31590b;
@@ -314,6 +326,12 @@ input[type="number"]:hover{
 input[type="submit"]:hover, button:hover,
 .ti_button:hover{
 	background: #fd8524;
+}
+
+input[type="submit"].ti_altBtn:hover, 
+input[type="button"].ti_altBtn:hover, 
+.ti_button.ti_altBtn:hover, button.ti_altBtn:hover{
+	background: #31590b; 
 }
 
 .ti_input_bar input[type="text"],
@@ -1161,6 +1179,29 @@ ul.ti_cart_review li:last-child{
 	width:100%;
 }
 
+.ti_cart_total {
+	background: #559a13;
+}
+
+.ti_cart_thumbRelate{
+	outline:2px solid #559a13;
+	width:100%;
+}
+
+.ti_cart_ship_option{
+	width:96%;
+	margin:4% auto;
+}
+
+.ti_cart_zip{
+	width:98%;
+	margin:0 0 2em 0;
+	padding:5px 1%;
+	border-radius:.25em;
+	-moz-border-radius:.25em;
+	-webkit-border-radius:.25em;
+}
+
 /* -----------------------------------*/
 /* -------->> 6. Footer <<<-----------*/
 /* -----------------------------------*/
@@ -1535,7 +1576,8 @@ ul.ti_product_checklist{
 	}
 
 	.ti_header_top_block,
-	#ti_header_quick_links .ti_header_top_block{
+	#ti_header_quick_links .ti_header_top_block,
+	.one_fifth, .two_fifth, .three_fifth, .four_fifth{
 		margin:0 1%;
 		width:48%;
 	}
@@ -1663,6 +1705,10 @@ ul.ti_product_checklist{
 		width:98%;
 		margin: 0 auto 15px;
 	}
+
+	.ti_cart_relateBlock.one_third { width:31%;margin:0 auto;}
+	.ti_cart_relateBlock.two_third { width:64%;margin:0 auto;}
+	.discount-form .one_half{width:48%;margin:0 auto;}
 
 	.ti_cms_home_block{
 		width:42%;

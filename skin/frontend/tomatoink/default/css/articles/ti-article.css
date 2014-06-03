@@ -1,8 +1,9 @@
 /************* CSS Header ******************************/
 /*
 Please refer to http://www.877ink.com/coding-standards.pdf for
-the most up to date coding standards for CompAndSave.com
+the most up to date coding standards for TomatoInk.com
 Author: Megan Prior-Pfeifer
+Modified by Sam Chao 05/29/14
 
 Table of Contents:
 1. Global
@@ -63,7 +64,7 @@ Naming convention: add ti_cms_ prefix
 /* -------->> 2. Header <<<-----------*/
 /* -----------------------------------*/
 
-.ti_cms_articleHeading {
+/*.ti_cms_articleHeading {
 	margin-top:1em;
 }
 
@@ -81,13 +82,13 @@ Naming convention: add ti_cms_ prefix
 	-webkit-border-radius:15px;
 	padding:20px;
 	position:relative;
-}
+}*/
 
 /* -----------------------------------*/
 /* -------->> 3. Navigation <<<-------*/
 /* -----------------------------------*/
 
-#ti_cms_articleNav{
+/*#ti_cms_articleNav{
 	padding:15px 0;
 	text-align: left;
 	color: rgb(51, 51, 51);
@@ -119,7 +120,7 @@ Naming convention: add ti_cms_ prefix
 
 #ti_cms_articleNav a{
 	color:#555555;	
-}
+}*/
 
 /* -----------------------------------*/
 /* ---------->> 4. Layout <<<---------*/
@@ -175,8 +176,7 @@ Naming convention: add ti_cms_ prefix
 	padding:20px; 
 	background:#f7f7f7; 
 	border-bottom:3px solid #eeeeee;
-	position:absolute;
-	right:0;
+	float:left;
 }
 
 /* --Full Width Layout--*/
@@ -212,7 +212,7 @@ Naming convention: add ti_cms_ prefix
 /* ----------->> 5. Text <<<----------*/
 /* -----------------------------------*/
 
-.ti_cms_articleContent_area, .ti_cms_articleContent_area p, 
+/*.ti_cms_articleContent_area, .ti_cms_articleContent_area p, 
 .ti_cms_articleContent_area h1, .ti_cms_articleContent_area h2, 
 .ti_cms_articleContent_area h3, .ti_cms_articleContent_area a{
 	font-family: Arial, Helvetica, sans-serif;
@@ -298,7 +298,7 @@ Naming convention: add ti_cms_ prefix
 
 .ti_cms_articleContent_area figcaption {
 	text-align:center;	
-}
+}*/
 
 /* -----------------------------------*/
 /* ---------->> 6. Elements <<<-------*/
@@ -401,17 +401,25 @@ Naming convention: add ti_cms_ prefix
 /* --Tables--*/
 
 .ti_cms_articleContent_area table{
-	border:none;
+	border:1px solid #ccc;
+	border-radius:1em;
+	-webkit-border-radius:1em;
+	-moz-border-radius:1em;
 	border-spacing:0;
+	overflow:hidden;
 }
 
 .ti_cms_articleContent_area th {
 	font-weight:bold;
+	background:#ddd;
 }
 
 .ti_cms_articleContent_area th,
 .ti_cms_articleContent_area td {
-
+	vertical-align: middle;
+	text-align:center;
+	padding:1em;
+	border:.5px solid #ddd;
 }
 
 /* --Images --*/
@@ -431,6 +439,103 @@ Naming convention: add ti_cms_ prefix
 	width:200px; 
 	height:247px;
 	background:url(/v/mp/images/tomato.png) no-repeat;
+}
+
+/* --Icons--*/
+
+a.ti_cms_iconBlock{
+  display:inline-block;
+  text-align:center;
+  margin:0 1em;
+}
+
+.ti_cms_icon{
+	display:inline-block;
+	background:url(/v/mp/images/ti-icons.png) transparent no-repeat left top;
+}
+
+.ti_cms_icon.ti_generalIcon{
+	width:48px;
+	height:48px;
+}
+
+.ti_cms_icon.ti_socialIcon{
+	width:41px;
+	height:41px;
+}
+
+#ti_tomato.ti_cms_icon{
+	background-position:-570px -10px;
+	width:53px;
+	height:61px;
+}
+
+#ti_brush.ti_cms_icon{
+	background-position:-16px -17px;
+}
+
+#ti_tag.ti_cms_icon{
+	background-position:-96px -19px;
+}
+
+#ti_note.ti_cms_icon{
+	background-position:-179px -15px;
+}
+
+#ti_truck.ti_cms_icon{
+	background-position:-256px -24px;
+}
+
+#ti_money.ti_cms_icon{
+	background-position:-340px -15px;
+}
+
+#ti_support.ti_cms_icon{
+	background-position:-420px -16px;
+}
+
+#ti_checkmark.ti_cms_icon{
+	background-position:-585px -107px;
+}
+
+#ti_like.ti_cms_icon{
+	background-position:-497px -19px;
+}
+
+#ti_paint.ti_cms_icon{
+	background-position:-655px -16px;
+}
+
+#ti_facebook.ti_cms_icon{
+	background-position:-18px -99px;
+}
+
+#ti_twitter.ti_cms_icon{
+	background-position:-98px -99px;
+}
+
+#ti_linkedin.ti_cms_icon{
+	background-position:-178px -99px;
+}
+
+#ti_google.ti_cms_icon{
+	background-position:-259px -99px;
+}
+
+#ti_pinterest.ti_cms_icon{
+	background-position:-340px -99px;
+}
+
+#ti_youtube.ti_cms_icon{
+	background-position:-419px -99px;
+}
+
+#ti_blogger.ti_cms_icon{
+	background-position:-498px -99px;
+}
+
+.ti_cms_icon.ti_socialIcon:hover{
+	background-position: inherit -179px !important;
 }
 
 /* --Resizable images --*/
@@ -518,4 +623,40 @@ Naming convention: add ti_cms_ prefix
 	z-index:100; 
 	position:relative;
 }
+/* -----------------------------------*/
+/* -------->> 9. Responsive <<<-------*/
+/* -----------------------------------*/
 
+
+/* iPhone 5 (portrait & landscape)----------- */
+@media only screen and (min-device-width : 320px) and (max-device-width : 568px){
+
+
+}
+
+@media only screen and (max-width : 1024px), @media only screen and (max-device-width : 1024px){
+
+	.ti_cms_hide1024 {
+		display:none;
+	}
+
+}
+
+@media only screen and (max-width : 767px), @media only screen and (max-device-width : 767px){
+
+	.ti_cms_100percent {
+		width:100%;
+		height:auto;
+	}
+
+}
+
+@media only screen and (min-width : 768px) and (max-width : 1024px) {
+
+
+}
+
+@media only screen and (min-width : 320px) and (max-width : 568px){
+
+	
+}

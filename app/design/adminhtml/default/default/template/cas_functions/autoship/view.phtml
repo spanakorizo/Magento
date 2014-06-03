@@ -2,17 +2,22 @@
 $ship_collection = Mage::getModel('sales/order')->getCollection()
 	->addAttributeToFilter('status', 'pending')
 	->addAttributeToFilter('order_type', 'Autoship')
-	->addAttributeToFilter('order_type_value', 'Autoship')
-	->addAttributeToSelect('*');
+	->addAttributeToFilter('order_type_value', 'Autoship');
 $ship_count = count($ship_collection);
 
 
 $print_collection = Mage::getModel('sales/order')->getCollection()
 	->addAttributeToFilter('status', 'pending')
 	->addAttributeToFilter('order_type', 'Autoship')
-	->addAttributeToFilter('order_type_value', 'Shipped')
-	->addAttributeToSelect('*');
+	->addAttributeToFilter('order_type_value', 'Shipped');
 $print_count = count($print_collection);
+
+
+$error_collection = Mage::getModel('sales/order')->getCollection()
+	->addAttributeToFilter('status', 'pending')
+	->addAttributeToFilter('order_type', 'Error');
+$error_count = count($error_collection);
+
 
 
 ?>
@@ -24,6 +29,32 @@ $print_count = count($print_collection);
 	}
 
 </style>
-
+<!-- <?php //echo Mage::helper('adminhtml')->getUrl('customize-functions/autoship/ship'); ?>!-->
 <p><span class='num'><?php echo $ship_count; ?></span>Orders Ready to Ship</p>
 <p><span class='num'><?php echo $print_count; ?></span>Orders Ready to Print</p>
+<p><span class='num'><?php echo $error_count; ?></span>Orders Have Error</p>
+<input type="button" id='autoship_buylabel' value="Buy Shipping Lable">
+<br>
+<input type="button" id="autoship_print" value="print">
+
+<script type='text/javascript'>
+var timestamp = new Date().getTime();
+var autoship_url = "<?php echo Mage::helper('adminhtml')->getUrl('customize-functions/autoship/ship'); ?>?batch_id=" + timestamp;
+var ship_count = "<?php echo $ship_count; ?>";
+jQuery('#autoship_buylabel').click(function () {
+
+	if (ship_count > 0) {
+		jQuery.get(autoship_url, function(data){
+			console.log(data);
+		});
+	}
+	else 
+		alert("We don't have any order could ship!");
+});
+
+
+jQuery('#autoship_print').click(function() {
+
+});
+
+</script>

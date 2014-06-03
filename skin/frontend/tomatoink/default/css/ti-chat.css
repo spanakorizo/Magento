@@ -1,0 +1,243 @@
+body{
+margin:0px;
+}
+h2{font-family: "PT Sans", "PT Sans Caption", "PT Sans Narrow";
+font-size:1.4em;
+font-weight:bold;
+color:#42822A;
+line-height:25px;
+margin:10px 5px 5px;
+}
+h3{font-family: "PT Sans", "PT Sans Caption", "PT Sans Narrow";
+font-size:1.2em;
+font-weight:bold;
+color:#42822A;
+line-height:20px;
+margin:0px;
+}
+.center{
+text-align:center;
+}
+.wrapper{
+width:100%;
+height:100%;
+margin:0px;
+}
+.header{
+height:12%;
+width:100%;
+max-width:100%;
+background:#FFFFFF;
+/*border-bottom:1px solid #D6D6D6;*/
+text-align:center;
+background:url(../images/ti_chat/line.jpg) repeat-x 0 100%;
+}
+.logo{
+float:left;
+position:relative;
+width:50%;
+height:100%;
+max-width:50%;
+
+}
+.logo img{
+height:100%;
+max-width:100%;
+}
+.right{
+float:right;
+position:relative;
+width:50%;
+height:100%;
+max-width:50%;
+text-align:right;
+
+}
+.right img{
+height:100%;
+max-width:100%;
+}
+
+/*@media handled,screen and (max-width: 450px) {
+.live_chat p{
+margin-top:3%;
+font-size:1em;
+}
+}
+@media handled,screen and (min-width: 451px) and (max-width: 660px) {
+.live_chat p{
+font-size:1.2em;
+
+}
+}*/
+.container{
+height:88%;
+width:100%;
+background:#F3F3F3;
+}
+.top_container{
+float:left;
+height:85%;
+position:relative;
+width:100%;
+
+}
+.chat_welcome{
+float:left;
+position:relative;
+width:90%;
+height:10%;
+margin:0% 5% ;
+}
+@media handled,screen and (max-width: 495px) {
+div.chat_container iframe {
+   overflow: auto;
+   	width: 100%;
+	height:130%;
+	margin-top:-110px;
+	margin-left:0%;
+	position:relative;
+	float:left; 
+}
+div.left_bottom_img p.left_bottom_img_res{
+font-size:0.7em;
+line-height:1em;
+text-align:justify;
+}
+.chat_welcome{
+height:10%;
+}
+.chat_container{
+height:85%;
+
+}
+.chat_welcome p{
+font-size:0.85em;
+line-height:1.0em;
+}
+.chat_welcome h2{
+font-size:1em;
+
+}
+.live_chat p{
+margin-top:3%;
+font-size:1em;
+}
+.left_bottom_header h3{
+font-size:1em;
+line-height:1.1em;
+}
+}
+@media handled,screen and (min-width: 496px) and (max-width: 590px) {
+div.chat_container iframe {
+     overflow: auto;
+   	width: 100%;
+	height:130%;
+	margin-top:-110px;
+	margin-left:0%;
+	position:relative;
+	float:left; 
+}
+div.left_bottom_img p.left_bottom_img_res{
+font-size:0.7em;
+line-height:1em;
+text-align:justify;
+}
+.chat_welcome{
+height:10%;
+}
+.chat_container{
+height:85%;
+
+}
+.chat_welcome p{
+font-size:0.85em;
+line-height:1.0em;
+}
+.chat_welcome h2{
+font-size:1.1em;
+
+}
+.live_chat p{
+font-size:1.2em;
+
+}
+.left_bottom_header h3{
+font-size:1em;
+line-height:1.1em;
+}
+}
+
+p{
+font-family: "PT Sans", "PT Sans Caption", "PT Sans Narrow";
+font-size:0.9em;
+font-weight:normal;
+color:#555;
+line-height:1em;
+text-align:center;
+margin:1% 1% 0% 1%;
+}
+.chat_container{
+float:left;
+position:relative;
+margin:0 5% ;
+border:1px solid #D6D6D6;
+background:#fff;
+width:90%;
+height:90%;
+overflow: hidden;
+}
+frame{
+overflow:hidden
+}
+iframe {
+    overflow: auto;
+   	width: 100%;
+	height:130%;
+	margin-top:-110px;
+	margin-left:0%;
+	position:relative;
+	float:left;
+}
+.bottom_container{
+float:left;
+position:relative;
+height:15%;
+width:100%;
+}
+.left_bottom{
+position:relative;
+float:left;
+width:45%;
+margin-left:5%;
+height:100%;
+}
+.left_bottom_header{
+position:relative;
+margin-top:2%;
+}
+.left_bottom_img{
+float:left;
+position:relative;
+margin:0%;
+width:100%;
+}
+.left_bottom_img img{
+float:left; position:relative; margin:0px; padding: 0 1% 1% 0
+}
+.left_bottom_img p{
+font-family: "PT Sans Caption", "PT Sans Narrow";
+font-size:0.8em;
+color:#999;
+text-align:justify;
+line-height:1em;
+margin:3px 0 0 0px;
+}
+
+.right_bottom{
+position:relative;
+float:right;
+width:45%;
+margin-right:5%;
+height:100%;
+}
