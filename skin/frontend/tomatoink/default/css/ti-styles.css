@@ -63,8 +63,10 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .brder-rt{border-right:2px #ccc solid;}
 .brder-all{border:2px #ccc solid;}
 .ti_cms_contain{width:1000px;margin:auto;}
-.block_center{margin:0 auto; display:block;}
+.block_center{margin:0 auto; display:block; float:none;}
 .text_center{text-align:center;}
+.text_left{text-align:left;}
+.text_right{text-align:right;}
 .ltWeight{font-weight:300;}
 
 /*responsive*/
@@ -233,6 +235,11 @@ blockquote h2:after{
 	line-height:1em;
 }
 
+.ti_headerH1{
+	font-size:3.2em; 
+	font-weight:bold;
+}
+
 
 /* -----------------------------------*/
 /* -------->> 3. Elements <<<---------*/
@@ -260,9 +267,10 @@ blockquote h2:after{
 input, button,
 input[type="button"],
 input[type="submit"],
-.ti_button {
+.ti_button,
+textarea {
   font:300 2.4em/1em 'Raleway', Verdana, sans-serif;
-  padding:1%;
+  padding:10px 1%;
   margin:1%;
   max-width:100%;
   border-radius:.25em;
@@ -273,10 +281,13 @@ input[type="submit"],
   -webkit-appearance: none;
   vertical-align:middle;
   display:inline-block;
+  box-sizing:border-box;
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="password"],
+textarea {
   color:#559a13;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
   -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
@@ -290,6 +301,25 @@ input[type="number"] {
 	-webkit-font-feature-settings: "lnum";
 	-ms-font-feature-settings: "lnum";
 	-o-font-feature-settings: "lnum";
+}
+
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    #559a13;
+    font-size:1.6em;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #559a13;
+    opacity:  1;
+    font-size:1.6em;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #559a13;
+    opacity:  1;
+    font-size:1.6em;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    #559a13;
+    font-size:1.6em;
 }
 
 input[type="submit"], 
@@ -306,24 +336,61 @@ input[type="button"],
   -webkit-transition:background .4s;
 }
 
+input[type="submit"].ti_altBtn, 
+input[type="button"].ti_altBtn, 
+.ti_button.ti_altBtn, button.ti_altBtn{
+	background: #559a13; 
+}
+
 input[type="text"]:hover,
-input[type="number"]:hover{
+input[type="number"]:hover,
+input[type="password"]:hover,
+textarea:hover{
 	color:#31590b;
 }
 
 input[type="submit"]:hover, button:hover,
 .ti_button:hover{
 	background: #fd8524;
+	border:none;
+	color:#fff;
+}
+
+input[type="submit"].ti_altBtn:hover, 
+input[type="button"].ti_altBtn:hover, 
+.ti_button.ti_altBtn:hover, button.ti_altBtn:hover{
+	background: #31590b; 
 }
 
 .ti_input_bar input[type="text"],
-.ti_input_bar input[type="number"]{
+.ti_input_bar input[type="number"],
+.ti_input_bar input[type="password"]{
 	width:60%;
 }
 
 .ti_input_bar input[type="submit"],
 .ti_input_bar button{
 	width:32%;
+}
+
+label{
+	font-size:1.6em;
+}
+
+input[type="checkbox"],
+input[type="radio"]{
+	display:inline-block;
+	margin:0 5px;
+	vertical-align:middle;
+}
+
+input[type="radio"]{
+	border-radius: 10px;
+	border: 5px solid #559a13;
+	background: none;
+	width: 5px;
+	height: 5px;
+	padding: 2px;
 }
 
 .ti_button_large{
@@ -346,7 +413,8 @@ select{
 	overflow: hidden;
 	width: 115%;
 	font-size: 1.6em;
-	padding: 5px 0;
+	padding: 0;
+	height:45px;
 }
 
 .ti_select_barContainer{
@@ -443,13 +511,14 @@ ul.ti_bullet{
 
 ul.ti_bullet li:before { 
     content: "";
-    display: block;
-    height: 5px;
-    width: 5px;
-    left: -1em;
-    top: 0.9em;
-    background:#559a13;
-    position: relative;
+	display: block;
+	height: 5px;
+	width: 5px;
+	left: -1em;
+	top: 0.9em;
+	background: #559a13;
+	position: relative;
+	border-radius: 5px;
 }
 
 .ti_menu>li{
@@ -1161,6 +1230,82 @@ ul.ti_cart_review li:last-child{
 	width:100%;
 }
 
+.ti_cart_total {
+	background: #559a13;
+}
+
+.ti_cart_thumbRelate{
+	outline:2px solid #559a13;
+	width:100%;
+}
+
+.ti_cart_ship_option{
+	width:96%;
+	margin:4% auto;
+}
+
+.ti_cart_zip{
+	width:98%;
+	margin:0 0 2em 0;
+	padding:5px 1%;
+	border-radius:.25em;
+	-moz-border-radius:.25em;
+	-webkit-border-radius:.25em;
+}
+
+/* Firecheckout */
+
+.ti_checkout_info{
+	width:98%;
+}
+
+.ti_checkout_password{
+	width:46%;
+	float:left;
+}
+
+.ti_checkout_list{
+	font-family:'Raleway', sans-serif;
+}
+
+.ti_checkout_list li{
+	display:block;
+	clear:both;
+	margin:.5em auto;
+}
+
+.ti_checkout_list input[type="radio"]{
+	border-radius:10px;
+	border:5px solid #559a13;
+	background:none;
+	width:10px;
+	height:10px;
+}
+
+.ti_checkout_list .ti_select_barContainer{
+	font-size:1.6rem;
+	width:80%;
+	margin:0;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.ti_checkout_list .ti_select_barContainer select{
+	font-weight:300;
+}
+
+.icon-lock.ti_checkout_secure{
+	font-size: 5em;
+}
+
+.ti_checkout_comments {
+	resize:none;
+	width:100%;
+	font-size:1.6em;
+	margin:0;
+}
+
+
 /* -----------------------------------*/
 /* -------->> 6. Footer <<<-----------*/
 /* -----------------------------------*/
@@ -1265,6 +1410,12 @@ ul.ti_cart_review li:last-child{
 	clear:both;
 }
 
+.ti_cms_block_headerBar-orange{
+	padding:0 5px;
+	background:url("../images/ti-assets/paper-bg_e67921.jpg") repeat;
+	clear:both;
+}
+
 .ti_block_inner{
 	padding:8px;
 }
@@ -1310,8 +1461,10 @@ ul.ti_cart_review li:last-child{
 
 .ti_cms_separator{
 	height:4px;
-	margin:.5em;
+	margin:1em auto;
 	background:#559a13;
+	display:inline-block;
+	width:100%;
 	clear:both;
 }
 
@@ -1498,6 +1651,55 @@ ul.ti_product_checklist{
 	float:right;
 }
 
+/* List View */
+
+.ti_cms_block_list{
+	margin-bottom:1em;
+}
+
+.ti_cms_block_list .ti_product_blockImg{
+	width:20%;
+	float:left;
+}
+
+.ti_cms_block_list .ti_product_blockImg img{
+	margin:0 auto;
+}
+
+.ti_cms_block_list .ti_product_blockPrice{
+	width:40%;
+	float:left;
+}
+
+.ti_cms_block_list .ti_product_blockPrice h3{
+	font-size:3.2em;
+	line-height: 1em;
+	margin: 1em auto 0;
+}
+
+.ti_cms_block_list .ti_product_blockPrice h5{
+	font-weight:normal;
+}
+
+.ti_cms_block_list .ti_product_blockQty{
+	width:40%;
+	float:left;
+}
+
+.ti_cms_block_list .ti_product_blockQty p{
+	font-size:2.4em;
+}
+
+.ti_cms_block_list .ti_product_blockQty input[type='text']{
+	width:80px;
+}
+
+/* Grid View */
+
+.ti_cms_block_grid h5{
+	display:none;
+}
+
 /* -----------------------------------*/
 /* -------->> 9. Responsive <<<-------*/
 /* -----------------------------------*/
@@ -1535,10 +1737,16 @@ ul.ti_product_checklist{
 	}
 
 	.ti_header_top_block,
-	#ti_header_quick_links .ti_header_top_block{
+	.one_fifth, .two_fifth, .three_fifth, .four_fifth{
 		margin:0 1%;
 		width:48%;
 	}
+
+	#ti_header_quick_links .ti_header_top_block{
+		width:100%;
+		margin:0;
+	}
+
 	.ti_header_top_block{
 		margin: 1em 0 0;
 	}
@@ -1554,6 +1762,10 @@ ul.ti_product_checklist{
 
 	.ti_header_top_block ul{
 		float:left;
+	}
+
+	#ti_header_searchHelp {
+	    margin: 0px 1em;
 	}
 
 	.ti_cms_dropContent{
@@ -1631,8 +1843,16 @@ ul.ti_product_checklist{
 		min-width:600px;
 	}
 
+	.ti_header_top_block,
+	#ti_header_quick_links .ti_header_top_block{
+		margin:0;
+		width:100%;
+		text-align:center;
+	}
+
 	.ti_header_top_block ul{
-		float:left;
+		float:none;
+		margin:0 auto;
 	}
 
 	.ti_header_nav_block{
@@ -1644,7 +1864,7 @@ ul.ti_product_checklist{
 
 	#ti_main_coupon{
 		z-index:3;
-		top:85px;
+		top:95px;
 	}
 
 	#ti_header_quick_links{
@@ -1662,6 +1882,14 @@ ul.ti_product_checklist{
 	.ti_footer_top_block .one_fourth {
 		width:98%;
 		margin: 0 auto 15px;
+	}
+
+	.ti_cart_relateBlock.one_third { width:31%;margin:0 auto;}
+	.ti_cart_relateBlock.two_third { width:64%;margin:0 auto;}
+	.discount-form .one_half{width:48%;margin:0 auto;}
+
+	#ti_cms_home_container{
+		background:none;
 	}
 
 	.ti_cms_home_block{
@@ -1767,13 +1995,6 @@ ul.ti_product_checklist{
 		width:48%;
 	}
 
-	.ti_header_top_block,
-	#ti_header_quick_links .ti_header_top_block{
-		margin:0;
-		width:100%;
-		text-align:center;
-	}
-
 	.ti_cms_home_block{
 		width:94%;
 	}
@@ -1796,21 +2017,13 @@ ul.ti_product_checklist{
 	.ti_logo_bar{
 		width:100%;
 		float:none;
+		max-width:auto;
+		margin:0 auto;
 	}
 
 	#ti_header_quick_links{
 		z-index: 20;
 		position: relative;
-	}
-
-	.ti_header_top_block ul {
-		float: none;
-		margin: 0 auto;
-		display: inline-block;
-	}
-
-	.ti_header_top_block p{
-		text-align:center;
 	}
 
 	.ti_footer_links_block ul.ti_menu li{

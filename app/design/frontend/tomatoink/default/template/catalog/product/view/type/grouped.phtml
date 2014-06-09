@@ -59,10 +59,10 @@
     <?php endif; ?>
 <?php endif; */?>
 
-            <div class="ti_cms_contain btcf">
+            <div class="btcf">
                 <div class="ti_printer_sortBar btcf">
-                    <div class="ti_printer_sortBlock sorter">
-                        <div class="one_half sort-by">
+                    <div class="one_half sort-by">
+                        <div class="ti_printer_sortBlock sorter">
                             <div class="view-mode btcf">
                                 <div class="ti_sort_block">
                                     <h2 class="lgTxt ltWeight">View as:</h2>
@@ -75,7 +75,6 @@
                         </div>
                     </div>
                     <div class="one_half">
-
                         <button type="button" title="Add to Cart" class="ti_button_large" onclick="this.form.submit()"><span>+ Add multiple to cart</span></button>
                     </div>
                 </div>
@@ -98,13 +97,13 @@
 <?php //echo $this->getChildHtml('product_type_data_extra') ?>
 
 
-            <div class="ti_cms_contain btcf">
+            <div class="btcf">
                 <?php if ($_hasAssociatedProducts): ?>
                 <?php $formKey = Mage::getSingleton('core/session')->getFormKey();?>
 
 <?php foreach ($_associatedProducts as $_item): ?>
 <div class="ti_cms_block_grid"> 
-    <div class="ti_block_inner ti_cms_border_block">       
+    <div class="ti_block_inner ti_cms_border_block btcf">       
     <?php //get product url ?>
     <?php $product_url = $_item->getProductUrl();
           $pro_url_array = explode("/", $product_url);
@@ -118,12 +117,16 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
             $product_url .= $pro_url_array[count($pro_url_array)-1];
   ?>
     <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
-        <a href="<?php echo $product_url?>?printer=<?php echo $_product->getId(); ?>"><p><?php echo $this->escapeHtml($_item->getName()) ?></p></a> 
+     <div class="ti_product_blockName">
+        <p><a href="<?php echo $product_url?>?printer=<?php echo $_product->getId(); ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a></p> 
+    </div>
         
-        <a href="<?php echo $product_url; ?>?printer=<?php echo $_product->getId(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" /></a>
+        <div class="ti_product_blockImg">
+            <a href="<?php echo $product_url; ?>?printer=<?php echo $_product->getId(); ?>"><img src="<?php echo $this->helper('catalog/image')->init($_item, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_item, 'small_image'), null, true) ?>" /></a>
+        </div>
             
                 <!-- <a href="<?php //echo $_item->getProductUrl()?>.html"><?php //echo $this->escapeHtml($_item->getName()) ?></a><br /> !-->
-        
+        <div class="ti_product_blockPrice">
             <?php if ($this->getCanShowProductPrice($_product)): ?>
             
                 <?php if ($this->getCanShowProductPrice($_item)): ?>
@@ -131,6 +134,8 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
                 <h5>brand-price: <span>$<?php echo round($_item->getMsrp(), 2) ?></span></h5>
                 <?php endif; ?>
             <?php endif; ?>
+        </div>
+        <div class="ti_product_blockQty">
 
             <?php if ($_product->isSaleable()): ?>
             
@@ -170,20 +175,21 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
             <?php endif; ?>
             
             <?php endif; ?>
-
-
-
         </div>
-            </div>
+
+
+
+    </div>
+</div>
     <?php endforeach; ?>
     <input type="hidden" name="product" value="<?php echo $new ?>" />
             <?php endif; ?>
             </div>
                   
-            <div class="ti_cms_contain btcf">
+            <div class="btcf">
                 <div class="ti_printer_sortBar btcf">
-                    <div class="ti_printer_sortBlock sorter">
-                        <div class="one_half sort-by">
+                    <div class="one_half sort-by">
+                        <div class="ti_printer_sortBlock sorter">
                             <div class="view-mode btcf">
                                 <div class="ti_sort_block">
                                     <h2 class="lgTxt ltWeight">View as:</h2>

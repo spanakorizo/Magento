@@ -1,7 +1,18 @@
-<?php
+<?php 
+error_reporting(E_ALL);
+ini_set('display_errors',1);
+
+require_once("easypost-php-master/lib/easypost.php");
+
 class Compandsave_Functions_Adminhtml_AutoshipController
     extends Mage_Adminhtml_Controller_Action
 {
+    //
+
+    //set key
+     
+
+
     /**
      * Instantiate our grid container block and add to the page content.
      * When accessing this admin index page, we will see a grid of all
@@ -34,98 +45,98 @@ class Compandsave_Functions_Adminhtml_AutoshipController
         $this->renderLayout();
     }
 
-    /**
-     * This action handles both viewing and editing existing coupons.
-     */
-/*
-    public function editAction()
+    public function shipAction() {
+        //
+        //test site key
+
+        \EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw'); //test site key
+//\EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); 
+        $ship_collection = Mage::getModel('sales/order')->getCollection()
+            ->addAttributeToFilter('status', 'pending')
+            ->addAttributeToFilter('order_type', 'Autoship')
+            ->addAttributeToFilter('order_type_value', 'Autoship')
+            ->addAttributeToSelect('*');
+        $ship_count = count($ship_collection);
+        //echo $ship_count . "<br>";
+
+        foreach ($ship_collection as $shipment) {
+
+            $buyshiplabel = new buyshiplabel(); 
+
+            $addressid = $shipment->getShippingAddress()->getId();
+            $shippingaddress = Mage::getModel('sales/order_address')->load($addressid);
+            $timestamp = $_GET['batch_id'];
+
+            $result_text = $buyshiplabel->buyshipment($shipment->getId(), $shipment->getCustomerName(), $shippingaddress->getStreetFull(), '', $shippingaddress->getCity(), $shippingaddress->getState(), $shippingaddress->getPostcode(), '', '5', $shipment->getCustomerId(), '', '', $timestamp);
+            $result = explode("&", $result_text);
+
+            if ($result[0] == "N") {
+              $shipment->setOrderType('Error')->setOrderTypeValue($result[2])->save();
+              echo "error with " . $result[1]; 
+            }
+            else {
+              echo "success with " . $result[1];
+            }
+            //echo $shipment->getId() . " " . $shippingaddress->getStreetFull() . " " . $shipment->getCustomerEmail() . "<br>";
+        }
+    }
+
+    public function searchAction()
     {
-        
-        $Coupon = Mage::getModel('compandsave_variable/coupon');
-        if ($CouponId = $this->getRequest()->getParam('id', false)) {
-            $Coupon->load($CouponId);
+       
+        // instantiate the grid container
+        /*
+        $DuplicateBlock = $this->getLayout()
+            ->createBlock('compandsave_functions_adminhtml/duplicate');
 
-            if ($Coupon->getId() < 1){
-				$this->_getSession()->addError(
-                    $this->__('This Coupon no longer exists.')
-                );
-                return $this->_redirect('compandsave_variable_admin/coupon/index');
-            }
-        }
-
-        // process $_POST data if the form was submitted
-        if ($postData = $this->getRequest()->getPost('CouponData')) {
-            try {
-                $Coupon->addData($postData);
-                $Coupon->save();
-
-                $this->_getSession()->addSuccess(
-                    $this->__('The Coupon Code "'. $postData['value'] .'" has been saved.')
-                );
-
-                // redirect to remove $_POST data from the request
-                return $this->_redirect(
-                    'compandsave_variable_admin/coupon/index',
-                    array('id' => $Coupon->getId())
-                );
-            } catch (Exception $e) {
-                Mage::logException($e);
-                $this->_getSession()->addError($e->getMessage());
-            }
-
-
-        }
-
-        // Make the current coupon object available to blocks.
-        Mage::register('current_coupon', $Coupon);
-
-        // Instantiate the form container.
-        $couponEditBlock = $this->getLayout()->createBlock(
-            'compandsave_variable_adminhtml/coupon_edit'
-        );
-
-        // Add the form container as the only item on this page.
+        // Add the grid container as the only item on this page
         $this->loadLayout()
-            ->_addContent($couponEditBlock)
-            ->renderLayout();
-    }
-    */
+            ->_addContent($DuplicateBlock)
+            ->renderLayout();*/
+            $order_id = $_GET['orderid'];
+            $order = Mage::getModel('sales/order')->load($orderid);
+            $addressid = $shipment->getShippingAddress()->getId();
+            $shippingaddress = Mage::getModel('sales/order_address')->load($addressid);
 /*
-    public function deleteAction()
-    {
-        $Coupon = Mage::getModel('compandsave_variable/coupon');
-
-        if ($CouponId = $this->getRequest()->getParam('id', false)) {
-            $Coupon->load($CouponId);
-        }
-
-        if ($Coupon->getId() < 1){
-			$this->_getSession()->addError(
-				$this->__('This Coupon no longer exists.')
-			);
-			return $this->_redirect('compandsave_variable_admin/coupon/index');
-		}
-
-        try {
-            $Coupon->delete();
-
-            $this->_getSession()->addSuccess(
-                $this->__('The Coupon "'. $Coupon->getValue() .'" has been deleted.')
-            );
-        } catch (Exception $e) {
-            Mage::logException($e);
-            $this->_getSession()->addError($e->getMessage());
-        }
-
-        return $this->_redirect(
-            'compandsave_variable_admin/coupon/index'
-        );
+            $order = Mage::getModel('sales/order')->load($your_order_id);
+$shipment_collection = Mage::getResourceModel('sales/order_shipment_collection')
+            ->setOrderFilter($order)
+            ->load();
+foreach($shipment_collection as $shipment){
+    echo "Tracking number(s) for shipment:<br/>";
+    foreach($shipment->getAllTracks() as $tracking_number){
+        echo $tracking_number->getNumber() . "<br/>";
     }
+    echo "Product(s) on shipment:<br/>";
+    foreach ($shipment->getAllItems() as $product){
+        echo $product->getName() . "<br/>";
+    }
+}
 */
-    /**
-     * Thanks to Ben for pointing out this method was missing. Without
-     * this method the ACL rules configured in adminhtml.xml are ignored.
-     */
+            echo $order_id . " " . $shippingaddress->getStreetFull() . " " . 
+
+
+       echo "this is search" . $order_id;
+    }
+
+        public function refundAction()
+    {
+       
+        // instantiate the grid container
+        /*
+        $DuplicateBlock = $this->getLayout()
+            ->createBlock('compandsave_functions_adminhtml/duplicate');
+
+        // Add the grid container as the only item on this page
+        $this->loadLayout()
+            ->_addContent($DuplicateBlock)
+            ->renderLayout();*/
+            $order_id = $_GET['orderid'];
+       echo "this is refund" . $order_id;
+    }
+
+
+
     protected function _isAllowed()
     {
         /**
@@ -158,3 +169,195 @@ class Compandsave_Functions_Adminhtml_AutoshipController
         return $isAllowed;
     }
 }
+?>
+
+
+<?php
+class buyshiplabel {
+
+
+//private $address;
+//private $verified_address;
+//private $from_address;
+//private $parcel;
+//private $shipment;
+//private $trackingcode;
+//private $shipid;
+//private $label_url;
+//private $orderrate;
+
+
+public function buyshipment($orderid, $customername, $customerstreet1, $customerstreet2, $customercity, $customerstate, $customerzip, $customerphone, $weight, $customerid, $orderdate, $productcode, $timestamp) {
+  $errorflag = false;
+
+  $address = \EasyPost\Address::create(array(
+  'name' => $customername,
+  'street1' => $customerstreet1,
+  'street2' => $customerstreet2,
+  'city' => $customercity,
+  'state' => $customerstate,
+  'zip' => $customerzip,
+  'phone' => $customerphone, 
+  'country' => 'US'
+));
+
+try 
+    {
+
+    $verified_address = $address->verify();
+    
+    $from_address = \EasyPost\Address::create(
+    array(
+        "name"    => "Shipping Receiving",
+        "company" => "CompAndSave",
+        "street1" => "38929 Cherry ST",
+        "street2" => " ",
+        "city"    => "Newark",
+        "state"   => "CA",
+        "zip"     => "94560",
+        "phone"   => "415-379-7678"
+    )
+);
+$parcel = \EasyPost\Parcel::create(
+    array(
+        "predefined_package" => "Parcel",
+        "weight" => $weight 
+    )
+);
+$shipment = \EasyPost\Shipment::create(
+    array(
+        "to_address"   => $verified_address,
+        "from_address" => $from_address,
+        "parcel"       => $parcel,
+        "carrier" => 'USPS', 
+        "service" => 'First' 
+    )
+);
+
+
+
+
+     }
+    catch(Exception $e) {return "N&" . $orderid . "&address"; $errorflag=true;}
+
+//echo $verified_address;
+    //echo $errorflag;
+
+if ($errorflag!=true)
+{
+
+    try 
+       {
+        //echo ($shipment->rates[0]->_values["service"]);
+        //$shipment->buy($shipment->rates[0]);
+        $shipment->buy($shipment->lowest_rate(array('USPS'), array('First')));
+
+
+//$shipment->label(array("file_format" => "zpl"));
+
+$trackingcode = $shipment->tracking_code;
+$shipid = $shipment->id;
+$label_url = $shipment->postage_label->label_url;
+//$label_zpl_url = $shipment->postage_label->label_zpl_url;
+//$orderrate = $shipment->rates[0]->rate;
+$orderrate = $shipment->selected_rate->rate; 
+        //print_r($shipment);
+        //echo $shipment;
+
+
+        //echo "normallabel: " . $shipment->postage_label->label_url;
+        //echo "<br>";
+        //echo $shipment->postage_label->label_zpl_url;
+    }
+    catch(Exception $e) {return "N&" . $orderid . "&shipment"; $errorflag=true;}
+}
+
+  if ($errorflag!=true) {
+
+    $carrier_code = 'usps';
+    $carrier_title = 'United States Postal Service';
+    $order = Mage::getModel('sales/order')->load($orderid);
+
+
+    $order->setAutoshipShipid($shipid)
+    ->setBatchNumber($timestamp)
+    ->setOrderTypeValue('Shipped')
+    ->setShippingAmount($orderrate)
+    ->save();
+    $order->setAutoshipLabel($label_url)->save();
+    echo $label_url . "<br>"; 
+
+    if($order->canShip()) {
+        
+      $ti_shipmentid = Mage::getModel('sales/order_shipment_api')
+        ->create($order->getIncrementId(), array());
+
+      $ti_shipment = Mage::getModel('sales/order_shipment')->getCollection()->addFieldToFilter('order_id', $order['entity_id'])->getFirstItem();
+      //$ti_shipment->setShippingLabel($label_url)->save();
+
+
+
+      $track = Mage::getModel('sales/order_shipment_track')
+        ->setTrackNumber($trackingcode)
+        ->setCarrierCode($carrier_code)
+        ->setTitle($carrier_title)
+        ->setOrderId($order['entity_id'])
+        ->setParentID($ti_shipment['entity_id'])
+        ->setCreatedAt($this->getShipDate())
+        ->save();
+
+
+      return "Y&" . $orderid . "&success";   
+      
+      }
+    else 
+      return "N&" . $orderid . "&unable to ship";
+  }
+
+//save in DB
+/*
+if($errorflag!=true)
+{
+$username = "DBCOMPANDSAVE";
+$password = "CAS123cas!";
+$hostname = "DBCOMPANDSAVE.db.11475010.hostedresource.com"; 
+$databasename = "DBCOMPANDSAVE";
+
+$dbhandle = mysql_connect($hostname, $username, $password);
+  if($dbname) die("Unable to connect to MySQL");
+
+mysql_select_db($databasename) or die("can't find dbname");
+
+
+date_default_timezone_set('America/Los_Angeles');
+//$shipdate = date('m/d/Y h:i:s a', time());
+$ship_date = date('Y/m/d h:i:s a', time());
+
+//insert info in database
+$query = "INSERT INTO Orders_Tracking (OrderID, Tracking_Code, Label_Url, ZPL_Url, weight, Street1, Street2, City, State, Zip, Phone, CustomerID, CustomerName, ShipID, OrderDate, ShipRate, Ship_Date, ProductCode, Flag_2) VALUES('$orderid', '$trackingcode', '$label_url', '$label_zpl_url', '$weight', '$customerstreet1', '$customerstreet2', '$customercity', '$customerstate', '$customerzip', '$customerphone', '$customerid', '$customername', '$shipid', '$orderdate', '$orderrate', '$ship_date', '$productcode', '$timestamp')";
+$result = mysql_query($query);
+mysql_close($dbhandle);
+echo "Y&" . $orderid . "&" . $trackingcode . "&" . $label_url . "&" . $orderrate;
+}
+
+*/
+
+
+
+
+}
+
+  private function getShipDate() {
+    date_default_timezone_set('America/Los_Angeles');
+    $date = date('Y-d-m h:i:s a', time());
+
+    return $date;
+
+  }
+
+
+
+}
+
+
+?>

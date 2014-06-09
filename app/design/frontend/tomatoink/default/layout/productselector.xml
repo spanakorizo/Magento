@@ -6,12 +6,16 @@
 			<action method="addItem"><type>skin_css</type><name>css/productselector.css</name></action>
         </reference>
 	</default>-->
-
-	<productselector_ajax_index>
+    <productselector_ajax_index>
         <reference>
 			<block type="compandsave_productselector/ajaxlist" name="root" as="ajaxlist" output="toHtml" template="productselector/ajaxlist.phtml" />
         </reference>
 	</productselector_ajax_index>
+    <productselector_ajax_livechat>
+        <reference>
+            <block type="compandsave_productselector/livechat" name="root" as="livechat" output="toHtml" template="productselector/livechat.phtml" />
+        </reference>
+    </productselector_ajax_livechat>
     <productselector_ink_index>
         <reference>
             <block type="compandsave_productselector/inklist" name="root" as="inklist" output="toHtml" template="productselector/inklist.phtml" />

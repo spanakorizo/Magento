@@ -94,6 +94,7 @@ html[xmlns] .slides {display: block;}
 	text-align:center;
 	top:2em;
 	text-shadow:1px 1px 0 #ececec;
+	color:#333;
 }
 .flex-caption span{
 	font-size:1.2em;
