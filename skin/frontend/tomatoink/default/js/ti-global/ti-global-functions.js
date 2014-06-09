@@ -5,6 +5,15 @@
 /* Version: 0.0.1 */
 /*******************************************************/
 
+
+function addSimpleToCart(id) {
+    ti = $(id);
+    if (ti) {
+    if ( ! ti.value || ti.value=='0') ti.value = '1';
+    }
+}
+
+
 function getUrlVars() {
     var vars = {};
     var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -84,7 +93,7 @@ jQuery(document).ready(function($){
 
 	var moreText = "Read more",
     	lessText = "Read less",
-    	moreButton = $(".readmorebtn");
+    	moreButton = $("a.readmorebtn");
 
 	moreButton.click(function () {
     	var $this = $(this);
@@ -242,4 +251,8 @@ function coupon_slideback() {
   jQuery("#ti_header_coupon_desc").slideUp("fast");
   jQuery("#ti_main_coupon_arrow").css("background-image", "url('" + ti_header_arrowup + "')");
   }
+}
+
+function checout_url(){
+	window.location.href = ti_global_url + 'index.php/firecheckout/';
 }

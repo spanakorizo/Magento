@@ -101,15 +101,13 @@ end Megan HTML-->
                         </div>
                     <!--</li>
                 </ul>-->
-                <div class="ti_select_barContainer ti_cart_ship_option">
-                    <select id="">
-                        <option value>Shipping method</option>
-                        <option value>Ground</option>
-                    </select>
-                </div>
+				<!---_____________START SHIPPING CODE CUSTOMIZATION________________________--->
+				
+				
                 <div class="buttons-set">
-                    <button type="button" title="<?php echo $this->__('Update Total') ?>" onclick="coShippingMethodForm.submit()" class="ti_altBtn block_center"><span><span><?php echo $this->__('Update Total') ?></span></span></button>
+                    <button type="button" title="<?php echo $this->__('Get Quote') ?>" onclick="coShippingMethodForm.submit()" class="ti_altBtn block_center"><span><span><?php echo $this->__('Get Quote') ?></span></span></button>
                 </div>
+				
             </form>
             <script type="text/javascript">
             //<![CDATA[
@@ -119,32 +117,28 @@ end Megan HTML-->
 
             <?php if (($_shippingRateGroups = $this->getEstimateRates())): ?>
             <form id="co-shipping-method-form" action="<?php echo $this->getUrl('checkout/cart/estimateUpdatePost') ?>">
-                <dl class="sp-methods">
-                    <?php foreach ($_shippingRateGroups as $code => $_rates): ?>
-                        <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?></dt>
-                        <dd>
-                            <ul>
-                            <?php foreach ($_rates as $_rate): ?>
-                                <li<?php if ($_rate->getErrorMessage()) echo ' class="error-msg"';?>>
-                                   <?php if ($_rate->getErrorMessage()): ?>
-                                        <?php echo $this->escapeHtml($_rate->getErrorMessage()) ?>
-                                   <?php else: ?>
-                                        <input name="estimate_method" type="radio" value="<?php echo $this->escapeHtml($_rate->getCode()) ?>" id="s_method_<?php echo $_rate->getCode() ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio" />
-                                        <label for="s_method_<?php echo $_rate->getCode() ?>"><?php echo $this->escapeHtml($_rate->getMethodTitle()) ?>
-                                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
-                                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
-                                        <?php echo $_excl; ?>
-                                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
-                                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
-                                        <?php endif; ?>
-                                        </label>
-                                   <?php endif ?>
-                                </li>
-                            <?php endforeach; ?>
-                            </ul>
-                        </dd>
-                    <?php endforeach; ?>
-                </dl>
+                <div class="ti_select_barContainer ti_cart_ship_option">
+					<select id='ti_drop_estimate_method' name="ti_estimate_method">
+						<?php foreach ($_shippingRateGroups as $code => $_rates){ 
+								$carrier_name = $this->escapeHtml($this->getCarrierName($code));
+								foreach ($_rates as $_rate){
+									$method_title = $carrier_name.'-'.$this->escapeHtml($_rate->getMethodTitle());
+									$_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax());
+									$incl = $this->getShippingPrice($_rate->getPrice(), true);
+									$method_title .= ' ['. $_excl;
+									if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl) {
+										$str2 .= ' '. $this->__('Incl. Tax'); echo $_incl;
+									}
+									$method_title .= '] ';
+								?>
+								<option <?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' selected="selected"' ?> value="<?php echo $this->htmlEscape($_rate->getCode()) ?>"><?php echo $method_title;?></option>
+							<?php
+								}
+							}
+						?>
+					
+					</select>	
+				</div>
                 <div class="buttons-set">
                     <button type="submit" title="<?php echo $this->__('Update Total') ?>" class="button" name="do" value="<?php echo $this->__('Update Total') ?>"><span><span><?php echo $this->__('Update Total') ?></span></span></button>
                 </div>
@@ -174,6 +168,7 @@ end Megan HTML-->
                 }
             //]]>
             </script>
+			
         </div>
     </div>
 </div>

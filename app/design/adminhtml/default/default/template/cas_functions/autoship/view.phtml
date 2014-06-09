@@ -16,7 +16,7 @@ $print_collection = Mage::getModel('sales/order')->getCollection()
 $print_count = count($print_collection);
 
 $print_orders = array();
-
+if ($print_count > 0) {
 foreach ($print_collection as $print_order) {
 
 	$items = $print_order->getAllItems();
@@ -31,6 +31,8 @@ for ($i=0; $i<count($printer_orders); $i++) {
 }
 
 $label_content .= "</body></html>";
+
+}
 $error_collection = Mage::getModel('sales/order')->getCollection()
 	->addAttributeToFilter('status', 'pending')
 	->addAttributeToFilter('order_type', 'Error');

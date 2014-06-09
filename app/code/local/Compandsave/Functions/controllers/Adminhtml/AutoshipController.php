@@ -4,6 +4,7 @@ ini_set('display_errors',1);
 
 require_once("easypost-php-master/lib/easypost.php");
 
+
 class Compandsave_Functions_Adminhtml_AutoshipController
     extends Mage_Adminhtml_Controller_Action
 {
@@ -48,9 +49,9 @@ class Compandsave_Functions_Adminhtml_AutoshipController
     public function shipAction() {
         //
         //test site key
+        //\EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw'); //test site key
+\EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); 
 
-        \EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw'); //test site key
-//\EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); 
         $ship_collection = Mage::getModel('sales/order')->getCollection()
             ->addAttributeToFilter('status', 'pending')
             ->addAttributeToFilter('order_type', 'Autoship')
@@ -94,34 +95,32 @@ class Compandsave_Functions_Adminhtml_AutoshipController
             ->_addContent($DuplicateBlock)
             ->renderLayout();*/
             $order_id = $_GET['orderid'];
-            $order = Mage::getModel('sales/order')->load($orderid);
-            $addressid = $shipment->getShippingAddress()->getId();
+            $order = Mage::getModel('sales/order')->load($order_id);
+
+            $addressid = $order->getShippingAddress()->getId();
             $shippingaddress = Mage::getModel('sales/order_address')->load($addressid);
-/*
-            $order = Mage::getModel('sales/order')->load($your_order_id);
-$shipment_collection = Mage::getResourceModel('sales/order_shipment_collection')
+            $shipment_collection = Mage::getResourceModel('sales/order_shipment_collection')
             ->setOrderFilter($order)
             ->load();
-foreach($shipment_collection as $shipment){
-    echo "Tracking number(s) for shipment:<br/>";
-    foreach($shipment->getAllTracks() as $tracking_number){
-        echo $tracking_number->getNumber() . "<br/>";
-    }
-    echo "Product(s) on shipment:<br/>";
-    foreach ($shipment->getAllItems() as $product){
-        echo $product->getName() . "<br/>";
-    }
-}
-*/
-            echo $order_id . " " . $shippingaddress->getStreetFull() . " " . 
+            foreach($shipment_collection as $shipment){
+              
+              foreach($shipment->getAllTracks() as $tracking_number) {
+                $tracking_num = $tracking_number->getNumber();
+              }
+              
+
+            }
+echo $order_id . " " . $order->getOrderTypeValue() . " " . $order->getCustomerName() . " " . $shippingaddress->getStreetFull() . " " . $tracking_num;
 
 
-       echo "this is search" . $order_id;
+       
     }
 
         public function refundAction()
     {
-       
+      //set autoship key
+      //\EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw');
+      \EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); //live site key
         // instantiate the grid container
         /*
         $DuplicateBlock = $this->getLayout()
@@ -132,7 +131,19 @@ foreach($shipment_collection as $shipment){
             ->_addContent($DuplicateBlock)
             ->renderLayout();*/
             $order_id = $_GET['orderid'];
-       echo "this is refund" . $order_id;
+            $order = Mage::getModel('sales/order')->load($order_id);
+            $ship_id = $order->getAutoshipShipid();
+
+            $shipment = \EasyPost\Shipment::retrieve(array('id' =>$ship_id));
+
+            $refundinfo = $shipment->refund();
+
+            if ($refundinfo->refund_status == "submitted") {
+              $order->setOrderTypeValue("Refunded")->save();
+            }
+
+
+       echo "Refund " . $order_id . " " . $refundinfo->status;
     }
 
 
