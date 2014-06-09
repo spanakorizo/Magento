@@ -70,7 +70,40 @@
         <div>
             <h2 class="ti_orange_head ti_headerH1 ti_block_inner">Claim your discount!</h2>
             <p class="text_center"><span class="ti_small_text">Click to apply your coupon code:</span></p>
-            <p class="ti_orange_head ti_headerH1" id="ti_cart_coupon"><a onClick="">QQQ</a></p>
+            <p class="ti_orange_head ti_headerH1" id="ti_cart_coupon">
+				
+					<?php $rules = Mage::getResourceModel('salesrule/rule_collection')->load();				
+					
+					
+					foreach ($rules as $rule) {
+						if ($rule->getIsActive()) {
+							$rule = Mage::getModel('salesrule/rule')->load($rule->getId()); 
+							?>
+							<a onClick="ti_load_coupon('<?php echo $rule->getCouponCode()?>')" class="ti_cart_coupon_<?php echo $rule->getId()?>"><?php echo $rule->getCouponCode()?></a>
+							<br>
+							<?php
+						}
+					}
+					if($this->getRequest()->getParam('coupon_code')){
+						$coupon_code = $this->getRequest()->getParam('coupon_code');
+						$oCoupon = Mage::getModel('salesrule/coupon')->load($coupon_code, 'code');
+						$rule = Mage::getModel('salesrule/rule')->load($oCoupon->getId());
+						
+						if($rule){
+						
+							if ($rule->getIsActive()) {
+							?>
+								<a onClick="ti_load_coupon('<?php echo $coupon_code; ?>')" class="ti_cart_coupon_<?php echo $rule->getId()?>"><?php echo $coupon_code; ?></a>
+							<?php
+							}
+						}
+						
+						
+					}
+					
+					?>
+				
+			</p>
         </div>
     </div>
 </form>
@@ -87,5 +120,10 @@ discountForm.submit = function (isRemove) {
     }
     return VarienForm.prototype.submit.bind(discountForm)();
 }
+function ti_load_coupon( y){
+	document.getElementById("coupon_code").value = y;
+}
+
+
 //]]>
 </script>
