@@ -18,7 +18,7 @@ Naming convention: add ti_hg_ prefix
 /****Text****/
 
 
-.ti_hg_content h2 {
+/*.ti_hg_content h2 {
 	margin:0;
 	font-size:1.8em; 
 	color:#333333; 
@@ -38,9 +38,9 @@ Naming convention: add ti_hg_ prefix
 .ti_hg_subTag_margin {
 	margin-left:20px;
 }
-
+*/
 /****Global****/
-.ti_hg_divider {
+/*.ti_hg_divider {
 	margin-bottom:40px;
 	border-color:#8ad260;
 }
@@ -56,7 +56,7 @@ Naming convention: add ti_hg_ prefix
 /*.ti_hg_center2Col {
 	margin-left:25px;
 }*/
-.ti_hg_heading, .ti_hg_order, .ti_hg_troubleshoot, .ti_hg_payment, .ti_hg_warranty, .ti_hg_cartridge, .ti_hg_shipping, .ti_hg_account, .ti_hg_policy, .ti_hg_title1 {
+/*.ti_hg_heading, .ti_hg_order, .ti_hg_troubleshoot, .ti_hg_payment, .ti_hg_warranty, .ti_hg_cartridge, .ti_hg_shipping, .ti_hg_account, .ti_hg_policy, .ti_hg_title1 {
 	float:left;
 }
 .ti_hg_subtitle {
@@ -77,10 +77,10 @@ Naming convention: add ti_hg_ prefix
 	background:url(../../../images/articles/help-general/help.png) no-repeat; 
 	margin-right:10px;
 	margin-top:2px;
-}
+}*/
 
 /****All About Order****/
-.ti_hg_content {
+/*.ti_hg_content {
 	float:left;
 	margin:1em 0;
 }
@@ -102,13 +102,27 @@ Naming convention: add ti_hg_ prefix
 .ti_hg_pushUD {
 	margin-top:20px;
 	margin-bottom:20px;
-}
+}*/
 /****Ink Troubleshooting****/
 
 .ti_hg_textWidth {
-	width:300px;
+	width:80%;
+	height:215px;
+	position:relative;
 }
-.ti_hg_troubleshoot {
+.ti_hg_viewAll{
+	position: absolute;
+	right: 0;
+	bottom: 10px;
+	width: 67px;
+	height:28px;
+}
+.ti_hg_chat {
+	display:inline;
+	margin-top:10px;
+	margin-left:10px;
+}
+/*.ti_hg_troubleshoot {
 	background-position:0 -41px; 
 	width:47px; 
 	height:47px;
@@ -180,11 +194,11 @@ Naming convention: add ti_hg_ prefix
 	0% {transform:scaleX(1);}
 	50% {transform:scaleX(0);}
 	100% {transform:scaleX(1);}
-	}
+	}*/
 
 /****Contact TomatoInk****/
 
-.ti_hg_tomatoman{
+/*.ti_hg_tomatoman{
 	width:50px; 
 	height:57px; 
 	float:right;
@@ -198,4 +212,4 @@ Naming convention: add ti_hg_ prefix
 	padding:1px 30px 1px 0;
 	color:#333; 
 	font-size:12px;
-}
+}*/

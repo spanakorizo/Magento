@@ -23,34 +23,33 @@ Naming convention: add ti_ts_ prefix
 	display:inline-block;
 	width:240px; 
 	padding:5px; 
-	border:1px solid #dddddd; 
-	margin-top:35px;
+	border:1px solid #f7e8db; 
 	}
 	
 /*Color troubleshooting section, added by Megan Prior-Pfeifer 8-9-2013*/
 
 table.ti_ts_color-chart{
-	width: 575px;
-	cellspacing:0;
+	width: 100%;
 	vertical-align:middle;
 	border:none;
-	font-family:Arial, Verdana, sans-serif;
-	font-size:12px;
+	border-spacing: 3px;
+    border-collapse: separate;
 }
 
 table.ti_ts_color-chart td {
 	text-align:center;
-	font-family:Arial, Verdana, sans-serif;
-	font-size:12px;	
+	vertical-align: middle;
+	padding:5px;
+	border-radius: 1em;
+	width:16%;
+}
+
+table.ti_ts_color-chart td p{
+	margin:0;
 }
 
 span.ti_ts_color {
 	color:#FFF;
-}
-
-.ti_ts_main-color {
-	width:65px;
-        height:65px;	
 }
 
 .ti_ts_col_1 {
@@ -66,6 +65,12 @@ span.ti_ts_color {
         height:32px;	
 }
 
+.ti_ts_blue,
+.ti_ts_red,
+.ti_ts_green{
+	min-width:65px;
+}
+
 .ti_ts_blue {
 	background:#1c0b5b;
 }
@@ -78,51 +83,65 @@ span.ti_ts_color {
 	background:#008742;
 }
 
+.ti_ts_cyan p,
+.ti_ts_magenta p{
+	color:#fff;
+}
+
+.ti_ts_yellow p{
+	color:#009EDB;
+}
+
 .ti_ts_cyan {
-	color:#FFF;
-	width:65px;
-	height:32px;
 	background:#009EDB;
 }
 
 .ti_ts_magenta {
-	color:#FFF;
-	width:65px;
-	height:32px;
 	background:#CD0065;
 }
 
 .ti_ts_yellow {
-	color:#009EDB;
-	width:65px;
-	height:32px;
 	background:#FDF200;
 }
 
 /* -- Index Follow --*/
 
 #ti_ts_container{
-	height:3950px;	
+		
 }
 
-#ti_ts_indexbox_1{
-	
-}
-
-#ti_ts_indexbox_2{
-	
-}
-
+#ti_ts_section_one,
+#ti_ts_section_two,
+#ti_ts_section_three,
+#ti_ts_indexbox_1,
+#ti_ts_indexbox_2,
 #ti_ts_indexbox_3{
-	
+	position:absolute;
+	right:0px;
 }
 
 #ti_ts_section_two{
-	position:absolute;
-	right:0px;
 	height:900px 
 }
 
-#ti_ts_divider_2{
-	
+/* -- Responsive --*/
+
+
+@media only screen and (max-width : 999px) {
+	#ti_ts_container{
+		
+	}
+}
+
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	#ti_ts_container{
+		
+	}
+}
+
+@media only screen and (max-width : 767px) {
+	#ti_ts_container{
+		
+	}
 }

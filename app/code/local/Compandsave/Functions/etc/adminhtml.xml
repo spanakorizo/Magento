@@ -49,6 +49,17 @@
                  <action>compandsave_functions_admin/autoship</action>
 
                 </autoship>
+                <packagelist translate="title"
+                        module="compandsave_functions">
+                    <title>Package List</title>
+                    <sort_order>13</sort_order>
+
+                    <!--
+                    When the menu is clicked, take the user here.
+                    -->
+                 <action>compandsave_functions_admin/packagelist</action>
+
+                </packagelist>
             </children>
         </compandsave_functions>
     </menu>

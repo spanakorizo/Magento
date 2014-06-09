@@ -50,7 +50,7 @@ class Compandsave_Functions_Adminhtml_AutoshipController
         //test site key
 
         \EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw'); //test site key
-
+//\EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); 
         $ship_collection = Mage::getModel('sales/order')->getCollection()
             ->addAttributeToFilter('status', 'pending')
             ->addAttributeToFilter('order_type', 'Autoship')
@@ -81,6 +81,59 @@ class Compandsave_Functions_Adminhtml_AutoshipController
         }
     }
 
+    public function searchAction()
+    {
+       
+        // instantiate the grid container
+        /*
+        $DuplicateBlock = $this->getLayout()
+            ->createBlock('compandsave_functions_adminhtml/duplicate');
+
+        // Add the grid container as the only item on this page
+        $this->loadLayout()
+            ->_addContent($DuplicateBlock)
+            ->renderLayout();*/
+            $order_id = $_GET['orderid'];
+            $order = Mage::getModel('sales/order')->load($orderid);
+            $addressid = $shipment->getShippingAddress()->getId();
+            $shippingaddress = Mage::getModel('sales/order_address')->load($addressid);
+/*
+            $order = Mage::getModel('sales/order')->load($your_order_id);
+$shipment_collection = Mage::getResourceModel('sales/order_shipment_collection')
+            ->setOrderFilter($order)
+            ->load();
+foreach($shipment_collection as $shipment){
+    echo "Tracking number(s) for shipment:<br/>";
+    foreach($shipment->getAllTracks() as $tracking_number){
+        echo $tracking_number->getNumber() . "<br/>";
+    }
+    echo "Product(s) on shipment:<br/>";
+    foreach ($shipment->getAllItems() as $product){
+        echo $product->getName() . "<br/>";
+    }
+}
+*/
+            echo $order_id . " " . $shippingaddress->getStreetFull() . " " . 
+
+
+       echo "this is search" . $order_id;
+    }
+
+        public function refundAction()
+    {
+       
+        // instantiate the grid container
+        /*
+        $DuplicateBlock = $this->getLayout()
+            ->createBlock('compandsave_functions_adminhtml/duplicate');
+
+        // Add the grid container as the only item on this page
+        $this->loadLayout()
+            ->_addContent($DuplicateBlock)
+            ->renderLayout();*/
+            $order_id = $_GET['orderid'];
+       echo "this is refund" . $order_id;
+    }
 
 
 
@@ -225,14 +278,22 @@ $orderrate = $shipment->selected_rate->rate;
     $carrier_title = 'United States Postal Service';
     $order = Mage::getModel('sales/order')->load($orderid);
 
-    $order->setAutoshipShipid($shipid)->setBatchNumber($timestamp)->setOrderTypeValue('Shipped')->setShippingAmount($orderrate)->save();
+
+    $order->setAutoshipShipid($shipid)
+    ->setBatchNumber($timestamp)
+    ->setOrderTypeValue('Shipped')
+    ->setShippingAmount($orderrate)
+    ->save();
+    $order->setAutoshipLabel($label_url)->save();
+    echo $label_url . "<br>"; 
+
     if($order->canShip()) {
         
       $ti_shipmentid = Mage::getModel('sales/order_shipment_api')
         ->create($order->getIncrementId(), array());
-        
+
       $ti_shipment = Mage::getModel('sales/order_shipment')->getCollection()->addFieldToFilter('order_id', $order['entity_id'])->getFirstItem();
-      $ti_shipment->setShippingLabel($label_url);
+      //$ti_shipment->setShippingLabel($label_url)->save();
 
 
 

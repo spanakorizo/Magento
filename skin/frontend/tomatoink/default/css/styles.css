@@ -331,6 +331,7 @@ p.error-msg { color:#d91a00; }
 .messages li.notice-msg ul { /* background-image:url(../images/bkg_msg-note.gif); */ }
 
 /* std class reset */
+.std {position:relative;}
 .std .messages { margin-top:0; }
 .std .messages { width:auto; list-style:none !important; padding:0 !important; margin-bottom:0 !important; }
 .std .messages ul { list-style:none !important; padding-left:17px !important; margin:0 0 -11px !important; }
@@ -343,13 +344,14 @@ p.error-msg { color:#d91a00; }
 .breadcrumbs a:hover { text-decoration:underline; }
 
 /* Page Heading */
-.page-title { margin-bottom:20px; padding:23px 20px 11px; background:#f6f6f6 url(../images/bkg_page-title.gif) repeat-x 0 0; border-bottom:1px solid #cfcfcf; }
-.page-title .link-rss { float:right; margin-top:8px; }
+/*.page-title { margin-bottom:20px; padding:23px 20px 11px; background:#f6f6f6 url(../images/bkg_page-title.gif) repeat-x 0 0; border-bottom:1px solid #cfcfcf; }
+.page-title .link-rss { float:right; margin-top:8px; }*/
 .page-title h1,
 .page-title h2 { 
-	font:normal 22px/27px Arial, Helvetica, sans-serif;  
-	font-weight:bold;
-	color:#333333;
+	color: #559A13;
+	line-height: 1.1em;
+	text-shadow: -0.5px -0.5px 0px #333, 1px 1px 0px #ECECEC;
+	text-align: left;
 }
 .title-buttons { text-align:right; }
 .title-buttons h1,
@@ -362,9 +364,9 @@ p.error-msg { color:#d91a00; }
 
 .subtitle { clear:both; padding:10px 0; font-size:18px; color:#d12c01; }
 
-.page-popup .page-title,
+/*.page-popup .page-title,
 .col-main .page-title { margin-left:-20px; margin-right:-20px; }
-.col1-layout .col-main .page-title { margin-top:-20px; }
+.col1-layout .col-main .page-title { margin-top:-20px; }*/
 
 .sub-title { font-size:16px; font-weight:normal; color:#000; line-height:19px; margin:0 0 10px; }
 .sub-title .separator { font-weight:normal; }
@@ -2055,7 +2057,7 @@ ul.cms-menu.type-square ul { list-style-type:square; }
 
 /* Account Login/Create Pages ============================================================ */
 .my-account {}
-
+/*
 .account-login { position:relative; font-size:12px; background:url(../images/bkg_cols.gif) repeat-y 266px 0; min-height:350px; margin-bottom:-20px; }
 
 .login-only { background:none; }
@@ -2085,7 +2087,7 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 
 .account-create {}
 
-
+*/
 
 /* Popup Dialog Block */
 .window-overlay { background:#000; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; }
@@ -2486,7 +2488,7 @@ address.copyright { margin-top:6px; }
 
 
 /* Some sample data cms styles ================================================================================ */
-.page-head-alt {}
+/*.page-head-alt {}
 .page-head,
 .page-head-alt { margin-bottom:20px; padding:23px 20px 11px; background:#f6f6f6 url(../images/bkg_page-title.gif) repeat-x 0 0; border-bottom:1px solid #cfcfcf; }
 .col-main .page-head,
@@ -2496,7 +2498,7 @@ address.copyright { margin-top:6px; }
 .page-head h3,
 .page-head-alt h3,
 .page-head-alt h2 { font:normal 22px/27px Arial, Helvetica, sans-serif; color:#d12c01; }
-
+*/
 
 /* Restricted ================================================================================ */
 .restriction-index-stub .page { width:652px; padding-bottom:3px; }

@@ -27,22 +27,3 @@ Naming convention: add ti_au_ prefix
 	left: -100px;
 	top: -10px;
 }
-
-#ti_au_wordsTwo {
-	background: url('../../../images/articles/about-us/aboutus_wordsTwo.png') no-repeat; 
-	width:341px; 
-	height:60px; 
-	display:block; 
-}
-
-div#content_Area img:first-child{
-	display:none;
-}
-
-div#content_Area img:nth-child(1){
-	display:none;
-}
-
-div#content_Area img:nth-of-type(1){
-	display:none;
-}
