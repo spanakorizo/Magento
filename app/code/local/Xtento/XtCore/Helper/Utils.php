@@ -3,8 +3,8 @@
 /**
  * Product:       Xtento_XtCore (1.0.0)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:46+00:00
- * Last Modified: 2013-09-13T12:14:30+02:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-05-15T11:54:34+02:00
  * File:          app/code/local/Xtento/XtCore/Helper/Utils.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -26,6 +26,10 @@ class Xtento_XtCore_Helper_Utils extends Mage_Core_Helper_Abstract
         '1.12.0.0' => '1.7.0.0',
         '1.12.0.1' => '1.7.0.0',
         '1.12.0.2' => '1.7.0.0',
+        '1.13.0.0' => '1.8.0.0',
+        '1.13.0.2' => '1.8.0.0',
+        '1.13.1.0' => '1.8.1.0',
+        '1.14.0.0' => '1.9.0.0'
     );
 
     protected $_versionCorrelationPE_CE = array(

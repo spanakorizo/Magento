@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Product:       Xtento_GridActions (1.7.5)
+ * Product:       Xtento_GridActions (1.7.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:46+00:00
+ * Packaged:      2014-06-10T20:04:28+00:00
  * Last Modified: 2013-09-13T15:45:14+02:00
  * File:          app/code/local/Xtento/GridActions/Helper/Data.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.

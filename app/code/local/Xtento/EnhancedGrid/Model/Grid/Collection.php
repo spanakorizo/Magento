@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-03-31T13:05:21+02:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-05-24T11:55:26+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/Model/Grid/Collection.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -122,6 +122,9 @@ class Xtento_EnhancedGrid_Model_Grid_Collection extends Mage_Core_Model_Abstract
         // Hide certain order status(es)
         if ($gridConfiguration->getHiddenStatus() != '') {
             $collection->addAttributeToFilter('`main_table`.status', array('nin' => explode(",", $gridConfiguration->getHiddenStatus())));
+        }
+        if ($gridConfiguration->getHiddenStores() != '') {
+            $collection->addAttributeToFilter('`main_table`.store_id', array('nin' => explode(",", $gridConfiguration->getHiddenStores())));
         }
 
         $collection->getSelect()->group('main_table.entity_id');

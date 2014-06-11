@@ -79,3 +79,7 @@ Xtento_GridActions
 ===== 1.7.5 =====
  + Added ability to localize/translate some more strings of the extension
  * Fixed a bug that lead to the carrier/tracking number column HTML being exported into the built-in CSV/Excel XML export functionality of Magento.
+
+===== 1.7.6 =====
+ + Added ability to re-send new order email to customer in bulk
+ ! Confirmed compatibility with Magento CE 1.9.0.0 / EE 1.14.0.0

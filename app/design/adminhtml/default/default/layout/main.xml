@@ -81,6 +81,8 @@ Default layout, loads most of the pages
 
 
                 <action method="addJs"><script>jquery/jquery-1.11.0.js</script></action>
+                <action method="addJs"><script>jquery/cas-admin.js</script></action>
+                
 
 
 

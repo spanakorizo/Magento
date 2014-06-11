@@ -3,7 +3,7 @@
 /**
  * Product:       Xtento_XtCore (1.0.0)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:46+00:00
+ * Packaged:      2014-06-10T20:04:35+00:00
  * Last Modified: 2012-07-17T23:15:30+02:00
  * File:          app/code/local/Xtento/XtCore/Model/System/Config/Source/Carriers.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.

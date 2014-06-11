@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-05-02T16:29:40+02:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-05-13T14:13:47+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/Model/Grid/Processor.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -17,7 +17,9 @@ class Xtento_EnhancedGrid_Model_Grid_Processor
         // Process grid
         if ($gridType) {
             $gridConfiguration = false;
-            Mage::getSingleton('xtento_enhancedgrid/columns')->getAndSaveGridColumns($block, $gridType);
+            if (!Mage::helper('xtento_enhancedgrid')->isMageExport()) {
+                Mage::getSingleton('xtento_enhancedgrid/columns')->getAndSaveGridColumns($block, $gridType);
+            }
             $gridConfigurationCollection = Mage::getModel('xtento_enhancedgrid/grid')->getCollection();
             $gridConfigurationCollection->addFieldToFilter('type', $gridType);
             $gridConfigurationCollection->addFieldToFilter('enabled', 1);
@@ -76,9 +78,9 @@ class Xtento_EnhancedGrid_Model_Grid_Processor
                             }
                         } else {
                             foreach ($columnData as $key => &$value) {
-                              if ($key == "filter" && $value === "") {
-                                  $value = false;
-                              }
+                                if ($key == "filter" && $value === "") {
+                                    $value = false;
+                                }
                             }
                             $block->xtUpdateColumn($columnIndex, $columnData);
                         }

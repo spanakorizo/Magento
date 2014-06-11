@@ -3,8 +3,8 @@
 /**
  * Product:       Xtento_XtCore (1.0.0)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:46+00:00
- * Last Modified: 2014-03-25T17:15:23+01:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-04-08T19:16:02+02:00
  * File:          app/code/local/Xtento/XtCore/Block/System/Config/Form/Xtento/Module.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -45,12 +45,17 @@ class Xtento_XtCore_Block_System_Config_Form_Xtento_Module extends Mage_Adminhtm
                     $version = Mage::getVersion();
                     $extensionVersion = $dataModel->getValue();
                     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                        $storeHtml = file_get_contents($url.'?version='.$version.'&d='.$extensionVersion);
+                        $storeHtml = file_get_contents($url . '?version=' . $version . '&d=' . $extensionVersion);
                     } else {
                         $client = new Zend_Http_Client($url, array('timeout' => 10));
                         $client->setParameterGet('version', $version);
                         $client->setParameterGet('d', $extensionVersion);
                         $response = $client->request('GET');
+                        // Post version
+                        /*$client = new Zend_Http_Client($url, array('timeout' => 10));
+                        $client->setParameterPost('version', $version);
+                        $client->setParameterPost('d', $extensionVersion);
+                        $response = $client->request('POST');*/
                         $storeHtml = $response->getBody();
                     }
                     $cache->save($storeHtml, $cacheKey);

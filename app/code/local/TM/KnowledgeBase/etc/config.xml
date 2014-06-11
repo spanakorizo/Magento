@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TM_KnowledgeBase>
+            <version>1.4.0</version>
+        </TM_KnowledgeBase>
+    </modules>
+
+    <admin>
+	<routers>
+	     <knowledgebase_admin>
+		<use>admin</use>
+		<args>
+		<module>TM_KnowledgeBase</module>
+		<frontName>knowledgebase_admin</frontName>
+		</args>
+	    </knowledgebase_admin>
+        </routers>
+    </admin>
+
+    <frontend>
+        <routers>
+            <knowledgebase>
+                <use>standard</use>
+                <args>
+                    <module>TM_KnowledgeBase</module>
+                    <frontName>knowledgebase</frontName>
+                </args>
+            </knowledgebase>
+        </routers>
+
+        <layout>
+            <updates>
+                <knowledgebase>
+                    <file>tm/knowledgebase.xml</file>
+                </knowledgebase>
+            </updates>
+        </layout>
+        <translate>
+            <modules>
+                <TM_KnowledgeBase>
+                    <files>
+                        <default>TM_KnowledgeBase.csv</default>
+                    </files>
+                </TM_KnowledgeBase>
+            </modules>
+        </translate>
+    </frontend>
+
+    <adminhtml>
+
+        <layout>
+            <updates>
+                <knowledgebase>
+                    <file>tm/knowledgebase.xml</file>
+                </knowledgebase>
+            </updates>
+        </layout>
+
+        <!-- -->
+        <translate>
+            <modules>
+                <TM_KnowledgeBase>
+                    <files>
+                        <default>TM_KnowledgeBase.csv</default>
+                    </files>
+                </TM_KnowledgeBase>
+            </modules>
+        </translate>
+        <!-- -->
+
+        <events>
+            <catalog_product_prepare_save>
+                <observers>
+                    <soldtogether_observer>
+                        <class>knowledgebase/observer</class>
+                        <method>prepareProductKnowledgeBaseData</method>
+                    </soldtogether_observer>
+                </observers>
+            </catalog_product_prepare_save>
+        </events>
+    </adminhtml>
+
+    <global>
+        <models>
+            <knowledgebase>
+                <class>TM_KnowledgeBase_Model</class>
+                <resourceModel>knowledgebase_mysql4</resourceModel>
+            </knowledgebase>
+            <knowledgebase_mysql4>
+                <class>TM_KnowledgeBase_Model_Mysql4</class>
+                <entities>
+                    <faq>
+                        <table>tm_knowledgebase_faq</table>
+                    </faq>
+                    <category>
+                        <table>tm_knowledgebase_category</table>
+                    </category>
+                    <faq_category>
+                        <table>tm_knowledgebase_faq_category</table>
+                    </faq_category>
+                    <faq_store>
+                        <table>tm_knowledgebase_faq_store</table>
+                    </faq_store>
+                </entities>
+            </knowledgebase_mysql4>
+        </models>
+
+        <resources>
+            <!--  -->
+            <tm_knowledgebase_setup>
+                <setup>
+                    <module>TM_KnowledgeBase</module>
+                    <!-- -->
+                    <class>Mage_Eav_Model_Entity_Setup</class>
+                    <!-- -->
+                </setup>
+
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </tm_knowledgebase_setup>
+            <!-- -->
+            <tm_knowledgebase_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </tm_knowledgebase_write>
+            <tm_knowledgebase_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </tm_knowledgebase_read>
+        </resources>
+
+        <blocks>
+            <knowledgebase>
+                <class>TM_KnowledgeBase_Block</class>
+            </knowledgebase>
+        </blocks>
+
+        <helpers>
+            <knowledgebase>
+                <class>TM_KnowledgeBase_Helper</class>
+            </knowledgebase>
+        </helpers>
+
+        <events>
+            <knowledgebase_faq_delete_before>
+                <observers>
+                    <knowledgebase>
+                        <class>TM_KnowledgeBase_Model_Observer</class>
+                        <method>beforeFaqDelete</method>
+                    </knowledgebase>
+                </observers>
+            </knowledgebase_faq_delete_before>
+        </events>
+
+    </global>
+    <default>
+        <knowledgebase>
+            <general>
+                <enabled>1</enabled>
+            </general>
+        </knowledgebase>
+    </default>
+
+</config>

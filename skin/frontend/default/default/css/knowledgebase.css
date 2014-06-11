@@ -1,0 +1,295 @@
+/* knowledgebase */
+
+/*
+.ask-autocomplete-table {
+   position: relative;
+   width: auto !important;
+}
+
+.ask-autocomplete-table div {
+    position: relative !important;
+}
+#ask_autocomplete .ask-autocomplete-table {
+
+}*/
+
+#suport_autocomplete {
+    position: relative;
+    margin-bottom: 20px
+}
+#suport_autocomplete div{
+    position: relative !important;
+}
+
+
+#suport_autocomplete .autocomplete-w1{
+	background: none;
+}
+
+#suport_autocomplete div{
+    position: relative !important;
+}
+
+#suport_autocomplete .autocomplete-w1 {
+    z-index:999;
+    position:absolute;
+    top:7px;
+    left:6px;
+    /* IE6 fix: */ _background:none; _top:1px;
+    background:none;
+}
+#suport_autocomplete .autocomplete {
+    width:100%;
+    border: 0px;
+    cursor:default;
+    text-align:left;
+    max-height:350px;
+    overflow:auto;
+    margin:-6px 6px 6px -6px; /* IE specific: */
+    _height:350px;
+    _margin:0px 6px 6px 0;
+    overflow-x:hidden;
+}
+#suport_autocomplete .autocomplete .selected {
+    background:#F0F0F0;
+}
+#suport_autocomplete .autocomplete div {
+    padding:2px 5px;
+    clear:both;
+    overflow: hidden;
+    line-height:1.1em;
+    font-weight: bold;
+}
+#suport_autocomplete .autocomplete strong {
+    font-weight:bold;
+    color:#3399FF;
+}
+#suport_autocomplete .autocomplete .ajaxsearchimage {
+    float: left;
+    margin:2px 6px 2px 2px;
+}
+#suport_autocomplete .autocomplete .ajaxsearchdescription {
+    font-size: 11px;
+    font-weight:normal;
+}
+
+#suport_autocomplete .autocomplete-w2 .autocomplete div {
+    padding: 10px 0 0 30px;
+    background-image: url(../images/knowledgebase/clipboard2.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+.knowledge-suport-block .block-content {
+    padding: 10px;
+}
+
+
+#suport_autocomplete2 {
+    position: relative;
+}
+#suport_autocomplete2 .autocomplete-w1{
+	background: none;
+}
+#suport_autocomplete2 div{
+   position: relative !important;
+   border: 0px;
+}
+
+
+#suport_autocomplete2 .autocomplete-w1 {
+    z-index:999;
+    position:absolute;
+    top:7px;
+    left:6px;
+    /* IE6 fix: */ _background:none; _top:1px;
+}
+#suport_autocomplete2 .autocomplete {
+    width:300px;
+    cursor:default;
+    text-align:left;
+    max-height:350px;
+    overflow:auto;
+    margin:-6px 6px 6px -6px; /* IE specific: */
+    _height:350px;
+    _margin:0px 6px 6px 0;
+    overflow-x:hidden;
+}
+/*#suport_autocomplete2 .autocomplete .selected {
+    background:#F0F0F0;
+}*/
+#suport_autocomplete .autocomplete div {
+    padding:2px 5px;
+    clear:both;
+    overflow: hidden;
+    line-height:1.1em;
+    font-weight: bold;
+}
+#suport_autocomplete2 .autocomplete strong {
+    font-weight:bold;
+    color:#3399FF;
+}
+#suport_autocomplete2 .autocomplete .ajaxsearchimage {
+    float: left;
+    margin:2px 6px 2px 2px;
+}
+#suport_autocomplete2 .autocomplete .ajaxsearchdescription {
+    font-size: 11px;
+    font-weight:normal;
+}
+
+#suport_autocomplete2 .autocomplete-w2 .autocomplete div {
+    padding: 0px;
+    background-image: url(../images/knowledgebase/clipboard2.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+#suport_autocomplete2 .autocomplete-w2 .autocomplete div p{
+    padding: 10px 10px 10px 30px;
+}
+
+.knowledge-suport-block2 .block-content {
+    padding: 10px;
+}
+
+#form-ticket-colset .form-list li.wide select,
+#form-ticket-colset .form-list li.wide textarea,
+#form-ticket-colset .form-list li.wide .input-box,
+#form-ticket-colset .form-list li.wide input.input-text {
+    width: 355px;
+}
+#form-ticket-colset .form-list li.fields .input-box,
+#form-ticket-colset .form-list li.fields .input-box select {
+    width: 175px;
+}
+
+#form-ticket-colset .form-list .logged input.input-text {
+    width: 168px !important;
+}
+
+#form-ticket-colset .form-list li.fields .field {
+    float: left; width: 185px;
+}
+
+
+#form-ticket-colset .col-2{
+    padding-top: 28px;
+}
+#form-ticket-colset .autocomplete-w2 div {
+    width: 415px !important;
+}
+
+
+#ask_autocomplete .autocomplete-w1 {
+    z-index:999;
+    background-color: #ddd /*url(../images/knowledgebase/shadow.png) no-repeat bottom right;*/;
+    position:absolute;
+    top:7px;
+    left:6px;
+    /* IE6 fix: */ _background:none; _top:1px;
+}
+#ask_autocomplete .autocomplete {
+    width:300px;
+    border:1px solid #999;
+    cursor:default;
+    text-align:left;
+    max-height:350px;
+    overflow:auto;
+    margin:-6px 6px 6px -6px; /* IE specific: */
+    _height:350px;
+    _margin:0px 6px 6px 0;
+    overflow-x:hidden;
+}
+#ask_autocomplete .autocomplete .selected {
+    background:#F0F0F0;
+}
+#ask_autocomplete .autocomplete div {
+    padding:2px 5px;
+    clear:both;
+    overflow: hidden;
+    line-height:1.1em;
+    font-weight: bold;
+}
+#ask_autocomplete .autocomplete strong {
+    font-weight:bold;
+    color:#3399FF;
+}
+#ask_autocomplete .autocomplete .ajaxsearchimage {
+    float: left;
+    margin:2px 6px 2px 2px;
+}
+#ask_autocomplete .autocomplete .ajaxsearchdescription {
+    font-size: 0.8em;
+    font-weight:normal;
+}
+
+#ask_autocomplete .autocomplete-w2 .autocomplete div {
+    padding: 10px 0 0 30px;
+    background-image: url(../images/knowledgebase/clipboard2.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}
+
+
+#ask {
+    width: 575px;
+}
+.knowledge-block .block-title button.button span {
+    background:none repeat scroll 0 0 #618499;
+    border-color:#406A83;
+}
+
+.knowledge-block .block-content , .knowledgebase-block-sub-title{
+    padding: 10px;
+}
+.knowledgebase-block .block-content h4 {
+    margin-left: 10px;
+	font-weight: normal;
+}
+
+#knowledge-block-result .block-content .knowledge-article {
+    background-image:url("../images/knowledgebase/clipboard2.png");
+    background-position:left center;
+    background-repeat:no-repeat;
+    margin-top:3px;
+	line-height: 25px;
+    padding:0 0 0 30px;
+}
+
+.knowledge-block .block-content #knowledge-faq-rate-form{
+    margin-right:10px;
+    float: right;
+}
+
+.knowledge-block .block-title strong {
+    display: inline;
+}
+
+.knowledge-block .block-sub-title {
+    font-weight: bold;
+          margin-left: 10px;
+}
+
+.knowledge-block-author {
+}
+
+.knowledge-block-time {
+}
+
+.knowledge-articles-list {
+	padding: 0px 0px 10px 15px;
+}
+
+
+/*  Tabs */
+.knowledgebase-tabs {margin-bottom:15px;border-bottom:1px solid #618499;}
+.knowledgebase-tabs li { float:left;  font-size:1.1em; line-height:1em; }
+.knowledgebase-tabs li.first { border-left:0; }
+.knowledgebase-tabs li.last { border-right:0; }
+.knowledgebase-tabs a { display:block; padding:6px 15px; color:#444; text-decoration: none;}
+.knowledgebase-tabs a:hover { background-color:#ddd; text-decoration:none; color:#444; }
+.knowledgebase-tabs li.active a,
+.knowledgebase-tabs li.active a:hover { background-color:#618499; font-weight:bold; color:#fff; }
+.knowledgebase-tabs-content { padding: 10px}
+.knowledgebase-tabs-content h2 { display:none; font-size:12px; font-weight:bold; }

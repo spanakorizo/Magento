@@ -128,3 +128,25 @@ Xtento_EnhancedGrid
  + Added ability to hide disabled payment methods in "payment method" dropdown
  + Added ability to show store_view name as one-line store view (compared to three-line store name out of the box in Magento)
  * Fixed filter being set to "text" even though no filter was set by the extension adding the column
+
+===== 1.4.2 =====
+ + Added ability to show invoiced/shipped items on Invoice / Shipment grid
+ + Added ability to show order grand total on other sales grids
+ + Added ability to customize Magento Enterprise "Sales Archive" grid - same layout as on "Sales Order" grid is shown
+ * Fixed wrong row count being exported using the built-in export functionality of Magento
+ ! Confirmed compatibility with Magento CE 1.9.0.0 / EE 1.14.0.0
+
+===== 1.4.3 =====
+ + Added more fields to the Sales Invoice grid
+ * Improved grid saving, moved key to be the last parameter, could otherwise lead to POST being empty in some hosting environments
+
+===== 1.4.4 =====
+ + Added ability to hide certain stores on the Sales grids
+ * Fixed a bug that could lead to other grids being rewritten, that should not be rewritten (grids, that use grid IDs that Magento uses for the order/invoice/shipment/credit memo grid)
+
+===== 1.4.5 =====
+ + Added "Order Source (M2EPro)" column to show eBay/Amazon/etc. order source when using the M2EPro extension
+ * Enhanced compatibility with Magentos built-in export functionality
+
+===== 1.4.6 =====
+ + Added ability to add custom columns using custom joins, etc. - see: http://support.xtento.com/wiki/Magento_Extensions:Enhanced_Order_Grid#Adding_custom_columns

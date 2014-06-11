@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="helpmate/general/enabled">
+                <type>skin_css</type>
+                <name>css/helpmate.css</name>
+            </action>
+        </reference>
+    </default>
+
+    <helpmate_index_index translate="label">
+        <label>Ticket</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+        <reference name="content">
+            <block type="knowledgebase/ask" name="knowledgebase_ask_ajax" template="knowledgebase/ask_contact.phtml" />
+            <block type="helpmate/ticket_new" name="helpmate_ticket_new" template="helpmate/ticket/new_result.phtml"/>
+        </reference>
+    </helpmate_index_index>
+
+    <customer_account>
+        <reference name="customer_account_navigation">
+            <action method="addLink" translate="label" module="helpmate" ifconfig="helpmate/general/enabled">
+                <name>helpmate</name>
+                <path>helpmate/index/customer</path>
+                <label>My Tickets</label>
+            </action>
+        </reference>
+    </customer_account>
+
+    <helpmate_index_customer translate="label">
+        <label>Ticket</label>
+        <update handle="customer_account"/>
+        <reference name="my.account.wrapper">
+            <block type="helpmate/ticket_list" name="helpmate_ticket_list" template="helpmate/ticket/list.phtml"/>
+            <block type="helpmate/ticket_new"  name="helpmate_ticket_new"  template="helpmate/ticket/new.phtml"/>
+        </reference>
+    </helpmate_index_customer>
+
+    <helpmate_contacts_index translate="label">
+        <update handle="contacts_index_index"/>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+        </reference>
+    </helpmate_contacts_index>
+
+    <helpmate_contacts_add_ticket translate="label">
+        <reference name="content">
+            <action method="unsetChild">
+                <name>contactForm</name>
+            </action>
+            <block type="helpmate/ticket_new" name="helpmate_ticket_new" template="helpmate/ticket/new.phtml"/>
+        </reference>
+    </helpmate_contacts_add_ticket>
+
+<!--
+    <helpmate_contacts_ticket translate="label">
+
+    </helpmate_contacts_ticket>
+-->
+
+    <helpmate_index_view translate="label">
+        <label>Ticket</label>
+        <update handle="customer_account"/>
+         <!--
+        <reference name="my.account.wrapper">
+        <reference name="content">
+            <block type="helpmate/ticket_view" name="helpmate_ticket_view" template="helpmate/ticket.phtml"/>
+            <block type="helpmate/ticket_theard_new" name="helpmate_ticket_theard_new" template="helpmate/ticket/new_theard.phtml"/>
+
+            <block type="helpmate/ticket_new" name="helpmate_ticket_new" template="helpmate/ticket/new.phtml"/>
+            ->
+        </reference>
+        -->
+    </helpmate_index_view>
+
+    <helpmate_ticket_new_additional>
+        <reference name="helpmate_ticket_new">
+            <block type="core/text_list" name="form.additional.info"/>
+        </reference>
+    </helpmate_ticket_new_additional>
+
+    <helpmate_ticket_new_configfields>
+        <reference name="form.additional.info">
+            <block type="core/template" name="helpmate_ticket_view_additional_configfields" template="helpmate/ticket/new/configfields.phtml"/>
+        </reference>
+    </helpmate_ticket_new_configfields>
+
+    <helpmate_ticket_new_attached>
+        <reference name="form.additional.info">
+            <block type="core/template" name="helpmate_ticket_view_additional_attached" template="helpmate/ticket/new/attached.phtml"/>
+        </reference>
+    </helpmate_ticket_new_attached>
+
+    <helpmate_ticket_new_orders>
+        <reference name="form.additional.info">
+            <block type="helpmate/ticket_new_orders" name="helpmate_ticket_view_additional_orders" />
+        </reference>
+    </helpmate_ticket_new_orders>
+
+    <helpmate_formcaptcha>
+        <reference name="form.additional.info">
+            <block type="captcha/captcha" name="captcha">
+                <reference name="head">
+                    <action method="addJs"><file>mage/captcha.js</file></action>
+                </reference>
+                <action method="setFormId"><formId>helpmate_ticket_form</formId></action>
+                <action method="setImgWidth"><width>230</width></action>
+                <action method="setImgHeight"><width>50</width></action>
+                <action method="setModuleName"><name>TM_Helpmate</name></action>
+            </block>
+        </reference>
+    </helpmate_formcaptcha>
+
+    <helpmate_ticket_new_additional>
+        <update handle="helpmate_ticket_new_configfields"/>
+        <update handle="helpmate_ticket_new_attached"/>
+        <update handle="helpmate_ticket_new_orders"/>
+        <update handle="helpmate_formcaptcha"/>
+    </helpmate_ticket_new_additional>
+
+    <helpmate_index_index>
+        <update handle="helpmate_ticket_new_additional"/>
+    </helpmate_index_index>
+
+    <!-- not show Mage_Captcha_Model_Zend::_isUserAuth -->
+    <helpmate_index_customer>
+        <update handle="helpmate_ticket_new_additional"/>
+    </helpmate_index_customer>
+
+    <helpmate_contacts_add_ticket>
+        <update handle="helpmate_ticket_new_additional"/>
+    </helpmate_contacts_add_ticket>
+
+</layout>

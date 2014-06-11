@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-02-17T12:24:35+01:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-05-24T11:55:02+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/controllers/Adminhtml/Enhancedgrid/GridController.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -54,7 +54,7 @@ class Xtento_EnhancedGrid_Adminhtml_Enhancedgrid_GridController extends Mage_Adm
             $model->setData($data);
         } else {
             // Handle certain fields
-            $fields = array('role_ids', 'hidden_status');
+            $fields = array('role_ids', 'hidden_status', 'hidden_stores');
             foreach ($fields as $field) {
                 $value = $model->getData($field);
                 if (!is_array($value)) {
@@ -104,7 +104,7 @@ class Xtento_EnhancedGrid_Adminhtml_Enhancedgrid_GridController extends Mage_Adm
             }
 
             // Handle certain fields
-            $fields = array('role_ids', 'hidden_status');
+            $fields = array('role_ids', 'hidden_status', 'hidden_stores');
             foreach ($fields as $field) {
                 $value = $gridModel->getData($field);
                 $gridModel->setData($field, '');
@@ -321,7 +321,7 @@ class Xtento_EnhancedGrid_Adminhtml_Enhancedgrid_GridController extends Mage_Adm
 
     protected function _isAllowed()
     {
-        //return Mage::getSingleton('admin/session')->isAllowed('sales/enhancedgrid/customize');
+        #return Mage::getSingleton('admin/session')->isAllowed('sales/enhancedgrid/customize');
         return true;
     }
 }

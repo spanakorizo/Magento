@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-01-09T11:12:45+01:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-05-22T18:23:14+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/Block/Adminhtml/Grid/Edit.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -42,7 +42,11 @@ class Xtento_EnhancedGrid_Block_Adminhtml_Grid_Edit extends Mage_Adminhtml_Block
                         tabsIdValue = tabsIdValue.substr(tabsBlockPrefix.length)
                     }
                 }
-                editForm.submit($('edit_form').action+'continue/edit/active_tab/'+tabsIdValue);
+                if (!$('edit_form').action.match(/\/key\//)) {
+                    editForm.submit($('edit_form').action+'continue/edit/active_tab/'+tabsIdValue);
+                } else {
+                    editForm.submit($('edit_form').action.replace(/\/key\//, '/continue/edit/active_tab/'+tabsIdValue+'/key/')); // key must be last parameter
+                }
             }
             varienGlobalEvents.attachEventHandler('formSubmit', function(){
                 if (editForm && editForm.validator.validate()) {

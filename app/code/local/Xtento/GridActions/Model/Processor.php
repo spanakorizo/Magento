@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_GridActions (1.7.5)
+ * Product:       Xtento_GridActions (1.7.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:46+00:00
- * Last Modified: 2014-02-26T12:41:46+01:00
+ * Packaged:      2014-06-10T20:04:28+00:00
+ * Last Modified: 2014-05-12T12:07:12+02:00
  * File:          app/code/local/Xtento/GridActions/Model/Processor.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -70,6 +70,7 @@ class Xtento_GridActions_Model_Processor extends Mage_Core_Model_Abstract
         $doPrintDocuments = false;
         $doChangeStatus = false;
         $doForceEmail = false;
+        $doForceOrderEmail = false;
 
         if (!strstr($actionsToRun, '_setstatus')) {
             if (strstr($actionsToRun, '_invoice')) {
@@ -98,6 +99,9 @@ class Xtento_GridActions_Model_Processor extends Mage_Core_Model_Abstract
             if (strstr($actionsToRun, '_forcenotification')) {
                 $doForceEmail = true;
             }
+            if (strstr($actionsToRun, '_forceorderemail')) {
+                $doForceOrderEmail = true;
+            }
         } else if (strstr($actionsToRun, '_setstatus')) {
             $doChangeStatus = true;
             $newOrderStatus = str_replace('_setstatus_', '', $actionsToRun);
@@ -124,6 +128,11 @@ class Xtento_GridActions_Model_Processor extends Mage_Core_Model_Abstract
 
                 #Mage::app()->setCurrentStore($order->getStoreId());
                 #Mage::app()->getLocale()->emulate($order->getStoreId());
+
+                if ($doForceOrderEmail) {
+                    $order->sendNewOrderEmail();
+                    $isModified = true;
+                }
 
                 if ($doInvoice && !$doForceEmail && $order->canInvoice()) {
                     /** @var $invoice Mage_Sales_Model_Order_Invoice */

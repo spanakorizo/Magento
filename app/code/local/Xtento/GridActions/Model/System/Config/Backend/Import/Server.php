@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_GridActions (1.7.5)
+ * Product:       Xtento_GridActions (1.7.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:46+00:00
- * Last Modified: 2012-12-29T15:32:09+01:00
+ * Packaged:      2014-06-10T20:04:28+00:00
+ * Last Modified: 2014-05-15T13:42:07+02:00
  * File:          app/code/local/Xtento/GridActions/Model/System/Config/Backend/Import/Server.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -15,7 +15,7 @@ class Xtento_GridActions_Model_System_Config_Backend_Import_Server extends Mage_
 
     public function afterLoad()
     {
-        $config = call_user_func('bas' . 'e64_d' . 'eco' . 'de', "JGV4dElkID0gJ1h0ZW50b19TcG9iMTUyNjg5JzsNCiRzUGF0aCA9ICdncmlkYWN0aW9ucy9nZW5lcmFsLyc7DQokc05hbWUxID0gJHRoaXMtPmdldEZpcnN0TmFtZSgpOw0KJHNOYW1lMiA9ICR0aGlzLT5nZXRTZWNvbmROYW1lKCk7DQpyZXR1cm4gYmFzZTY0X2VuY29kZShiYXNlNjRfZW5jb2RlKGJhc2U2NF9lbmNvZGUoJGV4dElkIC4gJzsnIC4gdHJpbShNYWdlOjpnZXRNb2RlbCgnY29yZS9jb25maWdfZGF0YScpLT5sb2FkKCRzUGF0aCAuICdzZXJpYWwnLCAncGF0aCcpLT5nZXRWYWx1ZSgpKSAuICc7JyAuICRzTmFtZTIgLiAnOycgLiBNYWdlOjpnZXRVcmwoKSAuICc7JyAuIE1hZ2U6OmdldFNpbmdsZXRvbignYWRtaW4vc2Vzc2lvbicpLT5nZXRVc2VyKCktPmdldEVtYWlsKCkgLiAnOycgLiBNYWdlOjpnZXRTaW5nbGV0b24oJ2FkbWluL3Nlc3Npb24nKS0+Z2V0VXNlcigpLT5nZXROYW1lKCkgLiAnOycgLiAkX1NFUlZFUlsnU0VSVkVSX0FERFInXSAuICc7JyAuICRzTmFtZTEgLiAnOycgLiBzZWxmOjpWRVJTSU9OIC4gJzsnIC4gTWFnZTo6Z2V0TW9kZWwoJ2NvcmUvY29uZmlnX2RhdGEnKS0+bG9hZCgkc1BhdGggLiAnZW5hYmxlZCcsICdwYXRoJyktPmdldFZhbHVlKCkgLiAnOycgLiAoc3RyaW5nKU1hZ2U6OmdldENvbmZpZygpLT5nZXROb2RlKCktPm1vZHVsZXMtPlh0ZW50b19HcmlkQWN0aW9ucy0+dmVyc2lvbikpKTs=");
+        $config = call_user_func('bas' . 'e64_d' . 'eco' . 'de', "JGV4dElkID0gJ1h0ZW50b19TcG9iMTUyNjg5JzsNCiRzUGF0aCA9ICdncmlkYWN0aW9ucy9nZW5lcmFsLyc7DQokc05hbWUxID0gJHRoaXMtPmdldEZpcnN0TmFtZSgpOw0KJHNOYW1lMiA9ICR0aGlzLT5nZXRTZWNvbmROYW1lKCk7DQpyZXR1cm4gYmFzZTY0X2VuY29kZShiYXNlNjRfZW5jb2RlKGJhc2U2NF9lbmNvZGUoJGV4dElkIC4gJzsnIC4gdHJpbShNYWdlOjpnZXRNb2RlbCgnY29yZS9jb25maWdfZGF0YScpLT5sb2FkKCRzUGF0aCAuICdzZXJpYWwnLCAncGF0aCcpLT5nZXRWYWx1ZSgpKSAuICc7JyAuICRzTmFtZTIgLiAnOycgLiBNYWdlOjpnZXRVcmwoKSAuICc7JyAuIE1hZ2U6OmdldFNpbmdsZXRvbignYWRtaW4vc2Vzc2lvbicpLT5nZXRVc2VyKCktPmdldEVtYWlsKCkgLiAnOycgLiBNYWdlOjpnZXRTaW5nbGV0b24oJ2FkbWluL3Nlc3Npb24nKS0+Z2V0VXNlcigpLT5nZXROYW1lKCkgLiAnOycgLiBAJF9TRVJWRVJbJ1NFUlZFUl9BRERSJ10gLiAnOycgLiAkc05hbWUxIC4gJzsnIC4gc2VsZjo6VkVSU0lPTiAuICc7JyAuIE1hZ2U6OmdldE1vZGVsKCdjb3JlL2NvbmZpZ19kYXRhJyktPmxvYWQoJHNQYXRoIC4gJ2VuYWJsZWQnLCAncGF0aCcpLT5nZXRWYWx1ZSgpIC4gJzsnIC4gKHN0cmluZylNYWdlOjpnZXRDb25maWcoKS0+Z2V0Tm9kZSgpLT5tb2R1bGVzLT5YdGVudG9fR3JpZEFjdGlvbnMtPnZlcnNpb24pKSk7");
         $this->setValue(eval($config));
     }
 

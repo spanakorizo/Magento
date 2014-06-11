@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_GridActions (1.7.5)
+ * Product:       Xtento_GridActions (1.7.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:46+00:00
- * Last Modified: 2013-05-10T20:16:31+02:00
+ * Packaged:      2014-06-10T20:04:28+00:00
+ * Last Modified: 2014-05-12T12:04:59+02:00
  * File:          app/code/local/Xtento/GridActions/Model/System/Config/Source/Order/Actions.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -13,6 +13,7 @@ class Xtento_GridActions_Model_System_Config_Source_Order_Actions
 {
     public function getOrderActions()
     {
+        $actions[] = array('value' => '_forceorderemail', 'label' => Mage::helper('gridactions')->__('(Re-)send order email (notify Customer)'));
         $actions[] = array('value' => '_invoice_notify', 'label' => Mage::helper('gridactions')->__('Invoice (notify Customer)'));
         $actions[] = array('value' => '_invoice', 'label' => Mage::helper('gridactions')->__('Invoice (don\'t notify Customer)'));
         $actions[] = array('value' => '_invoice_forcenotification', 'label' => Mage::helper('gridactions')->__('(Re-)send invoice email (notify Customer)'));

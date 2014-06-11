@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-05-01T16:22:33+02:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-06-10T18:44:43+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/Model/Columns/Custom.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -595,6 +595,106 @@ class Xtento_EnhancedGrid_Model_Columns_Custom extends Mage_Core_Model_Abstract
                     'change_renderer' => false,
                     'change_filter' => false
                 ),
+                'purchased_items' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Invoiced Items'),
+                    'id' => 'purchased_items',
+                    'index' => 'purchased_items',
+                    'filter_index' => '`sales/order_item`.sku', // item_filter
+                    'change_filter' => false,
+                    'change_renderer' => false,
+                    'renderer' => 'Xtento_EnhancedGrid_Block_Widget_Grid_Column_Renderer_Items',
+                    'is_order_column' => false
+                ),
+                'base_shipping_amount' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Shipping Amount'),
+                    'id' => 'base_shipping_amount',
+                    'index' => 'base_shipping_amount',
+                    'filter_index' => 'invoice.base_shipping_amount',
+                    'join_left' => array(
+                        'name' => array('invoice' => Mage::getSingleton('core/resource')->getTableName('sales/invoice')),
+                        'cond' => 'main_table.entity_id = invoice.entity_id',
+                        'cols' => array('base_shipping_amount' => 'invoice.base_shipping_amount')
+                    ),
+                    'type' => 'number',
+                    'currency' => 'base_currency_code',
+                    'renderer' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency',
+                    'filter' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Filter_Range'
+                ),
+                'base_shipping_incl_tax' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Shipping (Incl. Tax)'),
+                    'id' => 'base_shipping_incl_tax',
+                    'index' => 'base_shipping_incl_tax',
+                    'filter_index' => 'invoice.base_shipping_incl_tax',
+                    'join_left' => array(
+                        'name' => array('invoice' => Mage::getSingleton('core/resource')->getTableName('sales/invoice')),
+                        'cond' => 'main_table.entity_id = invoice.entity_id',
+                        'cols' => array('base_shipping_incl_tax' => 'invoice.base_shipping_incl_tax')
+                    ),
+                    'type' => 'number',
+                    'currency' => 'base_currency_code',
+                    'renderer' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency',
+                    'filter' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Filter_Range'
+                ),
+                'base_subtotal' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Subtotal'),
+                    'id' => 'base_subtotal',
+                    'index' => 'base_subtotal',
+                    'filter_index' => 'invoice.base_subtotal',
+                    'join_left' => array(
+                        'name' => array('invoice' => Mage::getSingleton('core/resource')->getTableName('sales/invoice')),
+                        'cond' => 'main_table.entity_id = invoice.entity_id',
+                        'cols' => array('base_subtotal' => 'invoice.base_subtotal')
+                    ),
+                    'type' => 'number',
+                    'currency' => 'base_currency_code',
+                    'renderer' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency',
+                    'filter' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Filter_Range'
+                ),
+                'base_tax_amount' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Tax Amount'),
+                    'id' => 'base_tax_amount',
+                    'index' => 'base_tax_amount',
+                    'filter_index' => 'invoice.base_tax_amount',
+                    'join_left' => array(
+                        'name' => array('invoice' => Mage::getSingleton('core/resource')->getTableName('sales/invoice')),
+                        'cond' => 'main_table.entity_id = invoice.entity_id',
+                        'cols' => array('base_tax_amount' => 'invoice.base_tax_amount')
+                    ),
+                    'type' => 'number',
+                    'currency' => 'base_currency_code',
+                    'renderer' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency',
+                    'filter' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Filter_Range'
+                ),
+                'base_discount_amount' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Discount Amount'),
+                    'id' => 'base_discount_amount',
+                    'index' => 'base_discount_amount',
+                    'filter_index' => 'invoice.base_discount_amount',
+                    'join_left' => array(
+                        'name' => array('invoice' => Mage::getSingleton('core/resource')->getTableName('sales/invoice')),
+                        'cond' => 'main_table.entity_id = invoice.entity_id',
+                        'cols' => array('base_discount_amount' => 'invoice.base_discount_amount')
+                    ),
+                    'type' => 'number',
+                    'currency' => 'base_currency_code',
+                    'renderer' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency',
+                    'filter' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Filter_Range'
+                ),
+                'base_grand_total_excl' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Grand Total (Excl. Tax)'),
+                    'id' => 'base_grand_total_excl',
+                    'index' => 'base_grand_total_excl',
+                    'filter_index' => 'invoice.base_grand_total_excl',
+                    'join_left' => array(
+                        'name' => array('invoice' => Mage::getSingleton('core/resource')->getTableName('sales/invoice')),
+                        'cond' => 'main_table.entity_id = invoice.entity_id',
+                        'cols' => array('base_grand_total_excl' => '(invoice.base_grand_total - invoice.base_tax_amount)')
+                    ),
+                    'type' => 'number',
+                    'currency' => 'base_currency_code',
+                    'renderer' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency',
+                    'filter' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Filter_Range'
+                ),
             ),
             Xtento_EnhancedGrid_Model_Grid::GRID_SALES_SHIPMENT => array(
                 'tracking_numbers' => array(
@@ -621,6 +721,31 @@ class Xtento_EnhancedGrid_Model_Columns_Custom extends Mage_Core_Model_Abstract
                     'renderer' => 'Xtento_EnhancedGrid_Block_Widget_Grid_Column_Renderer_Trackingtable',
                     'filter' => 'Xtento_EnhancedGrid_Block_Widget_Grid_Column_Renderer_Trackingtable'
                 ),
+                'purchased_items' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Shipped Items'),
+                    'id' => 'purchased_items',
+                    'index' => 'purchased_items',
+                    'filter_index' => '`sales/order_item`.sku', // item_filter
+                    'change_filter' => false,
+                    'change_renderer' => false,
+                    'renderer' => 'Xtento_EnhancedGrid_Block_Widget_Grid_Column_Renderer_Items',
+                    'is_order_column' => false
+                ),
+                'base_grand_total' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Order Grand Total'),
+                    'id' => 'base_grand_total',
+                    'index' => 'base_grand_total',
+                    'filter_index' => 'order.base_grand_total',
+                    'join_left' => array(
+                        'name' => array('order' => Mage::getSingleton('core/resource')->getTableName('sales/order')),
+                        'cond' => 'main_table.order_id = order.entity_id',
+                        'cols' => array('base_grand_total' => 'order.base_grand_total')
+                    ),
+                    'type' => 'number',
+                    'currency' => 'base_currency_code',
+                    'renderer' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Renderer_Currency',
+                    'filter' => 'Mage_Adminhtml_Block_Widget_Grid_Column_Filter_Range'
+                ),
             ),
             Xtento_EnhancedGrid_Model_Grid::GRID_SALES_CREDITMEMO => array(),
         );
@@ -641,6 +766,25 @@ class Xtento_EnhancedGrid_Model_Columns_Custom extends Mage_Core_Model_Abstract
                 'type' => 'text',
                 'change_filter' => false,
                 'change_renderer' => false,
+            );
+        }
+        // M2EPro
+        if (Mage::helper('xtcore/utils')->isExtensionInstalled('Ess_M2ePro')) {
+            $customColumns[Xtento_EnhancedGrid_Model_Grid::GRID_SALES_ORDER]['order_source'] = array(
+                'header' => Mage::helper('xtento_enhancedgrid')->__('Order Source (M2EPro)'),
+                'id' => 'order_source',
+                'index' => 'order_source',
+                'filter' => false,
+                'sortable' => false,
+                'align' => 'center',
+                'join_left' => array(
+                    'name' => array('payment' => Mage::getSingleton('core/resource')->getTableName('sales/order_payment')),
+                    'cond' => 'main_table.entity_id = payment.parent_id',
+                    'cols' => array('payment_method2' => 'payment.method')
+                ),
+                'change_filter' => false,
+                'change_renderer' => false,
+                'renderer' => 'Xtento_EnhancedGrid_Block_Widget_Grid_Column_Renderer_OrderSource'
             );
         }
         // Aitoc Delivery Date
@@ -673,6 +817,14 @@ class Xtento_EnhancedGrid_Model_Columns_Custom extends Mage_Core_Model_Abstract
                 'change_filter' => false,
                 'change_renderer' => false,
             );
+        }
+
+        // Get customer custom columns, if available
+        if (@Mage::getModel('xtento_enhancedgrid/columns_customer_columns')) {
+            $customerColumns = Mage::getModel('xtento_enhancedgrid/columns_customer_columns')->getCustomColumns();
+            if (!empty($customerColumns)) {
+                $customColumns = array_merge_recursive($customColumns, $customerColumns);
+            }
         }
 
         // Apply default values

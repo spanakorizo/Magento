@@ -1,0 +1,17 @@
+.helpmate-theard{
+    border:1px solid #d3d3d3;
+    margin-bottom: 5px;
+    padding: 5px;
+    background: url(../images/bkg_block-title.gif) repeat-x;
+    border-radius: 5px;
+}
+.helpmate-theard-header {
+    border-bottom: 1px solid #d3d3d3;
+}
+.helpmate-theard-content {
+
+}
+
+.helpmate-theard-content small {
+    font-style: italic;
+}

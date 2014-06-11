@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <!-- -->
+    <knowledgebase_admin_adminhtml_faq_index>
+        <reference name="content">
+            <!-- -->
+            <block type="knowledgebase/adminhtml_faq" name="faq" />
+            <!-- -->
+        </reference>
+    </knowledgebase_admin_adminhtml_faq_index>
+    <!-- -->
+
+    <knowledgebase_admin_adminhtml_category_index>
+        <reference name="content">
+            <!-- -->
+            <block type="knowledgebase/adminhtml_category" name="category" />
+            <!-- -->
+        </reference>
+    </knowledgebase_admin_adminhtml_category_index>
+
+    <adminhtml_catalog_product_edit>
+        <reference name="product_tabs">
+            <block type="knowledgebase/adminhtml_product_additional" name="product_kb_grid" />
+        </reference>
+    </adminhtml_catalog_product_edit>
+
+    <knowledgebase_admin_adminhtml_faq_product>
+        <block type="core/text_list" name="root">
+            <block type="knowledgebase/adminhtml_product_grid" name="knowledgebase.adminhtml.product.grid" />
+            <block type="adminhtml/widget_grid_serializer" name="knowledgebase_grid_serializer">
+                <reference name="knowledgebase_grid_serializer">
+                    <action method="initSerializerBlock">
+                        <grid_block_name>knowledgebase.adminhtml.product.grid</grid_block_name>
+                        <data_callback>getSelectedUsedFaq</data_callback>
+                        <hidden_input_name>knowledgebase_faq</hidden_input_name>
+                        <reload_param_name>knowledgebase_faq</reload_param_name>
+                    </action>
+                </reference>
+            </block>
+        </block>
+    </knowledgebase_admin_adminhtml_faq_product>
+
+</layout>

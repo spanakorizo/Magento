@@ -1,0 +1,43 @@
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<div class="page-title">
+    <h1><?php echo $this->__('My Tickets') ?></h1>
+</div>
+<div class="block">
+<?php if( $this->getCollection() && $this->count()): ?>
+    <?php echo $this->getToolbarHtml() ?>
+        <table class="data-table" id="my-tickets-table">
+            <thead>
+                <tr>
+                    <th><?php echo $this->__('Title') ?></th>
+                    <th><?php echo $this->__('Department') ?></th>
+                    <?php if(Mage::getStoreConfig("helpmate/general/usePriorityOnFrontend")) :?>
+                    <th><?php echo $this->__('Priority') ?></th>
+                    <?php endif;?>
+                    <th><?php echo $this->__('Status') ?></th>
+                    <th><?php echo $this->__('Created At') ?></th>
+                    <th><?php echo $this->__('Details') ?></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($this->getCollection() as $_ticket): ?>
+                <tr>
+                    <td><?php echo $_ticket->getTitle()?></td>
+                    <td><?php echo $_ticket->getDepartmentName()?></td>
+                    <?php if(Mage::getStoreConfig("helpmate/general/usePriorityOnFrontend")) :?>
+                    <td><?php echo $_ticket->getPriority()?></td>
+                    <?php endif;?>
+                    <td><?php echo $_ticket->getStatus()?></td>
+                    <td><?php echo $this->dateFormat($_ticket->getCreatedAt()) ?></td>
+                    <td><a href="<?php echo $this->getUrl(
+                        'helpmate/index/view', array('ticket' => $_ticket->getNumber()))
+                    ?>"><?php echo $this->__('View Ticket') ?></a>&nbsp;</td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+        <script type="text/javascript">decorateTable('my-tickets-table')</script>
+    <?php echo $this->getToolbarHtml() ?>
+<?php else: ?>
+    <p><?php echo $this->__('You have submitted no tickets.') ?></p>
+<?php endif; ?>
+</div>

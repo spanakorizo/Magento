@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-01-12T13:40:39+01:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-05-24T12:28:02+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/Helper/Data.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -25,27 +25,61 @@ class Xtento_EnhancedGrid_Helper_Data extends Mage_Core_Helper_Abstract
         return true;
     }
 
-    public function getGridBlockType($block) {
+    public function getGridBlockType($block)
+    {
+        $request = Mage::app()->getRequest();
         $gridType = false;
-        if ($block->getId() == 'sales_order_grid' && $block instanceof Mage_Adminhtml_Block_Widget_Grid) {
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_ORDER
+            && $block->getId() == 'sales_order_grid' && $block instanceof Mage_Adminhtml_Block_Widget_Grid
+        ) {
             $gridType = Xtento_EnhancedGrid_Model_Grid::GRID_SALES_ORDER;
         }
-        if ($block->getId() == 'sales_invoice_grid' && $block instanceof Mage_Adminhtml_Block_Widget_Grid) {
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_ORDER
+            && $block->getId() == 'sales_order_grid_archive' && $block instanceof Mage_Adminhtml_Block_Widget_Grid
+        ) {
+            // Enterprise Sales Order Archive
+            $gridType = Xtento_EnhancedGrid_Model_Grid::GRID_SALES_ORDER;
+        }
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_INVOICE
+            && $block->getId() == 'sales_invoice_grid' && $block instanceof Mage_Adminhtml_Block_Widget_Grid
+        ) {
             $gridType = Xtento_EnhancedGrid_Model_Grid::GRID_SALES_INVOICE;
         }
-        if ($block->getId() == 'sales_shipment_grid' && $block instanceof Mage_Adminhtml_Block_Widget_Grid) {
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_SHIPMENT
+            && $block->getId() == 'sales_shipment_grid' && $block instanceof Mage_Adminhtml_Block_Widget_Grid
+        ) {
             $gridType = Xtento_EnhancedGrid_Model_Grid::GRID_SALES_SHIPMENT;
         }
-        if ($block->getId() == 'sales_creditmemo_grid' && $block instanceof Mage_Adminhtml_Block_Widget_Grid) {
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_CREDITMEMO
+            && $block->getId() == 'sales_creditmemo_grid' && $block instanceof Mage_Adminhtml_Block_Widget_Grid
+        ) {
             $gridType = Xtento_EnhancedGrid_Model_Grid::GRID_SALES_CREDITMEMO;
         }
         return $gridType;
     }
 
+    public function getController($request)
+    {
+        if (in_array($request->getControllerName(), array('order', 'sales_order', 'admin_sales_order', 'adminhtml_sales_order', 'orderspro_order', 'sales_archive'))) {
+            return Xtento_EnhancedGrid_Model_Grid::GRID_SALES_ORDER;
+        }
+        if (in_array($request->getControllerName(), array('invoice', 'sales_invoice', 'adminhtml_sales_invoice'))) {
+            return Xtento_EnhancedGrid_Model_Grid::GRID_SALES_INVOICE;
+        }
+        if (in_array($request->getControllerName(), array('shipment', 'sales_shipment', 'adminhtml_sales_shipment'))) {
+            return Xtento_EnhancedGrid_Model_Grid::GRID_SALES_SHIPMENT;
+        }
+        if (in_array($request->getControllerName(), array('creditmemo', 'sales_creditmemo', 'adminhtml_sales_creditmemo'))) {
+            return Xtento_EnhancedGrid_Model_Grid::GRID_SALES_CREDITMEMO;
+        }
+        return false;
+    }
+
     /*
      * Is the current request a CSV/Excel XML export using the built-in functionality of Magento?
      */
-    public function isMageExport() {
+    public function isMageExport()
+    {
         return (stristr(Mage::app()->getRequest()->getControllerName(), 'sales_') && (Mage::app()->getRequest()->getActionName() == 'exportCsv' || Mage::app()->getRequest()->getActionName() == 'exportExcel'));
     }
 }

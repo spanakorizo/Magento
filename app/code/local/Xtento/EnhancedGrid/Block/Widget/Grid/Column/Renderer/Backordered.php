@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-03-20T12:18:03+01:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-05-12T23:33:50+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/Block/Widget/Grid/Column/Renderer/Backordered.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */

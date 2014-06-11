@@ -1,9 +1,9 @@
 <?php
 
 /**
- * Product:       Xtento_GridActions (1.7.5)
+ * Product:       Xtento_GridActions (1.7.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:46+00:00
+ * Packaged:      2014-06-10T20:04:28+00:00
  * Last Modified: 2012-02-13T20:51:34+01:00
  * File:          app/code/local/Xtento/GridActions/Model/System/Config/Source/Payment/Methods.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.

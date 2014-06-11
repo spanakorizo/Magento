@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-02-17T12:56:13+01:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-05-24T11:54:02+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/Block/Adminhtml/Grid/Edit/Tab/General.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -70,10 +70,10 @@ class Xtento_EnhancedGrid_Block_Adminhtml_Grid_Edit_Tab_General extends Mage_Adm
                 $type->setDisabled(true);
             }
 
+            $fieldset = $form->addFieldset('grid_fieldset', array(
+                'legend' => Mage::helper('xtento_enhancedgrid')->__('Grid Configuration'),
+            ));
             if ($model->getType() === Xtento_EnhancedGrid_Model_Grid::GRID_SALES_ORDER) {
-                $fieldset = $form->addFieldset('grid_fieldset', array(
-                    'legend' => Mage::helper('xtento_enhancedgrid')->__('Grid Configuration'),
-                ));
                 $fieldset->addField('hidden_status', 'multiselect', array(
                     'label' => Mage::helper('xtento_enhancedgrid')->__('Hidden Order Statuses'),
                     'name' => 'hidden_status',
@@ -81,6 +81,12 @@ class Xtento_EnhancedGrid_Block_Adminhtml_Grid_Edit_Tab_General extends Mage_Adm
                     'note' => $this->__('Selected order statuses will be hidden by default on the Sales > Orders grid for selected admin roles.')
                 ));
             }
+            $fieldset->addField('hidden_stores', 'multiselect', array(
+                'label' => Mage::helper('xtento_enhancedgrid')->__('Hidden Stores'),
+                'name' => 'hidden_stores',
+                'values' => array_merge_recursive(array(array('value' => '', 'label' => Mage::helper('xtento_enhancedgrid')->__('--- No hidden stores ---'))), Mage::getSingleton('adminhtml/system_store')->getStoreValuesForForm()),
+                'note' => $this->__('Selected stores will be hidden by default on the Sales > Orders grid for selected admin roles.')
+            ));
         }
 
         $form->setValues($model->getData());
@@ -93,10 +99,10 @@ class Xtento_EnhancedGrid_Block_Adminhtml_Grid_Edit_Tab_General extends Mage_Adm
         $this->setChild('continue_button',
             $this->getLayout()->createBlock('adminhtml/widget_button')
                 ->setData(array(
-                    'label' => Mage::helper('catalog')->__('Continue'),
-                    'onclick' => "saveAndContinueEdit()",
-                    'class' => 'save'
-                ))
+                'label' => Mage::helper('catalog')->__('Continue'),
+                'onclick' => "saveAndContinueEdit()",
+                'class' => 'save'
+            ))
         );
         return parent::_prepareLayout();
     }

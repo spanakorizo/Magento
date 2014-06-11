@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <TM_Helpmate>
+            <version>1.4.0</version>
+        </TM_Helpmate>
+    </modules>
+    <admin>
+	<routers>
+	    <helpmate_admin>
+                <use>admin</use>
+                <args>
+                    <module>TM_Helpmate</module>
+                    <frontName>helpmate_admin</frontName>
+                </args>
+	    </helpmate_admin>
+        </routers>
+    </admin>
+
+    <frontend>
+        <routers>
+            <helpmate>
+                <use>standard</use>
+                <args>
+                    <module>TM_Helpmate</module>
+                    <frontName>helpdesk</frontName>
+                </args>
+            </helpmate>
+
+            <contacts>
+                <args>
+                    <modules>
+                         <TM_Helpmate before="Mage_Contacts">TM_Helpmate_Contacts</TM_Helpmate>
+                    </modules>
+                </args>
+            </contacts>
+        </routers>
+
+        <layout>
+            <updates>
+                <helpmate>
+                    <file>tm/helpmate.xml</file>
+                </helpmate>
+            </updates>
+        </layout>
+
+        <translate>
+            <modules>
+                <TM_Helpmate>
+                    <files>
+                        <default>TM_Helpmate.csv</default>
+                    </files>
+                </TM_Helpmate>
+            </modules>
+        </translate>
+
+    </frontend>
+
+    <adminhtml>
+
+        <layout>
+            <updates>
+                <helpmate>
+                    <file>tm/helpmate.xml</file>
+                </helpmate>
+            </updates>
+        </layout>
+
+        <!-- -->
+        <translate>
+            <modules>
+                <TM_Helpmate>
+                    <files>
+                        <default>TM_Helpmate.csv</default>
+                    </files>
+                </TM_Helpmate>
+            </modules>
+        </translate>
+        <!-- -->
+    </adminhtml>
+
+    <global>
+        <models>
+            <helpmate>
+                <class>TM_Helpmate_Model</class>
+                <resourceModel>helpmate_mysql4</resourceModel>
+            </helpmate>
+            <helpmate_mysql4>
+                <class>TM_Helpmate_Model_Mysql4</class>
+                <entities>
+                    <ticket>
+                        <table>tm_helpmate_ticket</table>
+                    </ticket>
+                    <theard>
+                        <table>tm_helpmate_theard</table>
+                    </theard>
+                    <department>
+                        <table>tm_helpmate_department</table>
+                    </department>
+                    <gateway>
+                        <table>tm_helpmate_gateway</table>
+                    </gateway>
+                    <department_user>
+                        <table>tm_helpmate_department_user</table>
+                    </department_user>
+                </entities>
+            </helpmate_mysql4>
+
+            <core>
+                <rewrite>
+                    <email_template>TM_Helpmate_Model_Mail_Template</email_template>
+                </rewrite>
+            </core>
+
+        </models>
+
+        <resources>
+            <!--  -->
+            <tm_helpmate_setup>
+                <setup>
+                    <module>TM_Helpmate</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </tm_helpmate_setup>
+            <!-- -->
+            <tm_helpmate_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </tm_helpmate_write>
+            <tm_helpmate_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </tm_helpmate_read>
+        </resources>
+
+        <blocks>
+            <helpmate>
+                <class>TM_Helpmate_Block</class>
+            </helpmate>
+        </blocks>
+
+        <helpers>
+            <helpmate>
+                <class>TM_Helpmate_Helper</class>
+            </helpmate>
+        </helpers>
+
+        <template>
+            <email>
+                <helpmate_email_ticket_notification translate="label" module="helpmate">
+                    <label>Helpmate Notify Customer Ticket Creation Template</label>
+                    <file>tm/helpmate/notify_customer_ticket_create.html</file>
+                    <type>html</type>
+                </helpmate_email_ticket_notification>
+
+                <helpmate_email_theard_notification translate="label" module="helpmate">
+                    <label>Helpmate Notification Admin Ticket Change</label>
+                    <file>tm/helpmate/notify_admin_ticket_change.html</file>
+                    <type>html</type>
+                </helpmate_email_theard_notification>
+
+                <helpmate_email_ticket_answer translate="label" module="helpmate">
+                    <label>Helpmate Ticket Answer</label>
+                    <file>tm/helpmate/send_ticket_answer.html</file>
+                    <type>html</type>
+                </helpmate_email_ticket_answer>
+
+                <helpmate_email_ticket_autoclose translate="label" module="helpmate">
+                    <label>Helpmate Ticket Autoclose</label>
+                    <file>tm/helpmate/send_ticket_autoclose.html</file>
+                    <type>html</type>
+                </helpmate_email_ticket_autoclose>
+
+                <helpmate_email_ticket_assigned translate="label" module="helpmate">
+                    <label>Helpmate Ticket Assigned to User</label>
+                    <file>tm/helpmate/send_ticket_assigned.html</file>
+                    <type>html</type>
+                </helpmate_email_ticket_assigned>
+            </email>
+        </template>
+
+        <events>
+            <helpmate_notify_customer_ticket_create>
+                <observers>
+                    <helpmate>
+                        <class>TM_Helpmate_Model_Observer</class>
+                        <method>notifyCustomerTicketCreate</method>
+                    </helpmate>
+                </observers>
+            </helpmate_notify_customer_ticket_create>
+
+            <helpmate_notify_admin_ticket_change>
+                <observers>
+                    <helpmate>
+                        <class>TM_Helpmate_Model_Observer</class>
+                        <method>notifyAdminTicketChange</method>
+                    </helpmate>
+                </observers>
+            </helpmate_notify_admin_ticket_change>
+
+            <helpmate_send_ticket_answer>
+                <observers>
+                    <helpmate>
+                        <class>TM_Helpmate_Model_Observer</class>
+                        <method>sendTicketAnswer</method>
+                    </helpmate>
+                </observers>
+            </helpmate_send_ticket_answer>
+
+            <helpmate_ticket_user_changed>
+                <observers>
+                    <helpmate>
+                        <class>TM_Helpmate_Model_Observer</class>
+                        <method>ticketUserChange</method>
+                    </helpmate>
+                </observers>
+            </helpmate_ticket_user_changed>
+
+            <adminhtml_widget_container_html_before>
+                <observers>
+                    <helpmate>
+                        <class>TM_Helpmate_Model_Observer</class>
+                        <method>addCreateTicketButton</method>
+                    </helpmate>
+                </observers>
+            </adminhtml_widget_container_html_before>
+
+           <controller_action_predispatch_helpmate_index_save>
+                <observers>
+                    <captcha>
+                        <class>TM_Helpmate_Model_Observer</class>
+                        <method>checkCaptchaOnTicketSave</method>
+                    </captcha>
+                </observers>
+            </controller_action_predispatch_helpmate_index_save>
+
+        </events>
+
+    </global>
+    <default>
+        <helpmate>
+            <general>
+                <enabled>0</enabled>
+                <enabledAttached>1</enabledAttached>
+                <attachedAllowedExtensions>txt</attachedAllowedExtensions>
+                <autoCloseTicketAfterXDay>5</autoCloseTicketAfterXDay>
+                <enabledOrder>0</enabledOrder>
+                <enableAkismet>0</enableAkismet>
+            </general>
+            <ticketForm>
+                <noOverrideContactUsForm>0</noOverrideContactUsForm>
+                <usePriorityOnFrontend>1</usePriorityOnFrontend>
+                <field0>Phone</field0>
+                <field1></field1>
+                <field2></field2>
+                <wysiwyg>1</wysiwyg>
+                <secure>0</secure>
+                <faqcategory></faqcategory>
+            </ticketForm>
+            <email>
+                <enableCustomerNotification>0</enableCustomerNotification>
+                <enableAdminNotification>0</enableAdminNotification>
+
+                <ticket_notification>helpmate_email_ticket_notification</ticket_notification>
+                <theard_notification>helpmate_email_theard_notification</theard_notification>
+                <ticket_answer>helpmate_email_ticket_answer</ticket_answer>
+                <ticket_autoclose>helpmate_email_ticket_autoclose</ticket_autoclose>
+                <ticket_assigned>helpmate_email_ticket_assigned</ticket_assigned>
+            </email>
+            <!--
+            -->
+        </helpmate>
+
+        <customer>
+            <captcha>
+                <always_for>
+                    <helpmate_ticket_form>1</helpmate_ticket_form>
+                </always_for>
+            </captcha>
+        </customer>
+
+        <captcha>
+            <frontend>
+                <areas>
+                    <helpmate_ticket_form>
+                        <label>Helpmate Ticket Create</label>
+                    </helpmate_ticket_form>
+                </areas>
+            </frontend>
+        </captcha>
+    </default>
+
+    <crontab>
+        <jobs>
+            <tm_helpmate_mail>
+                <schedule>
+                    <cron_expr>*/5 * * * *</cron_expr> <!-- */5 * * * * -->
+                </schedule>
+                <run>
+                    <model>helpmate/observer::sheduledAddEmailedTicket</model>
+                </run>
+            </tm_helpmate_mail>
+
+            <tm_helpmate_auto_close>
+                <schedule>
+                    <cron_expr>0 0 * * *</cron_expr> <!-- Daily at midnight  -->
+                </schedule>
+                <run>
+                    <model>helpmate/observer::autoCloseTicketAfterXDay</model>
+                </run>
+            </tm_helpmate_auto_close>
+        </jobs>
+    </crontab>
+</config>

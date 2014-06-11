@@ -1,0 +1,111 @@
+<div class="block knowledge-block">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Describe the problem you are having');?></span></strong>
+    </div>
+    <div class="block-content">
+        <div class="form-ask">
+            <input type="text" class="input-text" value="<?php echo $this->getQuery();?>" name="q" id="ask" autocomplete="off">
+            <span class="f-left" id="askajaxico" style="display:none;">
+                <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="<?php echo $this->__('Loading ...') ?>" title="<?php echo $this->__('Loading ...') ?>" class="v-middle" /> <?php echo $this->__('Loading ...') ?>
+            </span>
+            <div id="ask_description" >
+                <p><?php echo $this->__('For instant answers, type in your question above!');?></p>
+                <p><?php echo $this->__('Example: What payment methods can I use?');?></p>
+                <p><?php echo $this->__('For best results:');?></p>
+                <p><?php echo $this->__('1. Type in a full question.');?></p>
+                <p><?php echo $this->__('2. Didn’t find what you are looking for? Try asking your question differently.');?></p>
+                <p><?php echo $this->__('3. Still can\'t find your answer? Click “Submit ticket” submit your question to our support.');?></p>
+            </div>
+        </div>
+        <div class="form-ask">
+            <div class="search-autocomplete" id="suport_autocomplete"></div>
+            <button class="button" style="display: none" title="<?php echo $this->__('No, thanks Add New Ticket') ?>" onclick="showTicketForm()">
+                <span><span><?php echo $this->__('No, thanks Add New Ticket') ?></span></span>
+            </button>
+            <script type="text/javascript">
+                function showTicketForm(){
+                    $('suport_autocomplete2').update(
+                        $('suport_autocomplete').innerHTML
+                    );
+
+                    $$('.knowledge-block .button').first().hide();
+                    $('suport_autocomplete').hide();
+
+                    $('title').value = $('ask').value;
+                    $('form-ticket-colset').show();
+                    $$('.knowledge-suport-block').invoke('show');
+
+                    return false;
+                }
+
+                function showResults(){
+                    $('form-ticket-colset').hide();
+                    $$('.knowledge-suport-block').invoke('hide');
+                    $('ask_description').hide();
+
+                    $$('.knowledge-block .button').first().show();
+                    $('suport_autocomplete').show();
+                }
+
+                function initAutocomplete(){
+                    $$('.knowledge-suport-block').invoke('hide');
+                    $('form-ticket-colset').hide();
+
+                    Autocomplete.prototype.isBadQuery = function(q) {
+
+                        var i = this.badQueries.length;
+                        while (i--) {
+                            if (this.badQueries[i] === q) {
+                                console.log(1);
+                                return true;
+                            }
+                        }
+                        if ('ask' === this.el.id) {
+                            showResults();
+                        }
+                        return false;
+                    };
+                    Autocomplete.prototype.enableKillerFn = function() {
+                        if (true == this.options.disableKiller) {
+                            return;
+                        }
+                        Event.observe(document.body, 'click', this.killerFn);
+                    };
+
+                    Autocomplete.prototype.disableKillerFn = function() {
+                        if (true == this.options.disableKiller) {
+                            return;
+                        }
+                        Event.stopObserving(document.body, 'click', this.killerFn);
+                    };
+
+                    new Autocomplete('ask', {
+                        serviceUrl        : '<?php echo $this->getAjaxAction() ?>',
+                        store             : '<?php echo Mage::app()->getStore()->getStoreId(); ?>',
+
+                        container         : 'suport_autocomplete',
+                        enableimage       : '0',
+                        enableloader      : '1',
+                        enabledescription : '1',
+                        descriptionchars  : '150',
+                        minChars          : '5',
+                        maxHeight         : '600',
+                        width             : '100%',
+                        searchtext        : '',
+
+                        baseUrl           : '<?php echo Mage::getBaseUrl(); ?>',
+                        secureUrl         : '<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true); ?>',
+                        onSelect          : onAutocompleteSubmit,
+                        disableKiller     : true
+                    });
+
+                }
+                if (Prototype.Browser.IE) {
+                    Event.observe(window, 'load', initAutocomplete);
+                } else {
+                    document.observe("dom:loaded", initAutocomplete);
+                }
+            </script>
+         </div>
+    </div>
+</div>

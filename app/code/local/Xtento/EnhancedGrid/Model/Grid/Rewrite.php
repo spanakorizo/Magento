@@ -1,10 +1,10 @@
 <?php
 
 /**
- * Product:       Xtento_EnhancedGrid (1.4.1)
+ * Product:       Xtento_EnhancedGrid (1.4.6)
  * ID:            N/W+h1YQ5V9LjSr4Chjc6LFc95fJOqSQtLq5zrXLDNA=
- * Packaged:      2014-05-02T21:30:40+00:00
- * Last Modified: 2014-04-22T13:20:52+02:00
+ * Packaged:      2014-06-10T20:04:35+00:00
+ * Last Modified: 2014-06-05T21:23:06+02:00
  * File:          app/code/local/Xtento/EnhancedGrid/Model/Grid/Rewrite.php
  * Copyright:     Copyright (c) 2014 XTENTO GmbH & Co. KG <info@xtento.com> / All rights reserved.
  */
@@ -26,22 +26,31 @@ class Xtento_EnhancedGrid_Model_Grid_Rewrite extends Mage_Core_Model_Abstract
 
         // Handle each grid separately
         // Sales > Orders
-        if (in_array($request->getControllerName(), array('order', 'sales_order', 'admin_sales_order', 'adminhtml_sales_order', 'orderspro_order'))) {
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_ORDER) {
             $blockName = 'sales_order_grid';
             $collectionName = 'order_grid_collection';
+            if (in_array($request->getControllerName(), array('sales_archive'))) {
+                // Sales > Orders Archive (EE only)
+                $blockName = 'adminhtml_sales_archive_order_grid';
+                $collectionName = 'order_collection';
+                $newModelClass = 'Xtento_EnhancedGrid_Model_Sales_Enterprise_Salesarchive_Order_Collection';
+                $newClass = 'Xtento_EnhancedGrid_Block_Rewrite_Sales_Enterprise_Sales_Archive_Order_Grid';
+                $module = 'enterprise_salesarchive';
+                $collectionModule = 'enterprise_salesarchive_resource';
+            }
         }
         // Sales > Invoices
-        if (in_array($request->getControllerName(), array('invoice', 'sales_invoice', 'adminhtml_sales_invoice'))) {
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_INVOICE) {
             $blockName = 'sales_invoice_grid';
             $collectionName = 'order_invoice_grid_collection';
         }
         // Sales > Shipments
-        if (in_array($request->getControllerName(), array('shipment', 'sales_shipment', 'adminhtml_sales_shipment'))) {
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_SHIPMENT) {
             $blockName = 'sales_shipment_grid';
             $collectionName = 'order_shipment_grid_collection';
         }
         // Sales > Credit Memos
-        if (in_array($request->getControllerName(), array('creditmemo', 'sales_creditmemo', 'adminhtml_sales_creditmemo'))) {
+        if (Mage::helper('xtento_enhancedgrid')->getController($request) == Xtento_EnhancedGrid_Model_Grid::GRID_SALES_CREDITMEMO) {
             $blockName = 'sales_creditmemo_grid';
             $collectionName = 'order_creditmemo_grid_collection';
         }
@@ -105,6 +114,10 @@ class Xtento_EnhancedGrid_Model_Grid_Rewrite extends Mage_Core_Model_Abstract
 
             $this->_registerNewClass($collectionModule, $collectionName, $newModelClass, $classCode, 'model');
             $this->_rewriteClass($collectionModule, $collectionName, $newModelClass, 'model');
+            #if (strstr($collectionModule, '_mysql4')) {
+            #    $this->_registerNewClass(str_replace("_mysql4", "_resource", $collectionModule), $collectionName, $newModelClass, $classCode, 'model');
+            #    $this->_rewriteClass(str_replace("_mysql4", "_resource", $collectionModule), $collectionName, $newModelClass, 'model');
+            #}
         }
 
         // Rewrite block
@@ -190,6 +203,7 @@ class Xtento_EnhancedGrid_Model_Grid_Rewrite extends Mage_Core_Model_Abstract
 
                 public function xtPrepareCollection()
                 {
+                    $this->_isExport = Mage::helper("xtento_enhancedgrid")->isMageExport(); // Fix for modules rewriting order grid+collection resetting this to false
                     $this->_readyToPrepareCollection = true;
                     return $this->_prepareCollection();
                 }

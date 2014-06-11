@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <!--
+        <customer translate="title" module="customer">
+            <children>
+                <knowledgebase module="knowledgebase">
+                    <title>KnowledgeBase</title>
+                    <sort_order>70</sort_order>
+                    <action>knowledgebase/adminhtml_knowledgebase</action>
+                </knowledgebase>
+            </children>
+        </customer>
+        -->
+
+        <templates_master>
+            <title>Templates Master</title>
+            <sort_order>71</sort_order>
+            <children>
+                <knowledgebase translate="title" module="knowledgebase">
+                    <title>KnowledgeBase</title>
+                    <sort_order>75</sort_order>
+                    <children>
+                        <faq translate="title">
+                            <title>Article</title>
+                            <action>knowledgebase_admin/adminhtml_faq</action>
+                            <sort_order>10</sort_order>
+                        </faq>
+                        <category translate="title">
+                            <title>Category</title>
+                            <action>knowledgebase_admin/adminhtml_category</action>
+                            <sort_order>20</sort_order>
+                        </category>
+                    </children>
+                </knowledgebase>
+            </children>
+        </templates_master>
+
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <knowledgebase translate="title" module="knowledgebase">
+                                        <title>KnowledgeBase Section</title>
+                                    </knowledgebase>
+                                </children>
+                            </config>
+                        </children>
+                    </system>
+                    <templates_master>
+                        <title>Templates Master</title>
+                        <sort_order>71</sort_order>
+                        <children>
+                            <knowledgebase translate="title" module="knowledgebase">
+                                <title>KnowledgeBase</title>
+                                <sort_order>75</sort_order>
+                                <children>
+                                    <faq translate="title">
+                                        <title>Article</title>
+                                        <action>knowledgebase_admin/adminhtml_faq</action>
+                                        <sort_order>10</sort_order>
+                                    </faq>
+                                    <category translate="title">
+                                        <title>Category</title>
+                                        <action>knowledgebase_admin/adminhtml_category</action>
+                                        <sort_order>20</sort_order>
+                                    </category>
+                                </children>
+                            </knowledgebase>
+                        </children>
+                </templates_master>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>
