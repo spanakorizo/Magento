@@ -373,8 +373,10 @@ input[type="button"].ti_altBtn:hover,
 	width:32%;
 }
 
-label{
-	font-size:1.6em;
+label span{
+	font-size:2.4em;
+	font-family:'raleway';
+	font-feature-settings: "lnum";-moz-font-feature-settings: "lnum";-webkit-font-feature-settings: "lnum";-ms-font-feature-settings: "lnum";-o-font-feature-settings: "lnum";
 }
 
 input[type="checkbox"],
@@ -1427,6 +1429,7 @@ ul.ti_cart_review li:last-child{
 	text-align:center;
 	width: 23%;
 	margin:1%;
+	padding:0;
 	float:left;
 }
 
@@ -1648,6 +1651,10 @@ ul.ti_product_checklist{
 }
 
 .ti_printer_sortBar button.ti_button_large {
+	float:right;
+}
+
+.ti_sort_multiple{
 	float:right;
 }
 
@@ -2036,6 +2043,15 @@ ul.ti_product_checklist{
 		margin-top:0;
 	}
 
+	.ti_sort_multiple{
+		float:none;
+	}
+
+	.ti_sort_multiple button{
+		display:block;
+		margin:0 auto;
+	}
+
 	.ti_cart_image{
 		display:none;
 	}
@@ -2043,6 +2059,7 @@ ul.ti_product_checklist{
 	.ti_cart_desc{
 		width:100%;
 	}
+
 
 	.ti_hide_479, .ti_product_cta .icon-ico-warranty:before,
 	.ti_product_cta .icon-ico-guarantee:before,

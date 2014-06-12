@@ -39,6 +39,42 @@
 <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
 
+            <div class="btcf">
+                <div class="ti_printer_sortBar btcf">
+                    <div class="one_third sort-by">
+                        <div class="ti_printer_sortBlock sorter">
+                            <div class="view-mode btcf">
+                                <div class="ti_sort_block" id="ti_group_sortblock">
+                                    <label class="lgTxt ltWeight">
+                                        <span>View as: <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
+                                        <a class="list ti-list" title="List" id="ti_group_list" onclick='view_list();'></a></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_third middle">
+                        <label class="lgTxt ltWeight">
+                            <span>Show
+                            <div class="ti_sort_block">
+                                <div class="ti_select_barContainer btcf" id="ti_select_productSortLimit">
+                                    <select>
+                                        <option selected="selected">4</option>
+                                        <option>8</option>
+                                        <option>12</option>
+                                    </select>
+                                </div>
+                            </div> 
+                            per page</span>
+                        </label>
+                    </div>
+                    <div class="one_third text_center">
+                        <button type="button" title="Add to Cart" class="ti_button" onclick="this.form.submit()"><span>+ Add multiple to cart</span>
+                    </div>
+                </div>
+            </div>
+
+
 
 <div class="category-products">
     <?php echo $this->getToolbarHtml() ?>
@@ -123,9 +159,44 @@
         <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
     <?php endif; ?>
 
+            <div class="btcf">
+                <div class="ti_printer_sortBar btcf">
+                    <div class="one_third sort-by">
+                        <div class="ti_printer_sortBlock sorter">
+                            <div class="view-mode btcf">
+                                <div class="ti_sort_block" id="ti_group_sortblock">
+                                    <label class="lgTxt ltWeight">
+                                        <span>View as: <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
+                                        <a class="list ti-list" title="List" id="ti_group_list" onclick='view_list();'></a></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="one_third middle">
+                        <label class="lgTxt ltWeight">
+                            <span>Show
+                            <div class="ti_sort_block">
+                                <div class="ti_select_barContainer btcf" id="ti_select_productSortLimit">
+                                    <select>
+                                        <option selected="selected">4</option>
+                                        <option>8</option>
+                                        <option>12</option>
+                                    </select>
+                                </div>
+                            </div> 
+                            per page</span>
+                        </label>
+                    </div>
+                    <div class="one_third text_center">
+                        <button type="button" title="Add to Cart" class="ti_button" onclick="this.form.submit()"><span>+ Add multiple to cart</span>
+                    </div>
+                </div>
+            </div>
 
-    <div class="toolbar-bottom">
+
+    <!--<div class="toolbar-bottom">
         <?php echo $this->getToolbarHtml() ?>
-    </div>
+    </div>-->
 </div>
 <?php endif; ?>
