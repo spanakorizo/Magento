@@ -25,7 +25,7 @@
  * @author     MageWorkshop <mageworkshophq@gmail.com>
  */
 
-require_once 'app/code/core/Mage/Customer/controllers/AccountController.php';
+require_once('/var/www/html/staging_magentohome/stag_EE_1.14.0.1/app/code/core/Mage/Customer/controllers/AccountController.php');
 
 
 class MageWorkshop_DetailedReview_Customer_AccountController extends Mage_Customer_AccountController
