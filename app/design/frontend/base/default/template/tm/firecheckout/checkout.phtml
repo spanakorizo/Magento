@@ -14,6 +14,16 @@
     $this->getMessagesBlock()->getMessageCollection()->clear();
 ?>
 
+<?php
+    $topContainer = $this->getChildHtml('firecheckout.top.container');
+    $topContainer = trim($topContainer);
+    if (strlen($topContainer)) :
+?>
+    <div class="firecheckout-top-container">
+        <?php echo $topContainer ?>
+    </div>
+<?php endif ?>
+
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/tm/firecheckout.js') ?>"></script>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/tm/firecheckout-compatibility.js') ?>"></script>
 <script type="text/javascript">countryRegions = <?php echo $this->helper('directory')->getRegionJson() ?></script>
@@ -155,7 +165,7 @@ endif;
                 event : 'click',
                 window: $('firecheckout-login-window'),
                 size: {
-                    maxWidth: 300
+                    maxWidth: 380
                 }
             },
             forgot: {
@@ -163,7 +173,7 @@ endif;
                 event : 'click',
                 window: $('firecheckout-forgot-window'),
                 size: {
-                    maxWidth: 300
+                    maxWidth: 380
                 }
             }
         };

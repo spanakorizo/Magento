@@ -279,9 +279,11 @@ class TM_FireCheckout_Model_Observer
         $updates = $observer->getUpdates();
         $mapping = array(
             'Aitoc_Aitgiftwrap'          => 'tm/firecheckout/aitoc_aitgiftwrap.xml',
+            'Amasty_Deliverydate'        => 'tm/firecheckout/amasty_deliverydate.xml',
             'AW_Advancednewsletter'      => 'tm/firecheckout/aw_newsletter.xml',
             'AW_Newsletter'              => 'tm/firecheckout/aw_newsletter.xml',
             'Billpay'                    => 'tm/firecheckout/billpay.xml',
+            'Bpost_ShippingManager'      => 'tm/firecheckout/bpost_shippingmanager.xml',
             'Braintree'                  => 'tm/firecheckout/braintree.xml',
             'Bysoft_Relaypoint'          => 'tm/firecheckout/bysoft_relaypoint.xml', // not confirmed module code
             'CraftyClicks'               => 'tm/firecheckout/craftyclicks.xml',
@@ -290,6 +292,7 @@ class TM_FireCheckout_Model_Observer
             'Enterprise_Enterprise'      => 'tm/firecheckout/mage_enterprise.xml',
             'GCMC_GiveChange'            => 'tm/firecheckout/gcmc_givechange.xml',
             'Geissweb_Euvatgrouper'      => 'tm/firecheckout/geissweb_euvatgrouper.xml',
+            'Inchoo_SocialConnect'       => 'tm/firecheckout/inchoo_socialconnect.xml',
             'IntellectLabs_Stripe'       => 'tm/firecheckout/intellectlabs_stripe.xml',
             'IrvineSystems_Deliverydate' => 'tm/firecheckout/irvinesystems_deliverydate.xml',
             'IrvineSystems_JapanPost'    => 'tm/firecheckout/irvinesystems_japanpost.xml',
@@ -307,6 +310,7 @@ class TM_FireCheckout_Model_Observer
             'PostcodeNl_Api'             => 'tm/firecheckout/postcodenl_api.xml',
             'Rewardpoints'               => 'tm/firecheckout/rewardpoints.xml',
             'Symmetrics_Buyerprotect'    => 'tm/firecheckout/symmetrics_buyerprotect.xml',
+            'Tig_MyParcel'               => 'tm/firecheckout/tig_myparcel.xml',
             'TIG_Postcode'               => 'tm/firecheckout/tig_postcode.xml',
             'Webtex_Giftcards'           => 'tm/firecheckout/webtex_gitcards.xml'
         );

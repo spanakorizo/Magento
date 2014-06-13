@@ -31,14 +31,4 @@ class TM_FireCheckout_Block_Checkout_Billing extends Mage_Checkout_Block_Onepage
         return $this->getAddress()->getRegisterAccount()
             || $this->getRequest()->has('register');
     }
-
-    public function getAddressesHtmlSelect($type)
-    {
-        return Mage::helper('firecheckout/address')->getAddressesHtmlSelect($type, $this);
-    }
-
-    public function hasCustomerAddressId()
-    {
-        return (bool)$this->getAddress()->getCustomerAddressId();
-    }
 }

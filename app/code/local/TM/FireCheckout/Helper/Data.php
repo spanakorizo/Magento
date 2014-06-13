@@ -16,8 +16,11 @@ class TM_FireCheckout_Helper_Data extends Mage_Core_Helper_Abstract
 
     public function isAllowedGuestCheckout()
     {
-        return 'optional' == Mage::getStoreConfig('firecheckout/general/registration_mode')
-            || 'optional-checked' == Mage::getStoreConfig('firecheckout/general/registration_mode');
+        if (!Mage::getSingleton('checkout/session')->getQuote()->isAllowedGuestCheckout()) {
+            return false;
+        }
+        return ('optional' == Mage::getStoreConfig('firecheckout/general/registration_mode')
+            || 'optional-checked' == Mage::getStoreConfig('firecheckout/general/registration_mode'));
     }
 
     public function getIsSubscribed()

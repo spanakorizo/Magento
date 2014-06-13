@@ -19,6 +19,7 @@
         <reference name="content">
             <block type="core/html_calendar" name="html_calendar" as="html_calendar" template="page/js/calendar.phtml"/>
             <block type="firecheckout/checkout" name="firecheckout" template="tm/firecheckout/checkout.phtml">
+                <block type="core/text_list" name="firecheckout.top.container" as="firecheckout.top.container"/>
                 <block type="customer/form_login" name="customer.login" template="tm/firecheckout/login.phtml"/>
                 <block type="customer/account_forgotpassword" name="customer.forgot" template="tm/firecheckout/forgotpassword.phtml"/>
                 <block type="core/template" name="persistent.login" template="tm/firecheckout/persistent.phtml"/>
@@ -102,7 +103,7 @@
             <action method="addItemRender"><type>grouped</type><block>checkout/cart_item_renderer_grouped</block><template>tm/firecheckout/checkout/review/item.phtml</template></action>
             <action method="addItemRender"><type>configurable</type><block>checkout/cart_item_renderer_configurable</block><template>tm/firecheckout/checkout/review/item.phtml</template></action>
             <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>tm/firecheckout/checkout/review/item.phtml</template></action>
-            <action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>>tm/firecheckout/downloadable/checkout/review/item.phtml</template></action>
+            <action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>tm/firecheckout/downloadable/checkout/review/item.phtml</template></action>
             <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
             <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
                 <label>Items Before</label>

@@ -1,8 +1,9 @@
 .firecheckout-index-index {}
 .firecheckout-index-index .page-title { margin-bottom: 10px; zoom: 1; background: none; padding: 0; width: auto; }
 .firecheckout-index-index .page-title:after { content: '.'; display: block; visibility: hidden; height: 0; font-size: 0; clear: both; }
-.firecheckout-index-index .checkout-title h1 { float: left; color: #000; background: none; }
+.firecheckout-index-index .checkout-title h1 { float: left; color: #000; background: none; border: none; }
 .firecheckout-login-wrapper { float: right; margin: 3px 0 0 0; }
+.firecheckout-top-container { margin: 10px 0; clear: both; }
 
 /* Layout */
 /* col3-set */
@@ -34,6 +35,7 @@
 .firecheckout-section .block-title {
     background: #e8ebed url(../../images/tm/firecheckout/sprite.png) repeat-x 0 -56px;
     border-bottom: 1px solid #ccc;
+    border-width: 0 0 1px 0;
     height: 19px;
     font-size: 12px;
     font-weight: bold;
@@ -222,7 +224,8 @@
 .firecheckout-set .gift-message-form { padding: 0; background: none; border: none;  }
 .firecheckout-set .gift-messages-form p { margin: 2px 0 10px; }
 .firecheckout-set .gift-messages-form .item .product-img-box { float: left; width: 75px; }
-.firecheckout-set .gift-messages-form .item .details { margin-left: 90px; }
+.firecheckout-set .gift-messages-form .item .details { margin-left: 90px; float: none; }
+.firecheckout-set .gift-messages-form .item .details .f-fix { float: left; }
 .firecheckout-set .add-gift-message { padding: 10px 0; }
 .firecheckout-set .add-gift-message h3 { font-size: 13px; font-weight: bold; }
 .firecheckout-set .add-gift-message p { margin: 10px 0 0; }
@@ -395,7 +398,7 @@
     background: #fff;
     border-radius: 4px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-    z-index: 999;
+    z-index: 9999;
     position: absolute;
     text-align: left;
     padding: 15px;
@@ -445,7 +448,7 @@
 .firecheckout-window .centinel .authentication { width: 450px; }
 #checkout-sagepay-iframe-load {  }
 #firecheckout-mask { background: #000; opacity: 0.4; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=40)"; filter: alpha(opacity=40);
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 990; }
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 9901; }
 * html #firecheckout-mask { position: absolute; }
 
 /* Klarna */
@@ -494,6 +497,11 @@ iframe#sage-pay-server-iframe { border:none; height:365px; width:687px; }
 /* infostrates tnt */
 .firecheckout-set .tnt_description { width: auto; }
 /* infostrates tnt */
+
+/* PostcodeNL */
+.form-list input.pcnl-input-text-half,
+.form-list select.pcnl-input-text-half { width: 45% !important; }
+/* PostcodeNL */
 
 #firecheckout-form div,
 .firecheckout-window *,

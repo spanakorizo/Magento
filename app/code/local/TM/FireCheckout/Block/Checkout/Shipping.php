@@ -34,14 +34,4 @@ class TM_FireCheckout_Block_Checkout_Shipping extends Mage_Checkout_Block_Onepag
 
         return $select->getHtml();
     }
-
-    public function getAddressesHtmlSelect($type)
-    {
-        return Mage::helper('firecheckout/address')->getAddressesHtmlSelect($type, $this);
-    }
-
-    public function hasCustomerAddressId()
-    {
-        return (bool)$this->getAddress()->getCustomerAddressId();
-    }
 }

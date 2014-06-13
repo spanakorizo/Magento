@@ -131,35 +131,25 @@ class TM_FireCheckout_Model_Type_Standard
         if (($customer = Mage::getSingleton('customer/session')->getCustomer())
             && ($addresses = $customer->getAddresses())) {
 
-            if ($this->getQuote()->getShippingAddress()->getCountryId()) {
-                $shippingAddress = $this->getQuote()->getShippingAddress();
-                if (!$shippingAddress->getSameAsBilling()) {
-                    $billingAddress  = $this->getQuote()->getBillingAddress();
-                } else {
-                    $billingAddress = $shippingAddress;
+            if (!$shippingAddress = $customer->getPrimaryShippingAddress()) {
+                foreach ($addresses as $address) {
+                    $shippingAddress = $address;
+                    break;
                 }
-                $result['shipping'] = $shippingAddress->getData();
-                $result['billing']  = $billingAddress->getData();
-                $result['billing']['use_for_shipping'] = $shippingAddress->getSameAsBilling();
-            } else {
-                if (!$shippingAddress = $customer->getPrimaryShippingAddress()) {
-                    foreach ($addresses as $address) {
-                        $shippingAddress = $address;
-                        break;
-                    }
-                }
-                if (!$billingAddress = $customer->getPrimaryBillingAddress()) {
-                    foreach ($addresses as $address) {
-                        $billingAddress = $address;
-                        break;
-                    }
-                }
-                $result['shipping']['country_id']          = $shippingAddress->getCountryId();
-                $result['shipping']['customer_address_id'] = $shippingAddress->getId();
-                $result['billing']['country_id']           = $billingAddress->getCountryId();
-                $result['billing']['customer_address_id']  = $billingAddress->getId();
-                $result['billing']['use_for_shipping']     = $shippingAddress->getId() === $billingAddress->getId();
             }
+            if (!$billingAddress = $customer->getPrimaryBillingAddress()) {
+                foreach ($addresses as $address) {
+                    $billingAddress = $address;
+                    break;
+                }
+            }
+            $result['shipping'] = $shippingAddress->getData();
+            $result['shipping']['country_id']          = $shippingAddress->getCountryId();
+            $result['shipping']['customer_address_id'] = $shippingAddress->getId();
+            $result['billing'] = $billingAddress->getData();
+            $result['billing']['country_id']           = $billingAddress->getCountryId();
+            $result['billing']['customer_address_id']  = $billingAddress->getId();
+            $result['billing']['use_for_shipping']     = $shippingAddress->getId() === $billingAddress->getId();
         } else if ($this->getQuote()->getShippingAddress()->getCountryId()) {
             // Estimated shipping cost from shopping cart
             $address = $this->getQuote()->getShippingAddress();
@@ -1001,6 +991,7 @@ class TM_FireCheckout_Model_Type_Standard
         }
 
         $payment = $quote->getPayment();
+        $payment->setMethod(isset($data['method']) ? $data['method'] : false); // Magebuzz_Rewardpoint fix
         $payment->importData($data);
 
         $quote->save();

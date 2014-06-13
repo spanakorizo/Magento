@@ -84,7 +84,8 @@ if (typeof EbizmartsSagePaySuite != 'undefined'
                 return;
             }
 
-        } else if(this.isDirectPaymentMethod() && parseInt(SuiteConfig.getConfig('global','token_enabled')) === 1 && ($('remembertoken-sagepaydirectpro').checked === true)) {
+        } else if(this.isDirectPaymentMethod() && parseInt(SuiteConfig.getConfig('global','token_enabled')) === 1
+            && ($('remembertoken-sagepaydirectpro') && $('remembertoken-sagepaydirectpro').checked === true)) {
 
             if(this.isDirectTokenTransaction()) {
                 return;
@@ -177,32 +178,33 @@ if (typeof EbizmartsSagePaySuite != 'undefined'
         if((typeof transport) == 'undefined') {
             var transport = {};
         }
-        if((typeof transport.responseText) == 'undefined') { // Firecheckout fix
+        if ((typeof transport.responseText) == 'undefined') { // Firecheckout fix
 
             if(this.isFormPaymentMethod()) {
                 setLocation(SuiteConfig.getConfig('form','url'));
                 return;
             }
 
-            if((this.isDirectPaymentMethod() || this.isServerPaymentMethod()) && parseInt(SuiteConfig.getConfig('global','token_enabled')) === 1) {
+            if((/*this.isDirectPaymentMethod() || */this.isServerPaymentMethod()) && parseInt(SuiteConfig.getConfig('global','token_enabled')) === 1) {
                 if((typeof transport.tokenSuccess) == 'undefined') {
                     this.setPaymentMethod();
 
-                    if(!this.isDirectTokenTransaction() && !this.isServerTokenTransaction()
-                         && (($('remembertoken-sagepaydirectpro') && $('remembertoken-sagepaydirectpro').checked === true) || ($('remembertoken-sagepayserver') && $('remembertoken-sagepayserver').checked === true))) {
-
+                    if (!this.isServerTokenTransaction() && $('remembertoken-sagepayserver') && $('remembertoken-sagepayserver').checked === true) {
                         return;
                     }
+
+                    // if(!this.isDirectTokenTransaction()
+                    //      && (($('remembertoken-sagepaydirectpro') && $('remembertoken-sagepaydirectpro').checked === true)
+                    //         || ) {
+
+                    //     return;
+                    // }
                 }
             }
 
             transport.tokenSuccess = true;
 
-            //var already_placing_order = false;
-
-            //var form = new VarienForm('onestepcheckout-form');
-
-            if(/*parseInt($$('div.onestepcheckout-place-order-loading').length) || */(typeof transport.tokenSuccess != 'undefined' && true === transport.tokenSuccess)) {
+            if((typeof transport.tokenSuccess != 'undefined' && true === transport.tokenSuccess)) {
 
                 if(Ajax.activeRequestCount > 1 && (typeof transport.tokenSuccess) == 'undefined') {
                     return;
@@ -238,7 +240,6 @@ if (typeof EbizmartsSagePaySuite != 'undefined'
                     return;
                 } else {
                     alert('unknown method');
-                    // $('onestepcheckout-form')._submit();
                     return;
                 }
 
@@ -740,10 +741,8 @@ function processOnepagecheckoutResponse(response) {
             }
         }
 
-        checkout.setLoadWaiting(true);
-
         new Ajax.Request(
-            saveSessInfoUrlGlobal,
+            checkout.urls.payment_method,
             {
                 method:'post',
                 parameters: params,
@@ -753,17 +752,6 @@ function processOnepagecheckoutResponse(response) {
                 }
             }
         );
-
-//        var request = new Ajax.Request(
-//            payment.saveUrl,
-//            {
-//                method:'post',
-//                onComplete: payment.onComplete,
-//                onSuccess: payment.onSave,
-//                onFailure: checkout.ajaxFailure.bind(checkout),
-//                parameters: Form.serialize(payment.form)
-//            }
-//        );
     }
 }
 /* phoenix ipayment */
@@ -1084,3 +1072,12 @@ if (typeof Customweb !== 'undefined') {
     Customweb.CheckoutPreloadFlag = true; // disable preload functionality
 }
 /* Customweb_PayUnity */
+
+/* Bpost_ShippingManager */
+if (typeof bpostShippingManagerBase !== 'undefined') {
+    bpostShippingManagerBase.prototype.updateShippingAddress = bpostShippingManagerBase.prototype.updateShippingAddress.wrap(function(o, details) {
+        o(details);
+        checkout.update(checkout.urls.shipping_method);
+    });
+}
+/* Bpost_ShippingManager */

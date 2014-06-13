@@ -35,44 +35,4 @@ class TM_FireCheckout_Helper_Address extends Mage_Core_Helper_Abstract
         }
         return $result;
     }
-
-    public function getAddressesHtmlSelect($type, $addressBlock)
-    {
-        if ($addressBlock->isCustomerLoggedIn()) {
-            $options = array();
-            foreach ($addressBlock->getCustomer()->getAddresses() as $address) {
-                $options[] = array(
-                    'value' => $address->getId(),
-                    'label' => $address->format('oneline')
-                );
-            }
-
-            $addressId = $addressBlock->getAddress()->getCustomerAddressId();
-            if (empty($addressId) && !$addressBlock->getAddress()->getCountryId()) {
-                if ($type=='billing') {
-                    $address = $addressBlock->getCustomer()->getPrimaryBillingAddress();
-                } else {
-                    $address = $addressBlock->getCustomer()->getPrimaryShippingAddress();
-                }
-                if ($address) {
-                    $addressId = $address->getId();
-                }
-            } elseif (empty($addressId)) {
-                $addressId = ''; // if customer selected "New Address" option
-            }
-
-            $select = $addressBlock->getLayout()->createBlock('core/html_select')
-                ->setName($type.'_address_id')
-                ->setId($type.'-address-select')
-                ->setClass('address-select')
-                ->setExtraParams('onchange="'.$type.'.newAddress(!this.value)"')
-                ->setValue($addressId)
-                ->setOptions($options);
-
-            $select->addOption('', Mage::helper('checkout')->__('New Address'));
-
-            return $select->getHtml();
-        }
-        return '';
-    }
 }

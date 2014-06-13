@@ -13,7 +13,7 @@ class TM_FireCheckout_Model_Taxvat_Validator
         'CY' => '/^[0-9]{8}[A-Z]$/',
         'DK' => '/^[0-9]{8}$/',
         'EE' => '/^[0-9]{9}$/',
-        'GR' => '/^[0-9]{9}$/',
+        'EL' => '/^[0-9]{9}$/',
         'ES' => '/^[0-9A-Z][0-9]{7}[0-9A-Z]$/',
         'FI' => '/^[0-9]{8}$/',
         'FR' => '/^[0-9A-Z]{2}[0-9]{9}$/',
@@ -52,8 +52,12 @@ class TM_FireCheckout_Model_Taxvat_Validator
 
     public function isValidVies($taxvat, $countryCode)
     {
-        if ('UK' === $countryCode) {
-            $countryCode = 'GB';
+        $countryCodeMapping = array(
+            'UK' => 'GB',
+            'GR' => 'EL'
+        );
+        if (array_key_exists($countryCode, $countryCodeMapping)) {
+            $countryCode = $countryCodeMapping[$countryCode];
         }
 
         if (!isset($this->_patterns[$countryCode])) {

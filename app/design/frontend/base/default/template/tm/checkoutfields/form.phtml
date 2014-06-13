@@ -16,7 +16,7 @@ $checkoutfields = Mage::helper('checkoutfields');
                 <label for="order-<?php echo $fieldName ?>"
                     class="<?php echo $required ? 'required' : '' ?>"
                     ><?php if ($required): ?><em>*</em><?php endif; ?><?php echo $this->escapeHtml($fieldConfig['label']) ?></label><br/>
-                <?php if ($fieldConfig['description']) : ?>
+                <?php if (!empty($fieldConfig['description'])) : ?>
                     <small class="checkoutfield-note"><?php echo $this->escapeHtml($fieldConfig['description']) ?></small>
                 <?php endif; ?>
             <?php endif; ?>
