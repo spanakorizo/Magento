@@ -84,18 +84,18 @@ $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
 		$check_telephone = str_replace(array('+','-'), '', $check_telephone);
 
     	//check customer id
-    	if ($order->getCustomerId() == $row['CustomerID']) {$filter_priority=false; $order->setOrderTypeValue('ID');
+    	if (($row['CustomerID'] != "") && ($order->getCustomerId() == $row['CustomerID'])) {$filter_priority=false; $order->setOrderTypeValue('ID');
 		$order->setOrderType('Special'); }
     	//check customername
     	
     	
-    	else if (similar_text(strtolower($check_fullname), strtolower($fullname)) > 90) {
+    	else if (($check_fullname != "") && (similar_text(strtolower($check_fullname), strtolower($fullname)) > 90)) {
     		$filter_priority=false;
     		$order->setOrderTypeValue('Name');
 			$order->setOrderType('Special');
     	}
     	//check customer email
-    	else if (strtolower($order->getCustomerEmail()) == strtolower($row['EmailAddress'])) {
+    	else if (($row['EmailAddress'] != "") && (strtolower($order->getCustomerEmail()) == strtolower($row['EmailAddress']))) {
     		$filter_priority=false; 
     		$order->setOrderTypeValue('Email');
 			$order->setOrderType('Special');
@@ -126,7 +126,7 @@ $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
     	}
     	
     	//check telephone
-    	else if ($check_telephone == $telephone) {
+    	else if (($check_telephone != "") && ($check_telephone == $telephone)) {
     		$filter_priority=false; 
     		$order->setOrderTypeValue('Telephone');
 			$order->setOrderType('Special');
