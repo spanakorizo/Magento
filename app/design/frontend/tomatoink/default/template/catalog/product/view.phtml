@@ -90,114 +90,110 @@ error_reporting(E_ALL);
 
 <?php if ($_product->getTypeId() == "simple" or $_product->getTypeId() == "bundle") :?>
 <div id="ti_cms_product_container" class="btcf">
-
-        <div class="ti_cms_contain">
-            <div class="two_fifth">
-                <?php echo $this->getChildHtml('media') ?>
-            </div>
-            <div class="three_fifth ti_cms_gradient_block">
-                    <h1 class="ti_green_head"><?php echo $_product->getName(); ?></h1>
-                    <p>
-                        <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
-                        <a href="#ti_product_details">See product details</a>
-                    </p>
-                    
-                    <div class="ti_cms_separator"></div>
-                    <div class="btcf">
-                        <div class="one_half ti_product_infoBlock">
-                            <h1 class="altTxt" id="ti_product_ourPrice">$<?php echo round($_product->getPrice(),2); ?></h1>
-                            <h5>brand-name: <span id="ti_product_brandPrice">$<?php echo round($_product->getMsrp(),2); ?></span></h5>
-                            <div class="ti_cms_block_qty">
-                                <form action="<?php echo Mage::getBaseUrl().'productselector/carts/' ?>" method="post" id="product_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
-                                    <?php echo $this->getBlockHtml('formkey') ?>
-                                    <div class="no-display">
-                                        <input type="hidden" name="products" value="<?php echo $_product->getId() ?>" />
-                                        <input type="hidden" name="related_product" id="related-products-field" value="" />
-                                    </div>
-
-                                    <p class="lgTxt"><span class="ti_small_text" id="ti_product_stockAlert"><?php $stockItem = $_product->getStockItem(); if($stockItem->getIsInStock()) {echo "In stock!";} else {echo "Out of stock!";} ?></span>
-                                        <br>Qty: <input type="text" class="input-text qty" name="qty<?php echo $_product->getId() ?>" maxlength="3" id = "ti_simple_prd_<?php echo $_product->getId(); ?>" value=""/></input>
-                                        <input type="button" value="Add To Cart" name="<?php echo $_product->getId(); ?>" onclick="addSimpleToCart('ti_simple_prd_<?php echo $_product->getId(); ?>');product_form.submit()"></input></p>
-                                    <?php
-                                    if ($_product->getTypeId() == 'bundle'){
-
-                                        $selectionCollection = $_product->getTypeInstance(true)->getSelectionsCollection(
-                                            $_product->getTypeInstance(true)->getOptionsIds($_product), $_product
-                                        );
-
-                                        foreach($selectionCollection as $option) {
-
-                                            echo '<input type="hidden" name="bundle_option'.$_product->getId().'[' . $option->option_id  . '][]" value="'.$option->selection_id.'" />';
-                                            echo '<input type="hidden" name="bundle_option_qty'.$_product->getId().'[' . $option->option_id . '][]" value="'.$option->selection_qty.'" />';
-
-                                        }//end: foreach $selectionCollection
-
-                                    } // end: if $_related_item == bundle
-                                    ?>
-
-                                </form>
+    <div class="two_fifth">
+        <?php echo $this->getChildHtml('media') ?>
+    </div>
+    <div class="three_fifth">
+        <div class="ti_block_inner ti_cms_gradient_block">
+            <h1 class="ti_green_head"><?php echo $_product->getName(); ?></h1>
+            <p><?php echo $this->getReviewsSummaryHtml($_product, false, true)?> | <a href="#ti_product_details">See product details</a>
+            </p>
+            
+            <div class="ti_cms_separator"></div>
+            <div class="btcf">
+                <div class="one_half ti_product_infoBlock">
+                    <h2 class="altTxt ti_headerH1" id="ti_product_ourPrice">$<?php echo round($_product->getPrice(),2); ?></h2>
+                    <h5>brand-name: <span id="ti_product_brandPrice">$<?php echo round($_product->getMsrp(),2); ?></span></h5>
+                    <div class="ti_cms_block_qty">
+                        <form action="<?php echo Mage::getBaseUrl().'productselector/carts/' ?>" method="post" id="product_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                            <?php echo $this->getBlockHtml('formkey') ?>
+                            <div class="no-display">
+                                <input type="hidden" name="products" value="<?php echo $_product->getId() ?>" />
+                                <input type="hidden" name="related_product" id="related-products-field" value="" />
                             </div>
-                        </div>
-                        <div class="one_half ti_product_infoBlock">
-                            <ul class="ti_product_checklist">
-                                <?php echo $_product->getShortDescription(); ?>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="btcf">
-                        <div class="one_half ti_product_infoBlock">
-                            <ul>
-                                <li id="ti_product_qtyDiscount"><a rel="nofollow" class="lgTxt"><span>Need 3 or more?</span></a>
-                                    <div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_product_qtyDiscountDrop">
-                                        <table>
-                                            <tr>
-                                                <td><p><span class="lgTxt">Buy 3 to 4</span></p></td>
-                                                <td><p id="ti_product_qty3" class="dark">$64.82</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p><span class="lgTxt">Buy 5 to 9</span></p></td>
-                                                <td><p id="ti_product_qty5" class="dark">$60.50</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p><span class="lgTxt">Buy 10+</span></p></td>
-                                                <td><p id="ti_product_qty10" class="dark">$59.18</p></td>
-                                            </tr>
-                                            <tr>
-                                                <td><p><span class="lgTxt">Buy 100+</span></p></td>
-                                                <td><p class="dark"><a href="">Get Quote</a></p></td>
-                                            </tr>
-                                        </table>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="one_half ti_product_infoBlock">
-                         <div id="fb-root"></div>
 
-                        <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=406893882783987"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script> 
-                            <!--AddThis Button BEGIN - Please consult with Mehmet about what to include here-->
-                            <p class="addthis_toolbox addthis_default_style">
-                                <div class="fb-like" id = 'ti_product_fb' data-href="" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
-                                <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
-                            <a id = 'ti_product_pin' href="" data-pin-do="buttonPin" data-pin-config="none" data-pin-color="red"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
-                            </p>
-                            <!-- facebook !-->
-                            <script type="text/javascript">
-                                document.getElementById('ti_product_fb').setAttribute('data-href', window.location.href);
-                            </script> 
+                            <p class="lgTxt"><span class="ti_small_text" id="ti_product_stockAlert"><?php $stockItem = $_product->getStockItem(); if($stockItem->getIsInStock()) {echo "In stock!";} else {echo "Out of stock!";} ?></span>
+                                <br>Qty: <input type="text" class="input-text qty" name="qty<?php echo $_product->getId() ?>" maxlength="3" id = "ti_simple_prd_<?php echo $_product->getId(); ?>" value=""/></input>
+                                <input type="button" value="Add To Cart" name="<?php echo $_product->getId(); ?>" onclick="addSimpleToCart('ti_simple_prd_<?php echo $_product->getId(); ?>');product_form.submit()"></input></p>
+                            <?php
+                            if ($_product->getTypeId() == 'bundle'){
 
-                            <!-- tweeter !-->
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+                                $selectionCollection = $_product->getTypeInstance(true)->getSelectionsCollection(
+                                    $_product->getTypeInstance(true)->getOptionsIds($_product), $_product
+                                );
 
-                            <!-- Pin it !-->
-                            <script>document.getElementById('ti_product_pin').href="//www.pinterest.com/pin/create/button/?url=" + encodeURIComponent(window.location.href) + "&media=" + encodeURIComponent('<?php echo $_product->getImageUrl() ?>') + "&description=TomatoinkTest";</script>
-                            <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
-                            <!-- AddThis Button END -->
-                        </div>
+                                foreach($selectionCollection as $option) {
+
+                                    echo '<input type="hidden" name="bundle_option'.$_product->getId().'[' . $option->option_id  . '][]" value="'.$option->selection_id.'" />';
+                                    echo '<input type="hidden" name="bundle_option_qty'.$_product->getId().'[' . $option->option_id . '][]" value="'.$option->selection_qty.'" />';
+
+                                }//end: foreach $selectionCollection
+
+                            } // end: if $_related_item == bundle
+                            ?>
+
+                        </form>
                     </div>
                 </div>
-        </div>
+                <div class="one_half ti_product_infoBlock">
+                    <ul class="ti_product_checklist">
+                        <?php echo $_product->getShortDescription(); ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="btcf">
+                <div class="one_half ti_product_infoBlock">
+                    <ul>
+                        <li id="ti_product_qtyDiscount"><a rel="nofollow" class="lgTxt"><span>Need 3 or more?</span></a>
+                            <div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_product_qtyDiscountDrop">
+                                <table>
+                                    <tr>
+                                        <td><p><span class="lgTxt">Buy 3 to 4</span></p></td>
+                                        <td><p id="ti_product_qty3" class="dark">$64.82</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p><span class="lgTxt">Buy 5 to 9</span></p></td>
+                                        <td><p id="ti_product_qty5" class="dark">$60.50</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p><span class="lgTxt">Buy 10+</span></p></td>
+                                        <td><p id="ti_product_qty10" class="dark">$59.18</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p><span class="lgTxt">Buy 100+</span></p></td>
+                                        <td><p class="dark"><a href="">Get Quote</a></p></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="one_half ti_product_infoBlock">
+                 <div id="fb-root"></div>
 
+                <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=406893882783987"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script> 
+                    <!--AddThis Button BEGIN - Please consult with Mehmet about what to include here-->
+                    <p class="addthis_toolbox addthis_default_style">
+                        <div class="fb-like" id = 'ti_product_fb' data-href="" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+                    <a id = 'ti_product_pin' href="" data-pin-do="buttonPin" data-pin-config="none" data-pin-color="red"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
+                    </p>
+                    <!-- facebook !-->
+                    <script type="text/javascript">
+                        document.getElementById('ti_product_fb').setAttribute('data-href', window.location.href);
+                    </script> 
+
+                    <!-- tweeter !-->
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                    <!-- Pin it !-->
+                    <script>document.getElementById('ti_product_pin').href="//www.pinterest.com/pin/create/button/?url=" + encodeURIComponent(window.location.href) + "&media=" + encodeURIComponent('<?php echo $_product->getImageUrl() ?>') + "&description=TomatoinkTest";</script>
+                    <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+                    <!-- AddThis Button END -->
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php echo $this->getChildHtml('relatedProducts') ?>
@@ -207,7 +203,7 @@ error_reporting(E_ALL);
 <div class="ti_cms_contain btcf">
                 <div class="ti_cms_block_headerBar-green">
                     <a name="ti_product_details" id="ti_product_details" title="ti_product_details"></a>
-                    <h1 class="white">Product Details</h1>
+                    <h2 class="white ti_headerH1">Product Details</h2>
                 </div>
                 <div class="ti_cms_gradient_block">
                     <div class="ti_block_inner">
@@ -229,7 +225,7 @@ error_reporting(E_ALL);
                     </div>
                 </div>
                 <div class="ti_cms_block_headerBar-green">
-                    <h1 class="white">Product Specifications</h1>
+                    <h2 class="white ti_headerH1">Product Specifications</h2>
                 </div>
                     <table class="ti_cms_infoTable">
                         <tr>
@@ -259,7 +255,7 @@ error_reporting(E_ALL);
                     </table>
                 <div class="ti_cms_block_headerBar-green">
                     <a name="ti_product_printerComp" id="ti_product_printerComp" title="ti_product_printerComp"></a>
-                    <h1 class="white">Compatible Printers</h1>
+                    <h2 class="white ti_headerH1">Compatible Printers</h2>
 
                 </div>
                 <table>
@@ -318,7 +314,7 @@ if (!jQuery("#ti_product_qtyDiscountDrop").is(":visible"))
 <div id="ti_cms_printer_container" class="btcf">
         <div class="ti_cms_contain btcf">
             <div class="two_third ti_cms_gradient_block">
-                <h1 class="ti_green_head"><span class='ti_printer_brand'></span>&nbsp;<?php echo $ti_printer_brand; ?>&nbsp;Ink Cartridges and Printing Supplies</h1>
+                <h2 class="ti_green_head ti_headerH1"><span class='ti_printer_brand'></span>&nbsp;<?php echo $ti_printer_brand; ?>&nbsp;Ink Cartridges and Printing Supplies</h2>
                 <p>We carry printer ink cartridges for your <span class='ti_printer_brand'></span>&nbsp;<?php echo $ti_printer_brand; ?>&nbsp;at a discounted price with the same quality and satisfaction you would get from brand name cartridges. Our high quality inkjet cartridges were professionally re-engineered in a manufacturing facility that uses state of the art processes to ensure that this product will print as well as their brand name counterparts.</p>
                 <div class="ti_product_cta">
                     <a href=""><h3 class="ti_orange_head icon-ico-warranty icon-angle-right">Our ink will never void<br class="ti_hide_479"> your printer's warranty.</h3></a>
@@ -369,7 +365,7 @@ jQuery(document).ready(function($) {
                 <div class="product-shop">
                     <div class="product-main-info">
                         <div class="product-name">
-                            <h1><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h1>
+                            <h2 class="ti_headerH1"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2>
                         </div>
                         <p class="product-ids"><?php echo $this->__('SKU# %s', $this->escapeHtml($_product->getSku())); ?></p>
                         <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>

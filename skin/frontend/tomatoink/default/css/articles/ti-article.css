@@ -265,22 +265,21 @@ Naming convention: add ti_cms_ prefix
 	padding-bottom:4px; 
 	list-style:disc;
 	}
-*/
+
 .ti_cms_articleContent_area ul li {
 	margin-left:20px;
+}*/
+.ti_cms_articleContent_area .ti_required-entry {
+	margin-left:5px;
 }	
-.ti_cms_articleContent_area ul li:before {
-	background-color: #559A13;
-	content: "";
-	border-radius: 10px;
-	-webkit-border-radius:10px;
-	-moz-border-radius:10px;
-	width: 10px;
-	height: 10px;
-	display: block;
+.ti_cms_articleContent_area .ti-required-entryB:after {
+	content: "*";
 	position: absolute;
-	margin-left: -20px;
-	margin-top: 8px;
+	margin-left: 0px;
+	margin-top: 2px;
+	color:#E67921;
+	font-weight: bold;
+	font-size: 1.2em;
 }
 .ti_cms_articleContent_area ol li {
 	margin-left:1.5em;
@@ -322,14 +321,16 @@ Naming convention: add ti_cms_ prefix
 .ti_cms_articleContent_area p {
 	margin-bottom:20px;
 }
-
+.ti_cms_articleContent_area a.lgTxt:hover {
+	color:#559A13;
+}
 /* -----------------------------------*/
 /* ---------->> 6. Elements <<<-------*/
 /* -----------------------------------*/
 
 /* --Buttons--*/
 
-.ti_cms_articleContent_area input[type=submit],
+/*.ti_cms_articleContent_area input[type=submit],
 .ti_cms_articleContent_area input[type=submit]:link,
 .ti_cms_articleContent_area a.btn {
 	border:1px solid #34740e;
@@ -353,7 +354,6 @@ Naming convention: add ti_cms_ prefix
  	transition:.6s;
  	height:auto;
 }
-/*
 .ti_cms_articleContent_area input[type=submit]:hover,
 .ti_cms_articleContent_area input[type=submit]:focus,
 .ti_cms_articleContent_area input[type=submit]:active,
@@ -412,14 +412,16 @@ Naming convention: add ti_cms_ prefix
 	transition: color 0.4s ease 0s;
 	font-family: 'Raleway',Verdana,sans-serif;
 	-moz-font-feature-settings: "lnum";
-	font-size:2.4em;
+	font-size:1.8em;
 	border-radius:10px;
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
 	padding:10px;
 	box-sizing:border-box;
 }
-
+.ti_cms_articleContent_area .textArea {
+	width:100%;
+}
 /* --Dividers--*/
 /*.ti_cms_divider {
 	border-top: 2px dotted #cccccc;
@@ -465,6 +467,7 @@ Naming convention: add ti_cms_ prefix
 .ti_cms_articleContent_area img{
 	border:none;
 	margin:1em auto;
+	max-width:100%;
 }
 
 .ti_cms_articleContent_area img.ti_cms_inlineImg{
@@ -691,9 +694,11 @@ a.ti_cms_iconBlock{
 
 @media only screen and (max-width : 767px), @media only screen and (max-device-width : 767px){
 
-	.ti_cms_100percent {
-		width:100%;
+	.ti_cms_height767 {
 		height:auto !important;
+	}
+	.ti_cms_inputFull {
+		width:98%;
 	}
 
 }

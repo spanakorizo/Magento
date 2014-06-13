@@ -6,81 +6,151 @@
             <h2 class="white ti_headerH1" id="ti_checkoutStep1"><span class="ti_checkoutStep">1</span> Billing Information</h2>
         </div>
         <!--Billing info shows by default-->
-        <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="First Name"onfocus="if(this.value=='First Name')this.value='';" onblur="if(this.value=='')this.value='First Name';">
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>First Name</span>
+                <input class="required-entry ti_checkout_info" type="text" value="First Name"onfocus="if(this.value=='First Name')this.value='';" onblur="if(this.value=='')this.value='First Name';"/>
+            </label>
+        </div>
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Last Name</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Last Name"onfocus="if(this.value=='Last Name')this.value='';" onblur="if(this.value=='')this.value='Last Name';">
+            </label>
+        </div>
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Email</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Email"onfocus="if(this.value=='Email')this.value='';" onblur="if(this.value=='')this.value='Email';">
+            </label>
         </div>
         <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="Last Name"onfocus="if(this.value=='Last Name')this.value='';" onblur="if(this.value=='')this.value='Last Name';">
+            <label class="ti_cms_labelHide">
+                <span>Company</span>
+                <input class="ti_checkout_info" type="text" value="Company" onfocus="if(this.value=='Company')this.value='';" onblur="if(this.value=='')this.value='Company';">
+            </label>
         </div>
-        <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="Email"onfocus="if(this.value=='Email')this.value='';" onblur="if(this.value=='')this.value='Email';">
-        </div>
-        <div class="one_half">
-            <input class="ti_checkout_info" type="text" value="Company" onfocus="if(this.value=='Company')this.value='';" onblur="if(this.value=='')this.value='Company';">
+        <div class="one ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Address line 1</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Address" onfocus="if(this.value=='Address')this.value='';" onblur="if(this.value=='')this.value='Address';">
+            </label>
         </div>
         <div class="one">
-            <input class="required-entry ti_checkout_info" type="text" value="Address" onfocus="if(this.value=='Address')this.value='';" onblur="if(this.value=='')this.value='Address';">
+            <label class="ti_cms_labelHide">
+                <span>Address line 2</span>
+                <input class="ti_checkout_info" type="text">
+            </label>
         </div>
-        <div class="one">
-            <input class="ti_checkout_info" type="text">
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>City</span>
+                <input class="required-entry ti_checkout_info" type="text" value="City" onfocus="if(this.value=='City')this.value='';" onblur="if(this.value=='')this.value='City';">
+            </label>
+        </div>
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Zip Code</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Zip" onfocus="if(this.value=='Zip')this.value='';" onblur="if(this.value=='')this.value='Zip';">
+            </label>
+        </div>
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Phone</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Phone" onfocus="if(this.value=='Phone')this.value='';" onblur="if(this.value=='')this.value='Phone';">
+            </label>
         </div>
         <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="City" onfocus="if(this.value=='City')this.value='';" onblur="if(this.value=='')this.value='City';">
-        </div>
-        <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="Zip" onfocus="if(this.value=='Zip')this.value='';" onblur="if(this.value=='')this.value='Zip';">
-        </div>
-        <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="Phone" onfocus="if(this.value=='Phone')this.value='';" onblur="if(this.value=='')this.value='Phone';">
-        </div>
-        <div class="one_half">
-            <input class="ti_checkout_info" type="text" value="Fax" onfocus="if(this.value=='Fax')this.value='';" onblur="if(this.value=='')this.value='Fax';">
+            <label class="ti_cms_labelHide">
+                <span>Fax</span>
+                <input class="ti_checkout_info" type="text" value="Fax" onfocus="if(this.value=='Fax')this.value='';" onblur="if(this.value=='')this.value='Fax';">
+            </label>
         </div>
         <div class="one_half">
             <!--ti_checkout_optionChecked shows by default-->
-            <label class="altTxt btcf"><input type="checkbox" class="ti_checkout_optionChecked">Save your information for future orders</label>
+            <label class="altTxt btcf"><input type="checkbox" checked="checked"><span><span class="ti_small_text">Save your information for future orders</span></span></label>
             <!--if ti_checkout_optionUnChecked then these two inputs do not display-->
-            <input class="required-entry ti_checkout_password" type="text" value="Password" onfocus="if(this.value=='Password')this.value='';" onblur="if(this.value=='')this.value='Password';">
-            <input class="required-entry ti_checkout_password" type="text" value="Password (retype)" onfocus="if(this.value=='Password (retype)')this.value='';" onblur="if(this.value=='')this.value='Password (retype)';">
+            <div class="ti-required-entry ti_checkout_password">
+                <label class="ti_cms_labelHide">
+                    <span>Password</span>
+                    <input class="required-entry" type="text" value="Password" onfocus="if(this.value=='Password')this.value='';" onblur="if(this.value=='')this.value='Password';">
+                </label>
+            </div>
+            <div class="ti-required-entry ti_checkout_password">
+                <label class="ti_cms_labelHide">
+                    <span>Password (retype)</span>
+                    <input class="required-entry" type="text" value="Password (retype)" onfocus="if(this.value=='Password (retype)')this.value='';" onblur="if(this.value=='')this.value='Password (retype)';">
+                </label>
+            </div>
         </div>
         <div class="one_half">
-            <label class="altTxt btcf"><input type="checkbox" class="ti_checkout_optionChecked">Sign up for TomatoInk's bi-weekly email deals</label>
+            <label class="altTxt btcf"><input type="checkbox" checked="checked"><span><span class="ti_small_text">Sign up for TomatoInk's bi-weekly email deals</span></span></label>
             <!--if ti_checkout_optionChecked then shipping info displays-->
-            <label class="altTxt btcf"><input type="checkbox" class="ti_checkout_optionUnchecked">Ship to a different address</label>
+            <label class="altTxt btcf"><input type="checkbox" checked="checked"><span><span class="ti_small_text">Ship to a different address</span></span></label>
         </div>
     </div>
     <!--end billing info-->
     <div id="ti_checkout_ShipInfo" class="btcf">
         <h2 class="lgTxt ti_headerH1">Shipping Information</h2>
-        <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="First Name"onfocus="if(this.value=='First Name')this.value='';" onblur="if(this.value=='')this.value='First Name';">
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>First Name</span>
+                <input class="required-entry ti_checkout_info" type="text" value="First Name"onfocus="if(this.value=='First Name')this.value='';" onblur="if(this.value=='')this.value='First Name';"/>
+            </label>
+        </div>
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Last Name</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Last Name"onfocus="if(this.value=='Last Name')this.value='';" onblur="if(this.value=='')this.value='Last Name';">
+            </label>
+        </div>
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Email</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Email"onfocus="if(this.value=='Email')this.value='';" onblur="if(this.value=='')this.value='Email';">
+            </label>
         </div>
         <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="Last Name"onfocus="if(this.value=='Last Name')this.value='';" onblur="if(this.value=='')this.value='Last Name';">
+            <label class="ti_cms_labelHide">
+                <span>Company</span>
+                <input class="ti_checkout_info" type="text" value="Company" onfocus="if(this.value=='Company')this.value='';" onblur="if(this.value=='')this.value='Company';">
+            </label>
         </div>
-        <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="Email"onfocus="if(this.value=='Email')this.value='';" onblur="if(this.value=='')this.value='Email';">
-        </div>
-        <div class="one_half">
-            <input class="ti_checkout_info" type="text" value="Company" onfocus="if(this.value=='Company')this.value='';" onblur="if(this.value=='')this.value='Company';">
+        <div class="one ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Address line 1</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Address" onfocus="if(this.value=='Address')this.value='';" onblur="if(this.value=='')this.value='Address';">
+            </label>
         </div>
         <div class="one">
-            <input class="required-entry ti_checkout_info" type="text" value="Address" onfocus="if(this.value=='Address')this.value='';" onblur="if(this.value=='')this.value='Address';">
+            <label class="ti_cms_labelHide">
+                <span>Address line 2</span>
+                <input class="ti_checkout_info" type="text">
+            </label>
         </div>
-        <div class="one">
-            <input class="ti_checkout_info" type="text" />
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>City</span>
+                <input class="required-entry ti_checkout_info" type="text" value="City" onfocus="if(this.value=='City')this.value='';" onblur="if(this.value=='')this.value='City';">
+            </label>
+        </div>
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Zip Code</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Zip" onfocus="if(this.value=='Zip')this.value='';" onblur="if(this.value=='')this.value='Zip';">
+            </label>
+        </div>
+        <div class="one_half ti-required-entry">
+            <label class="ti_cms_labelHide">
+                <span>Phone</span>
+                <input class="required-entry ti_checkout_info" type="text" value="Phone" onfocus="if(this.value=='Phone')this.value='';" onblur="if(this.value=='')this.value='Phone';">
+            </label>
         </div>
         <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="City" onfocus="if(this.value=='City')this.value='';" onblur="if(this.value=='')this.value='City';">
-        </div>
-        <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="Zip" onfocus="if(this.value=='Zip')this.value='';" onblur="if(this.value=='')this.value='Zip';">
-        </div>
-        <div class="one_half">
-            <input class="required-entry ti_checkout_info" type="text" value="Phone" onfocus="if(this.value=='Phone')this.value='';" onblur="if(this.value=='')this.value='Phone';">
-        </div>
-        <div class="one_half">
-            <input class="ti_checkout_info" type="text" value="Fax" onfocus="if(this.value=='Fax')this.value='';" onblur="if(this.value=='')this.value='Fax';">
+            <label class="ti_cms_labelHide">
+                <span>Fax</span>
+                <input class="ti_checkout_info" type="text" value="Fax" onfocus="if(this.value=='Fax')this.value='';" onblur="if(this.value=='')this.value='Fax';">
+            </label>
         </div>
     </div>
 </div>
@@ -118,13 +188,13 @@
                 </li>
                 <!--when radio is selected, lose class="ltWeight"-->
                 <li>
-                    <label class="lgTxt ltWeight"><input type="radio"><span class="ti_checkout_credit paypal"></span>Paypal</label>
+                    <label class="lgTxt ltWeight"><input type="radio"><span class="ti_checkout_credit paypal"></span><span><span class="ti_small_text">Paypal</span></span></label>
                 </li>
                 <li>
-                    <label class="lgTxt ltWeight"><input type="radio"><span class="ti_checkout_credit google"></span>Google Wallet</label>
+                    <label class="lgTxt ltWeight"><input type="radio"><span class="ti_checkout_credit google"></span><span><span class="ti_small_text">Google Wallet</span></span></label>
                 </li>
                 <li>
-                    <label class="lgTxt ltWeight"><input type="radio">Credit Card</label>
+                    <label class="lgTxt ltWeight"><input type="radio"><span><span class="ti_small_text">Credit Card</span></span></label>
                 </li>
             </ul>
         </div>

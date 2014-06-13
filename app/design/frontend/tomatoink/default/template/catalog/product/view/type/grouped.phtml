@@ -61,33 +61,32 @@
 
             <div class="btcf">
                 <div class="ti_printer_sortBar btcf">
-                    <div class="one_half sort-by">
-                        <div class="ti_printer_sortBlock sorter">
+                    <div class="one sort-by">
+                        <div class="ti_printer_sortBlock sorter ti_hide_479">
                             <div class="view-mode btcf">
-                                <div class="ti_sort_block">
-                                    <h2 class="lgTxt ltWeight">View as:</h2>
-                                </div>
                                 <div class="ti_sort_block" id="ti_group_sortblock">
-                                    <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
-                                    <a class="list ti-list" title="List" id="ti_group_list" onclick='view_list();'></a>
+                                    <label class="lgTxt ltWeight">
+                                        <span>View as: <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
+                                        <a class="list ti-list" title="List" id="ti_group_list" onclick='view_list();'></a></span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="one_half">
-                        <button type="button" title="Add to Cart" class="ti_button_large" onclick="this.form.submit()"><span>+ Add multiple to cart</span></button>
+                        <div class="ti_sort_multiple">
+                            <button type="button" title="Add to Cart" class="ti_button_large" onclick="this.form.submit()"><span>+ Add multiple to cart</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
 
 <script type="text/javascript">
     function view_grid() {
-        jQuery('#ti_group_sortblock').html("<strong class='grid ti-grid' title='Grid' id='ti_group_grid'></strong><a class='list ti-list' title='List' id='ti_group_list' onclick='view_list();'></a>");
+        jQuery('#ti_group_sortblock').html("<label class='lgTxt ltWeight'><span>View as: <strong class='grid ti-grid' title='Grid' id='ti_group_grid'></strong><a class='list ti-list' title='List' id='ti_group_list' onclick='view_list();'></a></span></label>");
         jQuery('.ti_cms_block_list').attr('class', 'ti_cms_block_grid');
     };
 
     function view_list() {
-        jQuery('#ti_group_sortblock').html("<a class='grid ti-grid' title='Grid' id='ti_group_grid' onclick='view_grid();'></a><strong class='list ti-list' title='List' id='ti_group_list'></strong>");
+        jQuery('#ti_group_sortblock').html("<label class='lgTxt ltWeight'><span>View as: <a class='grid ti-grid' title='Grid' id='ti_group_grid' onclick='view_grid();'></a><strong class='list ti-list' title='List' id='ti_group_list'></strong></span></label>");
         jQuery('.ti_cms_block_grid').attr('class', 'ti_cms_block_list');
     };
 
@@ -102,7 +101,7 @@
                 <?php $formKey = Mage::getSingleton('core/session')->getFormKey();?>
 
 <?php foreach ($_associatedProducts as $_item): ?>
-<div class="ti_cms_block_grid"> 
+<div class="ti_cms_block_grid one_fourth"> 
     <div class="ti_block_inner ti_cms_border_block btcf">       
     <?php //get product url ?>
     <?php $product_url = $_item->getProductUrl();
@@ -188,21 +187,20 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
                   
             <div class="btcf">
                 <div class="ti_printer_sortBar btcf">
-                    <div class="one_half sort-by">
-                        <div class="ti_printer_sortBlock sorter">
+                    <div class="one sort-by">
+                        <div class="ti_printer_sortBlock sorter ti_hide_479">
                             <div class="view-mode btcf">
-                                <div class="ti_sort_block">
-                                    <h2 class="lgTxt ltWeight">View as:</h2>
-                                </div>
-                                <div class="ti_sort_block">
-                                    <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
-                                    <a class="list ti-list" title="List" id="ti_group_list"></a>
+                                <div class="ti_sort_block" id="ti_group_sortblock">
+                                    <label class="lgTxt ltWeight">
+                                        <span>View as: <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
+                                        <a class="list ti-list" title="List" id="ti_group_list" onclick='view_list();'></a></span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="one_half">
-                        <button type="button" title="Add to Cart" class="ti_button_large" onclick="this.form.submit()"><span>+ Add multiple to cart</span></button>
+                        <div class="ti_sort_multiple">
+                            <button type="button" title="Add to Cart" class="ti_button_large" onclick="this.form.submit()"><span>+ Add multiple to cart</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
