@@ -1288,7 +1288,7 @@ ul.ti_cart_review li:last-child{
 }
 
 #ti_checkout_BillingInfo > .one_half > .ti_checkout_half:first-of-type,
-.one > .one_third > .one > .ti_checkout_half:first-of-type{
+#ti_checkout_PaymentInfo > .ti_cms_gradient_block > .one_third > .one > .ti-required-entry > .ti_checkout_half:first-of-type{
 	margin-right:8%;
 }
 
@@ -1948,16 +1948,19 @@ ul.ti_product_checklist{
 		width:48%;
 	}
 
-	.one_third, .two_third,
+	.one, .one_third, .two_third,
 	.one_half, .one_third.middle,
 	.one_fifth, .two_fifth,
 	.three_fifth, .four_fifth,
 	#ti_footer_email_cta.three_fourth,
 	#ti_footer_email_cta.one_fourth,
 	.ti_footer_top_block .three_fourth,
-	.ti_footer_top_block .one_fourth {
+	.ti_footer_top_block .one_fourth,
+	.ti_checkout_info {
 		width:98%;
 		margin: 0 auto 15px;
+		padding-right:1%;
+		padding-left:1%;
 	}
 
 	.ti_cart_relateBlock.one_third { width:31%;margin:0 auto;}
