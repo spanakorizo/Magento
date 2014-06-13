@@ -403,7 +403,6 @@ Naming convention: add ti_cms_ prefix
 */
 
 .ti_cms_articleContent_area textarea{
-	width:100%;
 	resize:none;
 	color: #559A13;
 	box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
@@ -419,9 +418,12 @@ Naming convention: add ti_cms_ prefix
 	padding:10px;
 	box-sizing:border-box;
 }
-.ti_cms_articleContent_area .textArea {
+.ti_cms_inputFull {
+		width:98%;
+	}
+/*.ti_cms_articleContent_area .textArea {
 	width:100%;
-}
+}*/
 /* --Dividers--*/
 /*.ti_cms_divider {
 	border-top: 2px dotted #cccccc;
@@ -696,9 +698,6 @@ a.ti_cms_iconBlock{
 
 	.ti_cms_height767 {
 		height:auto !important;
-	}
-	.ti_cms_inputFull {
-		width:98%;
 	}
 
 }

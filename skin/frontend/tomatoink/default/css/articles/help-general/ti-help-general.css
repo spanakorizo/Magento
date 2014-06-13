@@ -106,21 +106,17 @@ Naming convention: add ti_hg_ prefix
 /****Ink Troubleshooting****/
 
 .ti_hg_textWidth {
-	width:80%;
-	height:215px;
+	min-height:195px;
 	position:relative;
 }
 .ti_hg_viewAll{
 	position: absolute;
 	right: 0;
-	bottom: 10px;
-	width: 67px;
-	height:28px;
+	bottom: 0px;
 }
 .ti_hg_chat {
-	display:inline;
-	margin-top:10px;
-	margin-left:10px;
+	margin-top: -43px;
+	margin-left: 55px;
 }
 /*.ti_hg_troubleshoot {
 	background-position:0 -41px; 

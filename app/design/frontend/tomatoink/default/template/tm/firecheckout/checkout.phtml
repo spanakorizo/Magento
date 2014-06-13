@@ -70,13 +70,13 @@
             <!--ti_checkout_optionChecked shows by default-->
             <label class="altTxt btcf"><input type="checkbox" checked="checked"><span><span class="ti_small_text">Save your information for future orders</span></span></label>
             <!--if ti_checkout_optionUnChecked then these two inputs do not display-->
-            <div class="ti-required-entry ti_checkout_password">
+            <div class="ti-required-entry ti_checkout_half">
                 <label class="ti_cms_labelHide">
                     <span>Password</span>
                     <input class="required-entry" type="text" value="Password" onfocus="if(this.value=='Password')this.value='';" onblur="if(this.value=='')this.value='Password';">
                 </label>
             </div>
-            <div class="ti-required-entry ti_checkout_password">
+            <div class="ti-required-entry ti_checkout_half">
                 <label class="ti_cms_labelHide">
                     <span>Password (retype)</span>
                     <input class="required-entry" type="text" value="Password (retype)" onfocus="if(this.value=='Password (retype)')this.value='';" onblur="if(this.value=='')this.value='Password (retype)';">
@@ -198,49 +198,66 @@
                 </li>
             </ul>
         </div>
-        <div class="two_third ti_block_inner"><!--this hides when user selects "Credit Card"-->
+        <div class="two_third ti_block_inner"  style="display:none;"><!--this hides when user selects "Credit Card"-->
             <h2 class="ltWeight text_center lgTxt"><span class="icon-lock ti_checkout_secure"></span><br>All payments are secure.</h2>
         </div>
-        <div class="one_third ti_block_inner" style="display:none;"><!--this displays when user selects "Credit Card"-->
-            <p><span class="ti_checkout_credit mastercard"></span><span class="ti_checkout_credit visa"></span><span class="ti_checkout_credit discover"></span><span class="ti_checkout_credit amex"></span></p>
-            <input class="required-entry ti_checkout_info" type="text" value="Name on card" onfocus="if(this.value=='Name on card')this.value='';" onblur="if(this.value=='')this.value='Name on card';">
-            <input class="required-entry ti_checkout_info" type="text" value="Card number" onfocus="if(this.value=='Card number')this.value='';" onblur="if(this.value=='')this.value='Card number';">
+        <div class="one_third ti_block_inner"><!--this displays when user selects "Credit Card"-->
+            <p><span class="ti_checkout_credit mastercard"></span> <span class="ti_checkout_credit visa"></span> <span class="ti_checkout_credit discover"></span> <span class="ti_checkout_credit amex"></span></p>
+            <div class="ti-required-entry">
+                <label class="ti_cms_labelHide">
+                    <span>Name on card</span>
+                    <input class="required-entry ti_checkout_info" type="text" value="Name on card" onfocus="if(this.value=='Name on card')this.value='';" onblur="if(this.value=='')this.value='Name on card';">
+                </label>
+            </div>
+            <div class="ti-required-entry">
+                <label class="ti_cms_labelHide">
+                    <span>Card Number</span>
+                    <input class="required-entry ti_checkout_info" type="text" value="Card number" onfocus="if(this.value=='Card number')this.value='';" onblur="if(this.value=='')this.value='Card number';">
+                </label>
+            </div>
         </div>
-        <div class="one_third ti_block_inner" style="display:none;"><!--this displays when user selects "Credit Card"-->
-            <div class="one_half">
-                <div class="ti_select_barContainer required-entry">
-                    <select id="">
-                        <option value>Month</option>
-                        <option value>Jan</option>
-                        <option value>Feb</option>
-                        <option value>March</option>
-                        <option value>Apr</option>
-                        <option value>May</option>
-                        <option value>June</option>
-                        <option value>July</option>
-                        <option value>Aug</option>
-                        <option value>Sep</option>
-                        <option value>Oct</option>
-                        <option value>Nov</option>
-                        <option value>Dec</option>
-                    </select>
-                </div>
-            </div>
-            <div class="one_half">
-                <input class="required-entry ti_checkout_info" type="text" value="Year" onfocus="if(this.value=='Year')this.value='';" onblur="if(this.value=='')this.value='Year';">
-            </div>
+        <div class="one_third ti_block_inner"><!--this displays when user selects "Credit Card"-->
             <div class="one">
-                <div class="one_half">
-                    <input class="required-entry ti_checkout_info ti_checkout_ccv" type="text" value="CCV" onfocus="if(this.value=='CCV')this.value='';" onblur="if(this.value=='')this.value='CCV';"> 
+                <div class="ti_checkout_half ti-required-entry">
+                    <div class="ti_select_barContainer">
+                        <label class="ti_cms_labelHide">
+                            <span>Month</span>
+                            <select id="">
+                                <option value>Month</option>
+                                <option value>Jan</option>
+                                <option value>Feb</option>
+                                <option value>March</option>
+                                <option value>Apr</option>
+                                <option value>May</option>
+                                <option value>June</option>
+                                <option value>July</option>
+                                <option value>Aug</option>
+                                <option value>Sep</option>
+                                <option value>Oct</option>
+                                <option value>Nov</option>
+                                <option value>Dec</option>
+                            </select>
+                        </label>
+                    </div>
                 </div>
-                <div class="one_half">
+                <div class="ti_checkout_half ti-required-entry">
+                    <label class="ti_cms_labelHide">
+                        <span>Year</span>
+                        <input class="required-entry ti_checkout_info" type="text" value="Year" onfocus="if(this.value=='Year')this.value='';" onblur="if(this.value=='')this.value='Year';">
+                    </label>
+                </div>
+            </div>
+            <div class="one ti-required-entry">
+                <label class="ti_cms_labelHide">
+                    <span>CCV</span>
+                    <input class="required-entry ti_checkout_info ti_checkout_ccv" type="text" value="CCV" onfocus="if(this.value=='CCV')this.value='';" onblur="if(this.value=='')this.value='CCV';"> 
                     <ul id="ti_checkout_ccv">
                         <li><a rel="nofollow">What's this?</a></li>
                     </ul>
-                </div>
+                </label>
             </div>
             <div class="one">
-                <label class="altTxt"><input type="checkbox" class="ti_checkout_optionChecked">Save this method for future orders</label>
+                <label class="altTxt"><input type="checkbox" class="ti_checkout_optionChecked"><span><span class="ti_small_text">Save this method for future orders</span></span></label>
             </div>
         </div>
     </div>
