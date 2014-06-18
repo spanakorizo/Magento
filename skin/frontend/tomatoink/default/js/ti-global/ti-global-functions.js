@@ -1,18 +1,52 @@
+/*********************************************/
+/*  Function for add to cart and show popup */
+/*****   Added by : Zahed               ****/
+/*****  Date : 16 June 2014           *****/
+/*****************************************/
+function add_to_box(id1,id2){
+
+    var firstId = jQuery('#' + id1 );
+    var secondId = jQuery('#' + id2 );
+    var screenTop = jQuery(document).scrollTop();
+    screenTop = screenTop + 50;
+    var  url = firstId.attr('action');
+    var data = firstId.serialize();
+    jQuery('#ajax_loader').show();
+    try {
+        jQuery.ajax({
+            url: url,
+            dataType: 'json',
+            type : 'post',
+            data: data,
+            success: function(){
+                jQuery('#ajax_loader').hide();
+
+                jQuery.post( ti_global_url + 'productselector/popupcart/index',function(data){
+                    secondId.html(data);
+                    secondId.css('top', screenTop);
+                    secondId.show();
+                    jQuery('#ti_hide_body_div').show();
+                });
+            }
+        });
+
+    } catch (e) {
+    }
+
+}
+/************* function for auto qty set to 1 if not set ******/
+function addSimpleToCart(id) {
+    ti = $(id);
+    if (ti) {
+        if ( ! ti.value || ti.value=='0') ti.value = '1';
+    }
+}
 /*******************************************************/
 /* */
 /* Description: URL, COOKIE FUNCTIONS*/
 /* Author: Yiyang */
 /* Version: 0.0.1 */
 /*******************************************************/
-
-
-function addSimpleToCart(id) {
-    ti = $(id);
-    if (ti) {
-    if ( ! ti.value || ti.value=='0') ti.value = '1';
-    }
-}
-
 
 function getUrlVars() {
     var vars = {};

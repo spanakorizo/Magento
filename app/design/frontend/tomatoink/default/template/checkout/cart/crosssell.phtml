@@ -34,13 +34,22 @@ $coreResource = Mage::getSingleton('core/resource');
 $conn = $coreResource->getConnection('core_read');
 
 $cart_ids = $this->getData('_cart_product_ids'); //get product ids in the cart
-$cartprdIds = $this->_getCartProductIds();
+//$cartprdIds = $this->_getCartProductIds();
+$cart = Mage::getModel('checkout/cart')->getQuote();
+$select = $conn->select()
+    ->from($coreResource->getTableName('sales_flat_quote_item'),array('product_id'))
+    ->where('parent_item_id IS NULL')
+    ->where('quote_id = ?',$cart->getId());
+$cartprdIds = $conn->fetchCol($select);
 
 if (is_null($cart_ids)) {
     $ids = array();
     $i=0;
     foreach ($this->getQuote()->getAllItems() as $item) {
-        if ($product = $item->getProduct()) {
+        $product = $item->getProduct();
+
+        if ( $item->getPrice() > 0 ) {
+
             $ids[$i]['qty'] = $item->getQty();
             $ids[$i]['id'] = $product->getId();
             $relprdIds = $product->getRelatedProductIds();
@@ -51,13 +60,12 @@ if (is_null($cart_ids)) {
                 $select = $conn->select()
                     ->from($coreResource->getTableName('sales_flat_order_item'),array('product_id',new Zend_Db_Expr('SUM(qty_ordered) as pd')))
                     ->where('product_id IN (?)',$unique_prd_ids)
-					->where('product_type = ?',"bundle")
+					->where('product_type = ?','bundle')
                     ->group(array('product_id'));
                 $qty = $conn->fetchAll($select);
                 $max = 0;
                 if($qty != null){
                     foreach($qty as $prd){
-
                         if((int)$prd['pd'] > $max ){
                             //$max = (int)$prd['pd'];
                             $pid = $prd['product_id'];
@@ -66,12 +74,11 @@ if (is_null($cart_ids)) {
                 }
                 else{
 
-
                     if(!is_null($unique_prd_ids)){
                         $select = $conn->select()
                             ->from($coreResource->getTableName('catalog_product_entity'),array('entity_id'))
                             ->where('entity_id IN (?)',$unique_prd_ids)
-                            ->where('type_id = ?',"bundle");
+                            ->where('type_id = ?','bundle');
                         $bundle_prd = $conn->fetchAll($select);
 
                     }
@@ -81,9 +88,9 @@ if (is_null($cart_ids)) {
                     }
                     else{
                         $select = $conn->select()
-                            ->from($coreResource->getTableName('sales_flat_order_item'),array('product_id',new Zend_Db_Expr('SUM(qty_ordered) as pd')))
+                            ->from($coreResource->getTableName('sales_flat_order_item'),array('product_id',new Zend_Db_Expr('SUM(qty_ordered) as prd')))
                             ->where('product_id IN (?)',$unique_prd_ids)
-                            ->where('product_type = ?',"simple")
+                            ->where('product_type = ?','simple')
                             ->group(array('product_id'));
                         $qty = $conn->fetchAll($select);
 
@@ -92,13 +99,24 @@ if (is_null($cart_ids)) {
                         if($qty != null){
                             foreach($qty as $prd){
 
-                                if((int)$prd['pd'] > $max ){
+                                if((int)$prd['prd'] > $max ){
                                     //$max = (int)$prd['pd'];
                                     $pid = $prd['product_id'];
                                 }
                             }
                         }else{
-                            $pid = 0;
+                            if(!is_null($unique_prd_ids)){
+                                $select = $conn->select()
+                                    ->from($coreResource->getTableName('catalog_product_entity'),array('entity_id'))
+                                    ->where('entity_id IN (?)',$unique_prd_ids)
+                                    ->where('type_id = ?','simple');
+                                $simple_prd = $conn->fetchAll($select);
+
+                            }
+
+                            if($simple_prd){
+                                $pid = $simple_prd [0]["entity_id"];
+                            }
                         }
                     }
 

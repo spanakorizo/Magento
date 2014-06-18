@@ -68,7 +68,7 @@
         </div>
         <div class="one_half">
             <!--ti_checkout_optionChecked shows by default-->
-            <label class="altTxt btcf"><input type="checkbox" checked="checked"><span><span class="ti_small_text">Save your information for future orders</span></span></label>
+            <label class="altTxt btcf"><input type="checkbox" checked="checked" class="altTxt"><span><span class="ti_small_text">Save your information for future orders</span></span></label>
             <!--if ti_checkout_optionUnChecked then these two inputs do not display-->
             <div class="ti-required-entry ti_checkout_half">
                 <label class="ti_cms_labelHide">
@@ -84,9 +84,9 @@
             </div>
         </div>
         <div class="one_half">
-            <label class="altTxt btcf"><input type="checkbox" checked="checked"><span><span class="ti_small_text">Sign up for TomatoInk's bi-weekly email deals</span></span></label>
+            <label class="altTxt btcf"><input type="checkbox" checked="checked" class="altTxt"><span><span class="ti_small_text">Sign up for TomatoInk's bi-weekly email deals</span></span></label>
             <!--if ti_checkout_optionChecked then shipping info displays-->
-            <label class="altTxt btcf"><input type="checkbox" checked="checked"><span><span class="ti_small_text">Ship to a different address</span></span></label>
+            <label class="altTxt btcf"><input type="checkbox" class="altTxt"><span><span class="ti_small_text">Ship to a different address</span></span></label>
         </div>
     </div>
     <!--end billing info-->
@@ -180,7 +180,7 @@
                 <ul class="ti_checkout_list">
                     <li><label>
                         <input type="radio"><div class="ti_select_barContainer">
-                            <select id="">
+                            <select>
                                 <option value>Saved method</option>
                                 <option value>Credit Card 1</option>
                                 <option value>Credit Card 2</option>
@@ -188,7 +188,7 @@
                         </div></label>
                     </li>
                     <!--when radio is selected, lose class="ltWeight"-->
-                    <li>
+                    <li><!--these credit spans need a class of ti_checkout_creditSelected when selected -->
                         <label class="lgTxt ltWeight"><input type="radio"><span class="ti_checkout_credit paypal"></span><span><span class="ti_small_text">Paypal</span></span></label>
                     </li>
                     <li>
@@ -199,11 +199,13 @@
                     </li>
                 </ul>
             </div>
-            <div class="two_third ti_block_inner"  style="display:none;"><!--this hides when user selects "Credit Card"-->
+            <div class="two_third ti_block_inner"><!--this hides when user selects "Credit Card"-->
                 <h2 class="ltWeight text_center lgTxt"><span class="icon-lock ti_checkout_secure"></span><br>All payments are secure.</h2>
             </div>
-            <div class="one_third ti_block_inner"><!--this displays when user selects "Credit Card"-->
-                <p class="text_center"><span class="ti_checkout_credit mastercard"></span> <span class="ti_checkout_credit visa"></span> <span class="ti_checkout_credit discover"></span> <span class="ti_checkout_credit amex"></span></p>
+            <div class="one_third ti_block_inner"  style="display:none;"><!--this displays when user selects "Credit Card"-->
+                <p class="text_center"><!--these credit spans need a class of ti_checkout_creditSelected when selected -->
+                    <span class="ti_checkout_credit mastercard"></span> <span class="ti_checkout_credit visa"></span> <span class="ti_checkout_credit discover"></span> <span class="ti_checkout_credit amex"></span>
+                </p>
                 <div class="ti-required-entry">
                     <label class="ti_cms_labelHide">
                         <span>Name on card</span>
@@ -217,7 +219,7 @@
                     </label>
                 </div>
             </div>
-            <div class="one_third ti_block_inner"><!--this displays when user selects "Credit Card"-->
+            <div class="one_third ti_block_inner"  style="display:none;"><!--this displays when user selects "Credit Card"-->
                 <div class="one">
                     <div class="ti-required-entry">
                         <div class="ti_select_barContainer ti_checkout_half">
@@ -260,7 +262,7 @@
                     </ul>
                 </div>
                 <div class="one">
-                    <label class="altTxt"><input type="checkbox" class="ti_checkout_optionChecked"><span><span class="ti_small_text">Save this method for future orders</span></span></label>
+                    <label class="altTxt"><input type="checkbox" class="altTxt"><span><span class="ti_small_text">Save this method for future orders</span></span></label>
                 </div>
             </div>
         </div>
