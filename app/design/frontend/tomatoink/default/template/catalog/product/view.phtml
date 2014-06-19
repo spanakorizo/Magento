@@ -86,7 +86,10 @@ error_reporting(E_ALL);
 <script type="text/javascript">
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
+<div id='ajax_loader' style='display:none;z-index:99999;position:fixed;margin:3.5% 40%;'><img src='<?php echo $this->getSkinUrl('images/loading.gif')?>'/></div>
+<div id="show_cart" class="ti_popup_cart_window">
 
+</div>
 
 <?php if ($_product->getTypeId() == "simple" or $_product->getTypeId() == "bundle") :?>
 <div id="ti_cms_product_container" class="btcf">
@@ -114,7 +117,7 @@ error_reporting(E_ALL);
 
                             <p class="lgTxt"><span class="ti_small_text" id="ti_product_stockAlert"><?php $stockItem = $_product->getStockItem(); if($stockItem->getIsInStock()) {echo "In stock!";} else {echo "Out of stock!";} ?></span>
                                 <br>Qty: <input type="text" class="input-text qty" name="qty<?php echo $_product->getId() ?>" maxlength="3" id = "ti_simple_prd_<?php echo $_product->getId(); ?>" value=""/></input>
-                                <input type="button" value="Add To Cart" name="<?php echo $_product->getId(); ?>" onclick="addSimpleToCart('ti_simple_prd_<?php echo $_product->getId(); ?>');product_form.submit()"></input></p>
+                                <input type="button" value="Add To Cart" name="<?php echo $_product->getId(); ?>" onclick="addSimpleToCart('ti_simple_prd_<?php echo $_product->getId(); ?>');add_to_box('product_form','show_cart');" />
                             <?php
                             if ($_product->getTypeId() == 'bundle'){
 
@@ -330,7 +333,7 @@ if (!jQuery("#ti_product_qtyDiscountDrop").is(":visible"))
                 </div>
             </div>
         </div>
-        <form action="<?php echo Mage::getBaseUrl().'productselector/carts/' ?>" method="post" id="product_cart"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+        <form action="<?php echo Mage::getBaseUrl().'productselector/carts/' ?>" method="post" id="product_add_cart"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
             <?php echo $this->getBlockHtml('formkey') ?>
 
             <?php echo $this->getChildHtml('product_type_data') ?>
@@ -447,71 +450,5 @@ jQuery(document).ready(function($) {
         <?php //echo $this->getChildHtml('product_additional_data') ?>
 </div>
 
-
-
-
-
 <?php endif; ?>
-<script type="text/javascript">
 
-    function addSimpleToCart(id) {
-        ti = $(id);
-        if (ti) {
-            if ( ! ti.value || ti.value=='0') ti.value = '1';
-        }
-    }
-
-</script>
-
-
-<script type="text/javascript">
-//<![CDATA[
-    var productAddToCartForm = new VarienForm('product_addtocart_form');
-    productAddToCartForm.submit = function(button, url) {
-        if (this.validator.validate()) {
-            var form = this.form;
-            var oldUrl = form.action;
-
-            if (url) {
-               form.action = url;
-            }
-            var e = null;
-            try {
-                this.form.submit();
-            } catch (e) {
-            }
-            this.form.action = oldUrl;
-            if (e) {
-                throw e;
-            }
-
-            if (button && button != 'undefined') {
-                button.disabled = true;
-            }
-        }
-    }.bind(productAddToCartForm);
-
-    productAddToCartForm.submitLight = function(button, url){
-        if(this.validator) {
-            var nv = Validation.methods;
-            delete Validation.methods['required-entry'];
-            delete Validation.methods['validate-one-required'];
-            delete Validation.methods['validate-one-required-by-name'];
-            // Remove custom datetime validators
-            for (var methodName in Validation.methods) {
-                if (methodName.match(/^validate-datetime-.*/i)) {
-                    delete Validation.methods[methodName];
-                }
-            }
-
-            if (this.validator.validate()) {
-                if (url) {
-                    this.form.action = url;
-                }
-                this.form.submit();
-            }
-            Object.extend(Validation.methods, nv);
-        }
-    }.bind(productAddToCartForm);
-//]]>
-</script>

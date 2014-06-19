@@ -1,0 +1,52 @@
+<?php
+/*$prdinfo = $_POST['prd'];
+
+$individual_product = explode('#',$prdinfo);
+foreach($individual_product as $productarray){
+    $getItem = explode('*',$productarray);
+}*/
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$cart = Mage::getModel('checkout/cart')->getQuote();
+//$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+//$total_num = $cart->getItemsCount();
+$total_num = round($cart->getItemsQty());
+if ($total_num == "") $total_num=0;
+
+$grandtotal = $cart->getSubtotal();
+
+$select = $conn->select()
+    ->from($coreResource->getTableName('sales_flat_quote_item'),array('product_id'))
+    ->where('parent_item_id IS NULL')
+    ->where('quote_id = ?',$cart->getId());
+$cartItems = $conn->fetchCol($select);
+
+echo "<div class='full'><p> Total Items in Cart : ".$total_num."   <span>Sub Total: $" . round($grandtotal,2) . "</span></p><span class='ti_close_popup'><a href='#'>close</a></span></div><div class='ti_cart_cms_separator'></div>";
+
+foreach ($cart->getAllItems() as $item) {
+    $product = $item->getProduct();
+    if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
+        echo "<div class='one_fourth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image')->resize(75) . "'></img></a></div><div class='one_half'><a href='" . $product->getProductUrl() . "'><p>" . $product->getName() . "</p></a></div><div class='one_fourth'><p>".$item->getQty()."</div><div class='ti_cms_separator'></div>";
+    //$productId = $item->getProduct()->getId();
+    //$productqty = $item->getQty();
+    //$productPrice = $item->getProduct()->getPrice();
+
+}
+echo "<div class='text_center' ><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a><h1> or </h1>";
+echo "<a class='ti_button' href='".$this->getContinueShoppingUrl()."' ><strong>Continue Shopping</strong></a></div>";
+?>
+<script>
+    jQuery('.ti_close_popup').click(function(e){
+        e.preventDefault();
+        jQuery('#show_cart').hide(e);
+        jQuery('#ti_hide_body_div').hide();
+         e.stopPropagation();
+    });
+    jQuery(document).keyup(function(e) {
+        e.preventDefault();
+        if (e.keyCode == 27) { // esc keycode
+            jQuery('#ti_hide_body_div').hide();
+            jQuery('#show_cart').hide(e);
+        }
+    });
+</script>

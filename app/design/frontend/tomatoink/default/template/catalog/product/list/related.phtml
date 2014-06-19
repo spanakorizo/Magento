@@ -77,7 +77,7 @@
 					<div class="ti_cms_block_qty">
 						<p class="lgTxt">
 							<?php echo $this->__('Qty:') ?><input type="text" name="qty<?php echo $_related_item->getId(); ?>" maxlength="3" id = "ti_related_prd_<?php echo $_related_item->getId(); ?>" value="" class="input-text qty" />
-							<input type="button" value="Add To Cart" name="<?php echo $_related_item->getId(); ?>" onclick="addSimpleToCart('ti_related_prd_<?php echo $_related_item->getId(); ?>');related_product_cart<?php echo $_related_item->getId() ?>.submit()">
+                            <input type="button" value="Add To Cart" name="<?php echo $_related_item->getId(); ?>" onclick="addSimpleToCart('ti_related_prd_<?php echo $_related_item->getId(); ?>'); add_to_box('related_product_cart<?php echo $_related_item->getId() ?>','show_cart');">
 						</p>
 						<!-- customize bundle button !-->
 						<?php

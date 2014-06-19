@@ -19,18 +19,19 @@ Naming convention: add ti_na_ prefix
 /*********************************************************/
 
 .ti_na_container {
-	width: 860px;
+	/*width: 860px;*/
 	font-family: sans-serif;
 	font-size:9px;
 	line-height:1.2em;
 }
-.ti_na_leftCol, .ti_na_rightCol {
-	width:48%;
-	float: left;
+.ti_na_rightCol, .ti_na_leftCol{
+	width:49%;
+}
+.ti_na_rightCol {
+	padding-right:0;
 }
 .ti_na_leftCol{
-	margin-right:3%;
-	margin-left:1%;
+	padding-left:0;
 }
 .ti_na_title2 {
 	text-align:left;
@@ -100,3 +101,14 @@ Naming convention: add ti_na_ prefix
 #ti_na_rint-div td{
 	padding:0;
 }*/
+
+@media only screen and (max-width : 767px), @media only screen and (max-device-width : 767px){
+
+	.ti_na_width767 {
+		min-width:100% !important;
+	}
+	.ti_na_rightCol, .ti_na_leftCol {
+		padding:1% !important;
+		min-width:100% !important;
+	}
+}

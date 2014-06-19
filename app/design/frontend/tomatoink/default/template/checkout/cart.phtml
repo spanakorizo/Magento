@@ -34,10 +34,18 @@
 <div class="ti_cms_contain cart" id="ti_cart_block">
     <div class="btcf">
         <ul class="ti_cart_review ti_green_cart two_third">
-            <li><h3 class="ti_green_head"><?php echo $this->__('Your Cart') ?></h1></li>
+            <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()):?>
+                <li><a href="#" id="ti_cart_login"><h3 class="ti_green_head"><?php echo $this->__('Already a customer?
+') ?></h3></a></li>
+            <?php endif; ?>
+            <!--<li><h3 class="ti_green_head"><?php /*echo $this->__('Your Cart') */?></h1></li>
             <li><h3 class="ti_green_head ltWeight lgTxt icon-bubbles"><a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','TomatoInk Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">Need help?</a></h3></li>
-            <li><span class="ti_small_text"><input class="ti_altBtn" type="button" value="Login"></span></li>
+            <li><span class="ti_small_text"><input class="ti_altBtn" type="button" value="Login"></span></li>-->
+
         </ul>
+        <div class="ti_popup_cart_window" id="ti_cart_login_box">
+            <?php echo $this->getLayout()->createBlock('compandsave_productselector/cartlogin')->setTemplate('productselector/cartlogin.phtml')->toHtml(); ?>
+        </div>
         <?php if(!$this->hasError()): ?>
         <!--<div class="checkout-types one_third">-->
         <?php foreach ($this->getMethods('top_methods') as $method): ?>
@@ -176,3 +184,18 @@
         </div>
     </div>
 </div>
+<script>
+    jQuery('#ti_cart_login').click(function(e){
+        e.preventDefault();
+        jQuery('#ti_hide_body_div').show();
+        jQuery('#ti_cart_login_box').show(e);
+        e.stopPropagation();
+    });
+    jQuery(document).keyup(function(e) {
+        e.preventDefault();
+        if (e.keyCode == 27) { // esc keycode
+            jQuery('#ti_hide_body_div').hide();
+            jQuery('#ti_cart_login_box').hide(e);
+        }
+    });
+</script>

@@ -35,17 +35,18 @@ class Compandsave_Productselector_CartsController extends Mage_Core_Controller_F
 			$qty = $this->getRequest()->getParam('qty'.$product_id);
 
 			if ($qty <= 0) continue;
-			/* $request = new Varien_Object();
-			$request->setData($param); */
+			
 			$product = Mage::getModel('catalog/product')->load($product_id);
 						
             if ($product->getTypeId() == Mage_Catalog_Model_Product_Type::TYPE_SIMPLE) {
                 
 				if ($product->getId() && $product->isVisibleInCatalog()) {
                     try {
-						
+
 						
                         $cart->getQuote()->addProduct($product,$qty);
+
+
                     } catch (Exception $e){
                         $allAdded = false;
                     }
@@ -72,6 +73,8 @@ class Compandsave_Productselector_CartsController extends Mage_Core_Controller_F
                     try {
 												
                         $cart->addProduct($product,$params);
+
+                        
                     } catch (Exception $e){
                         $this->__('Some of the requested products are not available in the desired quantity.');
                         $flag=1;
@@ -86,12 +89,16 @@ class Compandsave_Productselector_CartsController extends Mage_Core_Controller_F
         }
 				
         $cart->save();
-        if($flag == 0)
-		    Mage::getSingleton('checkout/session')->setCartWasUpdated(true);
+
+        if($flag == 0){
+            Mage::getSingleton('checkout/session')->setCartWasUpdated(true);
+            $this->_redirect('checkout/cart');
+        }
+
         if ($this->getRequest()->isXmlHttpRequest()) {
             exit('1');
         }
-        $this->_redirect('checkout/cart');
+
 	}
 
 }

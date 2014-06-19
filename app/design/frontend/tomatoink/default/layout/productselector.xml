@@ -11,6 +11,16 @@
 			<block type="compandsave_productselector/ajaxlist" name="root" as="ajaxlist" output="toHtml" template="productselector/ajaxlist.phtml" />
         </reference>
 	</productselector_ajax_index>
+    <productselector_popupcart_index>
+        <reference>
+            <block type="compandsave_productselector/popupcart" name="root" as="popupcart" output="toHtml" template="productselector/popupcart.phtml" />
+        </reference>
+    </productselector_popupcart_index>
+    <!--<productselector_cartlogin_show>
+        <reference>
+            <block type="compandsave_productselector/cartlogin" name="root" as="cartlogin" output="toHtml" template="productselector/cartlogin.phtml" />
+        </reference>
+    </productselector_cartlogin_show>-->
     <productselector_ajax_livechat>
         <reference>
             <block type="compandsave_productselector/livechat" name="root" as="livechat" output="toHtml" template="productselector/livechat.phtml" />

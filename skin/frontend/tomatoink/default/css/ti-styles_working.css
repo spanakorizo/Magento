@@ -286,7 +286,6 @@ textarea {
 
 input[type="text"],
 input[type="number"],
-input[type="email"],
 input[type="password"],
 textarea {
   color:#559a13;
@@ -345,7 +344,6 @@ input[type="button"].ti_altBtn,
 
 input[type="text"]:hover,
 input[type="number"]:hover,
-input[type="email"]:hover,
 input[type="password"]:hover,
 textarea:hover{
 	color:#31590b;
@@ -366,7 +364,6 @@ input[type="button"].ti_altBtn:hover,
 
 .ti_input_bar input[type="text"],
 .ti_input_bar input[type="number"],
-.ti_input_bar input[type="email"],
 .ti_input_bar input[type="password"]{
 	width:60%;
 }

@@ -699,6 +699,10 @@ a.ti_cms_iconBlock{
 	.ti_cms_height767 {
 		height:auto !important;
 	}
+	.ti_cms_borderNo {
+		border-right:none;
+		border-left:none;
+	}
 
 }
 
