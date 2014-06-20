@@ -51,7 +51,7 @@
                 </autoship>
                 <packagelist translate="title"
                         module="compandsave_functions">
-                    <title>Package List</title>
+                    <title>Batch Print</title>
                     <sort_order>13</sort_order>
 
                     <!--

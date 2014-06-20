@@ -21,12 +21,12 @@ $select = $conn->select()
     ->where('quote_id = ?',$cart->getId());
 $cartItems = $conn->fetchCol($select);
 
-echo "<div class='full'><p> Total Items in Cart : ".$total_num."   <span>Sub Total: $" . round($grandtotal,2) . "</span></p><span class='ti_close_popup'><a href='#'>close</a></span></div><div class='ti_cart_cms_separator'></div>";
+echo "<div class='ti_cartpopup_block_headerBar-green'><h2 class='white ti_top_margin_hide'> Total Items in Cart : ".$total_num."   <span>Sub Total: $" . round($grandtotal,2) . "</span></h2><span class='ti_close_popup'><a href='#' class='ti_txt_dec_none'><p class='ti_orange_head ti_checkoutStep_close'>X</p></a></span></div>";
 
 foreach ($cart->getAllItems() as $item) {
     $product = $item->getProduct();
     if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
-        echo "<div class='one_fourth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image')->resize(75) . "'></img></a></div><div class='one_half'><a href='" . $product->getProductUrl() . "'><p>" . $product->getName() . "</p></a></div><div class='one_fourth'><p>".$item->getQty()."</div><div class='ti_cms_separator'></div>";
+        echo "<div class='one_fifth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image')->resize(75) . "'></img></a></div><div class='two_fifth'><a href='" . $product->getProductUrl() . "'><p>" . $product->getName() . "</p></a></div><div class='one_fifth text_center'><p>".$item->getQty()."</p></div><div class='one_fifth'><p>$".$item->getQty() * $item->getPrice()."</p></div><div class='ti_cms_separator'></div>";
     //$productId = $item->getProduct()->getId();
     //$productqty = $item->getQty();
     //$productPrice = $item->getProduct()->getPrice();

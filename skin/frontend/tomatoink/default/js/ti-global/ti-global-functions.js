@@ -41,6 +41,13 @@ function addSimpleToCart(id) {
         if ( ! ti.value || ti.value=='0') ti.value = '1';
     }
 }
+/******************* function for get parms from url **********/
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
 /*******************************************************/
 /* */
 /* Description: URL, COOKIE FUNCTIONS*/

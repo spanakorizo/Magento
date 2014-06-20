@@ -185,16 +185,32 @@
     </div>
 </div>
 <script>
+	var email = getParameterByName('email');
+	if(email != ''){
+		//alert('Invalid User Name or Password');
+		jQuery('#ti_cart_popup_error_msg').show();
+		jQuery('#ti_hide_body_div').show();
+        jQuery('#ti_cart_login_box').show();
+		jQuery('#login-email').val(email);
+	}
     jQuery('#ti_cart_login').click(function(e){
         e.preventDefault();
         jQuery('#ti_hide_body_div').show();
         jQuery('#ti_cart_login_box').show(e);
         e.stopPropagation();
     });
+	jQuery('#ti_cartlogin_close').click(function(e){
+        e.preventDefault();
+        jQuery('#ti_hide_body_div').hide();
+        jQuery('#ti_cart_login_box').hide(e);
+		jQuery('#ti_cart_popup_error_msg').hide();
+        e.stopPropagation();
+    });
     jQuery(document).keyup(function(e) {
         e.preventDefault();
         if (e.keyCode == 27) { // esc keycode
-            jQuery('#ti_hide_body_div').hide();
+            jQuery('#ti_hide_body_div').hide
+			jQuery('#ti_cart_popup_error_msg').hide();
             jQuery('#ti_cart_login_box').hide(e);
         }
     });

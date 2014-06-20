@@ -16,18 +16,27 @@ class Compandsave_Productselector_CartloginController extends Mage_Core_Controll
             //If the customer exists, log them in by forwarding to loginPost
             if($customer->getId())
             {
-                // just make the customer log in
-                $mysession = Mage::getSingleton('customer/session');
-                $mysession->setBeforeAuthUrl(Mage::getUrl('checkout/cart'));
-                $mysession->setAfterAuthUrl(Mage::getUrl('checkout/cart'));
-                $this->_forward('loginPost','account','customer');
+
+                $password = $login['password']; //validate password
+                if($customer->validatePassword($password)){
+                    $mysession = Mage::getSingleton('customer/session');
+                    $mysession->setBeforeAuthUrl(Mage::getUrl('checkout/cart'));
+                    $mysession->setAfterAuthUrl(Mage::getUrl('checkout/cart'));
+                    $this->_forward('loginPost','account','customer');
+                    $this->_redirect('checkout/cart');
+                }
+                else{
+                    $this->_redirect('checkout/cart',array( '_query' => array('email' => Mage::helper('core')->escapeHtml($email))));
+                }
+
             }
             else
             {
-                //There is no customer with that email.
+                $this->_redirect('checkout/cart',array( '_query' => array('email' => Mage::helper('core')->escapeHtml($email))));
+				
             }
         }
-        $this->_redirect('checkout/cart');
+        
         return;
     }
     public function showAction(){
