@@ -20,13 +20,19 @@ function add_to_box(id1,id2){
             data: data,
             success: function(){
                 jQuery('#ajax_loader').hide();
-
+                jQuery.post( ti_global_url + 'productselector/popupcart/header',function(response){
+                    var obj = response.evalJSON();
+                    jQuery('#ti_header_cartcount').html(obj.totalnumber);
+                    jQuery('#ti_header_cartitems').html(obj.alltext);
+                });
                 jQuery.post( ti_global_url + 'productselector/popupcart/index',function(data){
                     secondId.html(data);
                     secondId.css('top', screenTop);
                     secondId.show();
                     jQuery('#ti_hide_body_div').show();
+
                 });
+
             }
         });
 

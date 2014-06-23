@@ -174,7 +174,7 @@ else $cclast = "";
         $sku = $item->getSku();
 
         $product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
-
+        if ($product)
         $productinfo = "<tr><td bgcolor='#F9F9F9' width='12%' valign='TOP'><nobr>" . $sku . "</nobr></td><td bgcolor='#F9F9F9' align='LEFT' width='67%' valign='TOP'><b>" . $item->getName() . "</b></td><td bgcolor='#F9F9F9' width='6%'  valign='CENTER'><span style='font-size:15px'><b>" . $item->getQtyOrdered() . "</b></span></td><td bgcolor='#F9F9F9' align='right'  width='7%'  valign='CENTER'>" . $product->getWarehouseLocation() . "</td></tr>";
 
 

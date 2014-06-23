@@ -32,8 +32,8 @@ foreach ($cart->getAllItems() as $item) {
     //$productPrice = $item->getProduct()->getPrice();
 
 }
-echo "<div class='text_center' ><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a><h1> or </h1>";
-echo "<a class='ti_button' href='".$this->getContinueShoppingUrl()."' ><strong>Continue Shopping</strong></a></div>";
+echo "<div class='text_center' ><a class='ti_button ti_txt_dec_none' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a><h1> or </h1>";
+echo "<a class='ti_button ti_txt_dec_none' href='".$this->getContinueShoppingUrl()."' ><strong>Continue Shopping</strong></a></div>";
 ?>
 <script>
     jQuery('.ti_close_popup').click(function(e){

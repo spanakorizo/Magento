@@ -21,7 +21,7 @@
 .ti_header_left_align{color: #559A13;line-height: 1.1em; text-shadow: -0.5px -0.5px 0 #333333, 1px 1px 0 #ECECEC;text-align: left}
 .ti_subcat_product_gid_one_fifth{width:19%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
 .ti_close_popup{position: absolute;right:0;top:0}
-#ti_cartlogin_close{position: absolute;right:5px;top:5px}
+#ti_cartlogin_close,#ti_cartregister_close{position: absolute;right:5px;top:5px}
 #ti_cart_popup_error_msg{display:none}
 .ti_popup_cart_window{
     border-radius: 5px;
@@ -67,3 +67,6 @@
 }
 .ti_top_margin_hide{margin-top:0px}
 .ti_txt_dec_none{text-decoration:none}
+.ti_inline{display:inline}
+.ti_cart_popup_error{display:none}
+#ti_cart_register_box{display:none}

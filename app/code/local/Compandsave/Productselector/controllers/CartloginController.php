@@ -26,13 +26,13 @@ class Compandsave_Productselector_CartloginController extends Mage_Core_Controll
                     $this->_redirect('checkout/cart');
                 }
                 else{
-                    $this->_redirect('checkout/cart',array( '_query' => array('email' => Mage::helper('core')->escapeHtml($email))));
+                    $this->_redirect('checkout/cart',array( '_query' => array('email' => Mage::helper('core')->encrypt($email))));
                 }
 
             }
             else
             {
-                $this->_redirect('checkout/cart',array( '_query' => array('email' => Mage::helper('core')->escapeHtml($email))));
+                $this->_redirect('checkout/cart',array( '_query' => array('email' => Mage::helper('core')->encrypt($email))));
 				
             }
         }
@@ -42,5 +42,61 @@ class Compandsave_Productselector_CartloginController extends Mage_Core_Controll
     public function showAction(){
         $this->loadLayout();
         $this->renderLayout();
+    }
+
+    public function createAction(){
+        // if customer is not logged in
+        if(!Mage::getSingleton('customer/session')->isLoggedIn())
+        {
+
+            $password = $this->getRequest()->getPost('password');
+            $confirmation = $this->getRequest()->getPost('confirmation');
+            $email = $this->getRequest()->getPost('email');
+            $firstname = $this->getRequest()->getPost('firstname');
+            $lastname = $this->getRequest()->getPost('lastname');
+
+            if (!Zend_Validate::is(trim($firstname), 'NotEmpty') || !Zend_Validate::is(trim($lastname), 'NotEmpty') || !Zend_Validate::is(trim($email), 'NotEmpty')|| !Zend_Validate::is(trim($password), 'NotEmpty') ) {
+                $this->_redirect('checkout/cart',array( '_query' => array('empty' => 'true')));
+                return;
+            }
+
+            if (!Zend_Validate::is($email, 'EmailAddress')) {
+                $this->_redirect('checkout/cart',array( '_query' => array('emailid' => Mage::helper('core')->encrypt($email),'firstname' => Mage::helper('core')->encrypt($firstname),'lastname' => Mage::helper('core')->encrypt($lastname))));
+				return;
+            }
+
+            if (strlen($password) && !Zend_Validate::is($password, 'StringLength', array(6))) {
+                $this->_redirect('checkout/cart',array( '_query' => array('emailid' => Mage::helper('core')->encrypt($email),'firstname' => Mage::helper('core')->encrypt($firstname),'lastname' => Mage::helper('core')->encrypt($lastname),'len' => Mage::helper('core')->encrypt('false'))));
+				return;
+            }
+
+            if ($password != $confirmation) {
+                $this->_redirect('checkout/cart',array( '_query' => array('emailid' => Mage::helper('core')->encrypt($email),'firstname' => Mage::helper('core')->encrypt($firstname),'lastname' => Mage::helper('core')->encrypt($lastname),'valid' => Mage::helper('core')->encrypt('false'))));
+				return;
+            }
+
+
+            $customer = Mage::getModel('customer/customer')
+                ->setWebsiteId(Mage::app()->getStore()
+                    ->getWebsiteId())->loadByEmail($email);
+            if(!$customer->getId()){  ///customer email not exist so we can add customer
+                var_dump($password);
+
+                $mysession = Mage::getSingleton('customer/session');
+                $mysession->setBeforeAuthUrl(Mage::getUrl('checkout/cart'));
+                $mysession->setAfterAuthUrl(Mage::getUrl('checkout/cart'));
+                $this->_forward('createPost','account','customer');
+                $this->_redirect('checkout/cart');
+            }
+            else{
+                $this->_redirect('checkout/cart',array( '_query' => array('emailid' => Mage::helper('core')->encrypt($email),'firstname' => Mage::helper('core')->encrypt($firstname),'lastname' => Mage::helper('core')->encrypt($lastname),'exist' => Mage::helper('core')->encrypt('true'))));
+				return;
+
+            }
+
+
+        }
+
+        return;
     }
 }

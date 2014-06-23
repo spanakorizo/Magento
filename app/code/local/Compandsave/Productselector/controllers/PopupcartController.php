@@ -4,5 +4,9 @@ class Compandsave_Productselector_PopupcartController extends Mage_Core_Controll
         $this->loadLayout();
         $this->renderLayout();
 	}
+    public function headerAction(){
+        $this->loadLayout();
+        $this->renderLayout();
+    }
 	
  }

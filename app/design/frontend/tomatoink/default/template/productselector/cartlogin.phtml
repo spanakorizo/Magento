@@ -6,10 +6,13 @@
     <?php echo $this->getBlockHtml('formkey'); ?>
     <div class="block-content text_center">
 		<h2 class="ti_green_head" id="ti_cart_popup_error_msg">Invalid User Email or Password </h2>
-        <h2 class="ti_orange_head">Email</h2><input type="email" name="login[username]" class="required-entry" id="login-email" required="required" placeholder="Email" /><br/>
-        <h2 class="ti_orange_head">Password</h2><input type="password" name="login[password]" placeholder="Password" class="required-entry" id="login-password" required="required" />
+        <h2 class="ti_orange_head"><em> * </em><?php echo $this->__('Email Address') ?></h2><input type="email" name="login[username]" class="required-entry" id="login-email" required="required" placeholder="<?php echo $this->__('Email') ?>" /><br/>
+        <h2 class="ti_orange_head"><em> * </em><?php echo $this->__('Password') ?></h2><input type="password" name="login[password]" placeholder="<?php echo $this->__('Password') ?>" class="required-entry" id="login-password" required="required" />
         <div class="actions">
             <button type="submit" class="ti_button"><span><span><?php echo $this->__('Login') ?></span></span></button>
+        </div>
+		<div class="actions">
+            <a href="" id="ti_show_register_info" class="ti_button ti_txt_dec_none"><?php echo $this->__('Create an Account') ?></a>
         </div>
     </div>
 </form>
