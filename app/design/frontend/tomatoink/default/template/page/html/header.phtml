@@ -19,7 +19,7 @@
 	<script type="text/javascript">
 		var homepage = "<?php if ($this->getIsHomePage()) echo 'true'; else echo 'false'?>";
 		var ti_global_url = "<?php echo $current_url;?>";
-		ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
+		if (ti_global_url.match(/index.php/)) ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
 		
 	</script>
 
