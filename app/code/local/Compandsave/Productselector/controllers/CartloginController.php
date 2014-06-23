@@ -11,8 +11,7 @@ class Compandsave_Productselector_CartloginController extends Mage_Core_Controll
             $customer = Mage::getModel('customer/customer')
                 ->setWebsiteId(Mage::app()->getStore()
                     ->getWebsiteId())->loadByEmail($email);
-            $quote = Mage::getSingleton('checkout/cart')->getQuote();
-
+            
             //If the customer exists, log them in by forwarding to loginPost
             if($customer->getId())
             {
@@ -49,11 +48,11 @@ class Compandsave_Productselector_CartloginController extends Mage_Core_Controll
         if(!Mage::getSingleton('customer/session')->isLoggedIn())
         {
 
-            $password = $this->getRequest()->getPost('password');
-            $confirmation = $this->getRequest()->getPost('confirmation');
-            $email = $this->getRequest()->getPost('email');
-            $firstname = $this->getRequest()->getPost('firstname');
-            $lastname = $this->getRequest()->getPost('lastname');
+            $password = (string) $this->getRequest()->getPost('password');
+            $confirmation = (string) $this->getRequest()->getPost('confirmation');
+            $email = (string) $this->getRequest()->getPost('email');
+            $firstname = (string) $this->getRequest()->getPost('firstname');
+            $lastname = (string) $this->getRequest()->getPost('lastname');
 
             if (!Zend_Validate::is(trim($firstname), 'NotEmpty') || !Zend_Validate::is(trim($lastname), 'NotEmpty') || !Zend_Validate::is(trim($email), 'NotEmpty')|| !Zend_Validate::is(trim($password), 'NotEmpty') ) {
                 $this->_redirect('checkout/cart',array( '_query' => array('empty' => 'true')));
@@ -80,9 +79,8 @@ class Compandsave_Productselector_CartloginController extends Mage_Core_Controll
                 ->setWebsiteId(Mage::app()->getStore()
                     ->getWebsiteId())->loadByEmail($email);
             if(!$customer->getId()){  ///customer email not exist so we can add customer
-                var_dump($password);
-
-                $mysession = Mage::getSingleton('customer/session');
+                
+				$mysession = Mage::getSingleton('customer/session');
                 $mysession->setBeforeAuthUrl(Mage::getUrl('checkout/cart'));
                 $mysession->setAfterAuthUrl(Mage::getUrl('checkout/cart'));
                 $this->_forward('createPost','account','customer');
@@ -97,6 +95,47 @@ class Compandsave_Productselector_CartloginController extends Mage_Core_Controll
 
         }
 
+        return;
+    }
+	
+	public function forgetpassAction(){
+        // if customer is not logged in
+        if(!Mage::getSingleton('customer/session')->isLoggedIn())
+        {
+            // get the email and load the customer by id
+            $email = (string) $this->getRequest()->getPost('forget_email');
+			if ($email) {
+				if (!Zend_Validate::is($email, 'EmailAddress')) {
+					$this->_redirect('checkout/cart',array( '_query' => array('forgetemail' => Mage::helper('core')->encrypt($email),'invalid' => Mage::helper('core')->encrypt('true') )));
+					return;
+				}
+				$customer = Mage::getModel('customer/customer')
+					->setWebsiteId(Mage::app()->getStore()
+						->getWebsiteId())->loadByEmail($email);
+				
+				//If the customer exists, log them in by forwarding to loginPost
+				if($customer->getId()){  ///customer email not exist so we can add customer
+					
+					try {
+						$newResetPasswordLinkToken =  Mage::helper('customer')->generateResetPasswordLinkToken();
+						$customer->changeResetPasswordLinkToken($newResetPasswordLinkToken);
+						$customer->sendPasswordResetConfirmationEmail();
+						$this->_redirect('checkout/cart',array( '_query' => array('forgetemail' => Mage::helper('core')->encrypt($email),'success' => Mage::helper('core')->encrypt('true') )));
+						return;
+					} catch (Exception $exception) {
+						$this->_redirect('checkout/cart',array( '_query' => array('forgetemail' => Mage::helper('core')->encrypt($email))));
+						return;
+					}
+					
+				}
+				else{
+					$this->_redirect('checkout/cart',array( '_query' => array('forgetemail' => Mage::helper('core')->encrypt($email))));
+					return;
+
+				}
+			}
+        }
+        
         return;
     }
 }

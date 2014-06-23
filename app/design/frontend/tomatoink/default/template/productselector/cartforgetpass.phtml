@@ -1,0 +1,23 @@
+<div class="ti_cms_block_headerBar-green text_center">
+		<div class="ti_checkoutStep" id="ti_cartforget_close"><a href="#" class="ti_txt_dec_none"><p class="ti_orange_head">X</p></a></div>
+        <h2 class="white ti_headerH1 ti_top_margin_hide"><span><?php echo $this->__('Retrieve your password here') ?></span></h2>
+</div>
+<form action="<?php echo Mage::getUrl('productselector/cartlogin/forgetpass',array('_secure'=>true)) ?>" method="post" id="form-validate">
+	<div class="block-content text_center">
+			<h1 class="ti_orange_head ti_cart_popup_error_pass" id="ti_cart_popup_error_msg_success">A link have already sent to your email address to reset your password.</h1>
+			<h2 class="ti_orange_head ti_cart_popup_error_pass" id="ti_cart_popup_error_msg_invalidemail">Invalid Email Address</h2>
+			<h2 class="ti_orange_head ti_cart_popup_error_pass" id="ti_cart_popup_error_msg_forgetemail">No Customer Associate with the email address</h2>
+						
+			<?php echo $this->getBlockHtml('formkey'); ?>
+			
+			<h2 class="ti_green_head ti_hide_forgetpass_item"><?php echo $this->__('Please enter your email address below. You will receive a link to reset your password.') ?></h2>
+			
+					<h2 class="ti_orange_head ti_hide_forgetpass_item"><em> * </em><?php echo $this->__('Email Address') ?></h2>
+					
+					<input type="email" required="required" name="forget_email" id="forget_email" required="required" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="validate-email required-entry" />
+		
+		<div class="actions">
+			<button type="submit" title="<?php echo $this->__('Submit') ?>" class="ti_button ti_hide_forgetpass_item"><span><span><?php echo $this->__('Submit') ?></span></span></button>
+		</div>
+	</div>
+</form>

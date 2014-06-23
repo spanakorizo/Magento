@@ -176,7 +176,7 @@ $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
 
 		//$order->setOrderType($address->getStreetFull());
 
-if ($filter_priority) {
+if ($filter_priority && $order->getOrderType() == "") {
  
 	//$orderid = "11095";
 	//$order = Mage::getModel('sales/order')->load($orderid);
@@ -189,7 +189,7 @@ if ($filter_priority) {
 
 
 	$collection_items = Mage::getModel('sales/order')->getCollection()
-	->addAttributeToFilter('status', 'pending')
+	->addAttributeToFilter('status', array('IN'=>array('pending, processing')))
 	->addAttributeToSelect('*');
 
 
@@ -267,7 +267,7 @@ if (strtoupper($army_city) == 'APO' || strtoupper($army_city) == 'DPO' || strtou
 /* Yiyang   Date:5/20/2014                         */
 /***************************************************/
 
-if ($filter_priority && $order->getGrandTotal() >= 150) 	{
+if ($filter_priority && $order->getGrandTotal() >= 150 && $order->getOrderType() == '') 	{
 	$shippingstate = strtoupper($shippingaddress->getRegion());
 	$order->setOrderType('Large');
 	$filter_priority = false;
@@ -286,7 +286,7 @@ if ($filter_priority && $order->getGrandTotal() >= 150) 	{
 /* Yiyang   Date:5/20/2014                          */
 /****************************************************/
 
-if ($filter_priority && $order->getGrandTotal() < 150) 	{
+if ($filter_priority && $order->getGrandTotal() < 150 && $order->getOrderType() == '') 	{
 	$shippingstate = strtoupper($shippingaddress->getRegion());
 	$orderweight = $order->getWeight();
 	if ($orderweight < 0.75) {
