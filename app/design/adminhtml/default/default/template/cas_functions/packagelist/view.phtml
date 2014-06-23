@@ -1,7 +1,8 @@
 <?php 
+/*
 $orderid = "11136";
 
-$phone = "877.465.6888";
+$phone = "877.777.0127";
 $website = "www.tomatoink.com";
 $company = "TomatoInk.com";
 $address = "38929 CHERRY ST, NEWARK, CA94560";
@@ -173,19 +174,106 @@ $Arr=explode("-", $sku);
 
 	$print_text.= "<tr><td colspan='3' style='font-family:Verdana, Helvetica, sans-serif; font-size:11px; font-weight:400; color:#000000; text-align:center;' valign='top'>All of our products are backed with a 1-Year Money Back Guarantee.<br>If you have any questions about our products or services, please feel free to call us at <b><span style='color:#06C; text-decoration:underline'>" . $phone . "</span></b> or visit our website at <b><span style='color:#06C; text-decoration:underline'>" . $website . "</span></b><br><br><b><span style='font-size:11px;'><center>" . $company . "<span style='font-size:10px;'>&nbsp;</span><span style='font-size:9px;'>&#8226;</span><span style='font-size:10px;'>&nbsp;</span>" . $address . "<span style='font-size:10px;'>&nbsp;</span><span style='font-size:9px;'>&#8226;</span><span style='font-size:10px;'>&nbsp;</span>" . $phone . "</center></b></td></tr></table></td></tr></table></td></tr></table></body></html>";
 
-
+*/
 ?>
 
-<input type="button" value="print" id="print">
-<script type="text/javascript"> 
-var content = "<?php echo $print_text; ?>";
 
+
+
+<?php 
+	date_default_timezone_set('America/Los_Angeles');
+    $start = date('Ymd', time());
+    $end = date('Ymd', time());
+    $start .= "000000";
+    $end .= "235959";
+
+	$orders = Mage::getModel('sales/order')->getCollection()
+	->addFieldToFilter('batch_number', array('from'=>$start,'to'=>$end))
+	->addAttributeToSort('batch_number', 'DSC');
+	$batch_number = "";
+	$batch_count = 0;
+?>
+
+
+
+<select id='batch_select'>
+	<option value=''>Please Select Batch</option>
+	<?php foreach ($orders as $order): ?>
+		<?php if ($order->getBatchNumber() != $batch_number): 
+		$batch_count++; $batch_number = $order->getBatchNumber();?>
+		<option value="<?php echo $batch_number; ?>"><?php echo $batch_number . " " . $order->getStatus(); ?></option>
+	<?php endif; ?>
+<?php endforeach; ?>
+
+</select>
+<input type="button" id="print" value="Print">
+<input type="button" id="update" value="update">
+<br>
+<br>
+
+<script type="text/javascript"> 
+var batch_print_url = "<?php echo Mage::helper('adminhtml')->getUrl('customize-functions/packagelist/print/'); ?>";
 jQuery('#print').click(function() {
-	var win_ship = window.open("", "shiplabel", "fullscreen");
-var doc_ship = win_ship.document;
-doc_ship.write(content);
-doc_ship.close();
-win_ship.print();
+	var number = jQuery("#batch_select").val()
+	jQuery.get(batch_print_url, {batchnum: number}, function(data) {
+		var win_ship = window.open("", "shiplabel", "fullscreen");
+		var doc_ship = win_ship.document;
+		doc_ship.write(data);
+		doc_ship.close();
+		win_ship.print();
+	});
+
+
 });
 
+
+jQuery('#update').click(function() {
+	var url = window.location.href + "?batchnum=" + jQuery("#batch_select").val();
+
+	window.location = url;
+
+
+
+
+});
+
+
 </script>
+
+
+<?php 
+
+	if ($_GET['batchnum'] != "") {
+
+
+
+		
+		$batch_number = $_GET['batchnum'];
+		echo "batch " . $batch_number . "<br>";
+		$orders = Mage::getModel("sales/order")->getCollection()
+		->addAttributeToFilter('batch_number', $batch_number);
+
+		$error_count = 0;
+
+		foreach ($orders as $order) {
+			if ($order->getStatus() != "processing") {
+				echo "error: ";
+				$error_count++;
+				$admin_order_url = Mage::helper('adminhtml')->getUrl("adminhtml/sales_order/view", array('order_id'=>$order->getId()));
+				echo "<a href='" . $admin_order_url . "'>" . $order->getId() . "</a>  " . $order->getStatus() . "<br>";
+			}
+		}
+
+		if ($error_count == 0) {
+			$batch_view_url = Mage::helper('adminhtml')->getUrl('customize-functions/packagelist/index/');
+			foreach ($orders as $order) {
+				$order->setStatus('readytoship')->save();
+			}
+			echo "success update batch";
+			echo "<script type='text/javascript'>setTimeout(function(){window.location='" . $batch_view_url . "'}, 3000);</script>";
+		}
+		
+
+	}
+
+?>

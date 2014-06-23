@@ -19,7 +19,7 @@
 	<script type="text/javascript">
 		var homepage = "<?php if ($this->getIsHomePage()) echo 'true'; else echo 'false'?>";
 		var ti_global_url = "<?php echo $current_url;?>";
-		ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
+		if (ti_global_url.match(/index.php/)) ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
 		
 	</script>
 
@@ -250,13 +250,13 @@
     foreach ($cart->getAllItems() as $item) {
         $product = $item->getProduct();
         if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
-            $shopptingcarthtml .= "<div class='one_fourth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a></div><a href='" . $product->getProductUrl() . "'><div class='three_fourth'><p>" . $product->getName() . "</p></div></a><div class='ti_cms_separator'></div>";
+            $shopptingcarthtml .= "<div class='one_half'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a></div><a href='" . $product->getProductUrl() . "'><div class='one_half'><p>" . $product->getName() . "</p></div></a><div class='ti_cms_separator'></div>";
         //$productId = $item->getProduct()->getId();
         //$productqty = $item->getQty();
         //$productPrice = $item->getProduct()->getPrice();
 
     }
-    if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . round($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></p>";
+    if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . round($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "firecheckout/'><strong>Checkout</strong></a></p>";
     ?>
 
 

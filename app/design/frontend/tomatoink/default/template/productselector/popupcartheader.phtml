@@ -1,0 +1,40 @@
+<?php
+/*$prdinfo = $_POST['prd'];
+
+$individual_product = explode('#',$prdinfo);
+foreach($individual_product as $productarray){
+    $getItem = explode('*',$productarray);
+}*/
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$cart = Mage::getModel('checkout/session')->getQuote();
+//$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+//$total_num = $cart->getItemsCount();
+$total_num = round($cart->getItemsQty());
+if ($total_num == "") $total_num=0;
+
+$grandtotal = $cart->getSubtotal();
+$shopptingcarthtml="";
+$select = $conn->select()
+    ->from($coreResource->getTableName('sales_flat_quote_item'),array('product_id'))
+    ->where('parent_item_id IS NULL')
+    ->where('quote_id = ?',$cart->getId());
+$cartItems = $conn->fetchCol($select);
+
+foreach ($cart->getAllItems() as $item) {
+    $product = $item->getProduct();
+    if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
+        $shopptingcarthtml .= "<div class='one_fourth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a></div><a href='" . $product->getProductUrl() . "'><div class='three_fourth'><p>" . $product->getName() . "</p></div></a><div class='ti_cms_separator'></div>";
+    //$productId = $item->getProduct()->getId();
+    //$productqty = $item->getQty();
+    //$productPrice = $item->getProduct()->getPrice();
+
+}
+if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . round($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></p>";
+
+
+$myArray = array(
+    'totalnumber'=> $total_num,
+  'alltext'=> $shopptingcarthtml
+);
+echo json_encode($myArray);

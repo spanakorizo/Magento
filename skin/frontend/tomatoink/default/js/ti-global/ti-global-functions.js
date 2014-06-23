@@ -20,13 +20,19 @@ function add_to_box(id1,id2){
             data: data,
             success: function(){
                 jQuery('#ajax_loader').hide();
-
+                jQuery.post( ti_global_url + 'productselector/popupcart/header',function(response){
+                    var obj = response.evalJSON();
+                    jQuery('#ti_header_cartcount').html(obj.totalnumber);
+                    jQuery('#ti_header_cartitems').html(obj.alltext);
+                });
                 jQuery.post( ti_global_url + 'productselector/popupcart/index',function(data){
                     secondId.html(data);
                     secondId.css('top', screenTop);
                     secondId.show();
                     jQuery('#ti_hide_body_div').show();
+
                 });
+
             }
         });
 
@@ -40,6 +46,13 @@ function addSimpleToCart(id) {
     if (ti) {
         if ( ! ti.value || ti.value=='0') ti.value = '1';
     }
+}
+/******************* function for get parms from url **********/
+function getParameterByName(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results == null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 /*******************************************************/
 /* */

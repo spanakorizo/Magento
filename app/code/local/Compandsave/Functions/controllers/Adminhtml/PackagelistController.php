@@ -15,6 +15,53 @@ class Compandsave_Functions_Adminhtml_PackagelistController
     {
        
 
+        
+        $this->loadLayout();
+
+        $block = $this->getLayout()->createBlock('adminhtml/template')->setTemplate('cas_functions/packagelist/view.phtml');
+        $this->getLayout()->getBlock('content')->append($block);
+        
+        $this->renderLayout(); 
+    }
+
+    public function createbatchAction()
+    {
+       
+
+        /*
+        $this->loadLayout();
+
+        $block = $this->getLayout()->createBlock('adminhtml/template')->setTemplate('cas_functions/packagelist/view.phtml');
+        $this->getLayout()->getBlock('content')->append($block);
+        
+        $this->renderLayout(); */
+        $orders = $_GET['orders'];
+        if ($orders == "") {echo "no order";}
+        else {
+            $order_collection = explode(",", $orders);
+
+            //$date = new DateTime();
+            date_default_timezone_set('America/Los_Angeles');
+            $batchnum = date('YmdHis', time());
+            $count = 0;
+
+            foreach ($order_collection as $order_id) {
+                if ($order_id != "") {
+                    $order = Mage::getModel('sales/order')->load($order_id);
+                    $order->setBatchNumber($batchnum)->save();
+                    $count++;
+
+                }
+            }
+
+            echo "we've update " . $count . " orders";
+        }
+    }
+
+    public function printAction()
+    {
+       
+
         if ($_GET['orderid'] != "") {
             $order_id = $_GET['orderid'];
             echo $this->printlabel($order_id);
@@ -33,8 +80,8 @@ class Compandsave_Functions_Adminhtml_PackagelistController
             
         }
 
-        else if ($_GET['print'] != "") {
-
+        else if ($_GET['print'] == "autoship") {
+            //autoship need to be checked, status
             $order_collection = Mage::getModel('sales/order')->getCollection()
             ->addAttributeToFilter('status', 'processing')
             ->addAttributeToFilter('order_type', 'Autoship')
@@ -55,6 +102,7 @@ class Compandsave_Functions_Adminhtml_PackagelistController
         
         $this->renderLayout(); */
     }
+
 
     public function printlabel($orderid) {
 
@@ -126,7 +174,7 @@ else $cclast = "";
         $sku = $item->getSku();
 
         $product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
-
+        if ($product)
         $productinfo = "<tr><td bgcolor='#F9F9F9' width='12%' valign='TOP'><nobr>" . $sku . "</nobr></td><td bgcolor='#F9F9F9' align='LEFT' width='67%' valign='TOP'><b>" . $item->getName() . "</b></td><td bgcolor='#F9F9F9' width='6%'  valign='CENTER'><span style='font-size:15px'><b>" . $item->getQtyOrdered() . "</b></span></td><td bgcolor='#F9F9F9' align='right'  width='7%'  valign='CENTER'>" . $product->getWarehouseLocation() . "</td></tr>";
 
 
@@ -210,6 +258,7 @@ $Arr=explode("-", $sku);
          *
          * eg. you could add more rules inside coupon for edit and delete.
          */
+        
         $actionName = $this->getRequest()->getActionName();
         switch ($actionName) {
             case 'index':
@@ -225,4 +274,5 @@ $Arr=explode("-", $sku);
 
         return $isAllowed;
     }
+    
 }
