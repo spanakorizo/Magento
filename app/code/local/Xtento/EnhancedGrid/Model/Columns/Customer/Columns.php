@@ -81,6 +81,18 @@ class Xtento_EnhancedGrid_Model_Columns_Customer_Columns extends Mage_Core_Model
                         'cols' => array('order_type_value' => 'order.order_type_value')
                     ),
                     'type' => 'text'
+                ),
+                'batch_number' => array(
+                    'header' => Mage::helper('xtento_enhancedgrid')->__('Batch Number'),
+                    'id' => 'batch_number',
+                    'index' => 'batch_number',
+                    'filter_index' => 'order.batch_number',
+                    'join_left' => array(
+                        'name' => array('order' => Mage::getSingleton('core/resource')->getTableName('sales/order')),
+                        'cond' => 'main_table.entity_id = order.entity_id',
+                        'cols' => array('batch_number' => 'order.batch_number')
+                    ),
+                    'type' => 'text'
                 )
             )
         );
