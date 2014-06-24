@@ -91,7 +91,7 @@ class Compandsave_Functions_Adminhtml_PackagelistController
                 //echo $order->getId();
 
                 echo $this->printlabel($order->getId());
-                $order->setOrderTypeValue('Printed')->save();
+                $order->setOrderTypeValue('Printed')->setStatus('complete')->setState('complete')->save();
             }
         }
         /*

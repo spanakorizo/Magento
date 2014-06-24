@@ -34,7 +34,6 @@ $label_content .= "</body></html>";
 
 }
 $error_collection = Mage::getModel('sales/order')->getCollection()
-	->addAttributeToFilter('status', 'pending')
 	->addAttributeToFilter('order_type', 'Error');
 $error_count = count($error_collection);
 
@@ -92,7 +91,8 @@ jQuery('#autoship_buylabel').click(function () {
 
 	if (ship_count > 0) {
 		jQuery.get(autoship_url, function(data){
-			console.log(data);
+			alert(data);
+			location.reload();
 		});
 	}
 	else 

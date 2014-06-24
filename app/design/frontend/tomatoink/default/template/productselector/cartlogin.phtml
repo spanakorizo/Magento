@@ -6,6 +6,7 @@
     <?php echo $this->getBlockHtml('formkey'); ?>
     <div class="block-content text_center">
 		<h2 class="ti_green_head" id="ti_cart_popup_error_msg">Invalid User Email or Password </h2>
+		<a href="#" id="ti_cart_popup_forget_pass" ><h2 class="ti_orange_head" >Forget Password?</h2></a>
         <h2 class="ti_orange_head"><em> * </em><?php echo $this->__('Email Address') ?></h2><input type="email" name="login[username]" class="required-entry" id="login-email" required="required" placeholder="<?php echo $this->__('Email') ?>" /><br/>
         <h2 class="ti_orange_head"><em> * </em><?php echo $this->__('Password') ?></h2><input type="password" name="login[password]" placeholder="<?php echo $this->__('Password') ?>" class="required-entry" id="login-password" required="required" />
         <div class="actions">

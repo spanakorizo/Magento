@@ -49,6 +49,9 @@
         <div class="ti_popup_cart_window" id="ti_cart_register_box">
             <?php echo $this->getLayout()->createBlock('customer/form_register')->setTemplate('productselector/cartregister.phtml')->toHtml(); ?>
         </div>
+		<div class="ti_popup_cart_window" id="ti_cart_forgetpass_box">
+            <?php echo $this->getLayout()->createBlock('customer/form_register')->setTemplate('productselector/cartforgetpass.phtml')->toHtml(); ?>
+        </div>
         <?php if(!$this->hasError()): ?>
         <!--<div class="checkout-types one_third">-->
         <?php foreach ($this->getMethods('top_methods') as $method): ?>
@@ -194,6 +197,7 @@
     if(email != ''){
         //alert('Invalid User Name or Password');
         jQuery('#ti_cart_popup_error_msg').show();
+		jQuery('#ti_cart_popup_forget_pass').show();
         jQuery('#ti_hide_body_div').show();
         jQuery('#ti_cart_login_box').show();
         jQuery('#login-email').val(email);
@@ -211,6 +215,7 @@
         jQuery('#ti_cart_popup_error_msg').hide();
         e.stopPropagation();
     });
+	
     jQuery(document).keyup(function(e) {
         e.preventDefault();
         if (e.keyCode == 27) { // esc keycode
@@ -219,6 +224,12 @@
                 jQuery('#ti_cart_register_box').hide();
                 jQuery('#ti_cart_login_box').show(e);
             }
+			else if(jQuery('#ti_cart_forgetpass_box').is(":visible")){
+				jQuery('#ti_hide_body_div').show();
+				jQuery('#ti_cart_forgetpass_box').hide();
+				jQuery('.ti_cart_popup_error_pass').hide();
+				jQuery('#ti_cart_login_box').show(e);
+			}
             else{
                 jQuery('#ti_hide_body_div').hide();
                 jQuery('#ti_cart_login_box').hide(e);
@@ -235,7 +246,40 @@
     var len = "<?php echo Mage::helper('core')->decrypt($this->getRequest()->getParam('len'));?>";
     var valid = "<?php echo Mage::helper('core')->decrypt($this->getRequest()->getParam('valid'));?>";
     var exist = "<?php echo Mage::helper('core')->decrypt($this->getRequest()->getParam('exist'));?>";
-
+	var forgetemail = "<?php echo Mage::helper('core')->decrypt($this->getRequest()->getParam('forgetemail')); ?>";
+	var invalid = "<?php echo Mage::helper('core')->decrypt($this->getRequest()->getParam('invalid')); ?>";
+	var success = "<?php echo Mage::helper('core')->decrypt($this->getRequest()->getParam('success')); ?>";
+	
+	if(forgetemail != ''){
+		if(invalid == 'true'){
+			jQuery('#ti_cart_forgetpass_box').show();
+			jQuery('.ti_cart_popup_error_pass').hide();
+			jQuery('#ti_cart_popup_error_msg_invalidemail').show();
+			jQuery('#ti_hide_body_div').show();
+			jQuery('#ti_cart_login_box').hide();
+			jQuery('#ti_cart_register_box').hide();
+			jQuery('#forget_email').val(forgetemail);
+		}
+		else if( success == 'true'){
+			jQuery('#ti_cart_forgetpass_box').show();
+			jQuery('.ti_cart_popup_error_pass').hide();
+			jQuery('#ti_cart_popup_error_msg_success').show();
+			jQuery('#ti_hide_body_div').show();
+			jQuery('#ti_cart_login_box').hide();
+			jQuery('#ti_cart_register_box').hide();
+			jQuery('.ti_hide_forgetpass_item').hide();
+			jQuery('#forget_email').hide();
+		}
+		else{
+			jQuery('#ti_cart_forgetpass_box').show();
+			jQuery('.ti_cart_popup_error_pass').hide();
+			jQuery('#ti_cart_popup_error_msg_forgetemail').show();
+			jQuery('#ti_hide_body_div').show();
+			jQuery('#ti_cart_login_box').hide();
+			jQuery('#ti_cart_register_box').hide();
+			jQuery('#forget_email').val(forgetemail);
+		}
+	}
     if(emailid != ''){
 
         if( len == 'false'){
@@ -291,20 +335,37 @@
         jQuery('#ti_cart_register_box').show(e);
 
     }
-    jQuery('#ti_cartregister_close').click(function(e){
+    jQuery('#ti_cartregister_close, #ti_cartforget_close').click(function(e){
         e.preventDefault();
         jQuery('#ti_cart_register_box').hide(e);
         jQuery('#ti_cart_popup_error_msg').hide();
+		jQuery('#ti_cart_forgetpass_box').hide();
+		jQuery('.ti_cart_popup_error_pass').hide();
         jQuery('.ti_cart_popup_error').hide();
         jQuery('#ti_cart_login_box').show();
         jQuery('#ti_hide_body_div').show()
         e.stopPropagation();
     });
+	
     jQuery('#ti_show_register_info').click(function(e){
         e.preventDefault();
         jQuery('#ti_cart_register_box').show(e);
         jQuery('#ti_cart_login_box').hide();
+		jQuery('#ti_cart_forgetpass_box').hide();
+		jQuery('.ti_cart_popup_error_pass').hide();
         jQuery('#ti_cart_popup_error_msg').hide();
+        e.stopPropagation();
+    });
+	
+	jQuery('#ti_cart_popup_forget_pass').click(function(e){
+        e.preventDefault();
+        jQuery('#ti_cart_register_box').hide();
+		jQuery('#forget_email').val(email);
+        jQuery('#ti_cart_login_box').hide();
+		jQuery('#ti_cart_forgetpass_box').show(e);
+		jQuery('.ti_cart_popup_error_pass').hide();
+        jQuery('#ti_cart_popup_error_msg').hide();
+		jQuery('#ti_cart_popup_forget_pass').hide();
         e.stopPropagation();
     });
 </script>

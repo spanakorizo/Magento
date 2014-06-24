@@ -49,11 +49,11 @@ class Compandsave_Functions_Adminhtml_AutoshipController
     public function shipAction() {
         //
         //test site key
-        //\EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw'); //test site key
-\EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); 
+\EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw'); //test site key
+//\EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); 
 
         $ship_collection = Mage::getModel('sales/order')->getCollection()
-            ->addAttributeToFilter('status', 'pending')
+            ->addAttributeToFilter('status', 'processing')
             ->addAttributeToFilter('order_type', 'Autoship')
             ->addAttributeToFilter('order_type_value', 'Autoship')
             ->addAttributeToSelect('*');
@@ -95,7 +95,7 @@ class Compandsave_Functions_Adminhtml_AutoshipController
             ->_addContent($DuplicateBlock)
             ->renderLayout();*/
             $order_id = $_GET['orderid'];
-            $order = Mage::getModel('sales/order')->load($order_id);
+            $order = Mage::getModel('sales/order')->load($order_id, 'increment_id');
 
             $addressid = $order->getShippingAddress()->getId();
             $shippingaddress = Mage::getModel('sales/order_address')->load($addressid);
@@ -119,8 +119,8 @@ echo $order_id . " " . $order->getOrderTypeValue() . " " . $order->getCustomerNa
         public function refundAction()
     {
       //set autoship key
-      //\EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw');
-      \EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); //live site key
+      \EasyPost\EasyPost::setApiKey('ThiApS0dVpUZBCLg7lD0aw');
+      //\EasyPost\EasyPost::setApiKey('cXB0P702cwDAgOdP00Se0Q'); //live site key
         // instantiate the grid container
         /*
         $DuplicateBlock = $this->getLayout()
@@ -131,7 +131,7 @@ echo $order_id . " " . $order->getOrderTypeValue() . " " . $order->getCustomerNa
             ->_addContent($DuplicateBlock)
             ->renderLayout();*/
             $order_id = $_GET['orderid'];
-            $order = Mage::getModel('sales/order')->load($order_id);
+            $order = Mage::getModel('sales/order')->load($order_id, 'increment_id');
             $ship_id = $order->getAutoshipShipid();
 
             $shipment = \EasyPost\Shipment::retrieve(array('id' =>$ship_id));
@@ -290,15 +290,16 @@ $orderrate = $shipment->selected_rate->rate;
     $order = Mage::getModel('sales/order')->load($orderid);
 
 
+ 
+
+    if($order->canShip()) {
     $order->setAutoshipShipid($shipid)
     ->setBatchNumber($timestamp)
     ->setOrderTypeValue('Shipped')
     ->setShippingAmount($orderrate)
     ->save();
     $order->setAutoshipLabel($label_url)->save();
-    echo $label_url . "<br>"; 
-
-    if($order->canShip()) {
+    echo $label_url . "<br>";
         
       $ti_shipmentid = Mage::getModel('sales/order_shipment_api')
         ->create($order->getIncrementId(), array());
