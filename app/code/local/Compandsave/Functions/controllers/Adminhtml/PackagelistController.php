@@ -268,7 +268,7 @@ $Arr=explode("-", $sku);
             default:
                 $adminSession = Mage::getSingleton('admin/session');
                 $isAllowed = $adminSession
-                    ->isAllowed('compandsave_Functions/packagelist');
+                    ->isAllowed('compandsave_functions/packagelist');
                 break;
         }
 

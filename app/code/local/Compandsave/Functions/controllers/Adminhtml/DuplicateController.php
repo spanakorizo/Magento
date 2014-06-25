@@ -149,7 +149,7 @@ class Compandsave_Functions_Adminhtml_DuplicateController
             default:
                 $adminSession = Mage::getSingleton('admin/session');
                 $isAllowed = $adminSession
-                    ->isAllowed('compandsave_functions/duplicate');
+                    ->isAllowed('compandsave_functions/autoship');
                 break;
         }
 
