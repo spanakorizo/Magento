@@ -74,18 +74,22 @@
                         <title>CompAndSave Functions</title>
                         <sort_order>76</sort_order>
                         <children>
-                            <duplicate_order translate="title"
+                            <duplicateorder translate="title"
                                     module="compandsave_functions">
                                 <title>Dupliate Order</title>
-                            </duplicate_order>
-                            <special_filter translate="title"
+                            </duplicateorder>
+                            <specialfilter translate="title"
                                     module="compandsave_functions">
                                 <title>Special Filter</title>
-                            </special_filter>
-                            <auto_ship translate="title"
+                            </specialfilter>
+                            <autoship translate="title"
                                     module="compandsave_functions">
                                 <title>Autoship</title>
-                            </auto_ship>
+                            </autoship>
+                            <packagelist translate="title"
+                                    module="compandsave_functions">
+                                <title>Batch Print</title>
+                            </packagelist>
                         </children>
                     </compandsave_functions>
                 </children>
