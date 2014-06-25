@@ -149,7 +149,7 @@ class Compandsave_Functions_Adminhtml_SpecialfilterController
             default:
                 $adminSession = Mage::getSingleton('admin/session');
                 $isAllowed = $adminSession
-                    ->isAllowed('compandsave_Functions/specialfilter');
+                    ->isAllowed('compandsave_functions/specialfilter');
                 break;
         }
 
