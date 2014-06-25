@@ -1,0 +1,37 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Megan Prior-Pfeifer
+
+Created for Printer Support page at TomatoInk.com
+
+Naming convention: add ti_ps_ prefix
+ 
+*/
+/*********************************************************/
+
+.ti_ps_table p.icon-checkmark:before{
+	float: left;
+	left: -25px;
+	position: absolute;
+}
+
+.ti_ps_table p{
+	text-align:left;
+	margin-bottom: 20px;
+	position: relative;
+	margin-left: 25px;
+}
+
+@media only screen and (max-width : 767px) {
+/* Styles */
+	.ti_ps_table th,
+	.ti_ps_table td{
+		padding:5px;
+	}
+
+	.ti_ps_table th{
+		display:none;
+	}
+}

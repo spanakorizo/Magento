@@ -286,7 +286,6 @@ textarea {
 
 input[type="text"],
 input[type="number"],
-input[type="email"],
 input[type="password"],
 textarea {
   color:#559a13;
@@ -345,7 +344,6 @@ input[type="button"].ti_altBtn,
 
 input[type="text"]:hover,
 input[type="number"]:hover,
-input[type="email"]:hover,
 input[type="password"]:hover,
 textarea:hover{
 	color:#31590b;
@@ -366,7 +364,6 @@ input[type="button"].ti_altBtn:hover,
 
 .ti_input_bar input[type="text"],
 .ti_input_bar input[type="number"],
-.ti_input_bar input[type="email"],
 .ti_input_bar input[type="password"]{
 	width:60%;
 }
@@ -437,6 +434,16 @@ input[type="checkbox"]:checked:before{
 	font-size:2.8em;
 	font-weight:bold;
 	padding:1.5%;
+}
+
+/*--Read more buttons--*/
+
+.more {
+    display:none;
+}
+
+.readmorebtn {
+    cursor:pointer;
 }
 
 
@@ -639,11 +646,11 @@ td, th{
 
 @font-face {
 	font-family: 'ti-icons';
-	src:url('../fonts/ti-fonts/ti-icons.eot');
-	src:url('../fonts/ti-fonts/ti-icons.eot') format('embedded-opentype'),
-		url('../fonts/ti-fonts/ti-icons.woff') format('woff'),
-		url('../fonts/ti-fonts/ti-icons.ttf') format('truetype'),
-		url('../fonts/ti-fonts/ti-icons.svg') format('svg');
+	src:url('../fonts/ti-fonts/ti-icons.eot?1irnui');
+	src:url('../fonts/ti-fonts/ti-icons.eot?#iefix1irnui') format('embedded-opentype'),
+		url('../fonts/ti-fonts/ti-icons.woff?1irnui') format('woff'),
+		url('../fonts/ti-fonts/ti-icons.ttf?1irnui') format('truetype'),
+		url('../fonts/ti-fonts/ti-icons.svg?1irnui#ti-icons') format('svg');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -666,6 +673,14 @@ td, th{
 		font-family: 'ti-icons';
 }
 
+.ti_product_cta .icon-ico-warranty:before{
+	content: "\e600";
+}
+
+.ti_product_cta .icon-ico-guarantee:before{
+	content: "\e601";
+}
+
 .ti_product_cta .icon-ico-warranty:before,
 .ti_product_cta .icon-ico-guarantee:before {
 	font-size: 2.2em;
@@ -679,8 +694,15 @@ td, th{
 	position: absolute;
 	margin-left: .5em;
 	margin-top: -.5em;
+	content: "\f105";
 }
 
+.icon-ico-warranty:before {
+	content: "\e600";
+}
+.icon-ico-guarantee:before {
+	content: "\e601";
+}
 .icon-globe:before {
 	content: "\f0ac";
 }
@@ -693,7 +715,7 @@ td, th{
 .icon-angle-left:before {
 	content: "\f104";
 }
-.icon-angle-right:after {
+.icon-angle-right:before {
 	content: "\f105";
 }
 .icon-angle-up:before {
@@ -702,17 +724,14 @@ td, th{
 .icon-angle-down:before {
 	content: "\f107";
 }
-.icon-ico-warranty:before {
-	content: "\e600";
-}
-.icon-ico-guarantee:before  {
-	content: "\e601";
-}
 .icon-home:before {
 	content: "\e604";
 }
 .icon-droplet:before {
 	content: "\e605";
+}
+.icon-credit:before {
+	content: "\e60d";
 }
 .icon-phone:before {
 	content: "\e606";
@@ -723,14 +742,29 @@ td, th{
 .icon-bubbles:before {
 	content: "\e602";
 }
+.icon-search:before {
+	content: "\e60e";
+}
 .icon-lock:before {
 	content: "\e603";
+}
+.icon-trophy:before {
+	content: "\e60f";
 }
 .icon-leaf:before {
 	content: "\e608";
 }
+.icon-eye-blocked:before {
+	content: "\e610";
+}
 .icon-happy:before {
 	content: "\e609";
+}
+.icon-checkmark:before {
+	content: "\e611";
+}
+.icon-checkmark2:before {
+	content: "\e612";
 }
 .icon-minus:before {
 	content: "\e60a";
@@ -2187,4 +2221,15 @@ ul.ti_product_checklist{
 	#ti_header_row, #ti_footer_row, #ti_cms_home_container, #ti_footer_copyright_row{
 		min-width:568px;
 	}
+}
+
+
+/* cart page freeshipping reminder: Yiyang */
+#ti_cart_reminderbox td {
+	text-align: right;
+
+}
+
+#ti_cart_freereminder {
+	width:90%;
 }
