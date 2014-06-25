@@ -167,8 +167,9 @@ echo $order_id . " " . $order->getOrderTypeValue() . " " . $order->getCustomerNa
         $actionName = $this->getRequest()->getActionName();
         switch ($actionName) {
             case 'index':
-            case 'edit':
-            case 'delete':
+            case 'ship':
+            case 'search':
+            case 'refund':
                 // intentionally no break
             default:
                 $adminSession = Mage::getSingleton('admin/session');

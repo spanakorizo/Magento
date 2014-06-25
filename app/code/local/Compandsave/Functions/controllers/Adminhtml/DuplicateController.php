@@ -145,8 +145,6 @@ class Compandsave_Functions_Adminhtml_DuplicateController
         $actionName = $this->getRequest()->getActionName();
         switch ($actionName) {
             case 'index':
-            case 'edit':
-            case 'delete':
                 // intentionally no break
             default:
                 $adminSession = Mage::getSingleton('admin/session');

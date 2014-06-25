@@ -145,13 +145,11 @@ class Compandsave_Functions_Adminhtml_SpecialfilterController
         $actionName = $this->getRequest()->getActionName();
         switch ($actionName) {
             case 'index':
-            case 'edit':
-            case 'delete':
                 // intentionally no break
             default:
                 $adminSession = Mage::getSingleton('admin/session');
                 $isAllowed = $adminSession
-                    ->isAllowed('compandsave_Functions/duplicate');
+                    ->isAllowed('compandsave_Functions/specialfilter');
                 break;
         }
 
