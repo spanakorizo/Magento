@@ -165,7 +165,6 @@ echo $order_id . " " . $order->getOrderTypeValue() . " " . $order->getCustomerNa
          * eg. you could add more rules inside coupon for edit and delete.
          */
         $actionName = $this->getRequest()->getActionName();
-        echo $actionName . "<br>";
         switch ($actionName) {
             case 'index':
             case 'ship':
@@ -175,10 +174,10 @@ echo $order_id . " " . $order->getOrderTypeValue() . " " . $order->getCustomerNa
             default:
                 $adminSession = Mage::getSingleton('admin/session');
                 $isAllowed = $adminSession
-                    ->isAllowed('compandsave_Functions/autoship');
+                    ->isAllowed('compandsave_functions/autoship');
                 break;
         }
-        echo $isAllowed . "<br>";
+
         return $isAllowed;
     }
 }
