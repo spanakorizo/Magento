@@ -262,13 +262,13 @@ $Arr=explode("-", $sku);
         $actionName = $this->getRequest()->getActionName();
         switch ($actionName) {
             case 'index':
-            case 'edit':
-            case 'delete':
+            case 'createbatch':
+            case 'print':
                 // intentionally no break
             default:
                 $adminSession = Mage::getSingleton('admin/session');
                 $isAllowed = $adminSession
-                    ->isAllowed('compandsave_Functions/duplicate');
+                    ->isAllowed('compandsave_Functions/packagelist');
                 break;
         }
 
