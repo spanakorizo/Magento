@@ -140,7 +140,7 @@ jQuery(document).ready(function($){
 
 	var moreText = "Read more",
     	lessText = "Read less",
-    	moreButton = $("a.readmorebtn");
+    	moreButton = $(".readmorebtn");
 
 	moreButton.click(function () {
     	var $this = $(this);
