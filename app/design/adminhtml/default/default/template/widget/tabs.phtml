@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Magento Enterprise Edition
@@ -42,7 +41,7 @@
 </ul>
 <!-- print customize code !-->
 <br>
-<input type="button" value="print packagelist" id='order_print'>
+<input type="button" value="print packagelist" id='order_print' style='display:none'>
 <script type="text/javascript">
 	jQuery("#order_print").click(function() {
 		var order_id = jQuery('input[name=order_id]').val();
@@ -63,4 +62,3 @@
     <?php echo $this->getJsObjectName() ?> = new varienTabs('<?php echo $this->getId() ?>', '<?php echo $this->getDestElementId() ?>', '<?php echo $this->getActiveTabId() ?>', <?php echo $this->getAllShadowTabs()?>);
 </script>
 <?php endif; ?>
-
