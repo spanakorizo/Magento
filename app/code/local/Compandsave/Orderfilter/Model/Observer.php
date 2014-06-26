@@ -189,8 +189,9 @@ if ($filter_priority && $order->getOrderType() == "") {
 
 
 	$collection_items = Mage::getModel('sales/order')->getCollection()
-	->addAttributeToFilter('status', array('IN'=>array('pending, processing')))
+	->addAttributeToFilter(array('attribute'=> 'status', 'in' => array('pending, processing')));
 	->addAttributeToSelect('*');
+	//->addAttributeToFilter('status', array('IN'=>array('pending, processing')))
 
 
 
@@ -267,15 +268,15 @@ if (strtoupper($army_city) == 'APO' || strtoupper($army_city) == 'DPO' || strtou
 /* Yiyang   Date:5/20/2014                         */
 /***************************************************/
 
-if ($filter_priority && $order->getGrandTotal() >= 150 && $order->getOrderType() == '') 	{
+if ($filter_priority && ($order->getGrandTotal() >= 150) && $order->getOrderType() == '') {
 	$shippingstate = strtoupper($shippingaddress->getRegion());
 	$order->setOrderType('Large');
 	$filter_priority = false;
 	if ($shippingstate == "HAWAII" || $shippingstate == "ALASKA" || $shippingstate == "VIRGIN ISLANDS") {
 		$order->setOrderTypeValue('Special');
 	}
-	else 
-		$order->setOrderTypeValue('Regular');
+	else {
+		$order->setOrderTypeValue('Regular');}
 }
 
 
