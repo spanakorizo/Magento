@@ -189,7 +189,7 @@ if ($filter_priority && $order->getOrderType() == "") {
 
 
 	$collection_items = Mage::getModel('sales/order')->getCollection()
-	->addAttributeToFilter(array('attribute'=> 'status', 'in' => array('pending, processing')));
+	->addAttributeToFilter('status', 'pending');
 	->addAttributeToSelect('*');
 	//->addAttributeToFilter('status', array('IN'=>array('pending, processing')))
 
