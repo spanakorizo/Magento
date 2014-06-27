@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<config>
+	<tabs>
+		<nextopiaconfig translate="label" module="nsearch">
+			<label><![CDATA[<img src="http://assets.ecomm-search.com/logo-black-text.png">]]></label>
+			<sort_order>99300</sort_order>
+		</nextopiaconfig>
+	</tabs>	
+	<sections>
+		<nsearch_options translate="label" module="nsearch">
+			<label>Search Configuration Options</label>
+			<tab>nextopiaconfig</tab>
+			<frontend_type>text</frontend_type>
+			<sort_order>1000</sort_order>
+			<show_in_default>1</show_in_default>
+			<show_in_website>1</show_in_website>
+			<show_in_store>1</show_in_store>
+			<groups>
+			<settings translate="label">
+				<label>Configuration Fields</label>
+				<frontend_type>text</frontend_type>
+				<sort_order>1</sort_order>
+				<show_in_default>1</show_in_default>
+				<show_in_website>1</show_in_website>
+				<show_in_store>1</show_in_store>
+				<fields>
+					<searchstatus>
+						<label>Status</label>
+						<frontend_type>select</frontend_type>
+						<source_model>nsearch/Searchstatus</source_model>
+						<sort_order>1</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[Set this to "Disabled" to use the default Magento search. Set this to "Enabled" when you wish to make Nextopia Search live. You can perform test searches by appending "++" to your search term e.g. "shoes++".]]></comment>
+					</searchstatus>
+					<private_client_id>
+						<label>Private Client ID</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>2</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[This can be obtained by visisting the Account section of the Nextopia control panel. It will look something like "1234567890abcdef1234567890abcdef" and is 32 characters long. Leave blank to enter demo mode live on your site. While in demo mode, appending "++" to your search term e.g. "shoes++" will display results that use the demo data.]]></comment>
+					</private_client_id>
+					<public_client_id>
+						<label>Public Client ID</label>
+						<frontend_type>text</frontend_type>
+						<sort_order>3</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[This can be obtained by visisting the Account section of the Nextopia control panel. It will look something like "1234567890abcdef1234567890abcdef" and is 32 characters long. Leave blank to enter demo mode live on your site. While in demo mode, appending "++" to your search term e.g. "shoes++" will display results that use the demo data.]]></comment>
+					</public_client_id>
+					<redirect_on_one_match>
+						<label>Redirect on one match</label>
+						<frontend_type>select</frontend_type>
+						<source_model>nsearch/Boolean</source_model>
+						<sort_order>8</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[This controls if the system should send the user to the product if there is only one match.]]></comment>
+					</redirect_on_one_match>
+					<load_method>
+						<label>Load products using</label>
+						<frontend_type>select</frontend_type>
+						<source_model>nsearch/LoadMethod</source_model>
+						<sort_order>9</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[This controls if the products are loaded by product id or Sku.]]></comment>
+					</load_method>
+                    <productid_field_name>
+                        <label>Product ID field name</label>
+                        <frontend_type>text</frontend_type>
+                        <sort_order>10</sort_order>
+                        <show_in_default>1</show_in_default>
+                        <show_in_website>1</show_in_website>
+                        <show_in_store>1</show_in_store>
+                        <comment><![CDATA[The name of the Product ID field in your Nextopia data.]]></comment>
+                    </productid_field_name>
+					<default_display_type>
+						<label>Default display type</label>
+						<frontend_type>select</frontend_type>
+						<source_model>nsearch/Displaytypes</source_model>
+						<sort_order>12</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+					</default_display_type>
+					<refine_mappings>
+						<label>Visible Refine Names</label>
+						<frontend_type>textarea</frontend_type>
+						<sort_order>14</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[Enter in the mappings one per line with a comma.<br>Format: Label,Display Label]]></comment>
+					</refine_mappings>
+					<refine_order>
+						<label>Refinement Order</label>
+						<frontend_type>textarea</frontend_type>
+						<sort_order>16</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[Enter in a comma separated list of refinement names in the order in which you would like them to appear.]]></comment>
+					</refine_order>
+					<refines_sorted_numerically>
+						<label>Refinements Sorted Numerically</label>
+						<frontend_type>textarea</frontend_type>
+						<sort_order>20</sort_order>
+						<show_in_default>1</show_in_default>
+						<show_in_website>1</show_in_website>
+						<show_in_store>1</show_in_store>
+						<comment><![CDATA[Enter a comma separated list of refinement names which you would like to have sorted based on number of products.]]></comment>
+					</refines_sorted_numerically>
+				</fields>
+			</settings>
+			</groups>
+		</nsearch_options>
+	</sections>
+</config>
