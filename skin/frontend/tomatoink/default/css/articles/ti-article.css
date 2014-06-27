@@ -453,7 +453,7 @@ Naming convention: add ti_cms_ prefix
 
 .ti_cms_articleContent_area th {
 	font-weight:bold;
-	background:#ddd;
+	background:#f7e8db;
 }
 
 .ti_cms_articleContent_area th,
@@ -461,7 +461,7 @@ Naming convention: add ti_cms_ prefix
 	vertical-align: middle;
 	text-align:center;
 	padding:1em;
-	border:.5px solid #ddd;
+	border:.5px solid #f7e8db;
 }
 
 /* --Images --*/
