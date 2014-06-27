@@ -41,7 +41,7 @@
         </li>
         <li><?php $customer_email = $this->getCustomer()->getEmail(); ?>
             <?php $customerdata = Mage::getModel('newsletter/subscriber')->loadByEmail($customer_email)->getData();?>
-            <?php echo "your frequency: " . $customerdata['subscriber_freq']; ?><br>
+            <?php echo "Your frequency: " . $customerdata['subscriber_freq']; ?><br>
             <form action="<?php echo $this->getUrl(''); ?>newsletter/subscriber/new/" method="post">
 
 
@@ -59,7 +59,7 @@
     </ul>
 </div>
  <div class="buttons-set form-buttons">
-    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Go back') ?></a></p>
+    <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link ti_button"><?php echo $this->__('Back') ?></a>
 
 </div> 
 

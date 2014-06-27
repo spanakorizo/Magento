@@ -118,6 +118,14 @@ Naming convention: add ti_hg_ prefix
 	margin-top: -43px;
 	margin-left: 55px;
 }
+.ti_hg_contact {
+	position:relative;
+}
+.ti_hg_chatImg {
+	position:absolute;
+	top: -12px;
+	left: 65px;
+}
 /*.ti_hg_troubleshoot {
 	background-position:0 -41px; 
 	width:47px; 

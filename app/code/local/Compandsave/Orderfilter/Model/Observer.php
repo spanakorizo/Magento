@@ -182,24 +182,26 @@ if ($filter_priority && $order->getOrderType() == "") {
 	//$order = Mage::getModel('sales/order')->load($orderid);
 	//$addressid = $order->getShippingAddress()->getId();
 	//$address = Mage::getModel('sales/order_address')->load($addressid);
-		$street = $shippingaddress->getStreetFull();
+		//$street = $shippingaddress->getStreetFull();
 
 
 
 
 
 	$collection_items = Mage::getModel('sales/order')->getCollection()
-	->addAttributeToFilter('status', 'pending');
+	->addAttributeToFilter('status', array('in'=>array('pending', 'processing')))
 	->addAttributeToSelect('*');
 	//->addAttributeToFilter('status', array('IN'=>array('pending, processing')))
+
+	//$order->setAutoshipShipid($shipping_street);
 
 
 
 
 //extract all pending orders with the same address
 
-	$collection_items->getSelect()->join(array('t2' => 'sales_flat_order_address'),'main_table.entity_id = t2.parent_id', array('t2.address_type'))->where("t2.address_type = 'shipping'")->where("t2.street = ?", $street);
-
+	$collection_items->getSelect()->join(array('t2' => 'sales_flat_order_address'),'main_table.entity_id = t2.parent_id', array('t2.address_type'))->where("t2.address_type = 'shipping'")->where("t2.street = ?", $shipping_street);
+	//$order->setBatchNumber(count($collection_items));
 //check if there is duplicate
 	
 	if ( count($collection_items) > 1 ) {
@@ -226,9 +228,8 @@ if ($filter_priority && $order->getOrderType() == "") {
 
 			$count++;
 		} 
-		$order->setOrderTypeValue($duplicate_id);
-		$order->setOrderType('duplicate');
-		$filter_priority=false;
+		$order->setOrderTypeValue($duplicate_id)->setOrderType('duplicate');
+		$filter_priority = false;
 	}
 
 
@@ -300,8 +301,8 @@ if ($filter_priority && $order->getGrandTotal() < 150 && $order->getOrderType() 
 			if ($shippingstate == "HAWAII" || $shippingstate == "ALASKA" || $shippingstate == "VIRGIN ISLANDS") {
 				$order->setOrderTypeValue('Special');
 			}
-			else 
-				$order->setOrderTypeValue('Regular');
+			else {
+				$order->setOrderTypeValue('Regular');}
 
 	}
 

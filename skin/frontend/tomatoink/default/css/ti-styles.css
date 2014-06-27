@@ -86,7 +86,7 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .two_fifth{width:38%;}
 .three_fifth{width:58%;}
 .four_fifth{width:78%;}
-.one{width:100%; padding:0;}
+.one{width:98%;}
 .full{width:90%; padding-left:5%; padding-right:5%;}
 
 /*text colors*/
@@ -107,13 +107,13 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 	background: -ms-radial-gradient(center, ellipse cover,  #ffffff 60%,#fff6ee 99%); /* IE10+ */
 	background: radial-gradient(ellipse at center,  #ffffff 60%,#fff6ee 99%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fff6ee',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-	outline:1px solid #f7e8db;
+	border:1px solid #f7e8db;
 	border-bottom: 7px solid #71b62f;
 }
 
 .ti_cms_border_block{
 	background: #ffffff; /* Old browsers */
-	outline:1px solid #71b62f;
+	border:1px solid #71b62f;
 	border-bottom: 7px solid #71b62f;
 }
 
@@ -387,6 +387,7 @@ label.ti_cms_labelHide span{
 
 input[type="checkbox"],
 input[type="radio"]{
+	-moz-appearance:none;
 	display:inline-block;
 	margin:0 5px;
 	vertical-align:middle;
@@ -419,6 +420,7 @@ input[type="checkbox"]:checked:before{
 	position: absolute;
 	margin-top: -8px;
 	margin-left: -3px;
+	color:#fd8524;
 }
 
 .ti-required-entry:before{
@@ -489,6 +491,11 @@ select{
   }
 
 
+li input,
+li select,
+li button{
+	font-size:1.6em;
+}
 
 /* -- Social Media --*/
 /* -------- Prefix: ti_social_media_ --------*/
@@ -1331,6 +1338,16 @@ ul.ti_cart_review li:last-child{
 	margin:0;
 }
 
+/* cart page freeshipping reminder: Yiyang */
+#ti_cart_reminderbox td {
+	text-align: right;
+
+}
+
+#ti_cart_freereminder {
+	width:90%;
+}
+
 /* Firecheckout */
 
 .ti_checkoutStep{
@@ -1348,8 +1365,8 @@ ul.ti_cart_review li:last-child{
 }
 
 .ti_checkout_info{
-	width:96%;
-	margin:1% 2%;
+	width:100%;
+	margin:1% 0%;
 }
 
 .ti_checkout_half{
@@ -1446,6 +1463,12 @@ ul.ti_cart_review li:last-child{
 
 .ti_checkout_credit.amex{
 	background:url("../images/ti-assets/amex_48.png") no-repeat center;
+}
+
+/*  Account Features  */
+
+.ti_account_orderSum#my-orders-table th{
+	min-width:0;
 }
 
 /* -----------------------------------*/
@@ -1735,6 +1758,11 @@ ul.ti_product_checklist{
 	margin:.5em auto;
 }
 
+/* Related Products */
+
+
+
+
 /* Product Ratings*/
 .ti_product_rating{
 	width:83px;
@@ -1839,6 +1867,10 @@ ul.ti_product_checklist{
 
 /* Grid View */
 
+.ti_cms_block_grid{
+	min-height:425px;
+}
+
 .ti_cms_block_grid h5{
 	display:none;
 }
@@ -1881,7 +1913,6 @@ ul.ti_product_checklist{
 
 	.ti_header_top_block,
 	.one_fifth, .two_fifth, .three_fifth, .four_fifth{
-		margin:0 1%;
 		width:48%;
 	}
 
@@ -1940,6 +1971,10 @@ ul.ti_product_checklist{
 		right:0;
 		margin-right:auto;
 		margin-left:auto;
+	}
+
+	.ti_cms_block_grid{
+		min-height:475px;
 	}
 
 	.ti_hide_999{
@@ -2015,7 +2050,12 @@ ul.ti_product_checklist{
 		position:relative;
 	}
 
-	.one_fourth, .three_fourth{
+	.ti_cms_block_grid{
+		min-height:425px;
+	}
+
+	.one_fourth, .three_fourth,
+	.ti_cms_block_related{
 		margin:0 1%;
 		width:48%;
 	}
@@ -2131,6 +2171,15 @@ ul.ti_product_checklist{
 		font-size:.9rem
 	}
 
+	table{
+		word-break: break-all;
+	}
+
+	.my-account #my-orders-table td,
+	.my-account #my-orders-table th{
+		padding:5px;
+	}
+
 	.one_fourth, .three_fourth,
 	.ti_cms_block_related,
 	.ti_cms_block_grid,
@@ -2175,6 +2224,10 @@ ul.ti_product_checklist{
 	#ti_header_quick_links{
 		z-index: 20;
 		position: relative;
+	}
+
+	.ti_cms_block_grid{
+		min-height:0px;
 	}
 
 	.ti_footer_links_block ul.ti_menu li{
@@ -2223,13 +2276,3 @@ ul.ti_product_checklist{
 	}
 }
 
-
-/* cart page freeshipping reminder: Yiyang */
-#ti_cart_reminderbox td {
-	text-align: right;
-
-}
-
-#ti_cart_freereminder {
-	width:90%;
-}
