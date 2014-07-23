@@ -4,8 +4,7 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
     extends Mage_Eav_Model_Convert_Adapter_Entity
 {
  	
-    protected $_stores;
-	protected $_first_name = '';
+    protected $_first_name = '';
 	protected $_last_name = '';
 	protected $old_order_id = '';
 	protected $_emailAddress = '';
@@ -20,7 +19,7 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
         $importIds = $batchImportModel->getIdCollection();
 
         foreach ($importIds as $importId) {
-            //print '<pre>'.memory_get_usage().'</pre>';
+            print '<pre>'.memory_get_usage().'</pre>';
             $batchImportModel->load($importId);
             $importData = $batchImportModel->getBatchData();
 
@@ -30,16 +29,27 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 
     public function saveRow(array $importData)
     {
-        
-       	if (empty($importData['Store'])) {
+
+        /*if (empty($importData['Store'])) {
             if (!is_null($this->getBatchParams('Store'))) {
-                $store = $this->getStoreById($this->getBatchParams('Store'));
+                $stores = $this->getStoreById($this->getBatchParams('Store'));
             } 
         } else {
-            $store = $this->getStoreByCode($importData['Store']);
-        }
+            $stores = $this->getStoreByCode($importData['Store']);
+        }*/
 		//============================ GET CUSTOMER INFORMATION ============================//
 		$this->old_order_id = trim($importData['orderid']);
+        $data['order_comments'] = $importData['order_comments'];
+        $data['ordernotes'] = $importData['ordernotes'];
+        if($importData['printed'] == 'Y' )
+            $data['printed'] = 1;
+        else
+            $data['printed'] = 0;
+        if($importData['shipped'] == 'Y' )
+            $data['shipped'] = 1;
+        else
+            $data['shipped'] = 0;
+
 		$customer_collection = Mage::getResourceModel('customer/customer_collection')->addAttributeToFilter('customerid',$importData['customerid'])->getFirstItem()->load();
 		if($customer_collection != ''){
 			$this->_customer_id = $customer_collection->getId();
@@ -95,18 +105,10 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 		//payment declined 
 		$data['paymentamount'] = $importData['paymentamount'];
 		$data['total_payment_received'] = $importData['total_payment_received'];
-		
 		$data['paymentdeclined'] = $importData['paymentdeclined'];
-		
-		if($data['paymentdeclined'] == 'Y')
-			$data['total_refunded'] = 0;
-		elseif($data['total_payment_received'] == 0 && $data['total_payment_authorized'] == 0)
-			$data['total_refunded'] = 0;
-		else
-			$data['total_refunded'] = $data['paymentamount'] - $data['total_payment_received'];
-		
+
 		$data['dateOrdered'] = $importData['orderdate'];
-		$data['discount_amount'] = 0;
+        $data['discount_amount'] = 0;
 		
 		$data['affiliate_commissionable_value'] = $importData['affiliate_commissionable_value'];
 		$data['remote_ip'] = trim($importData['customer_ipaddress']);
@@ -212,15 +214,39 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 			$data['status'] = 'Pending';
 			$data['state'] = Mage_Sales_Model_Order::STATE_NEW;
 		}
-		$order = Mage::getModel('sales/order');
+        // returned and cancel amount
+        if($data['orderstatus'] == 'Partially Returned')
+            $data['total_refunded'] = $data['paymentamount'] - $data['total_payment_received'];
+        else if($data['orderstatus'] == 'Returned')
+            $data['total_refunded'] = $data['total_payment_received'];
+        else
+            $data['total_refunded'] = 0;
 
-		$order->setOldOrderId($this->old_order_id)
-			->setStoreId($store->getId())
+        if($data['orderstatus'] == 'Cancelled')
+            $data['total_cancelled'] = $data['paymentamount'] - $data['total_payment_received'];
+        else
+            $data['total_cancelled'] = 0;
+        //$data['batchnumber'] = $importData['batchnumber'];
+        $data['total_due'] = $data['paymentamount'] - $data['total_payment_received'];
+		$order = Mage::getModel('sales/order');
+        //$last_order_increment_id = $order->getCollection()->getLastItem()->getIncrementId();
+
+        $order->setOldOrderId($this->old_order_id)
+			//->setStoreId($stores->getId())
+            ->setStoreId(2)
+            ->setIsVirtual(0)
+            //->setBatchNumber($data['batchnumber'])
+            //->setIncrementId($last_order_increment_id)
 			->setCustomerEmail($this->_emailAddress)
 			->setCustomerFirstname($this->_first_name)
 			->setCustomerLastname($this->_last_name)
 			->setCustomerId($this->_customer_id)
 			->setCustomerIsGuest(0)
+            ->setCustomerNote($data['order_comments'])//customer comments
+            ->setPrivateNotes($data['ordernotes']) //cutomer private notes in backend
+            ->setPrinted($data['printed'])//set printed boolean //**********************************************//
+            ->setShipped($data['shipped'])//set shipped boolean //***************change if you have data for shipped ****************//
+            ->setLastModifiedBy(1)
 			->setCustomerGroupId(Mage_Customer_Model_Group::NOT_LOGGED_IN_ID)
 			->setData('state', $data['state']) //due to complete can not set manually
 			->setStatus($data['status'])
@@ -228,6 +254,8 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 			->setCreatedAt($this->getOrderDate($data))
 			->setGrandTotal($data['paymentamount']) //Total payment in order (grand total
 			->setBaseGrandTotal($data['paymentamount'])
+            ->setBaseTotalInvoiced($data['paymentamount'])
+            ->setTotalInvoiced($data['paymentamount'])
 			->setBaseTotalPaid($data['total_payment_received'])
 			->setTotalPaid($data['total_payment_received'])
 			->setPaymentAuthorizationAmount($data['total_payment_authorized'])
@@ -237,8 +265,14 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 			->setOrderCurrencyCode('USD')
 			->setBaseTotalRefunded($data['total_refunded'])
 			->setTotalRefunded($data['total_refunded'])
-			->setBaseTotalDue($data['paymentamount'] - $data['total_payment_received'])
-			->setTotalDue($data['paymentamount'] - $data['total_payment_received'])
+            ->setBaseTotalCanceled($data['total_cancelled'])
+            ->setTotalCanceled($data['total_cancelled'])
+            ->setSubtotalRefunded($data['total_refunded'] - $data['totalShippingFees'] - $data['salestax1'])
+            ->setBaseSubtotalRefunded($data['total_refunded'] - $data['totalShippingFees'] - $data['salestax1'])
+            ->setSubtotalCanceled($data['total_cancelled'] - $data['totalShippingFees'] - $data['salestax1'])
+            ->setBaseSubtotalCanceled($data['total_cancelled'] - $data['totalShippingFees'] - $data['salestax1'])
+			->setBaseTotalDue($data['total_due'])
+			->setTotalDue($data['total_due'] )
 			->setTaxAmount($data['salestax1'])
 			->setBaseDiscountAmount($data['discount_amount'])
 			->setDiscountAmount($data['discount_amount'])
@@ -247,10 +281,12 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 			->setRemoteIp($data['remote_ip'])
 			->setShippingAmount($data['totalShippingFees'])
 			->setBaseShippingAmount($data['totalShippingFees'])
-			->setSubtotal($data['paymentamount'] - $data['totalShippingFees'] - $data['salestax1'] - $data['discount_amount'])
-			->setBaseSubtotal($data['paymentamount'] - $data['totalShippingFees'] - $data['salestax1'] - $data['discount_amount'])
-			->setSubtotalInclTax((float) $data['paymentamount'] - $data['totalShippingFees'] - $data['discount_amount'] + $data['salestax1'])
-			->setBaseSubtotalInclTax((float) $data['paymentamount'] - $data['totalShippingFees'] - $data['discount_amount'] + $data['salestax1'])
+            ->setBaseSubtotalInvoiced($data['paymentamount'] - $data['totalShippingFees'] - $data['salestax1'] )
+            ->setSubtotalInvoiced($data['paymentamount'] - $data['totalShippingFees'] - $data['salestax1'] )
+			->setSubtotal($data['paymentamount'] - $data['totalShippingFees'] - $data['salestax1'] )
+			->setBaseSubtotal($data['paymentamount'] - $data['totalShippingFees'] - $data['salestax1'])
+			->setSubtotalInclTax((float) $data['paymentamount'] - $data['totalShippingFees'] + $data['salestax1'])
+			->setBaseSubtotalInclTax((float) $data['paymentamount'] - $data['totalShippingFees'] + $data['salestax1'])
 			->setTotalQtyOrdered($data['totalItemQty'])
 			->setBillingAddress($this->getBillingAddress($data))
 			->setShippingAddress($this->getShippingAddress($data))
@@ -270,8 +306,24 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 	}
 	public function getOrderDate($data)
 	{
-		$date  = new Zend_Date($data['dateOrdered'],Varien_Date::DATETIME_INTERNAL_FORMAT);
-		$date->setTimezone('UTC')->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);
+        //1/21/2014 10:48
+        //1/21/2014 17:11
+        //date_default_timezone_set('America/Los_Angeles');
+
+
+		$date_space = explode(' ',$data['dateOrdered']);
+        $date_date = explode('/',$date_space[0]);
+        $month = $date_date[0];
+        $day = $date_date[1];
+        $year = $date_date[2];
+        $date_time = explode(':',$date_space[1]);
+        $hour = $date_time[0];
+        $minute = $date_time[1];
+
+        $date = gmdate( "Y-m-d H:i:s", mktime( $hour + 7 ,$minute,0,$month,$day,$year ));
+
+        //$date  = new Zend_Date($data['dateOrdered'],Varien_Date::DATETIME_INTERNAL_FORMAT);
+		//$date->setTimezone('UTC')->toString(Varien_Date::DATETIME_INTERNAL_FORMAT);
 		return $date;
 	}
 	
@@ -284,7 +336,7 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 			->setRegion($data['billingstate'])
 			->setTelephone($data['billingphonenumber'])
 			->setCountryId($data['billingcountry'])
-			->setFirstname($$data['billingfirstname'])
+			->setFirstname($data['billingfirstname'])
 			->setLastname($data['billinglastname'])
 			->setCity($data['billingcity'])
 			->setStreet($data['billingaddress1'].$data['billingaddress2'])
@@ -301,7 +353,7 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 			->setRegion($data['shipstate'])
 			->setTelephone($data['shipphonenumber'])
 			->setCountryId($data['shipcountry'])
-			->setFirstname($$data['shipfirstname'])
+			->setFirstname($data['shipfirstname'])
 			->setLastname($data['shiplastname'])
 			->setCity($data['shipcity'])
 			->setStreet($data['shipaddress1'].$data['shipaddress2'])
@@ -329,21 +381,7 @@ class Compandsave_Orderlist_Model_Convert_Adapter_Orderlist
 			->setShippingAmount($data['totalShippingFees'])
 			->setLastTransId($data['last_trans_id']);
 	}
-	
-	/*public function getItem()
-	{
-		return $orderItem = Mage::getModel('sales/order_item')
-				->setStoreId(1)
-				//->setProductId()
-				->setProductType('simple')
-				->setSku('SKU-123123123-TEST')
-				->setPrice('122')
-				->setWeight('1000')
-				->setIsVirtual(0)
-				->setName('My non existing product')
-				->setBaseOriginalPrice('123.99')
-			;
-	}
+
     /**
      * Retrieve store object by code
      *

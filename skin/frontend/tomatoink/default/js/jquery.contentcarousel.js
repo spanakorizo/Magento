@@ -1,4 +1,5 @@
 (function($) {
+    var total_item_num = 2; // 3 is 4
     var	aux		= {
             // navigates left / right
             navigate	: function( dir, $el, $wrapper, opts, cache ) {
@@ -9,7 +10,7 @@
 
                 if( cache.expanded ) {
                     scroll		= 1; // scroll is always 1 in full mode
-                    factor		= 4; // the width of the expanded item will be 3 times bigger than 1 collapsed item
+                    factor		= total_item_num-1; // the width of the expanded item will be 3 times bigger than 1 collapsed item
                     idxClicked	= cache.idxClicked; // the index of the clicked item
                 }
 
@@ -53,7 +54,7 @@
 
                 $wrapper.find('div.ti_related_item_one_fourth').not( $item ).hide();
                 $item.find('div.ti_related_content_wrapper').css( 'left', cache.itemW + 'px' ).stop().animate({
-                    width	: cache.itemW * 3 + 'px',
+                    width	: cache.itemW * total_item_num + 'px',
                     left	: cache.itemW + 'px'
                 }, opts.itemSpeed, opts.itemEasing)
                     .end()
@@ -77,9 +78,9 @@
                         idx		= $item.index();
 
                     if( idx !== openedIdx ) {
-                        $item.css( 'left', - ( openedIdx - idx ) * ( cache.itemW * 4 ) + 'px' ).show().find('div.ti_related_content_wrapper').css({
+                        $item.css( 'left', - ( openedIdx - idx ) * ( cache.itemW * (total_item_num + 1) ) + 'px' ).show().find('div.ti_related_content_wrapper').css({
                             left	: cache.itemW + 'px',
-                            width	: cache.itemW * 3 + 'px'
+                            width	: cache.itemW * total_item_num + 'px'
                         });
 
                         // hide more link
@@ -131,6 +132,7 @@
             // gets the item's position (1, 2, or 3) on the viewport (the visible items)
             // val is the left of the item
             getWinPos	: function( val, cache ) {
+
                 switch( val ) {
                     case 0 					: return 1; break;
                     case cache.itemW 		: return 2; break;
@@ -168,10 +170,10 @@
                         cache.itemW			= $items.width();
                         // save the number of total items
                         cache.totalItems	= $items.length;
-
+                        //console.log(cache.totalItems);
                         // add navigation buttons
-                        if( cache.totalItems > 4 )
-                            $el.prepend('<div class="ti_related-nav"><span class="ti_related-nav-prev">Previous</span><span class="ti_related-nav-next">Next</span></div>')
+                        //if( cache.totalItems > 4 )
+                            $el.prepend('<div class="ti_related-nav"><span class="ti_related-nav-prev">Previous</span><span class="ti_related-nav-next">Next</span></div>');
 
                         // control the scroll value
                         if( settings.scroll < 1 )
@@ -187,6 +189,7 @@
 
                         // the items will have position absolute
                         // calculate the left of each item
+                        
                         $items.each(function(i) {
                             $(this).css({
                                 position	: 'absolute',
@@ -229,7 +232,7 @@
 
                         // adds events to the mouse
                         //tempary block this function by Yiyang
-
+                        /*
                         $el.bind('mousewheel.contentcarousel', function(e, delta) {
                             if(delta > 0) {
                                 if( cache.isAnimating ) return false;
@@ -242,7 +245,7 @@
                                 aux.navigate( 1, $el, $wrapper, settings, cache );
                             }
                             return false;
-                        });
+                        }); */
 
                     });
                 }
@@ -250,6 +253,8 @@
         };
 
     $.fn.contentcarousel = function(method) {
+        //if (method == 3) {alert("what is it?");}
+
         if ( methods[method] ) {
             return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
         } else if ( typeof method === 'object' || ! method ) {

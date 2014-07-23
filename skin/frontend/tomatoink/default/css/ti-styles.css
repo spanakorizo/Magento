@@ -31,11 +31,10 @@ Created for global css at TomatoInk.com
 Color Reference:
 dark-green: #31590b;
 lt-green: #559a13;
+bright-green: #88cc40;
 orange: #e67921;
 light orange: #fd8524;
 light brown: #f7e8db;
-
-Naming convention: add ti_cms_ prefix
  
 */
 /*********************************************************/
@@ -62,14 +61,15 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .brder-lt{border-left:2px #ccc solid;}
 .brder-rt{border-right:2px #ccc solid;}
 .brder-all{border:2px #ccc solid;}
-.ti_cms_contain{width:1000px;margin:auto;}
 .block_center{margin:0 auto; display:block; float:none;}
 .text_center{text-align:center;}
-.text_left{text-align:left;}
-.text_right{text-align:right;}
+.text_left{text-align:left !important;}
+.text_right{text-align:right !important;}
 .ltWeight{font-weight:300;}
+.width100{width:100%;}
 
 /*responsive*/
+.ti_cms_contain{width:1000px;margin:auto;}
 .one_third, .two_third,
 .one_half, .one_fourth,
 .three_fourth,
@@ -92,6 +92,7 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 /*text colors*/
 .dgTxt{color:#31590b;}
 .lgTxt{color:#559a13;}
+.bgTxt{color:#88cc40;}
 .altTxt{color:#e67921;}
 .white{color:#fff;}
 .dark{color:#333;}
@@ -106,7 +107,6 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 	background: -o-radial-gradient(center, ellipse cover,  #ffffff 60%,#fff6ee 99%); /* Opera 12+ */
 	background: -ms-radial-gradient(center, ellipse cover,  #ffffff 60%,#fff6ee 99%); /* IE10+ */
 	background: radial-gradient(ellipse at center,  #ffffff 60%,#fff6ee 99%); /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#fff6ee',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	border:1px solid #f7e8db;
 	border-bottom: 7px solid #71b62f;
 }
@@ -286,6 +286,7 @@ textarea {
 
 input[type="text"],
 input[type="number"],
+input[type="email"],
 input[type="password"],
 textarea {
   color:#559a13;
@@ -344,6 +345,7 @@ input[type="button"].ti_altBtn,
 
 input[type="text"]:hover,
 input[type="number"]:hover,
+input[type="email"]:hover,
 input[type="password"]:hover,
 textarea:hover{
 	color:#31590b;
@@ -374,7 +376,7 @@ input[type="button"].ti_altBtn:hover,
 }
 
 label span{
-	font-size:2.4em;
+	font-size:1.6em;
 	font-family:'raleway';
 	font-feature-settings: "lnum";-moz-font-feature-settings: "lnum";-webkit-font-feature-settings: "lnum";-ms-font-feature-settings: "lnum";-o-font-feature-settings: "lnum";
 	vertical-align:middle;
@@ -423,6 +425,46 @@ input[type="checkbox"]:checked:before{
 	color:#fd8524;
 }
 
+/* http://webdesign.tutsplus.com/articles/quick-tip-easy-css3-checkboxes-and-radio-buttons--webdesign-8953 */
+
+input[type="checkbox"] {
+    display:none;
+}
+
+input[type="checkbox"] + label div.ti-checkbox{
+    display:inline-block;
+    width:21px;
+    height:21px;
+    background:url('../images/ti-assets/checkbox.png') left top no-repeat;
+    vertical-align:middle;
+    margin-right:5px;
+}
+
+input[type="checkbox"]:checked + label div.ti-checkbox {
+    background:url('../images/ti-assets/checkbox.png') left -21px no-repeat;
+}
+
+input[type="radio"] {
+    display:none;
+}
+
+input[type="radio"] + label div.ti-radio {
+    display:inline-block;
+    width:20px;
+    height:20px;
+    background:url('../images/ti-assets/radiobox.png') left top no-repeat;
+    vertical-align:middle;
+    margin-right:5px;
+}
+
+input[type="radio"]:checked + label div.ti-radio {
+    background:url('../images/ti-assets/radiobox.png') left -20px no-repeat;
+}
+
+input[type="radio"]:checked + label span{
+	color:#e67921;
+}
+
 .ti-required-entry:before{
 	content:"*";
 	color:#e67921;
@@ -435,7 +477,10 @@ input[type="checkbox"]:checked:before{
 .ti_button_large{
 	font-size:2.8em;
 	font-weight:bold;
-	padding:1.5%;
+}
+
+.ti_button_small{
+	font-size:1.6em;
 }
 
 /*--Read more buttons--*/
@@ -630,7 +675,10 @@ td, th{
 	font-size:1.4em;
 	text-align:left;
 	color:#fff;
-	padding:10px;
+}
+
+.ti_cms_infoTable{
+	word-break:keep-all;
 }
 
 .ti_cms_infoTable th{
@@ -678,30 +726,6 @@ td, th{
 [class^="icon-"]:before, [class*=" icon-"]:before, 
 [class^="icon-"]:after, [class*=" icon-"]:after {
 		font-family: 'ti-icons';
-}
-
-.ti_product_cta .icon-ico-warranty:before{
-	content: "\e600";
-}
-
-.ti_product_cta .icon-ico-guarantee:before{
-	content: "\e601";
-}
-
-.ti_product_cta .icon-ico-warranty:before,
-.ti_product_cta .icon-ico-guarantee:before {
-	font-size: 2.2em;
-	position: absolute;
-	margin-left: -1.25em;
-
-}
-
-.ti_product_cta .icon-angle-right:after{
-	font-size: 2em;
-	position: absolute;
-	margin-left: .5em;
-	margin-top: -.5em;
-	content: "\f105";
 }
 
 .icon-ico-warranty:before {
@@ -1083,11 +1107,11 @@ td, th{
 	display:none;
 	z-index: 1000;
 	position: absolute;
-	min-width: 200px;
+	width: 250px;
 	color: #333;
 	padding:20px 5px 5px;
 	left: 50%;
-	margin-left: -100px;
+	margin-left: -125px;
 }
 
 .ti_cms_dropContent:after {
@@ -1141,6 +1165,10 @@ td, th{
 .ti_cms_dropContent input{
 	box-shadow:none;
 	text-shadow:none;
+}
+
+#ti_header_cartitems{
+	word-wrap:break-word;
 }
 
 /* Search */
@@ -1281,13 +1309,6 @@ ul.ti_cart_review li:last-child{
 	margin:0;
 }
 
-.ti_table_productName{
-	width:60%;
-}
-
-.ti_cart_qty{
-	width:12%;
-}
 
 .ti_cart_qty input{
 	float:left;
@@ -1315,9 +1336,14 @@ ul.ti_cart_review li:last-child{
 	background: #559a13;
 }
 
+.ti_cart_relatedItemBlock{
+	margin:5px 0;
+}
+
 .ti_cart_thumbRelate{
 	outline:2px solid #559a13;
 	width:100%;
+	height:auto;
 }
 
 .ti_cart_ship_option{
@@ -1326,26 +1352,84 @@ ul.ti_cart_review li:last-child{
 }
 
 .ti_cart_zip{
-	width:98%;
+	width:100%;
 	margin:0 0 2em 0;
-	padding:5px 1%;
-	border-radius:.25em;
-	-moz-border-radius:.25em;
-	-webkit-border-radius:.25em;
 }
 
 .ti_cart_relateBlock p{
 	margin:0;
+	line-height:1em;
+}
+
+#shopping-cart-totals-table td{
+	padding:0 5px;
+}
+
+.ti_table_productName{
+	width:70%;
+}
+
+.ti_table_productPrice, .ti_table_productQTY, .ti_table_productSubtotal, .ti_table_productSubtotalAmount{
+	width:10%;
+}
+
+.ti_table_productSubtotalTitle{
+	width:90%;
+	text-align:right;
 }
 
 /* cart page freeshipping reminder: Yiyang */
-#ti_cart_reminderbox td {
-	text-align: right;
 
+#ti_cart_reminderbox{
+	min-height:120px;
+}
+
+#ti_cart_reminderbox td{
+	padding:0;
 }
 
 #ti_cart_freereminder {
 	width:90%;
+	position:relative;
+}
+
+#ti_cart_freereminder div{
+	text-align:left;
+	padding:8px;
+	border:1px solid #88cc40;
+	position: relative;
+	border-right: 10px solid #88CC40;
+	word-break:keep-all;
+	position:absolute;
+	right:20px;
+	background:#fff;
+}
+
+#ti_cart_freereminder div:after{
+	content:"";
+	display:block;
+	border:15px solid transparent;
+	border-left:15px solid #88cc40;
+	width: 0px;
+	height: 0px;
+	right: -40px;
+	top: 0;
+	position: absolute;
+}
+
+#ti_cart_freereminder h3{
+	margin:0;
+}
+/* Pop Up */
+
+.ti_popup_cart_window{
+	width:470px;
+	left:50%;
+	margin-left:-235px;
+	max-height:450px;
+	position:absolute;
+	z-index:10000;
+	overflow:scroll;
 }
 
 /* Firecheckout */
@@ -1585,6 +1669,21 @@ ul.ti_cart_review li:last-child{
 	padding:8px;
 }
 
+.ti_cms_flex_gridContain{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+ 
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+	.ti_cms_flex_grid{
+		display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+	}
+
 .ti_cms_block_related,
 .ti_cms_block_grid,
 .ti_cms_block_brandVA,
@@ -1594,6 +1693,7 @@ ul.ti_cart_review li:last-child{
 	margin:1%;
 	padding:0;
 	float:left;
+
 }
 
 .ti_cms_block_related img,
@@ -1753,9 +1853,49 @@ ul.ti_product_checklist{
 }
 
 .ti_product_cta{
-	width:50%;
-	float:left;
-	margin:.5em auto;
+	text-align:center;
+}
+
+.ti_product_cta h3{
+	display:inline-block;
+}
+
+.ti_product_cta a:hover{
+	border:none;
+}
+
+.ti_product_cta .icon-ico-warranty:before{
+	content: "\e600";
+}
+
+.ti_product_cta .icon-ico-guarantee:before{
+	content: "\e601";
+}
+
+.ti_product_cta .icon-ico-warranty:before,
+.ti_product_cta .icon-ico-guarantee:before {
+	font-size: 2.2em;
+	position: absolute;
+	margin-left: -1.25em;
+
+}
+
+.ti_product_cta .icon-angle-right:after{
+	font-size: 2em;
+	position: absolute;
+	margin-left: .5em;
+	margin-top: -.5em;
+	content: "\f105";
+}
+
+/* Social Media */
+
+a[class^="PIN_"], a[class*=" PIN_"] {
+	border:0;
+}
+
+#ti_product_fb span:first-child{
+	vertical-align:initial !important;
 }
 
 /* Related Products */
@@ -1822,57 +1962,80 @@ ul.ti_product_checklist{
 	float:right;
 }
 
-/* List View */
+.ti_product_blockName{
 
-.ti_cms_block_list{
-	margin-bottom:1em;
+	word-wrap:break-word;
+	overflow-wrap:break-word;
+	position:relative;
+	width:100%;
 }
 
-.ti_cms_block_list .ti_product_blockImg{
-	width:20%;
-	float:left;
+	/* List View */
+
+	.ti_cms_block_list{
+		margin-bottom:1em;
+		width:100%;
+	}
+
+	.ti_cms_block_list .ti_product_blockImg{
+		width:20%;
+		float:left;
+	}
+
+	.ti_cms_block_list .ti_product_blockImg img{
+		margin:0 auto;
+		max-width:100%;
+		height:auto;
+	}
+
+	.ti_cms_block_list .ti_product_blockPrice{
+		width:40%;
+		float:left;
+	}
+
+	.ti_cms_block_list .ti_product_blockPrice h3{
+		font-size:3.2em;
+		line-height: 1em;
+		margin: 1em auto 0;
+	}
+
+	.ti_cms_block_list .ti_product_blockPrice h5{
+		font-weight:normal;
+	}
+
+	.ti_cms_block_list .ti_product_blockQty{
+		width:40%;
+		float:left;
+	}
+
+	.ti_cms_block_list .ti_product_blockQty p{
+		font-size:2.4em;
+	}
+
+	.ti_cms_block_list .ti_product_blockQty input[type='text']{
+		width:80px;
+	}
+
+	/* Grid View */
+
+
+	.ti_cms_block_grid h5{
+		display:none;
+	}
+
+/* -- Photo Paper --*/
+
+.ti_paper_img{
+	box-sizing:border-box;
+	width:100%;
+	height:auto;
 }
 
-.ti_cms_block_list .ti_product_blockImg img{
-	margin:0 auto;
-}
-
-.ti_cms_block_list .ti_product_blockPrice{
-	width:40%;
-	float:left;
-}
-
-.ti_cms_block_list .ti_product_blockPrice h3{
-	font-size:3.2em;
-	line-height: 1em;
-	margin: 1em auto 0;
-}
-
-.ti_cms_block_list .ti_product_blockPrice h5{
-	font-weight:normal;
-}
-
-.ti_cms_block_list .ti_product_blockQty{
-	width:40%;
-	float:left;
-}
-
-.ti_cms_block_list .ti_product_blockQty p{
-	font-size:2.4em;
-}
-
-.ti_cms_block_list .ti_product_blockQty input[type='text']{
-	width:80px;
-}
-
-/* Grid View */
-
-.ti_cms_block_grid{
-	min-height:425px;
-}
-
-.ti_cms_block_grid h5{
-	display:none;
+.ti_paper_btn{
+	padding:10px 0;
+	width:100%;
+	margin:10px 0;
+	text-align:center;
 }
 
 /* -----------------------------------*/
@@ -1973,10 +2136,6 @@ ul.ti_product_checklist{
 		margin-left:auto;
 	}
 
-	.ti_cms_block_grid{
-		min-height:475px;
-	}
-
 	.ti_hide_999{
 		display:none;
 	}
@@ -2050,14 +2209,17 @@ ul.ti_product_checklist{
 		position:relative;
 	}
 
-	.ti_cms_block_grid{
-		min-height:425px;
-	}
-
 	.one_fourth, .three_fourth,
 	.ti_cms_block_related{
 		margin:0 1%;
 		width:48%;
+		padding:0;
+	}
+
+	#ti_header_cartitems .one_fourth,
+	#ti_header_cartitems .three_fourth{
+		width:100%;
+		margin:0;
 	}
 
 	.one, .one_third, .two_third,
@@ -2132,7 +2294,7 @@ ul.ti_product_checklist{
 	}
 
 	.ti_cms_dropContent{
-		min-width:0px;
+		width:200px;
 	}
 
 	.cart .checkout-types{
@@ -2157,9 +2319,14 @@ ul.ti_product_checklist{
 		width:25%;
 	}
 
-	.ti_hide_767{
+	.ti_related_container{
+		display:none !important;
+	}
+
+	.ti_hide_767, .ti_relatedHeader{
 		display:none;
 	}
+
 
 }
 
@@ -2169,10 +2336,6 @@ ul.ti_product_checklist{
 	body  { 
 		font-size:9px;
 		font-size:.9rem
-	}
-
-	table{
-		word-break: break-all;
 	}
 
 	.my-account #my-orders-table td,

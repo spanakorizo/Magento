@@ -31,7 +31,7 @@
  * @see Mage_Checkout_Block_Cart
  */
 ?>
-<div class="ti_cms_contain cart" id="ti_cart_block">
+<div class="cart" id="ti_cart_block">
     <div class="btcf">
         <ul class="ti_cart_review ti_green_cart two_third">
             <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()):?>
@@ -49,17 +49,17 @@
         <div class="ti_popup_cart_window" id="ti_cart_register_box">
             <?php echo $this->getLayout()->createBlock('customer/form_register')->setTemplate('productselector/cartregister.phtml')->toHtml(); ?>
         </div>
-		<div class="ti_popup_cart_window" id="ti_cart_forgetpass_box">
+        <div class="ti_popup_cart_window" id="ti_cart_forgetpass_box">
             <?php echo $this->getLayout()->createBlock('customer/form_register')->setTemplate('productselector/cartforgetpass.phtml')->toHtml(); ?>
         </div>
         <?php if(!$this->hasError()): ?>
-        <!--<div class="checkout-types one_third">-->
+        <div class="ti_hide_767">
         <?php foreach ($this->getMethods('top_methods') as $method): ?>
             <?php if ($methodHtml = $this->getMethodHtml($method)): ?>
             <?php echo $methodHtml; ?>
             <?php endif; ?>
         <?php endforeach; ?>
-        <!--</div>-->
+        </div>
         <?php endif; ?>
     </div>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
@@ -98,15 +98,15 @@
                         <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
                         <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
                         <?php endif ?>-->
-                        <th colspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Unit Price') ?></span></th>
-                        <th rowspan="<?php echo $mergedCells; ?>"><?php echo $this->__('Qty') ?></th>
-                        <th colspan="50"><?php echo $this->__('Subtotal') ?></th>
+                        <th colspan="<?php echo $mergedCells; ?>" class="ti_table_productPrice"><?php echo $this->__('Unit Price') ?></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="ti_table_productQTY"><?php echo $this->__('Qty') ?></th>
+                        <th colspan="50" class="ti_table_productSubtotal"><?php echo $this->__('Subtotal') ?></th>
                     </tr>
                     <?php if ($this->helper('tax')->displayCartBothPrices()): ?>
                     <tr>
-                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
                         <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
-                        <th class="a-right"><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
+                        <th><?php echo $this->helper('tax')->getIncExcTaxLabel(false) ?></th>
                         <th><?php echo $this->helper('tax')->getIncExcTaxLabel(true) ?></th>
                     </tr>
                     <?php endif; ?>
@@ -114,7 +114,7 @@
                 <tfoot class="ti_cart_table green_cart">
                     <tr>
                         <td colspan="50">
-                          <div class="one totals btcf">
+                          <div class="totals btcf">
                             <?php echo $this->getChildHtml('totals'); ?>
                             <!--<?php if(!$this->hasError()): ?>
                                 <ul class="checkout-types">

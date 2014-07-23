@@ -1712,7 +1712,7 @@ ul.cms-menu.type-square ul { list-style-type:square; }
 .cart .title-buttons { padding-right:15px; }
 .cart .messages,
 .cart .messages li { margin:0; }
-*/.cart .checkout-types { float:right; text-align:center; }
+*/.cart .checkout-types { float:right; text-align:center; margin-bottom:1em;}
 .cart .checkout-types .paypal-or { margin:0 8px; line-height:2.3; }
 .cart .checkout-types fieldset { display:inline; }
 .cart .checkout-types .btn-proceed-checkout span { background-image:url(../images/bkg_btn-co.gif); height:27px !important; padding:0 0 0 13px !important; }
@@ -1736,9 +1736,9 @@ ul.cms-menu.type-square ul { list-style-type:square; }
 .cart-table tfoot td h2{font-size:3.2em; margin:0; font-weight:bold;}
 
 /* Shopping Cart Collateral boxes */
-/*
-.cart .cart-collaterals { width:630px; padding:20px 0 10px; }
-.cart .cross-inside { background:url(../images/bkg_crosssell.gif) repeat-y 0 0; }
+
+.cart .cart-collaterals { margin-top:15px;}
+/*.cart .cross-inside { background:url(../images/bkg_crosssell.gif) repeat-y 0 0; }
 .cart .cart-collaterals h2 { color:#000; font-weight:normal; margin:0 0 5px; }
 .cart .deals { float:left; width:280px; display:inline; margin:0 0 0 30px; font-size:12px; }
 .cart .deals p,
