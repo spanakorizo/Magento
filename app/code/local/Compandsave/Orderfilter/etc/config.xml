@@ -16,7 +16,7 @@
                     <class>Compandsave_OrderFilter_Model</class>
                 </compandsaveorderfilter>
             </models>
-            <events>
+            <!--<events>
                 <sales_order_save_after>
                     <observers>
                         <compandsave_orderfilter>
@@ -25,6 +25,6 @@
                         </compandsave_orderfilter>
                     </observers>
                 </sales_order_save_after>
-            </events>
+            </events>-->
         </global>
     </config>

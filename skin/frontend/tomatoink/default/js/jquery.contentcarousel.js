@@ -3,6 +3,9 @@
             // navigates left / right
             navigate	: function( dir, $el, $wrapper, opts, cache ) {
 
+                //customize responsive
+                cache.itemW = $('.ti_related_item_one_fourth').width();
+
                 var scroll		= opts.scroll,
                     factor		= 1,
                     idxClicked	= 0;
@@ -168,10 +171,10 @@
                         cache.itemW			= $items.width();
                         // save the number of total items
                         cache.totalItems	= $items.length;
-
+                        //console.log(cache.totalItems);
                         // add navigation buttons
-                        if( cache.totalItems > 4 )
-                            $el.prepend('<div class="ti_related-nav"><span class="ti_related-nav-prev">Previous</span><span class="ti_related-nav-next">Next</span></div>')
+                        //if( cache.totalItems > 4 )
+                            $el.prepend('<div class="ti_related-nav"><span class="ti_related-nav-prev">Previous</span><span class="ti_related-nav-next">Next</span></div>');
 
                         // control the scroll value
                         if( settings.scroll < 1 )
@@ -229,7 +232,7 @@
 
                         // adds events to the mouse
                         //tempary block this function by Yiyang
-
+                        /*
                         $el.bind('mousewheel.contentcarousel', function(e, delta) {
                             if(delta > 0) {
                                 if( cache.isAnimating ) return false;
@@ -242,7 +245,7 @@
                                 aux.navigate( 1, $el, $wrapper, settings, cache );
                             }
                             return false;
-                        });
+                        }); */
 
                     });
                 }
@@ -250,6 +253,8 @@
         };
 
     $.fn.contentcarousel = function(method) {
+        //if (method == 3) {alert("what is it?");}
+
         if ( methods[method] ) {
             return methods[method].apply( this, Array.prototype.slice.call( arguments, 1 ));
         } else if ( typeof method === 'object' || ! method ) {

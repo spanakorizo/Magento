@@ -39,10 +39,11 @@
 <p class="note-msg"><?php echo $this->__('There are no products matching the selection.') ?></p>
 <?php else: ?>
 
+
             <div class="btcf">
                 <div class="ti_printer_sortBar btcf">
-                    <div class="one_third sort-by">
-                        <div class="ti_printer_sortBlock sorter">
+                    <div class="one sort-by">
+                        <div class="ti_printer_sortBlock sorter ti_hide_479">
                             <div class="view-mode btcf">
                                 <div class="ti_sort_block" id="ti_group_sortblock">
                                     <label class="lgTxt ltWeight">
@@ -53,150 +54,121 @@
                             </div>
                         </div>
                     </div>
-                    <div class="one_third middle">
-                        <label class="lgTxt ltWeight">
-                            <span>Show
-                            <div class="ti_sort_block">
-                                <div class="ti_select_barContainer btcf" id="ti_select_productSortLimit">
-                                    <select>
-                                        <option selected="selected">4</option>
-                                        <option>8</option>
-                                        <option>12</option>
-                                    </select>
-                                </div>
-                            </div> 
-                            per page</span>
-                        </label>
-                    </div>
-                    <div class="one_third text_center">
-                        <button type="button" title="Add to Cart" class="ti_button" onclick="this.form.submit()"><span>+ Add multiple to cart</span>
-                    </div>
                 </div>
             </div>
 
 
+<script type="text/javascript">
+    function view_grid() {
+        jQuery('#ti_group_sortblock').html("<label class='lgTxt ltWeight'><span>View as: <strong class='grid ti-grid' title='Grid' id='ti_group_grid'></strong><a class='list ti-list' title='List' id='ti_group_list' onclick='view_list();'></a></span></label>");
+        jQuery('#ti_group_sortblock2').html("<label class='lgTxt ltWeight'><span>View as: <strong class='grid ti-grid' title='Grid' id='ti_group_grid2'></strong><a class='list ti-list' title='List' id='ti_group_list2' onclick='view_list();'></a></span></label>");
+        jQuery('.ti_cms_block_list').attr('class', 'ti_cms_block_grid');
+    };
+
+    function view_list() {
+        jQuery('#ti_group_sortblock').html("<label class='lgTxt ltWeight'><span>View as: <a class='grid ti-grid' title='Grid' id='ti_group_grid' onclick='view_grid();'></a><strong class='list ti-list' title='List' id='ti_group_list'></strong></span></label>");
+        jQuery('#ti_group_sortblock2').html("<label class='lgTxt ltWeight'><span>View as: <a class='grid ti-grid' title='Grid' id='ti_group_grid2' onclick='view_grid();'></a><strong class='list ti-list' title='List' id='ti_group_list2'></strong></span></label>");
+        jQuery('.ti_cms_block_grid').attr('class', 'ti_cms_block_list');
+    };
+
+</script>
 
 <div class="category-products">
     <?php echo $this->getToolbarHtml() ?>
-    <?php // List mode ?>
-    <?php if($this->getMode()!='grid'): ?>
-    <?php $_iterator = 0; ?>
-    <ol class="products-list" id="products-list">
-    <?php foreach ($_productCollection as $_product): ?>
-        <li class="item<?php if( ++$_iterator == sizeof($_productCollection) ): ?> last<?php endif; ?>">
-            <?php // Product Image ?>
-            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-            <?php // Product description ?>
-            <div class="product-shop">
-                <div class="f-fix">
-                    <?php $_productNameStripped = $this->stripTags($_product->getName(), null, true); ?>
-                    <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></h2>
-                    <?php if($_product->getRatingSummary()): ?>
-                    <?php echo $this->getReviewsSummaryHtml($_product) ?>
-                    <?php endif; ?>
-                    <?php echo $this->getPriceHtml($_product, true) ?>
-                    <?php if($_product->isSaleable()): ?>
-                        <p><button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button></p>
-                    <?php else: ?>
-                        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
-                    <?php endif; ?>
-                    <div class="desc std">
-                        <?php echo $_helper->productAttribute($_product, $_product->getShortDescription(), 'short_description') ?>
-                        <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped ?>" class="link-learn"><?php echo $this->__('Learn More') ?></a>
-                    </div>
-                    <ul class="add-to-links">
-                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
-                            <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
-                        <?php endif; ?>
-                        <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
-                            <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
-                        <?php endif; ?>
-                    </ul>
-                </div>
-            </div>
-        </li>
-    <?php endforeach; ?>
-    </ol>
-    <script type="text/javascript">decorateList('products-list', 'none-recursive')</script>
-
-    <?php else: ?>
 
     <?php // Grid Mode ?>
 
     <?php $_collectionSize = $_productCollection->count() ?>
     <?php $_columnCount = $this->getColumnCount(); ?>
     <?php $i=0; foreach ($_productCollection as $_product): ?>
-        <?php if ($i++%$_columnCount==0): ?>
+        <!--<?php //if ($i++%$_columnCount==0): ?>
         <ul class="products-grid">
-        <?php endif ?>
-            <li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">
-                <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-                <h2 class="product-name"><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($_product->getName(), null, true) ?>"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></a></h2>
-                <?php if($_product->getRatingSummary()): ?>
-                <?php echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+        <?php //endif ?>!-->
+        <div class="ti_cms_block_grid one_fourth"> 
+    <div class="ti_block_inner ti_cms_border_block btcf">  
+
+            <!--<li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">!-->
+            <?php //product image ?>
+            <div class="ti_product_blockImg">
+            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" ><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
+            </div>
+
+
+                    
+            <?php //product name ?>
+                    <div class="ti_product_blockName">
+                        <p><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></p> 
+                    </div>
+                <?php //if($_product->getRatingSummary()): ?>
+                <?php //echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                <?php //endif; ?>
+                <?php //echo $this->getPriceHtml($_product, true) ?>
+
+                <?php //product price ?>
+
+                 <div class="ti_product_blockPrice">           
+                <?php if ($this->getCanShowProductPrice($_product)): ?>
+                 <h3 class="altTxt">Our price: $<?php echo round($_product->getPrice(), 2) ?></h3>
+                <h5>brand-price: <span>$<?php echo round($_product->getMsrp(), 2) ?></span></h5>
                 <?php endif; ?>
-                <?php echo $this->getPriceHtml($_product, true) ?>
+                </div>
+
+
                 <div class="actions">
                     <?php if($_product->isSaleable()): ?>
                         <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
                     <?php else: ?>
                         <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
                     <?php endif; ?>
-                    <ul class="add-to-links">
-                        <?php if ($this->helper('wishlist')->isAllow()) : ?>
-                            <li><a href="<?php echo $this->helper('wishlist')->getAddUrl($_product) ?>" class="link-wishlist"><?php echo $this->__('Add to Wishlist') ?></a></li>
-                        <?php endif; ?>
-                        <?php if($_compareUrl=$this->getAddToCompareUrl($_product)): ?>
-                            <li><span class="separator">|</span> <a href="<?php echo $_compareUrl ?>" class="link-compare"><?php echo $this->__('Add to Compare') ?></a></li>
-                        <?php endif; ?>
-                    </ul>
                 </div>
-            </li>
+            <!--</li>
         <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
         </ul>
-        <?php endif ?>
+        <?php endif ?>!-->
+        </div></div>
         <?php endforeach ?>
-        <script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>
-    <?php endif; ?>
+        <!--<script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>!-->
+
 
             <div class="btcf">
                 <div class="ti_printer_sortBar btcf">
                     <div class="one_third sort-by">
                         <div class="ti_printer_sortBlock sorter">
                             <div class="view-mode btcf">
-                                <div class="ti_sort_block" id="ti_group_sortblock">
+                                <div class="ti_sort_block" id="ti_group_sortblock2">
                                     <label class="lgTxt ltWeight">
                                         <span>View as: <strong class="grid ti-grid" title="Grid" id="ti_group_grid"></strong>
-                                        <a class="list ti-list" title="List" id="ti_group_list" onclick='view_list();'></a></span>
+                                        <a class="list ti-list" title="List" id="ti_group_list2" onclick='view_list();'></a></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="one_third middle">
-                        <label class="lgTxt ltWeight">
-                            <span>Show
-                            <div class="ti_sort_block">
-                                <div class="ti_select_barContainer btcf" id="ti_select_productSortLimit">
-                                    <select>
-                                        <option selected="selected">4</option>
-                                        <option>8</option>
-                                        <option>12</option>
-                                    </select>
-                                </div>
-                            </div> 
-                            per page</span>
-                        </label>
-                    </div>
-                    <div class="one_third text_center">
-                        <button type="button" title="Add to Cart" class="ti_button" onclick="this.form.submit()"><span>+ Add multiple to cart</span>
-                    </div>
+
                 </div>
             </div>
 
 
-    <!--<div class="toolbar-bottom">
+    <div class="toolbar-bottom">
         <?php echo $this->getToolbarHtml() ?>
-    </div>-->
+    </div>
 </div>
 <?php endif; ?>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

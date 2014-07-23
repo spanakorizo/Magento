@@ -28,7 +28,7 @@
     <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
     <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.easing.1.3.js') ?>"></script>
     <!-- the jScrollPane script -->
-    <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.mousewheel.js') ?>"></script>
+    <!--<script type="text/javascript" src="<?php //echo $this->getSkinUrl('js/jquery.mousewheel.js') ?>"></script>!-->
     <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.contentcarousel.js') ?>"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/jquery.jscrollpane.css') ?>" />
     <link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/ti-related-slider.css') ?>" />
@@ -45,14 +45,15 @@
     ?>
 
 <?php $related_id = $__item->getRelatedProductIds() ?>
-    <div class="ti_cms_block_headerBar-green">
-        <h1 class="white"><?php echo $this->__('Customers also viewed:') ?></h1>
+    <div class="ti_cms_block_headerBar-green ti_relatedHeader">
+        <h2 class="white ti_headerH1"><?php echo $this->__('Customers also viewed:') ?></h1>
     </div>
 
     <?php $related_total = count($related_id)>4?count($related_id):4; ?>
 
     <div id="ti_related_container" class="ti_related_container">
         <div class="ti_cms_relatedProductWrap">
+
         <?php for ($i=0;$i<$related_total; $i++): ?>
             <?php if (($related_id[$i]== "") && ($i<4)) $related_id[$i] = $related_backup[$i]; ?>
         <?php $_related_item = Mage::getModel('catalog/product')->load($related_id[$i]);?>
@@ -132,9 +133,67 @@ function addproduct_query(product_id) {
 </script>
 
 <script type="text/javascript">
+
+
+
     jQuery( document ).ready(function() {
         jQuery('#ti_related_container').contentcarousel();
     });
+
+
+//jQuery('#ti_related_container').contentcarousel();
+var LastWidth = '0px';
+//checkForChanges(LastWidth);
+setInterval(function() {checkForChanges(LastWidth); LastWidth = jQuery('#ti_related_container').css('width');}, 1000);  
+function checkForChanges(LastWidth)
+{
+    var currentWidth = jQuery('#ti_related_container').css('width');
+    //console.log(parseInt(currentWidth));
+    if (currentWidth != LastWidth) {
+
+        if (parseInt(currentWidth) < 490) {
+        //alert(currentWidth);
+        
+        //if (currentWidth < )
+        jQuery('.ti_related_item_one_fourth').css('width', '100%');
+        resetWidth('370');
+        //jQuery('#ti_related_container').contentcarousel();
+        }
+
+        else if (parseInt(currentWidth) < 790) {
+            jQuery('.ti_related_item_one_fourth').css('width', '50%');
+            resetWidth('300');
+        //jQuery('#ti_related_container').contentcarousel();
+        }
+
+        else if (parseInt(currentWidth) < 1000) {
+            jQuery('.ti_related_item_one_fourth').css('width', '33%');
+            resetWidth('261');
+        //jQuery('#ti_related_container').contentcarousel();
+        }
+
+        else {
+            jQuery('.ti_related_item_one_fourth').css('width', '25%');
+            resetWidth('250');
+
+        //jQuery('#ti_related_container').contentcarousel();
+        }
+
+    }
+
+
+      
+}
+
+function resetWidth(Width) {
+
+    jQuery('.ti_related_item_one_fourth').each(function(i) {
+        jQuery(this).css({
+            left        : i * Width + 'px'
+        });
+    });
+}
+
 
 </script>
 

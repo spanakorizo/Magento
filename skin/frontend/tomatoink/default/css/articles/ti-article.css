@@ -383,6 +383,9 @@ Naming convention: add ti_cms_ prefix
     cursor:pointer;
 }
 
+.ti_articleContent_area input {
+	width:100%;
+}
 /* --Inputs--*/
 
 /*.ti_cms_articleContent_area input,
@@ -703,6 +706,9 @@ a.ti_cms_iconBlock{
 		border-right:none;
 		border-left:none;
 	}
+	.ti_cms_articleContent_area.ti_cms_noSpace{
+		margin-bottom:0 !important;
+	} 
 
 }
 

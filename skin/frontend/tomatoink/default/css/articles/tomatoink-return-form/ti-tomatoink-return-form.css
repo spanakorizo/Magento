@@ -1,0 +1,34 @@
+#ti_trf_contain {
+	font-size:7px;
+}
+#ti_trf_contain span {
+	font-size:12px;
+}
+#ti_trf_contain p , #ti_trf_contain ul li, #ti_trf_contain h4, #ti_trf_contain h5{
+	text-align:left;
+}
+#ti_trf_contain h1 {
+	margin:0;
+}
+#ti_trf_contain .ti_trf_inputMar {
+	padding:0 1%;
+}
+#ti_trf_contain .ti_trf_icon {
+	font-size:37px;
+}
+#ti_trf_contain input {
+	font-size:1.8em;
+	margin:3px auto;
+}
+#ti_trf_contain .ti_trf_modelWidth, #ti_trf_contain .ti_trf_qtyWidth {
+	padding:0 1%;
+	margin: 0px auto;
+	display: block;
+	float: left;
+}
+#ti_trf_contain .ti_trf_modelWidth {
+	width:16%;
+}
+#ti_trf_contain .ti_trf_qtyWidth {
+	width:5%;
+}

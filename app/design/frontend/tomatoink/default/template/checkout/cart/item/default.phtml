@@ -33,7 +33,7 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
 ?>
 <?php foreach($collection as $cartItem): ?>
 <tr>
-    <td>
+    <td class="ti_table_productName">
         <div class="ti_cart_image"><?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->escapeHtml($this->getProductName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $cartItem->getImageUrl();?>" alt="<?php echo $this->escapeHtml($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?></div><!--</td>-->
     <!--<td>-->
         <div class="ti_cart_desc">
@@ -87,20 +87,20 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
     <?php endif ?>-->
 
     <?php if ($canApplyMsrp): ?>
-        <td <?php if ($this->helper('tax')->displayCartBothPrices()): ?> colspan="2"<?php endif; ?>>
+        <td <?php if ($this->helper('tax')->displayCartBothPrices()): ?> colspan="2"<?php endif; ?> class="ti_table_productPrice">
             <p class="cart-price">
                 <span class="cart-msrp-unit"><?php echo $this->__('See price before order confirmation.'); ?></span>
                 <?php $helpLinkId = 'cart-msrp-help-' . $_item->getId(); ?>
                 <a id="<?php echo $helpLinkId ?>" href="#" class="map-help-link"><?php echo $this->__("What's this?"); ?></a>
                 <script type="text/javascript">
-                    Catalog.Map.addHelpLink($('<?php echo $helpLinkId ?>'), "<?php echo $this->__("What's this?") ?>");
+                    Catalog.Map.addHelpLink($('<?php echo $helpLinkId ?>'), "<?php echo $this->__("What&#39;s this?") ?>");
                 </script>
             </p>
         </td>
     <?php else: ?>
 
         <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
-        <td>
+        <td class="ti_table_productPrice">
             <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
                 <span class="cart-tax-total" onclick="taxToggle('eunit-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
             <?php else: ?>
@@ -141,7 +141,7 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
         </td>
         <?php endif; ?><!-- inclusive price starts here -->
         <?php if ($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
-        <td>
+        <td class="ti_table_productPrice">
             <?php $_incl = $this->helper('checkout')->getPriceInclTax($_item); ?>
             <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
                 <p class="cart-tax-total" onclick="taxToggle('unit-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
@@ -183,16 +183,16 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
         </td>
         <?php endif; ?>
     <?php endif; ?>
-    <td class="ti_cart_qty">
+    <td class="ti_cart_qty ti_table_productQTY">
         <p>
-            <input name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="3" title="<?php echo $this->__('Qty') ?>" class="input-text qty ti_cms_block_qty" maxlength="3" type="text" />
+            <input name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="1" title="<?php echo $this->__('Qty') ?>" class="input-text qty ti_cms_block_qty" maxlength="3" type="text" />
             <a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('X<br>delete')?>" class="btn-remove btn-remove2"><?php echo $this->__('X<br>delete')?></a>
         </p>
     </td>
 
     <!--Sub total starts here -->
     <?php if (($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()) && !$_item->getNoSubtotal()): ?>
-    <td>
+    <td colspan="50" class="ti_table_productSubtotal">
         <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
             <p class="cart-tax-total" onclick="taxToggle('esubtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
         <?php else: ?>
@@ -237,7 +237,7 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
     </td>
     <?php endif; ?>
     <?php if (($this->helper('tax')->displayCartPriceInclTax() || $this->helper('tax')->displayCartBothPrices()) && !$_item->getNoSubtotal()): ?>
-    <td>
+    <td colspan="50" class="ti_table_productSubtotal">
         <?php $_incl = $this->helper('checkout')->getSubtotalInclTax($_item); ?>
         <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
             <span class="cart-tax-total" onclick="taxToggle('subtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">

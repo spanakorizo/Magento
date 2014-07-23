@@ -175,11 +175,11 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
 
 <!-- Megan HTML -->
 <?php if($prd_array): ?>
-<div class="related one_third">
+<div class="related two_fifth">
     <div class="ti_cms_gradient_block ti_block_inner btcf">
         <h2 class="ti_green_head ti_headerH1"><?php echo $this->__('You may also like...') ?></h2>
         <?php foreach ($collection as $_item): ?>
-            <div class="btcf">
+            <div class="btcf ti_cart_relatedItemBlock">
                 <form action="<?php echo Mage::getBaseUrl().'productselector/carts/' ?>" method="post" id="product_form_<?php echo $_item->getId(); ?>"<?php if($_item->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
                     <?php echo $this->getBlockHtml('formkey') ?>
                     <div class="no-display">

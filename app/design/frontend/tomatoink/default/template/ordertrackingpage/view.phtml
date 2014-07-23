@@ -22,19 +22,78 @@ $form_submit = false;
 if ($form_submit): 
 
 if ($check_flag):?>
-Order Status: 
-<?php echo $order->getStatus() ?>
-<br>
-Order Date: 
-<?php echo $order->getCreatedAt() ?>
-<br>
-Order name: 
-<?php echo $order->getCustomerName() ?>
-<br>
-<?php if ($order->getStatus() == 'complete'): ?>
-<a href="#" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($order) ?>','trackorder','width=800,height=600,top=0,left=0,resizable=yes,scrollbars=yes'); return false;" title="<?php echo $this->__('Track all shipment(s)') ?>">Track Your Order</a>
-<?php endif; ?>
+<!-- search result start !-->
+
+<div class="page-title">
+	<h1 class="lgTxt"><?php echo $this->__('Order Tracking') ?></h1>
+</div>
+	
+<div class="data-table three_fourth">	
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<th valign="top">Order ID: <?php echo $incrementId; ?></th>
+			<th valign="top" style="text-align:right;">Order Placed: <?php echo $order->getCreatedAt() ?></th>
+		</tr>
+	</table>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-left:1px dotted #559a13;border-right:1px dotted #559a13;border-bottom:1px dotted #559a13;">	
+		<tr>
+			<td valign="top" align="left" colspan="2" style=";border-bottom:1px dotted #559a13;">
+				<p><b>Order Status:</b> <?php echo $order->getStatus() ?></p>
+				<p><b>Order Comments:</b></p><!--<<Yiyang>> Need Comments!-->
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" width="20%" style=";border-bottom:1px dotted #559a13;">
+				<p><b>Shipping Speed:</b></p>
+				<p>Free USPS Shipping (2-7 business days)</p><!--<<Yiyang>> Need Shipping Speed!-->
+			</td>
+			<td valign="top" width="80%" rowspan="2" style="border-left:1px dotted #559a13;">
+				<!--Dynamic order information table start!-->
+				<table>
+					<tr>
+						<td valign="top"><p><b>Items Ordered:</b></p></td>
+						<td valign="top" width="60"><p><b>Price:</b></p></td>
+						<td valign="top" width="80"><p><b>Status:</b></p></td>
+					</tr>
+					<!--<<Yiyang>> Dynamic part start!-->
+					<tr>
+						<td valign="top"><p>Hewlett Packard HP 564XL Bulk Set of 11 Packs (3 Black, 2 Photo Black, 2 Cyan, 2 Magenta, 2 Yellow) High Yield Replacement Ink Cartridges</p></td>
+						<td valign="top"><p>$63.69</p></td>
+						<td valign="top"><p>Processing</p></td>
+					</tr>
+					<!--<<Yiyang>> Dynamic part end!-->
+				</table>
+				<!--Dynamic order information table end!-->
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<p><b>Tracking Number:</b></p>
+				<p><?php echo $order->getCustomerName() ?></p>
+				<p class="lgTxt">
+					<?php if ($order->getStatus() == 'complete'): ?>
+						<a href="#" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($order) ?>','trackorder','width=800,height=600,top=0,left=0,resizable=yes,scrollbars=yes'); return false;" title="<?php echo $this->__('Track all shipment(s)') ?>">Track Your Order Now</a>
+					<?php endif; ?>
+				</p>
+			</td>
+		</tr>
+	</table>
+	
+</div>
+<div class="one_fourth">
+	<div class="ti_block_inner ti_cms_gradient_block">
+		<h3>Let Tomato Help You</h3>
+		<ul class="ti_bullet">
+			<li><a href="{{store direct_url='myaccount'}}" title="Edit your account" target="_blank">Edit your account</a></li>
+			<li><a href="{{store direct_url='shipping-policy'}}" title="All about shipping">All about shipping</a></li>
+			<li><a href="{{store direct_url='contact'}}" title="Contact TomatoInk">Contact TomatoInk</a></li>
+		</ul>
+	</div>
+</div>
+<!-- search result end !-->
+
 <?php else: ?>
+<!-- can't find order !-->
 <p>We can't find your order</p>
 <?php endif; 
     else: 

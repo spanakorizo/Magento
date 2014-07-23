@@ -44,32 +44,32 @@
 
 
 <form id="discount-coupon-form" action="<?php echo $this->getUrl('checkout/cart/couponPost') ?>" method="post">
-    <div class="one_third">
+    <div class="one_fifth">
         <div class="discount ti_cms_gradient_block ti_block_inner btcf">
-            <h2 class="ti_green_head ti_headerH1"><?php echo $this->__('Discount Code') ?></h2>
+            <h2 class="ti_green_head ti_headerH1"><?php echo $this->__('Discount') ?></h2>
             <div class="discount-form">
                 <!--<label for="coupon_code"><?php echo $this->__('Enter your coupon code if you have one.') ?></label>-->
                 <p class="text_center"><span class="ti_small_text">Have a coupon code? Type it here:</span></p>
                 <input type="hidden" name="remove" id="remove-coupone" value="0" />
-                <div class="ti_input_barContainer">
+                <!--<div class="ti_input_barContainer">
                     <div class="ti_input_bar">
-                        <!--<div class="input-box">-->
-                            <input class="input-text" id="coupon_code" name="coupon_code" value="<?php echo $this->escapeHtml($this->getCouponCode()) ?>" type="text" />
+                        <div class="input-box">-->
+                            <input class="input-text block_center" id="coupon_code" name="coupon_code" value="<?php echo $this->escapeHtml($this->getCouponCode()) ?>" type="text" /><br>
                         <!--</div>
                         <div class="buttons-set">-->
-                            <button type="button" title="<?php echo $this->__('Apply') ?>" class="button ti_altBtn" onclick="discountForm.submit(false)" value="<?php echo $this->__('Apply') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
+                            <button type="button" title="<?php echo $this->__('Apply') ?>" class="button ti_altBtn block_center" onclick="discountForm.submit(false)" value="<?php echo $this->__('Apply') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
                             <!--
                             <?php if(strlen($this->getCouponCode())): ?>
                                 &nbsp; <button type="button" title="<?php echo $this->__('Cancel Coupon') ?>" class="button" onclick="discountForm.submit(true)" value="<?php echo $this->__('Cancel Coupon') ?>"><span><span><?php echo $this->__('Cancel Coupon') ?></span></span></button>
                             <?php endif;?>-->
-                        <!--</div>-->
+                        <!--</div>
                     </div>
-                </div>
+                </div>-->
             </div>
         </div>
         <div>
             <h2 class="ti_orange_head ti_headerH1 ti_block_inner">Claim your discount!</h2>
-            <p class="text_center"><span class="ti_small_text">Click to apply your coupon code:</span></p>
+            <p class="text_center"><span class="ti_small_text">Click &amp; apply your coupon:</span></p>
             <p class="ti_orange_head ti_headerH1" id="ti_cart_coupon">
 				
 					<?php $rules = Mage::getResourceModel('salesrule/rule_collection')->load();				

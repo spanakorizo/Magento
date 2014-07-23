@@ -272,6 +272,51 @@ else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "sim
 
 
 
+/*******************************************************/
+/* */
+/* Description: Flex box fallback*/
+/* Author: Megan */
+/* Version: 0.0.1 */
+/* Found at: http://osvaldas.info/flexbox-based-responsive-equal-height-blocks-with-javascript-fallback */
+/*******************************************************/
+
+;( function( $, window, document, undefined )
+{
+    'use strict';
+ 
+    var s = document.body || document.documentElement, s = s.style;
+    if( s.webkitFlexWrap == '' || s.msFlexWrap == '' || s.flexWrap == '' ) return true;
+ 
+    var $list       = $( '.ti_cms_flex_gridContain' ),
+        $items      = $list.find( '.ti_cms_flex_grid' ),
+        setHeights  = function()
+        {
+            $items.css( 'height', 'auto' );
+ 
+            var perRow = Math.floor( $list.width() / $items.width() );
+            if( perRow == null || perRow < 2 ) return true;
+ 
+            for( var i = 0, j = $items.length; i < j; i += perRow )
+            {
+                var maxHeight   = 0,
+                    $row        = $items.slice( i, i + perRow );
+ 
+                $row.each( function()
+                {
+                    var itemHeight = parseInt( $( this ).outerHeight() );
+                    if ( itemHeight > maxHeight ) maxHeight = itemHeight;
+                });
+                $row.css( 'height', maxHeight );
+            }
+        };
+ 
+    setHeights();
+    $( window ).on( 'resize', setHeights );
+    $list.find( 'img' ).on( 'load', setHeights );
+ 
+})( jQuery, window, document );
+
+
 
 
 
@@ -303,3 +348,9 @@ function coupon_slideback() {
 function checout_url(){
 	window.location.href = ti_global_url + 'index.php/firecheckout/';
 }
+
+
+
+
+
+
