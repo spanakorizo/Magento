@@ -1,8 +1,10 @@
 (function($) {
-    var total_item_num = 2; // 3 is 4
     var	aux		= {
             // navigates left / right
             navigate	: function( dir, $el, $wrapper, opts, cache ) {
+
+                //customize responsive
+                cache.itemW = $('.ti_related_item_one_fourth').width();
 
                 var scroll		= opts.scroll,
                     factor		= 1,
@@ -10,7 +12,7 @@
 
                 if( cache.expanded ) {
                     scroll		= 1; // scroll is always 1 in full mode
-                    factor		= total_item_num-1; // the width of the expanded item will be 3 times bigger than 1 collapsed item
+                    factor		= 4; // the width of the expanded item will be 3 times bigger than 1 collapsed item
                     idxClicked	= cache.idxClicked; // the index of the clicked item
                 }
 
@@ -54,7 +56,7 @@
 
                 $wrapper.find('div.ti_related_item_one_fourth').not( $item ).hide();
                 $item.find('div.ti_related_content_wrapper').css( 'left', cache.itemW + 'px' ).stop().animate({
-                    width	: cache.itemW * total_item_num + 'px',
+                    width	: cache.itemW * 3 + 'px',
                     left	: cache.itemW + 'px'
                 }, opts.itemSpeed, opts.itemEasing)
                     .end()
@@ -78,9 +80,9 @@
                         idx		= $item.index();
 
                     if( idx !== openedIdx ) {
-                        $item.css( 'left', - ( openedIdx - idx ) * ( cache.itemW * (total_item_num + 1) ) + 'px' ).show().find('div.ti_related_content_wrapper').css({
+                        $item.css( 'left', - ( openedIdx - idx ) * ( cache.itemW * 4 ) + 'px' ).show().find('div.ti_related_content_wrapper').css({
                             left	: cache.itemW + 'px',
-                            width	: cache.itemW * total_item_num + 'px'
+                            width	: cache.itemW * 3 + 'px'
                         });
 
                         // hide more link
@@ -132,7 +134,6 @@
             // gets the item's position (1, 2, or 3) on the viewport (the visible items)
             // val is the left of the item
             getWinPos	: function( val, cache ) {
-
                 switch( val ) {
                     case 0 					: return 1; break;
                     case cache.itemW 		: return 2; break;
@@ -189,7 +190,6 @@
 
                         // the items will have position absolute
                         // calculate the left of each item
-                        
                         $items.each(function(i) {
                             $(this).css({
                                 position	: 'absolute',

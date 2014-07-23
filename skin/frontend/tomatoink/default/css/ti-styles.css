@@ -2319,11 +2319,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		width:25%;
 	}
 
-	.ti_related_container{
-		display:none !important;
-	}
-
-	.ti_hide_767, .ti_relatedHeader{
+	.ti_hide_767{
 		display:none;
 	}
 
