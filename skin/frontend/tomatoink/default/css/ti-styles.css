@@ -70,12 +70,14 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 
 /*responsive*/
 .ti_cms_contain{width:1000px;margin:auto;}
+.one {margin:0 auto;display:block;float:left;}
+.one_name {margin:0 auto;display:block;float:left;}
 .one_third, .two_third,
 .one_half, .one_fourth,
 .three_fourth,
 .one_fifth, .two_fifth,
 .three_fifth, .four_fifth,
-.one, .small_half {margin:0 auto;display:block;float:left;padding:1%;}
+.one_checkout,.small_half,.two_third_review {margin:0 auto;display:block;float:left;padding:1%;}
 .one_third{width:31%;}
 .one_third.middle{margin: 0 .5%;}
 .two_third{width:64%;}
@@ -86,9 +88,10 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .two_fifth{width:38%;}
 .three_fifth{width:58%;}
 .four_fifth{width:78%;}
-.one{width:98%;}
+.one_checkout, .one{width:98%;}
+.one_name{width: 100%}
 .full{width:90%; padding-left:5%; padding-right:5%;}
-
+.two_third_review{width: 65%}
 /*text colors*/
 .dgTxt{color:#31590b;}
 .lgTxt{color:#559a13;}
@@ -399,8 +402,9 @@ input[type="radio"]{
 	border-radius: 10px;
 	border: 5px solid #559a13;
 	background: none;
-	width: 5px;
-	height: 5px;
+	/* hide by yiyang, so small to display */
+	/*width: 5px;
+	height: 5px;*/
 	padding: 2px;
 }
 
@@ -443,10 +447,10 @@ input[type="checkbox"] + label div.ti-checkbox{
 input[type="checkbox"]:checked + label div.ti-checkbox {
     background:url('../images/ti-assets/checkbox.png') left -21px no-repeat;
 }
-
-input[type="radio"] {
+/* Update By Yiyang: Why hide the radio? ; */
+/*input[type="radio"] {
     display:none;
-}
+}*/
 
 input[type="radio"] + label div.ti-radio {
     display:inline-block;

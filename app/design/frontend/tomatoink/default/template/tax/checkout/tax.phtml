@@ -44,16 +44,16 @@
 
         <?php foreach ($rates as $rate): ?>
         <tr class="summary-details-<?php echo $taxIter; ?> summary-details<?php if ($isTop): echo ' summary-details-first'; endif; ?>" style="display:none;">
-            <td class="a-right ti_table_productSubtotalTitle" style="<?php echo $_style ?>" colspan="<?php echo $this->getColspan(); ?>">
-               <p><?php echo $this->escapeHtml($rate['title']); ?>
+            <td class="a-right" style="<?php echo $_style ?>" colspan="<?php echo $this->getColspan(); ?>">
+                <?php echo $this->escapeHtml($rate['title']); ?>
                 <?php if (!is_null($rate['percent'])): ?>
                     (<?php echo (float)$rate['percent']; ?>%)
-                <?php endif; ?>: </p>
+                <?php endif; ?>
                 <br />
             </td>
             <?php if ($isFirst): ?>
                 <td style="<?php echo $_style ?>" class="a-right" rowspan="<?php echo count($rates); ?>">
-                    <p><?php echo $this->helper('checkout')->formatPrice($amount); ?></p>
+                    <?php echo $this->helper('checkout')->formatPrice($amount); ?>
                 </td>
             <?php endif; ?>
         </tr>
@@ -64,23 +64,23 @@
     <?php $weees = $this->getAllWeee(); ?>
     <?php foreach ($weees as $weeeTitle => $weeeAmount): ?>
     <tr class="summary-details-<?php echo $taxIter; ?> summary-details<?php if ($isTop): echo ' summary-details-first'; endif; ?>" style="display:none;">
-        <td class="a-right ti_table_productSubtotalTitle" style="<?php echo $_style ?>" colspan="<?php echo $this->getColspan(); ?>">
-            <p><?php echo $this->escapeHtml($weeeTitle); ?>: </p>
+        <td class="a-right" style="<?php echo $_style ?>" colspan="<?php echo $this->getColspan(); ?>">
+            <?php echo $this->escapeHtml($weeeTitle); ?>
             <br />
         </td>
-        <td style="<?php echo $_style ?>" rowspan="1" class="ti_table_productSubtotalAmount">
-            <p><?php echo $this->helper('checkout')->formatPrice($weeeAmount); ?></p>
+        <td style="<?php echo $_style ?>" class="a-right" rowspan="1">
+            <?php echo $this->helper('checkout')->formatPrice($weeeAmount); ?>
         </td>
     </tr>
     <?php endforeach; ?>
 <?php endif;?>
 <tr <?php if ($this->helper('tax')->displayFullSummary() && $_value!=0): ?> class="summary-total" onclick="expandDetails(this, '.summary-details-<?php echo $taxIter;?>')"<?php endif; ?>>
-    <td style="<?php echo $_style ?>" class="a-right ti_table_productSubtotalTitle" colspan="<?php echo $this->getColspan(); ?>">
+    <td style="<?php echo $_style ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <?php if ($this->helper('tax')->displayFullSummary()): ?>
-            <div class="summary-collapse"><p><?php echo $this->getTotal()->getTitle() ?>: </p></div>
+            <div class="summary-collapse"><?php echo $this->getTotal()->getTitle() ?></div>
         <?php else: ?>
-            <p><?php echo $this->getTotal()->getTitle() ?>: </p>
+            <?php echo $this->getTotal()->getTitle() ?>
         <?php endif;?>
     </td>
-    <td style="<?php echo $_style ?>" class="ti_table_productSubtotalAmount"><p><?php echo $this->helper('checkout')->formatPrice($_value) ?></p></td>
+    <td style="<?php echo $_style ?>" class="a-right"><?php echo $this->helper('checkout')->formatPrice($_value) ?></td>
 </tr>

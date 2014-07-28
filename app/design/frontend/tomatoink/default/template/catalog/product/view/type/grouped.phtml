@@ -43,7 +43,7 @@
             ti_global_productlist[<?php echo $i; ?>] = new Array();
             ti_global_productlist[<?php echo $i; ?>][0] = "<?php echo $_associatedProducts[$i]->getSku(); ?>";
             ti_global_productlist[<?php echo $i; ?>][1] = "<?php echo $_associatedProducts[$i]->getName(); ?>";
-            ti_global_productlist[<?php echo $i; ?>][2] = "<?php echo round($_associatedProducts[$i]->getPrice(), 2); ?>";
+            ti_global_productlist[<?php echo $i; ?>][2] = "<?php echo number_format($_associatedProducts[$i]->getPrice(), 2); ?>";
         <?php endfor; ?>
     <?php endif; ?>
 </script>
@@ -109,10 +109,16 @@
     <?php $product_url = $_item->getProductUrl();
           $pro_url_array = explode("/", $product_url);
           $product_url = "";    
-          $checkout_url = "";      
+          $checkout_url = "";     
+          //print_r($pro_url_array); 
 for ($i=0;$i<(count($pro_url_array)-2);$i++) {
             $product_url .= $pro_url_array[$i] . "/";
         }
+
+        //only for testing
+        if ($pro_url_array[$i] == 'magentoEE')
+            $product_url .= $pro_url_array[$i] . "/";
+
             $checkout_url = $product_url;
             //$product_url .= $_item->getUrlKey() . ".html";
             $product_url .= $pro_url_array[count($pro_url_array)-1];
@@ -131,8 +137,8 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
             <?php if ($this->getCanShowProductPrice($_product)): ?>
             
                 <?php if ($this->getCanShowProductPrice($_item)): ?>
-                 <h3 class="altTxt">Our price: $<?php echo round($_item->getPrice(), 2) ?></h3>
-                <h5>brand-price: <span>$<?php echo round($_item->getMsrp(), 2) ?></span></h5>
+                 <h3 class="altTxt">Our price: $<?php echo number_format($_item->getPrice(), 2) ?></h3>
+                <h5>brand-price: <span>$<?php echo number_format($_item->getMsrp(), 2) ?></span></h5>
                 <?php endif; ?>
             <?php endif; ?>
         </div>

@@ -92,17 +92,17 @@ class Compandsave_Variable_Model_Observer
 
             $catalogSearchHelper =  $block->helper('catalogsearch');
 
-            $this->html .= '<form id="search_mini_form2" action="'.$catalogSearchHelper->getResultUrl().'" method="get">
-									<input type="text" name="'. $catalogSearchHelper->getQueryParamName() .'" id="search2" value="Find your cartridge" onfocus="if (block.value == "Find your cartridge") {block.value = "";}" onblur="if (block.value == "") {block.value = "Find your cartridge";}"/>
-									<input type="submit" name="Submit" id="search_submit2" value="Search" title="'. $block->__("Search") .'">
-									<div id="search_autocomplete" class="search-autocomplete"></div>
+            $this->html .= '<form id="search_mini_form3" action="'.$catalogSearchHelper->getResultUrl().'" method="get">
+									<input type="text" name="'. $catalogSearchHelper->getQueryParamName() .'" id="search3" value="Find your cartridge" onfocus="if (this.value == \'Find your cartridge\') {this.value = \'\';}" onblur="if (this.value == \'\') {this.value = \'Find your cartridge\';}"/>
+									<input type="submit" name="Submit" id="search_submit3" value="Search" title="'. $block->__("Search") .'">
+									<div id="search_autocomplete3" class="search-autocomplete"></div>
 									<script type="text/javascript">
 									//<![CDATA[
-										var searchForm2 = new Varien.searchForm("search_mini_form2", "search2", "'. $block->__("Search entire store here...'") .'");
-										searchForm.initAutocomplete("'. $catalogSearchHelper->getSuggestUrl() .'", "search_autocomplete");
+										var searchForm3 = new Varien.searchForm("search_mini_form3", "search3", "'. $block->__("Search entire store here...'") .'");
+										searchForm3.initAutocomplete("'. $catalogSearchHelper->getSuggestUrl() .'", "search_autocomplete3");
 									//]]>
 									</script>
-
+                            </form>
 							</div>
 						</div>
 					</div>';

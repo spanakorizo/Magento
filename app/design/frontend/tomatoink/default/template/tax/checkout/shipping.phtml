@@ -30,37 +30,37 @@
 ?>
 <?php if ($this->displayBoth()):?>
 <tr>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productSubtotalTitle" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo $this->getExcludeTaxLabel() ?>: </p>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->getExcludeTaxLabel() ?>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productSubtotalAmount">
-        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?></p>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
     </td>
 </tr>
 <tr>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productSubtotalTitle" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo $this->getIncludeTaxLabel() ?>: </p>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->getIncludeTaxLabel() ?>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productSubtotalAmount">
-        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
     </td>
 </tr>
 <?php elseif($this->displayIncludeTax()) : ?>
 <tr>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productSubtotalTitle" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo $this->getTotal()->getTitle() ?>: </p>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->getTotal()->getTitle() ?>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productSubtotalAmount">
-        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
     </td>
 </tr>
 <?php else:?>
-<tr>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productSubtotalTitle" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo $this->escapeHtml($this->getTotal()->getTitle()) ?>: </p>
+<tr class="ti_checkout_shipping_font">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <?php echo $this->escapeHtml($this->getTotal()->getTitle()) ?>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productSubtotalAmount">
-        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?></p>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
+        <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
     </td>
 </tr>
 <?php endif;?>

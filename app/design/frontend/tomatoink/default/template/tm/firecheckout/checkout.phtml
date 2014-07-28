@@ -1,11 +1,11 @@
 <!-- Megan HTML -->
-
+<!--
 <div class="one btcf">
     <div id="ti_checkout_BillingInfo" class="btcf">
-        <div class="ti_cms_block_headerBar-green"><!-- As user navigates through steps, this class should turn to ti_cms_block_headerBar-orange -->
+        <div class="ti_cms_block_headerBar-green"><!-- As user navigates through steps, this class should turn to ti_cms_block_headerBar-orange
             <h2 class="white ti_headerH1" id="ti_checkoutStep1"><span class="ti_checkoutStep">1</span> Billing Information</h2>
         </div>
-        <!--Billing info shows by default-->
+        <!--Billing info shows by default
         <div class="one_half ti-required-entry">
             <label class="ti_cms_labelHide">
                 <span>First Name</span>
@@ -67,9 +67,9 @@
             </label>
         </div>
         <div class="one_half">
-            <!--ti_checkout_optionChecked shows by default-->
+            ti_checkout_optionChecked shows by default
             <label class="altTxt btcf"><input type="checkbox" checked="checked" class="altTxt"><span><span class="ti_small_text">Save your information for future orders</span></span></label>
-            <!--if ti_checkout_optionUnChecked then these two inputs do not display-->
+            if ti_checkout_optionUnChecked then these two inputs do not display
             <div class="ti-required-entry ti_checkout_half">
                 <label class="ti_cms_labelHide">
                     <span>Password</span>
@@ -85,11 +85,11 @@
         </div>
         <div class="one_half">
             <label class="altTxt btcf"><input type="checkbox" checked="checked" class="altTxt"><span><span class="ti_small_text">Sign up for TomatoInk's bi-weekly email deals</span></span></label>
-            <!--if ti_checkout_optionChecked then shipping info displays-->
+            <!--if ti_checkout_optionChecked then shipping info displays
             <label class="altTxt btcf"><input type="checkbox" class="altTxt"><span><span class="ti_small_text">Ship to a different address</span></span></label>
         </div>
     </div>
-    <!--end billing info-->
+    <!--end billing info
     <div id="ti_checkout_ShipInfo" class="btcf">
         <h2 class="lgTxt ti_headerH1">Shipping Information</h2>
         <div class="one_half ti-required-entry">
@@ -170,7 +170,7 @@
         </div>
     </div>
 </div>
-<div class="one btcf">
+<!--<div class="one btcf">
     <div id="ti_checkout_PaymentInfo">
         <div class="ti_cms_block_headerBar-green">
             <h2 class="white ti_headerH1" id="ti_checkoutStep3"><span class="ti_checkoutStep">3</span> Payment</h2>
@@ -187,8 +187,8 @@
                             </select>
                         </div></label>
                     </li>
-                    <!--when radio is selected, lose class="ltWeight"-->
-                    <li><!--these credit spans need a class of ti_checkout_creditSelected when selected -->
+                    <!--when radio is selected, lose class="ltWeight"
+                    <li><!--these credit spans need a class of ti_checkout_creditSelected when selected
                         <label class="lgTxt ltWeight"><input type="radio"><span class="ti_checkout_credit paypal"></span><span><span class="ti_small_text">Paypal</span></span></label>
                     </li>
                     <li>
@@ -199,11 +199,11 @@
                     </li>
                 </ul>
             </div>
-            <div class="two_third ti_block_inner"><!--this hides when user selects "Credit Card"-->
+            <div class="two_third ti_block_inner"><!--this hides when user selects "Credit Card"-
                 <h2 class="ltWeight text_center lgTxt"><span class="icon-lock ti_checkout_secure"></span><br>All payments are secure.</h2>
             </div>
-            <div class="one_third ti_block_inner"  style="display:none;"><!--this displays when user selects "Credit Card"-->
-                <p class="text_center"><!--these credit spans need a class of ti_checkout_creditSelected when selected -->
+            <div class="one_third ti_block_inner"  style="display:none;"><!--this displays when user selects "Credit Card"
+                <p class="text_center"><!--these credit spans need a class of ti_checkout_creditSelected when selected
                     <span class="ti_checkout_credit mastercard"></span> <span class="ti_checkout_credit visa"></span> <span class="ti_checkout_credit discover"></span> <span class="ti_checkout_credit amex"></span>
                 </p>
                 <div class="ti-required-entry">
@@ -219,7 +219,7 @@
                     </label>
                 </div>
             </div>
-            <div class="one_third ti_block_inner"  style="display:none;"><!--this displays when user selects "Credit Card"-->
+            <div class="one_third ti_block_inner"  style="display:none;"><!--this displays when user selects "Credit Card"
                 <div class="one">
                     <div class="ti-required-entry">
                         <div class="ti_select_barContainer ti_checkout_half">
@@ -267,8 +267,8 @@
             </div>
         </div>
     </div>
-</div>
-<div class="one btcf">
+</div>-->
+<!--<div class="one btcf">
     <div class="ti_cms_block_headerBar-green">
         <h2 class="white ti_headerH1" id="ti_checkoutStep4"><span class="ti_checkoutStep">4</span> Additional Info (Optional)</h2>
     </div>
@@ -290,9 +290,9 @@
 <div class="one btcf">
     <div class="ti_cms_block_headerBar-green">
         <h2 class="white ti_headerH1" id="ti_checkoutStep5"><span class="ti_checkoutStep">5</span> Review Order</h2>
-    </div>
-    <!--this is where the table goes. let's throw it in here and I can review before adding additional elements.-->
-</div>
+    </div>-->
+    <!--this is where the table goes. let's throw it in here and I can review before adding additional elements.
+</div>-->
 
 <!-- end Megan HTML -->
 
@@ -339,26 +339,28 @@ endif;
 
 <?php $layout = Mage::getStoreConfig('firecheckout/general/layout'); ?>
 <div class="<?php echo $layout ?> firecheckout-set">
-    <div class="col-1">
+    <div class="one btcf">
         <?php echo $this->getChildHtml('billing.address') ?>
         <?php echo $this->getChildHtml('shipping.address') ?>
     </div>
 
-    <div class="col-2">
+    <div class="one btcf">
 
-        <?php if ('col2-set' === $layout) : ?>
+        <?php /*if ('col2-set' === $layout) : */?><!--
             <div class="col2-set">
                 <div class="col-1">
-        <?php endif; ?>
+        --><?php /*endif; */?>
 
         <?php echo $this->getChildHtml('shipping.method') ?>
-
-        <?php if ('col2-set' === $layout) : ?>
+    </div>
+       <!-- <?php /*if ('col2-set' === $layout) : */?>
                 </div>
                 <div class="col-2">
-        <?php endif; ?>
-
+        --><?php /*endif; */?>
+    <div class="one btcf">
         <?php echo $this->getChildHtml('payment.method') ?>
+    </div>
+    <div class="one btcf">
         <?php if ($j2tRewardPoints = $this->getLayout()->getBlock('checkout_cart_coupon_normal')): // rewardpoints extension override standard discount block too ?>
             <div id="checkout-coupon-discount-load">
                 <?php echo $j2tRewardPoints->toHtml(); ?>
@@ -368,20 +370,13 @@ endif;
                 <?php echo $this->getChildHtml('coupon') ?>
             </div>
         <?php endif; ?>
+    </div>
+    <div class="one btcf">
         <div id="checkout-giftcard-load">
             <?php echo $this->getChildHtml('giftcard') ?>
         </div>
-
-        <?php if ('col2-set' === $layout) : ?>
-                </div>
-            </div>
-        <?php endif; ?>
-
-    <?php if ('col3-set' === $layout) : ?>
     </div>
-    <div class="col-3">
-    <?php endif; ?>
-
+    <div class="one btcf">
         <?php echo $this->getChildHtml('review') ?>
 
     </div>
