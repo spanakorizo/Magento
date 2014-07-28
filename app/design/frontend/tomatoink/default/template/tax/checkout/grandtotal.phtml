@@ -30,29 +30,29 @@
 ?>
 <?php if ($this->includeTax() && $this->getTotalExclTax()>=0):?>
 <tr class="ti_cart_total">
-    <td style="<?php echo $this->getStyle() ?>" class="a-right ti_table_productGrandtotal" colspan="<?php echo $this->getColspan(); ?>">
-        <h2 class="white"><?php echo $this->helper('tax')->__('Grand Total Excl. Tax')?>: </h2>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <h2 class="white"><?php echo $this->helper('tax')->__('Grand Total Excl. Tax')?></h2>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productGrandtotalPrice">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <h2 class="white"><?php echo $this->helper('checkout')->formatPrice($this->getTotalExclTax()) ?></h2>
     </td>
 </tr>
 <?php echo $this->renderTotals('taxes', $this->getColspan()); ?>
 <tr>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right ti_table_productGrandtotal" colspan="<?php echo $this->getColspan(); ?>">
-        <h2 class="white"><?php echo $this->helper('tax')->__('Grand Total Incl. Tax')?>: </h2>
+    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <h2 class="white"><?php echo $this->helper('tax')->__('Grand Total Incl. Tax')?></h2>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productGrandtotalPrice">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <h2 class="white"><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></h2>
     </td>
 </tr>
 <?php else:?>
 <tr class="ti_cart_total">
-    <td style="<?php echo $this->getStyle() ?>" class="a-right ti_table_productGrandtotal" colspan="<?php echo $this->getColspan(); ?>">
-        <h2 class="white"><?php echo $this->getTotal()->getTitle() ?>: </h2>
+    <td style="<?php //echo $this->getStyle() ?>padding:0px" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
+        <h2 class="white ti_bold"><?php echo $this->getTotal()->getTitle() ?></h2>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="ti_table_productGrandtotalPrice">
-        <h2 class="white"><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></h2>
+    <td style="<?php //echo $this->getStyle() ?>padding:0px" class="a-right">
+        <h2 class="white ti_bold"><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></h2>
     </td>
 </tr>
 <?php endif;?>

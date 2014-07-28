@@ -10,7 +10,9 @@
 			<class>Compandsave_Productselector_Model</class>
 		</models>
 		<helpers>
-			<class>Compandsave_Productselector_Helper</class>
+			<compandsave_productselector>
+				<class>Compandsave_Productselector_Helper</class>
+			</compandsave_productselector>
 		</helpers>
 		<blocks>
 			<compandsave_productselector>

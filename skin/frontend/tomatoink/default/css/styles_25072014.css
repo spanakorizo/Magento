@@ -225,7 +225,7 @@ p.required {
 .form-list .input-box a { font-size:11px; margin-top:4px; }
 .form-list input.input-text,
 .form-list textarea { float:left; width:374px; vertical-align:top; }
-/*.form-list textarea { width:374px; height:13em; }*/
+.form-list textarea { width:374px; height:13em; }
 .form-list select { float:left; width:380px; vertical-align:top; }
 .form-list p { margin:0; padding:0 0 0 240px; }
 ul.add-row,

@@ -1,0 +1,109 @@
+<?php
+/**
+ * @var TM_CheckoutFields_Helper_Data
+ */
+$checkoutfields = Mage::helper('checkoutfields');
+?>
+<?php if ($fields = $checkoutfields->getEnabledFields()) : ?>
+    <ul class="form-list form-checkoutfields">
+    <?php foreach ($fields as $fieldName => $fieldConfig) : ?>
+        <?php
+            $required = ('req' === $fieldConfig['status']);
+            $value    = $this->escapeHtml($this->getQuote()->getData($fieldName));
+        ?>
+        <!--<li<?php /*echo 'checkbox' === $fieldConfig['type'] ? ' class="control"' : '' */?> >-->
+
+        <li <?php if('select' === $fieldConfig['type']) echo 'class="one_third ti_block_inner"'; elseif('textarea' === $fieldConfig['type']) echo 'class="two_third_review"';elseif('checkbox' === $fieldConfig['type']) echo 'class="control"'; else '';?> >
+            <?php if ('checkbox' !== $fieldConfig['type']) : ?>
+                <label for="order-<?php echo $fieldName ?>" class="ti_cms_labelHide">
+                    <span><?php echo $this->escapeHtml($fieldConfig['label']) ?></span>
+                </label>
+                <!--<label for="order-<?php /*echo $fieldName */?>"
+                    class="<?php /*echo $required ? 'required' : '' */?>"
+                    ><?php /*if ($required): */?><em>*</em><?php /*endif; */?><?php /*echo $this->escapeHtml($fieldConfig['label']) */?></label>-->
+                <?php if ($fieldConfig['description']) : ?>
+                    <small class="checkoutfield-note"><?php echo $this->escapeHtml($fieldConfig['description']) ?></small>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <?php switch ($fieldConfig['type']) :
+                case 'checkbox': ?>
+                <div class="input-box">
+                    <input type="checkbox"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        value="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
+                        class="checkbox<?php echo $required ? ' ti-required-entry' : '' ?>"
+                    />
+                    <label for="order-<?php echo $fieldName ?>"
+                        class="<?php echo $required ? 'required' : '' ?>"
+                        ><?php if ($required): ?><em>*</em><?php endif; ?><?php echo $this->escapeHtml($fieldConfig['label']) ?></label>
+                    <?php if ($fieldConfig['description']) : ?>
+                        <small class="checkoutfield-note"><?php echo $this->escapeHtml($fieldConfig['description']) ?></small>
+                    <?php endif; ?>
+                </div>
+                <?php break; ?>
+                <?php /*case 'multiselect': ?>
+                    <select type="text"
+                        size="4"
+                        multiple="multiple"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        class="<?php echo $required ? ' required-entry' : '' ?>"
+                    >
+                        <?php foreach($fieldConfig['options'] as $option) : ?>
+                            <?php $option = $this->escapeHtml($option); ?>
+                            <option value="<?php echo $option ?>"<?php echo $value === $option ? ' selected="selected"' : '' ?>><?php echo $option ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php break;*/ ?>
+                <?php case 'text': ?>
+                <div class="input-box">
+                    <input type="text"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        value="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
+                        onblur="if(this.value=='')this.value='<?php echo $this->escapeHtml($fieldConfig['label']) ?>';"
+                        onfocus="if(this.value=='<?php echo $this->escapeHtml($fieldConfig['label']) ?>')this.value='';"
+                        class="ti_checkout_info<?php echo $required ? ' ti-required-entry' : '' ?>"
+                    />
+                </div>
+                <?php break; ?>
+                <?php case 'textarea': ?>
+                <div>
+                    <textarea type="text"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        placeholder="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
+                        spellcheck="true"
+                        rows="3"
+                        style="width: 100%;font-size: 1em"
+                        onblur="if(this.value=='')this.value='<?php echo $this->escapeHtml($fieldConfig['label']) ?>';"
+                        onfocus="if(this.value=='<?php echo $this->escapeHtml($fieldConfig['label']) ?>')this.value='';"
+                        class="ti_checkout_comments<?php echo $required ? ' ti-required-entry' : '' ?>"
+                    ><?php echo $value ?></textarea>
+                </div>
+                <?php break; ?>
+                <?php case 'select': ?>
+                <div class="ti_select_barContainer ti_checkout_info">
+                    <select type="text"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        value=""
+                        style="width: 107%;font-size: 0.8em"
+                        class="select<?php echo $required ? ' ti-required-entry' : '' ?>"
+                    >
+                        <option value=""><?php echo $this->escapeHtml($fieldConfig['label']) ?></option>
+                        <?php foreach($fieldConfig['options'] as $option) : ?>
+                            <?php $option = $this->escapeHtml($option); ?>
+                            <option value="<?php echo $option ?>"<?php echo $value === $option ? ' selected="selected"' : '' ?>><?php echo $option ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <?php break; ?>
+            <?php endswitch; ?>
+
+        </li>
+    <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

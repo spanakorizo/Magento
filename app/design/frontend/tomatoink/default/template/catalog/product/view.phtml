@@ -45,7 +45,7 @@ error_reporting(E_ALL);
     var ti_global_pagetype = "<?php echo $_product->getTypeId(); ?>";
     var ti_global_pagename = "<?php echo $_product->getName(); ?>";
     var ti_global_productcode = "<?php echo $_product->getSku(); ?>";
-    var ti_global_productprice = "<?php echo round($_product->getPrice(), 2); ?>";
+    var ti_global_productprice = "<?php echo number_format($_product->getPrice(), 2); ?>";
     <?php if ($_product->getTypeId() == "grouped"): ?>
     var ti_global_printerbrand = "<?php $printer_cats = $_product->getCategoryIds();
     $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]) ;
@@ -105,8 +105,8 @@ error_reporting(E_ALL);
             <div class="ti_cms_separator"></div>
             <div class="btcf">
                 <div class="one_half ti_product_infoBlock">
-                    <h2 class="altTxt ti_headerH1" id="ti_product_ourPrice">$<?php echo round($_product->getPrice(),2); ?></h2>
-                    <h5>brand-name: <span id="ti_product_brandPrice">$<?php echo round($_product->getMsrp(),2); ?></span></h5>
+                    <h2 class="altTxt ti_headerH1" id="ti_product_ourPrice">$<?php echo number_format($_product->getPrice(),2); ?></h2>
+                    <h5>brand-name: <span id="ti_product_brandPrice">$<?php echo number_format($_product->getMsrp(),2); ?></span></h5>
                     <div class="ti_cms_block_qty">
                         <form action="<?php echo Mage::getBaseUrl().'productselector/carts/' ?>" method="post" id="product_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
                             <?php echo $this->getBlockHtml('formkey') ?>

@@ -104,17 +104,17 @@
 							<input type="submit" border="0" onclick="submitSearch5();" value="Find Ink" name="imageField">
 						</form> !-->
 						<?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
-						<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
-							<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
-							<input type="submit" name="Submit" id="search_submit" value="Search" title="<?php echo $this->__('Search') ?>">
-							
+						<form id="search_mini_form2" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+							<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search2" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}" />
+							<input type="submit" name="Submit" id="search_submit2" value="Search" title="<?php echo $this->__('Search') ?>" />
+							</form>
 	        <script type="text/javascript">
 	        //<![CDATA[
 	            //var searchForm = new Varien.searchForm('search_mini_form2', 'search2', '<?php echo $this->__('Search entire store here...') ?>');
 	            //searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
 	        //]]>
 	        </script>
-						</form>
+						
 
 
 
@@ -236,7 +236,7 @@
     $cart = Mage::getModel('checkout/session')->getQuote();
     //$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
     //$total_num = $cart->getItemsCount();
-    $total_num = round($cart->getItemsQty());
+    $total_num = number_format($cart->getItemsQty());
     if ($total_num == "") $total_num=0;
 
     $grandtotal = $cart->getSubtotal();
@@ -256,7 +256,7 @@
         //$productPrice = $item->getProduct()->getPrice();
 
     }
-    if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . round($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></p>";
+    if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . number_format($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></p>";
     ?>
 
 

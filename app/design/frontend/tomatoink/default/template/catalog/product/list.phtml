@@ -108,8 +108,8 @@
 
                  <div class="ti_product_blockPrice">           
                 <?php if ($this->getCanShowProductPrice($_product)): ?>
-                 <h3 class="altTxt">Our price: $<?php echo round($_product->getPrice(), 2) ?></h3>
-                <h5>brand-price: <span>$<?php echo round($_product->getMsrp(), 2) ?></span></h5>
+                 <h3 class="altTxt">Our price: $<?php echo number_format($_product->getPrice(), 2) ?></h3>
+                <h5>brand-price: <span>$<?php echo number_format($_product->getMsrp(), 2) ?></span></h5>
                 <?php endif; ?>
                 </div>
 
