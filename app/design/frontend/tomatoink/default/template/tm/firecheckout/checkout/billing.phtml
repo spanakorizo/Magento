@@ -107,7 +107,7 @@
         <ul>
         <?php if ($this->customerHasAddresses()): ?>
             <li class="one">
-                <label for="billing-address-select"><?php echo $this->helper('checkout')->__('Select a billing address from your address book or enter a new address.') ?></label>
+                <label for="billing-address-select"><span><?php echo $this->helper('checkout')->__('Select a billing address from your address book or enter a new address.') ?></span></label>
                 <div class="input">
                     <?php echo $this->getAddressesHtmlSelect('billing') ?>
                 </div>
@@ -266,7 +266,9 @@
                             $isAllowedGuest = Mage::helper('firecheckout')->isAllowedGuestCheckout();
                         if ($isAllowedGuest || $register) : ?>
                             <li class="control one_half">
-                                <label for="billing:register_account"  class="altTxt btcf"><input type="checkbox" name="billing[register_account]" value="1" title="<?php echo $this->__('Create account for later use') ?>" id="billing:register_account" onclick="if(window.billing) billing.setCreateAccount(this.checked);"<?php if ($register || 'optional-checked' == $registrationMode) : ?> checked="checked"<?php endif;?> class="altTxt" /><span class="ti_firecheckout_checkbox_font_size"><?php echo $this->__('Save your information for future orders') ?></span></label>
+                                <input type="checkbox" name="billing[register_account]" value="1" title="<?php echo $this->__('Create account for later use') ?>" id="billing:register_account" onclick="if(window.billing) billing.setCreateAccount(this.checked);"<?php if ($register || 'optional-checked' == $registrationMode) : ?> checked="checked"<?php endif;?> class="altTxt" />
+                                <label for="billing:register_account" class="altTxt btcf"><div class="ti-checkbox"></div> <span><?php echo $this->__('Save your information for future orders') ?></span></label>
+                                
                             </li>
                         <?php else: ?>
                             <li class="no-display">
@@ -275,19 +277,21 @@
                         <?php endif ?>
                         <?php if (Mage::helper('firecheckout')->canShowNewsletter()) : ?>
                             <li class="control one_half">
-                                <label for="newsletter-signup" class="altTxt btcf"><input type="checkbox" id="newsletter-signup" name="newsletter" value="1"<?php if (Mage::getStoreConfig('firecheckout/general/newsletter_checkbox_state')) : ?> checked="checked"<?php endif; ?> title="<?php echo Mage::helper('newsletter')->__('Sign up for our newsletter') ?>" class="altTxt" /><span class="ti_firecheckout_checkbox_font_size"><?php echo Mage::helper('newsletter')->__("Sign up for TomatoInk's bi-weekly email deals") ?></span></label>
+                                <input type="checkbox" id="newsletter-signup" name="newsletter" value="1"<?php if (Mage::getStoreConfig('firecheckout/general/newsletter_checkbox_state')) : ?> checked="checked"<?php endif; ?> title="<?php echo Mage::helper('newsletter')->__('Sign up for our newsletter') ?>" class="altTxt" />
+                                <label for="newsletter-signup" class="altTxt btcf"><div class="ti-checkbox"></div> <span><?php echo Mage::helper('newsletter')->__("Sign up for TomatoInk's bi-weekly email deals") ?></span></label>
+                                
                             </li>
                         <?php endif; ?>
                         <?php if ('hidden' !== $registrationMode || $register) : ?>
                             <li class="one_half" id="register-customer-password" <?php if ('optional' == $registrationMode && !$register) : ?>style="display: none;" <?php endif; ?>>
-                                <div class="one_half">
-                                    <label for="billing:customer_password" class="required altTxt"><em>*</em><span class="ti_firecheckout_checkbox_font_size"><?php echo $this->__('Password') ?></span></label>
+                                <div class="one_half ti-required-entry">
+                                    <label for="billing:customer_password" class="required altTxt"><span><?php echo $this->__('Password') ?></span></label>
                                     <div class="input-box">
                                         <input type="password" name="billing[customer_password]" id="billing:customer_password" title="<?php echo $this->__('Password') ?>" class="input required-entry validate-password" />
                                     </div>
                                 </div>
-                                <div class="one_half">
-                                    <label for="billing:confirm_password" class="required altTxt"><em>*</em><span class="ti_firecheckout_checkbox_font_size"><?php echo $this->__('Confirm Password') ?></span></label>
+                                <div class="one_half ti-required-entry">
+                                    <label for="billing:confirm_password" class="required altTxt"><span><?php echo $this->__('Confirm Password') ?></span></label>
                                     <div class="input-box">
                                         <input type="password" name="billing[confirm_password]" title="<?php echo $this->__('Confirm Password') ?>" id="billing:confirm_password" class="input required-entry validate-cpassword" />
                                     </div>
@@ -297,7 +301,8 @@
                     <?php endif; ?>
                     <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
                         <li class="control">
-                            <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" <?php if ($_address->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="billing:save_in_address_book"><?php echo $this->__('Save in address book') ?></label>
+                            <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" <?php if ($_address->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" />
+                            <label for="billing:save_in_address_book"><span><?php echo $this->__('Save in address book') ?></span></label>
                         </li>
                     <?php else:?>
                         <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>

@@ -307,23 +307,27 @@ textarea {
 	-o-font-feature-settings: "lnum";
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
+/*::-webkit-input-placeholder { 
     color:    #559a13;
     font-size:1.6em;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+:-moz-placeholder { 
     color:    #559a13;
     opacity:  1;
     font-size:1.6em;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+::-moz-placeholder { 
     color:    #559a13;
     opacity:  1;
     font-size:1.6em;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
+:-ms-input-placeholder { 
     color:    #559a13;
     font-size:1.6em;
+}*/
+
+textarea{
+	font-size:1.6px;
 }
 
 input[type="submit"], 
@@ -402,9 +406,6 @@ input[type="radio"]{
 	border-radius: 10px;
 	border: 5px solid #559a13;
 	background: none;
-	/* hide by yiyang, so small to display */
-	/*width: 5px;
-	height: 5px;*/
 	padding: 2px;
 }
 
@@ -473,7 +474,7 @@ input[type="radio"]:checked + label span{
 	content:"*";
 	color:#e67921;
 	position: absolute;
-	font-size: 3.2em;
+	font-size: 2.6em;
 	margin-left: -20px;
 	margin-top: 10px;
 	}
@@ -511,7 +512,7 @@ select{
 	overflow: hidden;
 	width: 115%;
 	font-size: 1.6em;
-	padding: 0;
+	padding: 10px;
 	height:45px;
 }
 
@@ -522,7 +523,6 @@ select{
 	background: url('../images/ti-assets/ti-select-arrow.jpg') no-repeat scroll 99% center #fff;
 	padding: 0;
 	overflow: hidden;
-	font-size: 1.6em;
 	border-radius: 0.25em;
 	-moz-border-radius: 0.25em;
 	-webkit-border-radius: 0.25em;
@@ -660,6 +660,10 @@ ul.ti_bullet li:before {
 
 img{
 	display:block;
+}
+
+img.ti_img_Inline{
+	display:inline;
 }
 
 /* -- Tables --*/
@@ -1555,7 +1559,7 @@ ul.ti_cart_review li:last-child{
 
 /*  Account Features  */
 
-.ti_account_orderSum#my-orders-table th{
+.ti_account_orderSum #my-orders-table th{
 	min-width:0;
 }
 
@@ -1694,7 +1698,7 @@ ul.ti_cart_review li:last-child{
 .ti_cms_block_brandVB{
 	text-align:center;
 	width: 23%;
-	margin:1%;
+	margin:10px 1%;
 	padding:0;
 	float:left;
 

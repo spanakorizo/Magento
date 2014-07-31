@@ -1,9 +1,11 @@
 <?php if ($this->getQuote()->isVirtual() || !Mage::getStoreConfig('firecheckout/general/shipping_address')) : return; endif; ?>
-<ul class="one_half">
-    <li class="control one">
-        <label for="shipping:same_as_billing" class="altTxt btcf"><input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Ship to the same address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="altTxt" /><span class="ti_firecheckout_checkbox_font_size"><?php echo $this->__('Ship to the same address') ?></span></label>
-    </li>
-</ul>
+<div class="control one">
+   <!--<li class="control one">-->
+        <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Ship to the same address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="altTxt" />
+        <label for="shipping:same_as_billing" class="altTxt btcf"><div class="ti-checkbox"></div><span><?php echo $this->__('Ship to the same address') ?></span></label>
+    <!--</li>
+</ul>-->
+</div>
 
 <?php
     $_layout = $this->getLayout();

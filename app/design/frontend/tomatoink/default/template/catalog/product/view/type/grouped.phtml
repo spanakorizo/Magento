@@ -92,6 +92,12 @@
         jQuery('.ti_cms_block_grid').attr('class', 'ti_cms_block_list');
     };
 
+        //click view_grid when it is less than 479px. 
+    var currentWidth = jQuery('#ti_header_breadcrumbs').css('width');
+    if (parseInt(currentWidth) < 480) {
+        view_grid();
+    }
+
 </script>
 
 

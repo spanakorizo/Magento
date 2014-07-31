@@ -32,49 +32,57 @@
  */
 ?>
 <?php if($this->getCollection()->getSize()): ?>
-<div class="toolbar">
+<div class="toolbar btcf">
     <?php if( $this->isExpanded() ): ?>
-    <div class="sorter">
+    <div class="sorter one_third">
 
         <div class="sort-by">
-            <label><?php echo $this->__('Sort By') ?></label>
-            <select onchange="setLocation(this.value)">
-            <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
-                <option value="<?php echo $this->getOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
-                    <?php echo $this->__($_order) ?>
-                </option>
-            <?php endforeach; ?>
-            </select>
-            <?php if($this->getCurrentDirection() == 'desc'): ?>
-                <a href="<?php echo $this->getOrderUrl(null, 'asc') ?>"><img src="<?php echo $this->getSkinUrl('images/sort_desc_arrow.gif') ?>" alt="<?php echo $this->__('Set Ascending Direction') ?>" class="v-middle" /></a>
-            <?php else: ?>
-                <a href="<?php echo $this->getOrderUrl(null, 'desc') ?>"><img src="<?php echo $this->getSkinUrl('images/sort_asc_arrow.gif') ?>" alt="<?php echo $this->__('Set Descending Direction') ?>" class="v-middle" /></a>
-            <?php endif; ?>
+            <label for="ti_select_rel">
+                <span class="lgTxt"><?php if($this->getCurrentDirection() == 'desc'): ?>
+                <a href="<?php echo $this->getOrderUrl(null, 'asc') ?>"><img src="<?php echo $this->getSkinUrl('images/sort_desc_arrow.gif') ?>" alt="<?php echo $this->__('Set Ascending Direction') ?>" class="v-middle ti_img_Inline" /></a>
+                <?php else: ?>
+                    <a href="<?php echo $this->getOrderUrl(null, 'desc') ?>"><img src="<?php echo $this->getSkinUrl('images/sort_asc_arrow.gif') ?>" alt="<?php echo $this->__('Set Descending Direction') ?>" class="v-middle ti_img_Inline" /></a>
+                <?php endif; ?>
+                <?php echo $this->__('Sort by:') ?></span>
+            </label>
+            <div class="ti_select_barContainer btcf">
+                <select id="ti_select_rel" onchange="setLocation(this.value)">
+                <?php foreach($this->getAvailableOrders() as $_key=>$_order): ?>
+                    <option value="<?php echo $this->getOrderUrl($_key, 'asc') ?>"<?php if($this->isOrderCurrent($_key)): ?> selected="selected"<?php endif; ?>>
+                        <?php echo $this->__($_order) ?>
+                    </option>
+                <?php endforeach; ?>
+                </select>
+            </div>
+            
         </div>
     </div>
     <?php endif; ?>
 
     <div class="pager">
-        <p class="amount">
+        <!--<p class="amount">
             <?php if($this->getLastPageNum()>1): ?>
                 <?php echo $this->__('Items %s-%s of %s', $this->getFirstNum(), $this->getLastNum(), $this->getTotalNum()) ?>
             <?php else: ?>
                 <?php echo $this->__('%s Item(s)', $this->getTotalNum()) ?>
             <?php endif; ?>
-        </p>
+        </p>-->
 
-        <div class="limiter">
-            <label><?php echo $this->__('Show') ?></label>
-            <select onchange="setLocation(this.value)">
-            <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
-                <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
-                    <?php echo $_limit ?>
-                </option>
-            <?php endforeach; ?>
-            </select> <?php echo $this->__('per page') ?>
+        <div class="limiter one_third middle">
+            <label for="ti_select_items"><span class="lgTxt"><?php echo $this->__('Show per page:') ?></span></label>
+            <div class="ti_select_barContainer btcf">
+                <select onchange="setLocation(this.value)" id="ti_select_items">
+                <?php foreach ($this->getAvailableLimit() as  $_key=>$_limit): ?>
+                    <option value="<?php echo $this->getLimitUrl($_key) ?>"<?php if($this->isLimitCurrent($_key)): ?> selected="selected"<?php endif ?>>
+                        <?php echo $_limit ?>
+                    </option>
+                <?php endforeach; ?>
+                </select>
+            </div> <!--<?php echo $this->__('per page') ?>-->
         </div>
-
-        <?php echo $this->getPagerHtml() ?>
+        <div class="limiter one_third">
+            <?php echo $this->getPagerHtml() ?>
+        </div>
 
     </div>
 </div>
