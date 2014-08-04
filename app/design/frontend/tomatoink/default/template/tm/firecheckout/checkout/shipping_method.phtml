@@ -1,6 +1,9 @@
 <?php if ($this->getQuote()->isVirtual()) : return; endif; ?>
 <div id="shipping-method">
-    <div class="ti_cms_block_headerBar-green"><div id="shipping-method-reset"><?php echo $this->__('Reset') ?></div><h2 class="white ti_checkout_headerH1" id="ti_checkoutStep2"><span class="ti_checkoutStep">2</span><?php echo $this->__(' Shipping') ?></h2></div>
+    <div class="ti_cms_block_headerBar-green">
+        <!--<div id="shipping-method-reset"><?php echo $this->__('Reset') ?></div>-->
+        <h2 class="white ti_headerH1" id="ti_checkoutStep2"><span class="ti_checkoutStep">2</span><?php echo $this->__(' Shipping') ?></h2>
+    </div>
     <div class="ti_cms_gradient_block">
         <div id="checkout-shipping-method-load">
             <?php echo $this->getChildHtml('available') ?>

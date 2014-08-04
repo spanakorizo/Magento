@@ -1,11 +1,12 @@
 <?php if ($this->getQuote()->isVirtual() || !Mage::getStoreConfig('firecheckout/general/shipping_address')) : return; endif; ?>
-<div class="control one">
-   <!--<li class="control one">-->
+    <ul class="ti_checkout_inputField">
+<!--<div class="control one_half">-->
+   <li class="control one_half">
         <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Ship to the same address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="altTxt" />
         <label for="shipping:same_as_billing" class="altTxt btcf"><div class="ti-checkbox"></div><span><?php echo $this->__('Ship to the same address') ?></span></label>
-    <!--</li>
-</ul>-->
-</div>
+    </li>
+<!--</div>-->
+</ul>
 
 <?php
     $_layout = $this->getLayout();
@@ -89,7 +90,7 @@
 <div id="shipping-address" class="btcf"<?php if($this->getAddress()->getSameAsBilling()): ?> style="display: none;"<?php endif; ?>>
     <h2 class="lgTxt ti_checkout_headerH1"><?php echo $this->helper('checkout')->__(' Shipping Information'); ?></h2>
     <div class="block-content">
-        <ul>
+        <ul class="ti_checkout_inputField">
         <?php if ($this->customerHasAddresses()): ?>
            <li class="one">
                <label for="shipping-address-select"><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></label>
@@ -101,7 +102,7 @@
             <li id="shipping-new-address-form"<?php if ($this->hasCustomerAddressId()): ?> style="display:none;"<?php endif ?>>
                 <fieldset>
                     <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
-                    <ul class="ti_small_text">
+                    <!--<ul class="ti_small_text">-->
                         <?php foreach (Mage::helper('firecheckout/address')->getSortedFields() as $row) : ?>
                             <?php
                                 $countVisible          = 0;
@@ -239,7 +240,7 @@
                     <?php else:?>
                         <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></li>
                     <?php endif;?>
-                    </ul>
+                    <!--</ul>-->
                 </fieldset>
             </li>
         </ul>

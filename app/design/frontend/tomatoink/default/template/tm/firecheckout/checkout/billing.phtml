@@ -101,10 +101,10 @@
     <?php if (!$this->canShip() || !Mage::getStoreConfig('firecheckout/general/shipping_address')): ?>
         <div class="ti_cms_block_headerBar-green"><span><?php echo $this->helper('checkout')->__('Address'); ?></span></div>
     <?php else: ?>
-        <div class="ti_cms_block_headerBar-green"><h2 class="white ti_checkout_headerH1" id="ti_checkoutStep1"><span class="ti_checkoutStep">1</span><?php echo $this->helper('checkout')->__(' Billing Information'); ?></h2></div>
+        <div class="ti_cms_block_headerBar-green"><h2 class="white ti_headerH1" id="ti_checkoutStep1"><span class="ti_checkoutStep">1</span><?php echo $this->helper('checkout')->__(' Billing Information'); ?></h2></div>
     <?php endif; ?>
     <div class="block-content">
-        <ul>
+        <ul class="ti_checkout_inputField">
         <?php if ($this->customerHasAddresses()): ?>
             <li class="one">
                 <label for="billing-address-select"><span><?php echo $this->helper('checkout')->__('Select a billing address from your address book or enter a new address.') ?></span></label>
@@ -116,7 +116,7 @@
         <li id="billing-new-address-form"<?php if ($this->hasCustomerAddressId()): ?> style="display:none;"<?php endif; ?>>
             <fieldset>
                 <input type="hidden" name="billing[address_id]" value="<?php echo $_address->getId() ?>" id="billing:address_id" />
-                <ul class="ti_small_text">
+                <!--<ul>-->
                     <?php foreach (Mage::helper('firecheckout/address')->getSortedFields() as $row) : ?>
                         <?php
                         $countVisible          = 0;
@@ -177,19 +177,19 @@
                                         <label for="<?php echo $_prefix ?>:<?php echo $field ?>"
                                             class="ti_cms_labelHide"
                                             ><span><?php echo $this->__($fields[$field]['label']) ?></span></label>
-                                        <div class="<?php echo $required ? 'ti-required-entry' : '' ?>">
+                                        <div class="<?php echo $required ? 'ti-required-entry' : '' ?> ti_checkout_info">
                                             <?php if ('country_id' === $field) : ?>
-                                            <div class="ti_select_barContainer ti_checkout_info">
+                                            <div class="ti_select_barContainer">
                                                 <?php echo $this->getCountryHtmlSelect($_prefix) ?>
                                             </div>
                                             <?php elseif ('region' === $field): ?>
-                                                <div id="ti_hide_billing_state" class="ti_select_barContainer ti_checkout_info">
+                                                <div id="ti_hide_billing_state" class="ti_select_barContainer">
                                                 <select id="<?php echo $_prefix ?>:region_id" name="<?php echo $_prefix ?>[region_id]"
                                                     title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
-                                                    class="validate-select<?php echo $required ? ' required-entry' : '' ?>" style="width: 105%" class="ti_select_barContainer ti_checkout_info"> 
+                                                    class="validate-select<?php echo $required ? ' required-entry' : '' ?>" class="ti_select_barContainer"> 
                                                     <option value=""><?php echo $this->__('Select State/ Province') ?></option>
                                                 </select>
-												</div>
+                                                </div>
                                                 <script type="text/javascript">
                                                 //<![CDATA[
                                                     $('<?php echo $_prefix ?>:region_id').setAttribute('defaultValue',  "<?php echo $_address->getRegionId() ?>");
@@ -198,7 +198,7 @@
                                                 <input type="text" id="<?php echo $_prefix ?>:region" name="<?php echo $_prefix ?>[region]"
                                                     value="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo 'State/Province'; ?>"
                                                     onblur="if(this.value=='')this.value='State/Province';" title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
-                                                    onfocus="if(this.value=='State/Province')this.value='';" class="<?php echo $required ? ' required-entry' : '' ?> ti_checkout_info" style="display:none;"
+                                                    onfocus="if(this.value=='State/Province')this.value='';" class="<?php echo $required ? ' required-entry' : '' ?>" style="display:none;"
                                                 />
                                                 
                                             <?php else: ?>
@@ -235,7 +235,7 @@
                                     <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
                                         </li>
                                         <li class="one_checkout">
-                                            <div class="input-box">
+                                            <div class="input-box ti_checkout_info">
                                                 <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="<?php echo $_prefix ?>[street][]" id="<?php echo $_prefix ?>:street<?php echo $_i?>" value="<?php echo $this->escapeHtml($_address->getStreet($_i)) ?>" class="ti_checkout_info" />
                                             </div>
                                     <?php endfor ?>
@@ -308,7 +308,7 @@
                         <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>
                     <?php endif; ?>
                     <?php echo $this->getChildHtml('form.additional.info'); ?>
-                </ul>
+                <!--</ul>-->
             </fieldset>
         </li>
         <?php /* Extensions placeholder */ ?>

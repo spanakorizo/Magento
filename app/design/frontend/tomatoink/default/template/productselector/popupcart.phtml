@@ -1,3 +1,5 @@
+<div class="ti_block_inner">
+
 <?php
 /*$prdinfo = $_POST['prd'];
 
@@ -23,7 +25,7 @@ $cartItems = $conn->fetchCol($select);
 
 //echo "<div class='ti_cartpopup_block_headerBar-green'><h2 class='white ti_top_margin_hide'> Total Items in Cart : ".$total_num."   <span>Sub Total: $" . round($grandtotal,2) . "</span></h2><span class='ti_close_popup'><a href='#' class='ti_txt_dec_none'><p class='ti_orange_head ti_checkoutStep_close'>X</p></a></span></div>";
 
-echo "<h2> Total Items in Cart : ".$total_num."   <br><strong class='altTxt'>Sub Total: $" . round($grandtotal,2) . "</strong></h2> <span class='ti_close_popup'><a href='#'><p class='ti_orange_head ti_checkoutStep_close'>X</p></a></span>";
+echo "<h2> Total Items in Cart : ".$total_num."   <br><strong class='altTxt'>Sub Total: $" . round($grandtotal,2) . "</strong></h2> <span class='ti_close_popup'><a href='#' class='ti_checkoutStep_close altTxt'>X</a></span>";
 
 foreach ($cart->getAllItems() as $item) {
     $product = $item->getProduct();
@@ -37,6 +39,7 @@ foreach ($cart->getAllItems() as $item) {
 echo "<div class='text_center'><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a>";
 echo "<a class='ti_button ti_altBtn' href='".$this->getContinueShoppingUrl()."' ><strong>Continue Shopping</strong></a></div>";
 ?>
+</div>
 <script>
     jQuery('.ti_close_popup').click(function(e){
         e.preventDefault();

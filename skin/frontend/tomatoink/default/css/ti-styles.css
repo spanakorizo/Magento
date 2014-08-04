@@ -1115,11 +1115,12 @@ td, th{
 	display:none;
 	z-index: 1000;
 	position: absolute;
-	width: 250px;
+	width: 112px;
 	color: #333;
 	padding:20px 5px 5px;
 	left: 50%;
-	margin-left: -125px;
+	margin-left: -66px;
+	top:20px;
 }
 
 .ti_cms_dropContent:after {
@@ -1173,6 +1174,11 @@ td, th{
 .ti_cms_dropContent input{
 	box-shadow:none;
 	text-shadow:none;
+}
+
+#ti_header_cartDrop{
+	width:250px;
+	margin-left:-125px;
 }
 
 #ti_header_cartitems{
@@ -1437,7 +1443,36 @@ ul.ti_cart_review li:last-child{
 	max-height:450px;
 	position:absolute;
 	z-index:10000;
-	overflow:scroll;
+	overflow-y:auto;
+	overflow-x:hidden;
+	transition:none;
+}
+
+.ti_close_popup {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+}
+
+.ti_checkoutStep_close{
+	border: 2px solid #71B62F;
+	font-size:16px;
+}
+
+#show_cart .one_fifth,
+#show_cart .two_fifth{
+	margin: 0 auto;
+	display: block;
+	float: left;
+	padding: 1%;
+}
+
+#show_cart .one_fifth{
+	width:18%;
+}
+
+#show_cart .two_fifth{
+	width:38%;
 }
 
 /* Firecheckout */
@@ -1446,6 +1481,10 @@ ul.ti_cart_review li:last-child{
 	padding:1px 10px;
 	border-radius:100px;
 	background:#fff;
+}
+
+.ti_checkout_inputField{
+	font-size:1em;
 }
 
 .ti_checkoutStep{
@@ -1458,7 +1497,12 @@ ul.ti_cart_review li:last-child{
 
 .ti_checkout_info{
 	width:100%;
-	margin:1% 0%;
+	margin:0;
+}
+
+input.ti_checkout_info {
+	height:45px;
+	padding-left:15px;
 }
 
 .ti_checkout_half{
@@ -1508,9 +1552,9 @@ ul.ti_cart_review li:last-child{
 
 .ti_checkout_comments {
 	resize:none;
-	width:100%;
+	width:98%;
 	font-size:1.6em;
-	margin:0;
+	margin:0 1%;
 }
 
 
@@ -1556,6 +1600,14 @@ ul.ti_cart_review li:last-child{
 .ti_checkout_credit.amex{
 	background:url("../images/ti-assets/amex_48.png") no-repeat center;
 }
+
+
+	/* FireCheckout Table*/
+
+	#checkout-review-table .ti_cart_total,
+	#checkout-review-table.data-table th{
+		background:#f8eadf;
+	}
 
 /*  Account Features  */
 
@@ -1971,7 +2023,6 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 }
 
 .ti_product_blockName{
-
 	word-wrap:break-word;
 	overflow-wrap:break-word;
 	position:relative;
@@ -2237,12 +2288,15 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	#ti_footer_email_cta.three_fourth,
 	#ti_footer_email_cta.one_fourth,
 	.ti_footer_top_block .three_fourth,
-	.ti_footer_top_block .one_fourth,
-	.ti_checkout_info {
+	.ti_footer_top_block .one_fourth {
 		width:98%;
 		margin: 0 auto 15px;
 		padding-right:1%;
 		padding-left:1%;
+	}
+
+	.one_checkout{
+		margin: 0 auto 15px;
 	}
 
 	.ti_cart_relateBlock.one_third { width:31%;margin:0 auto;}
@@ -2299,10 +2353,6 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	.menu_two_col li,
 	.menu_three_col li {
 	    width: 98%;
-	}
-
-	.ti_cms_dropContent{
-		width:200px;
 	}
 
 	.cart .checkout-types{

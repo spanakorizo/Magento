@@ -75,7 +75,7 @@
 }
 .firecheckout-set #shipping-method-reset:hover,
 .firecheckout-set #payment-method-reset:hover { color: #777; }
-.firecheckout-set .block-content { margin: 0; padding: 0 10px; }
+.firecheckout-set .block-content {  }
 /* input field styles */
 .firecheckout-set input.input-text,
 /*.firecheckout-set select,*/
@@ -113,7 +113,7 @@
 .firecheckout-set div.validation-error,
 .firecheckout-set span.validation-passed,
 .firecheckout-set div.validation-passed { background: none; padding: 0; }
-.firecheckout-set .form-list textarea { /*height: 60px;*/ }
+/*.firecheckout-set .form-list textarea { height: 60px; }*/
 .firecheckout-set .input-text,
 /*.firecheckout-set .form-list textarea,
 .firecheckout-set .form-list li.wide textarea,*/

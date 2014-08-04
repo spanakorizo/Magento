@@ -40,7 +40,7 @@
     <?php foreach ($this->getUserDefinedAttributes() as $attribute):?>
         <?php $attributeContent = $this->getAttributeHtml($attribute);?>
         <?php if ($attributeContent): ?>
-        <li><?php echo $attributeContent;?></li>
+        <li class="hello"><?php echo $attributeContent;?></li>
         <?php endif;?>
     <?php endforeach;?>
     <?php if ($this->isShowContainer()): ?>
