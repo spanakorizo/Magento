@@ -65,16 +65,20 @@ error_reporting(E_ALL);
                 $_printer_model = Mage::getModel('catalog/product')->loadByAttribute('categoryid', $printerid);
 
         } ?>
-        var ti_global_prev_printer = "<?php 
+
+            <?php if ($_printer_model != ""): ?>
+
+                var ti_global_prev_printer = "<?php 
             
             
-            echo $_printer_model->getName();
-            ?>";
-        var ti_global_printerbrand_url = "<?php 
-            $printer_cats = $_printer_model->getCategoryIds();
-            $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]);
-            echo $_printer_cat->getUrlKey();
-            ?>";
+                    echo $_printer_model->getName();
+                    ?>";
+                var ti_global_printerbrand_url = "<?php 
+                $printer_cats = $_printer_model->getCategoryIds();
+                $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]);
+                echo $_printer_cat->getUrlKey();
+                ?>";
+            <?php endif; ?>
       
       <?php endif; ?>
 
@@ -87,7 +91,7 @@ error_reporting(E_ALL);
     var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
 </script>
 <div id='ajax_loader' style='display:none;z-index:99999;position:fixed;margin:3.5% 40%;'><img src='<?php echo $this->getSkinUrl('images/loading.gif')?>'/></div>
-<div id="show_cart" class="ti_popup_cart_window">
+<div id="show_cart" class="ti_popup_cart_window ti_cms_border_block">
 
 </div>
 
@@ -238,6 +242,7 @@ error_reporting(E_ALL);
                             <th><p>Model Name:</p></th>
                             <td><p id="ti_product_name"><?php echo $_product->getVendorPartno(); ?></p></td>
                         </tr>
+                        <?php if ($_printer_model != ""): ?>
                         <tr>
                             <th><p>Color:</p></th>
                             <td><p id="ti_product_color"><?php echo $_product->getColor(); ?></p></td>
@@ -258,7 +263,10 @@ error_reporting(E_ALL);
                             <th><p>Quantity:</p></th>
                             <td><p id="ti_product_quantity"><?php if ($_product->getTypeId() == "simple") echo "1 Ink Cartridge"; else {preg_match("/\d$/", $_product->getSku(), $matches); echo $matches[0] . "INK Cartridges"; } ?></p></td>
                         </tr>
+                    <?php endif; ?>
                     </table>
+
+<?php if ($_printer_model != ""): ?>
                 <div class="ti_cms_block_headerBar-green">
                     <h2 class="white ti_headerH1"><a name="ti_product_printerComp" id="ti_product_printerComp" title="ti_product_printerComp"></a>Compatible Printers</h2>
 
@@ -291,6 +299,7 @@ error_reporting(E_ALL);
                     ?>
 
                 </table>
+<?php endif;?>
 </div>
 
 

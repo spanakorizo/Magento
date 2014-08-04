@@ -100,6 +100,12 @@ $products = Mage::getModel('catalog/category')->load($currentCategoryId)
         jQuery('.ti_cms_block_grid').attr('class', 'ti_cms_block_list');
     };
 
+    //click view_grid when it is less than 479px. 
+    var currentWidth = jQuery('#ti_header_breadcrumbs').css('width');
+    if (parseInt(currentWidth) < 480) {
+        view_grid();
+    }
+
 </script>
 
 <div class="category-products">
@@ -135,7 +141,7 @@ $products = Mage::getModel('catalog/category')->load($currentCategoryId)
                 <?php //product price ?>
 
                  <div class="ti_product_blockPrice">           
-                <?php if ($this->getCanShowProductPrice($_product)): ?>
+                <?php if($_product->isSaleable()): ?>
                  <h3 class="altTxt">Our price: $<?php echo round($_product->getPrice(), 2) ?></h3>
                 <h5>brand-price: <span>$<?php echo round($_product->getMsrp(), 2) ?></span></h5>
                 <?php endif; ?>

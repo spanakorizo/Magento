@@ -40,7 +40,6 @@
 <?php else: ?>
 
 
-            <div class="btcf">
                 <div class="ti_printer_sortBar btcf">
                     <div class="one sort-by">
                         <div class="ti_printer_sortBlock sorter ti_hide_479">
@@ -55,7 +54,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
 
 <script type="text/javascript">
@@ -75,7 +73,7 @@
 
 <div class="category-products">
     <?php echo $this->getToolbarHtml() ?>
-
+        <div class="ti_cms_flex_gridContain btcf">
     <?php // Grid Mode ?>
 
     <?php $_collectionSize = $_productCollection->count() ?>
@@ -84,53 +82,55 @@
         <!--<?php //if ($i++%$_columnCount==0): ?>
         <ul class="products-grid">
         <?php //endif ?>!-->
-        <div class="ti_cms_block_grid one_fourth"> 
-    <div class="ti_block_inner ti_cms_border_block btcf">  
 
-            <!--<li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">!-->
-            <?php //product image ?>
-            <div class="ti_product_blockImg">
-            <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" ><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
-            </div>
+            <div class="ti_cms_flex_grid ti_cms_block_grid one_fourth"> 
+                <div class="ti_block_inner ti_cms_border_block btcf">  
 
-
-                    
-            <?php //product name ?>
-                    <div class="ti_product_blockName">
-                        <p><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></p> 
+                    <!--<li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">!-->
+                    <?php //product image ?>
+                    <div class="ti_product_blockImg">
+                    <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" ><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
                     </div>
-                <?php //if($_product->getRatingSummary()): ?>
-                <?php //echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-                <?php //endif; ?>
-                <?php //echo $this->getPriceHtml($_product, true) ?>
 
-                <?php //product price ?>
 
-                 <div class="ti_product_blockPrice">           
-                <?php if ($this->getCanShowProductPrice($_product)): ?>
-                 <h3 class="altTxt">Our price: $<?php echo number_format($_product->getPrice(), 2) ?></h3>
-                <h5>brand-price: <span>$<?php echo number_format($_product->getMsrp(), 2) ?></span></h5>
-                <?php endif; ?>
+                            
+                    <?php //product name ?>
+                            <div class="ti_product_blockName">
+                                <p><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></p> 
+                            </div>
+                        <?php //if($_product->getRatingSummary()): ?>
+                        <?php //echo $this->getReviewsSummaryHtml($_product, 'short') ?>
+                        <?php //endif; ?>
+                        <?php //echo $this->getPriceHtml($_product, true) ?>
+
+                        <?php //product price ?>
+
+                         <div class="ti_product_blockPrice">           
+                        <?php if ($this->getCanShowProductPrice($_product)): ?>
+                         <h3 class="altTxt">Our price: $<?php echo number_format($_product->getPrice(), 2) ?></h3>
+                        <h5>brand-price: <span>$<?php echo number_format($_product->getMsrp(), 2) ?></span></h5>
+                        <?php endif; ?>
+                        </div>
+
+
+                        <div class="actions">
+                            <?php if($_product->isSaleable()): ?>
+                                <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
+                            <?php else: ?>
+                                <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
+                            <?php endif; ?>
+                        </div>
+                    <!--</li>
+                <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
+                </ul>
+                <?php endif ?>!-->
                 </div>
-
-
-                <div class="actions">
-                    <?php if($_product->isSaleable()): ?>
-                        <button type="button" title="<?php echo $this->__('Add to Cart') ?>" class="button btn-cart" onclick="setLocation('<?php echo $this->getAddToCartUrl($_product) ?>')"><span><span><?php echo $this->__('Add to Cart') ?></span></span></button>
-                    <?php else: ?>
-                        <p class="availability out-of-stock"><span><?php echo $this->__('Out of stock') ?></span></p>
-                    <?php endif; ?>
-                </div>
-            <!--</li>
-        <?php if ($i%$_columnCount==0 || $i==$_collectionSize): ?>
-        </ul>
-        <?php endif ?>!-->
-        </div></div>
+            </div>
+        
         <?php endforeach ?>
         <!--<script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>!-->
-
-
-            <div class="btcf">
+        </div>
+</div>
                 <div class="ti_printer_sortBar btcf">
                     <div class="one_third sort-by">
                         <div class="ti_printer_sortBlock sorter">
@@ -146,7 +146,6 @@
                     </div>
 
                 </div>
-            </div>
 
 
     <div class="toolbar-bottom">

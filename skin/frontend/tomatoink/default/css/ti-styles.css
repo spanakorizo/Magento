@@ -307,23 +307,27 @@ textarea {
 	-o-font-feature-settings: "lnum";
 }
 
-::-webkit-input-placeholder { /* WebKit browsers */
+/*::-webkit-input-placeholder { 
     color:    #559a13;
     font-size:1.6em;
 }
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+:-moz-placeholder { 
     color:    #559a13;
     opacity:  1;
     font-size:1.6em;
 }
-::-moz-placeholder { /* Mozilla Firefox 19+ */
+::-moz-placeholder { 
     color:    #559a13;
     opacity:  1;
     font-size:1.6em;
 }
-:-ms-input-placeholder { /* Internet Explorer 10+ */
+:-ms-input-placeholder { 
     color:    #559a13;
     font-size:1.6em;
+}*/
+
+textarea{
+	font-size:1.6px;
 }
 
 input[type="submit"], 
@@ -402,9 +406,6 @@ input[type="radio"]{
 	border-radius: 10px;
 	border: 5px solid #559a13;
 	background: none;
-	/* hide by yiyang, so small to display */
-	/*width: 5px;
-	height: 5px;*/
 	padding: 2px;
 }
 
@@ -473,7 +474,7 @@ input[type="radio"]:checked + label span{
 	content:"*";
 	color:#e67921;
 	position: absolute;
-	font-size: 3.2em;
+	font-size: 2.6em;
 	margin-left: -20px;
 	margin-top: 10px;
 	}
@@ -511,7 +512,7 @@ select{
 	overflow: hidden;
 	width: 115%;
 	font-size: 1.6em;
-	padding: 0;
+	padding: 10px;
 	height:45px;
 }
 
@@ -522,7 +523,6 @@ select{
 	background: url('../images/ti-assets/ti-select-arrow.jpg') no-repeat scroll 99% center #fff;
 	padding: 0;
 	overflow: hidden;
-	font-size: 1.6em;
 	border-radius: 0.25em;
 	-moz-border-radius: 0.25em;
 	-webkit-border-radius: 0.25em;
@@ -660,6 +660,10 @@ ul.ti_bullet li:before {
 
 img{
 	display:block;
+}
+
+img.ti_img_Inline{
+	display:inline;
 }
 
 /* -- Tables --*/
@@ -1111,11 +1115,12 @@ td, th{
 	display:none;
 	z-index: 1000;
 	position: absolute;
-	width: 250px;
+	width: 112px;
 	color: #333;
 	padding:20px 5px 5px;
 	left: 50%;
-	margin-left: -125px;
+	margin-left: -66px;
+	top:20px;
 }
 
 .ti_cms_dropContent:after {
@@ -1169,6 +1174,11 @@ td, th{
 .ti_cms_dropContent input{
 	box-shadow:none;
 	text-shadow:none;
+}
+
+#ti_header_cartDrop{
+	width:250px;
+	margin-left:-125px;
 }
 
 #ti_header_cartitems{
@@ -1433,7 +1443,36 @@ ul.ti_cart_review li:last-child{
 	max-height:450px;
 	position:absolute;
 	z-index:10000;
-	overflow:scroll;
+	overflow-y:auto;
+	overflow-x:hidden;
+	transition:none;
+}
+
+.ti_close_popup {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+}
+
+.ti_checkoutStep_close{
+	border: 2px solid #71B62F;
+	font-size:16px;
+}
+
+#show_cart .one_fifth,
+#show_cart .two_fifth{
+	margin: 0 auto;
+	display: block;
+	float: left;
+	padding: 1%;
+}
+
+#show_cart .one_fifth{
+	width:18%;
+}
+
+#show_cart .two_fifth{
+	width:38%;
 }
 
 /* Firecheckout */
@@ -1442,6 +1481,10 @@ ul.ti_cart_review li:last-child{
 	padding:1px 10px;
 	border-radius:100px;
 	background:#fff;
+}
+
+.ti_checkout_inputField{
+	font-size:1em;
 }
 
 .ti_checkoutStep{
@@ -1454,7 +1497,12 @@ ul.ti_cart_review li:last-child{
 
 .ti_checkout_info{
 	width:100%;
-	margin:1% 0%;
+	margin:0;
+}
+
+input.ti_checkout_info {
+	height:45px;
+	padding-left:15px;
 }
 
 .ti_checkout_half{
@@ -1504,9 +1552,9 @@ ul.ti_cart_review li:last-child{
 
 .ti_checkout_comments {
 	resize:none;
-	width:100%;
+	width:98%;
 	font-size:1.6em;
-	margin:0;
+	margin:0 1%;
 }
 
 
@@ -1553,9 +1601,17 @@ ul.ti_cart_review li:last-child{
 	background:url("../images/ti-assets/amex_48.png") no-repeat center;
 }
 
+
+	/* FireCheckout Table*/
+
+	#checkout-review-table .ti_cart_total,
+	#checkout-review-table.data-table th{
+		background:#f8eadf;
+	}
+
 /*  Account Features  */
 
-.ti_account_orderSum#my-orders-table th{
+.ti_account_orderSum #my-orders-table th{
 	min-width:0;
 }
 
@@ -1694,7 +1750,7 @@ ul.ti_cart_review li:last-child{
 .ti_cms_block_brandVB{
 	text-align:center;
 	width: 23%;
-	margin:1%;
+	margin:10px 1%;
 	padding:0;
 	float:left;
 
@@ -1967,7 +2023,6 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 }
 
 .ti_product_blockName{
-
 	word-wrap:break-word;
 	overflow-wrap:break-word;
 	position:relative;
@@ -2233,12 +2288,15 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	#ti_footer_email_cta.three_fourth,
 	#ti_footer_email_cta.one_fourth,
 	.ti_footer_top_block .three_fourth,
-	.ti_footer_top_block .one_fourth,
-	.ti_checkout_info {
+	.ti_footer_top_block .one_fourth {
 		width:98%;
 		margin: 0 auto 15px;
 		padding-right:1%;
 		padding-left:1%;
+	}
+
+	.one_checkout{
+		margin: 0 auto 15px;
 	}
 
 	.ti_cart_relateBlock.one_third { width:31%;margin:0 auto;}
@@ -2295,10 +2353,6 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	.menu_two_col li,
 	.menu_three_col li {
 	    width: 98%;
-	}
-
-	.ti_cms_dropContent{
-		width:200px;
 	}
 
 	.cart .checkout-types{

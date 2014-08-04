@@ -29,7 +29,7 @@
  */
 ?>
 <?php if ($this->displayBoth()):?>
-<tr class="ti_checkout_subtotal_font">
+<tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo $this->helper('tax')->__('Subtotal (Excl. Tax)') ?></p>
     </td>
@@ -37,7 +37,7 @@
        <p> <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueExclTax()) ?></p>
     </td>
 </tr>
-<tr class="ti_checkout_subtotal_font">
+<tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo $this->helper('tax')->__('Subtotal (Incl. Tax)') ?></p>
     </td>
@@ -46,7 +46,7 @@
     </td>
 </tr>
 <?php else : ?>
-<tr class="ti_checkout_subtotal_font"> 
+<tr> 
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo $this->getTotal()->getTitle() ?></p>
     </td>

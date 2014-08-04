@@ -6,7 +6,9 @@ var lastPrice;
 //]]>
 </script>
 <div id="payment-method">
-	<div class="ti_cms_block_headerBar-green"><div id="payment-method-reset"><?php echo $this->__('Reset') ?></div><h2 class="white ti_checkout_headerH1" id="ti_checkoutStep2"><span class="ti_checkoutStep">3</span><?php echo $this->__(' Payment') ?></h2></div>
+	<div class="ti_cms_block_headerBar-green">
+        <!--<div id="payment-method-reset"><?php echo $this->__('Reset') ?></div>-->
+        <h2 class="white ti_headerH1" id="ti_checkoutStep2"><span class="ti_checkoutStep">3</span><?php echo $this->__(' Payment') ?></h2></div>
     
     <div class="tool-tip" id="payment-tool-tip" style="display:none;">
         <div class="btn-close"><a href="#" id="payment-tool-tip-close" title="<?php echo $this->__('Close') ?>"><?php echo $this->__('Close') ?></a></div>
@@ -62,7 +64,10 @@ var lastPrice;
     <?php echo $this->getChildChildHtml('methods_additional', '', true, true) ?>
     <div class="ti_cms_gradient_block btcf">
         <div id="checkout-payment-method-load">
-            <?php echo $this->getChildHtml('methods') ?>
+                <?php echo $this->getChildHtml('methods') ?>
+            <div id='ti_payment_security' class="two_third">
+                <h2 class="ltWeight text_center lgTxt"><span class="icon-lock ti_checkout_secure"></span><br>All payments are secure.</h2>
+            </div>
         </div>
     </div>
 
@@ -71,4 +76,16 @@ var lastPrice;
         payment.currentMethod = "<?php echo $this->getChild('methods')->getSelectedMethodCode() ?>";
     //]]>
     </script>
+
+    <script type='text/javascript'>
+        jQuery('#p_method_ccsave').click(function() {
+            jQuery('#ti_payment_security').hide();
+        });
+
+        jQuery('#p_method_checkmo').click(function() {
+            jQuery('#ti_payment_security').show();
+        });
+
+    </script>
+    
 </div>

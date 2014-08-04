@@ -32,8 +32,8 @@
 <ul class="ti_header_toplinks">
 
 						<li id="ti_header_account"><a rel="nofollow"><span>My Account</span></a>
-							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_accountDrop">
-								<ul class="ti_sub-menu menu_two_col">
+							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_accountDrop"><!--  menu_two_col!-->
+								<ul class="ti_sub-menu menu_one_col">
 									<li id="ti_header_login"><a href="<?php echo $this->getUrl('') ?>customer/account/login/"><span>Sign In</span></a></li>
 									<li><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a></li>
 									<li><a href="<?php echo $this->getUrl('') ?>customer/account/index/"><span>My Profile</span></a></li>
@@ -50,9 +50,9 @@
 						</li>
 						<li id="ti_header_help"><a rel="nofollow" rel="nofollow"><span>Need help?</span></a>
 							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_helpDrop">
-								<ul class="ti_sub-menu menu_two_col">
-									<li><a href=""><span>Track Orders</span></a></li>
-									<li><a href=""><span>Call us</span></a></li>
+								<ul class="ti_sub-menu menu_one_col">
+									<li><span>Call us: 877-777-0127</span></li>
+									<li><a href="<?php echo $this->getUrl('') ?>order-tracking"><span>Track Orders</span></a></li>
 									<li><a href="<?php echo $this->getUrl('') ?>ink_toner_troubleshooting" target="_blank">Troubleshooting</a></li>
 									<li><a href=""><span>Leave a Ticket</span></a></li>
 									<li id="scEkiO"></li>
