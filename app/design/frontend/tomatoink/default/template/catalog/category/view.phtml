@@ -226,6 +226,13 @@ echo $getModel['value'];
             jQuery(".ti_series_header_sign_minus").html('<a href="#"> + </a>');
             jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> - </a>');
             //jQuery("html, body").scrollTop(jQuery(".ti_cms_block_headerBar-green").offset().top);
+
+            //scroll
+                var temp = this.id.split("-");
+                var series_id = temp[temp.length-1];
+                var series_block = "ti_series_display-" + series_id;
+                scroll(document.getElementById(series_block));
+
             return false;
         });
 
@@ -302,15 +309,19 @@ echo $getModel['value'];
 
 <script type="text/javascript">
 //scroll down js
-
+/*
 jQuery(".ti_cms_block_brandVB").click(function() {
-    scroll(document.getElementById('ti_all_series_list'));
+    var temp = this.id.split("-");
+    var series_id = temp[temp.length-1];
+    var series_block = "ti_series_display-" + series_id;
+    //ti_series_display-41
+    scroll(document.getElementById(series_block));
 });
 
-
+*/
 function scroll(element) {   
     jQuery('html,body').animate({
-    scrollTop: element.offsetTop},
+    scrollTop: element.offsetTop-80},
     'slow'); 
 
 }

@@ -1008,6 +1008,24 @@ td, th{
 	border:none;
 }
 
+
+/* Header My Account*/
+.ti_sub-menu {
+	text-align: center;
+}
+
+#ti_header_login {
+	border: solid, 1px;
+	border-radius: 5px;
+	background: #00CC00;
+}
+
+#ti_header_logout {
+	border: solid, 1px;
+	border-radius: 5px;
+	background: #FD8524;
+}
+
 /* Nav Mini */
 #ti_header_nav_mini, #ti_header_search_mini{
 	display:block;

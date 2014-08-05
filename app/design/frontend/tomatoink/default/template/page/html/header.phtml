@@ -202,15 +202,15 @@
 							<li><a href="<?php echo $current_url ?>apple-printer-ink-toner.html"><span>Apple</span></a></li>
 							<li><a href="<?php echo $current_url ?>compaq-printer-ink-toner.html"><span>Compaq</span></a></li>
 							<li><a href="<?php echo $current_url ?>apollo-printer-ink-toner.html"><span>Apollo</span></a></li>
-							<li><a href=""><span>AstroJet</span></a></li>
-							<li><a href=""><span>Bryce</span></a></li>
-							<li><a href=""><span>Hasler</span></a></li>
-							<li><a href=""><span>Mimaki</span></a></li>
-							<li><a href=""><span>Mutoh</span></a></li>
-							<li><a href=""><span>NeoPost</span></a></li>
-							<li><a href=""><span>Rena</span></a></li>
-							<li><a href=""><span>Roland</span></a></li>
-							<li><a href=""><span>Secap</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/astrojet-series-ink-and-toner-cartridges.html"><span>AstroJet</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/bryce-series-ink-and-toner-cartridges.html"><span>Bryce</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/hasler-series-ink-and-toner-cartridges.html"><span>Hasler</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/mimaki-series-ink-and-toner-cartridges.html"><span>Mimaki</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/mutoh-series-ink-and-toner-cartridges.html"><span>Mutoh</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/neopost-series-ink-and-toner-cartridges.html"><span>NeoPost</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/rena-series-ink-and-toner-cartridges.html"><span>Rena</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/roland-series-ink-and-toner-cartridges.html"><span>Roland</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/secap-series-ink-and-toner-cartridges.html"><span>Secap</span></a></li>
 						</ul>
 					</span></a></li>
 					<li><a href="#"><span>Accessories</span></a>
@@ -250,7 +250,7 @@
     foreach ($cart->getAllItems() as $item) {
         $product = $item->getProduct();
         if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
-            $shopptingcarthtml .= "<div class='one_fourth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a></div><a href='" . $product->getProductUrl() . "'><div class='three_fourth'><p>" . $product->getName() . "</p></div></a><div class='ti_cms_separator'></div>";
+            $shopptingcarthtml .= "<div class='one_fourth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><p>Qty: " . $item->getQty() . "</p></div><div class='three_fourth'><a href='" . $product->getProductUrl() . "'><p>" . $product->getName() . "</p></a></div><div class='ti_cms_separator'></div>";
         //$productId = $item->getProduct()->getId();
         //$productqty = $item->getQty();
         //$productPrice = $item->getProduct()->getPrice();
