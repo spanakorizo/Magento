@@ -31,36 +31,36 @@
 <?php if ($this->displayBoth()):?>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <?php echo $this->getExcludeTaxLabel() ?>
+        <p><?php echo $this->getExcludeTaxLabel() ?>:&nbsp;</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right">
-        <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
+    <td style="<?php echo $this->getStyle() ?>">
+        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?></p>
     </td>
 </tr>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <?php echo $this->getIncludeTaxLabel() ?>
+        <p><?php echo $this->getIncludeTaxLabel() ?>:&nbsp;</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right">
-        <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
+    <td style="<?php echo $this->getStyle() ?>">
+        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
     </td>
 </tr>
 <?php elseif($this->displayIncludeTax()) : ?>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <?php echo $this->getTotal()->getTitle() ?>
+        <p><?php echo $this->getTotal()->getTitle() ?>:&nbsp;</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right">
-        <?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?>
+    <td style="<?php echo $this->getStyle() ?>">
+        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
     </td>
 </tr>
 <?php else:?>
 <tr class="ti_checkout_shipping_font">
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <?php echo $this->escapeHtml($this->getTotal()->getTitle()) ?>
+        <p><?php echo $this->escapeHtml($this->getTotal()->getTitle()) ?>:&nbsp;</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>" class="a-right">
-        <?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?>
+    <td style="<?php echo $this->getStyle() ?>">
+        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?></p>
     </td>
 </tr>
 <?php endif;?>

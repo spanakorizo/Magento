@@ -21,7 +21,7 @@ $billsafe = false;
 <?php if (!$methods = $this->getMethods()) : ?>
 <p><?php echo $this->helper('checkout')->__('Sorry, no quotes are available for this order at this time.') ?></p>
 <?php else : ?>
-<dl class="sp-methods" style="width:100%">
+<dl class="sp-methods">
     <?php if ($awPoints && $this->pointsSectionAvailable()): ?>
     <dt>
         <input type="checkbox" name="payment[use_points]" id="use_points"<?php echo (Mage::getSingleton('checkout/session')->getData('use_points')) ? ' checked="checked"' : ''?>/>
@@ -39,7 +39,8 @@ $billsafe = false;
 	<?php //if($this->getPaymentMethodFormHtml($_method)):?>
 		<!-- <dt style="width:50%;float:left;position:relative"> -->
 	<?php //else:?>
-		<dt style="width:50%;float:left;position:relative">
+		<div class="btcf">
+            <dt class="one_third">
 	<?php //endif;?>
     <?php if (sizeof($this->getMethods()) > 1): ?>
         <?php if ($customerCredit) : ?>
@@ -59,30 +60,32 @@ $billsafe = false;
         <span class="no-display"><input id="p_method_<?php echo $_code ?>" value="<?php echo $_code ?>" type="radio" name="payment[method]" onclick="payment.switchMethod('<?php echo $_code ?>')" checked="checked" class="radio" /></span>
     <?php endif; ?>
 
-        <label for="p_method_<?php echo $_code ?>">
+        <label for="p_method_<?php echo $_code ?>" class="lgTxt ltWeight">
+            <div class="ti-radio"></div><span>
             <?php echo $this->getMethodTitle($_method) ?>
             <?php if ($customerCredit && $_code=='customercredit' && Mage::helper('customercredit')->isEnabledCodes()) : ?>
                 (<a href="<?php echo $this->getUrl('customercredit/') ?>" target="_blank"><?php echo Mage::helper('customercredit')->__('Recharge') ?></a>)
             <?php endif ?>
-            <?php echo $this->getMethodLabelAfterHtml($_method) ?>
+            <?php echo $this->getMethodLabelAfterHtml($_method) ?></span>
         </label>
     </dt>
 	<?php if ($html = $this->getPaymentMethodFormHtml($_method)): ?>
 	
-		<dt style="width:55%;float:right;position:relative;right:0%">
+		<dt class="two_third">
 		<?php echo $html; ?>
 		
 	<?php else:?>
-		<dt style="width:100%;float:left;position:relative;">
+		<dt class="two_third">
 	<?php endif;?>
 
     </dt>
+    </div>
 <?php endforeach; ?>
 
 </dl>
 
 <?php if (Mage::helper('core')->isModuleOutputEnabled('Netresearch_Billsafe') && !$billsafe) : ?>
-    <p style="margin: 25px 0 10px;">
+    <p>
         <?php echo $this->getBillsafeLogo(); ?>
         <?php echo $this->__('BillSAFE payment is not available for this order'); ?>
     </p>

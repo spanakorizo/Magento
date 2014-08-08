@@ -108,13 +108,13 @@
         <?php if ($this->customerHasAddresses()): ?>
             <li class="one">
                 <label for="billing-address-select"><span><?php echo $this->helper('checkout')->__('Select a billing address from your address book or enter a new address.') ?></span></label>
-                <div class="input">
+                <div class="ti_select_barContainer">
                     <?php echo $this->getAddressesHtmlSelect('billing') ?>
                 </div>
             </li>
         <?php endif; ?>
         <li id="billing-new-address-form"<?php if ($this->hasCustomerAddressId()): ?> style="display:none;"<?php endif; ?>>
-            <fieldset>
+            <fieldset style="width: 98%;display: block; float: left; margin: 0 1%">
                 <input type="hidden" name="billing[address_id]" value="<?php echo $_address->getId() ?>" id="billing:address_id" />
                 <!--<ul>-->
                     <?php foreach (Mage::helper('firecheckout/address')->getSortedFields() as $row) : ?>
@@ -300,9 +300,9 @@
                         <?php endif; ?>
                     <?php endif; ?>
                     <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-                        <li class="control">
-                            <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" <?php if ($_address->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" />
-                            <label for="billing:save_in_address_book"><span><?php echo $this->__('Save in address book') ?></span></label>
+                        <li class="control one_half">
+                            <input type="checkbox" name="billing[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="billing:save_in_address_book" <?php if ($_address->getSaveInAddressBook()):?> checked="checked"<?php endif;?> />
+                            <label class="altTxt btcf" for="billing:save_in_address_book"><div class="ti-checkbox"></div><span><?php echo $this->__('Save in address book') ?></span></label>
                         </li>
                     <?php else:?>
                         <li class="no-display"><input type="hidden" name="billing[save_in_address_book]" value="1" /></li>

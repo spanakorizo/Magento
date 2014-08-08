@@ -20,12 +20,17 @@
 }
 .ti_header_left_align{color: #559A13;line-height: 1.1em; text-shadow: -0.5px -0.5px 0 #333333, 1px 1px 0 #ECECEC;text-align: left}
 .ti_subcat_product_gid_one_fifth{width:19%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
+.ti_subcat_product_gid_one_fourth{width:24%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
+.ti_subcat_product_gid_one_third{width:32%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
 .ti_close_popup{position: absolute;right:0;top:0}
 #ti_cartlogin_close,#ti_cartregister_close, #ti_cartforget_close{position: absolute;right:5px;top:5px}
 #ti_cart_popup_error_msg,#ti_cart_popup_forget_pass{display:none}
+
+/* Not needed - Megan 8-7-2014 */
+/*
 .ti_popup_cart_window{
     border-radius: 5px;
-    /*box-shadow: 0 0 2500px 2500px rgba(0, 0, 0,0.7);*/
+    box-shadow: 0 0 2500px 2500px rgba(0, 0, 0,0.7);
     display: none;
     z-index: 10000;
     position: absolute;
@@ -36,7 +41,7 @@
     background: radial-gradient(ellipse at center,  #ffffff 60%,#fff6ee 90%);
     border: 2px solid #71B62F;
     border-bottom: 7px solid #71B62F;
-}
+}*/
 .ti_cart_cms_separator{
     height: 2px;
     margin: 0.5em;
@@ -55,6 +60,8 @@
     background-color: rgba(0, 0, 0,0.7);
 
 }
+/* Not needed - Megan 8-7-2014 */
+/*
 .ti_cartpopup_block_headerBar-green {
     padding: 5px 5px;
     background: url('../images/ti-assets/paper-bg_559a13.jpg') repeat scroll 0% 0% transparent;
@@ -64,7 +71,9 @@
     padding: 5px 10px;
     border-radius: 100px;
     background: none repeat scroll 0% 0% #FFF;
-}
+}*/
+
+
 .ti_top_margin_hide{margin-top:0px}
 .ti_txt_dec_none{text-decoration:none}
 .ti_inline{display:inline}
@@ -74,10 +83,12 @@
 #ti_shipping_select{width: 105%}
 .ti_select_width{width: 105%}
 .ti_table_checkout_productName{width: 70%}
-.ti_checkout_review_font{font-family: "raleway";    -moz-font-feature-settings: "lnum";    margin: 0px;}
+
+/* Not needed - Megan 8-7-2014 */
+/*.ti_checkout_review_font{font-family: "raleway";    -moz-font-feature-settings: "lnum";    margin: 0px;}
 .ti_checkout_review_price{font-size: 1.3em;}
 .ti_checkout_shipping_font{font-size: 1.3em;}
 .ti_review_gradient_block {    background: radial-gradient(ellipse at center center , #FFF 60%, #FFF6EE 99%) repeat scroll 0% 0% transparent;
     outline: 1px solid #F7E8DB;}
 .ti_bold{font-weight: bold}
-.ti_checkout_headerH1 {    font-size: 3.2em;    font-weight: bold; text-align: center}
+.ti_checkout_headerH1 {    font-size: 3.2em;    font-weight: bold; text-align: center}*/

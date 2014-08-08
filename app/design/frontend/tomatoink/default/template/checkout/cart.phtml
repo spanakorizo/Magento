@@ -43,13 +43,13 @@
             <li><span class="ti_small_text"><input class="ti_altBtn" type="button" value="Login"></span></li>-->
 
         </ul>
-        <div class="ti_popup_cart_window" id="ti_cart_login_box">
+        <div class="ti_popup_cart_window ti_cms_border_block" id="ti_cart_login_box">
             <?php echo $this->getLayout()->createBlock('compandsave_productselector/cartlogin')->setTemplate('productselector/cartlogin.phtml')->toHtml(); ?>
         </div>
-        <div class="ti_popup_cart_window" id="ti_cart_register_box">
+        <div class="ti_popup_cart_window ti_cms_border_block" id="ti_cart_register_box">
             <?php echo $this->getLayout()->createBlock('customer/form_register')->setTemplate('productselector/cartregister.phtml')->toHtml(); ?>
         </div>
-        <div class="ti_popup_cart_window" id="ti_cart_forgetpass_box">
+        <div class="ti_popup_cart_window ti_cms_border_block" id="ti_cart_forgetpass_box">
             <?php echo $this->getLayout()->createBlock('customer/form_register')->setTemplate('productselector/cartforgetpass.phtml')->toHtml(); ?>
         </div>
         <?php if(!$this->hasError()): ?>
@@ -64,7 +64,7 @@
     </div>
     <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
     <?php echo $this->getChildHtml('form_before') ?>
-    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post">
+    <form action="<?php echo $this->getUrl('checkout/cart/updatePost') ?>" method="post" id="cart-form">
         <?php echo $this->getBlockHtml('formkey'); ?>
         <fieldset>
             <table id="shopping-cart-table" class="data-table cart-table">
