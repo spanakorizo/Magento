@@ -20,53 +20,39 @@
             'class'  => 'input validate-email ti_checkout_info',
             'label'  => 'Email Address',
             'status' => $_isCustomerLoggedIn ? 'hidden' : 'required',
-            'onfocus' => "if(this.value=='Email')this.value='';",
-            'value' => 'Email',
-            'onblur' => "if(this.value=='')this.value='Email';",
+            'placeholder' => 'Email'
         ),
         'company' => array(
             'class' => 'ti_checkout_info',
             'label' => 'Company',
-            'onfocus' => "if(this.value=='Company')this.value='';",
-            'value' => 'Company',
-            'onblur' => "if(this.value=='')this.value='Company';"
+            'placeholder' => 'Company'
         ),
         'city' => array(
             'class' => 'ti_checkout_info',
             'label' => 'City',
-            'onfocus' => "if(this.value=='City')this.value='';",
-            'value' => 'City',
-            'onblur' => "if(this.value=='')this.value='City';"
+            'placeholder' => 'City'
         ),
         'postcode' => array(
             'class' => 'validate-zip-international ti_checkout_info',
             'label' => 'Zip/Postal Code',
-            'onfocus' => "if(this.value=='Postal Code')this.value='';",
-            'value' => 'Postal Code',
-            'onblur' => "if(this.value=='')this.value='Postal Code';"
+            'placeholder' => 'Postal Code'
         ),
         'fax' => array(
             'class' => 'ti_checkout_info',
             'label' => 'Fax',
-            'onfocus' => "if(this.value=='Fax')this.value='';",
-            'value' => 'Fax',
-            'onblur' => "if(this.value=='')this.value='Fax';"
+            'placeholder' => 'Fax'
         ),
         'telephone' => array(
             'class' => 'ti_checkout_info',
             'label' => 'Telephone',
-            'onfocus' => "if(this.value=='Telephone')this.value='';",
-            'value' => 'Telephone',
-            'onblur' => "if(this.value=='')this.value='Telephone';"
+            'placeholder' => 'Telephone'
         ),
         'street1' => array(
             'class' => 'ti_checkout_info',
             'label' => 'Address',
             'title' => 'Street Address',
             'name'  => $_prefix . '[street][]',
-            'value' => $_address->getStreet(1) ? $_address->getStreet(1) : 'Address',
-            'onfocus' => "if(this.value=='Address')this.value='';",
-            'onblur' => "if(this.value=='')this.value='Address';"
+            'placeholder' => $_address->getStreet(1) ? $_address->getStreet(1) : 'Address'
         ),
         'country_id' => array(
             'label' => 'Country',
@@ -196,15 +182,15 @@
                                                 //]]>
                                                 </script>
                                                 <input type="text" id="<?php echo $_prefix ?>:region" name="<?php echo $_prefix ?>[region]"
-                                                    value="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo 'State/Province'; ?>"
-                                                    onblur="if(this.value=='')this.value='State/Province';" title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
-                                                    onfocus="if(this.value=='State/Province')this.value='';" class="<?php echo $required ? ' required-entry' : '' ?>" style="display:none;"
+                                                    placeholder="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo 'State/Province'; ?>"
+                                                    title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
+                                                    class="<?php echo $required ? ' required-entry' : '' ?> ti_checkout_info" style="display:none;"
                                                 />
                                                 
                                             <?php else: ?>
                                                 <?php
-                                                    if (isset($fields[$field]['value'])):
-                                                        $value = $fields[$field]['value'];
+                                                    if (isset($fields[$field]['placeholder'])):
+                                                        $value = $fields[$field]['placeholder'];
                                                     else:
                                                         $method = 'get' . ucfirst($field);
                                                         $value = $_address->{$method}();
@@ -213,9 +199,7 @@
                                                 <input type="text"
                                                     name="<?php echo (empty($fields[$field]['name']) ? $_prefix . '[' . $field . ']' : $fields[$field]['name']) ?>"
                                                     id="<?php echo $_prefix ?>:<?php echo $field ?>"
-                                                    value="<?php echo $this->escapeHtml($value) ?>"
-                                                    onfocus = "<?php echo (!empty($fields[$field]['onfocus']) ? $this->__($fields[$field]['onfocus']) : null) ?>"
-                                                    onblur = "<?php echo (!empty($fields[$field]['onblur']) ? $this->__($fields[$field]['onblur']) : null) ?>"
+                                                    placeholder = "<?php echo $this->escapeHtml($value) ?>"
                                                     title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
                                                     class="<?php echo $fields[$field]['class'] ?><?php echo $required ? ' required-entry' : '' ?>"
                                                 />

@@ -30,7 +30,7 @@ function add_to_box(id1,id2){
                     secondId.css('top', screenTop);
                     secondId.show();
                     jQuery('#ti_hide_body_div').show();
-                    jQuery('.qty').val("");
+
                 });
 
             }
@@ -40,7 +40,6 @@ function add_to_box(id1,id2){
     }
 
 }
-
 /************* function for auto qty set to 1 if not set ******/
 function addSimpleToCart(id) {
     ti = $(id);

@@ -37,9 +37,8 @@ foreach ($cart->getAllItems() as $item) {
 
 }
 echo "<div class='text_center'><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a>";
-//echo "<a class='ti_button ti_altBtn' href='".$this->getContinueShoppingUrl()."' ><strong>Continue Shopping</strong></a></div>";
-?><a class="ti_button ti_altBtn" href="#" id="ti_continue_shopping"><strong>Continue Shopping</strong></a></div>
-
+echo "<a class='ti_button ti_altBtn' href='".$this->getContinueShoppingUrl()."' ><strong>Continue Shopping</strong></a></div>";
+?>
 </div>
 <script>
     jQuery('.ti_close_popup').click(function(e){
@@ -47,12 +46,6 @@ echo "<div class='text_center'><a class='ti_button' href='" . $this->getUrl('') 
         jQuery('#show_cart').hide(e);
         jQuery('#ti_hide_body_div').hide();
          e.stopPropagation();
-    });
-    jQuery('#ti_continue_shopping').click(function(e){
-        e.preventDefault();
-        jQuery('#show_cart').hide(e);
-        jQuery('#ti_hide_body_div').hide();
-        e.stopPropagation();
     });
     jQuery(document).keyup(function(e) {
         e.preventDefault();

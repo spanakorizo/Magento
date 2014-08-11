@@ -49,8 +49,67 @@ light brown: #f7e8db;
             display:table;
             clear:both;
         }
+input::-webkit-input-placeholder {
+    color: #559A13;
+}
 
+input:-moz-placeholder { /* Firefox 18- */
+    color: #559A13;
+}
 
+input::-moz-placeholder {  /* Firefox 19+ */
+    color: #559A13;
+}
+
+input:-ms-input-placeholder {
+    color: #559A13;
+}
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus:-moz-placeholder { /* Firefox 18- */
+    color: transparent;
+}
+
+input:focus::-moz-placeholder {  /* Firefox 19+ */
+    color: transparent;
+}
+
+input:focus:-ms-input-placeholder {
+    color: transparent;
+}
+/*-------->> Text Area Placeholder <<-------------*/
+textarea::-webkit-input-placeholder {
+    color: #559A13;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+    color: #559A13;
+}
+
+textarea::-moz-placeholder {  /* Firefox 19+ */
+    color: #559A13;
+}
+
+textarea:-ms-input-placeholder {
+    color: #559A13;
+}
+textarea:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+textarea:focus:-moz-placeholder { /* Firefox 18- */
+    color: transparent;
+}
+
+textarea:focus::-moz-placeholder {  /* Firefox 19+ */
+    color: transparent;
+}
+
+textarea:focus:-ms-input-placeholder {
+    color: transparent;
+}
 /* -----------------------------------*/
 /* -------->> 1. Global <<<-----------*/
 /* -----------------------------------*/
@@ -307,22 +366,22 @@ textarea {
 }
 
 ::-webkit-input-placeholder { 
-    color:    #559a13;
-    font-size:1.6em;
+    color:    #ccc;
+    font-size:1.6rem;
 }
 :-moz-placeholder { 
-    color:    #559a13;
+    color:    #ccc;
     opacity:  1;
-    font-size:1.6em;
+    font-size:1.6rem;
 }
 ::-moz-placeholder { 
-    color:    #559a13;
+    color:    #ccc;
     opacity:  1;
-    font-size:1.6em;
+    font-size:1.6rem;
 }
 :-ms-input-placeholder { 
-    color:    #559a13;
-    font-size:1.6em;
+    color:    #ccc;
+    font-size:1.6rem;
 }
 
 textarea{
@@ -476,7 +535,7 @@ input[type="radio"]:checked + label span{
 	color:#e67921;
 	position: absolute;
 	font-size: 24px;
-	margin-left: -20px;
+	margin-left: -10px;
 	margin-top: 10px;
 	}
 
@@ -1024,13 +1083,13 @@ td, th{
 	border: solid, 1px;
 	border-radius: 5px;
 	background: #00CC00;
-}*/
+}
 
 #ti_header_logout {
 	border: solid, 1px;
 	border-radius: 5px;
 	background: #FD8524;
-}
+}*/
 
 /* Nav Mini */
 #ti_header_nav_mini, #ti_header_search_mini{

@@ -17,7 +17,7 @@
 <?php endif; ?>
     <div class="one_half ti-required-entry">
         <label class="ti_cms_labelHide"><span><?php echo $this->getStoreLabel('firstname') ?></span>
-            <input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" value="<?php if($this->getObject()->getFirstname()) echo $this->escapeHtml($this->getObject()->getFirstname()); else echo 'First Name'; ?>" title="<?php echo $this->getStoreLabel('firstname') ?>" maxlength="255" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('firstname') ?> ti_checkout_info" onfocus="if(this.value=='First Name')this.value='';" onblur="if(this.value=='')this.value='First Name';" <?php echo $this->getFieldParams() ?> />
+            <input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" placeholder="<?php if($this->getObject()->getFirstname()) echo $this->escapeHtml($this->getObject()->getFirstname()); else echo 'First Name'; ?>" title="<?php echo $this->getStoreLabel('firstname') ?>" maxlength="255" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('firstname') ?> ti_checkout_info" <?php echo $this->getFieldParams() ?> />
         </label>
     </div>
 <?php if ($this->showMiddlename()): ?>
@@ -25,13 +25,13 @@
     <div class="one_half ti-required-entry">
         <label for="<?php echo $this->getFieldId('middlename')?>"<?php echo $isMiddlenameRequired ? ' class="required"' : '' ?>><?php echo $isMiddlenameRequired ? '<em>*</em>' : '' ?><?php echo $this->getStoreLabel('middlename') ?></label>
         <div class="input-box">
-            <input type="text" id="<?php echo $this->getFieldId('middlename')?>" name="<?php echo $this->getFieldName('middlename')?>" value="<?php echo $this->escapeHtml($this->getObject()->getMiddlename()) ?>" title="<?php echo $this->getStoreLabel('middlename') ?>" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('middlename') ?>" <?php echo $this->getFieldParams() ?> />
+            <input type="text" id="<?php echo $this->getFieldId('middlename')?>" name="<?php echo $this->getFieldName('middlename')?>" placeholder="<?php echo $this->escapeHtml($this->getObject()->getMiddlename()) ?>" title="<?php echo $this->getStoreLabel('middlename') ?>" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('middlename') ?>" <?php echo $this->getFieldParams() ?> />
         </div>
     </div>
 <?php endif; ?>
     <div class="one_half ti-required-entry">
         <label class="ti_cms_labelHide"><span><?php echo $this->getStoreLabel('lastname') ?></span>
-            <input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" value="<?php if($this->getObject()->getLastname()) echo $this->escapeHtml($this->getObject()->getLastname()); else echo 'Last Name'; ?>" title="<?php echo $this->getStoreLabel('lastname') ?>" maxlength="255" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('lastname') ?> ti_checkout_info" onfocus="if(this.value=='Last Name')this.value='';" onblur="if(this.value=='')this.value='Last Name';" <?php echo $this->getFieldParams() ?> />
+            <input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" placeholder="<?php if($this->getObject()->getLastname()) echo $this->escapeHtml($this->getObject()->getLastname()); else echo 'Last Name'; ?>" title="<?php echo $this->getStoreLabel('lastname') ?>" maxlength="255" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('lastname') ?> ti_checkout_info" <?php echo $this->getFieldParams() ?> />
         </label>
     </div>
 <?php if ($this->showSuffix()): ?>

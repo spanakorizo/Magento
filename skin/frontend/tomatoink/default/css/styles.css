@@ -194,7 +194,7 @@ p.required {
 	text-align:right; 
 	color:#e67921; 
 }
-
+ 
 .form-list .validation-advice { width:250px; margin-right:-250px; }
 /* Expiration date and CVV number validation fix */
 .v-fix { float:left; }
@@ -221,7 +221,7 @@ p.required {
 .form-list .value { float:left; padding:2px 0 0; }
 .form-list .note { clear:both; font-size:11px; width:380px; margin:0; padding:3px 0 0 240px; }
 .form-list span.label { font-weight:normal; }
-.form-list .input-box { float:right; /* width:256px; */ }
+.form-list .input-box input { /* float:right;  width:256px; */ width:98%; }
 .form-list .input-box a { font-size:11px; margin-top:4px; }
 /*.form-list input.input-text,
 .form-list textarea { float:left; width:374px; vertical-align:top; }
@@ -233,12 +233,12 @@ ul.add-row,
 ul.add-row .btn-remove,
 .form-list li.add-row .btn-remove { font-size:0; line-height:0; padding:5px 5px 0 0; margin:0; text-align:right; }
 .form-list .range input.input-text { float:none; width:64px; vertical-align:middle; }
-
+/*
 .form-list .add-field .input-box { margin-left:240px }
-.form-list .control { position:relative; vertical-align:top; z-index:1; } /* row with checkbox or radio button */
+.form-list .control { position:relative; vertical-align:top; z-index:1; } /* row with checkbox or radio button 
 .form-list .control label { line-height:16px; }
 .form-list .control .input-box { position:absolute; left:0; margin-left:240px; line-height:16px; padding-top:1px; }
-.form-list .control input.radio { margin-top:3px; }
+.form-list .control input.radio { margin-top:3px; }*/
 
 .form-alt label { float:none; display:inline; width:auto; }
 .form-alt li { margin:0 0 5px; line-height:16px; }
@@ -1020,7 +1020,7 @@ ul.disc li { padding-left:10px; background:url(../images/bkg_bulletsm.gif) no-re
 /* Block: Reorder */
 .block-reorder li { padding:5px 0; }
 .block-reorder input.checkbox { float:left; margin:3px -20px 0 0; }
-.block-reorder .product-name { margin-left:20px; float:left; display:block; font-weight:normal; }
+.block-reorder .product-name { /*margin-left:20px; float:left; display:block; font-weight:normal; */}
 
 /* Block: Banner */
 .block-banner { border:0; margin:10px 0; }
@@ -2148,7 +2148,7 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 .popup-block .block-title strong { color:#D12C01; font-size:16px; font-weight:normal; }
 .popup-block .block-content { padding:17px 17px 25px; background:url(../images/bkg_block.gif) repeat-x 0 100% #fff; font-size:12px;  }
 .popup-block .block-content .form-list label { width:180px; }
-.popup-block .block-content .form-list .input-text { width:230px; }
+.popup-block .block-content .form-list .input-text { /*width:230px; */}
 .popup-block .block-content .form-list .control .input-box { margin-left:195px; }
 .popup-block .block-content .form-buttons { width:auto; padding-left:188px; padding-top:10px; }
 .popup-block .block-content .form-buttons .button { float:left; }
@@ -2159,7 +2159,7 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 
 /* Captcha */
 .captcha-note  { clear:left; padding-top:5px;}
-.captcha-image { float:left; margin:0 0 0 240px; position:relative; width:228px; }
+.captcha-image { position:relative; width:228px; }
 .captcha-image .captcha-img { border:1px solid #c7c7c7; vertical-align:bottom; width:100%; }
 .registered-users .captcha-image    { margin:-12px 0 0 113px; }
 #checkout-step-login .captcha-image { margin:-24px 0 0 105px; width:214px; }
