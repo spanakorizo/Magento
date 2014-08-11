@@ -186,7 +186,11 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
     <td class="ti_cart_qty ti_table_productQTY">
         <p>
             <input name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="1" title="<?php echo $this->__('Qty') ?>" class="input-text qty ti_cms_block_qty" maxlength="3" type="text" />
+
             <a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('X<br>delete')?>" class="btn-remove btn-remove2"><?php echo $this->__('X<br>delete')?></a>
+            <button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update'); ?>" class="button btn-update ti_button_mini"><span><?php echo $this->__('Update'); ?></span></button>
+            <!-- <a id="update_link_<?php //echo $_item->getId();?>" href="#" onclick="update_cart(<?php //echo $_item->getId() ?>);" title="<?php //echo $this->__('Update') ?>" class="btn-remove2 btn-update"><?php //echo $this->__('Update') ?></a> -->
+
         </p>
     </td>
 
@@ -287,3 +291,14 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
     <!--<td class="a-center"><a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('Remove item')?>" class="btn-remove btn-remove2"><?php echo $this->__('Remove item')?></a></td>-->
 </tr>
 <?php endforeach; ?>
+<!--
+<script>
+    //<![CDATA[
+    function update_cart(product_id) {
+        jQuery('#update_link_'+product_id).css({'color': '#DDD', 'text-decoration': 'none'});
+        jQuery('#cart-form').submit();
+        return false;
+    }
+    //]]>
+</script>
+-->

@@ -62,9 +62,7 @@ $checkoutfields = Mage::helper('checkoutfields');
                     <input type="text"
                         name="<?php echo $fieldName ?>"
                         id="order-<?php echo $fieldName ?>"
-                        value="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
-                        onblur="if(this.value=='')this.value='<?php echo $this->escapeHtml($fieldConfig['label']) ?>';"
-                        onfocus="if(this.value=='<?php echo $this->escapeHtml($fieldConfig['label']) ?>')this.value='';"
+                        placeholder="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
                         class="ti_checkout_info<?php echo $required ? ' ti-required-entry' : '' ?>"
                     />
                 </div>
@@ -77,8 +75,6 @@ $checkoutfields = Mage::helper('checkoutfields');
                         placeholder="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
                         spellcheck="true"
                         rows="3"
-                        onblur="if(this.value=='')this.value='<?php echo $this->escapeHtml($fieldConfig['label']) ?>';"
-                        onfocus="if(this.value=='<?php echo $this->escapeHtml($fieldConfig['label']) ?>')this.value='';"
                         class="ti_checkout_comments"
                     ><?php echo $value ?></textarea>
                 </div>

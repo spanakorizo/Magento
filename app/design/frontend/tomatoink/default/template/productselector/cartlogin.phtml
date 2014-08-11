@@ -1,5 +1,5 @@
 <div class="ti_checkoutStep" id="ti_cartlogin_close">
-    <a href="#"><p class="ti_orange_head">X</p></a>
+    <a class="ti_checkoutStep_close altTxt" href="#">X</a>
 </div>
 <h2><?php echo $this->__('Customer Login') ?></h2>
 
@@ -7,14 +7,14 @@
     <?php echo $this->getBlockHtml('formkey'); ?>
     <div class="block-content">
 		<p class="altTxt" id="ti_cart_popup_error_msg">Invalid User Email or Password </p>
-		<p><a href="#" id="ti_cart_popup_forget_pass">Forget Password?</p>
+		<p><a href="#" id="ti_cart_popup_forget_pass">Forget Password?</a></p>
         <div class="full ti-required-entry">
             <label for="login-email" class="ti_cms_labelHide"><span><?php echo $this->__('Email Address') ?></span></label>
-            <input type="email" name="login[username]" class="required-entry width100" id="login-email" required="required" value="<?php echo $this->__('Email') ?>" onfocus="if(this.value=='<?php echo $this->__('Email') ?>')this.value='';" onblur="if(this.value=='')this.value='<?php echo $this->__('Email') ?>';"/>
+            <input type="email" name="login[username]" class="required-entry width100" id="login-email" required="required" placeholder="<?php echo $this->__('Email') ?>" />
         </div>
         <div class="full ti-required-entry">
             <label for="login-password" class="ti_cms_labelHide"><span><?php echo $this->__('Password') ?></span></label>
-            <input type="password" name="login[password]" value="<?php echo $this->__('Password') ?>" onfocus="if(this.value=='<?php echo $this->__('Password') ?>')this.value='';" onblur="if(this.value=='')this.value='<?php echo $this->__('Password') ?>';" class="required-entry width100" id="login-password" required="required" />
+            <input type="password" name="login[password]" placeholder="<?php echo $this->__('Password') ?>" class="required-entry width100" id="login-password" required="required" />
         </div>
         <div class="actions">
             <button type="submit" class="ti_button one_half"><span><span><?php echo $this->__('Login') ?></span></span></button>

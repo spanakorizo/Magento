@@ -140,7 +140,8 @@ class Compandsave_Variable_Model_Observer
                     ->addAttributeToFilter('category_id', $item->entity_id)
                     ->addAttributeToFilter('status', 1)
                     ->addAttributeToSort('name', 'ASC');
-
+                $flag_four = false;
+                $flag_three = false;
                 if($productCollection->count()){
 
                     $this->html .= '<div class="ti_cms_block_headerBar-green">
@@ -148,12 +149,32 @@ class Compandsave_Variable_Model_Observer
 								<h2 class="ti_headerH1 white"><a class="ti_series_header_sign_minus" id="ti_series_header_sign-'. $item->getId().'"> + </a>'.$item->getName().' Series</h2>
 							</div>
 							<div class="ti_series_header" id="ti_series_display-'. $item->getId().'" style="display: none">';
-                    foreach($productCollection as $product_model){
+                    foreach($productCollection as $product_model_len){
+                        $test_len = strlen($product_model_len->getName());
+                        if($test_len > 18 and $test_len < 24)
+                            $flag_four = true;
+                        elseif($test_len > 24)
+                            $flag_three = true;
+                    }
+                    if($flag_four == true and $flag_three == false){
+                        foreach($productCollection as $product_model){
+                                $this->html .= '<div class="ti_subcat_product_gid_one_fourth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+                        }
+                    }
+                    elseif($flag_three == true){
+                        foreach($productCollection as $product_model){
+                            $this->html .= '<div class="ti_subcat_product_gid_one_third"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+                        }
+                    }
+                    else{
 
-                        $this->html .= '<div class="ti_subcat_product_gid_one_fifth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+                        foreach($productCollection as $product_model){
+                            $this->html .= '<div class="ti_subcat_product_gid_one_fifth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
 
+                        }
 
                     }
+
 
 
                     $this->html .='</div>

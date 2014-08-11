@@ -1,5 +1,5 @@
 <div class="ti_checkoutStep" id="ti_cartregister_close">
-	<a href="#" class="ti_txt_dec_none"><p class="ti_orange_head">X</p></a>
+	<a href="#" class="ti_checkoutStep_close altTxt">X</a>
 </div>
 <h2><?php echo $this->__('Create Customer Account') ?></h2>
 <form action="<?php echo Mage::getUrl('productselector/cartlogin/create',array('_secure'=>true)) ?>" method="post" id="form-validate">
@@ -16,18 +16,18 @@
 			<h2 class="ti_green_head"><?php echo $this->__('Personal Information') ?></h2>
 				<div class="full ti-required-entry">
 					<label class="ti_cms_labelHide" for="firstname"><span><?php echo $this->__('First Name') ?></span></label>
-					<input type="text" id="firstname" name="firstname" value="<?php echo $this->__('First Name') ?>" onfocus="if(this.value=='<?php echo $this->__('First Name') ?>')this.value='';" onblur="if(this.value=='')this.value='<?php echo $this->__('First Name') ?>';" title="<?php echo $this->__('First Name') ?>" maxlength="255" required="required" class="required-entry" />
+					<input type="text" id="firstname" name="firstname" placeholder="<?php echo $this->__('First Name') ?>" title="<?php echo $this->__('First Name') ?>" maxlength="255" required="required" class="required-entry" />
 				</div>
 				<div class="full ti-required-entry">
 					<label class="ti_cms_labelHide" for="lastname"><span><?php echo $this->__('Last Name') ?></span></label>
 					
-					<input type="text" id="lastname" name="lastname" value="<?php echo $this->__('Last Name') ?>" onfocus="if(this.value=='<?php echo $this->__('Last Name') ?>')this.value='';" onblur="if(this.value=='')this.value='<?php echo $this->__('Last Name') ?>';"  title="<?php echo $this->__('Last Name') ?>" maxlength="255" required="required" class="required-entry" />
+					<input type="text" id="lastname" name="lastname" placeholder="<?php echo $this->__('Last Name') ?>" title="<?php echo $this->__('Last Name') ?>" maxlength="255" required="required" class="required-entry" />
 				</div>
 				<div class="full ti-required-entry">	
 
 					<label class="ti_cms_labelHide" for="email_address"><span><?php echo $this->__('Email Address') ?></span></label>
 
-					<input type="email" required="required" name="email" id="email_address" required="required" value="<?php echo $this->__('Email Address') ?>" onfocus="if(this.value=='<?php echo $this->__('Email Address') ?>')this.value='';" onblur="if(this.value=='')this.value='<?php echo $this->__('Email Address') ?>';" title="<?php echo $this->__('Email Address') ?>" class="validate-email required-entry" />
+					<input type="email" required="required" name="email" id="email_address" required="required" placeholder="<?php echo $this->__('Email Address') ?>" title="<?php echo $this->__('Email Address') ?>" class="validate-email required-entry" />
 					
 					<!--<input type="email" required="required" name="email" id="email_address" required="required" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="validate-email required-entry" />-->
 				</div>
@@ -36,7 +36,7 @@
 
 				<div class="full">
 					<input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="ti_checkbox" />
-					<label class="ti_inline altTxt" for="is_subscribed"><span><?php echo $this->__('Newsletter Signup') ?></span></label>
+					<label class="ti_inline altTxt" for="is_subscribed"><div class="ti-checkbox"></div><span><?php echo $this->__('Newsletter Signup') ?></span></label>
 				</div>
 						
 						<?php /* Extensions placeholder */ ?>
@@ -48,11 +48,11 @@
 
 					<div class="full ti-required-entry">
 						<label class="ti_cms_labelHide" for="password"><span><?php echo $this->__('Password') ?></span></label>
-						<input type="password" required="required" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="required-entry validate-password" value="<?php echo $this->__('Password') ?>" onfocus="if(this.value=='<?php echo $this->__('Password') ?>')this.value='';" onblur="if(this.value=='')this.value='<?php echo $this->__('Password') ?>';"  />
+						<input type="password" required="required" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="required-entry validate-password" placeholder="<?php echo $this->__('Password') ?>" />
 					</div>
 					<div class="full ti-required-entry">
 						<label class="ti_cms_labelHide" for="confirmation"><span><?php echo $this->__('Confirm Password') ?></span></label>
-						<input type="password" required="required" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="required-entry validate-cpassword" value="<?php echo $this->__('Password') ?>" onfocus="if(this.value=='<?php echo $this->__('Password') ?>')this.value='';" onblur="if(this.value=='')this.value='<?php echo $this->__('Password') ?>';"  />
+						<input type="password" required="required" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="required-entry validate-cpassword" placeholder="<?php echo $this->__('Confirm Password') ?>"   />
 					</div>
 
 		

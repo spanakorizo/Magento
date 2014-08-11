@@ -26,46 +26,34 @@
         'company' => array(
             'class' => 'ti_checkout_info',
             'label' => 'Company',
-            'onfocus' => "if(this.value=='Company')this.value='';",
-            'value' => 'Company',
-            'onblur' => "if(this.value=='')this.value='Company';"
+            'placeholder' => 'Company'
         ),
         'city' => array(
             'class' => 'ti_checkout_info',
             'label' => 'City',
-            'onfocus' => "if(this.value=='City')this.value='';",
-            'value' => 'City',
-            'onblur' => "if(this.value=='')this.value='City';"
+            'placeholder' => 'City'
         ),
         'postcode' => array(
             'class' => 'validate-zip-international ti_checkout_info',
             'label' => 'Zip/Postal Code',
-            'onfocus' => "if(this.value=='Postal Code')this.value='';",
-            'value' => 'Postal Code',
-            'onblur' => "if(this.value=='')this.value='Postal Code';"
+            'placeholder' => 'Postal Code'
         ),
         'fax' => array(
             'class' => 'ti_checkout_info',
             'label' => 'Fax',
-            'onfocus' => "if(this.value=='Fax')this.value='';",
-            'value' => 'Fax',
-            'onblur' => "if(this.value=='')this.value='Fax';"
+            'placeholder' => 'Fax'
         ),
         'telephone' => array(
             'class' => 'ti_checkout_info',
             'label' => 'Telephone',
-            'onfocus' => "if(this.value=='Telephone')this.value='';",
-            'value' => 'Telephone',
-            'onblur' => "if(this.value=='')this.value='Telephone';"
+            'placeholder' => 'Telephone'
         ),
         'street1' => array(
             'class' => 'ti_checkout_info',
             'label' => 'Address',
             'title' => 'Street Address',
             'name'  => $_prefix . '[street][]',
-            'value' => $_address->getStreet(1) ? $_address->getStreet(1) : 'Address',
-            'onfocus' => "if(this.value=='Address')this.value='';",
-            'onblur' => "if(this.value=='')this.value='Address';"
+            'placeholder' => $_address->getStreet(1) ? $_address->getStreet(1) : 'Address'
         ),
         'country_id' => array(
             'label' => 'Country',
@@ -93,14 +81,14 @@
         <ul class="ti_checkout_inputField">
         <?php if ($this->customerHasAddresses()): ?>
            <li class="one">
-               <label for="shipping-address-select"><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></label>
-               <div class="input">
+               <label for="shipping-address-select"><span><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></span></label>
+               <div class="ti_select_barContainer">
                    <?php echo $this->getAddressesHtmlSelect('shipping') ?>
                </div>
            </li>
         <?php endif ?>
             <li id="shipping-new-address-form"<?php if ($this->hasCustomerAddressId()): ?> style="display:none;"<?php endif ?>>
-                <fieldset>
+                <fieldset style="width: 98%;display: block; float: left; margin: 0 1%">
                     <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
                     <!--<ul class="ti_small_text">-->
                         <?php foreach (Mage::helper('firecheckout/address')->getSortedFields() as $row) : ?>
@@ -178,14 +166,14 @@
                                                 //]]>
                                                 </script>
                                                 <input type="text" id="<?php echo $_prefix ?>:region" name="<?php echo $_prefix ?>[region]"
-                                                       value="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo 'State/Province'; ?>"
-                                                       onblur="if(this.value=='')this.value='State/Province';" title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
-                                                       onfocus="if(this.value=='State/Province')this.value='';" class="<?php echo $required ? ' required-entry' : '' ?> ti_checkout_info" style="display:none;"
+                                                       placeholder="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo 'State/Province'; ?>"
+                                                       title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
+                                                       class="<?php echo $required ? ' required-entry' : '' ?> ti_checkout_info" style="display:none;"
                                                 />
                                             <?php else: ?>
                                                 <?php
-                                                    if (isset($fields[$field]['value'])):
-                                                        $value = $fields[$field]['value'];
+                                                    if (isset($fields[$field]['placeholder'])):
+                                                        $value = $fields[$field]['placeholder'];
                                                     else:
                                                         $method = 'get' . ucfirst($field);
                                                         $value = $_address->{$method}();
@@ -194,9 +182,7 @@
                                                 <input type="text"
                                                     name="<?php echo (empty($fields[$field]['name']) ? $_prefix . '[' . $field . ']' : $fields[$field]['name']) ?>"
                                                     id="<?php echo $_prefix ?>:<?php echo $field ?>"
-                                                    value="<?php echo $this->htmlEscape($value) ?>"
-                                                    onfocus = "<?php echo (!empty($fields[$field]['onfocus']) ? $this->__($fields[$field]['onfocus']) : null) ?>"
-                                                    onblur = "<?php echo (!empty($fields[$field]['onblur']) ? $this->__($fields[$field]['onblur']) : null) ?>"
+                                                    placeholder="<?php echo $this->htmlEscape($value) ?>"
                                                     title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
                                                     class="<?php echo $fields[$field]['class'] ?><?php echo $required ? ' required-entry' : '' ?>"
                                                 />
@@ -235,8 +221,9 @@
                     <?php endif;?>
 
                     <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-                        <li class="control">
-                            <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" <?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="shipping:save_in_address_book"><?php echo $this->__('Save in address book') ?></label></li>
+                        <li class="control one_half">
+                            <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" <?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?>  />
+                            <label class="altTxt btcf" for="shipping:save_in_address_book"><div class="ti-checkbox"></div><span><?php echo $this->__('Save in address book') ?></span></label></li>
                     <?php else:?>
                         <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></li>
                     <?php endif;?>

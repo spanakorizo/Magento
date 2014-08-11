@@ -34,6 +34,7 @@
 <?php
     $_category  = $this->getCurrentCategory();
 	$currentCategoryId = $_category->getId();
+    $parent = $_category->getParentCategory()->getId(); 
 ?> 
 
 <script type="text/javascript">
@@ -187,6 +188,152 @@ $products = Mage::getModel('catalog/category')->load($currentCategoryId)
 
 
 
+<?php //one table brand page  ?>
+<?php elseif ($currentCategoryId == 27 || $currentCategoryId == 23 || $currentCategoryId == 33 || $currentCategoryId == 32 || $parent == 34):  ?>
+<?php 
+//$products = Mage::getModel('catalog/category')->load($currentCategoryId)
+// ->getProductCollection()
+// ->addAttributeToSelect('entity_id') // add all attributes - optional
+// ->addAttributeToFilter('status', 1) // enabled
+// ->addAttributeToFilter('visibility', 4);
+$block = new Mage_Catalog_Block_Category_View();
+            $_helper    = $block->helper('catalog/output');
+            $currentCategoryId = $_category->getId();
+            $_imgHtml   = '';
+            if ($_imgUrl = $_category->getImageUrl()) {
+                $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$block->escapeHtml($_category->getName()).'" title="'.$block->escapeHtml($_category->getName()).'" /></p>';
+                $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+            }
+
+
+            echo '<div class="three_fourth">';
+
+            echo '<h1 class="ti_header_left_align">'.$_helper->categoryAttribute($_category, $_category->getName(), "name").'</h1>';//.$block->getMessagesBlock()->getGroupedHtml();
+
+            if($_imgUrl){
+                echo '<p>'.$_imgHtml;
+                if($_description= $_category->getDescription())
+                    echo '<p>'.$_helper->categoryAttribute($_category, $_description, "description").'</p>';
+                echo '</p>';
+            }
+            else{
+                if($_description = $_category->getDescription())
+                    echo '<p>'.$_helper->categoryAttribute($_category, $_description, "description").'</p>';
+
+
+            }
+            echo '</div>';
+            /*        '<div class="one_fourth ti_ink_selector_holder">
+                        <div class="ti_cms_gradient_block ti_block_inner">
+                            <h2 class="ti_headerH1 ti_green_head">Ink Search</h2>
+                            <div id="ti_ajax_cat_loading_ink"><img src="'.$block->getSkinUrl("images/loading.gif").'" /></div>
+                            <div class="ti_select_barContainerBorder btcf">
+                                <div class="ti_select_barContainer btcf">
+                                    <select name="" id="ti_series_selector">
+                                        <option value="0" selected="">Series</option>';
+
+                $category_model = Mage::getModel('catalog/category')->load($currentCategoryId);
+                $subcategoryIds = $category_model->getChildren();
+                $subCatIds = explode(',',$subcategoryIds);
+                $collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id','image'))->addAttributeToSort('name', 'ASC')->load();
+
+                foreach($collection as $item){
+                    $productCollection = Mage::getModel('catalog/product')
+                        ->getCollection()
+                        ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
+                        ->addAttributeToSelect(array('name','url'))
+                        ->addAttributeToFilter('category_id', $item->entity_id)
+                        ->addAttributeToFilter('status', 1);
+
+                    if($productCollection->count()){
+                        $this->html .= '<option value="'.$item->getId().'">'.$item->getName().'</option>';
+                    }
+                }
+
+
+                $this->html .= '</select>
+                                </div>
+                            </div>
+
+                            <div class="ti_select_barContainerBorder btcf">
+                                <div class="ti_select_barContainer btcf">
+
+                                    <select disabled="" name="" id="ti_cartridge_selector">
+                                        <option value="" selected="">Model</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*/
+                    echo '<div class="one ti_hide_479">
+                        <div class="ti_input_bar">
+                            <div class="ti_input_barContainer">';
+    
+            $catalogSearchHelper =  $block->helper('catalogsearch');
+
+            echo '<form id="search_mini_form3" action="'.$catalogSearchHelper->getResultUrl().'" method="get">
+                                    <input type="text" name="'. $catalogSearchHelper->getQueryParamName() .'" id="search3" value="Find your cartridge" onfocus="if (this.value == \'Find your cartridge\') {this.value = \'\';}" onblur="if (this.value == \'\') {this.value = \'Find your cartridge\';}"/>
+                                    <input type="submit" name="Submit" id="search_submit3" value="Search" title="'. $block->__("Search") .'">
+                                    <div id="search_autocomplete3" class="search-autocomplete"></div>
+                                    <script type="text/javascript">
+                                    //<![CDATA[
+                                        var searchForm3 = new Varien.searchForm("search_mini_form3", "search3", "'. $block->__("Search entire store here...'") .'");
+                                        searchForm3.initAutocomplete("'. $catalogSearchHelper->getSuggestUrl() .'", "search_autocomplete3");
+                                    //]]>
+                                    </script>
+                            </form>
+                            </div>
+                        </div>
+                    </div>';
+
+
+
+                $productCollection = Mage::getModel('catalog/product')
+                    ->getCollection()
+                    ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
+                    ->addAttributeToSelect(array('name','url'))
+                    ->addAttributeToFilter('category_id', $currentCategoryId)
+                    ->addAttributeToFilter('status', 1)
+                    ->addAttributeToSort('name', 'ASC');
+                $flag_four = false;
+                $flag_three = false;
+                if($productCollection->count()){
+
+                    echo '<div class="ti_cms_block_headerBar-green">
+                            <div id="ti_series_name">
+                                <h2 class="ti_headerH1 white"><a class="ti_series_header_sign_minus" id="ti_series_header_sign-'. $_category->getId().'"> + </a>'.$_category->getName().' Series</h2>
+                            </div>
+                            <div class="ti_series_header" id="ti_series_display-'. $_category->getId().'">';
+                    foreach($productCollection as $product_model_len){
+                        $test_len = strlen($product_model_len->getName());
+                        if($test_len > 18 and $test_len < 24)
+                            $flag_four = true;
+                        elseif($test_len > 24)
+                            $flag_three = true;
+                    }
+                    if($flag_four == true and $flag_three == false){
+                        foreach($productCollection as $product_model){
+                                echo '<div class="ti_subcat_product_gid_one_fourth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+                        }
+                    }
+                    elseif($flag_three == true){
+                        foreach($productCollection as $product_model){
+                            echo '<div class="ti_subcat_product_gid_one_third"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+                        }
+                    }
+                    else{
+
+                        foreach($productCollection as $product_model){
+                            echo '<div class="ti_subcat_product_gid_one_fifth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+
+                        }
+
+                    }
+
+
+
+                    echo '</div>   </div>';
+                }
 
 
 
@@ -197,10 +344,7 @@ $products = Mage::getModel('catalog/category')->load($currentCategoryId)
 
 
 
-
-
-
-
+?>
 
 <?php //regular brand page?>  
 <?php else: ?>    
@@ -226,6 +370,13 @@ echo $getModel['value'];
             jQuery(".ti_series_header_sign_minus").html('<a href="#"> + </a>');
             jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> - </a>');
             //jQuery("html, body").scrollTop(jQuery(".ti_cms_block_headerBar-green").offset().top);
+
+            //scroll
+                var temp = this.id.split("-");
+                var series_id = temp[temp.length-1];
+                var series_block = "ti_series_display-" + series_id;
+                scroll(document.getElementById(series_block));
+
             return false;
         });
 
@@ -302,15 +453,19 @@ echo $getModel['value'];
 
 <script type="text/javascript">
 //scroll down js
-
+/*
 jQuery(".ti_cms_block_brandVB").click(function() {
-    scroll(document.getElementById('ti_all_series_list'));
+    var temp = this.id.split("-");
+    var series_id = temp[temp.length-1];
+    var series_block = "ti_series_display-" + series_id;
+    //ti_series_display-41
+    scroll(document.getElementById(series_block));
 });
 
-
+*/
 function scroll(element) {   
     jQuery('html,body').animate({
-    scrollTop: element.offsetTop},
+    scrollTop: element.offsetTop-80},
     'slow'); 
 
 }

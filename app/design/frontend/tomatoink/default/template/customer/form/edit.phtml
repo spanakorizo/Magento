@@ -37,9 +37,9 @@
                 <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($this->getCustomer())->toHtml() ?>
             </li>
             <li>
-                <label for="email" class="required"><em class="altTxt">*</em><?php echo $this->__('Email Address') ?></label>
-                <div class="input-box">
-                    <input type="text" name="email" id="email" value="<?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email" />
+                <label for="email" class="required ti_cms_labelHide"><span><?php echo $this->__('Email Address') ?></span></label>
+                <div class="input-box ti-required-entry">
+                    <input type="text" name="email" id="email" value="<?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="input-text validate-email" placeholder="Email"/>
                 </div>
             </li>
         <?php $_dob = $this->getLayout()->createBlock('customer/widget_dob') ?>
@@ -55,16 +55,17 @@
             <li><?php echo $_gender->setGender($this->getCustomer()->getGender())->toHtml() ?></li>
         <?php endif ?>
             <li class="control">
-                <input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo $this->__('Change Password') ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="change_password"><?php echo $this->__('Change Password') ?></label>
+                <input type="checkbox" name="change_password" id="change_password" value="1" onclick="setPasswordForm(this.checked)" title="<?php echo $this->__('Change Password') ?>"<?php if($this->getCustomer()->getChangePassword()==1): ?> checked="checked"<?php endif; ?> class="checkbox" /><label for="change_password"><div class="ti-checkbox"></div><span class="altTxt"><?php echo $this->__('Change Password') ?></span></label>
             </li>
         </ul>
     </div>
     <div class="fieldset" style="display:none;">
+        <div class="ti_cms_separator"></div>
         <h2 class="legend altTxt"><?php echo $this->__('Change Password') ?></h2>
         <ul class="form-list">
             <li>
-                <label for="current_password" class="required"><em class="altTxt">*</em><?php echo $this->__('Current Password') ?></label>
-                <div class="input-box">
+                <label for="current_password" class="required"><span><?php echo $this->__('Current Password') ?></span></label>
+                <div class="input-box ti-required-entry">
                     <!-- This is a dummy hidden field to trick firefox from auto filling the password -->
                     <input type="text" class="input-text no-display" name="dummy" id="dummy" />
                     <input type="password" title="<?php echo $this->__('Current Password') ?>" class="input-text" name="current_password" id="current_password" />
@@ -72,14 +73,14 @@
             </li>
             <li class="fields">
                 <div class="field">
-                    <label for="password" class="required"><em class="altTxt">*</em><?php echo $this->__('New Password') ?></label>
-                    <div class="input-box">
+                    <label for="password" class="required"><span><?php echo $this->__('New Password') ?></span></label>
+                    <div class="input-box ti-required-entry">
                         <input type="password" title="<?php echo $this->__('New Password') ?>" class="input-text validate-password" name="password" id="password" />
                     </div>
                 </div>
                 <div class="field">
-                    <label for="confirmation" class="required"><em class="altTxt">*</em><?php echo $this->__('Confirm New Password') ?></label>
-                    <div class="input-box">
+                    <label for="confirmation" class="required"><span><?php echo $this->__('Confirm New Password') ?></span></label>
+                    <div class="input-box ti-required-entry">
                         <input type="password" title="<?php echo $this->__('Confirm New Password') ?>" class="input-text validate-cpassword" name="confirmation" id="confirmation" />
                     </div>
                 </div>

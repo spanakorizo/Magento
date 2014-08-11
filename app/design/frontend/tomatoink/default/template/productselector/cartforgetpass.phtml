@@ -1,5 +1,5 @@
 <div class="ti_checkoutStep" id="ti_cartforget_close">
-	<a href="#" class="ti_txt_dec_none"><p class="ti_orange_head">X</p></a>
+	<a href="#" class="ti_checkoutStep_close altTxt">X</a>
 </div>
 <h2><?php echo $this->__('Retrieve your password here') ?></h2>
 <form action="<?php echo Mage::getUrl('productselector/cartlogin/forgetpass',array('_secure'=>true)) ?>" method="post" id="form-validate">
@@ -13,7 +13,7 @@
 		<p class="ti_hide_forgetpass_item"><?php echo $this->__('Please enter your email address below. You will receive a link to reset your password.') ?></p>
 		<div class="full ti-required-entry">
 			<label class="ti_hide_forgetpass_item ti_cms_labelHide" for="forget_email"><span><?php echo $this->__('Email Address') ?></span></label>
-			<input type="email" required="required" name="forget_email" id="forget_email" required="required" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" onfocus="if(this.value=='<?php echo $this->__('Email') ?>')this.value='';" onblur="if(this.value=='')this.value='<?php echo $this->__('Email') ?>';" title="<?php echo $this->__('Email') ?>" class="validate-email required-entry width100" />
+			<input type="email" required="required" name="forget_email" id="forget_email" required="required" placeholder="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email') ?>" class="validate-email required-entry width100" />
 		</div>
 		<div class="actions">
 			<button type="submit" title="<?php echo $this->__('Submit') ?>" class="ti_button ti_hide_forgetpass_item"><span><?php echo $this->__('Submit') ?></span></button>
