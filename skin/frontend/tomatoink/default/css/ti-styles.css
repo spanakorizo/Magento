@@ -566,6 +566,7 @@ input[type="radio"]:checked + label span{
 
 .readmorebtn {
     cursor:pointer;
+    border: 0px none !important;
 }
 
 
