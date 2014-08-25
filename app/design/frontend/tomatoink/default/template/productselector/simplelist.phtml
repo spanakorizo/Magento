@@ -30,6 +30,7 @@ if(!empty($result)){
         $collection = Mage::getModel('catalog/product')
             ->getCollection()
             ->addFieldToFilter('entity_id', $result_simple)
+            ->addAttributeToFilter('type_id', 'simple')
             ->addAttributeToFilter('status', 1)
             ->addAttributeToSelect(array('vendor_partno','entity_id'))
             ->addAttributeToSort('vendor_partno', 'ASC');
