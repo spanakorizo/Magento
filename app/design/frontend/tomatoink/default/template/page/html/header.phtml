@@ -22,7 +22,7 @@
 		if (ti_global_url.match(/index.php/)) ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
 		
 	</script>
-
+    <div id="ti_top_link"></div>
 
 	<div id="ti_header_row">
 		<?php $getCouponModel = Mage::getResourceModel('compandsave_variable/coupon_collection')
@@ -44,7 +44,7 @@
 		<div id="ti_header_quick_links" class="btcf">
 			<div class="ti_cms_contain">
 				<div class="ti_header_top_block">
-					<p><strong>Free shipping on orders of $50 or more!</strong> Reg: $3.99</p>
+					<p><a href="<?php echo $current_url;?>shipping-policy"><strong>Free shipping on orders of $50 or more!</strong> Reg: $3.99</a></p>
 				</div>
 				<div class="ti_header_top_block">
 					
@@ -125,15 +125,15 @@
 		<div class="ti_cms_contain btcf">
 			<div class="ti_header_top_block ti_logo_bar">
 
-				<a href="<?php echo $current_url ?>"><img src="<?php echo $this->getSkinUrl('images/ti-assets/ti-logo.png') ?>" alt="Save up to 80% on ink cartridges, toner, and printer accessories at TomatoInk!" id="ti_header_logo"/></a>
+				<a href="<?php echo $current_url ?>" class="ti_header_logo_border"><img src="<?php echo $this->getSkinUrl('images/ti-assets/ti-logo.png') ?>" alt="Save up to 80% on ink cartridges, toner, and printer accessories at TomatoInk!" id="ti_header_logo"/></a>
 			</div>
 			<div class="ti_header_top_block ti_hide_767 ti_logo_bar">
 				<?php if ($this->getIsHomePage()):?>
 				<div class="ti_input_bar" id="ti_header_home_email">
 
 					<form action="<?php echo $current_url; ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
-        <input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" />
-     	<button type="submit" class="button" title="<?php echo $this->__('Subscribe') ?>"><span><span><?php echo $this->__('Sign Up') ?></span></span></button> 
+        <input name="email" type="email" id="newsletter" placeholder="<?php echo $this->__('Enter your email address') ?>" class="input-text required-entry validate-email" />
+     	<button type="submit" class="button" title="<?php echo $this->__('Subscribe') ?>"><?php echo $this->__('Sign Up') ?></button> 
 
 
          </form>
@@ -142,7 +142,7 @@
 				<?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
 					<div class="ti_input_bar" id="ti_header_site_search">
 						<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
-							<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
+							<input type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search" placeholder="Type your printer or ink model..." />
 							<input type="submit" name="Submit" id="search_submit" value="Search" title="<?php echo $this->__('Search') ?>">
 							<div id="search_autocomplete" class="search-autocomplete"></div>
 	        <script type="text/javascript">

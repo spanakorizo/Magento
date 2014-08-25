@@ -7,11 +7,11 @@
         <div class="ti_select_barContainerBorder btcf">
             <div class="ti_select_barContainer btcf">    
 
-    			<div id="ti_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>"/></div>
-    			<div id="ti_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>"/></div>
+    			<div id="ti_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>"/></div>
+    			<div id="ti_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>"/></div>
                <!--<h3>Choose Printer Brand</h3>-->
                 <select name="" id="ti_brand_selector">
-                    <option value="">Brand</option>
+                    <option value="0">Brand</option>
                     <?php
                     $category_model = Mage::getModel('catalog/category')->load(2);
     				$subcategoryIds = $category_model->getChildren();
@@ -54,8 +54,10 @@
 <script>
 jQuery.noConflict();
 jQuery(function(){
+
     jQuery("#ti_brand_selector").change(function() {
-	    document.getElementById("ti_series_selector").disabled=true;
+        var option_value = jQuery("#ti_brand_selector option:selected").val();//get select brand option value
+        document.getElementById("ti_series_selector").disabled=true;
 		document.getElementById("ti_cartridge_selector").disabled=true;
 		document.getElementById("ti_brand_selector").disabled=true;
         var dataString = jQuery(this).val();
@@ -77,8 +79,10 @@ jQuery(function(){
 				jQuery('#ti_cartridge_selector').html(transport.responseText);
 				jQuery("#ti_ajax_loading_ink").hide();
 				jQuery(".ti_ink_selector_holder").fadeTo('slow',1.0);
-				document.getElementById("ti_series_selector").disabled=false;
-				document.getElementById("ti_cartridge_selector").disabled=false;
+                if (option_value != 0){ //if no brand selected series and cartridge are disable
+				    document.getElementById("ti_series_selector").disabled=false;
+				    document.getElementById("ti_cartridge_selector").disabled=false;
+                }
 				document.getElementById("ti_brand_selector").disabled=false;
             }
         });
@@ -113,7 +117,8 @@ jQuery(function(){
 
     jQuery("#ti_cartridge_selector").change(function() {
         var id=jQuery(this).val();
-        window.open(ti_global_url + "catalog/product/view/id/"+ id, "_self");
+        if(id != 0)
+            window.open(ti_global_url + "catalog/product/view/id/"+ id, "_self");
     });
 });
 

@@ -1,5 +1,6 @@
 #ti_trf_contain {
 	font-size:7px;
+	width:860px;
 }
 #ti_trf_contain span {
 	font-size:12px;
@@ -10,8 +11,12 @@
 #ti_trf_contain h1 {
 	margin:0;
 }
+#ti_trf_contain h3 {
+	margin: 0;
+}
 #ti_trf_contain .ti_trf_inputMar {
 	padding:0 1%;
+	margin:0;
 }
 #ti_trf_contain .ti_trf_icon {
 	font-size:37px;

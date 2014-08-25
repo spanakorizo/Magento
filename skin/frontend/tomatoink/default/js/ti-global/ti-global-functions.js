@@ -11,6 +11,12 @@ function add_to_box(id1,id2){
     screenTop = screenTop + 50;
     var  url = firstId.attr('action');
     var data = firstId.serialize();
+    var qty_check = false;
+    jQuery('.qty').each(function() {
+      if (jQuery(this).val() != '') qty_check = true;
+    });
+if (qty_check) {
+    jQuery('#ti_group_multiple_msg').hide();
     jQuery('#ajax_loader').show();
     try {
         jQuery.ajax({
@@ -38,6 +44,10 @@ function add_to_box(id1,id2){
 
     } catch (e) {
     }
+  }
+  else 
+    
+    jQuery('#ti_group_multiple_msg').show();
 
 }
 
@@ -109,24 +119,36 @@ for (i=0;i<ARRcookies.length;i++)
 
 jQuery(document).ready(function($){
 
+    //code for top link
+    // hide #ti_back_top first
+    jQuery("#ti_back_top").hide();
 
+    // fade in #ti_back_top
+    jQuery(function () {
+        jQuery(window).scroll(function () {
+            if (jQuery(this).scrollTop() > 100) {
+                jQuery('#ti_back_top').fadeIn();
+            } else {
+                jQuery('#ti_back_top').fadeOut();
+            }
+        });
+        jQuery('#ti_back_top a').bind("mouseover", function(){
+            var color  = jQuery('#ti_back_top').css("background-color");
 
-  //can't work 
-  /*
-	$('a[href^="#"]').on('click',function (e) {
-	    e.preventDefault();
+            jQuery('#ti_back_top').css("background", "rgba(113, 182, 47,1)");
 
-	    var target = this.hash,
-	    $target = $(target);
-
-	    $('html, body').stop().animate({
-	        'scrollTop': $target.offset().top
-	    }, 900, 'swing', function () {
-	        window.location.hash = target;
-	    });
-	});
-
-*/
+            jQuery(this).bind("mouseout", function(){
+                jQuery('#ti_back_top').css("background", color);
+            })
+        })
+        // scroll body to 0px on click
+        jQuery('#ti_back_top a').click(function () {
+            jQuery('body,html').animate({
+                scrollTop: 0
+            }, 800);
+            return false;
+        });
+    });
 
 
 /*****************************************************************/
@@ -203,7 +225,7 @@ function change_readmore(_more, _less) {
     e.stopPropagation();
   });
 	//Toggle coupon code
-	jQuery("#ti_main_coupon_arrow").click(function(e){
+	jQuery("#ti_main_coupon_arrow, #ti_main_coupon").click(function(e){
   jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
 	jQuery("#ti_header_click_coupon").slideToggle("fast", function() {
 			//if (jQuery('ti_header_click_coupon').css("display") == "none") alert("close");//
