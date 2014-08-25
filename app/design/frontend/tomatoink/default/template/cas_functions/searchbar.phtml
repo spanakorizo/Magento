@@ -1,6 +1,6 @@
 <?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
 <form id="search_homepage_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
-							<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="searchbar_home" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
+							<input type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="searchbar_home" placeholder="Type your printer or ink model..."/>
 							<input type="submit" name="Submit" id="search_submit_home" value="Search" title="<?php echo $this->__('Search') ?>">
 							<div id="search_autocomplete_home" class="search-autocomplete"></div>
 	        <script type="text/javascript">

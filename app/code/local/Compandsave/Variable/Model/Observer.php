@@ -29,7 +29,7 @@ class Compandsave_Variable_Model_Observer
             if($block->IsRssCatalogEnable() && $block->IsTopCategory()){
                 $this->html .= '<a href="'.$block->getRssLink().'" class="link-rss">'.$block->__('Subscribe to RSS Feed').'</a>';
             }
-            $this->html .= '<h1 class="ti_header_left_align">'.$_helper->categoryAttribute($_category, $_category->getName(), "name").'</h1>';//.$block->getMessagesBlock()->getGroupedHtml();
+            $this->html .= '<h1 class="ti_green_head text_left">'.$_helper->categoryAttribute($_category, $_category->getName(), "name").'</h1>';//.$block->getMessagesBlock()->getGroupedHtml();
 
             if($_imgUrl){
                 $this->html .= '<p>'.$_imgHtml;
@@ -47,7 +47,7 @@ class Compandsave_Variable_Model_Observer
 					<div class="one_fourth ti_ink_selector_holder">
                         <div class="ti_cms_gradient_block ti_block_inner">
     						<h2 class="ti_headerH1 ti_green_head">Ink Search</h2>
-    						<div id="ti_ajax_cat_loading_ink"><img src="'.$block->getSkinUrl("images/loading.gif").'" /></div>
+    						<div id="ti_ajax_cat_loading_ink"><img src="'.$block->getSkinUrl("images/ti_loading_small.gif").'" /></div>
     						<div class="ti_select_barContainerBorder btcf">
     							<div class="ti_select_barContainer btcf">
     								<select name="" id="ti_series_selector">
@@ -93,12 +93,12 @@ class Compandsave_Variable_Model_Observer
             $catalogSearchHelper =  $block->helper('catalogsearch');
 
             $this->html .= '<form id="search_mini_form3" action="'.$catalogSearchHelper->getResultUrl().'" method="get">
-									<input type="text" name="'. $catalogSearchHelper->getQueryParamName() .'" id="search3" value="Find your cartridge" onfocus="if (this.value == \'Find your cartridge\') {this.value = \'\';}" onblur="if (this.value == \'\') {this.value = \'Find your cartridge\';}"/>
+									<input type="text" name="'. $catalogSearchHelper->getQueryParamName() .'" id="search3" Placeholder="Find your cartridge" />
 									<input type="submit" name="Submit" id="search_submit3" value="Search" title="'. $block->__("Search") .'">
 									<div id="search_autocomplete3" class="search-autocomplete"></div>
 									<script type="text/javascript">
 									//<![CDATA[
-										var searchForm3 = new Varien.searchForm("search_mini_form3", "search3", "'. $block->__("Search entire store here...'") .'");
+										var searchForm3 = new Varien.searchForm("search_mini_form3", "search3", "'. $block->__("Find your cartridge") .'");
 										searchForm3.initAutocomplete("'. $catalogSearchHelper->getSuggestUrl() .'", "search_autocomplete3");
 									//]]>
 									</script>
@@ -118,8 +118,9 @@ class Compandsave_Variable_Model_Observer
                 if($productCollection->count()){
                     $this->html .= '<div class="ti_cms_block_brandVB" id="'.$series->name.'-'.$series->entity_id.'">
 							<div class="ti_block_inner ti_cms_border_block">';
-									if($series->getImageUrl()) $this->html .= '<a href="#"><img src="'.$series->getImageUrl().'"/></a>';
-                                    else $this->html .= '<a href="#"><img src="'.$block->getSkinUrl("images/dummy-printer.jpg").'"/></a>';
+                                    //********************** if we need add series pic uncomment below two lines
+									//if($series->getImageUrl()) $this->html .= '<a href="#"><img src="'.$series->getImageUrl().'"/></a>';
+                                    //else $this->html .= '<a href="#"><img src="'.$block->getSkinUrl("images/dummy-printer.jpg").'"/></a>';
                     $this->html .= '<p><a href="#">'.$series->getName().' Series</a></p>
 							</div>
 						</div>';
@@ -144,7 +145,7 @@ class Compandsave_Variable_Model_Observer
                 $flag_three = false;
                 if($productCollection->count()){
 
-                    $this->html .= '<div class="ti_cms_block_headerBar-green">
+                    $this->html .= '<div class="ti_cms_block_headerBar-green" id="ti_series_header_display-'. $item->getId().'">
 							<div id="ti_series_name">
 								<h2 class="ti_headerH1 white"><a class="ti_series_header_sign_minus" id="ti_series_header_sign-'. $item->getId().'"> + </a>'.$item->getName().' Series</h2>
 							</div>

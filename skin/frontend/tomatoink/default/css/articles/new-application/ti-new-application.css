@@ -19,10 +19,17 @@ Naming convention: add ti_na_ prefix
 /*********************************************************/
 
 .ti_na_container {
-	/*width: 860px;*/
+	width: 860px;
 	font-family: sans-serif;
 	font-size:9px;
 	line-height:1.2em;
+}
+.ti_na_container span {
+	color:#999999;
+	font-size: 1.3rem;
+}
+.ti_na_container input {
+	margin:1% 0;
 }
 .ti_na_rightCol, .ti_na_leftCol{
 	width:49%;
@@ -32,6 +39,10 @@ Naming convention: add ti_na_ prefix
 }
 .ti_na_leftCol{
 	padding-left:0;
+}
+.ti_na_borderBlock{
+	padding:1%;
+	margin:1%;
 }
 
 /*.ti_na_container table td {

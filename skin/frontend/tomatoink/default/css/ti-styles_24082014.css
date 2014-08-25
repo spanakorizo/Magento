@@ -296,7 +296,7 @@ blockquote h2:after{
 }
 
 .ti_headerH1{
-	font-size:2.4em;
+	font-size:3.2em; 
 	font-weight:bold;
 }
 
@@ -330,7 +330,7 @@ input[type="submit"],
 .ti_button,
 textarea {
 	font-size:16px;
-    font:300 1.6rem 'Raleway', Verdana, sans-serif;
+    font:300 1.6rem/1em 'Raleway', Verdana, sans-serif;
     padding:10px 5px;
     margin:1%;
     max-width:100%;
@@ -628,9 +628,7 @@ select:disabled{
 p.ti_social_media{
 	text-align:center;
 }
-p.ti_social_media a:hover{
-    border: 0px none !important;
-}
+
 .ti_social_media_btn{
 	width:42px;
 	height:42px;
@@ -731,7 +729,7 @@ li.ti_bulletNone:before{
 }
 
 .ti_menu a, .ti_sub-menu>li{
-    display:inline;
+    display:block;
     text-decoration:none;
 }
 
@@ -964,12 +962,7 @@ td, th{
 .ti_header_top_block ul li:last-child:after{
 	display:none;
 }
-#ti_header_logo{
-	display:inline;
-}
-.ti_header_logo_border:hover{
-	border-bottom: 0px none;
-}
+
 /* Navigation */
 /* ------ Prefix: ti_header_nav_ -----*/
 
@@ -1066,12 +1059,8 @@ td, th{
 .menu_one_col li{
 	width:96%;
 }
-.ti_header_top_block p a{
-		color: #FFEDDD;
-}
-.ti_header_top_block p a:hover{
-	color: #FFEDDD;
-}
+
+.ti_header_top_block p,
 #ti_header_nav_main p{
 	color:#f7e8db;
 }
@@ -1866,7 +1855,6 @@ input.ti_checkout_info {
 	padding:0 5px;
 	background:url("../images/ti-assets/paper-bg_559a13.jpg") repeat;
 	clear:both;
-    cursor: pointer;
 }
 
 .ti_cms_block_headerBar-orange{
@@ -1972,27 +1960,7 @@ input.ti_checkout_info {
 	opacity:1;
 	outline:5px solid #71b62f;
 }
-/****** brand top link *****/
-#ti_back_top{
-    position: fixed;
-    width: 40px;
-    bottom: 30px;
-    right: 30px;
-    float: right;
-    display: block;
-    text-align: center;
-    background: rgba(113, 182, 47,0.6);
-    padding: 3px;
-    z-index:99999
-}
-#ti_back_top a{
-    font: 600 1.3rem "raleway";
-    -moz-font-feature-settings: "lnum";
-    color: #FFF;
-}
-#ti_back_top a span{
-    display: block;
-}
+
 /* Products */
 /* ------- Prefix: ti_product_ -----*/
 
@@ -2725,7 +2693,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		z-index: 20;
 		position: relative;
 	}
-	
+
 	.ti_cms_block_grid{
 		min-height:0px;
 	}

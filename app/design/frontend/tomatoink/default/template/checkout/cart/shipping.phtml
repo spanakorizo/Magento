@@ -118,7 +118,7 @@ end Megan HTML-->
             <?php if (($_shippingRateGroups = $this->getEstimateRates())): ?>
             <form id="co-shipping-method-form" action="<?php echo $this->getUrl('checkout/cart/estimateUpdatePost') ?>">
                 <div class="ti_select_barContainer ti_cart_ship_option">
-					<select id='ti_drop_estimate_method' name="ti_estimate_method">
+					<select id='ti_drop_estimate_method' name="estimate_method">
 						<?php foreach ($_shippingRateGroups as $code => $_rates){ 
 								$carrier_name = $this->escapeHtml($this->getCarrierName($code));
 								foreach ($_rates as $_rate){
