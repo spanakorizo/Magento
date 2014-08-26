@@ -49,67 +49,6 @@ light brown: #f7e8db;
             display:table;
             clear:both;
         }
-input::-webkit-input-placeholder {
-    color: #559A13;
-}
-
-input:-moz-placeholder { /* Firefox 18- */
-    color: #559A13;
-}
-
-input::-moz-placeholder {  /* Firefox 19+ */
-    color: #559A13;
-}
-
-input:-ms-input-placeholder {
-    color: #559A13;
-}
-input:focus::-webkit-input-placeholder {
-    color: transparent;
-}
-
-input:focus:-moz-placeholder { /* Firefox 18- */
-    color: transparent;
-}
-
-input:focus::-moz-placeholder {  /* Firefox 19+ */
-    color: transparent;
-}
-
-input:focus:-ms-input-placeholder {
-    color: transparent;
-}
-/*-------->> Text Area Placeholder <<-------------*/
-textarea::-webkit-input-placeholder {
-    color: #559A13;
-}
-
-textarea:-moz-placeholder { /* Firefox 18- */
-    color: #559A13;
-}
-
-textarea::-moz-placeholder {  /* Firefox 19+ */
-    color: #559A13;
-}
-
-textarea:-ms-input-placeholder {
-    color: #559A13;
-}
-textarea:focus::-webkit-input-placeholder {
-    color: transparent;
-}
-
-textarea:focus:-moz-placeholder { /* Firefox 18- */
-    color: transparent;
-}
-
-textarea:focus::-moz-placeholder {  /* Firefox 19+ */
-    color: transparent;
-}
-
-textarea:focus:-ms-input-placeholder {
-    color: transparent;
-}
 /* -----------------------------------*/
 /* -------->> 1. Global <<<-----------*/
 /* -----------------------------------*/
@@ -330,8 +269,9 @@ input[type="submit"],
 .ti_button,
 textarea {
 	font-size:16px;
+	line-height:2em;
     font:300 1.6rem 'Raleway', Verdana, sans-serif;
-    padding:10px 5px;
+    padding:0 5px;
     margin:1%;
     max-width:100%;
     border-radius:.25em;
@@ -355,6 +295,7 @@ textarea {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
   -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
   cursor:text;
+  line-height:2em;
   border:1px solid #559a13;
   transition:color .4s;
   -webkit-transition:color .4s;
@@ -366,24 +307,27 @@ textarea {
 	-o-font-feature-settings: "lnum";
 }
 
-::-webkit-input-placeholder { 
-    color:    #ccc;
-    font-size:1.6rem;
-}
-:-moz-placeholder { 
-    color:    #ccc;
-    opacity:  1;
-    font-size:1.6rem;
-}
-::-moz-placeholder { 
-    color:    #ccc;
-    opacity:  1;
-    font-size:1.6rem;
-}
-:-ms-input-placeholder { 
-    color:    #ccc;
-    font-size:1.6rem;
-}
+input::-webkit-input-placeholder,
+input:-moz-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder{ color: #ccc; opacity: 1; font-size:1.6rem;}
+
+input:focus::-webkit-input-placeholder,
+input:focus:-moz-placeholder,
+input:focus::-moz-placeholder,
+input:focus:-ms-input-placeholder{ color: transparent;}
+
+/*-------->> Text Area Placeholder <<-------------*/
+textarea::-webkit-input-placeholder,
+textarea:-moz-placeholder,
+textarea::-moz-placeholder,
+textarea:-ms-input-placeholder {color: #ccc; opacity: 1; font-size:1.6rem;}
+
+textarea:focus::-webkit-input-placeholder,
+textarea:focus:-moz-placeholder,
+textarea:focus::-moz-placeholder,
+textarea:focus:-ms-input-placeholder {color: transparent;}
+
 
 textarea{
 	font-size:16px;
@@ -402,6 +346,7 @@ input[type="button"],
   cursor:pointer;
   transition:background .4s;
   -webkit-transition:background .4s;
+  line-height:2em;
 }
 
 input[type="submit"].ti_altBtn, 
@@ -566,7 +511,6 @@ input[type="radio"]:checked + label span{
 
 .readmorebtn {
     cursor:pointer;
-    border: 0px none !important;
 }
 
 
@@ -619,19 +563,17 @@ li button{
 }
 
 select:disabled{
-	opacity:.5;
+	opacity:.3;
 	cursor:default;
 }
 
 /* -- Social Media --*/
 /* -------- Prefix: ti_social_media_ --------*/
 
-p.ti_social_media{
-	text-align:center;
+.ti_social_media a:hover{
+    border: 0px none;
 }
-p.ti_social_media a:hover{
-    border: 0px none !important;
-}
+
 .ti_social_media_btn{
 	width:42px;
 	height:42px;
@@ -1288,25 +1230,39 @@ td, th{
 	text-shadow:none;
 }
 
+#ti_header_accountDrop{
+	width:260px;
+	margin-left:-55px;
+}
+
+#ti_header_accountDrop:after{
+	left:20%;
+}
+
 #ti_header_cartDrop{
-	width:250px;
-	margin-left:-125px;
+	width:260px;
+	margin-left:-150px;
+}
+
+#ti_header_helpDrop{
+	width:260px;
+	margin-left:-235px;
+}
+
+#ti_header_helpDrop:after{
+	left:80%;
 }
 
 #ti_header_cartitems{
 	word-wrap:break-word;
 }
 
-/* Search */
-#ti_header_mainSearch{
-	display:block;
-	position:absolute;
-	z-index:5;
-	top:15em;
-	left:50%;
-	margin-left:-30%;
-	width:55%;
+/*  temporary */
+#scEkiO{
+	display:none;
 }
+
+/* Search */
 
 #ti_header_site_search{
 	background:none;
@@ -1825,6 +1781,19 @@ input.ti_checkout_info {
 /* -----------------------------------*/
 /* ------- Prefix: ti_cms_home_ ------*/
 
+#ti_home_centerMain{
+	display:block;
+	position:absolute;
+	z-index:5;
+	top:10em;
+	left:50%;
+	margin-left:-30%;
+	width:55%;
+	background:url("../images/ti-assets/paper-bg_e67921.jpg") repeat;
+	border-radius:0.25em;
+	text-align:center;
+}
+
 .ti_cms_home_block{
 	width: 28%;
 	margin-bottom:20px;
@@ -2212,7 +2181,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 .ti_related-nav span:hover{
     opacity:1.0;
 }
-.ti-more{
+/*.ti-more{
     position: absolute;
     bottom: 10px;
     right:0px;
@@ -2223,7 +2192,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     color: white;
     font-style:italic;
     text-shadow:1px 1px 1px #897c63;
-}
+}*/
 .ti-close{
     position:absolute;
     top:10px;
@@ -2403,12 +2372,6 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		min-width:800px;
 	}
 
-	#ti_header_mainSearch .ti_input_barContainer{
-		background:none;
-		box-shadow:none;
-		-webkit-box-shadow:none;
-	}
-
 	#ti_header_nav_main li{
 		padding:0px 1.4em;
 	}
@@ -2445,12 +2408,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	}
 
 	.ti_cms_dropContent{
-		left:0;
 		margin-left:0;
-	}
-
-	.ti_cms_dropContent:after{
-		left:10%;
 	}
 
 	#ti_product_qtyDiscountDrop{
