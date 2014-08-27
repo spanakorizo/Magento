@@ -371,44 +371,54 @@ echo $getModel['value'];
         jQuery(".ti_cms_block_brandVB").click(function(e) {
 			e.preventDefault();
             var y=jQuery(this).attr("id");
-
+            //var x= y.split("-");
+            //var id = x[1];
             var id = y.split("-").pop();
-            if(jQuery("#ti_series_display-" + id).is(":visible")){
+            jQuery(".ti_series_header").hide();
+            jQuery("#ti_series_display-" + id).show(e);
+            jQuery(".ti_series_header_sign_minus").html('<a href="#"> + </a>');
+            jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> - </a>');
+            //jQuery("html, body").scrollTop(jQuery(".ti_cms_block_headerBar-green").offset().top);
 
-				jQuery("#ti_series_display-" + id).hide();
-                jQuery(".ti_series_name").hide();
-				if(jQuery(".ti_show_hide_series").html() == '<a href="#">- Hide All Series</a>'){
-					jQuery(".ti_series_header").hide();
-					jQuery("#ti_series_display-" + id).show();
-					jQuery(".ti_show_hide_series").html('<a href="#">+ Show All Series</a>');
-				}
-                var series_block = "ti_series_header_display-" + id;
+            //scroll
+                var temp = this.id.split("-");
+                var series_id = temp[temp.length-1];
+                var series_block = "ti_series_display-" + series_id;
                 scroll(document.getElementById(series_block));
-            }
-            else{
-				jQuery(".ti_series_header").hide();
-                jQuery("#ti_series_display-" + id).show();
-                jQuery(".ti_series_name").hide();
-                var series_block = "ti_series_display-" + id;
-                scroll(document.getElementById(series_block));
-            }
-            
-
 
             return false;
         });
 
-        jQuery(".ti_show_hide_series").click(function(e) {
+        jQuery('.ti_series_header_sign_minus,.ti_cms_block_headerBar-green').click(function(e){
+            e.preventDefault();
+            var y=jQuery(this).attr("id");
+            //var x= y.split("-");
+            //var id = x[1];
+            var id = y.split("-").pop();
+            if(jQuery("#ti_series_display-" + id).is(":visible")){
+                jQuery("#ti_series_display-" + id).hide();
+                jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> + </a>');
+            }
+            else{
+                jQuery("#ti_series_display-" + id).show();
+                jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> - </a>');
+            }
+            return false;
+        });
+
+
+		jQuery(".ti_show_hide_series").click(function(e) {
 			e.preventDefault();
-            
-            if(jQuery(".ti_show_hide_series").html() == '<a href="#">- Hide All Series</a>'){
+            /*jQuery(".ti_series_header").hide();
+            jQuery(".ti_cms_block_headerBar-green").toggle();*/
+            if(jQuery(".ti_series_header").is(":visible")){
                 jQuery(".ti_series_header").hide();
-                jQuery(".ti_series_name").hide();
+                jQuery(".ti_series_header_sign_minus").html('<a href="#"> + </a>');
                 jQuery(".ti_show_hide_series").html('<a href="#">+ Show All Series</a>');
             }
             else{
                 jQuery(".ti_series_header").show();
-                jQuery(".ti_series_name").show();
+                jQuery(".ti_series_header_sign_minus").html('<a href="#">- </a>');
                 jQuery(".ti_show_hide_series").html('<a href="#">- Hide All Series</a>');
             }
             //jQuery(".ti_series_header").toggle(e);
@@ -454,7 +464,17 @@ echo $getModel['value'];
 </script>
 
 <script type="text/javascript">
+//scroll down js
+/*
+jQuery(".ti_cms_block_brandVB").click(function() {
+    var temp = this.id.split("-");
+    var series_id = temp[temp.length-1];
+    var series_block = "ti_series_display-" + series_id;
+    //ti_series_display-41
+    scroll(document.getElementById(series_block));
+});
 
+*/
 function scroll(element) {   
     jQuery('html,body').animate({
     scrollTop: element.offsetTop-80},

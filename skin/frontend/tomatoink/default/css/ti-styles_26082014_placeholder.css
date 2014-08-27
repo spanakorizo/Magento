@@ -306,25 +306,27 @@ textarea {
 	-o-font-feature-settings: "lnum";
 }
 
-input::-webkit-input-placeholder {color: #ccc; opacity: 1; font-size:1.6rem;}
-input:-moz-placeholder { /* Firefox 18- */color: #ccc; opacity: 1; font-size:1.6rem;}
-input::-moz-placeholder {  /* Firefox 19+ */color: #ccc; opacity: 1; font-size:1.6rem;}
-input:-ms-input-placeholder {color: #ccc; opacity: 1; font-size:1.6rem;}
+input::-webkit-input-placeholder,
+input:-moz-placeholder,
+input::-moz-placeholder,
+input:-ms-input-placeholder{ color: #ccc; opacity: 1; font-size:1.6rem;}
 
-/*input:focus::-webkit-input-placeholder {color: transparent;}
-input:focus:-moz-placeholder { color: transparent;}
-input:focus::-moz-placeholder {  color: transparent;}
-input:focus:-ms-input-placeholder {color: transparent;}*/
+input:focus::-webkit-input-placeholder,
+input:focus:-moz-placeholder,
+input:focus::-moz-placeholder,
+input:focus:-ms-input-placeholder{ color: transparent;}
 
-textarea::-webkit-input-placeholder {color: #ccc; opacity: 1; font-size:1.6rem;}
-textarea:-moz-placeholder { /* Firefox 18- */color: #ccc; opacity: 1; font-size:1.6rem;}
-textarea::-moz-placeholder {  /* Firefox 19+ */color: #ccc; opacity: 1; font-size:1.6rem;}
-textarea:-ms-input-placeholder { color: #ccc; opacity: 1; font-size:1.6rem;}
+/*-------->> Text Area Placeholder <<-------------*/
+textarea::-webkit-input-placeholder,
+textarea:-moz-placeholder,
+textarea::-moz-placeholder,
+textarea:-ms-input-placeholder {color: #ccc; opacity: 1; font-size:1.6rem;}
 
-/*textarea:focus::-webkit-input-placeholder {color: transparent;}
-textarea:focus:-moz-placeholder { color: transparent;}
-textarea:focus::-moz-placeholder { color: transparent;}
-textarea:focus:-ms-input-placeholder {color: transparent;}*/
+textarea:focus::-webkit-input-placeholder,
+textarea:focus:-moz-placeholder,
+textarea:focus::-moz-placeholder,
+textarea:focus:-ms-input-placeholder {color: transparent;}
+
 
 textarea{
 	font-size:16px;
@@ -527,7 +529,6 @@ select{
 	padding: 0 10px;
 	height:45px;
 	cursor:pointer;
-	-webkit-appearance:none;
 }
 
 .ti_select_barContainer{
@@ -1042,6 +1043,24 @@ td, th{
 	border:none;
 }
 
+
+/* Header My Account*/
+/*.ti_sub-menu {
+	text-align: center;
+}
+
+#ti_header_login {
+	border: solid, 1px;
+	border-radius: 5px;
+	background: #00CC00;
+}
+
+#ti_header_logout {
+	border: solid, 1px;
+	border-radius: 5px;
+	background: #FD8524;
+}*/
+
 /* Nav Mini */
 #ti_header_nav_mini, #ti_header_search_mini{
 	display:block;
@@ -1154,7 +1173,7 @@ td, th{
 	padding:20px 5px 5px;
 	left: 50%;
 	margin-left: -66px;
-	top:31px;
+	top:20px;
 }
 
 .ti_cms_dropContent:after {
@@ -1163,15 +1182,11 @@ td, th{
 	position: absolute;
 	border-style: solid;
 	border-width: 10px;
-	border-color: transparent transparent #71b62f;
+	border-color: transparent transparent #E67921;
 	content: "";
-	top: -20px; 
+	top: 0; 
 	left: 50%;
 	margin-left: -5px;
-}
-
-.ti_cms_dropContent .ti_block_inner{
-	padding:0;
 }
 
 .ti_cms_dropContent ul{
@@ -1179,23 +1194,29 @@ td, th{
 }
 
 .ti_cms_dropContent ul li{
-	margin:0 0 10px 0;
+	margin:0;
 	clear:both;
-	padding:0;
-	font-size:1.4rem;
+	padding:1%;
 }
 
-.ti_cms_dropContent li a{
-	color:#71b62f;
+.ti_cms_dropContent a,
+.ti_cms_dropContent p,
+.ti_cms_dropContent li {
+	font-size:1.2em;
+	text-decoration:none;
+}
+
+.ti_cms_dropContent a{
+	border-bottom: 3px solid transparent;
+}
+
+.ti_cms_dropContent a:hover{
+	border-bottom: 3px solid #E67921;
 }
 
 .ti_cms_dropContent p{
 	color:#333;
-	font-size:1.4rem;
-}
-
-#ti_header_cartDrop p{
-	font-size:1.2rem;
+	font-size:1.6em;
 }
 
 .ti_cms_dropContent img{
@@ -1235,26 +1256,8 @@ td, th{
 	word-wrap:break-word;
 }
 
-.ti_cms_dropContent .ti_block_inner.ti_dropHalfBrder{
-	padding-left:5px;
-	border-left:1px solid #71b62f;
-}
-
-#ti_header_helpDrop .ti_dropHalfBrder{
-	text-align:center;
-}
-
-.ti_dropHalfBrder h3{
-	line-height:1;
-	font-size:1.8rem;
-}
-
-.ti_dropHalfBrder .icon-bubbles{
-	font-size:4em;
-}
-
 /*  temporary */
-#scEkiO img{
+#scEkiO{
 	display:none;
 }
 
@@ -1903,8 +1906,7 @@ input.ti_checkout_info {
 .ti_cms_block_qty input{
 	display:inline;
 	width:auto;
-	font-size:1em;
-	font-family: 'Raleway', Verdana, sans-serif;
+	font:1em/1em 'Raleway', Verdana, sans-serif;
 }
 
 .ti_cms_block_qty input[type="text"],
@@ -2741,3 +2743,4 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		min-width:568px;
 	}
 }
+

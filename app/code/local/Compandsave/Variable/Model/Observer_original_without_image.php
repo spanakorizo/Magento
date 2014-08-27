@@ -146,8 +146,8 @@ class Compandsave_Variable_Model_Observer
                 if($productCollection->count()){
 
                     $this->html .= '<div class="ti_cms_block_headerBar-green" id="ti_series_header_display-'. $item->getId().'">
-							<div class="ti_series_name">
-								<h2 class="ti_headerH1 white">'.$item->getName().' Series</h2>
+							<div id="ti_series_name">
+								<h2 class="ti_headerH1 white"><a class="ti_series_header_sign_minus" id="ti_series_header_sign-'. $item->getId().'"> + </a>'.$item->getName().' Series</h2>
 							</div>
 							<div class="ti_series_header" id="ti_series_display-'. $item->getId().'" style="display: none">';
                     foreach($productCollection as $product_model_len){

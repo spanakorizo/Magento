@@ -83,6 +83,7 @@ ul,ol         { list-style:none; }
 .no-margin    { margin:0 !important; }
 .no-padding   { padding:0 !important; }
 .no-bg        { background:none !important; }
+.strong        { font-weight:bold !important; }
 /* ======================================================================================= */
 
 /* Layout ================================================================================ */
@@ -1741,7 +1742,7 @@ ul.cms-menu.type-square ul { list-style-type:square; }
 .cart .title-buttons { padding-right:15px; }
 .cart .messages,
 .cart .messages li { margin:0; }
-*/.cart .checkout-types { float:right; text-align:center; margin-bottom:1em;}
+*/.cart .checkout-types { float:right; text-align:center; margin-bottom:1em; padding:0;}
 .cart .checkout-types .paypal-or { margin:0 8px; line-height:2.3; }
 .cart .checkout-types fieldset { display:inline; }
 .cart .checkout-types .btn-proceed-checkout span { background-image:url(../images/bkg_btn-co.gif); height:27px !important; padding:0 0 0 13px !important; }
@@ -1753,6 +1754,7 @@ ul.cms-menu.type-square ul { list-style-type:square; }
 .cart-table .item-msg { font-size:10px; }
 .cart-table thead th { vertical-align:bottom; }
 .cart-table tbody td { padding:12px; }*/
+button.btn-continue{ padding:0;}
 .btn-continue { float:left; background:#f7e8db; border:none; color:#736151; text-shadow:none;}
 .btn-continue:hover { background:#ded1c5;}/*
 .cart-table .btn-continue span { background:none; border:none; text-transform:none; color:#444; text-decoration:underline; font-weight:normal; padding:0; }
