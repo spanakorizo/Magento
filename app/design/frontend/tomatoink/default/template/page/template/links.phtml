@@ -32,31 +32,60 @@
 <ul class="ti_header_toplinks">
 
 						<li id="ti_header_account"><a rel="nofollow"><span>My Account</span></a>
-							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_accountDrop"><!--  menu_two_col!-->
-								<ul class="ti_sub-menu menu_one_col ti_bullet">
-									<li id="ti_header_login"><a href="<?php echo $this->getUrl('') ?>customer/account/login/"><span>Sign In</span></a></li>
-									<li><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a></li>
-									<li><a href="<?php echo $this->getUrl('') ?>customer/account/index/"><span>My Profile</span></a></li>
-									<li><a href="<?php echo $this->getUrl('') ?>sales/order/history/"><span>My Orders</span></a></li>
-									<li id="ti_header_logout"><a href="<?php echo $this->getUrl('') ?>customer/account/logout/"><span>Sign Out</span></a></li>
-								</ul>
+							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_accountDrop">
+								<div class="one_half">
+									<div class="ti_block_inner">
+										<ul>
+											<li id="ti_header_login"><a href="<?php echo $this->getUrl('') ?>customer/account/login/"><span>Sign In</span></a></li>
+											<li id="ti_header_logout"><a href="<?php echo $this->getUrl('') ?>customer/account/logout/"><span>Sign Out</span></a></li>
+											<li><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="one_half">
+									<div class="ti_block_inner ti_dropHalfBrder btcf">
+										<ul>
+											<li><a href="<?php echo $this->getUrl('') ?>customer/account/index/"><span>My Profile</span></a></li>
+											<li><a href="<?php echo $this->getUrl('') ?>sales/order/history/"><span>My Orders</span></a></li>
+										</ul>
+									</div>
+								</div>
 							</div>
 						</li>
 						<li id="ti_header_cart"><a rel="nofollow"><span>Cart</span>(<span id="ti_header_cartcount">0</span>)</a>
-							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_cartDrop">
+							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_cartDrop">
 								<p><strong>Currently in your cart:</strong></p>
 								<div id="ti_header_cartitems"></div>
 							</div>
 						</li>
 						<li id="ti_header_help"><a rel="nofollow" rel="nofollow"><span>Need help?</span></a>
-							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_helpDrop">
-								<ul class="ti_sub-menu menu_one_col ti_bullet">
-									<li><a href="tel:877-777-0127"><span>Call us: 877-777-0127</span></a></li>
-									<li><a href="<?php echo $this->getUrl('') ?>order-tracking"><span>Track Orders</span></a></li>
-									<li><a href="<?php echo $this->getUrl('') ?>ink_toner_troubleshooting" target="_blank">Troubleshooting</a></li>
-									<li><a href=""><span>Leave a Ticket</span></a></li>
-									<li id="scEkiO" class="ti_bulletNone"></li>
-								</ul>
+							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_helpDrop">
+								<p>We're available M-F, 8am-5pm PST</p>
+								<div class="one_half">
+									<div class="ti_block_inner">
+										<ul>
+											<li><a href="<?php echo $this->getUrl('') ?>order-tracking"><span>Track Orders</span></a></li>
+											<li><a href="<?php echo $this->getUrl('') ?>ink_toner_troubleshooting" target="_blank">Troubleshooting</a></li>
+											<li><a href=""><span>Support Ticket</span></a></li>
+											<li><a href="mailto:customercare@tomatoink.com"><span>Email us</span></a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="one_half">
+									<div class="ti_block_inner ti_dropHalfBrder">
+										<div id="scEkiO"></div>
+										<a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','Comboink Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;><p>
+											<!-- The altTxt class should change to lgTxt when offline -->
+											<span class="icon-bubbles altTxt"></span>
+										</p>
+											<!-- The text in id="ti_liveChat" should change to Live Chat is offline. The altTxt class should change to lgTxt -->
+										<h3 class="altTxt ltWeight" id="ti_liveChat">Live Chat<br>is online</h3></a>
+										<h4 class="ltWeight">
+											<!-- The text in id="ti_phoneMessage" should change to Leave a message. The altTxt class should change to lgTxt -->
+											<span id="ti_phoneMessage">Or call us:</span><br><a href="tel:877-777-0127" class="altTxt strong">877-777-0127</a></span>
+										</h4>
+									</div>
+								</div>
 							</div>
 						</li>
                         
