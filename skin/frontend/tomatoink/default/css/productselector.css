@@ -22,10 +22,10 @@
     border-bottom: 7px solid #71B62F;
 }
 .ti_header_left_align{color: #559A13;line-height: 1.1em; text-shadow: -0.5px -0.5px 0 #333333, 1px 1px 0 #ECECEC;text-align: left}
-.ti_subcat_product_gid_one_sixth{width:15.5%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
-.ti_subcat_product_gid_one_fifth{width:19%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
-.ti_subcat_product_gid_one_fourth{width:24%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
-.ti_subcat_product_gid_one_third{width:32%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
+.ti_subcat_product_gid_one_sixth{width:16%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
+.ti_subcat_product_gid_one_fifth{width:19.5%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
+.ti_subcat_product_gid_one_fourth{width:24.5%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
+.ti_subcat_product_gid_one_third{width:32.5%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
 .ti_close_popup{position: absolute;right:0;top:0}
 #ti_cartlogin_close,#ti_cartregister_close, #ti_cartforget_close{position: absolute;right:5px;top:5px}
 #ti_cart_popup_error_msg,#ti_cart_popup_forget_pass{display:none}
