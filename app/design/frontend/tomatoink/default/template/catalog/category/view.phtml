@@ -375,11 +375,12 @@ echo $getModel['value'];
             var id = y.split("-").pop();
             if(jQuery("#ti_series_display-" + id).is(":visible")){
 
-				jQuery("#ti_series_display-" + id).hide();
-                jQuery(".ti_series_name").hide();
+			jQuery("#ti_series_display-" + id).hide();
+                jQuery(".ti_series_name").hide(e);
 				if(jQuery(".ti_show_hide_series").html() == '<a href="#">- Hide All Series</a>'){
 					jQuery(".ti_series_header").hide();
 					jQuery("#ti_series_display-" + id).show();
+					jQuery("#ti_header_series_name_display-" + id).show(e);
 					jQuery(".ti_show_hide_series").html('<a href="#">+ Show All Series</a>');
 				}
                 var series_block = "ti_series_header_display-" + id;
@@ -389,6 +390,7 @@ echo $getModel['value'];
 				jQuery(".ti_series_header").hide();
                 jQuery("#ti_series_display-" + id).show();
                 jQuery(".ti_series_name").hide();
+				jQuery("#ti_header_series_name_display-" + id).show(e);
                 var series_block = "ti_series_display-" + id;
                 scroll(document.getElementById(series_block));
             }
@@ -403,12 +405,12 @@ echo $getModel['value'];
             
             if(jQuery(".ti_show_hide_series").html() == '<a href="#">- Hide All Series</a>'){
                 jQuery(".ti_series_header").hide();
-                jQuery(".ti_series_name").hide();
+                jQuery(".ti_series_name").hide(e);
                 jQuery(".ti_show_hide_series").html('<a href="#">+ Show All Series</a>');
             }
             else{
                 jQuery(".ti_series_header").show();
-                jQuery(".ti_series_name").show();
+                jQuery(".ti_series_name").show(e);
                 jQuery(".ti_show_hide_series").html('<a href="#">- Hide All Series</a>');
             }
             //jQuery(".ti_series_header").toggle(e);

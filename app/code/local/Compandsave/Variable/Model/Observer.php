@@ -143,18 +143,21 @@ class Compandsave_Variable_Model_Observer
                     ->addAttributeToSort('name', 'ASC');
                 $flag_four = false;
                 $flag_three = false;
+                $flag_fifth = false;
                 if($productCollection->count()){
 
                     $this->html .= '<div class="ti_cms_block_headerBar-green" id="ti_series_header_display-'. $item->getId().'">
-							<div class="ti_series_name">
+							<div class="ti_series_name" id="ti_header_series_name_display-'. $item->getId().'">
 								<h2 class="ti_headerH1 white">'.$item->getName().' Series</h2>
 							</div>
 							<div class="ti_series_header" id="ti_series_display-'. $item->getId().'" style="display: none">';
                     foreach($productCollection as $product_model_len){
                         $test_len = strlen($product_model_len->getName());
-                        if($test_len > 18 and $test_len < 24)
+                        if($test_len > 15 and $test_len < 26)
+                            $flag_fifth = true;
+                        if($test_len > 25 and $test_len < 36)
                             $flag_four = true;
-                        elseif($test_len > 24)
+                        elseif($test_len > 35)
                             $flag_three = true;
                     }
                     if($flag_four == true and $flag_three == false){
@@ -167,10 +170,15 @@ class Compandsave_Variable_Model_Observer
                             $this->html .= '<div class="ti_subcat_product_gid_one_third"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
                         }
                     }
+                    elseif($flag_fifth == true and $flag_four == false and $flag_three == false){
+                        foreach($productCollection as $product_model){
+                            $this->html .= '<div class="ti_subcat_product_gid_one_fifth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+                        }
+                    }
                     else{
 
                         foreach($productCollection as $product_model){
-                            $this->html .= '<div class="ti_subcat_product_gid_one_fifth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
+                            $this->html .= '<div class="ti_subcat_product_gid_one_sixth"><p><a href="'. $product_model->getProductUrl().'" >'.$product_model->getName().'</a></p></div>';
 
                         }
 

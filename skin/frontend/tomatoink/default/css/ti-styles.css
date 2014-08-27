@@ -235,8 +235,8 @@ blockquote h2:after{
 }
 
 .ti_headerH1{
-	font-size:2.4em;
-	font-weight:bold;
+	font-size:2.2em;
+	/*font-weight:bold;*/
 }
 
 
@@ -1842,7 +1842,7 @@ input.ti_checkout_info {
 	padding:0 5px;
 	background:url("../images/ti-assets/paper-bg_559a13.jpg") repeat;
 	clear:both;
-    cursor: pointer;
+    /*cursor: pointer;*/
 }
 
 .ti_cms_block_headerBar-orange{
@@ -1949,6 +1949,15 @@ input.ti_checkout_info {
 	opacity:1;
 	outline:5px solid #71b62f;
 }
+/************ brand page content ************/
+.ti_show_hide_series{
+	font-size:2.2em;
+	font-weight:bold;
+}
+.ti_series_header p{
+font-size:1.3em;
+}
+
 /****** brand top link *****/
 #ti_back_top{
     position: fixed;
