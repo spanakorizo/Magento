@@ -1,3 +1,4 @@
+<?php $current_url = $this->getUrl(''); ?>
 <div id="ti_footer_row" class="btcf">
 	<div class="ti_cms_contain">
 
@@ -9,7 +10,7 @@
 				</div>
 				<div class="three_fourth">
 					<div id="ti_footer_emailSubmit" class="ti_input_bar">
-						<form action="<?php echo $this->getUrl(''); ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
+						<form action="<?php echo $current_url; ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
 					        <input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" />
 					     	<button type="submit" class="button" title="<?php echo $this->__('Subscribe') ?>">
 					     		<span><span><?php echo $this->__('Sign Up') ?></span></span>
@@ -29,41 +30,41 @@
 			</div>
 		</div>
 		<script type="text/javascript">
-        	var ti_current_url = window.location.href;
-        	if (ti_current_url == "<?php echo $this->getUrl('') ?>") document.getElementById('ti_footer_home_hide').style.display="none";
+        	//var ti_current_url = window.location.href;
+        	//if (ti_current_url == "<?php echo $current_url ?>") document.getElementById('ti_footer_home_hide').style.display="none";
         </script>
 		<div class="ti_footer_links_block one_third clear">
 			<h2>Company</h2>
 			<ul class="ti_menu">
-				<li><a href="<?php echo $this->getUrl('') ?>about"><span>About Us</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>contact"><span>Contact Us</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>privacy-policy"><span>Privacy Policy</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>terms"><span>Terms &amp; Conditions</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>wholesale"><span>Corporate Account</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>become-reseller"><span>Reseller Program</span></a></li>
+				<li><a href="<?php echo $current_url ?>about"><span>About Us</span></a></li>
+				<li><a href="<?php echo $current_url ?>contact"><span>Contact Us</span></a></li>
+				<li><a href="<?php echo $current_url ?>privacy-policy"><span>Privacy Policy</span></a></li>
+				<li><a href="<?php echo $current_url ?>terms"><span>Terms &amp; Conditions</span></a></li>
+				<li><a href="<?php echo $current_url ?>wholesale"><span>Corporate Account</span></a></li>
+				<li><a href="<?php echo $current_url ?>become-reseller"><span>Reseller Program</span></a></li>
 				<li><a href="http://www.shareasale.com/shareasale.cfm?merchantID=40756" target="_blank"><span>Become an Affiliate</span></a></li>
 			</ul>
 		</div>
 		<div class="ti_footer_links_block one_third middle">
 			<h2>Resources</h2>
 			<ul class="ti_menu">
-				<li><a href="<?php echo $this->getUrl('') ?>shipping-policy"><span>Shipping Policy</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>return-policy"><span>Return Policy</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>low-price-guarantee"><span>Low Price Guarantee</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>ink-toner-troubleshooting"><span>Ink Troubleshooting</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>compatible-remanufactured-cartridges-information"><span>Ink Knowledge Base</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>printer-drivers-support"><span>Printer Support</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>environmentally-friendly-green-ink-and-toner-cartridges"><span>Environment Friendly Inks</span></a></li>
+				<li><a href="<?php echo $current_url ?>shipping-policy"><span>Shipping Policy</span></a></li>
+				<li><a href="<?php echo $current_url ?>return-policy"><span>Return Policy</span></a></li>
+				<li><a href="<?php echo $current_url ?>low-price-guarantee"><span>Low Price Guarantee</span></a></li>
+				<li><a href="<?php echo $current_url ?>ink-toner-troubleshooting"><span>Ink Troubleshooting</span></a></li>
+				<li><a href="<?php echo $current_url ?>compatible-remanufactured-cartridges-information"><span>Ink Knowledge Base</span></a></li>
+				<li><a href="<?php echo $current_url ?>printer-drivers-support"><span>Printer Support</span></a></li>
+				<li><a href="<?php echo $current_url ?>environmentally-friendly-green-ink-and-toner-cartridges"><span>Environment Friendly Inks</span></a></li>
 			</ul>
 		</div>
 		
 		<div class="ti_footer_links_block one_third">
 			<h2>Account</h2>
 			<ul class="ti_menu">
-				<li><a href="<?php echo $this->getUrl('') ?>customer/account/index/"><span>My Account</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>checkout/cart/"><span>View Cart</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>order-tracking"><span>Order Status</span></a></li>
-				<li><a href="<?php echo $this->getUrl('') ?>faq"><span>Help</span></a></li>
+				<li><a href="<?php echo $current_url ?>customer/account/index/"><span>My Account</span></a></li>
+				<li><a href="<?php echo $current_url ?>checkout/cart/"><span>View Cart</span></a></li>
+				<li><a href="<?php echo $current_url ?>order-tracking"><span>Order Status</span></a></li>
+				<li><a href="<?php echo $current_url ?>faq"><span>Help</span></a></li>
 			</ul>
 		</div>
 	</div>
