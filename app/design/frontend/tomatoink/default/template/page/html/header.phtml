@@ -1,10 +1,8 @@
-
+<meta name="viewport" content="width=device-width">
 	
 	<!--Fonts for all pages-->
 	<link href='//fonts.googleapis.com/css?family=Oleo+Script' rel='stylesheet' type='text/css'>
 	<link href='//fonts.googleapis.com/css?family=Raleway:400,700,300&subset=all' rel='stylesheet' type='text/css'>
-	<!--<script type="text/javascript" src="//use.typekit.net/mbd0rqf.js"></script>
-	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>-->
 	<!--end fonts-->
 	
 	<!--[if gte IE 9]>
@@ -17,7 +15,7 @@
 
 	<?php $current_url = $this->getUrl(''); ?>
 	<script type="text/javascript">
-		var homepage = "<?php if ($this->getIsHomePage()) echo 'true'; else echo 'false'?>";
+		//var homepage = "<?php //if ($this->getIsHomePage()) echo 'true'; //else echo 'false'?>";
 		var ti_global_url = "<?php echo $current_url;?>";
 		if (ti_global_url.match(/index.php/)) ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
 		
@@ -25,19 +23,22 @@
     <div id="ti_top_link"></div>
 
 	<div id="ti_header_row">
-		<?php $getCouponModel = Mage::getResourceModel('compandsave_variable/coupon_collection')
+		<?php 
+		/*
+		$getCouponModel = Mage::getResourceModel('compandsave_variable/coupon_collection')
 				->addFieldToFilter('entity_type_id','Coupon')
 				->addFieldToFilter('status','1')
 				->addFieldToFilter('visibility','1')
 				->getFirstItem()
 				->load();
+				*/
 		?>
 		<div class="ti_cms_contain ti_hide_479" id="ti_main_coupon">
 			<p id="ti_header_click_coupon"><span>Fresh Deals</span><br>Get this month's coupon.</p>
 			<p id="ti_header_coupon_desc">
-				<span id="ti_header_coupon_info"><?php echo $getCouponModel['description'];?></span><br>
-				<span id="ti_header_coupon_code"><?php echo $getCouponModel['value']; ?></span><br>
-				<span id="ti_header_coupon_exp" class="ti_small_text"><?php echo $getCouponModel['expiry_date']; ?></span>
+				<span id="ti_header_coupon_info"><?php //echo $getCouponModel['description'];?></span><br>
+				<span id="ti_header_coupon_code"><?php //echo $getCouponModel['value']; ?></span><br>
+				<span id="ti_header_coupon_exp" class="ti_small_text"><?php //echo $getCouponModel['expiry_date']; ?></span>
 			</p>
 			<div id="ti_main_coupon_arrow"></div>
 		</div>
@@ -48,7 +49,7 @@
 				</div>
 				<div class="ti_header_top_block">
 					
-						<?php echo $this->getChildHtml('topLinks') ?>
+						<?php //echo $this->getChildHtml('topLinks') ?>
 					
 				</div>
 				<div class="ti_header_nav_block clear">
@@ -105,12 +106,12 @@
 						</form> !-->
 						<?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
 						<form id="search_mini_form2" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
-							<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search2" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}" />
+							<input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search2" placeholder="Ink or printer model" />
 							<input type="submit" name="Submit" id="search_submit2" value="Search" title="<?php echo $this->__('Search') ?>" />
 							</form>
 	        <script type="text/javascript">
 	        //<![CDATA[
-	            //var searchForm = new Varien.searchForm('search_mini_form2', 'search2', '<?php echo $this->__('Search entire store here...') ?>');
+	            //var searchForm = new Varien.searchForm('search_mini_form2', 'search2', '<?php echo $this->__('Type ink or printer model') ?>');
 	            //searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
 	        //]]>
 	        </script>
@@ -128,17 +129,17 @@
 				<a href="<?php echo $current_url ?>" class="ti_header_logo_border"><img src="<?php echo $this->getSkinUrl('images/ti-assets/ti-logo.png') ?>" alt="Save up to 80% on ink cartridges, toner, and printer accessories at TomatoInk!" id="ti_header_logo"/></a>
 			</div>
 			<div class="ti_header_top_block ti_hide_767 ti_logo_bar">
-				<?php if ($this->getIsHomePage()):?>
-				<div class="ti_input_bar" id="ti_header_home_email">
+				<?php //if ($this->getIsHomePage()):?>
+				<!--<div class="ti_input_bar" id="ti_header_home_email">
 
-					<form action="<?php echo $current_url; ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
-        <input name="email" type="email" id="newsletter" placeholder="<?php echo $this->__('Enter your email address') ?>" class="input-text required-entry validate-email" />
-     	<button type="submit" class="button" title="<?php echo $this->__('Subscribe') ?>"><?php echo $this->__('Sign Up') ?></button> 
+					<form action="<?php //echo $current_url; ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
+        <input name="email" type="email" id="newsletter" placeholder="<?php //echo $this->__('Enter your email address') ?>" class="input-text required-entry validate-email" />
+     	<button type="submit" class="button" title="<?php //echo $this->__('Subscribe') ?>"><?php //echo $this->__('Sign Up') ?></button> 
 
 
          </form>
-				</div>
-				<?php else:?>
+				</div>!-->
+				<?php //else:?>
 				<?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
 					<div class="ti_input_bar" id="ti_header_site_search">
 						<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
@@ -147,13 +148,13 @@
 							<div id="search_autocomplete" class="search-autocomplete"></div>
 	        <script type="text/javascript">
 	        //<![CDATA[
-	            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Search entire store here...') ?>');
+	            var searchForm = new Varien.searchForm('search_mini_form', 'search', '<?php echo $this->__('Type ink or printer model') ?>');
 	            searchForm.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
 	        //]]>
 	        </script>
 						</form>
 					</div>	
-					<ul id="ti_header_searchHelp">		
+					<!--<ul id="ti_header_searchHelp">		
 						<li><a rel="nofollow"><span class="ti_small_text lgTxt">Click here for search help</span></a>
 							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_searchHelpDrop">
 								<p><span class="ti_small_text">There are a few ways to find your cartridge or printer model:</span></p>
@@ -165,9 +166,9 @@
 								<p><span class="ti_small_text">You may type either cartridge code or printer model into the search box to search. Please contact us if you have any further questions.</span></p>
 							</div>
 						</li>
-					</ul>
+					</ul>-->
 				</div>
-				<?php endif?>
+				<?php //endif?>
 		</div>
 			<!-- <div class="ti_header_top_block ti_hide_767 ti_logo_bar" id="ti_site_block">
 				<div class="ti_input_bar" id="ti_header_site_search">
@@ -214,7 +215,7 @@
 						</ul>
 					</span></a></li>
 					<li><a href="#"><span>Accessories</span></a>
-						<ul class="ti_sub-menu menu_two_col ti_cms_border_block" id="ti_header_lastMenu">
+						<ul class="ti_sub-menu menu_one_col ti_cms_border_block" id="ti_header_lastMenu">
 							<li><a href="<?php echo $current_url ?>usb-printer-cables.html"><span>Cables</span></a></li>
 							<li><a href="<?php echo $current_url ?>printer-supply.html"><span>Photo Paper</span></a></li>
 						</ul>
@@ -231,6 +232,7 @@
 	</div>
 
     <?php
+    /*
     $coreResource = Mage::getSingleton('core/resource');
     $conn = $coreResource->getConnection('core_read');
     $cart = Mage::getModel('checkout/session')->getQuote();
@@ -257,6 +259,7 @@
 
     }
     if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . number_format($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></p>";
+    */
     ?>
 
 
@@ -271,20 +274,20 @@
 
 
 var ti_global_islogin = "<?php  if ($this->helper('customer')->isLoggedIn()) echo true; else echo false;  ?>";
-var ti_global_customerid = "";
-if (ti_global_islogin) ti_global_customerid = "<?php if ($this->helper('customer')->isLoggedIn()) echo Mage::getSingleton('customer/session')->getCustomer()->getId(); ?>";
-var ti_global_total   = "<?php echo $total_num ?>";
+//var ti_global_customerid = "";
+//if (ti_global_islogin) ti_global_customerid = "<?php //if ($this->helper('customer')->isLoggedIn()) //echo Mage::getSingleton('customer/session')->getCustomer()->getId(); ?>";
+//var ti_global_total   = "<?php //echo $total_num ?>";
 jQuery(document).ready(function($) {
 //my account signin/signout
 if (ti_global_islogin) {$('#ti_header_login').hide();}
 else {$('#ti_header_logout').hide();}
 
 //shopping cart count
-jQuery('#ti_header_cartcount').html(ti_global_total);
+//jQuery('#ti_header_cartcount').html(ti_global_total);
 
 //shopping cart item
-var ti_header_shoppingcartblock = document.getElementById('ti_header_cartitems');
-ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
+//var ti_header_shoppingcartblock = document.getElementById('ti_header_cartitems');
+//ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
 
 
 });
