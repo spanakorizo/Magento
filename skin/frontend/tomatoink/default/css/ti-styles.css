@@ -116,6 +116,8 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 	border-bottom: 7px solid #71b62f;
 }
 
+.ti_hide{ display:none; }
+
 /* -----------------------------------*/
 /* ---------->> 2. Text <<<-----------*/
 /* -----------------------------------*/
@@ -1133,8 +1135,7 @@ td, th{
 	background:url("../images/ti-assets/mini-search-slide.png") -90px 0 no-repeat transparent;
 }
 
-#ti_header_nav_mini:hover select,
-#ti_header_nav_mini select:focus{
+#ti_header_nav_mini:hover select{
 	margin-left:0;
 	color:#559a13;
 }
@@ -1308,6 +1309,7 @@ td, th{
 	left: -115px;
 	box-shadow:0 3px 3px rgba(70,37,10,.4);
 	padding:0 0 10px;
+	cursor:pointer;
 }
 
 #ti_main_coupon_arrow{
@@ -1848,6 +1850,11 @@ input.ti_checkout_info {
 
 #ti_site_block{
 	display:none;
+}
+
+#ti_header_imageSplash .ti_input_bar{
+	margin-bottom:0;
+	border-radius:0;
 }
 
 /* -----------------------------------*/
@@ -2618,6 +2625,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		width:42%;
 	}
 
+	#ti_home_centerMain{
+		display:none;
+	}
+
 	.ti_cms_block_brandVA,
 	.ti_cms_block_brandVB,
 	.one_half.ti_product_infoBlock{
@@ -2686,6 +2697,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	    font-size:2em;
 	}
 
+	.ti_show_767{
+		display:block;
+	}
+
 	.ti_hide_767{
 		display:none;
 	}
@@ -2705,6 +2720,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		width:100%;
 		min-width:100%;
 		overflow:hidden;
+	}
+
+	.ti_block_inner{
+		padding:4px;
 	}
 
 	.my-account #my-orders-table td,
@@ -2730,7 +2749,11 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	}
 
 	.ti_cms_home_block{
-		width:94%;
+		width:36%;
+	}
+
+	.ti_cms_home_block blockquote h2{
+		font-size:2em;
 	}
 
 	#ti_header_row,
@@ -2739,7 +2762,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	}
 
 	#ti_header_logo{
-		max-width:220px;
+		max-width:100%;
 		margin:.7em auto;
 	}
 
@@ -2780,7 +2803,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	}
 
 	.ti_social_media_btn{
-		margin:0 15px;
+		margin:0 15px 0 0;
 	}
 
 
