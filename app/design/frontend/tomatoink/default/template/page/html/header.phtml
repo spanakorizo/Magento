@@ -24,32 +24,32 @@
 
 	<div id="ti_header_row">
 		<?php 
-		/*
+		
 		$getCouponModel = Mage::getResourceModel('compandsave_variable/coupon_collection')
 				->addFieldToFilter('entity_type_id','Coupon')
 				->addFieldToFilter('status','1')
 				->addFieldToFilter('visibility','1')
 				->getFirstItem()
 				->load();
-				*/
+				
 		?>
 		<div class="ti_cms_contain ti_hide_479" id="ti_main_coupon">
 			<p id="ti_header_click_coupon"><span>Fresh Deals</span><br>Get this month's coupon.</p>
 			<p id="ti_header_coupon_desc">
-				<span id="ti_header_coupon_info"><?php //echo $getCouponModel['description'];?></span><br>
-				<span id="ti_header_coupon_code"><?php //echo $getCouponModel['value']; ?></span><br>
-				<span id="ti_header_coupon_exp" class="ti_small_text"><?php //echo $getCouponModel['expiry_date']; ?></span>
+				<span id="ti_header_coupon_info"><?php echo $getCouponModel['description'];?></span><br>
+				<span id="ti_header_coupon_code"><?php echo $getCouponModel['value']; ?></span><br>
+				<span id="ti_header_coupon_exp" class="ti_small_text"><?php echo $getCouponModel['expiry_date']; ?></span>
 			</p>
 			<div id="ti_main_coupon_arrow"></div>
 		</div>
 		<div id="ti_header_quick_links" class="btcf">
 			<div class="ti_cms_contain">
-				<div class="ti_header_top_block">
+				<div class="ti_header_top_block ti_hide_479">
 					<p><a href="<?php echo $current_url;?>shipping-policy"><strong>Free shipping on orders of $50 or more!</strong> Reg: $3.99</a></p>
 				</div>
 				<div class="ti_header_top_block">
 					
-						<?php //echo $this->getChildHtml('topLinks') ?>
+						<?php echo $this->getChildHtml('topLinks') ?>
 					
 				</div>
 				<div class="ti_header_nav_block clear">
@@ -232,7 +232,7 @@
 	</div>
 
     <?php
-    /*
+    
     $coreResource = Mage::getSingleton('core/resource');
     $conn = $coreResource->getConnection('core_read');
     $cart = Mage::getModel('checkout/session')->getQuote();
@@ -259,7 +259,7 @@
 
     }
     if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . number_format($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></p>";
-    */
+    
     ?>
 
 
@@ -274,20 +274,20 @@
 
 
 var ti_global_islogin = "<?php  if ($this->helper('customer')->isLoggedIn()) echo true; else echo false;  ?>";
-//var ti_global_customerid = "";
-//if (ti_global_islogin) ti_global_customerid = "<?php //if ($this->helper('customer')->isLoggedIn()) //echo Mage::getSingleton('customer/session')->getCustomer()->getId(); ?>";
-//var ti_global_total   = "<?php //echo $total_num ?>";
+var ti_global_customerid = "";
+if (ti_global_islogin) ti_global_customerid = "<?php if ($this->helper('customer')->isLoggedIn()) echo Mage::getSingleton('customer/session')->getCustomer()->getId(); ?>";
+var ti_global_total   = "<?php echo $total_num ?>";
 jQuery(document).ready(function($) {
 //my account signin/signout
 if (ti_global_islogin) {$('#ti_header_login').hide();}
 else {$('#ti_header_logout').hide();}
 
 //shopping cart count
-//jQuery('#ti_header_cartcount').html(ti_global_total);
+jQuery('#ti_header_cartcount').html(ti_global_total);
 
 //shopping cart item
-//var ti_header_shoppingcartblock = document.getElementById('ti_header_cartitems');
-//ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
+var ti_header_shoppingcartblock = document.getElementById('ti_header_cartitems');
+ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
 
 
 });

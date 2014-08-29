@@ -114,7 +114,7 @@ for (i=0;i<ARRcookies.length;i++)
 /* Author: Megan Prior-Pfeifer, reference from http://www.paulund.co.uk/smooth-scroll-to-internal-links-with-jQuery */
 /* Version: 0.0.1 */
 /*******************************************************/
-/*
+
 
 
 jQuery(document).ready(function($){
@@ -171,7 +171,7 @@ jQuery(document).ready(function($){
 		//jQuery( this ).toggle( "highlight" );
 	});
 	
-*/
+
 
 /*****************************************************************/
 /*                                                               */
@@ -181,7 +181,7 @@ jQuery(document).ready(function($){
 /* Author: TomatoInk.com                                         */
 /* Version: 0.0.1                                                */
 /*****************************************************************/
-/*
+
 
 	var moreText = "Read more",
     	lessText = "Read less",
@@ -197,7 +197,7 @@ function change_readmore(_more, _less) {
 	lessText = _less;
 }
 
-*/
+
 
 
 
@@ -213,7 +213,7 @@ function change_readmore(_more, _less) {
 /*  top links/coupon code/search help/need more slidetoggle function   */
 /*    Author: Yiyang     5-9-2014                                      */
 /***********************************************************************/
-/*
+
 	$("#ti_header_help").click(function(e){
 		jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
 		if (!$("#ti_header_helpDrop").is(":visible")) 
@@ -263,7 +263,7 @@ function change_readmore(_more, _less) {
 
 
 
-*/
+
 
 
 
@@ -271,7 +271,7 @@ function change_readmore(_more, _less) {
 /* qty number input limit  */
 /* Yiyang 5-1-2014         */
 /******************************/
-/*
+
 //click qty input -> show empty
 jQuery(".qty").focus(function() {
   if (jQuery(this).val() == 0) jQuery(this).val('');
@@ -290,14 +290,14 @@ var ti_qty_previous="";
   jQuery(".qty").keyup(function() {
     if (jQuery(this).val().match(/\D/)) jQuery(this).val(ti_qty_previous);
   });
-*/
+
 
 /***************************************/
 /*   Display Small Navigation          */
 /* Author: Yiyang     Date: 5/5/2014   */
 /* Version 2: clickable     5/9/2014   */
 /***************************************/
-/*
+
 var ti_breadcrumb_home = "<p><a href='" + ti_global_url + "'>Home</a> &gt; "
 
 var ti_header_smallnav = document.getElementById('ti_header_breadcrumbs');
@@ -315,7 +315,7 @@ else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "sim
     ti_header_smallnav.innerHTML = ti_breadcrumb_home + "<a href='" + ti_global_url + ti_global_printerbrand_url + ".html'>" + ti_header_sku_arr[1] + "</a> &gt; " + ti_global_pagename + "</p> ";
 }
 
-*/
+
 
 
 /*******************************************************/
@@ -325,7 +325,7 @@ else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "sim
 /* Version: 0.0.1 */
 /* Found at: http://osvaldas.info/flexbox-based-responsive-equal-height-blocks-with-javascript-fallback */
 /*******************************************************/
-/*
+
 ;( function( $, window, document, undefined )
 {
     'use strict';
@@ -396,7 +396,7 @@ function checout_url(){
 }
 
 
-*/
+
 
 
 
