@@ -1069,6 +1069,7 @@ td, th{
 }
 
 #ti_header_nav_mini select{
+	font-size: 2em;
 	float:left;
 	height:25px;
 	margin-left:250px;
@@ -2686,6 +2687,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	#ti_product_qtyDiscountDrop{
 		left:0;
 		margin-left:50px;
+	}
+
+	.ti_footer_block p{
+		font-size:1.2em;
 	}
 
 	#ti_footer_email_cta{
