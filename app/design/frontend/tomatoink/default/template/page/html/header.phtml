@@ -15,7 +15,7 @@
 
 	<?php $current_url = $this->getUrl(''); ?>
 	<script type="text/javascript">
-		//var homepage = "<?php //if ($this->getIsHomePage()) echo 'true'; //else echo 'false'?>";
+		var homepage = "<?php if ($this->getIsHomePage()) echo 'true'; else echo 'false'?>";
 		var ti_skin_url = "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>";
 		var ti_global_url = "<?php echo $current_url;?>";
 		if (ti_global_url.match(/index.php/)) ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
@@ -287,8 +287,8 @@ else {$('#ti_header_logout').hide();}
 jQuery('#ti_header_cartcount').html(ti_global_total);
 
 //shopping cart item
-var ti_header_shoppingcartblock = document.getElementById('ti_header_cartitems');
-ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
+//var ti_header_shoppingcartblock = document.getElementById('ti_header_cartitems');
+//ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
 
 
 });

@@ -29,11 +29,14 @@ $currentUrl = preg_replace('/\?.*/', '', $this->helper('core/url')->getCurrentUr
 ?>
 <div class="review-top no-reviews">
     <div class="button-write-review">
+        <div class="ti_cms_block_headerBar-green">
+            <h2 class="white ti_headerH1">Reviews</h2>
+        </div>
         <?php if ( !$this->helper('detailedreview')->isUserAbleToWriteReview() ): ?>
-        <span class="error"><?php $this->__('You are not Allowed to Write a Review.'); ?></span>
+        <p class="error altTxt"><?php $this->__('You are not Allowed to Write a Review.'); ?></ps>
         <?php else: ?>
         <?php $redirectUrl = $currentUrl  . $this->helper('detailedreview')->getCurrentUrlWithNewParam('show_popup','1'); ?>
-        <span><?php echo $this->__('Tell us what you think about this item!') ?></span>
+        <p><?php echo $this->__('Tell us what you think about this item!') ?></p>
         <input type="hidden" value="<?php echo htmlspecialchars($redirectUrl); ?>" />
         <input type="hidden" value="<?php echo $this->helper('core/url')->getEncodedUrl($redirectUrl);?>" />
         <input type="button" class="review-dialog" value="<?php echo $this->__('Write A Review') ?>" />

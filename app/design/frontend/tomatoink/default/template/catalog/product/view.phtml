@@ -103,7 +103,8 @@ error_reporting(E_ALL);
     <div class="three_fifth">
         <div class="ti_block_inner ti_cms_gradient_block">
             <h1 class="ti_green_head"><?php echo $_product->getName(); ?></h1>
-            <p><?php echo $this->getReviewsSummaryHtml($_product, false, true)?> | <a href="#ti_product_details">See product details</a>
+            <div class="f-left"><?php echo $this->getReviewsSummaryHtml($_product, false, true)?></div>
+            <p class="f-right"><a href="#ti_product_details">See product details</a>
             </p>
             
             <div class="ti_cms_separator"></div>
