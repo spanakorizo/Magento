@@ -38,6 +38,17 @@
                     <action>compandsave_variable_admin/brand</action>
 
                 </brand>
+                <productselectors translate="title"
+                       module="compandsave_variable">
+                    <title>Product Selectors</title>
+                    <sort_order>12</sort_order>
+
+                    <!--
+                    When the menu is clicked, take the user here.
+                    -->
+                    <action>compandsave_variable_admin/productselectors</action>
+
+                </productselectors>
             </children>
         </compandsave_variable>
     </menu>
@@ -60,6 +71,10 @@
                                     module="compandsave_variable">
                                 <title>Coupon Code</title>
                             </brand>
+                            <productselectors translate="title"
+                                   module="compandsave_variable">
+                                <title>Product Selectors</title>
+                            </productselectors>
                         </children>
                     </compandsave_variable>
                 </children>

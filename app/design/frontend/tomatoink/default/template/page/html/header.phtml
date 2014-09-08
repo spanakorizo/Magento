@@ -16,6 +16,7 @@
 	<?php $current_url = $this->getUrl(''); ?>
 	<script type="text/javascript">
 		//var homepage = "<?php //if ($this->getIsHomePage()) echo 'true'; //else echo 'false'?>";
+		var ti_skin_url = "<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_SKIN); ?>";
 		var ti_global_url = "<?php echo $current_url;?>";
 		if (ti_global_url.match(/index.php/)) ti_global_url = ti_global_url.match(/.*(?=index.php\/)/);
 		
@@ -33,7 +34,7 @@
 				->load();
 				
 		?>
-		<div class="ti_cms_contain ti_hide_479" id="ti_main_coupon">
+		<div class="ti_cms_contain ti_hide_767" id="ti_main_coupon">
 			<p id="ti_header_click_coupon"><span>Fresh Deals</span><br>Get this month's coupon.</p>
 			<p id="ti_header_coupon_desc">
 				<span id="ti_header_coupon_info"><?php echo $getCouponModel['description'];?></span><br>
@@ -44,10 +45,10 @@
 		</div>
 		<div id="ti_header_quick_links" class="btcf">
 			<div class="ti_cms_contain">
-				<div class="ti_header_top_block ti_hide_479">
+				<div class="ti_header_top_block ti_hide_767">
 					<p><a href="<?php echo $current_url;?>shipping-policy"><strong>Free shipping on orders of $50 or more!</strong> Reg: $3.99</a></p>
 				</div>
-				<div class="ti_header_top_block">
+				<div class="ti_header_top_block ti_hide_767">
 					
 						<?php echo $this->getChildHtml('topLinks') ?>
 					
@@ -221,7 +222,7 @@
 						</ul>
 					</li>
 				</ul>
-				<p id="ti_secondary_coupon" class="clear"><strong>This month's special offer:</strong> <span id="ti_secondary_coupon_info"></span> <strong class="ti_secondary_coupon_code" id="ti_secondary_coupon_code"></strong>. <span id="ti_secondary_coupon_exp"></span></p>
+				<!--<p id="ti_secondary_coupon" class="clear"><strong>This month's special offer:</strong> <span id="ti_secondary_coupon_info"></span> <strong class="ti_secondary_coupon_code" id="ti_secondary_coupon_code"></strong>. <span id="ti_secondary_coupon_exp"></span></p>-->
 			</div>
 		</div>
 	<div class="ti_cms_contain btcf">

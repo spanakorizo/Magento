@@ -1,9 +1,7 @@
-<!--<div class="ti_ink_selector_holder">-->
+
 	
-	<h2 class="ti_green_head ti_headerH1">Ink Search</h2>
-	<!--<p>Please Select your printer Brand/Series/Model for your Ink / Cartridge </p>
-	<div style="width:100%;position:relative;float:left">
-		<div class="ti_ink_selector_div">-->
+	    <h2 class="ti_green_head ti_headerH1">Ink Search</h2>
+
         <div class="ti_select_barContainerBorder btcf">
             <div class="ti_select_barContainer btcf">    
 
@@ -47,9 +45,6 @@
             </div>
         </div>
 
-
-	<!--</div>
-</div>-->
 <script type="text/javascript">
     //<![CDATA[
     function reset_options() {
@@ -58,16 +53,20 @@
     }
     window.onload=reset_options;
 
-    var catalogUrl = 'http://www.866ink.com/magentoEE/productselector/ajax/index';
+    //var catalogUrl = 'http://127.0.0.1/magento/';
 
     var urlMappingTable = {};
     Event.observe($('topCategoriesLeft'), 'change', function() {
         if (this.value != '') {
             resetShoppingEasyLeft($('subCategoriesLeft'));
             resetShoppingEasyLeft($('groupedProductsLeft'));
-            new Ajax.Request(catalogUrl + '?id=' + this.value, {
-                method: 'get',
-                asynchronous: false,
+            var dataString = this.value;
+            new Ajax.Request("productselector/ajax/index", {
+                method: 'post',
+                parameters: {
+                    id : dataString
+                },
+                cache: true,
                 onSuccess: function(transport) {
                     var data = transport.responseText.evalJSON();
                     if (data) {

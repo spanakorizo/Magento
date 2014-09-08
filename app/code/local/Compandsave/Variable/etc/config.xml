@@ -2,7 +2,7 @@
 <config>
     <modules>
         <Compandsave_Variable>           
-            <version>0.0.3</version>
+            <version>0.0.4</version>
         </Compandsave_Variable>
     </modules>
     <global>
@@ -20,6 +20,9 @@
                     <brand>
                         <table>compandsave_variable_brand</table>
                     </brand>
+                    <productselectors>
+                        <table>compandsave_variable_productselectors</table>
+                    </productselectors>
                 </entities>
             </compandsave_variable_resource>
         </models>
@@ -72,6 +75,7 @@
                 </schedule>
                 <run>
                     <model>compandsave_variable/observer::variable_static_code_insert</model>
+                    <model>compandsave_variable/observer::productselector_json_code_insert</model>
                 </run>
             </compandsave_variable>
         </jobs>

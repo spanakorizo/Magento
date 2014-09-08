@@ -2,6 +2,7 @@
 class Compandsave_Variable_Model_Observer
 {
     protected $html = '';
+    protected $json_value = '';
 
     public function variable_static_code_insert()
     {
@@ -196,6 +197,99 @@ class Compandsave_Variable_Model_Observer
             $conn->delete($tableName, array('brand_id = ?' => $currentCategoryId));
             $conn->insert($tableName,array('brand_id' => $currentCategoryId , 'value' => $this->html , 'visibility' => '1','status' =>'1','created_at' => $current_day_time, 'updated_at' => $current_day_time));
         }
+
+        return $this;
+
+    }
+
+    public function productselector_json_code_insert(){
+
+        $coreResource = Mage::getSingleton('core/resource');
+        $conn = $coreResource->getConnection('core_write');
+        $conn_read = $coreResource->getConnection('core_read');
+        $tableName = $coreResource->getTableName('compandsave_variable/productselectors');
+
+        $CatPrdTable = $coreResource->getTableName('catalog_category_product');
+        $brand_model = Mage::getModel('catalog/category')->load(2);
+        $brandIds = $brand_model->getChildren();
+        $subCatIds = explode(',',$brandIds);
+        $brandcollection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id','image','description'))->load();
+
+        foreach($brandcollection as $_category){ // $_category is brand collection
+            $currentCategoryId = $_category->getId();
+            $category_model = Mage::getModel('catalog/category')->load($currentCategoryId);
+            $subcategoryIds = $category_model->getChildren();
+            $seriesIds = explode(',',$subcategoryIds);
+
+            $collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$seriesIds)->addAttributeToSelect(array('name','entity_id'))->addAttributeToSort('name', 'ASC')->load();
+            $series = array();
+            $model = array();
+
+            if(!empty($collection)){
+                foreach($collection as $item){
+
+                    $productCollection = Mage::getModel('catalog/product')
+                        ->getCollection()
+                        ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
+                        ->addAttributeToSelect(array('name','url'))
+                        ->addAttributeToFilter('category_id', $item->entity_id)
+                        ->addAttributeToFilter('status', 1);
+                    if($productCollection->count()){
+                        $series_len = strlen($item->name);
+                        $select = $conn_read->select()
+                            ->from($CatPrdTable,array('product_id'))
+                            ->where('category_id = ?',$item->entity_id)
+                            ->where('position = ? ', '1');
+                        $result = $conn_read->fetchCol($select);
+
+                        if(!empty($result)){
+
+                            $collection = Mage::getModel('catalog/product')
+                                ->getCollection()
+                                ->addFieldToFilter('entity_id', $result)
+                                ->addAttributeToFilter('status', 1)
+                                ->addAttributeToSelect(array('name','entity_id'))
+                                ->addAttributeToSort('name', 'ASC');
+
+
+                            foreach($collection as $product_model){
+                                $model_name = $product_model->getName();
+                                if(substr_count($model_name,$item->name)){
+                                    $model_len = strlen($model_name);
+                                    $model_name = substr($model_name,$series_len, $model_len - $series_len + 1);
+                                    $model_name = str_replace('-','', $model_name);
+                                    $model_name = trim($model_name);
+                                }
+
+                                $model[] = array("id" => $product_model->getId(), "name" => $model_name , "url" => $product_model->getProductUrl() );
+
+
+
+                            }
+
+                        }
+
+                        $series["$item->entity_id"]  =  array("name" => $item->name ,"level" => "3","sub" => $model );
+
+                        unset($model);//for flash model array and initialize to empty
+                    }
+
+
+
+                }
+
+                $this->json_value = json_encode($series );
+
+
+            }
+
+            $current_day_time = date("Y-m-d H:i:s", Mage::getModel('core/date')->timestamp(time()));
+            $conn->delete($tableName, array('brand_id = ?' => $currentCategoryId));
+            $conn->insert($tableName,array('brand_id' => $currentCategoryId , 'value' => $this->json_value , 'visibility' => '1','status' =>'1','created_at' => $current_day_time, 'updated_at' => $current_day_time));
+            unset($series);
+            unset($model);
+
+        }//end brand category collection
 
         return $this;
 

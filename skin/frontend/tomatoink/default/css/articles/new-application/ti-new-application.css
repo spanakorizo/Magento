@@ -28,8 +28,15 @@ Naming convention: add ti_na_ prefix
 	color:#999999;
 	font-size: 1.3rem;
 }
-.ti_na_container input {
+.ti_na_container h1 {
+	line-height:1em;
+}
+.ti_na_container h3 {
+	font-size:1.8em;
+}
+.ti_na_container .ti_na_textArea {
 	margin:1% 0;
+	font-size:1.8em;
 }
 .ti_na_rightCol, .ti_na_leftCol{
 	width:49%;

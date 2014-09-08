@@ -365,7 +365,9 @@ echo $getModel['value'];
             TOP
         </a>
     </div>
-<script>
+    <script src="//code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
+<script type="text/javascript">
+    //<![CDATA[
     jQuery.noConflict();
     jQuery(function(){
         jQuery(".ti_cms_block_brandVB").click(function(e) {
@@ -440,17 +442,15 @@ echo $getModel['value'];
 			window.open(ti_global_url + "catalog/product/view/id/"+ id, "_self");
 		});
     });
-</script>
 
-<script type="text/javascript">
 
-function scroll(element) {   
-    jQuery('html,body').animate({
-    scrollTop: element.offsetTop-80},
-    'slow'); 
+    function scroll(element) {
+        jQuery('html,body').animate({
+        scrollTop: element.offsetTop-80},
+        'slow');
 
-}
-
+    }
+    //]]>
 </script>
 
 

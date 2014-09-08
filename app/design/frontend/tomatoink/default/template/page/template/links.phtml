@@ -54,8 +54,23 @@
 						</li>
 						<li id="ti_header_cart"><a rel="nofollow"><span>Cart</span>(<span id="ti_header_cartcount">0</span>)</a>
 							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_cartDrop">
-								<p><strong>Currently in your cart:</strong></p>
-								<div id="ti_header_cartitems"></div>
+								<div class="ti_miniCart_carousel-nav ti_hide_767">
+									<span class="ti_carousel-nav-next icon-angle-left"></span>
+									<span class="ti_carousel-nav-prev icon-angle-right"></span>
+								</div>
+								<div class="ti_miniCart_carousel_wrapper ti_hide_767">
+									<div class="ti_miniCart_carousel_item">
+										<img src="thumb.jpg">
+										<strong class="lgTxt">$<span id="">3.99</span><br>Qty: <span id="">3</span></strong>
+										<div class="one"><p id="">The name of the product goes here.</p></div>
+									</div>
+								</div>
+								<div class="ti_miniCart_subtotal">
+									<h4 class="ltWeight lgTxt"><strong id="">13</strong> items in your cart<br>Subtotal: $<strong id="">129.99</strong></h4>
+									<a class="ti_button">Checkout</a>
+								</div>
+								<!--<p><strong>Currently in your cart:</strong></p>
+								<div id="ti_header_cartitems"></div>-->
 							</div>
 						</li>
 						<li id="ti_header_help"><a rel="nofollow" rel="nofollow"><span>Need help?</span></a>
@@ -66,7 +81,7 @@
 										<ul>
 											<li><a href="<?php echo $this->getUrl('') ?>order-tracking"><span>Track Orders</span></a></li>
 											<li><a href="<?php echo $this->getUrl('') ?>ink_toner_troubleshooting" target="_blank">Troubleshooting</a></li>
-											<li><a href=""><span>Support Ticket</span></a></li>
+											<li><a href="<?php echo $this->getUrl('helpdesk/index/customer/');?>"><span>Support Ticket</span></a></li>
 											<li><a href="mailto:customercare@tomatoink.com"><span>Email us</span></a></li>
 										</ul>
 									</div>

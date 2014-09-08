@@ -2,7 +2,7 @@
 <config>
     <modules>
         <SolrBridge_Solrsearch>
-            <active>true</active>
+            <active>false</active>
             <codePool>community</codePool>
         </SolrBridge_Solrsearch>
     </modules>

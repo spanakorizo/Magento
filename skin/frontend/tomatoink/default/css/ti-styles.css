@@ -5,26 +5,54 @@ the most up to date coding standards for TomatoInk.com
 Author: Megan Prior-Pfeifer
 
 Table of Contents:
+0. Clearfix
 1. Global
 	- Responsive
 	- Text colors
 2. Text
 3. Elements
 	- Inputs
+		- Readmore buttons
 	- Select
 	- Social media
 	- Lists
 	- Images
 	- Tables
+	- Icons
 4. Header
 	- Navigation
+		-Nav Mini
+	- Drop Content
+		- Account Drop
+		- Mini Cart
+		- Help Drop
 	- Search
+	- Splash Banner
 	- Coupon
-5. Footer
-6. Home Content
-7. Block Content
+5. Cart and Checkout
+	- Free shipping reminder
+	- Pop Up
+	- Firecheckout
+		Firecheckout Table
+	- Account Features
+6. Footer
+7. Home Content
+8. Block Content
+	- Brand
 	- Product
-8. Responsive
+	- Social Media
+	- Related Products
+	- Product Ratings
+	- Printer Page
+		- List View
+		- Grid View
+	- Photo Paper
+9. Responsive
+	- Max width 999px
+	- 999px to 768px
+	- Max width 767px
+	- Max width 479px
+	- 320px to 568px
 
 Created for global css at TomatoInk.com
 
@@ -190,7 +218,7 @@ sub{
 
 blockquote{
 	text-align:left;
-	padding: 10px 20px;
+	padding: 20px 30px 0;
 }
 
 blockquote h2:before{
@@ -237,8 +265,8 @@ blockquote h2:after{
 }
 
 .ti_headerH1{
-	font-size:2.2em;
-	/*font-weight:bold;*/
+	font-size:2.4em;
+	font-weight:bold;
 }
 
 
@@ -264,6 +292,11 @@ blockquote h2:after{
   background:url('../images/ti-assets/paper-bg_559a13.jpg') repeat;
 }
 
+.ti_input_bar.no_border{
+	background:none;
+	padding:0;
+}
+
 
 input, button,
 input[type="button"],
@@ -271,6 +304,7 @@ input[type="submit"],
 .ti_button,
 textarea {
 	line-height:2em;
+	height:2em;
     font:300 2rem 'Raleway', Verdana, sans-serif;
     padding:0 5px;
     margin:1%;
@@ -296,7 +330,6 @@ textarea {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
   -webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
   cursor:text;
-  line-height:2em;
   border:1px solid #559a13;
   transition:color .4s;
   -webkit-transition:color .4s;
@@ -401,6 +434,7 @@ li label span{
 label.ti_cms_labelHide span{
 	position:absolute;
 	left:-9999999em;
+	font-size:0;
 }
 
 input[type="checkbox"],
@@ -457,10 +491,10 @@ input[type="checkbox"] + label div.ti-checkbox{
 input[type="checkbox"]:checked + label div.ti-checkbox {
     background:url('../images/ti-assets/checkbox.png') left -21px no-repeat;
 }
-/* Update By Yiyang: Why hide the radio? ; */
-/*input[type="radio"] {
+
+input[type="radio"] {
     display:none;
-}*/
+}
 
 input[type="radio"] + label div.ti-radio {
     display:inline-block;
@@ -1151,6 +1185,8 @@ td, th{
 	overflow:visible;
 }
 
+/* Drop Content */
+
 .ti_cms_dropContent{
 	display:none;
 	z-index: 1000;
@@ -1199,11 +1235,6 @@ td, th{
 	color:#333;
 	font-size:1.4rem;
 }
-
-#ti_header_cartDrop p{
-	font-size:1.2rem;
-}
-
 .ti_cms_dropContent img{
 	width:100%;
 }
@@ -1214,50 +1245,121 @@ td, th{
 	text-shadow:none;
 }
 
-#ti_header_accountDrop{
-	width:260px;
-	margin-left:-55px;
-}
+	/* Account Drop */
 
-#ti_header_accountDrop:after{
-	left:20%;
-}
+	#ti_header_accountDrop{
+		width:260px;
+		margin-left:-55px;
+	}
 
-#ti_header_cartDrop{
-	width:260px;
-	margin-left:-150px;
-}
+	#ti_header_accountDrop:after{
+		left:20%;
+	}
 
-#ti_header_helpDrop{
-	width:260px;
-	margin-left:-235px;
-}
+	/* Mini Cart */
 
-#ti_header_helpDrop:after{
-	left:80%;
-}
+	#ti_header_cartDrop{
+		max-width: 550px;
+		min-width:360px;
+		margin-left: -250px;
+		transform-origin: right center;
+	}
 
-#ti_header_cartitems{
-	word-wrap:break-word;
-}
+	#ti_header_cartDrop:after{
+		right:120px;
+		left:auto;
+	}
 
-.ti_cms_dropContent .ti_block_inner.ti_dropHalfBrder{
-	padding-left:5px;
-	border-left:1px solid #71b62f;
-}
+	#ti_header_cartitems{
+		word-wrap:break-word;
+	}
 
-#ti_header_helpDrop .ti_dropHalfBrder{
-	text-align:center;
-}
+	.ti_miniCart_carousel-nav{
+		position:absolute;
+		top:40px;
+		width:210px;
+	}
 
-.ti_dropHalfBrder h3{
-	line-height:1;
-	font-size:1.8rem;
-}
+	.ti_carousel-nav-next,
+	.ti_carousel-nav-prev{
+		color: #f7e8db;
+		font-size:6em;
+		position:absolute;
+	}
 
-.ti_dropHalfBrder .icon-bubbles{
-	font-size:4em;
-}
+	.ti_carousel-nav-prev{
+		right:0;
+	}
+
+	.ti_carousel-nav-next{
+		left:0;
+	}
+
+	.ti_miniCart_carousel_wrapper{
+		position: relative;
+		padding: 0px 30px;
+		box-sizing: border-box;
+		margin-right:35px;
+		float:left;
+		width:180px;
+	}
+
+	.ti_miniCart_carousel_item{
+		width:150px;
+		padding:5px;
+		float:left;
+		border-right:1px solid #f7e8db;
+		border-left:1px solid #f7e8db;
+		box-sizing:border-box;
+	}
+
+	.ti_miniCart_carousel_item strong{
+		margin: 15px 0;
+		display: block;
+		font-size: 1.4em;
+	}
+
+	.ti_miniCart_carousel_item p{
+		font-size:1.2em;
+	}
+
+	.ti_miniCart_carousel_item img{
+		width:75px;
+		float:left;
+	}
+
+	.ti_miniCart_subtotal{
+		text-align:center;
+	}
+
+	/* Help Drop */
+
+	#ti_header_helpDrop{
+		width:260px;
+		margin-left:-235px;
+	}
+
+	#ti_header_helpDrop:after{
+		left:80%;
+	}
+
+	.ti_cms_dropContent .ti_block_inner.ti_dropHalfBrder{
+		padding-left:5px;
+		border-left:1px solid #71b62f;
+	}
+
+	#ti_header_helpDrop .ti_dropHalfBrder{
+		text-align:center;
+	}
+
+	.ti_dropHalfBrder h3{
+		line-height:1;
+		font-size:1.8rem;
+	}
+
+	.ti_dropHalfBrder .icon-bubbles{
+		font-size:4em;
+	}
 
 /*  temporary */
 #scEkiO img{
@@ -1292,6 +1394,10 @@ td, th{
 	position:relative;
     border-bottom:7px solid #559a13;
 	z-index: 1;
+}
+
+.ti_home_mini_splash{
+	height:0;
 }
 
 /* Coupon */
@@ -1821,16 +1927,19 @@ input.ti_checkout_info {
 }
 
 #ti_home_centerMain .one_half:first-child{
-	border-right: 1px solid #FFF;
+	border-right: 1px solid #A75818;
+}
+
+#ti_home_centerMain .one_half:nth-child(2n){
+	border-left: 1px solid #ff923b;
 }
 
 .ti_cms_home_block{
-	width: 28%;
+	width: 32%;
 	margin-bottom:20px;
 	outline:none;
 	border:1px solid #f7e8db;
 	border-bottom: 7px solid #71b62f;
-	padding:20px;
 	text-align:center;
 }
 
@@ -2444,6 +2553,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		padding:0px 1.4em;
 	}
 
+	#ti_header_accountDrop{margin-left: -48px;}
+	#ti_header_cartDrop{transform-origin: left center 0px; margin-left:-132px;}
+	#ti_header_helpDrop{margin-left: -208px; }
+
 	.ti_header_top_block,
 	.one_fifth, .two_fifth, .three_fifth, .four_fifth{
 		width:48%;
@@ -2464,16 +2577,16 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	}
 
 	.ti_cms_home_block{
-		width:44%;
+		width:49%;
 	}
 
 	.ti_header_top_block ul{
 		float:left;
 	}
 
-	#ti_header_searchHelp {
+	/*#ti_header_searchHelp {
 	    margin: 0px 1em;
-	}
+	}*/
 
 	.ti_cms_dropContent{
 		margin-left:0;
@@ -2490,9 +2603,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		margin-left:-5px;
 	}
 
-	#ti_header_searchHelpDrop{
-		left:50%;
-	}
+	/*#ti_header_searchHelpDrop{left:50%;}*/
 
 	#ti_main_coupon{
 		left:auto;
@@ -2548,8 +2659,17 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	.ti_header_top_block,
 	#ti_header_quick_links .ti_header_top_block{
 		margin:0;
-		width:100%;
+		width:50%;
 		text-align:center;
+		font-size:.9em;
+	}
+
+	#ti_header_accountDrop{margin-left: -48px;}
+	#ti_header_cartDrop{min-width: 150px;margin-left: -75px;}
+	#ti_header_helpDrop{margin-left: -208px; }
+
+	#ti_header_cartDrop:after{
+		right:auto;
 	}
 
 	.ti_header_top_block ul{
@@ -2566,7 +2686,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 
 	#ti_main_coupon{
 		z-index:3;
-		top:95px;
+		top:65px;
 	}
 
 	#ti_header_quick_links{
@@ -2581,6 +2701,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	.ti_cms_dropContent .one_half{
 		margin:0 1%;
 		width:48%;
+		min-width:48%;
 		padding:0;
 	}
 
@@ -2619,11 +2740,44 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	.discount-form .one_half{width:48%;margin:0 auto;}
 
 	#ti_cms_home_container{
-		background:none;
+		background:#559a13;
+	}
+
+	.ti_home_mini_splash{
+		width:100%;
+		height:300px;
+		background:url('../images/ti-assets/tablet-splash.jpg') no-repeat;
+		background-position: center;
+		background-size: contain;
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+		src='../images/ti-assets/tablet-splash.jpg',
+		sizingMethod='scale');
+
+		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+		src='../images/ti-assets/tablet-splash.jpg',
+		sizingMethod='scale')";
 	}
 
 	.ti_cms_home_block{
-		width:42%;
+		text-align:left;
+		border:none;
+	}
+
+	.ti_cms_home_block img{
+		float:right;
+		width:50%;
+	}
+
+	.ti_cms_home_block p{
+		font-size:1.3em;
+	}
+
+	.ti_cms_home_block input,
+	.ti_cms_home_block button{
+		text-align:left;
+		display:block;
+		margin:0 auto;
+		clear:both;
 	}
 
 	#ti_home_centerMain{
@@ -2724,6 +2878,11 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	.ti_cms_contain{
 		width:100%;
 		min-width:100%;
+	}
+
+	.page, .main{
+		width:100%;
+		min-width:100%;
 		overflow:hidden;
 	}
 
@@ -2753,12 +2912,23 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		width:48%;
 	}
 
-	.ti_cms_home_block{
-		width:36%;
-	}
-
 	.ti_cms_home_block blockquote h2{
 		font-size:2em;
+	}
+
+	.ti_home_mini_splash{
+		width:100%;
+		height:200px;
+		background:url('../images/ti-assets/mini-splash.jpg') no-repeat;
+		background-position: center;
+		background-size: contain;
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+		src='../images/ti-assets/mini-splash.jpg',
+		sizingMethod='scale');
+
+		-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(
+		src='../images/ti-assets/mini-splash.jpg',
+		sizingMethod='scale')";
 	}
 
 	#ti_header_row,
@@ -2769,13 +2939,6 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	#ti_header_logo{
 		max-width:100%;
 		margin:.7em auto;
-	}
-
-	.ti_logo_bar{
-		width:100%;
-		float:none;
-		max-width:auto;
-		margin:0 auto;
 	}
 
 	#ti_header_quick_links{

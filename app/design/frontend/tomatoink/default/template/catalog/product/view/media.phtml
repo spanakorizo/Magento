@@ -35,15 +35,35 @@
     $_helper = $this->helper('catalog/output');
 ?>
 
+<!--<action method="addItem"><type>skin_js</type><name>js/jqzoom/jquery-1.6.1.min.js</name></action>
+<action method="addItem"><type>skin_js</type><name>js/jqzoom/jquery.jqzoom1.0.1.js</name></action>-->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jqzoom/jquery-1.6.1.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jqzoom/jquery.jqzoom1.0.1.js') ?>"></script>
+<script type="text/javascript">
+    var zx = jQuery.noConflict();
+    zx(document).ready(function() {
+        zx('.jqzoom').jqzoom({
+            zoomType: 'standard',
+            lens:true,
+            preloadImages: false,
+            alwaysOn:false
+        });
+
+    });
 
 
+</script>
                 <div class="full">
-                    <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" class="block_center ti_product_image"/>
+				<a href="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" class="jqzoom" rel='gal1'>
+				     <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" class="block_center ti_catalog_product_image"/>
+				</a>
                 <?php if (count($this->getGalleryImages()) > 0): ?>
                     <div class="ti_product_thumb_block btcf">
                     <?php foreach ($this->getGalleryImages() as $_image): ?>   
                         <div class="one_fourth">
-                            <a href="#" onclick="popWin('<?php echo $this->getGalleryUrl($_image) ?>', 'gallery', 'width=300,height=300,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes'); return false;" ?><img class= "ti_product_thumb" src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'thumbnail', $_image->getFile())->resize(56); ?>"/></a>
+                            <a href='javascript:void(0);' rel="{gallery: 'gal1', smallimage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>', largeimage: '<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>'}" >
+								<img class= "ti_product_thumb" src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>"/>
+							</a>
                         </div>
                     <?php endforeach; ?>
                     </div>
