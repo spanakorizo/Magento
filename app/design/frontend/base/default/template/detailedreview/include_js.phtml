@@ -51,7 +51,7 @@ if(Mage::getStoreConfig('detailedreview/settings/enable_jquery')) :
 ?>
 <script type="text/javascript">
     //<![CDATA[
-        document.write("<?php echo $detailedreview; ?>");
+      if (typeof ti_global_productcode != 'undefined')  document.write("<?php echo $detailedreview; ?>");
     //]]>
 </script>
 <?php else: ?>
