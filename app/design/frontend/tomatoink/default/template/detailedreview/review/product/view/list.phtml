@@ -47,8 +47,6 @@ if (!$timeFormat = Mage::getStoreConfig('detailedreview/datetime_options/time_fo
 $clientTimezone = Mage::getSingleton('customer/session')->getClientTimezone();
 $_product = Mage::app()->getLayout()->getBlock('product.info')->getProduct();
 ?>
-<!-- for pinterest grid - Megan -->
-<script src="<?php echo $this->getSkinUrl('js/masonry.pkgd.min.js'); ?>" type="text/javascript"></script>
 
     <div itemscope itemtype="http://schema.org/Product">
     <meta itemprop="name" content="<?php echo $_product->getName();?>" />
@@ -57,6 +55,10 @@ $_product = Mage::app()->getLayout()->getBlock('product.info')->getProduct();
     <?php echo $this->getChildHtml('toolbar') ?>
     <?php $reviewSizing = Mage::getSingleton('detailedreview/review_sizing'); ?>
     <?php $reviewBodyType = Mage::getSingleton('detailedreview/review_bodyType'); ?>
+
+    <!-- for pinterest grid - Megan -->
+    <script src="<?php echo $this->getSkinUrl('js/masonry.pkgd.min.js'); ?>" type="text/javascript"></script>
+
     <div id="container" class="ti_cms_contain js-masonry" data-masonry-options="{ &quot;columnWidth&quot;: .ti_cms_review_block.one_half, &quot;itemSelector&quot;: &quot;.ti_cms_pinGrid&quot;, &quot;gutter&quot;:&quot;.ti_cms_block_gutter&quot; }">
         <div class="ti_cms_block_gutter">&nbsp;</div>
         <?php foreach ($_items as $keyReview => $_review):?>

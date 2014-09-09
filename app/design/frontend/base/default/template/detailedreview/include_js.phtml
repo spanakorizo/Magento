@@ -48,11 +48,12 @@ if(Mage::getStoreConfig('detailedreview/settings/enable_jquery')) :
     }
     $detailedreview = "<script type='text/javascript' src='".$urlJs."/" . $drjs . "'><\/script>";
     ?>
-<script type="text/javascript">
+<!--<script type="text/javascript">!-->
     //<![CDATA[
-    document.write("<?php echo $detailedreview; ?>");
+    //document.write("<?php echo $detailedreview; ?>");
+    <?php echo $detailedreview; ?>
     //]]>
-</script>
+<!--</script>!-->
 <?php else: ?>
 <script type="text/javascript">
     if(typeof jQuery === 'undefined' || !(/[1-9]\.[8-9].[0-9]/.test(jQuery.fn.jquery))){

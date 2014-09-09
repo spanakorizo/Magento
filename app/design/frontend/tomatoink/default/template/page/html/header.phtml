@@ -233,7 +233,7 @@
 	</div>
 
     <?php
-    
+    //shopping cart items
     $coreResource = Mage::getSingleton('core/resource');
     $conn = $coreResource->getConnection('core_read');
     $cart = Mage::getModel('checkout/session')->getQuote();
@@ -243,7 +243,10 @@
     if ($total_num == "") $total_num=0;
 
     $grandtotal = $cart->getSubtotal();
-    $shopptingcarthtml="";
+    $shopptingcarthtml = "";
+    if ($total_num > 0)
+    $shopptingcarthtml="<div class='ti_miniCart_carousel-nav ti_hide_767'><span class='ti_carousel-nav-next icon-angle-left'></span><span class='ti_carousel-nav-prev icon-angle-right'></span></div>";
+
     $select = $conn->select()
         ->from($coreResource->getTableName('sales_flat_quote_item'),array('product_id'))
         ->where('parent_item_id IS NULL')
@@ -253,13 +256,17 @@
     foreach ($cart->getAllItems() as $item) {
         $product = $item->getProduct();
         if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
-            $shopptingcarthtml .= "<div class='one_fourth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><p>Qty: " . $item->getQty() . "</p></div><div class='three_fourth'><a href='" . $product->getProductUrl() . "'><p>" . $product->getName() . "</p></a></div><div class='ti_cms_separator'></div>";
+            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
+
+
         //$productId = $item->getProduct()->getId();
         //$productqty = $item->getQty();
         //$productPrice = $item->getProduct()->getPrice();
 
     }
-    if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . number_format($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></p>";
+
+    if ($shopptingcarthtml != "") $shopptingcarthtml .= "<div class='ti_miniCart_subtotal'><h4 class='ltWeight lgTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
+    else $shopptingcarthtml = "You don't have any items inside cart.";
     
     ?>
 
@@ -287,8 +294,8 @@ else {$('#ti_header_logout').hide();}
 jQuery('#ti_header_cartcount').html(ti_global_total);
 
 //shopping cart item
-//var ti_header_shoppingcartblock = document.getElementById('ti_header_cartitems');
-//ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
+var ti_header_shoppingcartblock = document.getElementById('ti_header_cartDrop');
+ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
 
 
 });
