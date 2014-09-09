@@ -47,13 +47,13 @@ if(Mage::getStoreConfig('detailedreview/settings/enable_jquery')) :
         $drjs = 'dr.without.jqui.easing.spy.min.js';
     }
     $detailedreview = "<script type='text/javascript' src='".$urlJs."/" . $drjs . "'></script>";
-	echo $detailedreview;    
+//	echo $detailedreview;    
 ?>
-<!--<script type="text/javascript">!-->
-    <!--<![CDATA[
-    //document.write("<?php //echo $detailedreview; ?>");
-    ]]>!-->
-<!--</script>!-->
+<script type="text/javascript">!-->
+    <![CDATA[
+    if (typeof ti_global_productcode != 'undefined') document.write("<?php echo $detailedreview; ?>");
+    ]]>
+</script>
 <?php else: ?>
 <script type="text/javascript">
     if(typeof jQuery === 'undefined' || !(/[1-9]\.[8-9].[0-9]/.test(jQuery.fn.jquery))){

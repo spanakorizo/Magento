@@ -2781,17 +2781,18 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 		border:none;
 	}
 
-	.ti_cms_home_block img{
-		float:right;
-		width:50%;
-	}
-
 	.ti_cms_home_block .ti_image_sprite{
 		float:right;
 		width:150px;
 		height:150px;
 		background-size:900px 150px;
 	}
+
+	.ti_cms_home_block .ti_image_sprite.ship{background-position:-150px 0;}
+	.ti_cms_home_block .ti_image_sprite.save{background-position:-300px 0;}
+	.ti_cms_home_block .ti_image_sprite.newsletter{background-position:-450px 0;}
+	.ti_cms_home_block .ti_image_sprite.eco{background-position:-600px 0;}
+	.ti_cms_home_block .ti_image_sprite.secure{background-position:-750px 0;}
 
 	.ti_cms_home_block p{
 		font-size:1.3em;
