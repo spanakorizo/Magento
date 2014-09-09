@@ -25,8 +25,11 @@
  * @author     MageWorkshop <mageworkshophq@gmail.com>
  */
 ?><div class="reviews-wrapper">
+    <?php $product_type = Mage::registry('current_product')->getTypeId(); ?>
+    <?php if ($product_type != "grouped"): ?>
     <div class="reviews-container" id="feedback">
         <?php echo $this->getChildHtml() ?>
     </div>
+    <?php endif; ?>
 </div>
 <div id="imageLoading"><img width=50px height=50px src="<?php echo $this->getSkinUrl('images/detailedreview/ajax-loader.gif'); ?>" alt=""/></div>
