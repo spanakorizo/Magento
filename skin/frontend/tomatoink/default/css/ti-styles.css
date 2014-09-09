@@ -18,6 +18,7 @@ Table of Contents:
 	- Lists
 	- Images
 	- Tables
+	- Sprites
 	- Icons
 4. Header
 	- Navigation
@@ -730,6 +731,23 @@ img.ti_img_Inline{
 	display:inline;
 }
 
+/* -- Sprites --*/
+
+.ti_image_sprite{
+	background:url('../images/ti-home/image-sprite.jpg')no-repeat 0 0;
+	height:300px;
+	width:300px;
+	display:block;
+}
+
+.ti_image_sprite.warranty{background-position:0 0;}
+.ti_image_sprite.ship{background-position:-300px 0;}
+.ti_image_sprite.save{background-position:-600px 0;}
+.ti_image_sprite.newsletter{background-position:-900px 0;}
+.ti_image_sprite.eco{background-position:-1200px 0;}
+.ti_image_sprite.secure{background-position:-1500px 0;}
+
+.ti_image_sprite span{position:absolute; left:-9999999em;font-size:0;}
 /* -- Tables --*/
 
 table{
@@ -2766,6 +2784,13 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 	.ti_cms_home_block img{
 		float:right;
 		width:50%;
+	}
+
+	.ti_cms_home_block .ti_image_sprite{
+		float:right;
+		width:150px;
+		height:150px;
+		background-size:900px 150px;
 	}
 
 	.ti_cms_home_block p{
