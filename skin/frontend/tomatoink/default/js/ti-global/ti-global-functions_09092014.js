@@ -8,64 +8,49 @@ function add_to_box(id1,id2){
     var firstId = jQuery('#' + id1 );
     var secondId = jQuery('#' + id2 );
     var screenTop = jQuery(document).scrollTop();
-    var Top = (screen.height / 3);
-    Top = screenTop + Top;
     screenTop = screenTop + 50;
-	var  url = firstId.attr('action');
+    var  url = firstId.attr('action');
     var data = firstId.serialize();
     var qty_check = false;
     jQuery('.qty').each(function() {
       if (jQuery(this).val() != '') qty_check = true;
     });
-	if (qty_check) {
-		//jQuery('#ti_group_multiple_msg').hide();
-		jQuery('#ajax_loader').show();
-		try {
-			jQuery.ajax({
-				url: url,
-				dataType: 'json',
-				type : 'post',
-				data: data,
-				success: function(){
-					jQuery('#ajax_loader').hide();
-					jQuery.post( ti_global_url + 'productselector/popupcart/header',function(response){
-						var obj = response.evalJSON();
-						jQuery('#ti_header_cartcount').html(obj.totalnumber);
-						jQuery('#ti_header_cartDrop').html(obj.alltext);
-					});
-					jQuery.post( ti_global_url + 'productselector/popupcart/index',function(data){
-						secondId.html(data);
-						secondId.css('top', screenTop);
-						secondId.show();
-						jQuery('#ti_hide_body_div').show();
-						jQuery('.qty').val("");
-					});
+if (qty_check) {
+    jQuery('#ti_group_multiple_msg').hide();
+    jQuery('#ajax_loader').show();
+    try {
+        jQuery.ajax({
+            url: url,
+            dataType: 'json',
+            type : 'post',
+            data: data,
+            success: function(){
+                jQuery('#ajax_loader').hide();
+                jQuery.post( ti_global_url + 'productselector/popupcart/header',function(response){
+                    var obj = response.evalJSON();
+                    jQuery('#ti_header_cartcount').html(obj.totalnumber);
+                    jQuery('#ti_header_cartitems').html(obj.alltext);
+                });
+                jQuery.post( ti_global_url + 'productselector/popupcart/index',function(data){
+                    secondId.html(data);
+                    secondId.css('top', screenTop);
+                    secondId.show();
+                    jQuery('#ti_hide_body_div').show();
+                    jQuery('.qty').val("");
+                });
 
-				}
-			});
+            }
+        });
 
-		} 
-		catch (e) {
-		
-		}
-	}
-	else{
-			
-		secondId.html("<h2 style='padding:15px 5px'><strong class='altTxt' style='padding-left:10px'>Please select at least one product</strong></h2><span class='ti_close_popup'><a href='#' class='ti_checkoutStep_close altTxt' onclick =' hide_pop_up() '>X</a></span>");
-		secondId.show();
-		jQuery('#ti_hide_body_div').show();
-		secondId.css('top', Top);
-			
-	}
+    } catch (e) {
+    }
+  }
+  else 
     
-    //jQuery('#ti_group_multiple_msg').show();
+    jQuery('#ti_group_multiple_msg').show();
 
 }
-function hide_pop_up(){
-	jQuery('#ti_hide_body_div').hide();
-	jQuery('#show_cart').hide();
-	
-}
+
 /************* function for auto qty set to 1 if not set ******/
 function addSimpleToCart(id) {
     ti = $(id);
@@ -130,15 +115,10 @@ for (i=0;i<ARRcookies.length;i++)
 /* Version: 0.0.1 */
 /*******************************************************/
 
+
+
 jQuery(document).ready(function($){
-	
-	jQuery(document).keyup(function(e) {
-        e.preventDefault();
-        if (e.keyCode == 27) { // esc keycode
-            jQuery('#ti_hide_body_div').hide();
-            jQuery('#show_cart').hide(e);
-        }
-    });
+
     //code for top link
     // hide #ti_back_top first
     jQuery("#ti_back_top").hide();

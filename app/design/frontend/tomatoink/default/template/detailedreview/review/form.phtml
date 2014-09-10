@@ -51,7 +51,7 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
 
                 <?php echo $this->getChildHtml('form_fields_before')?>
                     <div class="header">
-                        <span class="tell-us"><?php echo $this->__("Tell us what you think about this item") ?>:</span>
+                        <h3 class="tell-us"><?php echo $this->__("Tell us what you think about this item") ?>:</h3>
                     </div>
                     <span id="input-message-box"></span>
                 <?php if( $this->getRatings() && $this->getRatings()->getSize()): ?>
@@ -114,51 +114,51 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 <?php endif; ?>
                 <div class="your-review">
                     <div class="left">
-                        <span class="title"><?php echo $this->__("Your Review") ?> <em class="required">*</em></span>
-                        <p class="desc"><?php echo $this->__("share your opinion with others by writing a detailed review") ?></p>
+                        <span class="title altTxt"><?php echo $this->__("Your Review") ?></span>
+                        <p class="desc"><?php echo $this->__("Share your opinion with others by writing a detailed review") ?></p>
                     </div>
                     <div class="right">
                         <div class="wide">
-                            <span><label for="nickname_field" class="required"><?php echo $this->__('Nickname') ?> <em>*</em></label></span>
-                            <div class="input-box field-row">
-                                <input type="text" name="nickname" id="nickname_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" />
+                            <label for="nickname_field" class="required ti_cms_labelHide"><span><?php echo $this->__('Nickname') ?> <em>*</em></span></label>
+                            <div class="input-box field-row ti-required-entry">
+                                <input type="text" name="nickname" id="nickname_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" placeholder="Nickname" />
                             </div>
                         </div>
                         <div class="wide">
-                            <span><label for="summary_field" class="required"><?php echo $this->__('Review Title:') ?> <em>*</em></label></span>
-                            <div class="input-box field-row">
-                                <input type="text" name="title" id="summary_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getTitle()) ?>" />
+                            <label for="summary_field" class="required ti_cms_labelHide"><span><?php echo $this->__('Review Title:') ?> <em>*</em></span></label>
+                            <div class="input-box field-row ti-required-entry">
+                                <input type="text" name="title" id="summary_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getTitle()) ?>" placeholder="Review title"/>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="your-review overall with-border">
                     <div class="left">
-                        <p class="desc"><?php echo $this->__("when writing your review, try to avoid") ?>:</p>
-                        <ul class="desc">
-                            <li>- <?php echo $this->__("non-product related comments") ?></li>
-                            <li>- <?php echo $this->__("price and promotion details")?></li>
-                            <li>- <?php echo $this->__("inappropriate language")?></li>
-                            <li>- <?php echo $this->__("info about other companies or websites") ?></li>
-                            <li>- <?php echo $this->__("any personal info - we want to protect your privacy!") ?></li>
+                        <p class="desc"><?php echo $this->__("Try to avoid") ?>:</p>
+                        <ul class="desc ti_bullet">
+                            <li><?php echo $this->__("Non-product related comments") ?></li>
+                            <!--<li><?php echo $this->__("Price and promotion details")?></li>-->
+                            <li><?php echo $this->__("Inappropriate language")?></li>
+                            <li><?php echo $this->__("Info about other companies or websites") ?></li>
+                            <li><?php echo $this->__("Any personal info. We want to protect your privacy!") ?></li>
                         </ul>
                     </div>
                     <div class="right">
                         <div class="wide">
-                            <label for="review_field" class="required"><?php echo $this->__('Overall Review:') ?> <em>*</em></label>
-                            <div class="input-box field-row">
-                                <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry"><?php echo $this->htmlEscape($data->getDetail()) ?></textarea>
+                            <label for="review_field" class="required ti_cms_labelHide"><span><?php echo $this->__('Your comments') ?></span></label>
+                            <div class="input-box field-row ti-required-entry">
+                                <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry" placeholder="Your comments"><?php echo $this->htmlEscape($data->getDetail()) ?></textarea>
                             </div>
                         </div>
                         <?php if ( $helperDetailedreview->checkFieldAvailable('good_and_bad_detail') ): ?>
                         <div class="narrow first">
-                            <label for="goodreview_field"><?php echo $this->__('What do you like about this item?') ?></label>
+                            <label for="goodreview_field"><p><?php echo $this->__('What do you like about this item?') ?></p></label>
                             <div class="input-box">
                                 <textarea name="good_detail" id="goodreview_field" cols="5" rows="3"><?php echo $this->htmlEscape($data->getGoodDetail()) ?></textarea>
                             </div>
                         </div>
                         <div class="narrow">
-                            <label for="nogoodreview_field"><?php echo $this->__('What do you dislike about this item?') ?></label>
+                            <label for="nogoodreview_field"><p><?php echo $this->__('What do you dislike about this item?') ?></p></label>
                             <div class="input-box">
                                 <textarea name="no_good_detail" id="nogoodreview_field" cols="5" rows="3"><?php echo $this->htmlEscape($data->getNoGoodDetail()) ?></textarea>
                             </div>
@@ -171,15 +171,15 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                         ?>
                             <div class="narrow first">
                                 <?php if ($helperDetailedreview->checkFieldAvailable('user_pros_and_cons') || ($helperDetailedreview->checkFieldAvailable('pros_and_cons') && $prosCollection->getSize())): ?>
-                                    <label><?php echo $this->__('Pros:') ?></label>
+                                    <label for="user_goodreview_field" class="ti_cms_labelHide"><span><?php echo $this->__('Pros:') ?></span></label>
                                 <?php endif; ?>
 
                                 <?php if ( $helperDetailedreview->checkFieldAvailable('user_pros_and_cons') ): ?>
                                     <div class="input-box">
-                                        <textarea name="user_pros" id="user_goodreview_field" cols="5" rows="2"><?php echo $this->htmlEscape($data->getGoodDetail()) ?></textarea>
+                                        <textarea name="user_pros" id="user_goodreview_field" cols="5" rows="2" placeholder="Pros"><?php echo $this->htmlEscape($data->getGoodDetail()) ?></textarea>
                                     </div>
                                     <div class="proscons">
-                                        <label class="proscons" for="user_goodreview_field"><?php echo $this->__('Enter your Pros, separated by comma') ?></label>
+                                        <label class="proscons" for="user_goodreview_field"><p><span class="ti_small_text"><?php echo $this->__('Separate pros by comma') ?></span></p></label>
                                     </div>
                                 <?php endif; ?>
 
@@ -196,15 +196,15 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                             </div>
                             <div class="narrow">
                                 <?php if ($helperDetailedreview->checkFieldAvailable('user_pros_and_cons') || ($helperDetailedreview->checkFieldAvailable('pros_and_cons') && $prosCollection->getSize())): ?>
-                                    <label><?php echo $this->__('Cons:') ?></label>
+                                    <label class="ti_cms_labelHide"><span><?php echo $this->__('Cons:') ?></span></label>
                                 <?php endif; ?>
 
                                 <?php if ( $helperDetailedreview->checkFieldAvailable('user_pros_and_cons') ): ?>
                                 <div class="input-box">
-                                    <textarea name="user_cons" id="user_nogoodreview_field" cols="5" rows="2"><?php echo $this->htmlEscape($data->getNoGoodDetail()) ?></textarea>
+                                    <textarea name="user_cons" id="user_nogoodreview_field" cols="5" rows="2" placeholder="Cons"><?php echo $this->htmlEscape($data->getNoGoodDetail()) ?></textarea>
                                 </div>
                                 <div class="proscons">
-                                    <label class="proscons" for="user_nogoodreview_field"><?php echo $this->__('Enter your Cons, separated by comma') ?></label>
+                                    <label class="proscons" for="user_nogoodreview_field"><p><span class="ti_small_text"><?php echo $this->__('Separate cons by comma') ?></span></p></label>
                                 </div>
                                 <?php endif; ?>
 
@@ -244,13 +244,13 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                     ?>
                 <div class="upload-image">
                     <div class="left">
-                        <span class="title"><?php echo $this->__("Upload Your Image") ?></span>
-                        <p class="desc"><?php echo $this->__("pictures speak a thousand words!") ?></p>
-                        <ul class="desc">
-                            <li>- <?php echo $this->__("Image must be in PNG, GIF or JPEG format") ?></li>
-                            <li>- <?php echo $this->__("File size must be %d MB or less", $maxSize) ?></li>
-                            <li>- <?php echo $this->__("Image must be at least %d pixels tall", $minHeight) ?></li>
-                            <li>- <?php echo $this->__("Image must be at least %d pixels wide", $minWidth) ?></li>
+                        <span class="title altTxt"><?php echo $this->__("Upload Your Image") ?></span>
+                        <p class="desc"><?php echo $this->__("Pictures speak a thousand words!") ?></p>
+                        <ul class="desc ti_bullet">
+                            <li><?php echo $this->__("PNG, GIF or JPEG format") ?></li>
+                            <li><?php echo $this->__("File size must be %d MB or less", $maxSize) ?></li>
+                            <li><?php echo $this->__("Image must be at least %d px by %d px", $minHeight, $minWidth) ?></li>
+                            <!--<li><?php echo $this->__("Image must be at least %d pixels wide", $minWidth) ?></li>-->
                         </ul>
                     </div>
                     <div class="right">
@@ -263,7 +263,7 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                             </div>
                         </div>
                         <?php if ((int)Mage::getStoreConfig('detailedreview/image_options/images_max_count') > 1): ?>
-                            <span class="more-images"><a href="#" id="add-more-images">Add More Files</a></span>
+                            <p class="more-images"><a href="#" id="add-more-images">+ Add more files</a></p>
                         <?php endif ?>
                     </div>
                 </div>
@@ -271,14 +271,14 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 <?php if ( $helperDetailedreview->checkFieldAvailable('video') ): ?>
                 <div class="upload-video with-border">
                     <div class="left">
-                        <span class="title"><?php echo $this->__("Attach Your Video") ?></span>
-                        <p class="desc"><?php echo $this->__("post your youtube video link to show how you style this item") ?></p>
+                        <span class="title altTxt"><?php echo $this->__("Attach your video") ?></span>
+                        <p class="desc"><?php echo $this->__("Paste in a url to your video") ?></p>
                     </div>
                     <div class="right">
                         <div class="wide">
-                            <label for="video_field"><?php echo $this->__('Attach Your Video') ?></label>
+                            <label for="video_field" class="ti_cms_labelHide"><span><?php echo $this->__('Attach your video') ?></span></label>
                             <div class="input-box">
-                                <input type="text" name="video" id="video_field" class="input-text" value="<?php echo $this->htmlEscape($data->getVideo()) ?>" />
+                                <input type="text" name="video" id="video_field" class="input-text" value="<?php echo $this->htmlEscape($data->getVideo()) ?>" placeholder="Video URL" />
                             </div>
                         </div>
                     </div>
@@ -369,7 +369,7 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
         (function($){
             $.noConflict();
             <?php if ($displayCaptcha): ?>
-                if(($.browser.msie && parseInt($.browser.version, 10) != 7) || !$.browser.msie) {
+                if((jQuery.browser.msie && parseInt(jQuery.browser.version, 10) != 7) || !$.browser.msie) {
                     Recaptcha.create("<?php echo $public_key; ?>",
                             "review-captcha",
                             {
@@ -380,6 +380,7 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 }
                 <?php endif; ?>
                 dataForm = new VarienForm('review-form');
+                
                 if ($.browser.msie && $.browser.version=="9.0") {
                     var dialog = $('.review-dialog-block');
                     var el = $('#review-form input');
@@ -455,7 +456,7 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                         }
                 );
 
-        })(DRjQuery)
+        })(jQuery)
     });
     //]]>
 </script>

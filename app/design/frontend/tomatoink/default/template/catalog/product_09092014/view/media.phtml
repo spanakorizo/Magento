@@ -37,11 +37,11 @@
 
 <!--<action method="addItem"><type>skin_js</type><name>js/jqzoom/jquery-1.6.1.min.js</name></action>
 <action method="addItem"><type>skin_js</type><name>js/jqzoom/jquery.jqzoom1.0.1.js</name></action>-->
-<!--<script type="text/javascript" src="<?php //echo $this->getSkinUrl('js/jqzoom/jquery-1.6.1.min.js') ?>"></script>!-->
+<script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jqzoom/jquery-1.6.1.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jqzoom/jquery.jqzoom1.0.1.js') ?>"></script>
 <script type="text/javascript">
     var zx = jQuery.noConflict();
-    jQuery(document).ready(function(zx) {
+    zx(document).ready(function() {
         zx('.jqzoom').jqzoom({
             zoomType: 'standard',
             lens:true,

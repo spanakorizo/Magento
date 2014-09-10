@@ -1,36 +1,36 @@
 <?php
-/*$prdinfo = $_POST['prd'];
-
-$individual_product = explode('#',$prdinfo);
-foreach($individual_product as $productarray){
-    $getItem = explode('*',$productarray);
-}*/
 $coreResource = Mage::getSingleton('core/resource');
 $conn = $coreResource->getConnection('core_read');
-$cart = Mage::getModel('checkout/session')->getQuote();
-//$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
-//$total_num = $cart->getItemsCount();
+$cart = Mage::getModel('checkout/cart')->getQuote();
 $total_num = round($cart->getItemsQty());
 if ($total_num == "") $total_num=0;
 
 $grandtotal = $cart->getSubtotal();
-$shopptingcarthtml="";
+
 $select = $conn->select()
     ->from($coreResource->getTableName('sales_flat_quote_item'),array('product_id'))
     ->where('parent_item_id IS NULL')
     ->where('quote_id = ?',$cart->getId());
-$cartItems = $conn->fetchCol($select);
+$cartItems = $conn->fetchCol($select); //this for bundle otherwise all product under bundle will show in cart
+$shopptingcarthtml = "";
+if ($total_num > 0)
+    $shopptingcarthtml="<div class='ti_miniCart_carousel-nav ti_hide_767'><span class='ti_carousel-nav-next icon-angle-left'></span><span class='ti_carousel-nav-prev icon-angle-right'></span></div>";
 
-foreach ($cart->getAllItems() as $item) {
+$quote = Mage::getModel('sales/quote')->load($cart->getId());
+$cartitem = Mage::getModel('sales/quote_item')
+    ->getCollection()
+    ->setQuote($quote)
+    ->addOrder('updated_at', 'desc');
+
+foreach ($cartitem as $item) {
     $product = $item->getProduct();
-    if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
-        $shopptingcarthtml .= "<div class='one_fourth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a></div><div class='three_fourth'><p><a href='" . $product->getProductUrl() . "'>" . $product->getName() . "</a></p></div><div class='ti_cms_separator'></div>";
-    //$productId = $item->getProduct()->getId();
-    //$productqty = $item->getQty();
-    //$productPrice = $item->getProduct()->getPrice();
+    if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 ) //this for bundle otherwise all product under bundle will show in cart
+        $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
 
 }
-if ($shopptingcarthtml != "") $shopptingcarthtml .= "<p class='text_center'><span class='altTxt'>Total:<span id='ti_cart_miniProductPrice'>$" . round($grandtotal,2) . "</span></span> <span><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>View Cart</strong></a></p>";
+
+if ($shopptingcarthtml != "") $shopptingcarthtml .= "<div class='ti_miniCart_subtotal'><h4 class='ltWeight lgTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
+else $shopptingcarthtml = "You don't have any items inside cart.";
 
 
 $myArray = array(

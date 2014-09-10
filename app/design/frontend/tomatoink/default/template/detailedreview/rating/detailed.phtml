@@ -101,9 +101,9 @@ $showRating = Mage::helper('detailedreview')->checkFieldAvailable('review_graph'
 //                        var searchReviewForm = new Varien.searchForm('review_search_mini_form', 'review-search', 'Search in reviews');
                     document.observe("dom:loaded", function() {
                         (function($){
-                            $('.ac-off').placeholder();
+                            //$('.ac-off').placeholder();
                             $(".ac-off").attr("autocomplete", "off");
-                        })(DRjQuery)
+                        })(jQuery)
                     })
 //                        $$(".ac-off").each(function(el){el.autocomplete = 'off';})
                     //]]>

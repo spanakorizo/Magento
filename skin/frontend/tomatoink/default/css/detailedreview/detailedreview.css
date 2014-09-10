@@ -120,39 +120,40 @@ p.error-message { color: red; }
 .review-dialog-block #review-form { width:540px; display:block; padding:7px 0 0 0; }
 .review-dialog-block #review-form .form-add { float: left; }
 .review-dialog-block #review-form fieldset > div { width:100%; float:left; clear:both; }
-.review-dialog-block #review-form fieldset div.with-border { padding-bottom:10px; margin-bottom:5px; border-bottom:1px solid #cbcbcb; }
+.review-dialog-block #review-form fieldset div.with-border { padding-bottom:5px; margin-bottom:5px; border-bottom:1px solid #559a13; }
 .review-dialog-block #review-form fieldset div.about-you.with-border { border-bottom:2px solid #cbcbcb; }
 .review-dialog-block #review-form .your-review.overall { margin-top:7px; }
-.review-dialog-block #review-form p { margin:0; }
+.review-dialog-block #review-form p { margin:0; font-weight:normal; font-size:13px; }
 
 .review-dialog-block #review-form .header { width:100%; text-align:left; }
 .review-dialog-block #review-form .header .tell-us { font-size: 15px; }
-.review-dialog-block #review-form .header .questions { float:right; margin-top:4px; font:bold 9px Arial; color:#252525; }
-.review-dialog-block #review-form .header .customer-service { float:right; margin-top:2px; clear:right; font:normal 9px Arial; color:#252525; }
+.review-dialog-block #review-form .header .questions { float:right; margin-top:4px; font:bold 9px Verdana; color:#252525; }
+.review-dialog-block #review-form .header .customer-service { float:right; margin-top:2px; clear:right; font:normal 9px Verdana; color:#252525; }
 .review-dialog-block #review-form .header .customer-service a { color:#bb4381; font-weight:bold; text-decoration:none; }
 
 .review-dialog-block #review-form .left { width:202px; padding:2px 10px 0 0; text-align:left; }
 .review-dialog-block #review-form .left .title { font-size:16px; color:#0A263C; }
 .review-dialog-block #review-form .left .title em { color:#EB340A; }
-.review-dialog-block #review-form .left .desc { padding-top:4px; font-size:14px; }
+.review-dialog-block #review-form .left .desc { padding-top:4px; font-size:13px; }
 .review-dialog-block #review-form .left overall.desc { margin-bottom:5px; }
 
-.review-dialog-block #review-form .right { width:320px; padding-right:6px; text-align:left; }
-.review-dialog-block #review-form .right label { font:bold 10px Arial; color:#0A263C; }
-.review-dialog-block #review-form .right label.proscons { font:italic 10px Arial; color:#0A263C; }
+.review-dialog-block #review-form .right { width:320px; padding:6px; text-align:left; box-sizing:border-box; border-radius:5px;background:#f7e8db; }
+.review-dialog-block #review-form .right label { font:bold 10px Verdana; color:#0A263C; }
+.review-dialog-block #review-form .right label.proscons { font:italic 10px Verdana; color:#0A263C; }
 .review-dialog-block #review-form .right .proscons { line-height:10px; margin-bottom:5px; }
 .review-dialog-block #review-form .right label em { color:#EB340A; }
-.review-dialog-block #review-form .right input, .review-dialog-block #review-form .right textarea { width:100%;}
+.review-dialog-block #review-form .right input, .review-dialog-block #review-form .right textarea { width:98%;}
 .review-dialog-block #review-form .right .wide { width:100%; }
-.review-dialog-block #review-form .right .wide textarea { height:158px; }
-.review-dialog-block #review-form .right .narrow textarea { }
+.review-dialog-block #review-form .right .wide textarea { height:100px; padding-top:5px; }
+.review-dialog-block #review-form .right .narrow textarea { padding-top:5px; }
 .review-dialog-block #review-form .right .input-box {  }
 /*.review-dialog-block #review-form .right  .more-images {float:left;}*/
-.review-dialog-block #review-form .right  .more-images input {}
+.review-dialog-block #review-form .right  .more-images input { line-height:1em;height:auto; padding:0;
+margin:0;}
 .review-dialog-block #review-form .right  .more-images a {float:right;line-height:19px;margin-top:3px;font-size:10px;}
 .review-dialog-block #review-form .right   #add-more-images {float:left;clear:both;}
-.review-dialog-block #review-form .right .narrow { width:147px; float:left; }
-.review-dialog-block #review-form .right .narrow.first { margin-right:26px; }
+.review-dialog-block #review-form .right .narrow { width:48%; float:left; }
+.review-dialog-block #review-form .right .narrow.first { margin:0 1%; }
 .review-dialog-block #review-form .right .age, .review-dialog-block #review-form .right .height { width:70px; float:left; }
 .review-dialog-block #review-form .right .age input, .review-dialog-block #review-form .right .height input { width:50px; }
 .review-dialog-block #review-form .right .body-types li { float:left; width:30px; text-align:center; }
@@ -164,7 +165,7 @@ p.error-message { color: red; }
 .review-dialog-block #review-form .your-review.overall .left { padding-top:17px; }
 .review-dialog-block #review-form .your-review.overall .right { margin-bottom:15px; }
 .review-dialog-block #review-form .your-review.overall .wide { margin-bottom:3px; }
-.review-dialog-block #review-form .your-review.overall ul li { margin-bottom:3px; font:10px Arial; }
+.review-dialog-block #review-form .your-review.overall ul li { margin-bottom:3px; }
 .review-dialog-block #review-form .upload-image { margin-bottom:5px; }
 .review-dialog-block #review-form .upload-image img { margin-top:10px; }
 .review-dialog-block #review-form .about-you img { height:92px; }
@@ -215,11 +216,11 @@ p.error-message { color: red; }
 a.helpful-btn  {}
 a.unhelpful-btn {}
 a.review-vote-rating {float:left; margin-right: 15px;}
-a.review-vote-rating span {font:font: normal 11px/1.55 Arial,Helvetica,sans-serif; color:#000; }
+a.review-vote-rating span {font:font: normal 11px/1.55 Verdana,Helvetica,sans-serif; color:#000; }
 a.review-vote-rating:hover { background-position: 0 -22px;}
 a.review-vote-rating:active { background-position: 0 -44px;}
 
-.voting-qty {float: right; padding-left: 6px; font: bold 12px/1.55 Arial,Helvetica,sans-serif; color:#000; }
+.voting-qty {float: right; padding-left: 6px; font: bold 12px/1.55 Verdana,Helvetica,sans-serif; color:#000; }
 .ui-dialog.ui-widget-content.success {position: fixed!important;top: 350px!important; }
 
 .review-dialog-modal{
@@ -233,6 +234,8 @@ a.review-vote-rating:active { background-position: 0 -44px;}
 	-moz-border-left-colors: none;
 	border-image: none;
 }
+
+.ui-widget-overlay{background-color: rgba(0, 0, 0,0.7);}
 
 
 .ti_cms_review_block.one_half{

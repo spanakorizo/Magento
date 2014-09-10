@@ -198,7 +198,8 @@
                         });
 
                         // click to open the item(s)
-                        $el.find('a.ti-more').live('click.contentcarousel', function( event ) {
+                        //$el.find('a.ti-more').live('click.contentcarousel', function( event ) {
+                        $el.on('click.contentcarousel', 'a.ti-more', function( event ) {
                             if( cache.isAnimating ) return false;
                             cache.isAnimating	= true;
                             $(this).hide();
@@ -208,7 +209,8 @@
                         });
 
                         // click to close the item(s)
-                        $el.find('a.ti-close').live('click.contentcarousel', function( event ) {
+                        //$el.find('a.ti-close').live('click.contentcarousel', function( event ) {
+                        $el.on('click.contentcarousel', 'a.ti-close', function( event ) {
                             if( cache.isAnimating ) return false;
                             cache.isAnimating	= true;
                             var $item	= $(this).closest('div.ti_related_item_one_fourth');

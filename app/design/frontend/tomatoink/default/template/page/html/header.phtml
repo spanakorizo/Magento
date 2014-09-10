@@ -253,9 +253,15 @@
         ->where('quote_id = ?',$cart->getId());
     $cartItems = $conn->fetchCol($select);
 
-    foreach ($cart->getAllItems() as $item) {
+        $quote = Mage::getModel('sales/quote')->load($cart->getId());
+        $cartitem = Mage::getModel('sales/quote_item')
+                    ->getCollection()
+                    ->setQuote($quote)
+                    ->addOrder('updated_at', 'desc');
+
+    foreach ($cartitem as $item) {
         $product = $item->getProduct();
-        if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
+        if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 ) //this for bundle otherwise all product under bundle will show in cart
             $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
 
 
@@ -296,7 +302,6 @@ jQuery('#ti_header_cartcount').html(ti_global_total);
 //shopping cart item
 var ti_header_shoppingcartblock = document.getElementById('ti_header_cartDrop');
 ti_header_shoppingcartblock.innerHTML = "<?php echo $shopptingcarthtml; ?>";
-
 
 });
 
