@@ -15,8 +15,7 @@
 
 
 /* this part of css for category page */
-/* Moved to ti-styles.css - Megan 9-10-2014 */
-/*
+
 .ti_category_one_forth{width: 23%;position: relative; display: block; float: left; padding:1%}
 .ti_series_one_forth{width: 23%;position: relative; display: block; float: left; margin:1%;outline: 1px solid #71B62F;border-bottom: 7px solid #71B62F;min-height: 200px; cursor: pointer}
 .ti_category_content_container{width: 100%;position: relative; display: block; float: left}
@@ -25,11 +24,10 @@
     padding: 1%;
     outline: 1px solid #F7E8DB;
     border-bottom: 7px solid #71B62F;
-}*/
+}
 /*.ti_header_left_align{color: #559A13;line-height: 1.1em; text-shadow: -0.5px -0.5px 0 #333333, 1px 1px 0 #ECECEC;text-align: left}*/
 
-/* Moved to ti-styles.css - Megan 9-10-2014 */
-/*
+
 .ti_subcat_product_gid_one_sixth{width:16%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
 .ti_subcat_product_gid_one_fifth{width:19.5%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
 .ti_subcat_product_gid_one_fourth{width:24.5%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
@@ -37,7 +35,7 @@
 
 .ti_close_popup{position: absolute;right:0;top:0}
 #ti_cartlogin_close,#ti_cartregister_close, #ti_cartforget_close{position: absolute;right:5px;top:5px}
-#ti_cart_popup_error_msg,#ti_cart_popup_forget_pass{display:none}*/
+#ti_cart_popup_error_msg,#ti_cart_popup_forget_pass{display:none}
 
 /* Not needed - Megan 8-7-2014 */
 /*
@@ -55,15 +53,15 @@
     border: 2px solid #71B62F;
     border-bottom: 7px solid #71B62F;
 }
+*/
 .ti_cart_cms_separator{
     height: 2px;
     margin: 0.5em;
     background: none repeat scroll 0% 0% #559A13;
     clear: both;
-}*/
+}
 
-/* Moved to ti-styles.css - Megan 9-10-2014 */
-/*
+
 #ti_hide_body_div{
 
     display: none;
@@ -79,7 +77,7 @@
 .ti_series_name{
 display:none;
 }
-*/
+
 
 /* Not needed - Megan 8-7-2014 */
 /*
@@ -95,19 +93,16 @@ display:none;
 }*/
 
 
-/* Moved to ti-styles.css - Megan 9-10-2014 */
-/*
+
 .ti_cart_popup_error, .ti_cart_popup_error_pass{display:none}
 #ti_cart_register_box, #ti_cart_forgetpass_box{display:none}
-*/
 
-/* Not needed - Megan 9-10-2014 */
-/*
+
 .ti_firecheckout_checkbox_font_size{font-size: 1.5em}
 #ti_shipping_select{width: 105%}
 .ti_select_width{width: 105%}
 .ti_table_checkout_productName{width: 70%}
-*/
+
 
 /* Not needed - Megan 8-7-2014 */
 /*.ti_checkout_review_font{font-family: "raleway";    -moz-font-feature-settings: "lnum";    margin: 0px;}
