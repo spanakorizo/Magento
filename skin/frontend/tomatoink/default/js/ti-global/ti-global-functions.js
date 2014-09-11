@@ -67,11 +67,13 @@ function hide_pop_up(){
 	
 }
 /************* function for auto qty set to 1 if not set ******/
-function addSimpleToCart(id) {
-    ti = $(id);
-    if (ti) {
-        if ( ! ti.value || ti.value=='0') ti.value = '1';
-    }
+function addSimpleToCart( id ) {
+	
+    var ti = jQuery('#' + id );
+	var qty = ti.val();
+    
+	if ( qty == '' || qty == '0') ti.val(1);
+    
 }
 /******************* function for get parms from url **********/
 function getParameterByName(name) {
@@ -136,7 +138,7 @@ jQuery(document).ready(function($){
         e.preventDefault();
         if (e.keyCode == 27) { // esc keycode
             jQuery('#ti_hide_body_div').hide();
-            jQuery('#show_cart').hide(e);
+            jQuery('#show_cart').hide();
         }
     });
     //code for top link

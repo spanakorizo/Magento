@@ -40,9 +40,9 @@
 <!--<script type="text/javascript" src="<?php //echo $this->getSkinUrl('js/jqzoom/jquery-1.6.1.min.js') ?>"></script>!-->
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jqzoom/jquery.jqzoom1.0.1.js') ?>"></script>
 <script type="text/javascript">
-    var zx = jQuery.noConflict();
-    jQuery(document).ready(function(zx) {
-        zx('.jqzoom').jqzoom({
+    //var zx = jQuery.noConflict();
+    jQuery(document).ready(function() {
+        jQuery('.jqzoom').jqzoom({
             zoomType: 'standard',
             lens:true,
             preloadImages: false,

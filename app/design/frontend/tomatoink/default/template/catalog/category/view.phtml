@@ -379,7 +379,7 @@ echo $getModel['value'];
             jQuery(".ti_series_header").hide();
             jQuery("#ti_series_display-" + id).show();
             jQuery(".ti_series_name").hide();
-            jQuery("#ti_header_series_name_display-" + id).show(e);
+            jQuery("#ti_header_series_name_display-" + id).show();
             var series_block = "ti_series_display-" + id;
             scroll(document.getElementById(series_block));
             if(jQuery(".ti_show_hide_series").html() == '<a href="#">- Hide All Series</a>'){
@@ -394,12 +394,12 @@ echo $getModel['value'];
             
             if(jQuery(".ti_show_hide_series").html() == '<a href="#">- Hide All Series</a>'){
                 jQuery(".ti_series_header").hide();
-                jQuery(".ti_series_name").hide(e);
+                jQuery(".ti_series_name").hide();
                 jQuery(".ti_show_hide_series").html('<a href="#">+ Show All Series</a>');
             }
             else{
                 jQuery(".ti_series_header").show();
-                jQuery(".ti_series_name").show(e);
+                jQuery(".ti_series_name").show();
                 jQuery(".ti_show_hide_series").html('<a href="#">- Hide All Series</a>');
             }
             //jQuery(".ti_series_header").toggle(e);

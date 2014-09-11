@@ -98,11 +98,13 @@ display:none;
 #ti_cart_register_box, #ti_cart_forgetpass_box{display:none}
 
 
+/* Not needed - Megan 9-10-2014 */
+/*
 .ti_firecheckout_checkbox_font_size{font-size: 1.5em}
 #ti_shipping_select{width: 105%}
 .ti_select_width{width: 105%}
 .ti_table_checkout_productName{width: 70%}
-
+*/
 
 /* Not needed - Megan 8-7-2014 */
 /*.ti_checkout_review_font{font-family: "raleway";    -moz-font-feature-settings: "lnum";    margin: 0px;}
