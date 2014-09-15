@@ -48,25 +48,19 @@
 <?php elseif($this->displayIncludeTax()) : ?>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo 'S & H'//$this->getTotal()->getTitle() ?>:</p>
+        <p><?php echo $this->getTotal()->getTitle() ?>:</p>
     </td>
     <td style="<?php echo $this->getStyle() ?>">
-        <p class="ti-cart-right"><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
+        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
     </td>
 </tr>
 <?php else:?>
 <tr class="ti_checkout_shipping_font">
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo 'S & H'//$this->escapeHtml($this->getTotal()->getTitle()) ?>:</p>
+        <p><?php echo $this->escapeHtml($this->getTotal()->getTitle()) ?>:</p>
     </td>
     <td style="<?php echo $this->getStyle() ?>">
-        <p class="ti-cart-right">
-            <?php   if($this->getShippingExcludeTax() == 0)
-                        echo '<span class="altTxt">FREE</span>';
-                    else
-                        echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax());
-            ?>
-        </p>
+        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?></p>
     </td>
 </tr>
 <?php endif;?>

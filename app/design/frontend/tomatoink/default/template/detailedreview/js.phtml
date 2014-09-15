@@ -189,9 +189,14 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
                                 i = 1;
                             }
                             reviewDialog.dialog("destroy");
-                            $('.review-dialog-submit-result').html(response.messages).dialog({
+                            
+                            var temptext = "Your review has been accepted for moderation.";
+                            $('.review-dialog-submit-result').html(temptext).dialog({
                                 dialogClass: dialogClass
                             });
+                            
+                            //$('.review-dialog-submit-result').html('you are successfully updated your review');
+                            
                             $('.review-dialog-submit-result').delay(3000).fadeOut(function(){$(this).dialog("close")});
 
                             if (response.html) {

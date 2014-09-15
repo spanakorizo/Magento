@@ -24,49 +24,41 @@
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
 /**
- * @var $this Mage_Tax_Block_Checkout_Shipping
- * @see Mage_Tax_Block_Checkout_Shipping
+ * @var $this Mage_Tax_Block_Checkout_Subtotal
+ * @see Mage_Tax_Block_Checkout_Subtotal
  */
 ?>
 <?php if ($this->displayBoth()):?>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo $this->getExcludeTaxLabel() ?>:</p>
+        <p><?php echo $this->helper('tax')->__('Subtotal (Excl. Tax)') ?>:</p>
     </td>
     <td style="<?php echo $this->getStyle() ?>">
-        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?></p>
+       <p> <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueExclTax()) ?></p>
     </td>
 </tr>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo $this->getIncludeTaxLabel() ?>:</p>
+        <p><?php echo $this->helper('tax')->__('Subtotal (Incl. Tax)') ?>:</p>
     </td>
     <td style="<?php echo $this->getStyle() ?>">
-        <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
+        <p><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueInclTax()) ?></p>
     </td>
 </tr>
-<?php elseif($this->displayIncludeTax()) : ?>
+<?php else : ?>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo 'S & H'//$this->getTotal()->getTitle() ?>:</p>
+        <table id='ti_cart_reminderbox'><tr>
+            <?php if (($this->getTotal()->getValue())<50): ?>
+            <td id='ti_cart_freereminder'><div><h3 class="lgTxt">For free S&amp;H, add <span id='' class="altTxt"><?php echo '$' . number_format(50-($this->getTotal()->getValue()), 2); ?></span> to your cart.</h3></div>
+            </td>
+        <?php else : ?> <td>&nbsp;</td>
+    <?php endif; ?>
+
+            <td class="a-right"><p><?php echo $this->getTotal()->getTitle() ?>:</p></td></tr></table>
     </td>
     <td style="<?php echo $this->getStyle() ?>">
-        <p class="ti-cart-right"><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
-    </td>
-</tr>
-<?php else:?>
-<tr class="ti_checkout_shipping_font">
-    <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo 'S & H'//$this->escapeHtml($this->getTotal()->getTitle()) ?>:</p>
-    </td>
-    <td style="<?php echo $this->getStyle() ?>">
-        <p class="ti-cart-right">
-            <?php   if($this->getShippingExcludeTax() == 0)
-                        echo '<span class="altTxt">FREE</span>';
-                    else
-                        echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax());
-            ?>
-        </p>
+        <p><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></p>
     </td>
 </tr>
 <?php endif;?>

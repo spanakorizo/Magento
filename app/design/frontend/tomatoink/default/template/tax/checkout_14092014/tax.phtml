@@ -53,7 +53,7 @@
             </td>
             <?php if ($isFirst): ?>
                 <td style="<?php echo $_style ?>" rowspan="<?php echo count($rates); ?>">
-                    <p class="ti-cart-right"><?php echo $this->helper('checkout')->formatPrice($amount); ?></p>
+                    <p><?php echo $this->helper('checkout')->formatPrice($amount); ?></p>
                 </td>
             <?php endif; ?>
         </tr>
@@ -82,5 +82,5 @@
             <p><?php echo $this->getTotal()->getTitle() ?>:</p>
         <?php endif;?>
     </td>
-    <td style="<?php echo $_style ?>"><p class="ti-cart-right"><?php echo $this->helper('checkout')->formatPrice($_value) ?></p></td>
+    <td style="<?php echo $_style ?>"><p><?php echo $this->helper('checkout')->formatPrice($_value) ?></p></td>
 </tr>

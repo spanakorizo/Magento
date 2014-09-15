@@ -23,24 +23,16 @@
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
-/* @var $this Mage_Reports_Block_Product_Viewed */
 ?>
-<?php if ($_products = $this->getRecentlyViewedProducts()): ?>
-<div class="block block-list block-viewed">
-    <div class="block-title">
-        <p><strong><?php echo $this->__('Recently Viewed Products') ?></strong></p>
-    </div>
-    <div class="ti_cms_border_block ti_block_inner">
-        <div class="block-content">
-            <ul id="recently-viewed-items ti_bullet">
-            <?php foreach ($_products as $_item): ?>
-                <li class="item">
-                    <span class="product-name"><a href="<?php echo $this->getProductUrl($_item) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName() , 'name') ?></a></span>
-                </li>
-            <?php endforeach; ?>
-            </ul>
-            <script type="text/javascript">decorateList('recently-viewed-items');</script>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
+<tr>
+    <td colspan="<?php echo $this->getColspan(); ?>" style="<?php echo $this->getTotal()->getStyle() ?>" class="a-right">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><p><?php endif; ?>
+            <p><?php echo $this->escapeHtml($this->getTotal()->getTitle()); ?>:</p>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?>:</p><?php endif; ?>
+    </td>
+    <td style="<?php echo $this->getTotal()->getStyle() ?>">
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?><p><?php endif; ?>
+            <p><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></p>
+        <?php if ($this->getRenderingArea() == $this->getTotal()->getArea()): ?></p><?php endif; ?>
+    </td>
+</tr>

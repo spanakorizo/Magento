@@ -243,3 +243,15 @@ display:none;
   display:block;
 }
 */
+.item-options dt p{ font-size: 1.3rem !important; padding: 0px}
+.item-options dt { font-size: 1.1rem !important; font-weight: normal; padding: 0px !important}
+.ti-cart-right{text-align: right !important; padding-right: 10px}
+#shopping-cart-totals-table p,#checkout-review-table p{
+    font-size:1.6em;
+    margin: 0.2em 0;
+    color:#333;
+}
+#checkout-review-table tr td{ padding:2px 5px !important;}
+.ti_cart_total h2{font-size: 2.8em !important;}
+/*tooltip*/
+

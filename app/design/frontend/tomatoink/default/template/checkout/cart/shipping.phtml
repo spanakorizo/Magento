@@ -26,55 +26,28 @@
 ?>
 <?php /** @var $this Mage_Checkout_Block_Cart_Shipping */ ?>
 
-<!-- Megan HTML
-
-    <div class="shipping one_fifth btcf">
-        <div class="ti_cms_gradient_block ti_block_inner">
-            <h2 class="ti_green_head ti_headerH1">Shipping &amp; Tax</h2>
-            <div class="ti_select_barContainer ti_cart_ship_option">
-                <select id="">
-                    <option value>Country</option>
-                    <option value>United States</option>
-                </select>
-            </div>
-            <div class="ti_select_barContainer ti_cart_ship_option">
-                <select id="">
-                    <option value>State/Province</option>
-                    <option value>California</option>
-                </select>
-            </div>
-            <input type="text" value="Zip code" onfocus="if (this.value == 'Zip code') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Zip code';}" class="ti_cart_zip ti_cart_ship_option">
-            <div class="ti_select_barContainer ti_cart_ship_option">
-                <select id="">
-                    <option value>Shipping method</option>
-                    <option value>Ground</option>
-                </select>
-            </div>
-        </div>
-    </div>
-
-
-end Megan HTML-->
-
-
-<div class="two_fifth shipping">
+<div class="one_third middle shipping">
     <div class="ti_cms_gradient_block ti_block_inner btcf">
         <h2 class="ti_green_head ti_headerH1"><?php echo $this->__('Shipping and Tax') ?></h2>
         <div class="shipping-form">
            <form action="<?php echo $this->getUrl('checkout/cart/estimatePost') ?>" method="post" id="shipping-zip-form">
+            <label for="postcode" class="ti_cms_labelHide ti-required-entry<?php //if ($this->isZipCodeRequired()) echo ' required ti-required-entry' ?>"><span><?php echo $this->__('Zip/Postal Code') ?></span></label>
+                        <div class="input-box ti_cart_ship_option">
+                            <input title="Please enter your zip code for Shipping and Tax estimation" class="input-text ti_cart_zip validate-postcode<?php //if ($this->isZipCodeRequired()):?> required-entry <?php //endif;?>" type="text" id="postcode" name="estimate_postcode" placeholder="Zip code" class="ti_cart_zip" />
+                        </div>
                 <!--<p><?php echo $this->__('Enter your destination to get a shipping estimate.') ?></p>-->
                 <!--<ul class="form-list">
                     <li>-->
-                        <!--<label for="country" class="required"><em>*</em><?php echo $this->__('Country') ?></label>-->
+                        <label for="country" class="ti_cms_labelHide required ti-required-entry"><span><?php echo $this->__('Country') ?></span></label>
                         <div class="input-box ti_select_barContainer ti_cart_ship_option">
                             <?php echo Mage::getBlockSingleton('directory/data')->getCountryHtmlSelect($this->getEstimateCountryId()) ?>
                         </div>
                     <!--</li>-->
                 <?php //if($this->getStateActive()): ?>
                     <!--<li>-->
-                        <!--<label for="region_id"<?php if ($this->isStateProvinceRequired()) echo ' class="required"' ?>><?php if ($this->isStateProvinceRequired()) echo '<em>*</em>' ?><?php echo $this->__('State/Province') ?></label>-->
+                        <label for="region_id" class="ti_cms_labelHide ti-required-entry<?php //if ($this->isStateProvinceRequired()) echo ' ti-required-entry required' ?>"><span><?php echo $this->__('State/Province') ?></span></label>
                         <div class="input-box ti_select_barContainer ti_cart_ship_option">
-                            <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;"<?php echo ($this->isStateProvinceRequired() ? ' class="validate-select"' : '') ?>>
+                            <select id="region_id" name="region_id" title="<?php echo $this->__('State/Province') ?>" style="display:none;" class="validate-select required-entry"<?php //echo ($this->isStateProvinceRequired() ? ' class="validate-select"' : '') ?>>
                                 <option value=""><?php echo $this->__('State/Province') ?></option>
                             </select>
                            <script type="text/javascript">
@@ -95,18 +68,18 @@ end Megan HTML-->
                     <!--</li>-->
                 <?php endif; ?>
                     <!--<li>-->
-                        <!--<label for="postcode"<?php if ($this->isZipCodeRequired()) echo ' class="required"' ?>><?php if ($this->isZipCodeRequired()) echo '<em>*</em>' ?><?php echo $this->__('Zip/Postal Code') ?></label>-->
+                        <!--<label for="postcode" class="ti_cms_labelHide <?php if ($this->isZipCodeRequired()) echo ' required ti-required-entry' ?>"><span><?php echo $this->__('Zip/Postal Code') ?></span></label>
                         <div class="input-box ti_cart_ship_option">
-                            <input class="input-text ti_cart_zip validate-postcode<?php if ($this->isZipCodeRequired()):?> required-entry<?php endif;?>" type="text" id="postcode" name="estimate_postcode" value="Zip code" onfocus="if (this.value == 'Zip code') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Zip code';}" class="ti_cart_zip" />
-                        </div>
+                            <input class="input-text ti_cart_zip validate-postcode<?php if ($this->isZipCodeRequired()):?> required-entry<?php endif;?>" type="text" id="postcode" name="estimate_postcode" placeholder="Zip code" class="ti_cart_zip" />
+                        </div>-->
                     <!--</li>
                 </ul>-->
 				<!---_____________START SHIPPING CODE CUSTOMIZATION________________________--->
 				
 				
-                <div class="buttons-set">
-                    <button type="button" title="<?php echo $this->__('Get Quote') ?>" onclick="coShippingMethodForm.submit()" class="ti_altBtn block_center"><span><span><?php echo $this->__('Get Quote') ?></span></span></button>
-                </div>
+                <!--<div class="buttons-set">
+                    <button type="button" title="<?php /*echo $this->__('Get Quote') */?>" onclick="coShippingMethodForm.submit()" class="ti_altBtn block_center"><span><span><?php /*echo $this->__('Get Quote') */?></span></span></button>
+                </div>-->
 				
             </form>
             <script type="text/javascript">
@@ -119,12 +92,37 @@ end Megan HTML-->
             <form id="co-shipping-method-form" action="<?php echo $this->getUrl('checkout/cart/estimateUpdatePost') ?>">
                 <div class="ti_select_barContainer ti_cart_ship_option">
 					<select id='ti_drop_estimate_method' name="estimate_method">
-						<?php foreach ($_shippingRateGroups as $code => $_rates){ 
+                        <?php $min_rate = 0; $min_rate_array = array();?>
+						<?php foreach ($_shippingRateGroups as $code => $_rates){
+
 								$carrier_name = $this->escapeHtml($this->getCarrierName($code));
+
+                                foreach($_rates as $_rate){
+                                    $min_rate_array[] = $_rate->getPrice();
+                                }
+                                $min_rate = min($min_rate_array);
 								foreach ($_rates as $_rate){
-									$method_title = $carrier_name.'-'.$this->escapeHtml($_rate->getMethodTitle());
-									$_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax());
-									$incl = $this->getShippingPrice($_rate->getPrice(), true);
+                                    if($this->htmlEscape($_rate->getCode()) === 'freeshipping_freeshipping' ){
+                                        $method_title = 'Tomato Mail';
+                                        $_excl = 'FREE';
+                                    }
+                                    else if($this->htmlEscape($_rate->getCode()) === 'flatrate_flatrate'){
+                                        $method_title = 'Tomato Mail';
+                                        $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax());
+                                    }
+                                    else{
+                                        $method_title = $carrier_name.'-'.$this->escapeHtml($_rate->getMethodTitle());
+                                        $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax());
+                                    }
+
+
+                                    $incl = $this->getShippingPrice($_rate->getPrice(), true);
+
+                                    if($_rate->getPrice() == $min_rate){
+                                        $auto_ship_code = $this->htmlEscape($_rate->getCode());
+
+                                    }
+
 									$method_title .= ' ['. $_excl;
 									if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl) {
 										$str2 .= ' '. $this->__('Incl. Tax'); echo $_incl;
@@ -134,14 +132,16 @@ end Megan HTML-->
 								<option <?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' selected="selected"' ?> value="<?php echo $this->htmlEscape($_rate->getCode()) ?>"><?php echo $method_title;?></option>
 							<?php
 								}
+
 							}
 						?>
 					
-					</select>	
+					</select>
+
 				</div>
-                <div class="buttons-set">
-                    <button type="submit" title="<?php echo $this->__('Update Total') ?>" class="button block_center" name="do" value="<?php echo $this->__('Update Total') ?>"><span><span><?php echo $this->__('Update Total') ?></span></span></button>
-                </div>
+                <!--<div class="buttons-set">
+                    <button type="submit" title="<?php /*echo $this->__('Update Total') */?>" class="button block_center" name="do" value="<?php /*echo $this->__('Update Total') */?>"><span><span><?php /*echo $this->__('Update Total') */?></span></span></button>
+                </div>-->
             </form>
             <?php endif; ?>
             <script type="text/javascript">
@@ -172,3 +172,130 @@ end Megan HTML-->
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    //<![CDATA[
+
+    /*var APIURL = 'http://' + 'paragonex.ubinary.com/httphandlers/API/';
+
+    jQuery(document).ready(function () {
+
+        *//* Country code population *//*
+
+        jQuery.getJSON(APIURL + '/getlocation.ashx?format=JSON&APIver=2&callback=?', {}, function (data) {
+
+            countryCode = data.GetLocation.Data.location.countryCode;
+
+            if (countryCode == 'UN' || countryCode == '' || countryCode == 'N/A') { //could not recive data
+
+                jQuery("#country").val('US');
+                jQuery('#region').hide();
+                jQuery('#region_id').show();
+
+            } else {
+                jQuery('#country option[value="'+ countryCode +'"]').attr("selected", "selected");
+                if (countryCode == 'US') { //could not recive data
+                    jQuery('#region').hide();
+                    jQuery('#region_id').show();
+
+                }
+                else{
+                    jQuery('#region').show();
+                    jQuery('#region_id').hide();
+                }
+
+            }
+        });
+
+
+    });*/
+    jQuery(document).ready(function () {
+        var ship_code = '<?php echo $auto_ship_code;?>';
+        jQuery("#postcode").keyup(function() {
+            var zip = jQuery(this).val();
+            var len = zip.length;
+            if(len < 3 || len > 5){
+
+            }
+            else if(len == 3){
+                //zip codefor canada
+                jQuery.ajax({
+                    url: "http://api.zippopotam.us/ca/" + zip,
+                    cache: false,
+                    dataType: "json",
+                    type: "GET",
+                    success: function(result, success) {
+
+                        places = result['places'][0];
+
+                        jQuery('#country option[value="CA"]').attr("selected", "selected");
+
+                        var x = new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+                        x.update();
+                        jQuery('#region_id option[title="'+ places['state'] +'"]').attr("selected", "selected");
+                        /*new Ajax.Request("http://127.0.0.1/magento/index.php/checkout/cart/estimateUpdatePost", {
+                            method: "post",
+                            parameters: {
+                                estimate_method : ship_code
+                            },
+                            cache: false,
+                            onSuccess: function(transport) {
+                                return true;
+                            }
+                        });*/
+
+                        jQuery('#ti_drop_estimate_method').val(ship_code);
+                        jQuery('#co-shipping-method-form').submit();
+                        coShippingMethodForm.submit();
+                    },
+                    error: function(result, success) {
+
+                    }
+                });
+            }
+            else if(len == 5){
+                //zip code for usa
+                jQuery.ajax({
+                    url: "http://api.zippopotam.us/us/" + zip,
+                    cache: false,
+                    dataType: "json",
+                    type: "GET",
+                    success: function(result, success) {
+
+                        places = result['places'][0];
+                        //var title = jquery( "region_id" ).attr( "title" );
+                        jQuery('#country option[value="US"]').attr("selected", "selected");
+                        var x = new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+                        x.update();
+                        jQuery('#region_id option[title="'+ places['state'] +'"]').attr("selected", "selected");
+
+                        /*new Ajax.Request("http://127.0.0.1/magento/index.php/checkout/cart/estimateUpdatePost", {
+                            method: "post",
+                            parameters: {
+                                estimate_method : ship_code
+                            },
+                            cache: false,
+                            onSuccess: function(transport) {
+                                return true;
+                            }
+                        });*/
+
+                        jQuery('#ti_drop_estimate_method').val(ship_code);
+                        jQuery('#co-shipping-method-form').submit();
+                        coShippingMethodForm.submit();
+                    },
+                    error: function(result, success) {
+                        
+                    }
+                });
+            }
+
+
+        });
+        jQuery('#ti_drop_estimate_method').change(function(){
+            jQuery('#co-shipping-method-form').submit();
+
+        });
+
+    });
+    //]]>
+</script>

@@ -55,10 +55,22 @@
 
 <!-- Update section !-->
 <div id="ti_update_form">
-    <div id = "success_message"></div>
-    <input type="radio" name="update_freq" value="0">Regular<br>
-    <input type="radio" name="update_freq" value="1">Once a Month<br>
-    <input type="radio" name="update_freq" value="2">Twice a Month<br>
+    <div id="success_message"></div>
+    <input type="radio" id="regular" name="update_freq" value="0">
+    <label for="regular">
+        <div class="ti-radio"></div>
+        <span>Regular</span>
+    </label><br>
+    <input type="radio" id="once" name="update_freq" value="1">
+    <label for="once">
+        <div class="ti-radio"></div>
+        <span>Once a Month</span>
+    </label><br>
+    <input type="radio" id="twice" name="update_freq" value="2">
+    <label for="twice">
+        <div class="ti-radio"></div>
+        <span>Twice a Month</span>
+    </label><br>
     <button type="button" onclick="window.history.go(-1);">Back</button>&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
 
 </div>

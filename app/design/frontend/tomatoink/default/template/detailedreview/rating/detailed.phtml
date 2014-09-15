@@ -133,7 +133,7 @@ $showRating = Mage::helper('detailedreview')->checkFieldAvailable('review_graph'
             <?php foreach ( $this->getAvailableFilterAtts() as $k => $v ):?>
             <li>
                 <?php if ($helperDetailedreview->checkAvailableFilter($k)):?>
-                    <input type="checkbox" <?php if ($helperDetailedreview->isInGetParams($k,'true')):?>checked="checked"<?php endif;?> onclick="setLocation(this.value)" value="<?php echo htmlspecialchars( $currentUrl . $helperDetailedreview->getCurrentUrlWithNewParam($k,'true') );?>" id=""/>
+                    <input type="checkbox" <?php if ($helperDetailedreview->isInGetParams($k,'true')):?>checked="checked"<?php endif;?> onclick="setLocation(this.value)" value="<?php echo htmlspecialchars( $currentUrl . $helperDetailedreview->getCurrentUrlWithNewParam($k,'true') );?>" />
                     <label for=""><div class="ti-checkbox"></div><span><?php echo $this->__($v);?></span></label>
                 <?php endif; ?>
             </li>

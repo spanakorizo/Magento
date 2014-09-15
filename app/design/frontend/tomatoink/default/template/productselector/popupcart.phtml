@@ -38,13 +38,13 @@ echo "<div class='text_center'><a class='ti_button' href='" . $this->getUrl('') 
 <script>
     jQuery('.ti_close_popup').click(function(e){
         e.preventDefault();
-        jQuery('#show_cart').hide();
+        jQuery('#show_cart').hide("slow");
         jQuery('#ti_hide_body_div').hide();
          e.stopPropagation();
     });
     jQuery('#ti_continue_shopping').click(function(e){
         e.preventDefault();
-        jQuery('#show_cart').hide();
+        jQuery('#show_cart').hide("slow");
         jQuery('#ti_hide_body_div').hide();
         e.stopPropagation();
     });

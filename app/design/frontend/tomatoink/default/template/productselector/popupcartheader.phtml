@@ -30,7 +30,7 @@ foreach ($cartitem as $item) {
 }
 
 if ($shopptingcarthtml != "") $shopptingcarthtml .= "<div class='ti_miniCart_subtotal'><h4 class='ltWeight lgTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
-else $shopptingcarthtml = "You don't have any items inside cart.";
+else $shopptingcarthtml = "<p class='text_center'><span class='altTxt'>You don't have any items inside cart.</span></p>";
 
 
 $myArray = array(

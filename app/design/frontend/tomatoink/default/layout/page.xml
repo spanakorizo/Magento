@@ -51,6 +51,7 @@ Default layout, loads most of the pages
                  <action method="addJs"><script>jquery/jquery-1.8.3.js</script></action>
                  <action method="addJs"><script>jquery/jquery-ui-1.8.2.js</script></action>
                  <action method="addJs"><script>jquery/jquery-lightbox.js</script></action>
+                 <action method="addJs"><script>jquery/jquery.form.js</script></action>
                 <action method="addItem"><type>skin_js</type><name>js/ti-global/ti-global-functions.js</name></action>
                 <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
 

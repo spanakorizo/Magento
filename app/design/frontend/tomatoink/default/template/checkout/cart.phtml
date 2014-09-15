@@ -93,7 +93,7 @@
                 <thead>
                     <tr>
                         <!--<th rowspan="<?php echo $mergedCells; ?>">&nbsp;</th>-->
-                        <th rowspan="<?php echo $mergedCells; ?>" class="ti_table_productName"><span class="nobr"><?php echo $this->__('Product Name') ?></span></th>
+                        <th rowspan="<?php echo $mergedCells; ?>" class="ti_table_productName"><span class="nobr"><?php echo $this->__('Item') ?></span></th>
                         <!--<th rowspan="<?php echo $mergedCells; ?>"></th>
                         <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
                         <th rowspan="<?php echo $mergedCells; ?>"><span class="nobr"><?php echo $this->__('Move to Wishlist') ?></span></th>
@@ -205,13 +205,13 @@
     jQuery('#ti_cart_login').click(function(e){
         e.preventDefault();
         jQuery('#ti_hide_body_div').show();
-        jQuery('#ti_cart_login_box').show(e);
+        jQuery('#ti_cart_login_box').show("slow");
         e.stopPropagation();
     });
     jQuery('#ti_cartlogin_close').click(function(e){
         e.preventDefault();
         jQuery('#ti_hide_body_div').hide();
-        jQuery('#ti_cart_login_box').hide(e);
+        jQuery('#ti_cart_login_box').hide("slow");
         jQuery('#ti_cart_popup_error_msg').hide();
         e.stopPropagation();
     });
@@ -222,17 +222,17 @@
             if(jQuery('#ti_cart_register_box').is(":visible")){
                 jQuery('#ti_hide_body_div').show();
                 jQuery('#ti_cart_register_box').hide();
-                jQuery('#ti_cart_login_box').show(e);
+                jQuery('#ti_cart_login_box').show("slow");
             }
 			else if(jQuery('#ti_cart_forgetpass_box').is(":visible")){
 				jQuery('#ti_hide_body_div').show();
 				jQuery('#ti_cart_forgetpass_box').hide();
 				jQuery('.ti_cart_popup_error_pass').hide();
-				jQuery('#ti_cart_login_box').show(e);
+				jQuery('#ti_cart_login_box').show("slow");
 			}
             else{
                 jQuery('#ti_hide_body_div').hide();
-                jQuery('#ti_cart_login_box').hide(e);
+                jQuery('#ti_cart_login_box').hide("slow");
                 jQuery('#ti_cart_popup_error_msg').hide();
             }
 
@@ -332,12 +332,12 @@
         jQuery('#ti_cart_popup_error_msg_empty').show();
         jQuery('#ti_hide_body_div').show();
         jQuery('#ti_cart_login_box').hide();
-        jQuery('#ti_cart_register_box').show(e);
+        jQuery('#ti_cart_register_box').show("slow");
 
     }
     jQuery('#ti_cartregister_close, #ti_cartforget_close').click(function(e){
         e.preventDefault();
-        jQuery('#ti_cart_register_box').hide(e);
+        jQuery('#ti_cart_register_box').hide("slow");
         jQuery('#ti_cart_popup_error_msg').hide();
 		jQuery('#ti_cart_forgetpass_box').hide();
 		jQuery('.ti_cart_popup_error_pass').hide();
@@ -349,7 +349,7 @@
 	
     jQuery('#ti_show_register_info').click(function(e){
         e.preventDefault();
-        jQuery('#ti_cart_register_box').show(e);
+        jQuery('#ti_cart_register_box').show("slow");
         jQuery('#ti_cart_login_box').hide();
 		jQuery('#ti_cart_forgetpass_box').hide();
 		jQuery('.ti_cart_popup_error_pass').hide();
@@ -362,7 +362,7 @@
         jQuery('#ti_cart_register_box').hide();
 		jQuery('#forget_email').val(email);
         jQuery('#ti_cart_login_box').hide();
-		jQuery('#ti_cart_forgetpass_box').show(e);
+		jQuery('#ti_cart_forgetpass_box').show("slow");
 		jQuery('.ti_cart_popup_error_pass').hide();
         jQuery('#ti_cart_popup_error_msg').hide();
 		jQuery('#ti_cart_popup_forget_pass').hide();

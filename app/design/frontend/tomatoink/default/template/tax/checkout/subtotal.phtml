@@ -50,7 +50,7 @@
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <table id='ti_cart_reminderbox'><tr>
             <?php if (($this->getTotal()->getValue())<50): ?>
-            <td id='ti_cart_freereminder'><div><h3 class="lgTxt ltWeight">Want free shipping?<br>Just add <span id='' class="altTxt"><?php echo '$' . number_format(50-($this->getTotal()->getValue()), 2); ?></span> to your cart.</h3></div>
+            <td id='ti_cart_freereminder'><div><h3 class="lgTxt">For free S&amp;H, add <span id='' class="altTxt"><?php echo '$' . number_format(50-($this->getTotal()->getValue()), 2); ?></span> to your cart.</h3></div>
             </td>
         <?php else : ?> <td>&nbsp;</td>
     <?php endif; ?>
@@ -58,7 +58,7 @@
             <td class="a-right"><p><?php echo $this->getTotal()->getTitle() ?>:</p></td></tr></table>
     </td>
     <td style="<?php echo $this->getStyle() ?>">
-        <p><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></p>
+        <p class="ti-cart-right"><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></p>
     </td>
 </tr>
 <?php endif;?>

@@ -124,7 +124,7 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .dgTxt{color:#31590b;}
 .lgTxt{color:#559a13;}
 .bgTxt{color:#88cc40;}
-.altTxt{color:#e67921 !important;}
+.altTxt{color:#e67921;}
 .white{color:#fff;}
 .dark{color:#333;}
 .ltAlt{color:#fd8524;}
@@ -236,7 +236,7 @@ h6 {
 
 p {
 	font-size:1.6em;
-	margin: .5em 0;
+	margin:.5em 0;
 	color:#333;
 }
 
@@ -1637,7 +1637,7 @@ ul.ti_cart_review li:last-child{
 }
 
 #shopping-cart-totals-table > tbody > tr:last-child td{
-	height:50px;
+	height:70px;
 }
 
 #shopping-cart-totals-table td{

@@ -18,7 +18,7 @@ function add_to_box(id1,id2){
       if (jQuery(this).val() != '') qty_check = true;
     });
 	if (qty_check) {
-		//jQuery('#ti_group_multiple_msg').hide();
+		jQuery('#imageLoading img').hide();
 		jQuery('#ajax_loader').show();
 		try {
 			jQuery.ajax({
@@ -27,7 +27,6 @@ function add_to_box(id1,id2){
 				type : 'post',
 				data: data,
 				success: function(){
-					jQuery('#ajax_loader').hide();
 					jQuery.post( ti_global_url + 'productselector/popupcart/header',function(response){
 						var obj = response.evalJSON();
 						jQuery('#ti_header_cartcount').html(obj.totalnumber);
@@ -36,12 +35,14 @@ function add_to_box(id1,id2){
 					jQuery.post( ti_global_url + 'productselector/popupcart/index',function(data){
 						secondId.html(data);
 						secondId.css('top', screenTop);
-						secondId.show();
+						secondId.show("fast");
 						jQuery('#ti_hide_body_div').show();
 						jQuery('.qty').val("");
+                        jQuery('#ajax_loader').hide();
 					});
 
 				}
+
 			});
 
 		} 
@@ -52,7 +53,7 @@ function add_to_box(id1,id2){
 	else{
 			
 		secondId.html("<h2 style='padding:15px 5px'><strong class='altTxt' style='padding-left:10px'>Please select at least one product</strong></h2><span class='ti_close_popup'><a href='#' class='ti_checkoutStep_close altTxt' onclick =' hide_pop_up() '>X</a></span>");
-		secondId.show();
+		secondId.show("slow");
 		jQuery('#ti_hide_body_div').show();
 		secondId.css('top', Top);
 			
@@ -62,9 +63,8 @@ function add_to_box(id1,id2){
 
 }
 function hide_pop_up(){
-	jQuery('#ti_hide_body_div').hide();
-	jQuery('#show_cart').hide();
-	
+    jQuery('#ti_hide_body_div').hide();
+    jQuery('#show_cart').hide("slow");
 }
 /************* function for auto qty set to 1 if not set ******/
 function addSimpleToCart( id ) {
@@ -138,7 +138,7 @@ jQuery(document).ready(function($){
         e.preventDefault();
         if (e.keyCode == 27) { // esc keycode
             jQuery('#ti_hide_body_div').hide();
-            jQuery('#show_cart').hide();
+            jQuery('#show_cart').hide("slow");
         }
     });
     //code for top link
@@ -417,7 +417,55 @@ function checout_url(){
 	window.location.href = ti_global_url + 'index.php/firecheckout/';
 }
 
+//**************************************************************************//
+//* Description:                                                            */
+//* Author: added by Megan Prior-Pfeifer                                    */ 
+//* http://www.caincode.com/html5-placeholder-fallback-crappy-old-browsers/ */            
+//* Version: 0.0.1                                                          */
+//**************************************************************************//
 
+/* Modernizr 2.8.3 (Custom Build) | MIT & BSD
+ * Build: http://modernizr.com/download/#-input
+ */
+;window.Modernizr=function(a,b,c){function t(a){i.cssText=a}function u(a,b){return t(prefixes.join(a+";")+(b||""))}function v(a,b){return typeof a===b}function w(a,b){return!!~(""+a).indexOf(b)}function x(a,b,d){for(var e in a){var f=b[a[e]];if(f!==c)return d===!1?a[e]:v(f,"function")?f.bind(d||b):f}return!1}function y(){e.input=function(c){for(var d=0,e=c.length;d<e;d++)n[c[d]]=c[d]in j;return n.list&&(n.list=!!b.createElement("datalist")&&!!a.HTMLDataListElement),n}("autocomplete autofocus list placeholder max min multiple pattern required step".split(" "))}var d="2.8.3",e={},f=b.documentElement,g="modernizr",h=b.createElement(g),i=h.style,j=b.createElement("input"),k={}.toString,l={},m={},n={},o=[],p=o.slice,q,r={}.hasOwnProperty,s;!v(r,"undefined")&&!v(r.call,"undefined")?s=function(a,b){return r.call(a,b)}:s=function(a,b){return b in a&&v(a.constructor.prototype[b],"undefined")},Function.prototype.bind||(Function.prototype.bind=function(b){var c=this;if(typeof c!="function")throw new TypeError;var d=p.call(arguments,1),e=function(){if(this instanceof e){var a=function(){};a.prototype=c.prototype;var f=new a,g=c.apply(f,d.concat(p.call(arguments)));return Object(g)===g?g:f}return c.apply(b,d.concat(p.call(arguments)))};return e});for(var z in l)s(l,z)&&(q=z.toLowerCase(),e[q]=l[z](),o.push((e[q]?"":"no-")+q));return e.input||y(),e.addTest=function(a,b){if(typeof a=="object")for(var d in a)s(a,d)&&e.addTest(d,a[d]);else{a=a.toLowerCase();if(e[a]!==c)return e;b=typeof b=="function"?b():b,typeof enableClasses!="undefined"&&enableClasses&&(f.className+=" "+(b?"":"no-")+a),e[a]=b}return e},t(""),h=j=null,e._version=d,e}(this,this.document);
+
+jQuery( document ).ready(function($) {
+// If placeholder isn't supported.
+if (!Modernizr.input.placeholder) {
+    // For every element that has a placeholder attribute
+    $('[placeholder]').each(function() {
+        var $this = $(this),
+            placeholderValue = $this.attr('placeholder'); // Save the value of the placeholder for later
+ 
+        if ($this.val() == '') { // if field is empty, put the placeholder in it
+            $this.val( placeholderValue );
+            $this.addClass('ti-cms-hasPlaceholderText');
+        }
+        // Add/remove placeholder on focus/blur
+        $this.focus(function() {
+            // Hide the placeholder so the user can enter their own text
+            if ($this.val() == placeholderValue) {
+                $this.val('');
+                $this.removeClass('ti-cms-hasPlaceholderText');
+            }
+        }).blur(function() {
+      // If the user didn't enter any text, show the placeholder text again.
+            if ($this.val() == '' || $this.val() == placeholderValue) {
+                $this.val(placeholderValue);
+                $this.addClass('ti-cms-hasPlaceholderText');
+            }
+        });
+ 
+        // If the user submits the form, remove the placeholder if it is still there.
+        $this.closest('form').submit(function() {
+            if ($this.val() == $this.attr('placeholder')) {
+                $this.val('');
+            }
+        });
+    });
+}
+
+});
 
 
 

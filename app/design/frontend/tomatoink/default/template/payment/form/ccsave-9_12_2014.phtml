@@ -47,7 +47,7 @@
         <div class="ti-required-entry">
             <label for="<?php echo $_code ?>_cc_owner" class="required ti_cms_labelHide"><span><?php echo $this->__('Name on Card') ?></span></label>
                 <!--<div class="input-box">--><div>
-                    <input type="text" title="<?php echo $this->__('Name on Card') ?>" class="input-text required-entry ti_checkout_info" id="<?php echo $_code ?>_cc_owner" name="payment[cc_owner]" value="<?php echo $this->escapeHtml($this->getInfoData('cc_owner')) ?>" placeholder="Name on card" />
+                    <input type="text" title="<?php echo $this->__('Name on Card') ?>" class="input-text required-entry ti_checkout_info" id="<?php echo $_code ?>_cc_owner" name="payment[cc_owner]" value="<?php echo $this->escapeHtml($this->getInfoData('cc_owner')) ?>" onfocus="if(this.value=='Name on Card')this.value='';" onblur="if(this.value=='')this.value='Name on Card';" />
                 </div>
             </div>
         </li>
@@ -55,7 +55,7 @@
             <div class="ti-required-entry">
                 <label for="<?php echo $_code ?>_cc_number" class="required ti_cms_labelHide"><span><?php echo $this->__('Credit Card Number') ?></span></label>
                 <!--<div class="input-box">--><div>
-                    <input type="text" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo $this->__('Credit Card Number') ?>" class="input-text validate-cc-number validate-cc-type ti_checkout_info" value="" placeholder="Credit card number"/>
+                    <input type="text" id="<?php echo $_code ?>_cc_number" name="payment[cc_number]" title="<?php echo $this->__('Credit Card Number') ?>" class="input-text validate-cc-number validate-cc-type ti_checkout_info" value="" onfocus="if(this.value=='Credit Card Number')this.value='';" onblur="if(this.value=='')this.value='Credit Card Number';"/>
                 </div>
             </div>
         </li>
@@ -90,7 +90,7 @@
             <label for="<?php echo $_code ?>_cc_cid" class="required ti_cms_labelHide"><span><?php echo $this->__('Card Verification Number') ?></span></label>
             <!--<div class="input-box">--><div>
                 <div class="v-fix ti_checkout_half ti-required-entry">
-                    <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry validate-cc-cvn ti_checkout_info ti_checkout_ccv" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="" placeholder="CCV" />
+                    <input type="text" title="<?php echo $this->__('Card Verification Number') ?>" class="input-text cvv required-entry validate-cc-cvn ti_checkout_info ti_checkout_ccv" id="<?php echo $_code ?>_cc_cid" name="payment[cc_cid]" value="CCV" onfocus="if(this.value=='CCV')this.value='';" onblur="if(this.value=='')this.value='CCV';" />
                     <a href="#" class="cvv-what-is-this" rel="nofollow" title="This is a small 3 or 4 digit number located on the front or back of your credit card."><span class="lgTxt"><?php echo $this->__('What is this?') ?></span></a>
                 </div>
             </div>

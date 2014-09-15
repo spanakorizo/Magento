@@ -81,6 +81,12 @@
                     el.zoomPad = $('<div/>').addClass('zoomPad');
                     img.wrap(el.zoomPad);
                 }
+                if(screen.width < 768 ){
+
+                    $('.zoomPad', el).css({width: '50%', margin: '0 25%' });
+                    $('.zoomPad img', el).css({width: '100%', margin: '0' });
+
+                }
                 if(settings.zoomType == 'standard'){
                     settings.zoomWidth  = smallimage.w;
                     settings.zoomHeight  =   smallimage.h;
@@ -366,11 +372,16 @@
                     $(this.node).empty().append(this.image);
                 }
             };
+
+
             this.setdimensions = function () {
-                this.node.w = (parseInt((settings.zoomWidth) / el.scale.x) > smallimage.w ) ? smallimage.w : (parseInt(settings.zoomWidth / el.scale.x)); 
-                this.node.h = (parseInt((settings.zoomHeight) / el.scale.y) > smallimage.h ) ? smallimage.h : (parseInt(settings.zoomHeight / el.scale.y)); 
+
+
+                this.node.w = (parseInt((settings.zoomWidth) / el.scale.x) > smallimage.w ) ? smallimage.w : (parseInt(settings.zoomWidth / el.scale.x));
+                this.node.h = (parseInt((settings.zoomHeight) / el.scale.y) > smallimage.h ) ? smallimage.h : (parseInt(settings.zoomHeight / el.scale.y));
                 this.node.top = (smallimage.oh - this.node.h - 2) / 2;
                 this.node.left = (smallimage.ow - this.node.w - 2) / 2;
+
                 //centering lens
                 this.node.css({
                     top: 0,
@@ -421,6 +432,7 @@
                 largeimage.setposition();
             };
             this.setposition = function (e) {
+
                 el.mousepos.x = e.pageX;
                 el.mousepos.y = e.pageY;
                 var lensleft = 0;
@@ -518,20 +530,33 @@
                 this.node.toppos = 0;
                 if (settings.zoomType != 'innerzoom') {
                     //positioning
+                    var zoompad_width = $('.zoomPad').width();
+                    if(screen.width < 768 ){
+
+                        settings.position = "top_new";
+                    }
+                    var left_new_left = (zoompad_width - smallimage.ow)/2;
                     switch (settings.position) {
                     case "left":
+
                         this.node.leftpos = (smallimage.pos.l - smallimage.bleft - Math.abs(settings.xOffset) - settings.zoomWidth > 0) ? (0 - settings.zoomWidth - Math.abs(settings.xOffset)) : (smallimage.ow + Math.abs(settings.xOffset));
                         this.node.toppos = Math.abs(settings.yOffset);
+
                         break;
                     case "top":
                         this.node.leftpos = Math.abs(settings.xOffset);
                         this.node.toppos = (smallimage.pos.t - smallimage.btop - Math.abs(settings.yOffset) - settings.zoomHeight > 0) ? (0 - settings.zoomHeight - Math.abs(settings.yOffset)) : (smallimage.oh + Math.abs(settings.yOffset));
+                        break;
+                    case "top_new":
+                        this.node.leftpos = left_new_left;
+                        this.node.toppos = smallimage.oh + Math.abs(settings.yOffset);
                         break;
                     case "bottom":
                         this.node.leftpos = Math.abs(settings.xOffset);
                         this.node.toppos = (smallimage.pos.t - smallimage.btop + smallimage.oh + Math.abs(settings.yOffset) + settings.zoomHeight < screen.height) ? (smallimage.oh + Math.abs(settings.yOffset)) : (0 - settings.zoomHeight - Math.abs(settings.yOffset));
                         break;
                     default:
+
                         this.node.leftpos = (smallimage.rightlimit + Math.abs(settings.xOffset) + settings.zoomWidth < screen.width) ? (smallimage.ow + Math.abs(settings.xOffset)) : (0 - settings.zoomWidth - Math.abs(settings.xOffset));
                         this.node.toppos = Math.abs(settings.yOffset);
                         break;

@@ -62,17 +62,8 @@
         <dl class="item-options" <?php echo $style ?>>
             <?php foreach ($_options as $_option) : ?>
             <?php $_formatedOptionValue = $this->getFormatedOptionValue($_option) ?>
-            <dt><?php echo '<p class="altTxt"> Combo Includes: </p>';?></dt>
-            <!-- <dt><?php //echo $this->htmlEscape($_option['label']) ?></dt> -->
-            <dd<?php if (isset($_formatedOptionValue['full_view'])): ?> class="truncated"<?php endif; ?>>
-                <?php //echo $_formatedOptionValue['value'] ?>
-                <?php //echo $_formatedOptionValue['value'] ;
-
-                foreach( $_option['value'] as $simple_prd_name ){
-                    $bundle_item = explode('$',$simple_prd_name);
-                    echo '<dt><b>- </b>'.trim($bundle_item[0]).'</dt>';
-                }
-                ?>
+            <dt><?php echo $this->htmlEscape($_option['label']) ?></dt>
+            <dd<?php if (isset($_formatedOptionValue['full_view'])): ?> class="truncated"<?php endif; ?>><?php echo $_formatedOptionValue['value'] ?>
                 <?php if (isset($_formatedOptionValue['full_view'])): ?>
                 <div class="truncated_full_value">
                     <dl class="item-options">
