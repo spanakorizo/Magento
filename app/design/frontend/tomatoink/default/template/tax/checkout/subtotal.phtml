@@ -33,7 +33,7 @@
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo $this->helper('tax')->__('Subtotal (Excl. Tax)') ?>:</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
        <p> <?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueExclTax()) ?></p>
     </td>
 </tr>
@@ -41,7 +41,7 @@
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo $this->helper('tax')->__('Subtotal (Incl. Tax)') ?>:</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <p><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValueInclTax()) ?></p>
     </td>
 </tr>
@@ -57,7 +57,7 @@
 
             <td class="a-right"><p><?php echo $this->getTotal()->getTitle() ?>:</p></td></tr></table>
     </td>
-    <td style="<?php echo $this->getStyle() ?>">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <p class="ti-cart-right"><?php echo $this->helper('checkout')->formatPrice($this->getTotal()->getValue()) ?></p>
     </td>
 </tr>

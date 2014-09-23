@@ -67,20 +67,7 @@
                         </div>
                     <!--</li>-->
                 <?php endif; ?>
-                    <!--<li>-->
-                        <!--<label for="postcode" class="ti_cms_labelHide <?php if ($this->isZipCodeRequired()) echo ' required ti-required-entry' ?>"><span><?php echo $this->__('Zip/Postal Code') ?></span></label>
-                        <div class="input-box ti_cart_ship_option">
-                            <input class="input-text ti_cart_zip validate-postcode<?php if ($this->isZipCodeRequired()):?> required-entry<?php endif;?>" type="text" id="postcode" name="estimate_postcode" placeholder="Zip code" class="ti_cart_zip" />
-                        </div>-->
-                    <!--</li>
-                </ul>-->
-				<!---_____________START SHIPPING CODE CUSTOMIZATION________________________--->
-				
-				
-                <!--<div class="buttons-set">
-                    <button type="button" title="<?php /*echo $this->__('Get Quote') */?>" onclick="coShippingMethodForm.submit()" class="ti_altBtn block_center"><span><span><?php /*echo $this->__('Get Quote') */?></span></span></button>
-                </div>-->
-				
+
             </form>
             <script type="text/javascript">
             //<![CDATA[
@@ -92,15 +79,12 @@
             <form id="co-shipping-method-form" action="<?php echo $this->getUrl('checkout/cart/estimateUpdatePost') ?>">
                 <div class="ti_select_barContainer ti_cart_ship_option">
 					<select id='ti_drop_estimate_method' name="estimate_method">
-                        <?php $min_rate = 0; $min_rate_array = array();?>
+                        
 						<?php foreach ($_shippingRateGroups as $code => $_rates){
 
 								$carrier_name = $this->escapeHtml($this->getCarrierName($code));
 
-                                foreach($_rates as $_rate){
-                                    $min_rate_array[] = $_rate->getPrice();
-                                }
-                                $min_rate = min($min_rate_array);
+                                
 								foreach ($_rates as $_rate){
                                     if($this->htmlEscape($_rate->getCode()) === 'freeshipping_freeshipping' ){
                                         $method_title = 'Tomato Mail';
@@ -116,13 +100,9 @@
                                     }
 
 
-                                    $incl = $this->getShippingPrice($_rate->getPrice(), true);
+                                    $_incl = $this->getShippingPrice($_rate->getPrice(), true);
 
-                                    if($_rate->getPrice() == $min_rate){
-                                        $auto_ship_code = $this->htmlEscape($_rate->getCode());
-
-                                    }
-
+                                    
 									$method_title .= ' ['. $_excl;
 									if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl) {
 										$str2 .= ' '. $this->__('Incl. Tax'); echo $_incl;
@@ -172,122 +152,94 @@
         </div>
     </div>
 </div>
+
 <script type="text/javascript">
     //<![CDATA[
 
-    /*var APIURL = 'http://' + 'paragonex.ubinary.com/httphandlers/API/';
-
-    jQuery(document).ready(function () {
-
-        *//* Country code population *//*
-
-        jQuery.getJSON(APIURL + '/getlocation.ashx?format=JSON&APIver=2&callback=?', {}, function (data) {
-
-            countryCode = data.GetLocation.Data.location.countryCode;
-
-            if (countryCode == 'UN' || countryCode == '' || countryCode == 'N/A') { //could not recive data
-
-                jQuery("#country").val('US');
-                jQuery('#region').hide();
-                jQuery('#region_id').show();
-
-            } else {
-                jQuery('#country option[value="'+ countryCode +'"]').attr("selected", "selected");
-                if (countryCode == 'US') { //could not recive data
-                    jQuery('#region').hide();
-                    jQuery('#region_id').show();
-
-                }
-                else{
-                    jQuery('#region').show();
-                    jQuery('#region_id').hide();
-                }
-
-            }
-        });
-
-
-    });*/
     jQuery(document).ready(function () {
         var ship_code = '<?php echo $auto_ship_code;?>';
-        jQuery("#postcode").keyup(function() {
+
+        jQuery("#postcode").keypress(function(el) {
+			
             var zip = jQuery(this).val();
-            var len = zip.length;
-            if(len < 3 || len > 5){
+            var len = zip.length
+			if(el.which  == 13){
+				if(len < 3 || len > 5){
 
-            }
-            else if(len == 3){
-                //zip codefor canada
-                jQuery.ajax({
-                    url: "http://api.zippopotam.us/ca/" + zip,
-                    cache: false,
-                    dataType: "json",
-                    type: "GET",
-                    success: function(result, success) {
+				}
+				else if(len == 3){
+					//zip codefor canada
+					jQuery.ajax({
+						url: "http://api.zippopotam.us/ca/" + zip,
+						cache: false,
+						dataType: "json",
+						type: "GET",
+						success: function(result, success) {
 
-                        places = result['places'][0];
+							places = result['places'][0];
 
-                        jQuery('#country option[value="CA"]').attr("selected", "selected");
+							jQuery('#country option[value="CA"]').attr("selected", "selected");
+							var x = new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+							x.update();
+							jQuery('#region_id option[title="'+ places['state'] +'"]').attr("selected", "selected");
 
-                        var x = new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
-                        x.update();
-                        jQuery('#region_id option[title="'+ places['state'] +'"]').attr("selected", "selected");
-                        /*new Ajax.Request("http://127.0.0.1/magento/index.php/checkout/cart/estimateUpdatePost", {
-                            method: "post",
-                            parameters: {
-                                estimate_method : ship_code
-                            },
-                            cache: false,
-                            onSuccess: function(transport) {
-                                return true;
-                            }
-                        });*/
+							coShippingMethodForm.submit();
 
-                        jQuery('#ti_drop_estimate_method').val(ship_code);
-                        jQuery('#co-shipping-method-form').submit();
-                        coShippingMethodForm.submit();
-                    },
-                    error: function(result, success) {
+								new Ajax.Request(ti_global_url + "checkout/cart/estimateUpdatePost", {
+								method: "post",
+								parameters: {
+								  estimate_method : '<?php echo $this->getLowestShippingMethodCode('CA'); ?>'
+								},
+								onSuccess: function(transport) {
+									
 
-                    }
-                });
-            }
-            else if(len == 5){
-                //zip code for usa
-                jQuery.ajax({
-                    url: "http://api.zippopotam.us/us/" + zip,
-                    cache: false,
-                    dataType: "json",
-                    type: "GET",
-                    success: function(result, success) {
+								}
+							});
+									
+							
 
-                        places = result['places'][0];
-                        //var title = jquery( "region_id" ).attr( "title" );
-                        jQuery('#country option[value="US"]').attr("selected", "selected");
-                        var x = new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
-                        x.update();
-                        jQuery('#region_id option[title="'+ places['state'] +'"]').attr("selected", "selected");
+						},
+						error: function(result, success) {
+                            //error code here zahed
+						}
+					});
+				}
+				else if(len == 5){
+					//zip code for usa
+					jQuery.ajax({
+						url: "http://api.zippopotam.us/us/" + zip,
+						cache: false,
+						dataType: "json",
+						type: "GET",
+						success: function(result, success) {
 
-                        /*new Ajax.Request("http://127.0.0.1/magento/index.php/checkout/cart/estimateUpdatePost", {
-                            method: "post",
-                            parameters: {
-                                estimate_method : ship_code
-                            },
-                            cache: false,
-                            onSuccess: function(transport) {
-                                return true;
-                            }
-                        });*/
+							places = result['places'][0];
+							//var title = jquery( "region_id" ).attr( "title" );
+							jQuery('#country option[value="US"]').attr("selected", "selected");
+							var x = new RegionUpdater('country', 'region', 'region_id', <?php echo $this->helper('directory')->getRegionJson() ?>);
+							x.update();
+							jQuery('#region_id option[title="'+ places['state'] +'"]').attr("selected", "selected");
 
-                        jQuery('#ti_drop_estimate_method').val(ship_code);
-                        jQuery('#co-shipping-method-form').submit();
-                        coShippingMethodForm.submit();
-                    },
-                    error: function(result, success) {
-                        
-                    }
-                });
-            }
+							coShippingMethodForm.submit();
+							//alert('here');
+								new Ajax.Request(ti_global_url + "checkout/cart/estimateUpdatePost", {
+								method: "post",
+								parameters: {
+								  estimate_method : '<?php echo $this->getLowestShippingMethodCode('US'); ?>'
+								},
+								onSuccess: function(transport) {
+
+								}
+							});
+
+						},
+						error: function(result, success) {
+
+						}
+					});
+				}
+			}
+            
 
 
         });

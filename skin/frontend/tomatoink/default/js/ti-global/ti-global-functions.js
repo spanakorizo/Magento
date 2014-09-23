@@ -3,10 +3,12 @@
 /*****   Added by : Zahed               ****/
 /*****  Date : 16 June 2014           *****/
 /*****************************************/
+
 function add_to_box(id1,id2){
 
     var firstId = jQuery('#' + id1 );
     var secondId = jQuery('#' + id2 );
+    //var secondId = jQuery('#' + id2 );
     var screenTop = jQuery(document).scrollTop();
     var Top = (screen.height / 3);
     Top = screenTop + Top;
@@ -20,28 +22,60 @@ function add_to_box(id1,id2){
 	if (qty_check) {
 		jQuery('#imageLoading img').hide();
 		jQuery('#ajax_loader').show();
+
 		try {
 			jQuery.ajax({
 				url: url,
-				dataType: 'json',
+				dataType: 'text',
 				type : 'post',
 				data: data,
-				success: function(){
+				success: function(text){
+
+
+
 					jQuery.post( ti_global_url + 'productselector/popupcart/header',function(response){
 						var obj = response.evalJSON();
 						jQuery('#ti_header_cartcount').html(obj.totalnumber);
+            jQuery('#ti_popup_cart_num').html(obj.totalnumber);
 						jQuery('#ti_header_cartDrop').html(obj.alltext);
-					});
-					jQuery.post( ti_global_url + 'productselector/popupcart/index',function(data){
-						secondId.html(data);
-						secondId.css('top', screenTop);
-						secondId.show("fast");
-						jQuery('#ti_hide_body_div').show();
-						jQuery('.qty').val("");
-                        jQuery('#ajax_loader').hide();
-					});
+            if (obj.totalitem > 1) {
+              jQuery('#ti_header_cartDrop').contentcarouselhd();
+              jQuery('.ti_miniCart_carousel-nav').show();
+            }
 
-				}
+
+                    //clean qty, show pop up cart, hide loading image
+          jQuery('#show_cart_content').html(text);
+          secondId.css('top', screenTop);
+          secondId.show("fast");
+          jQuery('#ti_hide_body_div').show();
+          jQuery('.qty').val("");
+          jQuery('#ajax_loader').hide();
+
+
+          //pop up cart
+          jQuery('#ti_continue_shopping').click(function(e){
+            e.preventDefault();
+            jQuery('#show_cart').hide("slow");
+            jQuery('#ti_hide_body_div').hide();
+            e.stopPropagation();
+           });
+
+					});
+					//jQuery.post( ti_global_url + 'productselector/popupcart/index',function(data){
+					//	secondId.html(data);
+					//	secondId.css('top', screenTop);
+					//	secondId.show("fast");
+					//	jQuery('#ti_hide_body_div').show();
+					//	jQuery('.qty').val("");
+          //  jQuery('#ajax_loader').hide();
+					//});
+
+				}, 
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                  //alert(textStatus);
+                  console.log(errorThrown);
+              }
 
 			});
 
@@ -133,6 +167,9 @@ for (i=0;i<ARRcookies.length;i++)
 /*******************************************************/
 
 jQuery(document).ready(function($){
+
+
+
 	
 	jQuery(document).keyup(function(e) {
         e.preventDefault();
@@ -239,7 +276,7 @@ function change_readmore(_more, _less) {
 	$("#ti_header_help").click(function(e){
 		jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
 		if (!$("#ti_header_helpDrop").is(":visible")) 
-			$("#ti_header_helpDrop").stop(true, true).slideDown("fast");
+			$("#ti_header_helpDrop").stop(true, true).slideToggle("fast");
 
 		coupon_slideback();
 		e.stopPropagation();
@@ -257,17 +294,14 @@ function change_readmore(_more, _less) {
   	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
   	if (!$("#ti_header_accountDrop").is(":visible")) 
     $("#ti_header_accountDrop").stop(true, true).slideToggle("fast");
-  coupon_slideback();
+    coupon_slideback();
     e.stopPropagation();
   });
 
-   $("#ti_header_searchHelp").click(function(e){
-  	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-  	if (!$("#ti_header_searchHelpDrop").is(":visible")) 
-    $("#ti_header_searchHelpDrop").stop(true, true).slideToggle("fast");
-  coupon_slideback();
+  $(".ti_cms_dropContent").click(function(e) {
     e.stopPropagation();
   });
+
 	//Toggle coupon code
 	jQuery("#ti_main_coupon_arrow, #ti_main_coupon").click(function(e){
   jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
@@ -284,16 +318,37 @@ function change_readmore(_more, _less) {
 	});
 
 
+//hide drop content when clicking on anywhere else
+jQuery(document).click(function (e) {
 
+  jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  if (e.target.id != "ti_header_coupon_code")
+  coupon_slideback();
 
+});
 
 
 
 /****************************************/
+/******   small shopping cart   *******/
+/* Yiyang 9-16-2014         */
+/******************************/
+//jQuery('#ti_header_cartDrop').contentcarousel();
+
+ //$("#owl-demo").owlCarousel({
+ 
+//autoPlay: 3000, //Set AutoPlay to 3 seconds
+ 
+//items : 4,
+//itemsDesktop : [1199,3],
+//itemsDesktopSmall : [979,3]
+ 
+//});
+/****************************************/
 /* qty number input limit  */
 /* Yiyang 5-1-2014         */
 /******************************/
-
+/*
 //click qty input -> show empty
 jQuery(".qty").focus(function() {
   if (jQuery(this).val() == 0) jQuery(this).val('');
@@ -312,7 +367,7 @@ var ti_qty_previous="";
   jQuery(".qty").keyup(function() {
     if (jQuery(this).val().match(/\D/)) jQuery(this).val(ti_qty_previous);
   });
-
+*/
 
 /***************************************/
 /*   Display Small Navigation          */
@@ -394,15 +449,6 @@ else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "sim
 
 
 
-
-
-//hide drop content when clicking on anywhere else
-jQuery(document).click(function (e) {
-  jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-  if (e.target.id != "ti_header_coupon_code")
-  coupon_slideback();
-
-});
 
 function coupon_slideback() {
   var ti_header_arrowup = ti_global_url + "skin/frontend/tomatoink/default/images/ti-assets/header-coupon-arrow.png"; 

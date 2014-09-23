@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Compandsave_Checkout>
+           <version>1.0.0.0</version>
+        </Compandsave_Checkout>
+    </modules>
+    <global>
+
+    <blocks>
+        <checkout>
+            <rewrite>
+                <cart_shipping>Compandsave_Checkout_Block_Cart_Shipping</cart_shipping>
+            </rewrite>
+        </checkout>
+    </blocks>
+
+    </global>
+</config>

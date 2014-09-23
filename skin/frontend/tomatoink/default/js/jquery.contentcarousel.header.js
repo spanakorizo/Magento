@@ -4,9 +4,7 @@
             navigate	: function( dir, $el, $wrapper, opts, cache ) {
 
                 //customize responsive
-                cache.itemW = $('.ti_related_item_one_fourth').width();
-
-                $('.ti_related_item_one_fourth').css('position', 'absolute');
+                cache.itemW = $('.ti_miniCart_carousel_wrapper').width();
 
                 var scroll		= opts.scroll,
                     factor		= 1,
@@ -20,14 +18,14 @@
 
                 // clone the elements on the right / left and append / prepend them according to dir and scroll
                 if( dir === 1 ) {
-                    $wrapper.find('div.ti_related_item_one_fourth:lt(' + scroll + ')').each(function(i) {
+                    $wrapper.find('div.ti_miniCart_carousel_wrapper:lt(' + scroll + ')').each(function(i) {
                         $(this).clone(true).css( 'left', ( cache.totalItems - idxClicked + i ) * cache.itemW * factor + 'px' ).appendTo( $wrapper );
                     });
                 }
                 else {
                     var $first	= $wrapper.children().eq(0);
 
-                    $wrapper.find('div.ti_related_item_one_fourth:gt(' + ( cache.totalItems  - 1 - scroll ) + ')').each(function(i) {
+                    $wrapper.find('div.ti_miniCart_carousel_wrapper:gt(' + ( cache.totalItems  - 1 - scroll ) + ')').each(function(i) {
                         // insert before $first so they stay in the right order
                         $(this).clone(true).css( 'left', - ( scroll - i + idxClicked ) * cache.itemW * factor + 'px' ).insertBefore( $first );
                     });
@@ -35,7 +33,7 @@
 
                 // animate the left of each item
                 // the calculations are dependent on dir and on the cache.expanded value
-                $wrapper.find('div.ti_related_item_one_fourth').each(function(i) {
+                $wrapper.find('div.ti_miniCart_carousel_wrapper').each(function(i) {
                     var $item	= $(this);
                     $item.stop().animate({
                         left	:  ( dir === 1 ) ? '-=' + ( cache.itemW * factor * scroll ) + 'px' : '+=' + ( cache.itemW * factor * scroll ) + 'px'
@@ -56,7 +54,7 @@
                 // the item's position (1, 2, or 3) on the viewport (the visible items)
                 cache.winpos		= aux.getWinPos( $item.position().left, cache );//3
 
-                $wrapper.find('div.ti_related_item_one_fourth').not( $item ).hide();
+                $wrapper.find('div.ti_miniCart_carousel_wrapper').not( $item ).hide();
                 $item.find('div.ti_related_content_wrapper').css( 'left', cache.itemW + 'px' ).stop().animate({
                     width	: cache.itemW * 3 + 'px',
                     left	: cache.itemW + 'px'
@@ -77,7 +75,7 @@
             openItems	: function( $wrapper, $openedItem, opts, cache ) {
                 var openedIdx	= $openedItem.index();
 
-                $wrapper.find('div.ti_related_item_one_fourth').each(function(i) {
+                $wrapper.find('div.ti_miniCart_carousel_wrapper').each(function(i) {
                     var $item	= $(this),
                         idx		= $item.index();
 
@@ -116,7 +114,7 @@
                 // show more link
                 aux.toggleMore( $openedItem, true );
 
-                $wrapper.find('div.ti_related_item_one_fourth').each(function(i) {
+                $wrapper.find('div.ti_miniCart_carousel_wrapper').each(function(i) {
                     var $item	= $(this),
                         idx		= $item.index();
 
@@ -165,8 +163,8 @@
                         }
 
                         var $el 			= $(this),
-                            $wrapper		= $el.find('div.ti_cms_relatedProductWrap'),
-                            $items			= $wrapper.children('div.ti_related_item_one_fourth'),
+                            $wrapper		= $el.find('div.ti_carousel_header'),
+                            $items			= $wrapper.children('div.ti_miniCart_carousel_wrapper'),
                             cache			= {};
 
                         // save the with of one item
@@ -176,7 +174,7 @@
                         //console.log(cache.totalItems);
                         // add navigation buttons
                         //if( cache.totalItems > 4 )
-                            $el.prepend('<div class="ti_related-nav"><span class="ti_related-nav-prev">Previous</span><span class="ti_related-nav-next">Next</span></div>');
+                            $el.prepend('<div class="ti_miniCart_carousel-nav ti_hide_767" style="display:none"><span class="ti_carousel-nav-prev icon-angle-left"></span><span class="ti_carousel-nav-next icon-angle-right"></span></div>');
 
                         // control the scroll value
                         if( settings.scroll < 1 )
@@ -184,8 +182,8 @@
                         else if( settings.scroll > 4 )
                             settings.scroll = 4;
 
-                        var $navPrev		= $el.find('span.ti_related-nav-prev'),
-                            $navNext		= $el.find('span.ti_related-nav-next');
+                        var $navPrev		= $el.find('span.ti_carousel-nav-prev'),
+                            $navNext		= $el.find('span.ti_carousel-nav-next');
 
                         // hide the items except the first 3
                         $wrapper.css( 'overflow', 'hidden' );
@@ -199,37 +197,36 @@
                             });
                         });
 
-
                         // click to open the item(s)
                         //$el.find('a.ti-more').live('click.contentcarousel', function( event ) {
-                        $el.on('click.contentcarousel', 'a.ti-more', function( event ) {
+                        $el.on('click.contentcarouselhd', 'a.ti-more', function( event ) {
                             if( cache.isAnimating ) return false;
                             cache.isAnimating	= true;
                             $(this).hide();
-                            var $item	= $(this).closest('div.ti_related_item_one_fourth');
+                            var $item	= $(this).closest('div.ti_miniCart_carousel_wrapper');
                             aux.openItem( $wrapper, $item, settings, cache );
                             return false;
                         });
 
                         // click to close the item(s)
                         //$el.find('a.ti-close').live('click.contentcarousel', function( event ) {
-                        $el.on('click.contentcarousel', 'a.ti-close', function( event ) {
+                        $el.on('click.contentcarouselhd', 'a.ti-close', function( event ) {
                             if( cache.isAnimating ) return false;
                             cache.isAnimating	= true;
-                            var $item	= $(this).closest('div.ti_related_item_one_fourth');
+                            var $item	= $(this).closest('div.ti_miniCart_carousel_wrapper');
                             aux.closeItems( $wrapper, $item, settings, cache );
                             return false;
                         });
 
                         // navigate left
-                        $navPrev.bind('click.contentcarousel', function( event ) {
+                        $navPrev.bind('click.contentcarouselhd', function( event ) {
                             if( cache.isAnimating ) return false;
                             cache.isAnimating	= true;
                             aux.navigate( -1, $el, $wrapper, settings, cache );
                         });
 
                         // navigate right
-                        $navNext.bind('click.contentcarousel', function( event ) {
+                        $navNext.bind('click.contentcarouselhd', function( event ) {
                             if( cache.isAnimating ) return false;
                             cache.isAnimating	= true;
                             aux.navigate( 1, $el, $wrapper, settings, cache );
@@ -257,7 +254,7 @@
             }
         };
 
-    $.fn.contentcarousel = function(method) {
+    $.fn.contentcarouselhd = function(method) {
         //if (method == 3) {alert("what is it?");}
 
         if ( methods[method] ) {
@@ -265,7 +262,7 @@
         } else if ( typeof method === 'object' || ! method ) {
             return methods.init.apply( this, arguments );
         } else {
-            $.error( 'Method ' +  method + ' does not exist on jQuery.contentcarousel' );
+            $.error( 'Method ' +  method + ' does not exist on jQuery.contentcarousel-header' );
         }
     };
 

@@ -2,10 +2,10 @@
 	<div class="one_half">
 		<div class="ti_block_inner">
 			<h2 class="ti_headerH1 white">Sign up for deals:</h2>
-			<form>
-				<label class="ti_cms_labelHide" for="home_email"><span>Your email address</span></label> <input id="home_email" class="one" type="email" placeholder="Enter email address"/> 
+			<form action="<?php echo $this->getUrl(''); ?>newsletter/subscriber/new/" method="POST">
+				<label class="ti_cms_labelHide" for="home_email"><span>Your email address</span></label> <input id="home_email" class="one" name = "email" type="email" placeholder="Enter email address"/> 
 				<label class="ti_cms_labelHide" for="home_name"><span>Your first name</span></label> 
-				<input id="home_name" class="one" type="text" placeholder="Enter your name" /> <input class="ti_altBtn" type="submit" value="Sign up" />
+				<input id="home_name" class="one" type="text" name="subscriber_firstname" placeholder="Enter your name" /> <input class="ti_altBtn" type="submit" value="Sign up" />
 			</form>
 		</div>
 	</div>

@@ -23,24 +23,16 @@
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
-/* @var $this Mage_Reports_Block_Product_Viewed */
 ?>
-<?php if ($_products = $this->getRecentlyViewedProducts()): ?>
-<div class="block block-list block-viewed">
-    <div class="block-title">
-        <p><strong><?php echo $this->__('Recently Viewed Products') ?></strong></p>
-    </div>
-    <div class="ti_cms_border_block ti_block_inner">
-        <div class="block-content">
-            <ul id="recently-viewed-items" class="ti_bullet">
-            <?php foreach ($_products as $_item): ?>
-                <li class="item">
-                    <span class="product-name"><a href="<?php echo $this->getProductUrl($_item) ?>"><?php echo $this->helper('catalog/output')->productAttribute($_item, $_item->getName() , 'name') ?></a></span>
-                </li>
-            <?php endforeach; ?>
-            </ul>
-            <script type="text/javascript">decorateList('recently-viewed-items');</script>
-        </div>
-    </div>
-</div>
-<?php endif; ?>
+<?php
+/**
+ * Note: This mark is a requirement of PayPal
+ * @see Mage_Paypal_Block_Standard_Form
+ */
+?>
+<!-- PayPal Logo -->
+<!--<img src="<?php echo $this->escapeHtml($this->getPaymentAcceptanceMarkSrc())?>" alt="<?php echo Mage::helper('paypal')->__('Acceptance Mark') ?>" class="v-middle" />-->
+<!--this paypal span needs a class of ti_checkout_creditSelected when the li is selected-->
+<span class="ti_checkout_credit paypal" alt="<?php echo Mage::helper('paypal')->__('Acceptance Mark') ?>"></span> PayPal<br>
+<!--<a href="<?php echo $this->getPaymentAcceptanceMarkHref()?>" onclick="javascript:window.open('<?php echo $this->getPaymentAcceptanceMarkHref()?>','olcwhatispaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, ,left=0, top=0, width=400, height=350'); return false;" class="ti_small_text"><?php echo Mage::helper('paypal')->__('What is PayPal?') ?></a>-->
+<!-- PayPal Logo -->

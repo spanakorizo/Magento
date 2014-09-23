@@ -1,4 +1,5 @@
-
+/* Not needed - Megan 9-10-2014 */
+/*
 
 .ti_ink_selector_holder{width:100%; margin:0;position:relative;float:left;display:block;height:auto}
 .ti_ink_selector_holder h1,.ti_ink_selector_holder p{padding:0 5px}
@@ -12,10 +13,11 @@
 #ti_ajax_loading_ink img,#ti_ajax_loading_series img,#ti_banner_ajax_loading_ink img,#ti_banner_ajax_loading_series img{display: block;max-width:120px;max-height: 120px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}
 
 #ti_ajax_cat_loading_ink img{display: block;max-width:80px;max-height: 80px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}
-
+*/
 
 /* this part of css for category page */
-
+/* Not needed - Megan 9-10-2014 */
+/*
 .ti_category_one_forth{width: 23%;position: relative; display: block; float: left; padding:1%}
 .ti_series_one_forth{width: 23%;position: relative; display: block; float: left; margin:1%;outline: 1px solid #71B62F;border-bottom: 7px solid #71B62F;min-height: 200px; cursor: pointer}
 .ti_category_content_container{width: 100%;position: relative; display: block; float: left}
@@ -25,9 +27,10 @@
     outline: 1px solid #F7E8DB;
     border-bottom: 7px solid #71B62F;
 }
-/*.ti_header_left_align{color: #559A13;line-height: 1.1em; text-shadow: -0.5px -0.5px 0 #333333, 1px 1px 0 #ECECEC;text-align: left}*/
+.ti_header_left_align{color: #559A13;line-height: 1.1em; text-shadow: -0.5px -0.5px 0 #333333, 1px 1px 0 #ECECEC;text-align: left}*/
 
-
+/* Not needed - Megan 9-10-2014 */
+/*
 .ti_subcat_product_gid_one_sixth{width:16%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
 .ti_subcat_product_gid_one_fifth{width:19.5%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
 .ti_subcat_product_gid_one_fourth{width:24.5%; position: relative;float: left; display: block; padding: 0.25% 0.5% 0.25% 0}
@@ -36,7 +39,7 @@
 .ti_close_popup{position: absolute;right:0;top:0}
 #ti_cartlogin_close,#ti_cartregister_close, #ti_cartforget_close{position: absolute;right:5px;top:5px}
 #ti_cart_popup_error_msg,#ti_cart_popup_forget_pass{display:none}
-
+*/
 /* Not needed - Megan 8-7-2014 */
 /*
 .ti_popup_cart_window{
@@ -54,6 +57,9 @@
     border-bottom: 7px solid #71B62F;
 }
 */
+
+/* Not needed - Megan 9-10-2014 */
+/*
 .ti_cart_cms_separator{
     height: 2px;
     margin: 0.5em;
@@ -77,7 +83,7 @@
 .ti_series_name{
 display:none;
 }
-
+*/
 
 /* Not needed - Megan 8-7-2014 */
 /*
@@ -92,12 +98,12 @@ display:none;
     background: none repeat scroll 0% 0% #FFF;
 }*/
 
-
-
+/* Not needed - Megan 9-10-2014 */
+/*
 .ti_cart_popup_error, .ti_cart_popup_error_pass{display:none}
 #ti_cart_register_box, #ti_cart_forgetpass_box{display:none}
 
-
+*/
 /* Not needed - Megan 9-10-2014 */
 /*
 .ti_firecheckout_checkbox_font_size{font-size: 1.5em}
@@ -243,6 +249,9 @@ display:none;
   display:block;
 }
 */
+
+/* Not needed - Megan 9-10-2014 */
+/*
 .item-options dt p{ font-size: 1.3rem !important; padding: 0px}
 .item-options dt { font-size: 1.1rem !important; font-weight: normal; padding: 0px !important}
 .ti-cart-right{text-align: right !important; padding-right: 10px}
@@ -253,5 +262,6 @@ display:none;
 }
 #checkout-review-table tr td{ padding:2px 5px !important;}
 .ti_cart_total h2{font-size: 2.8em !important;}
+*/
 /*tooltip*/
 

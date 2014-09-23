@@ -144,7 +144,14 @@ jQuery.ajax({
 
 
 
+    },
+    error: function(data, textStatus, jqXHR) {
+        console.log(data.error);
+        console.log(textStatus);
+        console.log(jqXHR);
     }
+
+
 });
 });
 </script>

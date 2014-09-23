@@ -63,11 +63,11 @@ var lastPrice;
     </script>
     <?php echo $this->getChildChildHtml('methods_additional', '', true, true) ?>
     <div class="ti_cms_gradient_block btcf">
+        <div class="one">
+            <h2 class="ltWeight text_center lgTxt"><span class="icon-lock ti_checkout_secure"></span> All payments are secure.</h2>
+        </div>
         <div id="checkout-payment-method-load">
-                <?php echo $this->getChildHtml('methods') ?>
-            <div id='ti_payment_security' class="two_third">
-                <h2 class="ltWeight text_center lgTxt"><span class="icon-lock ti_checkout_secure"></span> All payments are secure.</h2>
-            </div>
+                <?php echo $this->getChildHtml('methods') ?>  
         </div>
     </div>
 

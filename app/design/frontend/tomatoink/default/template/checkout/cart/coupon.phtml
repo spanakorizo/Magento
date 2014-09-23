@@ -48,6 +48,8 @@
         <div class="discount ti_cms_gradient_block ti_block_inner btcf">
             <!--<h2 class="ti_green_head ti_headerH1"><?php echo $this->__('Discount') ?></h2>-->
             <h2 class="ti_green_head ti_headerH1 ti_block_inner">Claim your discount!</h2>
+            <!-- This p text will only appear if a stored cookie coupon code was used. -->
+            <p class="text_center altTxt">We saved the last coupon you looked at! Click apply to use it:</p>
             <div class="discount-form">
                 <label for="coupon_code" class="ti_cms_labelHide"><span><?php echo $this->__('Enter your coupon code if you have one.') ?></span></label>
                 <input type="hidden" name="remove" id="remove-coupone" value="0" />
@@ -67,6 +69,7 @@
                 </div>-->
             </div>
         </div>
+        <!--
         <div>
             
             <p class="text_center altTxt">We saved the last coupon you looked at for you! Click to apply it:</p>
@@ -106,7 +109,7 @@
     				
     			</p>
             </div>
-        </div>
+        </div>-->
     </div>
 </form>
 <script type="text/javascript">

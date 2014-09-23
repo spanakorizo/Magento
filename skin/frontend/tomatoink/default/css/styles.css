@@ -1842,6 +1842,21 @@ button.btn-continue{ padding:0;}
 /* Options Tool Tip */
 .item-options p { font-size:1.1em; font-weight:bold; text-transform:uppercase; padding:10px 12px 0 12px; }
 .item-options dt { font-weight:bold; padding:7px 0 7px ; }
+
+.ti_cart_desc .item-options dt:nth-child(n+2):before,
+.ti_table_checkout_productName .item-options dt:nth-child(n+2):before{
+	content: "";
+	display: inline-block;
+	vertical-align:middle;
+	height: 5px;
+	width: 5px;
+	margin-left:10px;
+	left: -5px;
+	background: #559a13;
+	position: relative;
+	border-radius: 50%;
+}
+
 .item-options dd { padding-bottom:5px; }
 .truncated { cursor:help; margin:5px 0 0; position:relative; z-index:1; width:110px; }
 .truncated:hover { z-index:2; }
@@ -2024,6 +2039,7 @@ button.btn-continue{ padding:0;}
 .checkmo-list address { float:left; }
 
 .please-wait { position:absolute; z-index:99; top:50%; left:50%; margin:-34px 0 0 -90px; border:5px solid #f3b66f; font-size:12px; color:#f18200; font-weight:bold; background:#fff; padding:20px; white-space:nowrap; }
+.please-wait img {margin:0 auto;}
 .cvv-what-is-this { cursor:help; margin-left:5px; }
 
 /* Payment Bridge */

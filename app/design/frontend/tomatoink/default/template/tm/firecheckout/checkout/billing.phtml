@@ -52,7 +52,8 @@
             'label' => 'Address',
             'title' => 'Street Address',
             'name'  => $_prefix . '[street][]',
-            'placeholder' => $_address->getStreet(1) ? $_address->getStreet(1) : 'Address'
+            'value' => $_address->getStreet(1) ? $_address->getStreet(1) : '',
+            'placeholder' => 'Address'
         ),
         'country_id' => array(
             'label' => 'Country',
@@ -99,6 +100,7 @@
                 </div>
             </li>
         <?php endif; ?>
+
         <li id="billing-new-address-form"<?php if ($this->hasCustomerAddressId()): ?> style="display:none;"<?php endif; ?>>
             <fieldset style="width: 98%;display: block; float: left; margin: 0 1%">
                 <input type="hidden" name="billing[address_id]" value="<?php echo $_address->getId() ?>" id="billing:address_id" />
@@ -181,16 +183,16 @@
                                                     $('<?php echo $_prefix ?>:region_id').setAttribute('defaultValue',  "<?php echo $_address->getRegionId() ?>");
                                                 //]]>
                                                 </script>
-                                                <input type="text" id="<?php echo $_prefix ?>:region" name="<?php echo $_prefix ?>[region]"
-                                                    placeholder="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo 'State/Province'; ?>"
+                                                <input type="text" id="<?php echo $_prefix ?>:region" name="<?php echo $_prefix ?>[region]" value="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo ''; ?>"
+                                                    placeholder="State/Province"
                                                     title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
                                                     class="<?php echo $required ? ' required-entry' : '' ?> ti_checkout_info" style="display:none;"
                                                 />
                                                 
                                             <?php else: ?>
                                                 <?php
-                                                    if (isset($fields[$field]['placeholder'])):
-                                                        $value = $fields[$field]['placeholder'];
+                                                    if (isset($fields[$field]['value'])):
+                                                        $value = $fields[$field]['value'];
                                                     else:
                                                         $method = 'get' . ucfirst($field);
                                                         $value = $_address->{$method}();
@@ -198,8 +200,8 @@
                                                 ?>
                                                 <input type="text"
                                                     name="<?php echo (empty($fields[$field]['name']) ? $_prefix . '[' . $field . ']' : $fields[$field]['name']) ?>"
-                                                    id="<?php echo $_prefix ?>:<?php echo $field ?>"
-                                                    placeholder = "<?php echo $this->escapeHtml($value) ?>"
+                                                    id="<?php echo $_prefix ?>:<?php echo $field ?>" value="<?php echo $this->escapeHtml($value) ?>"
+                                                    placeholder = "<?php if(empty($fields[$field]['placeholder'])) echo $this->escapeHtml($fields[$field]['label']); else  echo $this->escapeHtml($fields[$field]['placeholder']);?>"
                                                     title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
                                                     class="<?php echo $fields[$field]['class'] ?><?php echo $required ? ' required-entry' : '' ?>"
                                                 />

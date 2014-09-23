@@ -11,7 +11,7 @@
 				<div class="three_fourth">
 					<div id="ti_footer_emailSubmit" class="ti_input_bar">
 						<form action="<?php echo $current_url; ?>Mail_Subscribe/" method="get" id="newsletter-validate-detail">
-					        <input name="email" type="text" id="newsletter" value="<?php echo $this->__('Enter your email address') ?>" onclick="this.value=='<?php echo $this->__('Enter your email address') ?>'?this.value='':''" onblur="this.value==''?this.value='<?php echo $this->__('Enter your email address') ?>':''" class="input-text required-entry validate-email" />
+					        <input name="email" type="text" id="newsletter" placeholder="Email address" class="input-text required-entry validate-email" />
 					     	<button type="submit" value="<?php echo $this->__('Sign Up') ?>" class="button" title="<?php echo $this->__('Subscribe') ?>"><?php echo $this->__('Sign Up') ?></button> 
 				        </form>
 					</div>

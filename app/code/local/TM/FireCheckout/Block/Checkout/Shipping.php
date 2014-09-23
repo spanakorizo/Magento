@@ -28,10 +28,20 @@ class TM_FireCheckout_Block_Checkout_Shipping extends Mage_Checkout_Block_Onepag
             ->setName($type.'[country_id]')
             ->setId($type.':country_id')
             ->setTitle(Mage::helper('checkout')->__('Country'))
-            ->setClass('validate-select')
+            ->setClass('validate-select one_half_fire_checkout_select ti_select_font_size')
             ->setValue($countryId)
             ->setOptions($this->getCountryOptions());
 
         return $select->getHtml();
+    }
+
+    public function getAddressesHtmlSelect($type)
+    {
+        return Mage::helper('firecheckout/address')->getAddressesHtmlSelect($type, $this);
+    }
+
+    public function hasCustomerAddressId()
+    {
+        return (bool)$this->getAddress()->getCustomerAddressId();
     }
 }

@@ -57,7 +57,8 @@
             'label' => 'Address',
             'title' => 'Street Address',
             'name'  => $_prefix . '[street][]',
-            'placeholder' => $_address->getStreet(1) ? $_address->getStreet(1) : 'Address'
+            'value' => $_address->getStreet(1) ? $_address->getStreet(1) : '',
+            'placeholder' => 'Address'
         ),
         'country_id' => array(
             'label' => 'Country',
@@ -170,14 +171,14 @@
                                                 //]]>
                                                 </script>
                                                 <input type="text" id="<?php echo $_prefix ?>:region" name="<?php echo $_prefix ?>[region]"
-                                                       placeholder="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo 'State/Province'; ?>"
+                                                       placeholder="State/Province" value="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo ''; ?>"
                                                        title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
                                                        class="<?php echo $required ? ' required-entry' : '' ?> ti_checkout_info" style="display:none;"
                                                 />
                                             <?php else: ?>
                                                 <?php
-                                                    if (isset($fields[$field]['placeholder'])):
-                                                        $value = $fields[$field]['placeholder'];
+                                                    if (isset($fields[$field]['value'])):
+                                                        $value = $fields[$field]['value'];
                                                     else:
                                                         $method = 'get' . ucfirst($field);
                                                         $value = $_address->{$method}();
@@ -186,7 +187,7 @@
                                                 <input type="text"
                                                     name="<?php echo (empty($fields[$field]['name']) ? $_prefix . '[' . $field . ']' : $fields[$field]['name']) ?>"
                                                     id="<?php echo $_prefix ?>:<?php echo $field ?>"
-                                                    placeholder="<?php echo $this->htmlEscape($value) ?>"
+                                                    value="<?php echo $this->htmlEscape($value) ?>" placeholder = "<?php if(empty($fields[$field]['placeholder'])) echo $this->escapeHtml($fields[$field]['label']); else  echo $this->escapeHtml($fields[$field]['placeholder']);?>"
                                                     title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
                                                     class="<?php echo $fields[$field]['class'] ?><?php echo $required ? ' required-entry' : '' ?>"
                                                 />

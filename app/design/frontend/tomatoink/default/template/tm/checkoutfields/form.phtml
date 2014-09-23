@@ -13,7 +13,7 @@ $checkoutfields = Mage::helper('checkoutfields');
         ?>
         <!--<li<?php /*echo 'checkbox' === $fieldConfig['type'] ? ' class="control"' : '' */?> >-->
 
-        <div <?php if('select' === $fieldConfig['type']) echo 'class="one_third ti_block_inner"'; elseif('textarea' === $fieldConfig['type']) echo 'class="two_third"';elseif('checkbox' === $fieldConfig['type']) echo 'class="control"'; else '';?> >
+        <div <?php if('select' === $fieldConfig['type']) echo 'class="one_third"'; elseif('textarea' === $fieldConfig['type']) echo 'class="two_third"';elseif('checkbox' === $fieldConfig['type']) echo 'class="control"'; else '';?> >
             <?php if ('checkbox' !== $fieldConfig['type']) : ?>
                 <label for="order-<?php echo $fieldName ?>" class="ti_cms_labelHide">
                     <span><?php echo $this->escapeHtml($fieldConfig['label']) ?></span>

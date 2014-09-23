@@ -33,7 +33,7 @@
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo $this->getExcludeTaxLabel() ?>:</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax()) ?></p>
     </td>
 </tr>
@@ -41,7 +41,7 @@
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo $this->getIncludeTaxLabel() ?>:</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <p><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
     </td>
 </tr>
@@ -50,7 +50,7 @@
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo 'S & H'//$this->getTotal()->getTitle() ?>:</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <p class="ti-cart-right"><?php echo $this->helper('checkout')->formatPrice($this->getShippingIncludeTax()) ?></p>
     </td>
 </tr>
@@ -59,7 +59,7 @@
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
         <p><?php echo 'S & H'//$this->escapeHtml($this->getTotal()->getTitle()) ?>:</p>
     </td>
-    <td style="<?php echo $this->getStyle() ?>">
+    <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <p class="ti-cart-right">
             <?php   if($this->getShippingExcludeTax() == 0)
                         echo '<span class="altTxt">FREE</span>';

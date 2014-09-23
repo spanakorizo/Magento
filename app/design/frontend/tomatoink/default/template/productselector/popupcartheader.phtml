@@ -14,7 +14,7 @@ $select = $conn->select()
 $cartItems = $conn->fetchCol($select); //this for bundle otherwise all product under bundle will show in cart
 $shopptingcarthtml = "";
 if ($total_num > 0)
-    $shopptingcarthtml="<div class='ti_miniCart_carousel-nav ti_hide_767'><span class='ti_carousel-nav-next icon-angle-left'></span><span class='ti_carousel-nav-prev icon-angle-right'></span></div>";
+    $shopptingcarthtml="<div class='ti_carousel_header'>";
 
 $quote = Mage::getModel('sales/quote')->load($cart->getId());
 $cartitem = Mage::getModel('sales/quote_item')
@@ -25,16 +25,17 @@ $cartitem = Mage::getModel('sales/quote_item')
 foreach ($cartitem as $item) {
     $product = $item->getProduct();
     if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 ) //this for bundle otherwise all product under bundle will show in cart
-        $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
+            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
 
 }
 
-if ($shopptingcarthtml != "") $shopptingcarthtml .= "<div class='ti_miniCart_subtotal'><h4 class='ltWeight lgTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
-else $shopptingcarthtml = "<p class='text_center'><span class='altTxt'>You don't have any items inside cart.</span></p>";
+    if ($shopptingcarthtml != "") $shopptingcarthtml .= "</div><div class='ti_miniCart_subtotal'><h4 class='ltWeight lgTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
+    else $shopptingcarthtml = "<p class='text_center'><span class='altTxt'>You don't have any items inside cart.</span></p>";
 
 
 $myArray = array(
     'totalnumber'=> $total_num,
+    'totalitem' => count($cartitem),
   'alltext'=> $shopptingcarthtml
 );
 echo json_encode($myArray);

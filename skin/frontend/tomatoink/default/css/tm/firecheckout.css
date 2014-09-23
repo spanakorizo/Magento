@@ -325,7 +325,7 @@
 #shipping_form_delivery_date .delivery-date label { clear: left; display: block; float: none; color: #888; font-size: 10px; font-weight: normal; }
 
 .firecheckout-set #checkout-review .block-title { margin: 0 !important; }
-.firecheckout-set #checkout-review .product-image { float: left; margin: 0px 10px 5px 10px; }
+.firecheckout-set #checkout-review .product-image { /*float: left; margin: 0; */}
 .firecheckout-set #checkout-review .short-description { font-size: .9em; line-height: normal; }
 .firecheckout-set #checkout-review .firecheckout-items-after { padding: 7px 10px; }
 .firecheckout-set #checkout-review #checkout-review-table { border-width: 0 0 1px 0; width: 100%; }
@@ -393,44 +393,51 @@
 
 /* window */
 .firecheckout-window {
-    border: none;
-    background: #fff;
-    border-radius: 4px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    background: #ffffff; /* Old browsers */
+    border:1px solid #71b62f;
+    border-bottom: 7px solid #71b62f;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
     z-index: 999;
     position: absolute;
     text-align: left;
-    padding: 15px;
-    box-sizing: border-box;
-    -moz-box-sizing: border-box;
 }
 .firecheckout-window .page-title span { color: #0A263C; font-size: 20px; margin: 0; }
-.firecheckout-window .content { padding: 0; margin: 0; overflow: auto; overflow-x: hidden; }
+.firecheckout-window .content { padding: 0; margin: 0; overflow: hidden; overflow-x: hidden; }
 .firecheckout-window label { width: auto; text-align: left; }
 .firecheckout-window .form-list .input-box { clear: both; }
 .firecheckout-window .form-list input.input-text,
-.firecheckout-window .form-list textarea { width: 260px; }
+.firecheckout-window .form-list textarea {  }
 #firecheckout-forgot-window .form-list input.input-text,
 #firecheckout-login-window .form-list input.input-text {
-    width: 100%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     -ms-box-sizing: border-box;
     -o-box-sizing: border-box;
     box-sizing: border-box;
 }
-.firecheckout-window .close {
+.firecheckout-window .close:after {
     position: absolute;
     top: -8px;
     right: -8px;
-    width: 16px;
-    height: 16px;
-    background: url(../../images/tm/firecheckout/sprite.png) no-repeat -91px 0;
+    border: 2px solid #71B62F;
+    font-size:16px;
+    border-radius:50%;
+    padding:5px 10px;
+    content:"X";
+    background:#fff;
+    color:#E67921;
 }
+.firecheckout-window .close:hover:after{
+    border-bottom: 2px solid #E67921;
+}
+
 .firecheckout-window .close:hover {}
 .firecheckout-set .please-wait,
-.firecheckout-window .please-wait { position: static; padding: 0; background: none; border: none; margin: 0; left: auto; top: auto; }
-.firecheckout-window .buttons-set { margin: 1em 0 0; text-align: right; border-top:1px solid #e4e4e4; padding: 8px 0 0; }
+.firecheckout-window .please-wait { float:right; position: static; padding: 0; background: none; border: none; margin: 0; left: auto; top: auto; }
+.firecheckout-window .buttons-set { margin: 1em 0 0; text-align: center; border-top:1px solid #e4e4e4; padding: 8px 0 0; }
 .firecheckout-window .actionbar { padding: 10px 10px 0; text-align: right; font-weight: bold; }
 
 #emailexists-window .content a { text-decoration: underline; }

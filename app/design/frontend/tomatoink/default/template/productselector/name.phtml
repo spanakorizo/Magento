@@ -17,7 +17,7 @@
 <?php endif; ?>
     <div class="one_half ti-required-entry">
         <label class="ti_cms_labelHide"><span><?php echo $this->getStoreLabel('firstname') ?></span>
-            <input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" placeholder="<?php if($this->getObject()->getFirstname()) echo $this->escapeHtml($this->getObject()->getFirstname()); else echo 'First Name'; ?>" title="<?php echo $this->getStoreLabel('firstname') ?>" maxlength="255" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('firstname') ?> ti_checkout_info" <?php echo $this->getFieldParams() ?> />
+            <input type="text" id="<?php echo $this->getFieldId('firstname')?>" name="<?php echo $this->getFieldName('firstname')?>" placeholder="First Name" value="<?php if($this->getObject()->getFirstname()) echo $this->escapeHtml($this->getObject()->getFirstname()); else echo ''; ?>" title="<?php echo $this->getStoreLabel('firstname') ?>" maxlength="255" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('firstname') ?> ti_checkout_info" <?php echo $this->getFieldParams() ?> />
         </label>
     </div>
 <?php if ($this->showMiddlename()): ?>
@@ -31,7 +31,7 @@
 <?php endif; ?>
     <div class="one_half ti-required-entry">
         <label class="ti_cms_labelHide"><span><?php echo $this->getStoreLabel('lastname') ?></span>
-            <input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" placeholder="<?php if($this->getObject()->getLastname()) echo $this->escapeHtml($this->getObject()->getLastname()); else echo 'Last Name'; ?>" title="<?php echo $this->getStoreLabel('lastname') ?>" maxlength="255" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('lastname') ?> ti_checkout_info" <?php echo $this->getFieldParams() ?> />
+            <input type="text" id="<?php echo $this->getFieldId('lastname')?>" name="<?php echo $this->getFieldName('lastname')?>" placeholder="Last Name" value="<?php if($this->getObject()->getLastname()) echo $this->escapeHtml($this->getObject()->getLastname()); else echo ''; ?>" title="<?php echo $this->getStoreLabel('lastname') ?>" maxlength="255" class="input <?php echo $this->helper('customer/address')->getAttributeValidationClass('lastname') ?> ti_checkout_info" <?php echo $this->getFieldParams() ?> />
         </label>
     </div>
 <?php if ($this->showSuffix()): ?>
