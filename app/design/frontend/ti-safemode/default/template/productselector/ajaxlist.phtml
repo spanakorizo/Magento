@@ -1,0 +1,15 @@
+<?php
+
+$cat_id = $_REQUEST['id'];
+
+$coreResource = Mage::getSingleton('core/resource');
+$conn_read = $coreResource->getConnection('core_read');
+$tableName = $coreResource->getTableName('compandsave_variable/productselectors');
+
+$select = $conn_read->select()
+    ->from($tableName,'value')
+    ->where('brand_id = ?',$cat_id)
+    ->where('status = ? ', '1')
+    ->where('visibility = ? ', '1');
+$result = $conn_read->fetchOne($select);
+echo $result;

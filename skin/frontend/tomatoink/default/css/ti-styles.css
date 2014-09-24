@@ -94,42 +94,41 @@ body  { background:#fff; font-size:10px; font:1rem/1.5 Verdana, Helvetica, sans-
 .text_left{text-align:left !important;}
 .text_right{text-align:right !important;}
 .ltWeight{font-weight:300;}
-.width100{width:100%;}
 .ti_top_margin_hide{margin-top:0}
 .ti_txt_dec_none{text-decoration:none}
 .ti_inline{display:inline}
 
 /*responsive*/
 .ti_cms_contain{width:1000px;margin:auto;}
-.one {margin:0 1%;display:block;float:left;}
+.one,
 .one_third, .two_third,
 .one_half, .one_fourth,
 .three_fourth,
 .one_fifth, .two_fifth,
 .three_fifth, .four_fifth,
-.one_checkout,.small_half,.two_third_review {margin:0 auto;display:block;float:left;padding:1%;}
-.one_third{width:31%;}
+.one_checkout,.small_half,.two_third_review {margin:0 auto;display:block;float:left;padding:1%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box;box-sizing: border-box;}
+.one_third{width:33%;}
 .one_third.middle{margin: 0 .5%;}
-.two_third{width:64%;}
-.one_half{width:48%;}
-.one_fourth{width:23%;}
-.three_fourth{width:73%;}
-.one_fifth{width:18%;}
-.two_fifth{width:38%;}
-.three_fifth{width:58%;}
-.four_fifth{width:78%;}
-.one{width:98%;}
-.full{width:90%; padding-left:5%; padding-right:5%;}
+.two_third{width:66%;}
+.one_half{width:50%;}
+.one_fourth{width:25%;}
+.three_fourth{width:75%;}
+.one_fifth{width:20%;}
+.two_fifth{width:40%;}
+.three_fifth{width:60%;}
+.four_fifth{width:80%;}
+.one, .width100, .one_checkout, .one_name{width:100%;}
+.full{width:90%; margin-left:5%; margin-right:5%;}
 .two_third_review{width: 65%}
 /*text colors*/
-.dgTxt{color:#31590b;}
-.lgTxt{color:#559a13;}
-.bgTxt{color:#88cc40;}
+.dgTxt{color:#31590b !important;}
+.lgTxt{color:#559a13 !important;}
+.bgTxt{color:#88cc40 !important;}
 .altTxt{color:#e67921 !important;}
-.white{color:#fff;}
-.dark{color:#333;}
-.ltAlt{color:#fd8524;}
-.ltNeutral{color:#f7e8db;}
+.white{color:#fff !important;}
+.dark{color:#333 !important;}
+.ltAlt{color:#fd8524 !important;}
+.ltNeutral{color:#f7e8db !important;}
 
 .ti_cms_gradient_block{
 	background: #ffffff; /* Old browsers */
@@ -327,6 +326,12 @@ blockquote h2:after{
 /* -------->> 3. Elements <<<---------*/
 /* -----------------------------------*/
 
+div{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 /* -- Inputs --*/
 /* -------- Prefix: ti_input_ --------*/
 
@@ -370,7 +375,9 @@ textarea {
     -webkit-appearance: none;
     vertical-align:middle;
     display:inline-block;
-    box-sizing:border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 input[type="text"],
@@ -536,7 +543,7 @@ input[type="checkbox"]:checked:before{
 /* http://webdesign.tutsplus.com/articles/quick-tip-easy-css3-checkboxes-and-radio-buttons--webdesign-8953 */
 
 input[type="checkbox"] {
-    display:inline-block;
+    display:none;
     opacity: 0;
     z-index: 10;
 }
@@ -1010,7 +1017,6 @@ td, th{
 .ti_header_top_block ul,
 .ti_header_top_block ol{
 	float:right;
-	position:relative;
 	font-size:1em;
 	margin:.5em auto;
 }
@@ -1819,17 +1825,6 @@ ul.ti_cart_review li:last-child{
 	margin-left:-15px;
 }
 
-.one_name {
-	margin:0 auto;
-	display:block;
-	float:left;
-	width:100%;
-}
-
-.one_checkout{
-	width:98%;
-}
-
 .ti_checkoutStep{
 	padding:1px 10px;
 	border-radius:100px;
@@ -2331,7 +2326,7 @@ font-size:1.3em;
 .ti_product_thumb:active,
 .ti_product_thumb:focus,
 .ti_product_thumb:hover{
-	border:3px solid #559a13;
+	outline:3px solid #559a13;
 	opacity:1;
 }
 

@@ -1,0 +1,31 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Sam Chao
+
+Table of Contents:
+1. Global
+
+Created for article pages at TomatoInk.com
+
+Color Reference:
+green: #4ca62e;
+ 
+*/
+/*********************************************************/
+
+
+/* -----------------------------------*/
+/* -------->> 1. Global <<<-----------*/
+/* -----------------------------------*/
+.ti_br_marginBottom20 {
+	margin-bottom:20px;
+}
+.ti_br_noDecor {
+	text-decoration:none;
+}
+.ti_br_noDecor:hover {
+	text-decoration:underline;
+	color:#4ca62e;
+}

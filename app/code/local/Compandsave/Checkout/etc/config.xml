@@ -14,6 +14,13 @@
             </rewrite>
         </checkout>
     </blocks>
+    <models>
+        <checkout>
+            <rewrite>
+                <cart>Compandsave_Checkout_Model_Cart</cart>
+            </rewrite>
+        </checkout>
+    </models>
 
     </global>
 </config>

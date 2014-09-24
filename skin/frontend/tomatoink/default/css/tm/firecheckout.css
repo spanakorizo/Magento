@@ -504,7 +504,7 @@ iframe#sage-pay-server-iframe { border:none; height:365px; width:687px; }
 .firecheckout-set .tnt_description { width: auto; }
 /* infostrates tnt */
 
-#firecheckout-form div,
+/*#firecheckout-form div,
 .firecheckout-window *,
 #firecheckout-spinner {
     -webkit-box-sizing: content-box;
@@ -512,7 +512,7 @@ iframe#sage-pay-server-iframe { border:none; height:365px; width:687px; }
     -ms-box-sizing: content-box;
     -o-box-sizing: content-box;
     box-sizing: content-box;
-}
+}*/
 #firecheckout-form .col2-set,
 #firecheckout-form .col3-set,
 #firecheckout-form .col4-set {

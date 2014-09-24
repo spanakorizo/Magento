@@ -15,23 +15,21 @@
         <img src="<?php echo $this->getSkinUrl('images/ti-home/email.jpg') ?>"/>
     </div>
     <div id='ti_subscribe_loading' style="display:none">
-<img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>">
-</div>
+        <img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>">
+    </div>
     <div class="two_third">
-        <h2 class="ti_headerH1" id="ti_subpage_message">Thank you for subscribing!</h2>
+        <h2 id="ti_subpage_message">Thank you for subscribing!</h2>
         <form action="" method="post" id="ti_subpage_form">
             <div class="form-subscribe">
                 <div class="form-subscribe-header">
                     <h2 class="ti_headerH1"><label for="newsletter"><?php echo $this->__('Sign up for our newsletter:') ?></label></h2>
                 </div>
-                <div class="v-fix">
-                    <input name="email" type="text" id="newsletter" placeholder="<?php echo $this->__('Enter your email address') ?>" class="input-text required-entry validate-email" />
-                </div>
-                <input id="ti_subpage_fname" type="text" placeholder="<?php echo $this->__('Enter your first name') ?>"><label for="ti_subpage_fname" class="ti_cms_labelHide"><div class="ti-radio"></div><span>Enter your first name</span></label><br>
-                <input id="ti_subpage_lname" type="text" placeholder="<?php echo $this->__('Enter your last name') ?>" ><label for="ti_subpage_lname" class="ti_cms_labelHide"><div class="ti-radio"></div></span><span>Enter your last name</span></label><br>
-                <input type="radio" id="subscribe_3-4" name="subscriber_freq" value="0" checked><label for="subscribe_3-4"><div class="ti-radio"></div><span>3-4 times per month</span></label><br>
-                <input type="radio" id="subscribe_2" name="subscriber_freq" value="2"><label for="subscribe_2"><div class="ti-radio"></div><span>Twice a Month</span></label><br>
-                <input type="radio" id="subscribe_1" name="subscriber_freq" value="1"><label for="subscribe_1"><div class="ti-radio"></div><span>Once a Month</span></label>
+                <input name="email" type="text" id="newsletter" placeholder="<?php echo $this->__('Enter your email address') ?>" class="input-text required-entry validate-email" /><label for="newsletter" class="ti_cms_labelHide"><span>Enter your email address</span></label><br/>
+                <input id="ti_subpage_fname" type="text" placeholder="<?php echo $this->__('Enter your first name') ?>"><label for="ti_subpage_fname" class="ti_cms_labelHide"><span>Enter your first name</span></label><br/>
+                <input id="ti_subpage_lname" type="text" placeholder="<?php echo $this->__('Enter your last name') ?>" ><label for="ti_subpage_lname" class="ti_cms_labelHide"><span>Enter your last name</span></label><br/>
+                <input type="radio" id="subscribe_3-4" name="subscriber_freq" value="0" checked><label for="subscribe_3-4"><div class="ti-radio"></div><span>3-4 times per month</span></label><br/>
+                <input type="radio" id="subscribe_2" name="subscriber_freq" value="2"><label for="subscribe_2"><div class="ti-radio"></div><span>Twice a Month</span></label><br/>
+                <input type="radio" id="subscribe_1" name="subscriber_freq" value="1"><label for="subscribe_1"><div class="ti-radio"></div><span>Once a Month</span></label><br/>
              	<button type="button" class="button" id="ti_subpage_submit" title="<?php echo $this->__('Subscribe') ?>"><span><?php echo $this->__('Subscribe') ?></span></button>
             </div>
         </form>

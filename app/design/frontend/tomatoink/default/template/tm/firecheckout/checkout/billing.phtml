@@ -270,17 +270,13 @@
                         <?php endif; ?>
                         <?php if ('hidden' !== $registrationMode || $register) : ?>
                             <li class="one_half" id="register-customer-password" <?php if ('optional' == $registrationMode && !$register) : ?>style="display: none;" <?php endif; ?>>
-                                <div class="one_half ti-required-entry">
-                                    <label for="billing:customer_password" class="required altTxt"><span><?php echo $this->__('Password') ?></span></label>
-                                    <div class="input-box">
-                                        <input type="password" name="billing[customer_password]" id="billing:customer_password" title="<?php echo $this->__('Password') ?>" class="input required-entry validate-password" />
-                                    </div>
+                                <label for="billing:customer_password" class="required altTxt"><span><?php echo $this->__('Password') ?></span></label>
+                                <div class="input-box ti-required-entry">
+                                    <input type="password" name="billing[customer_password]" id="billing:customer_password" title="<?php echo $this->__('Password') ?>" class="input required-entry validate-password one ti_checkout_info" />
                                 </div>
-                                <div class="one_half ti-required-entry">
-                                    <label for="billing:confirm_password" class="required altTxt"><span><?php echo $this->__('Confirm Password') ?></span></label>
-                                    <div class="input-box">
-                                        <input type="password" name="billing[confirm_password]" title="<?php echo $this->__('Confirm Password') ?>" id="billing:confirm_password" class="input required-entry validate-cpassword" />
-                                    </div>
+                                <label for="billing:confirm_password" class="required altTxt"><span><?php echo $this->__('Confirm Password') ?></span></label>
+                                <div class="input-box ti-required-entry">
+                                    <input type="password" name="billing[confirm_password]" title="<?php echo $this->__('Confirm Password') ?>" id="billing:confirm_password" class="input required-entry validate-cpassword one ti_checkout_info" />
                                 </div>
                             </li>
                         <?php endif; ?>

@@ -155,7 +155,7 @@ input.radio { font-size:10px !important; }
 input.qty { width:2.5em !important; }
 input.disabled { background:#f6f6f6 !important; color:#bbb !important; }
 button.button::-moz-focus-inner { padding:0; border:0; } *//* FF Fix */
-button.button { -webkit-border-fit:lines; } /* <- Safari & Google Chrome Fix */
+/* button.button { -webkit-border-fit:lines; } <- Safari & Google Chrome Fix */
 
 /*button.button { border:0; padding:0; margin:0; background:transparent; line-height:21px; overflow:visible; cursor:pointer; vertical-align:middle; } */
 
@@ -2574,14 +2574,14 @@ p.link-widget-sku a { color:#999; }
 /* Footer ================================================================================ */
 .footer-before-container { margin:0 0 3px; text-align:center; }
 
-.form-subscribe { float:left; width:183px; padding: 0 17px 0 0; }
-.form-subscribe-header { color:#d12c01; font-size:11px; font-weight:bold; text-decoration:none; text-transform:uppercase; }
+/*.form-subscribe { float:left; width:183px; padding: 0 17px 0 0; }
+.form-subscribe-header { color:#d12c01; font-size:11px; font-weight:bold; text-decoration:none; text-transform:uppercase;}
 .form-subscribe label { display:block; margin:6px 0; }
 .form-subscribe input.input-text { width:177px; display:block; }
 .form-subscribe button.button { margin:6px 0 0; float:right; }
 .form-subscribe .validation-advice { width:180px; }
 .form-subscribe .v-fix { text-align:left; padding-right:5px; }
-.form-subscribe a { color:#777; }
+.form-subscribe a { color:#777; }*/
 
 .footer-container { margin:0 0 20px; text-align:left; background:#f8f8f8; border:1px solid #cfcfcf; padding:14px 17px 12px; }
 .footer { background:url(../images/bkg_footer.gif) repeat-y 200px 0; }

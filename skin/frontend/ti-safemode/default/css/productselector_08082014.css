@@ -1,0 +1,85 @@
+.ti_ink_selector_holder{width:100%; margin:0;position:relative;float:left;display:block;height:auto}
+.ti_ink_selector_holder h1,.ti_ink_selector_holder p{padding:0 5px}
+.ti_ink_selector_div{width:100%;margin:0;float:left;position:relative}
+.ti_ink_selector_div h3{text-align: left}
+.ti_select_text{width: 100%; text-align: left;color: #000}
+#ti_ajax_loading_ink ,#ti_ajax_loading_series,#ti_ajax_cat_loading_ink{display: block;width:100%;height: 100%; position: absolute;float: left;display: none; opacity: 1.0; z-index: 99999}
+#ti_ajax_loading_ink img,#ti_ajax_loading_series img{display: block;max-width:120px;max-height: 120px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}
+
+#ti_ajax_cat_loading_ink img{display: block;max-width:80px;max-height: 80px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}
+
+/* this part of css for category page */
+.ti_category_one_forth{width: 23%;position: relative; display: block; float: left; padding:1%}
+.ti_series_one_forth{width: 23%;position: relative; display: block; float: left; margin:1%;outline: 1px solid #71B62F;border-bottom: 7px solid #71B62F;min-height: 200px; cursor: pointer}
+.ti_category_content_container{width: 100%;position: relative; display: block; float: left}
+.ti_category_product_selector_box {
+    background: radial-gradient(ellipse at center center , #FFF 60%, #FFF6EE 99%) repeat scroll 0% 0% transparent;
+    padding: 1%;
+    outline: 1px solid #F7E8DB;
+    border-bottom: 7px solid #71B62F;
+}
+.ti_header_left_align{color: #559A13;line-height: 1.1em; text-shadow: -0.5px -0.5px 0 #333333, 1px 1px 0 #ECECEC;text-align: left}
+.ti_subcat_product_gid_one_fifth{width:19%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
+.ti_subcat_product_gid_one_fourth{width:24%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
+.ti_subcat_product_gid_one_third{width:32%; position: relative;float: left; display: block; padding: 0.5% 0.5%}
+.ti_close_popup{position: absolute;right:0;top:0}
+#ti_cartlogin_close,#ti_cartregister_close, #ti_cartforget_close{position: absolute;right:5px;top:5px}
+#ti_cart_popup_error_msg,#ti_cart_popup_forget_pass{display:none}
+.ti_popup_cart_window{
+    border-radius: 5px;
+    /*box-shadow: 0 0 2500px 2500px rgba(0, 0, 0,0.7);*/
+    display: none;
+    z-index: 10000;
+    position: absolute;
+    top:20%;
+    width:40%;
+    margin-left:20%;
+    transition:width .6s ease-in-out, background .6s ease-in-out;
+    background: radial-gradient(ellipse at center,  #ffffff 60%,#fff6ee 90%);
+    border: 2px solid #71B62F;
+    border-bottom: 7px solid #71B62F;
+}
+.ti_cart_cms_separator{
+    height: 2px;
+    margin: 0.5em;
+    background: none repeat scroll 0% 0% #559A13;
+    clear: both;
+}
+#ti_hide_body_div{
+
+    display: none;
+    z-index:1001;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 305%;
+    background-color: rgba(0, 0, 0,0.7);
+
+}
+.ti_cartpopup_block_headerBar-green {
+    padding: 5px 5px;
+    background: url('../images/ti-assets/paper-bg_559a13.jpg') repeat scroll 0% 0% transparent;
+    clear: both;
+}
+.ti_checkoutStep_close {
+    padding: 5px 10px;
+    border-radius: 100px;
+    background: none repeat scroll 0% 0% #FFF;
+}
+.ti_top_margin_hide{margin-top:0px}
+.ti_txt_dec_none{text-decoration:none}
+.ti_inline{display:inline}
+.ti_cart_popup_error, .ti_cart_popup_error_pass{display:none}
+#ti_cart_register_box, #ti_cart_forgetpass_box{display:none}
+.ti_firecheckout_checkbox_font_size{font-size: 1.5em}
+#ti_shipping_select{width: 105%}
+.ti_select_width{width: 105%}
+.ti_table_checkout_productName{width: 70%}
+.ti_checkout_review_font{font-family: "raleway";    -moz-font-feature-settings: "lnum";    margin: 0px;}
+.ti_checkout_review_price{font-size: 1.3em;}
+.ti_checkout_shipping_font{font-size: 1.3em;}
+.ti_review_gradient_block {    background: radial-gradient(ellipse at center center , #FFF 60%, #FFF6EE 99%) repeat scroll 0% 0% transparent;
+    outline: 1px solid #F7E8DB;}
+.ti_bold{font-weight: bold}
+.ti_checkout_headerH1 {    font-size: 3.2em;    font-weight: bold; text-align: center}

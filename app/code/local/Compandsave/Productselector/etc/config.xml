@@ -7,7 +7,9 @@
     </modules>
 	<global>
 		<models>
-			<class>Compandsave_Productselector_Model</class>
+            <compandsave_productselector>
+			    <class>Compandsave_Productselector_Model</class>
+            </compandsave_productselector>
 		</models>
 		<helpers>
 			<compandsave_productselector>

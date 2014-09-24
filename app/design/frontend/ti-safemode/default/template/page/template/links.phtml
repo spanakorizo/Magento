@@ -1,0 +1,206 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * @see Mage_Page_Block_Template_Links
+ */
+?>
+
+
+								    <?php
+    //shopping cart items
+    $coreResource = Mage::getSingleton('core/resource');
+    $conn = $coreResource->getConnection('core_read');
+    $cart = Mage::getModel('checkout/session')->getQuote();
+    //$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+    //$total_num = $cart->getItemsCount();
+    $total_num = number_format($cart->getItemsQty());
+    if ($total_num == "") $total_num=0;
+
+    $grandtotal = $cart->getSubtotal();
+    $shopptingcarthtml = "";
+    if ($total_num > 0)
+    $shopptingcarthtml="<div class='ti_carousel_header'>";
+//$shopptingcarthtml="<div class='ti_miniCart_carousel-nav ti_hide_767'><span class='ti_carousel-nav-next icon-angle-left'></span><span class='ti_carousel-nav-prev icon-angle-right'></span></div><div class='ti_carousel_header'>";
+
+    $select = $conn->select()
+        ->from($coreResource->getTableName('sales_flat_quote_item'),array('product_id'))
+        ->where('parent_item_id IS NULL')
+        ->where('quote_id = ?',$cart->getId());
+    $cartItems = $conn->fetchCol($select);
+
+        $quote = Mage::getModel('sales/quote')->load($cart->getId());
+        $cartitem = Mage::getModel('sales/quote_item')
+                    ->getCollection()
+                    ->setQuote($quote)
+                    ->addOrder('updated_at', 'desc');
+
+    $number_count = 0;
+    foreach ($cartitem as $item) {
+    	$number_count++;
+        $product = $item->getProduct();
+        if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 ) //this for bundle otherwise all product under bundle will show in cart
+		//$shopptingcarthtml .= "<div class='ti_related_item_one_fourth ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
+
+            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
+
+
+
+        //$productId = $item->getProduct()->getId();
+        //$productqty = $item->getQty();
+        //$productPrice = $item->getProduct()->getPrice();
+
+    }
+
+
+    if ($shopptingcarthtml != "") $shopptingcarthtml .= "</div><div class='ti_miniCart_subtotal'><h4 class='ltWeight lgTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
+    else $shopptingcarthtml = "<p class='text_center'><span class='altTxt'>You don't have any items inside cart.</span></p>"; ?>
+
+<ul class="ti_header_toplinks">
+
+						<li id="ti_header_account"><a rel="nofollow"><span>My Account</span></a>
+							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_accountDrop">
+								<div class= "ti_header_linkgap"></div>
+								<div class="one_half">
+									<div class="ti_block_inner">
+										<ul>
+											<li id="ti_header_login"><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>Sign In</span></a></li>
+											<li id="ti_header_logout"><a href="<?php echo $this->getUrl('') ?>customer/account/logout/"><span>Sign Out</span></a></li>
+											<li><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="one_half">
+									<div class="ti_block_inner ti_dropHalfBrder btcf">
+										<ul>
+											<li><a href="<?php echo $this->getUrl('') ?>customer/account/index/"><span>My Profile</span></a></li>
+											<li><a href="<?php echo $this->getUrl('') ?>sales/order/history/"><span>My Orders</span></a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li id="ti_header_cart"><a rel="nofollow"><span>Cart</span>(<span id="ti_header_cartcount"><?php echo $total_num ?></span>)</a>
+							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_cartDrop">
+								<div class= "ti_header_linkgap"></div>
+
+									<?php
+    									echo $shopptingcarthtml;
+    
+    								?>
+
+							</div>
+						</li>
+						<li id="ti_header_help"><a rel="nofollow" rel="nofollow"><span>Need help?</span></a>
+							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_helpDrop">
+								<div class= "ti_header_linkgap"></div>
+								<p>We're available M-F, 8am-5pm PST</p>
+								<div class="one_half">
+									<div class="ti_block_inner">
+										<ul>
+											<li><a href="<?php echo $this->getUrl('') ?>order-tracking"><span>Track Orders</span></a></li>
+											<li><a href="<?php echo $this->getUrl('') ?>ink_toner_troubleshooting" target="_blank">Troubleshooting</a></li>
+											<li><a href="<?php echo $this->getUrl('helpdesk/index/customer/');?>"><span>Support Ticket</span></a></li>
+											<li><a href="mailto:customercare@tomatoink.com"><span>Email us</span></a></li>
+										</ul>
+									</div>
+								</div>
+								<div class="one_half">
+									<div class="ti_block_inner ti_dropHalfBrder">
+										<div id="scEkiO"></div>
+										<a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','Comboink Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;><p>
+											<!-- The altTxt class should change to lgTxt when offline -->
+											<span class="icon-bubbles altTxt"></span>
+										</p>
+											<!-- The text in id="ti_liveChat" should change to Live Chat is offline. The altTxt class should change to lgTxt -->
+										<h3 class="altTxt ltWeight" id="ti_liveChat">Live Chat<br>is online</h3></a>
+										<h4 class="ltWeight">
+											<!-- The text in id="ti_phoneMessage" should change to Leave a message. The altTxt class should change to lgTxt -->
+											<span id="ti_phoneMessage">Or call us:</span><br><a href="tel:877-777-0127" class="altTxt strong">877-777-0127</a></span>
+										</h4>
+									</div>
+								</div>
+							</div>
+						</li>
+                        
+					</ul>
+
+
+<!-- BEGIN ProvideSupport.com Custom Images Chat Button Code -->
+<div id="ciEkiO" style="z-index:100;position:absolute"></div>
+<!--<div id="scEkiO" style="display:inline"></div>-->
+<div id="sdEkiO" style="display:none"></div>
+<script type="text/javascript">var seEkiO=document.createElement("script");seEkiO.type="text/javascript";var seEkiOs=(location.protocol.indexOf("https")==0?"https":"http")+"://image.providesupport.com/js/lubu12/safe-standard.js?ps_h=EkiO&ps_t="+new Date().getTime()+"&online-image=<?php echo $this->getSkinUrl('images/ti-chat/live-chat-online.png') ?>&offline-image=<?php echo $this->getSkinUrl('images/ti-chat/live-chat-offline.png') ?>";setTimeout("seEkiO.src=seEkiOs;document.getElementById('sdEkiO').appendChild(seEkiO)",1)</script>
+<noscript><div style="display:inline"><a href="<?php echo Mage::getBaseUrl() ?>productselector/ajax/livechat" onClick="javascript:void window.open('<?php echo Mage::getBaseUrl() ?>productselector/ajax/livechat','CompandSave Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">Live Chat</a></div></noscript>
+<!-- END ProvideSupport.com Custom Images Chat Button Code -->
+<!-- chat page update !-->
+<script type="text/javascript">
+
+
+/*****************************************/
+/* toplinks: login section/cart section  */
+/* Author: Yiyang     Date 4/25/2014     */
+/*****************************************/
+
+var ti_global_islogin = "<?php  if ($this->helper('customer')->isLoggedIn()) echo true; else echo false;  ?>";
+var ti_global_customerid = "";
+if (ti_global_islogin) ti_global_customerid = "<?php if ($this->helper('customer')->isLoggedIn()) echo Mage::getSingleton('customer/session')->getCustomer()->getId(); ?>";
+
+
+    function openChat(){
+        window.open(ti_global_url + 'productselector/ajax/livechat','CompandSave Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;
+    }
+    jQuery(document).ready(function() {
+        setTimeout(function() {
+            var livesite_tag = document.getElementById('scEkiO');
+            livesite_tag.innerHTML = "<a href='#' onClick='openChat();' >"  + livesite_tag.firstChild.innerHTML + "</a>";
+        },2000);
+
+
+
+		//my account signin/signout
+			if (ti_global_islogin) {jQuery('#ti_header_login').hide();}
+			else {jQuery('#ti_header_logout').hide();}
+
+
+				//ti_miniCart_carousel-nav
+				jQuery('#ti_header_cartDrop').contentcarouselhd();
+
+				<?php if ($number_count > 1): ?>
+				jQuery('.ti_miniCart_carousel-nav').show();
+				<?php endif; ?>
+
+
+
+    });
+
+
+
+
+
+</script>
+<!-- chat page update !-->

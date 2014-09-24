@@ -1,0 +1,66 @@
+<div class="ti_checkoutStep" id="ti_cartregister_close">
+	<a href="#" class="ti_checkoutStep_close altTxt">X</a>
+</div>
+<h2><?php echo $this->__('Create Customer Account') ?></h2>
+<form action="<?php echo Mage::getUrl('productselector/cartlogin/create',array('_secure'=>true)) ?>" method="post" id="form-validate">
+	<div class="block-content text_center">
+			<p class="altTxt ti_cart_popup_error" id="ti_cart_popup_error_msg_empty">Name, email and password can't be empty</p>
+			<p class="altTxt ti_cart_popup_error" id="ti_cart_popup_error_msg_email">Invalid email address</p>
+			<p class="altTxt ti_cart_popup_error" id="ti_cart_popup_error_msg_passlen">Password length must be at least 6 character</p>
+			<p class="altTxt ti_cart_popup_error" id="ti_cart_popup_error_msg_passnotmatch">Password and confirmation password must be the same</p>
+			<p class="altTxt ti_cart_popup_error" id="ti_cart_popup_error_msg_emailexist">This email is already associated with an acccount! Do you want to <a ref="nofollow">login</a>?</p>
+			
+			<?php echo $this->getBlockHtml('formkey'); ?>
+			<input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
+			<input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
+			<h2 class="ti_green_head"><?php echo $this->__('Personal Information') ?></h2>
+				<div class="full ti-required-entry">
+					<label class="ti_cms_labelHide" for="firstname"><span><?php echo $this->__('First Name') ?></span></label>
+					<input type="text" id="firstname" name="firstname" placeholder="<?php echo $this->__('First Name') ?>" title="<?php echo $this->__('First Name') ?>" maxlength="255" required="required" class="required-entry" />
+				</div>
+				<div class="full ti-required-entry">
+					<label class="ti_cms_labelHide" for="lastname"><span><?php echo $this->__('Last Name') ?></span></label>
+					
+					<input type="text" id="lastname" name="lastname" placeholder="<?php echo $this->__('Last Name') ?>" title="<?php echo $this->__('Last Name') ?>" maxlength="255" required="required" class="required-entry" />
+				</div>
+				<div class="full ti-required-entry">	
+
+					<label class="ti_cms_labelHide" for="email_address"><span><?php echo $this->__('Email Address') ?></span></label>
+
+					<input type="email" required="required" name="email" id="email_address" required="required" placeholder="<?php echo $this->__('Email Address') ?>" title="<?php echo $this->__('Email Address') ?>" class="validate-email required-entry" />
+					
+					<!--<input type="email" required="required" name="email" id="email_address" required="required" value="<?php echo $this->escapeHtml($this->getFormData()->getEmail()) ?>" title="<?php echo $this->__('Email Address') ?>" class="validate-email required-entry" />-->
+				</div>
+
+				<?php if ($this->isNewsletterEnabled()): ?>
+
+				<div class="full">
+					<input type="checkbox" name="is_subscribed" title="<?php echo $this->__('Sign Up for Newsletter') ?>" value="1" id="is_subscribed"<?php if($this->getFormData()->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="ti_checkbox" />
+					<label class="ti_inline altTxt" for="is_subscribed"><div class="ti-checkbox"></div><span><?php echo $this->__('Newsletter Signup') ?></span></label>
+				</div>
+						
+						<?php /* Extensions placeholder */ ?>
+						<?php echo $this->getChildHtml('customer.form.register.newsletter')?>
+
+				<?php endif;?>
+
+				<h2 class="ti_green_head"><?php echo $this->__('Login Information') ?></h2>
+
+					<div class="full ti-required-entry">
+						<label class="ti_cms_labelHide" for="password"><span><?php echo $this->__('Password') ?></span></label>
+						<input type="password" required="required" name="password" id="password" title="<?php echo $this->__('Password') ?>" class="required-entry validate-password" placeholder="<?php echo $this->__('Password') ?>" />
+					</div>
+					<div class="full ti-required-entry">
+						<label class="ti_cms_labelHide" for="confirmation"><span><?php echo $this->__('Confirm Password') ?></span></label>
+						<input type="password" required="required" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="required-entry validate-cpassword" placeholder="<?php echo $this->__('Confirm Password') ?>"   />
+					</div>
+
+		
+
+			
+		
+		<div class="actions">
+			<button type="submit" title="<?php echo $this->__('Submit') ?>" class="ti_button"><span><?php echo $this->__('Submit') ?></span></button>
+		</div>
+	</div>
+</form>
