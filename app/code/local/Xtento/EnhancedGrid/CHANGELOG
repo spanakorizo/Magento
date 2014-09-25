@@ -1,0 +1,152 @@
+Xtento_EnhancedGrid
+
+-------------
+  CHANGELOG
+-------------
+
+===== 1.0.0 =====
+ * Initial Release
+
+===== 1.0.1 =====
+ * Fixed problem with built-in columns filter
+
+===== 1.0.2 =====
+ + Added ability to display carriers/tracking numbers in Sales > Orders grid
+
+===== 1.0.3 =====
+ * Fixed grid pager / collection count when filtering/displaying purchased items
+ * Fixed grid massaction checkbox when filtering/searching
+ * Improved performance when using the "products purchased" column
+
+===== 1.0.4 =====
+ + Added column saying Yes / No whether backordered items are in the order or not
+ + Added "Column Configuration" tab which allows to specify further options for certain columns
+ + Added ability to show product thumbnails in grid
+ + Added ability to show weight in grid
+
+===== 1.0.5 =====
+ + Added tracking table column which contains carrier / tracking number
+ + Added ability to show order comments history in grid
+ * Fixed bug if other collections are loaded at the same time with the order grid collection
+
+===== 1.0.6 =====
+ + Added color to the "backordered" column to make it more noticeable
+ * Enhanced performance if other extensions are joining tables in the grids
+ * Fixed CSS for the popular "Magento Go" admin theme
+
+===== 1.0.7 =====
+ + Added ability to allow/disallow grid customization on a admin role level: You can now disallow grid customization for specific admin roles.
+
+===== 1.0.8 =====
+ * Fixed filtering functionality when filtering by SKU + store
+
+===== 1.0.9 =====
+ + Added ability to show "OneStepCheckout" customer comment in the Sales > Orders grid
+
+===== 1.0.10 =====
+ + Added ability to show tracking numbers / tracking table in the Sales > Shipments grid
+ * Fixed the tracking table column
+
+===== 1.0.11 =====
+ + Added "Total Qty Ordered" column for Sales > Orders grid
+
+===== 1.0.12 =====
+ * Fixed filtering functionality when filtering by SKU + created_at
+
+===== 1.1.0 =====
+ + Added ability to show full billing/shipping address in one column
+
+===== 1.1.1 =====
+ + Added and improved column layout when exporting using the Magento built-in "Export CSV/Excel XML" functionality
+
+===== 1.2.0 =====
+ + Enhanced the Magento built-in "CSV/Excel XML" export when using the "tracking number", "tracking table" and "comments history" columns
+ + Added compatibility check for CE/EE Magento versions
+ * Fixed tracking link for tracking number / tracking table columns
+ * Added "carrier title" to tracking table column
+ * Fixed invoice/shipment/credit memo grid collection/data loading
+ * Fixed filtering functionality when filtering by SKU + status
+
+===== 1.2.1 =====
+ * Removed obsolete columns when exporting
+
+===== 1.2.2 =====
+ + Added billing/shipping firstname + lastname as separate columns
+ + Added ability to specify the number of characters after which the comments history should be truncated
+ + Added ability to specify the number of items that should be shown in the orders grid (column "Purchased items")
+ * Fixed a bug when filtering by multiple fields
+
+===== 1.2.3 =====
+ + Added ability to export grand total (excl. tax)
+ * Fixed a bug that could lead to the export failing if columns are sorted by purchased_items
+ * Fixed a bug that could lead to an exception if the purchased_items column was sorted
+
+===== 1.3.0 =====
+ + Added ability to hide certain order statuses on the Sales > Orders grid
+
+===== 1.3.1 =====
+ + Qty backordered is shown in purchased items column now
+ * Further improved filtering by SKU/purchased items
+
+===== 1.3.2 =====
+ + Added ability to select whether the "Purchased Items" column should filter by SKU or product name
+ + Added ability to show shipping/billing "city" on the Sales > Orders grid
+ + Added ability to show/filter by "NOT LOGGED IN" customer group in the customer group column
+ + For Sage Pay Direct Pro payments, the correct payment method title is shown
+ * Removed "sagepay_transaction_state" column when exporting as this column lead to problems when exporting
+ * Removed "Price" filter as it's not a valid filter for "Sales" grids
+
+===== 1.3.3 =====
+ * Bugfix: Grouping by main_table.entity_id in grids now to avoid "Item in collection already exists"
+ * Bugfix: Multiple grid configurations for different admin roles are working again now
+
+===== 1.3.4 =====
+ + Added column: "Shipping (Incl. Tax)"
+ + Added ability to show prices in "Purchased Items" column in order *or* base currency
+
+===== 1.3.5 =====
+ + Added column: "Delivery Date", "Delivery Comment" (Aitoc Delivery Date)
+
+===== 1.3.6 =====
+ + Some previously missing strings can now be translated as well
+
+===== 1.3.7 =====
+ * Fixed a bug that could lead to custom fields not showing up on the Sales > Invoice/Shipment/Credit Memo grids
+
+===== 1.3.8 =====
+ + Added "Customer Group" for invoice grids
+
+===== 1.3.9 =====
+ * Fixed collection rewrite being to greedy, now stopping the item collection from being rewritten when exporting on the Sales > Orders grid.
+
+===== 1.4.0 =====
+ + Added "payment method" for invoice grids
+ * Further optimized built-in CSV/XML export when exporting and filtering by fields at the same time
+ * Fixed updated_at column being not filterable
+
+===== 1.4.1 =====
+ + Added ability to hide disabled payment methods in "payment method" dropdown
+ + Added ability to show store_view name as one-line store view (compared to three-line store name out of the box in Magento)
+ * Fixed filter being set to "text" even though no filter was set by the extension adding the column
+
+===== 1.4.2 =====
+ + Added ability to show invoiced/shipped items on Invoice / Shipment grid
+ + Added ability to show order grand total on other sales grids
+ + Added ability to customize Magento Enterprise "Sales Archive" grid - same layout as on "Sales Order" grid is shown
+ * Fixed wrong row count being exported using the built-in export functionality of Magento
+ ! Confirmed compatibility with Magento CE 1.9.0.0 / EE 1.14.0.0
+
+===== 1.4.3 =====
+ + Added more fields to the Sales Invoice grid
+ * Improved grid saving, moved key to be the last parameter, could otherwise lead to POST being empty in some hosting environments
+
+===== 1.4.4 =====
+ + Added ability to hide certain stores on the Sales grids
+ * Fixed a bug that could lead to other grids being rewritten, that should not be rewritten (grids, that use grid IDs that Magento uses for the order/invoice/shipment/credit memo grid)
+
+===== 1.4.5 =====
+ + Added "Order Source (M2EPro)" column to show eBay/Amazon/etc. order source when using the M2EPro extension
+ * Enhanced compatibility with Magentos built-in export functionality
+
+===== 1.4.6 =====
+ + Added ability to add custom columns using custom joins, etc. - see: http://support.xtento.com/wiki/Magento_Extensions:Enhanced_Order_Grid#Adding_custom_columns

@@ -1,0 +1,26 @@
+<div class="block knowledge-block" id="knowledge-block-result">
+    <div class="block-title">
+        <strong><span><?php echo $this->__('Support Results');?> : </span></strong><?php echo $this->getQuery();?>
+    </div>
+    <div class="block-content">
+        <?php $collection = $this->getCollection();
+        $processor = new Mage_Cms_Model_Template_Filter(); ?>
+        <?php foreach ($collection as $_faq) :?>
+            <div>
+                <a href="<?php echo $this->getUrl(
+                    'knowledgebase/index/view', array('faq' => $_faq->getIdentifier()))
+                ?>"><?php echo $_faq->getTitle() ?></a>
+				<p>
+                <?php $content = $processor->filter($_faq->getContent());
+                echo substr(strip_tags($content), 0, 200) . ' ...'; ?>
+                </p>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+<div class="buttons-set">
+    <p><?php echo $this->__('Still not finding your answer?')?></p>
+    <button class="button" onclick="window.location='<?php echo $this->getUrl('helpmate/index/save')?>'; return false;" title="<?php echo $this->__('No thanks, open a ticket.') ?>">
+        <span><span><?php echo $this->__('No thanks, open a ticket.') ?></span></span>
+    </button>
+</div>

@@ -1,0 +1,47 @@
+<?php
+$cat_id = $_POST['id'];
+echo '<option value="" selected="">Ink/Cartridge</option>';
+
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$store_id = 0;//Mage::app()->getStore()->getId();
+//get group product id
+$relationtable = $coreResource->getTableName('catalog_product_link');
+$prdtable = $coreResource->getTableName('catalog_category_product');
+$select = $conn->select()
+		->from($prdtable,array('product_id'))
+		->where('category_id = ?',$cat_id);
+$result = $conn->fetchCol($select); //get product ID from category
+if(!empty($result)){
+    $simple_prd_array = array();
+	foreach( $result as $grp_id){	
+		$select = $conn->select()
+			->from($relationtable,array('linked_product_id'))
+			->where('product_id = ?',$grp_id)
+			->where('link_type_id = ?',Mage_Catalog_Model_Product_Link::LINK_TYPE_GROUPED);
+		$result_all = $conn->fetchCol($select);
+        $simple_prd_array = array_merge($simple_prd_array,$result_all);
+
+    }
+
+    $result_simple = array_unique($simple_prd_array);
+
+    if(!empty($result_simple)){
+        $collection = Mage::getModel('catalog/product')
+            ->getCollection()
+            ->addFieldToFilter('entity_id', $result_simple)
+            ->addAttributeToFilter('type_id', 'simple')
+            ->addAttributeToFilter('status', 1)
+            ->addAttributeToSelect(array('vendor_partno','entity_id'))
+            ->addAttributeToSort('vendor_partno', 'ASC');
+
+
+        foreach($collection as $product_model)
+            echo '<option value="'.$product_model->getId().'">'.$product_model->getVendorPartno().'</option>';
+    }
+    else{
+      echo '<option value="0">No Product Found</option>';
+
+    }
+
+}

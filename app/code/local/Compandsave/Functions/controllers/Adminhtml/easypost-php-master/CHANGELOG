@@ -1,0 +1,30 @@
+=== 2.0.6 2013-10-21
+
+* Added Event resource for webhooks.
+
+
+=== 2.0.5 2013-08-30
+
+* API Addition: Batch.buy method added. Trigger the purchasing of labels after a successful Batch.create.
+* API Addition: Batch.scan_form method added. Quickly generate a scan_form for an entire batch.
+
+
+=== 2.0.4 2013-07-31
+
+* API Addition: Tracker objects added. Trackers can be used to register any tracking code with EasyPost webhooks.
+
+
+=== 2.0.3 2013-07-16
+
+* Bug fix: error messages should no longer be truncated to their first character.
+
+
+=== 2.0.2 2013-07-05
+
+* Added function to Address to all creating and verifying at the same time.
+
+
+=== 2.0.1 2013-07-01
+
+* Add label function to Shipment to request specific label file_formats (pdf, epl2, zpl).
+* Add insure function to Shipment. Add insurance to any shipment in one call!

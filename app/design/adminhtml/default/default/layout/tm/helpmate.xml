@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <!-- -->
+    <helpmate_admin_adminhtml_ticket_index>
+        <reference name="content">
+            <!-- -->
+            <block type="helpmate/adminhtml_ticket" name="ticket" />
+            <!-- -->
+        </reference>
+    </helpmate_admin_adminhtml_ticket_index>
+
+    <helpmate_admin_adminhtml_ticket_edit>
+        <update handle="editor"/>
+    </helpmate_admin_adminhtml_ticket_edit>
+
+    <helpmate_admin_adminhtml_department_index>
+        <reference name="content">
+            <!-- -->
+            <block type="helpmate/adminhtml_department" name="department" />
+            <!-- -->
+        </reference>
+    </helpmate_admin_adminhtml_department_index>
+
+    <helpmate_admin_adminhtml_gateway_index>
+        <reference name="content">
+            <!-- -->
+            <block type="helpmate/adminhtml_gateway" name="gateway" />
+            <!-- -->
+        </reference>
+    </helpmate_admin_adminhtml_gateway_index>
+    <!-- -->
+</layout>

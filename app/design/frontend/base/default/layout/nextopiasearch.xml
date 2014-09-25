@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+    <nsearch_index_index translate="label">
+        <reference name="left">
+            <block type="nrefine/" name="catalogsearch.leftnav" before="catalog.compare.sidebar" template="catalog/layer/view.phtml"/>
+            <!-- block type="catalog/product_compare_sidebar" after="catalogsearch.leftnav" name="catalog.compare.sidebar" template="catalog/product/compare/sidebar.phtml"/ -->
+        </reference>		
+		<reference name="content">
+			<block type="nsearch/result" name="search.result" template="catalogsearch/result.phtml">
+				<block type="nsearch/nsearch" name="search_result_list" template="catalog/product/list.phtml">
+					<block type="catalog/product_list_toolbar" name="product_list_toolbar" template="catalog/product/list/toolbar.phtml">
+						<block type="page/html_pager" name="product_list_toolbar_pager"/>
+					</block>
+					<action method="setToolbarBlockName"><name>product_list_toolbar</name></action>
+				</block>
+			</block>
+		</reference>
+    </nsearch_index_index>
+</layout> 

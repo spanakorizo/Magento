@@ -1,0 +1,103 @@
+<?php
+/**
+ * @var TM_CheckoutFields_Helper_Data
+ */
+$checkoutfields = Mage::helper('checkoutfields');
+?>
+<?php if ($fields = $checkoutfields->getEnabledFields()) : ?>
+    <div class="form-list form-checkoutfields">
+    <?php foreach ($fields as $fieldName => $fieldConfig) : ?>
+        <?php
+            $required = ('req' === $fieldConfig['status']);
+            $value    = $this->escapeHtml($this->getQuote()->getData($fieldName));
+        ?>
+        <!--<li<?php /*echo 'checkbox' === $fieldConfig['type'] ? ' class="control"' : '' */?> >-->
+
+        <div <?php if('select' === $fieldConfig['type']) echo 'class="one_third"'; elseif('textarea' === $fieldConfig['type']) echo 'class="two_third"';elseif('checkbox' === $fieldConfig['type']) echo 'class="control"'; else '';?> >
+            <?php if ('checkbox' !== $fieldConfig['type']) : ?>
+                <label for="order-<?php echo $fieldName ?>" class="ti_cms_labelHide">
+                    <span><?php echo $this->escapeHtml($fieldConfig['label']) ?></span>
+                </label>
+                <!--<label for="order-<?php /*echo $fieldName */?>"
+                    class="<?php /*echo $required ? 'required' : '' */?>"
+                    ><?php /*if ($required): */?><em>*</em><?php /*endif; */?><?php /*echo $this->escapeHtml($fieldConfig['label']) */?></label>-->
+                <?php if ($fieldConfig['description']) : ?>
+                    <small class="checkoutfield-note"><?php echo $this->escapeHtml($fieldConfig['description']) ?></small>
+                <?php endif; ?>
+            <?php endif; ?>
+
+            <?php switch ($fieldConfig['type']) :
+                case 'checkbox': ?>
+                <div class="input-box">
+                    <input type="checkbox"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        value="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
+                        class="checkbox<?php echo $required ? ' ti-required-entry' : '' ?>"
+                    />
+                    <label for="order-<?php echo $fieldName ?>"
+                        class="<?php echo $required ? 'required ti-required-entry' : '' ?>"
+                        ><!--<?php if ($required): ?><em>*</em><?php endif; ?>--><?php echo $this->escapeHtml($fieldConfig['label']) ?></label>
+                    <?php if ($fieldConfig['description']) : ?>
+                        <small class="checkoutfield-note"><?php echo $this->escapeHtml($fieldConfig['description']) ?></small>
+                    <?php endif; ?>
+                </div>
+                <?php break; ?>
+                <?php /*case 'multiselect': ?>
+                    <select type="text"
+                        size="4"
+                        multiple="multiple"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        class="<?php echo $required ? ' required-entry' : '' ?>"
+                    >
+                        <?php foreach($fieldConfig['options'] as $option) : ?>
+                            <?php $option = $this->escapeHtml($option); ?>
+                            <option value="<?php echo $option ?>"<?php echo $value === $option ? ' selected="selected"' : '' ?>><?php echo $option ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                <?php break;*/ ?>
+                <?php case 'text': ?>
+                <div class="input-box">
+                    <input type="text"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        placeholder="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
+                        class="ti_checkout_info<?php echo $required ? ' ti-required-entry' : '' ?>"
+                    />
+                </div>
+                <?php break; ?>
+                <?php case 'textarea': ?>
+                <div>
+                    <textarea type="text"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        placeholder="<?php echo $this->escapeHtml($fieldConfig['label']) ?>"
+                        spellcheck="true"
+                        rows="3"
+                        class="ti_checkout_comments"
+                    ><?php echo $value ?></textarea>
+                </div>
+                <?php break; ?>
+                <?php case 'select': ?>
+                <div class="ti_select_barContainer">
+                    <select type="text"
+                        name="<?php echo $fieldName ?>"
+                        id="order-<?php echo $fieldName ?>"
+                        value=""
+                        class="select"
+                    >
+                        <option value=""><?php echo $this->escapeHtml($fieldConfig['label']) ?></option>
+                        <?php foreach($fieldConfig['options'] as $option) : ?>
+                            <?php $option = $this->escapeHtml($option); ?>
+                            <option value="<?php echo $option ?>"<?php echo $value === $option ? ' selected="selected"' : '' ?>><?php echo $option ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+                <?php break; ?>
+            <?php endswitch; ?>
+
+        </div>
+    <?php endforeach; ?>
+    </div>
+<?php endif; ?>

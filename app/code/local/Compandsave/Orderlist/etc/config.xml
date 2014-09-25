@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config>
+    <modules>
+        <Compandsave_Orderlist>
+           <version>0.0.4</version>
+        </Compandsave_Orderlist>
+    </modules>
+    <global>
+    	<models>
+        	<compandsave_orderlist>
+				<class>Compandsave_Orderlist_Model</class>
+			</compandsave_orderlist>
+		</models>
+		<resources>
+            <compandsave_orderlist_setup>
+                <setup>
+                    <module>Compandsave_Orderlist</module>
+                </setup>
+            </compandsave_orderlist_setup>
+        </resources>
+	</global>
+</config>

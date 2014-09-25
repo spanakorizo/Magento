@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Compandsave_Checkout>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Compandsave_Checkout>
+    </modules>
+</config>

@@ -1,0 +1,36 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Sam Chao
+
+Created for Corporate Account page at TomatoInk.com
+
+- General
+- Left Column
+- Right Column
+
+Color Reference:
+green: #4ca62e;
+
+Naming convention: add ti_ca_ prefix
+ 
+*/
+/*********************************************************/
+
+.ti_ca_threeFax {
+	min-height:351px;
+}
+
+.ti_ca_threeFax p {
+	font-size:1.6em;
+	line-height:1.6em;
+}
+
+@media only screen and (max-width : 767px), @media only screen and (max-device-width : 767px){
+
+	.ti_ca_threeFax {
+		min-height:1px !important;
+	}
+
+}

@@ -1,0 +1,151 @@
+<!-- https://www.866ink.com/magentoEE/index.php/newsletter/subscriber/new/ !-->
+<style type="text/css">
+#ti_subpage_message {
+    display:none;
+}
+
+#ti_update_form {
+    display: none;
+}
+
+</style>
+
+<div class="ti_cms_contain">
+    <div class="one_third">
+        <img src="<?php echo $this->getSkinUrl('images/ti-home/email.jpg') ?>"/>
+    </div>
+    <div id='ti_subscribe_loading' style="display:none">
+        <img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>">
+    </div>
+    <div class="two_third">
+        <h2 id="ti_subpage_message">Thank you for subscribing!</h2>
+        <form action="" method="post" id="ti_subpage_form">
+            <div class="form-subscribe">
+                <div class="form-subscribe-header">
+                    <h2 class="ti_headerH1"><label for="newsletter"><?php echo $this->__('Sign up for our newsletter:') ?></label></h2>
+                </div>
+                <input name="email" type="text" id="newsletter" placeholder="<?php echo $this->__('Enter your email address') ?>" class="input-text required-entry validate-email" /><label for="newsletter" class="ti_cms_labelHide"><span>Enter your email address</span></label><br/>
+                <input id="ti_subpage_fname" type="text" placeholder="<?php echo $this->__('Enter your first name') ?>"><label for="ti_subpage_fname" class="ti_cms_labelHide"><span>Enter your first name</span></label><br/>
+                <input id="ti_subpage_lname" type="text" placeholder="<?php echo $this->__('Enter your last name') ?>" ><label for="ti_subpage_lname" class="ti_cms_labelHide"><span>Enter your last name</span></label><br/>
+                <input type="radio" id="subscribe_3-4" name="subscriber_freq" value="0" checked><label for="subscribe_3-4"><div class="ti-radio"></div><span>3-4 times per month</span></label><br/>
+                <input type="radio" id="subscribe_2" name="subscriber_freq" value="2"><label for="subscribe_2"><div class="ti-radio"></div><span>Twice a Month</span></label><br/>
+                <input type="radio" id="subscribe_1" name="subscriber_freq" value="1"><label for="subscribe_1"><div class="ti-radio"></div><span>Once a Month</span></label><br/>
+             	<button type="button" class="button" id="ti_subpage_submit" title="<?php echo $this->__('Subscribe') ?>"><span><?php echo $this->__('Subscribe') ?></span></button>
+            </div>
+        </form>
+
+        <!-- Update section !-->
+        <div id="ti_update_form">
+            <p>Do you want to update your subscription information? </p>
+            <input id="ti_update_fname" type="text" placeholder="<?php echo $this->__('Enter your first name') ?>"><label for="ti_update_fname" class="ti_cms_labelHide"><span>Enter your first name</span></label><br>
+            <input id="ti_update_lname" type="text" placeholder="<?php echo $this->__('Enter your last name') ?>"><label for="ti_update_lname" class="ti_cms_labelHide"><span>Enter your last name</span></label><br>
+            <input type="radio" id="update_subscribe_3-4" name="update_freq" value="0" checked="checked"><label for="update_subscribe_3-4"><div class="ti-radio"></div><span>3-4 times per month</span></label><br>
+            <input type="radio" id="update_subscribe_2" name="update_freq" value="2"><label for="update_subscribe_2"><div class="ti-radio"></div><span>Twice a Month</span></label><br>
+            <input type="radio" id="update_subscribe_1" name="update_freq" value="1"><label for="update_subscribe_1"><div class="ti-radio"></div><span>Once a Month</span></label>
+            <br>
+            <input type="button" value="Back" onclick="window.history.go(-1);">&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+    var newsletterSubscriberFormDetail = new VarienForm('ti_subpage_form');
+//]]>
+</script>
+
+
+<script type="text/javascript">
+var ti_subpage_url   = "<?php echo $this->getUrl(''); ?>newsletter/subscriber/new/";
+var ti_update_email = decodeURIComponent(getUrlVars()["email"]);
+console.log(ti_update_email);
+if (ti_update_email != "undefined" && ti_update_email != "") {
+    jQuery('#ti_subscribe_loading').show();
+
+    jQuery('#ti_subpage_form').hide();
+    jQuery.ajax({
+        url : ti_subpage_url,
+        type: "POST",
+        data : {email: ti_update_email},
+        success: function(data, textStatus, jqXHR) {
+            console.log(textStatus);
+            jQuery('#ti_subpage_message').show('slow');
+            jQuery('#ti_update_form').show('slow');
+
+ jQuery('#ti_subscribe_loading').hide();
+
+        }
+
+    });
+}
+
+
+jQuery('#ti_update_submit').click(function() {
+    var ti_update_fname = jQuery('#ti_update_fname').val();
+    var ti_update_lname = jQuery('#ti_update_lname').val();
+    var ti_update_freq  = jQuery('input[name=update_freq]:checked').val();
+
+    var formdata = { 
+        email:ti_update_email, 
+        subscriber_firstname: ti_update_fname, 
+        subscriber_lastname: ti_update_lname, 
+        subscriber_freq: ti_update_freq
+    };
+ jQuery('#ti_subscribe_loading').show();
+jQuery.ajax({
+    url : ti_subpage_url,
+    type: "POST",
+    data : formdata,
+    success: function(data, textStatus, jqXHR) {
+        jQuery('#ti_subpage_message').html('Thank you for updating!');
+        jQuery('#ti_subpage_form').hide();
+        jQuery('#ti_update_form').hide();
+         jQuery('#ti_subscribe_loading').hide();
+
+
+    }
+});
+});
+
+
+
+jQuery('#ti_subpage_submit').click(function() {
+    var ti_subpage_email = jQuery('#newsletter').val();
+    var ti_subpage_fname = jQuery('#ti_subpage_fname').val();
+    var ti_subpage_lname = jQuery('#ti_subpage_lname').val();
+    var ti_subpage_freq  = jQuery('input[name=subscriber_freq]:checked').val();
+
+    var formdata = { 
+        email:ti_subpage_email, 
+        subscriber_firstname: ti_subpage_fname, 
+        subscriber_lastname: ti_subpage_lname, 
+        subscriber_freq: ti_subpage_freq
+    };
+ jQuery('#ti_subscribe_loading').show();
+jQuery.ajax({
+    url : ti_subpage_url,
+    type: "POST",
+    data : formdata,
+    success: function(data, textStatus, jqXHR) {
+        console.log(textStatus);
+        jQuery('#ti_subpage_message').show('slow');
+         jQuery('#ti_subscribe_loading').hide();
+
+
+    },
+    error: function (jqXHR, textStatus, errorThrown) {
+        console.log("error");
+        console.log(errorThrown);
+        jQuery('#ti_subpage_message').html('something is wrong');
+        jQuery('#ti_subpage_message').show('slow');
+    }
+});
+
+
+
+
+});
+ 
+
+
+</script>

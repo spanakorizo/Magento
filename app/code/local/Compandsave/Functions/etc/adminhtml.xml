@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<config>
+    <!-- We are defining a new menu item for the admin panel. -->
+    <menu>
+
+        <!--
+        First, create a top-level menu item, which will appear alongside CMS
+        -->
+        <compandsave_functions translate="title"
+                module="compandsave_functions">
+            <title>CompAndSave Functions</title>
+            <sort_order>76</sort_order>
+            <depends>
+                <module>Compandsave_Functions</module>
+            </depends>
+
+            <!-- Under this top-level menu, create a child menu item. -->
+            <children>
+                <duplicateorder translate="title"
+                        module="compandsave_functions">
+                    <title>Duplicate Order</title>
+                    <sort_order>10</sort_order>
+
+                    <!--
+                    When the menu is clicked, take the user here.
+                    -->
+                 <action>compandsave_functions_admin/duplicate</action>
+
+                </duplicateorder>
+                <specialfilter translate="title"
+                        module="compandsave_functions">
+                    <title>Special Filter</title>
+                    <sort_order>11</sort_order>
+
+                    <!--
+                    When the menu is clicked, take the user here.
+                    -->
+                 <action>compandsave_functions_admin/specialfilter</action>
+
+                </specialfilter>
+                <autoship translate="title"
+                        module="compandsave_functions">
+                    <title>Autoship</title>
+                    <sort_order>12</sort_order>
+
+                    <!--
+                    When the menu is clicked, take the user here.
+                    -->
+                 <action>compandsave_functions_admin/autoship</action>
+
+                </autoship>
+                <packagelist translate="title"
+                        module="compandsave_functions">
+                    <title>Batch Print</title>
+                    <sort_order>13</sort_order>
+
+                    <!--
+                    When the menu is clicked, take the user here.
+                    -->
+                 <action>compandsave_functions_admin/packagelist</action>
+
+                </packagelist>
+            </children>
+        </compandsave_functions>
+    </menu>
+
+    <!-- Define ACL for access to these menu items. -->
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <compandsave_functions translate="title"
+                            module="compandsave_functions">
+                        <title>CompAndSave Functions</title>
+                        <sort_order>76</sort_order>
+                        <children>
+                            <duplicateorder translate="title"
+                                    module="compandsave_functions">
+                                <title>Dupliate Order</title>
+                            </duplicateorder>
+                            <specialfilter translate="title"
+                                    module="compandsave_functions">
+                                <title>Special Filter</title>
+                            </specialfilter>
+                            <autoship translate="title"
+                                    module="compandsave_functions">
+                                <title>Autoship</title>
+                            </autoship>
+                            <packagelist translate="title"
+                                    module="compandsave_functions">
+                                <title>Batch Print</title>
+                            </packagelist>
+                        </children>
+                    </compandsave_functions>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

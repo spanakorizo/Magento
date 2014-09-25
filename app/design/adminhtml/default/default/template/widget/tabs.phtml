@@ -39,6 +39,25 @@
     </li>
 <?php endforeach; ?>
 </ul>
+<!-- print customize code !-->
+<br>
+<input type="button" value="print packagelist" id='order_print' style='display:none'>
+<script type="text/javascript">
+	jQuery("#order_print").click(function() {
+		var order_id = jQuery('input[name=order_id]').val();
+		var packagelist_url = "<?php echo Mage::helper('adminhtml')->getUrl('customize-functions/packagelist/print/'); ?>";
+		jQuery.get(packagelist_url, {orderid:order_id}, function(data) {
+			var win_ship = window.open("", "shiplabel", "fullscreen");
+			var doc_ship = win_ship.document;
+			doc_ship.write(data);
+			doc_ship.close();
+			win_ship.print();
+		})
+	});;
+</script>
+<!-- print customize code !-->
+
+
 <script type="text/javascript">
     <?php echo $this->getJsObjectName() ?> = new varienTabs('<?php echo $this->getId() ?>', '<?php echo $this->getDestElementId() ?>', '<?php echo $this->getActiveTabId() ?>', <?php echo $this->getAllShadowTabs()?>);
 </script>

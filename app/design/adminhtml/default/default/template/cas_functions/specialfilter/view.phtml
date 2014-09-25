@@ -1,0 +1,618 @@
+
+<?php 
+if ($_POST['save'] != "") {
+	
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+$query = "UPDATE `compandsave_functions_conditionfilter` SET `Condition`='" . $_POST['Condition'] . "',`Key`='" . $_POST['Key'] . "' WHERE entity_id = '1'";
+
+$readresult=$write->query($query);
+//$actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+header('Location: saved');
+}
+
+
+
+
+
+if ($_GET['delete'] != "") {
+	
+$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+$query = "DELETE FROM `compandsave_functions_customerfilter` WHERE entity_id = '" . $_GET['delete'] . "'";
+$readresult=$write->query($query);
+//$actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+header('Location: deleted');
+}
+$form_key = Mage::getSingleton('core/session')->getFormKey();
+	if ($_POST['entity_id'] != "") {
+		//save
+		$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+
+
+
+
+		if ($_POST['entity_id'] == '0') {$query = "INSERT INTO `compandsave_functions_customerfilter` (entity_id, FirstName, LastName, CustomerID, EmailAddress, ShippingAddress, BillingAddress, Company, Telephone) VALUES (0, '" . $_POST['FirstName'] . "', '" . $_POST['LastName'] . "', '" . $_POST['CustomerID'] . "', '" . $_POST['EmailAddress'] . "', '" . $_POST['ShippingAddress'] . "', '" . $_POST['BillingAddress'] . "', '" . $_POST['CampanyName'] . "', '" . $_POST['Telephone'] . "'); ";}
+			else {
+				$query = "UPDATE `compandsave_functions_customerfilter` SET FirstName = '" . $_POST['FirstName'] . "', LastName ='" . $_POST['LastName'] . "', CustomerID='" . $_POST['CustomerID'] . "', EmailAddress='" . $_POST['EmailAddress'] . "', ShippingAddress='" . $_POST['ShippingAddress'] . "', BillingAddress='" . $_POST['BillingAddress'] . "', Company='" . $_POST['CompanyName'] . "', Telephone='" . $_POST['Telephone'] . "' WHERE entity_id='" . $_POST['entity_id'] . "'";
+			}
+    
+    	$readresult=$write->query($query);
+
+	}
+
+	$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		
+    $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
+    
+    $readresult=$write->query($query);
+    $customer_text = "";
+    while ($row = $readresult->fetch() ) {
+    	$customer_text .= "***Customers***" . $row['FirstName'] . "*" . $row['LastName'] . "*" . $row['CustomerID'] . "*" . $row['EmailAddress'] . "*" . $row['Company'] . "*" . $row['ShippingAddress'] . "*" . $row['BillingAddress'] . "*" . $row['Telephone'] . "*" . $row['entity_id'];
+    }
+
+
+  	//$write = Mage::getSingleton('core/resource')->getConnection('core_write');
+		
+    $query = "SELECT * FROM `compandsave_functions_conditionfilter` WHERE entity_id=1";
+    
+    $readresult=$write->query($query);
+
+    while ($row = $readresult->fetch() ) {
+    	$condition_text = $row['Condition'];
+    	$keys_text = $row['Key'];
+    }             
+    $conditionfilter_text = $condition_text . "#" . $keys_text;
+
+
+?>
+
+
+
+<style type='text/css'>
+p {
+	color:#0000A0;
+}
+
+#customer {
+	margin-top: 100px;
+	margin-left:70px;
+}
+#keywords {
+	top:390px;
+	left:500px;
+	position:absolute;
+}
+
+#text {
+	margin-left:50px;
+	margin-top:50px;
+	font-family: verdana;
+
+}
+a {
+	text-decoration:none;
+}
+
+</style>
+<div id="text">
+<h1>Special Filter</h1>
+<br>
+
+</div>
+<div id="customer">
+
+<input type="button" value="create" id="create_new">
+
+</div>
+
+
+
+
+<div id="keywords">
+
+</div>
+
+
+<script type="text/javascript">
+
+var customers = '<?php echo $customer_text; ?>';
+var keywords = '<?php echo $conditionfilter_text ?>';
+
+
+var customers_array = customers.split("***Customers***");
+
+var customer_label = ["FirstName", "LastName", "CustomerID", "EmailAddress", "CampanyName", "ShippingAddress", "BillingAddress", "Telephone"];
+
+
+//extract conditions and keywords
+var message_array;
+var conditions;
+var keywords_array;
+var conditions_num; 
+var keywords_num;
+
+
+
+jQuery(document).ready(function() {
+	var customers_block = document.getElementById('customer');
+	var keywords_block = document.getElementById('keywords');
+	console.log(customers_array);
+	for (var i=0; i<customers_array.length; i++) {
+		displayarray(customer_label, customers_array[i], customers_block, "Customer" + i);
+
+	}
+	//display keyword block
+	displaykeywords(keywords, keywords_block);
+
+});
+
+function displayarray(label, message, object, id_text) {
+	
+	if (message != "") {
+		var message_array = message.split("*");
+		// create block title
+		var messagebox = document.createElement("p");
+		messagebox.innerHTML = id_text;
+		messagebox.class = "messagebox";
+
+		// edit button
+		var edit_button = document.createElement("input");
+		edit_button.type = "button";
+		edit_button.class = "edit_button";
+		edit_button.value = "edit";
+		edit_button.id = id_text + "_edit";
+		edit_button.name = id_text; 
+		edit_button.onclick = function() {edit_function(this.name, this);};
+
+		// delete button
+		var delete_button = document.createElement("input");
+		delete_button.type = "button";
+		delete_button.value = "delete";
+		delete_button.name = message_array[8]; 
+		delete_button.onclick = function() {delete_function(this.name);};
+
+
+		//save button
+		var save_button = document.createElement("input");
+		save_button.type = "submit";
+		save_button.value = "save";
+		save_button.id = "save_" + id_text;
+		save_button.style = "visibility:hidden";
+		save_button.name = id_text; 
+		//save_button.onclick = function() {save_function(this.name);};
+
+
+		//back button
+		var back_button = document.createElement("input");
+		back_button.type = "button";
+		back_button.value = "back";
+		back_button.id = "back_" + id_text; 
+		back_button.style = "visibility:hidden";
+		back_button.onclick = function() {back_function();}
+
+		//create table
+		var form = document.createElement("form");
+		form.method = "post";
+		form.action = "";
+		var table = document.createElement("table");
+		table.id = id_text;
+		
+		for (var j=0; j<message_array.length; j++) {
+			if (j < 8 ) {
+				var tr = document.createElement("tr");
+				var td = document.createElement("td");
+				td.innerHTML = label[j];
+				tr.appendChild(td);
+				td = null;
+				td = document.createElement("td");
+				td.id = id_text + j;
+				td.innerHTML = message_array[j];
+				tr.appendChild(td);
+				table.appendChild(tr);
+				td = null;
+				tr = null;
+			}
+		}
+
+		var entity_id = document.createElement("input");
+		entity_id.type = "hidden";
+		entity_id.name = "entity_id";
+		if (typeof message_array[8] != "undefined")
+		entity_id.value = message_array[8];
+		else entity_id.value = '0';
+		var form_key = document.createElement("input");
+		form_key.type = "hidden";
+		form_key.name = "form_key";
+		form_key.value = "<?php echo $form_key?>";
+
+		form.appendChild(messagebox);
+		form.appendChild(edit_button);
+		form.appendChild(delete_button);
+		form.appendChild(save_button);
+		form.appendChild(back_button);
+		form.appendChild(entity_id);
+		form.appendChild(form_key);
+		form.appendChild(table);
+		object.appendChild(form);
+		table = null;
+		messagebox = null;
+
+
+	}
+}
+
+
+function edit_function(id_text, object) {
+	object.remove();
+	document.getElementById("save_" + id_text).style.visibility = "visible";
+	document.getElementById("back_" + id_text).style.visibility = "visible";
+
+	var cell_id;
+	var cell;
+	var input;
+	var value;
+	for (var i=0; i<8; i++) {
+		cell_id = id_text + i;
+		cell = document.getElementById(cell_id); 
+		value = cell.innerHTML; 
+		input = document.createElement('input');
+		input.type = "text";
+		input.value = value; 
+		input.id = id_text + i + "_input";
+		input.name = customer_label[i];
+		cell.innerHTML = "";
+		cell.appendChild(input);
+		cell = null;
+		input = null;
+	}
+}
+
+function save_function(id_text) {
+	var reg = /\d+$/;
+	var customer_id = reg.exec(id_text);
+	customers_array[customer_id] = "";
+	var inputid = "";
+
+	for (var i=0; i<8; i++) {
+		inputid = id_text + i + "_input";
+		console.log(inputid);
+		customers_array[customer_id] += document.getElementById(inputid).value + "*"; 		
+	}
+	savetolog();
+
+}
+
+
+function delete_function(id_text) {
+	if (id_text != "undefined") {
+		window.location.href = window.location.href + "?delete=" + id_text;
+
+	}
+	else 
+		location.reload(true);
+
+}
+
+
+function back_function() {
+	location.reload(true);
+}
+
+function create_function() {
+	var customers_block = document.getElementById('customer');
+	var new_id = customers_array.length;
+	var edit_click = "Customer" + new_id + "_edit";
+	customers_array[new_id] = "*******";
+	displayarray(customer_label, customers_array[new_id], customers_block, "Customer" + new_id);
+	document.getElementById(edit_click).click();
+
+}
+
+function displaykeywords(message, object) {
+	if (message != "") {
+
+		//extract conditions and keywords
+		message_array = message.split("#");
+		conditions = message_array[0].split("*");
+		keywords_array = message_array[1].split("*");
+		conditions_num = conditions.length - 1;
+		keywords_num = keywords_array.length - 1; 
+
+		//create titles
+		var condition_title = document.createElement('p');
+		condition_title.innerHTML = "Condition";
+		condition_title.style = "margin-bottom:20px;"; 
+		var keywords_title = document.createElement('p');
+		keywords_title.innerHTML = "Keywords";
+		keywords_title.style = "margin-bottom:20px;";
+		keywords_title.id = "keywords_title";
+
+		object.appendChild(condition_title);
+		condition_title = null; 
+
+		//create buttons 
+
+		var edit_button = document.createElement("input");
+		edit_button.type = "button";
+		edit_button.value = "edit";
+		edit_button.id = "condition_edit"; 
+		edit_button.onclick = function() {edit_keyword("condition", this);};
+
+
+		//save button
+		var save_button = document.createElement("input");
+		save_button.type = "button";
+		save_button.value = "save";
+		save_button.id = "condition_save";
+		save_button.style = "visibility:hidden";
+		save_button.onclick = function() {save_keyword("condition");};
+
+		//back button
+		var back_button = document.createElement("input");
+		back_button.type = "button";
+		back_button.value = "back";
+		back_button.id = "condition_back"
+		back_button.style = "visibility:hidden";
+		back_button.onclick = function() {back_function();}
+
+		//add button
+		var add_button = document.createElement("input");
+		add_button.type = "button";
+		add_button.value = "Add";
+		add_button.id = "condition_add";
+		add_button.style = "visibility:hidden";
+		add_button.onclick = function() {add_function("condition");}
+
+		object.appendChild(edit_button);
+		object.appendChild(save_button);
+		object.appendChild(back_button);
+		object.appendChild(add_button);
+
+
+
+		//display conditions
+		for (var i=0; i<conditions.length; i++) {
+			if (conditions[i] != "") {
+				var condition_word = document.createElement('div');
+				condition_word.id = "condition_" + i; 
+				condition_word.innerHTML = conditions[i];
+				object.appendChild(condition_word); 
+				condition_word = null;
+			}
+		}
+		object.appendChild(keywords_title);
+
+				//create buttons 
+
+		var edit_button = document.createElement("input");
+		edit_button.type = "button";
+		edit_button.value = "edit";
+		edit_button.id = "keyword_edit"; 
+		edit_button.onclick = function() {edit_keyword("keyword", this);};
+
+
+		//save button
+		var save_button = document.createElement("input");
+		save_button.type = "button";
+		save_button.value = "save";
+		save_button.id = "keyword_save";
+		save_button.style = "visibility:hidden";
+		save_button.onclick = function() {save_keyword("keyword");};
+
+		//back button
+		var back_button = document.createElement("input");
+		back_button.type = "button";
+		back_button.value = "back";
+		back_button.id = "keyword_back"
+		back_button.style = "visibility:hidden";
+		back_button.onclick = function() {back_function();}
+
+		//add button
+		var add_button = document.createElement("input");
+		add_button.type = "button";
+		add_button.value = "Add";
+		add_button.id = "keyword_add";
+		add_button.style = "visibility:hidden";
+		add_button.onclick = function() {add_function("keyword");}
+
+		object.appendChild(edit_button);
+		object.appendChild(save_button);
+		object.appendChild(back_button);
+		object.appendChild(add_button);
+
+		for (var i=0; i<keywords_array.length; i++) {
+			if (keywords_array[i] != "") {
+				var key_word = document.createElement('div');
+				key_word.innerHTML = keywords_array[i];
+				key_word.id = "keyword_" + i; 
+				object.appendChild(key_word); 
+				key_word = null;
+			}
+		}
+
+
+
+	}
+}
+
+function edit_keyword(block, object) { 
+	if (block == "condition") {
+		object.remove();
+		document.getElementById('condition_add').style.visibility = "visible";
+		document.getElementById('condition_save').style.visibility = "visible";
+		document.getElementById('condition_back').style.visibility = "visible"; 
+
+		for (var i=0; i<conditions.length; i++) {
+			if (conditions[i] != "") {
+				var condition_div = document.getElementById('condition_' + i);
+				var condition_input = document.createElement('input');
+				condition_input.type = "text";
+				condition_input.id = "condition_input_" + i; 
+				condition_input.value = condition_div.innerHTML;
+				condition_div.innerHTML = "";
+				condition_div.appendChild(condition_input);
+				
+ 
+				condition_input = null;
+				condition_div = null;
+			}
+		}
+
+
+
+	}
+	else if (block == "keyword") {
+			object.remove();
+			document.getElementById('keyword_add').style.visibility = "visible";
+			document.getElementById('keyword_save').style.visibility = "visible";
+			document.getElementById('keyword_back').style.visibility = "visible"; 
+
+		for (var i=0; i<keywords_array.length; i++) {
+			if (keywords_array[i] != "") {
+				var keyword_div = document.getElementById('keyword_' + i);
+				var keyword_input = document.createElement('input');
+				keyword_input.type = "text";
+				keyword_input.id = "keyword_input_" + i; 
+				keyword_input.value = keyword_div.innerHTML;
+				keyword_div.innerHTML = "";
+				keyword_div.appendChild(keyword_input);
+				
+ 
+				keyword_input = null;
+				keyword_div = null;
+			}
+		}
+
+	}
+
+}
+
+function save_keyword(block) {
+	if (block == "condition") {
+
+		message_array[0] = "";
+		for (var i=0; i<conditions_num; i++) {
+			
+			var condition_input_id = "condition_input_" + i;
+
+			if (document.getElementById(condition_input_id)) { 
+				if (document.getElementById(condition_input_id).value != "")
+				message_array[0] += document.getElementById(condition_input_id).value + "*";
+
+			}
+		}
+		if (message_array[0] == "") message_array[0] = "*";
+		console.log(message_array[0]);
+		
+
+
+	}
+	else if (block == "keyword") {
+		//alert(keywords_num);
+			message_array[1] = "";
+		for (var i=0; i<keywords_num; i++) {
+			
+			var keyword_input_id = "keyword_input_" + i;
+			var keyword_input_message;
+			if (document.getElementById(keyword_input_id)) {
+				keyword_input_message = document.getElementById(keyword_input_id).value;
+				//alert(keyword_input_message);
+				if (keyword_input_message != "")
+				message_array[1] += keyword_input_message + "*";
+
+			}
+		}
+		if (message_array[1] == "") message_array[1] = "*";
+		
+
+
+	}
+	else 
+		alert("error");
+
+	document.getElementById('condition_input').value = message_array[0];
+	document.getElementById('key_input').value = message_array[1];
+	//console.log(message_array);
+	document.getElementById('condition_form').submit();
+
+}
+
+
+function add_function(block) {
+	if (block == "condition") { 
+
+	//create div			
+	var condition_div = document.createElement('div');
+	condition_div.id = "condition_" + conditions_num; 
+
+	//create input
+	var condition_input = document.createElement('input');
+	condition_input.type = "text";
+	condition_input.id = "condition_input_" + conditions_num; 
+	condition_input.value = "";
+
+	//add to DOM
+	condition_div.appendChild(condition_input);
+	
+	var keywords_title = document.getElementById('keywords_title');
+	document.getElementById('keywords').insertBefore(condition_div, keywords_title); 
+			condition_input = null;
+			condition_div = null;
+			keywords_title = null;
+
+		conditions_num++;
+
+
+	}
+	else if (block == "keyword") {
+	//create div			
+	var key_div = document.createElement('div');
+	key_div.id = "keyword_" + keywords_num; 
+
+	//create input
+	var keyword_input = document.createElement('input');
+	keyword_input.type = "text";
+	keyword_input.id = "keyword_input_" + keywords_num; 
+	keyword_input.value = "";
+
+	//add to DOM
+
+	key_div.appendChild(keyword_input);
+	document.getElementById('keywords').appendChild(key_div); 
+			keyword_input = null;
+			key_div = null;
+
+
+		keywords_num++;
+
+	}
+	else 
+		alert("error");
+
+}
+
+
+
+
+
+
+
+jQuery("#create_new").click(function() {
+	/*var scroll_target = "Customer" + (customers_array.length-1) + "_edit";
+	    jQuery('html, body').animate({
+        scrollTop: jQuery('#' + scroll_target).offset().top
+    }, 2000);*/
+
+	create_function();
+});
+
+</script>
+
+
+<form id='condition_form' action='' method='post'>
+<input type='hidden' name='form_key' value='<?php echo $form_key?>'>
+<input type='hidden' name='save' value='1'>
+<input type='hidden' name='Condition' id='condition_input' value=''>
+<input type='hidden' name='Key' id='key_input' value=''>
+</form>

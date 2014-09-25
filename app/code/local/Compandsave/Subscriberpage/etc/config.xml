@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <modules>
+            <Compandsave_Subscriberpage>
+                <version>0.1.0</version>
+            </Compandsave_Subscriberpage>
+        </modules>
+    </global>
+    <frontend>
+        <routers>
+            <!-- the <helloworld> tagname appears to be arbitrary, but by
+            convention is should match the frontName tag below-->
+            <mailsubscribe>
+                <use>standard</use>
+                <args>
+                    <module>Compandsave_Subscriberpage</module>
+                    <frontName>Mail_Subscribe</frontName>
+                </args>
+            </mailsubscribe>
+        </routers>
+        <layout>
+            <updates>
+                <helloworld>
+                    <file>helloworld.xml</file>
+                </helloworld>
+            </updates>
+        </layout>
+
+    </frontend>
+        <global>
+        <blocks>
+            <helloworld>
+                <class>Compandsave_Subscriberpage_Block</class>
+            </helloworld>
+        </blocks>
+        <helpers>
+            <helloworld>
+                <class>Compandsave_Subscriberpage_Helper</class>
+            </helloworld>
+        </helpers>
+    </global>
+<!-- ... -->
+</config>
+

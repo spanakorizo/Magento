@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Compandsave_Orderlist>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Compandsave_Orderlist>
+    </modules>
+</config>

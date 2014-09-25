@@ -1,0 +1,167 @@
+<?php 
+$form_submit = false;
+    if (isset($_POST['method']) && ($_POST['method'] != '0')) {
+        $form_submit = true;
+        $check_flag = false;
+        $incrementId = $_POST['orderid'];
+        $order = Mage::getModel('sales/order')->load($incrementId, 'increment_id');
+        if ($_POST['method'] == 1) {
+            $email = $_POST['value'];
+            if ($order->getCustomerEmail() == $email) {
+                $check_flag = true;
+            }
+
+        }
+        else if ($_POST['method'] == 2) {
+            $postcode = $_POST['value'];
+            if ($order->getShippingAddress()->getPostcode() == $postcode) {
+                 $check_flag = true;
+            }
+        }
+    }
+if ($form_submit): 
+
+if ($check_flag):?>
+<!-- search result start !-->
+
+<div class="page-title">
+	<h1 class="lgTxt"><?php echo $this->__('Order Tracking') ?></h1>
+</div>
+	
+<div class="data-table three_fourth">	
+	<table border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<th valign="top">Order ID: <?php echo $incrementId; ?></th>
+			<th valign="top" style="text-align:right;">Order Placed: <?php echo $order->getCreatedAt() ?></th>
+		</tr>
+	</table>
+	<table border="0" cellspacing="0" cellpadding="0" style="border-left:1px dotted #559a13;border-right:1px dotted #559a13;border-bottom:1px dotted #559a13;">	
+		<tr>
+			<td valign="top" align="left" colspan="2" style=";border-bottom:1px dotted #559a13;">
+				<p><b>Order Status:</b> <?php echo $order->getStatus() ?></p>
+				<p><b>Order Comments:</b></p><!--<<Yiyang>> Need Comments!-->
+			</td>
+		</tr>
+		<tr>
+			<td valign="top" width="20%" style=";border-bottom:1px dotted #559a13;">
+				<p><b>Shipping Speed:</b></p>
+				<p>Free USPS Shipping (2-7 business days)</p><!--<<Yiyang>> Need Shipping Speed!-->
+			</td>
+			<td valign="top" width="80%" rowspan="2" style="border-left:1px dotted #559a13;">
+				<!--Dynamic order information table start!-->
+				<table>
+					<tr>
+						<td valign="top"><p><b>Items Ordered:</b></p></td>
+						<td valign="top" width="60"><p><b>Price:</b></p></td>
+						<td valign="top" width="80"><p><b>Status:</b></p></td>
+					</tr>
+					<!--<<Yiyang>> Dynamic part start!-->
+					<tr>
+						<td valign="top"><p>Hewlett Packard HP 564XL Bulk Set of 11 Packs (3 Black, 2 Photo Black, 2 Cyan, 2 Magenta, 2 Yellow) High Yield Replacement Ink Cartridges</p></td>
+						<td valign="top"><p>$63.69</p></td>
+						<td valign="top"><p>Processing</p></td>
+					</tr>
+					<!--<<Yiyang>> Dynamic part end!-->
+				</table>
+				<!--Dynamic order information table end!-->
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">
+				<p><b>Tracking Number:</b></p>
+				<p><?php echo $order->getCustomerName() ?></p>
+				<p class="lgTxt">
+					<?php if ($order->getStatus() == 'complete'): ?>
+						<a href="#" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($order) ?>','trackorder','width=800,height=600,top=0,left=0,resizable=yes,scrollbars=yes'); return false;" title="<?php echo $this->__('Track all shipment(s)') ?>">Track Your Order Now</a>
+					<?php endif; ?>
+				</p>
+			</td>
+		</tr>
+	</table>
+	
+</div>
+<div class="one_fourth">
+	<div class="ti_block_inner ti_cms_gradient_block">
+		<h3>Let Tomato Help You</h3>
+		<ul class="ti_bullet">
+			<li><a href="{{store direct_url='myaccount'}}" title="Edit your account" target="_blank">Edit your account</a></li>
+			<li><a href="{{store direct_url='shipping-policy'}}" title="All about shipping">All about shipping</a></li>
+			<li><a href="{{store direct_url='contact'}}" title="Contact TomatoInk">Contact TomatoInk</a></li>
+		</ul>
+	</div>
+</div>
+<!-- search result end !-->
+
+<?php else: ?>
+<!-- can't find order !-->
+<p>We can't find your order</p>
+<?php endif; 
+    else: 
+?>
+
+
+
+<div class="ti_cms_articleContent_area">
+<h1 class="dgTxt">Order Tracking</h1>
+<!-----Member Login---!-->
+<form action="" method="POST" id='tracking_form'>
+    <input type='hidden' id='ti_method' name='method' value='' />
+    <input type='hidden' id='ti_orderid' name='orderid' value='' />
+    <input type='hidden' id='ti_value' name='value' value='' />
+<div class="one_half">
+<h2 class="altTxt">Having an Account?</h2>
+<p>If you already have a TomatoInk account, please click the button below to sign in and view your order history. This will tell you the status of all of your recent orders.</p>
+<a class="ti_button btn ti_cms_floatRight" href="{{store direct_url='myaccount'}}" target="_blank">View Account</a> <br class="ti_cms_clear" />
+<h3>Why Register?</h3>
+<p>With a TomatoInk account you get more from our website:</p>
+<ul class="ti_bullet">
+<li>Shop online with ease and convenience</li>
+<li>Emails about new arrivals &amp; special offers</li>
+<li>Members exclusive discounts</li>
+<li>Easy Order Tracking</li>
+</ul>
+<p><a class="lgTxt" href="{{store direct_url='new-account'}}?AddNewCustomer=Y" target="_blank">Click here to join TomatoInk</a> today.</p>
+</div>
+<!-----General Login---!-->
+<div class="one_half">
+<h2 class="altTxt">Having an Order ID?</h2>
+<p>You can still view your order status without signing in. If you do not have your Order ID Number, please refer to your Order Confirmation email.</p>
+<p id='warning-message' style='color:red'></p>
+<div class="ti-required-entry one"><label class="ti_cms_labelHide" for="order_id_1"> <input id="ti_ot_order_id_1" class="textArea ti_cms_inputFull" onfocus="if(this.value=='Order ID')this.value='';" onblur="if(this.value=='')this.value='Order ID';" type="text" value="Order ID" /> <span>Order ID</span> </label></div>
+<div class="ti-required-entry one"><label class="ti_cms_labelHide" for="email"> <input id="ti_ot_email" class="textArea ti_cms_inputFull" onfocus="if(this.value=='Email Address')this.value='';" onblur="if(this.value=='')this.value='Email Address';" type="text" value="Email Address" /> <span>Email Address</span> </label></div>
+<h3 class="altTxt">-----------or-----------</h3>
+<div class="ti-required-entry one"><label class="ti_cms_labelHide" for="order_id_2"> <input id="ti_ot_order_id_2" class="textArea ti_cms_inputFull" onfocus="if(this.value=='Order ID')this.value='';" onblur="if(this.value=='')this.value='Order ID';" type="text" value="Order ID" /> <span>Order ID</span> </label></div>
+<div class="ti-required-entry one"><label class="ti_cms_labelHide" for="postal"> <input id="ti_ot_postal" class="textArea ti_cms_inputFull" onfocus="if(this.value=='Shipping Zipcode')this.value='';" onblur="if(this.value=='')this.value='Shipping Zipcode';" type="text" value="Shipping Zipcode" /> <span>Shipping Zipcode</span> </label></div>
+<input class="ti_cms_floatRight" title="Continue" type="button" value="Continue" id='tracking_submit' /></div>
+</form></div>
+
+<script type='text/javascript'>
+jQuery('#tracking_submit').click(function() {
+    var method = 0; 
+    var orderid = 0; 
+    var value = "";
+    if ((jQuery('#ti_ot_order_id_1').val() != 'Order ID') && (jQuery('#ti_ot_email').val() != 'Email Address')) {
+        jQuery('#ti_method').val(1); 
+        jQuery('#ti_orderid').val(jQuery('#ti_ot_order_id_1').val());
+        jQuery('#ti_value').val(jQuery('#ti_ot_email').val());
+        jQuery('#tracking_form').submit();
+
+
+    }
+
+    else if ((jQuery('#ti_ot_order_id_2').val() != 'Order ID') && (jQuery('#ti_ot_postal').val() != 'Shipping Zipcode')) {
+        jQuery('#ti_method').val(2); 
+        jQuery('#ti_orderid').val(jQuery('#ti_ot_order_id_2').val());
+        jQuery('#ti_value').val(jQuery('#ti_ot_postal').val());
+        jQuery('#tracking_form').submit();
+    }
+
+    else {
+        jQuery('#warning-message').html("We need to fill in orderid and emailaddress both or orderid and postcode both");
+    }
+
+        
+});
+</script>
+
+<?php endif; ?>

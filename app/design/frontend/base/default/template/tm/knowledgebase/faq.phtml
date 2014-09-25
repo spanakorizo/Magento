@@ -1,0 +1,40 @@
+<?php $_faq = $this->getFaq();
+if (empty($_faq)) {
+    return;
+}
+//Zend_Debug::dump($_faq['author_data']->getData());
+if(null !== $_faq->getId()):?>
+    <div class="knowledge-block block">
+        <div class="knowledgebase-block-title block-title">
+            <strong>
+                <span><?php echo $_faq->getTitle();?></span>
+            </strong>
+        </div>
+		<div class="knowledgebase-block-sub-title">
+            <span class="knowledge-block-time">
+                   <?php 
+			$format = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
+			echo Mage::app()->getLocale()->date($_faq->getCreatedAt())->toString($format);
+		 	?>
+            </span>
+            <span class="knowledge-block-author">
+                <?php echo $this->__(
+                    'by %s', $_faq->getAuthorData()->getName()
+                );?>
+            </span>
+        </div>
+
+
+        <div class="knowledgebase-block-content block-content">
+            <?php echo $_faq->getContent(); ?>
+            <?php if (!$this->isRated()) :?>
+            <form id="knowledge-faq-rate-form" method="post" action="<?php echo $this->getRateAction() ?>">
+                <input type="hidden" value="<?php echo $_faq->getId();?>" name="faq">
+                <button type="submit" title="<?php echo $this->__('Like')?>" class="button form-button">
+                    <span><span><?php echo $this->__('Like')?></span></span>
+                </button>
+            </form>
+            <?php endif;?>
+        </div>
+    </div>
+<?php endif; ?>

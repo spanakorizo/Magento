@@ -1,0 +1,130 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Sam Chao
+
+Created New Account Application Form for Corporate Account page at TomatoInk.com
+
+- General
+- Head
+- Form
+
+Color Reference:
+green: #4ca62e;
+
+Naming convention: add ti_na_ prefix
+ 
+*/
+/*********************************************************/
+
+.ti_na_container {
+	width: 860px;
+	font-family: sans-serif;
+	font-size:9px;
+	line-height:1.2em;
+}
+.ti_na_container span {
+	color:#999999;
+	font-size: 1.3rem;
+}
+.ti_na_container h1 {
+	line-height:1em;
+}
+.ti_na_container h3 {
+	font-size:1.8em;
+}
+.ti_na_container .ti_na_textArea {
+	margin:1% 0;
+	font-size:1.8em;
+}
+.ti_na_rightCol, .ti_na_leftCol{
+	width:49%;
+}
+.ti_na_rightCol {
+	padding-right:0;
+}
+.ti_na_leftCol{
+	padding-left:0;
+}
+.ti_na_borderBlock{
+	padding:1%;
+	margin:1%;
+}
+
+/*.ti_na_container table td {
+	border:0;
+}*/
+
+/****Head****/
+
+/*.ti_na_head {
+	padding: 10px 5px 20px;
+	color: #666;
+}
+.ti_na_head td {
+	padding:0 !important;
+}
+.ti_na_infotitle {
+	font-weight: bold;
+}
+.ti_na_form-heading {
+	padding-bottom: 5px;
+	border-bottom: 1px dotted #999;
+	text-align: center;
+	font-size: 26px;
+	font-weight: bold;
+	color: #444;
+}*/
+
+/****Form****/
+
+/*#ti_na_company, #ti_na_contactPerson, #ti_na_billingAdd, #ti_na_shippingAdd {
+	padding: 0px 20px;
+}
+.ti_na_note {
+	font-size:14px;
+}
+.ti_na_title {
+	font-size: 16px;
+	font-weight: bold;
+	padding-top: 12px;
+}*/
+.ti_na_star {
+	color:#ED1C24;
+}
+/*
+.ti_na_textArea {
+	font-size: 16px;
+	padding: 3px 0px 3px 5px;
+	color: #444;
+}
+.ti_na_title2 {
+	font-size: 13px;
+	margin: 4px 0px;
+	color: #555;
+}
+.ti_na_print-text {
+	text-align: center;
+	font-size:18px;
+}
+#ti_na_rint-div {
+	width: 155px;
+	padding: 20px 0px;
+	text-align: center;
+	margin:0 auto;
+}
+#ti_na_rint-div td{
+	padding:0;
+}*/
+
+@media only screen and (max-width : 767px), @media only screen and (max-device-width : 767px){
+
+	.ti_na_width767 {
+		min-width:100% !important;
+	}
+	.ti_na_rightCol, .ti_na_leftCol {
+		padding:1% !important;
+		min-width:100% !important;
+	}
+}

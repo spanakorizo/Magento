@@ -1,0 +1,201 @@
+<div id="ti_home_centerMain">	
+	<div class="one_half">
+		<div class="ti_block_inner">
+			<h2 class="ti_headerH1 white">Sign up for deals:</h2>
+			<form action="<?php echo $this->getUrl(''); ?>newsletter/subscriber/new/" method="POST">
+				<label class="ti_cms_labelHide" for="home_email"><span>Your email address</span></label> <input id="home_email" class="one" name = "email" type="email" placeholder="Enter email address"/> 
+				<label class="ti_cms_labelHide" for="home_name"><span>Your first name</span></label> 
+				<input id="home_name" class="one" type="text" name="subscriber_firstname" placeholder="Enter your name" /> <input class="ti_altBtn" type="submit" value="Sign up" />
+			</form>
+		</div>
+	</div>
+	<div class="one_half">
+		<div class="ti_block_inner">	
+		<h2 class="ti_headerH1 white">Search for ink:</h2>
+				
+				<div class="ti_select_barContainer btcf">    
+
+					<div id="ti_banner_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>"/></div>
+					<div id="ti_banner_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>"/></div>
+				   <!--<h3>Choose Printer Brand</h3>-->
+                    <select id="topCategoriesLeft" name="topCategoriesLeft">
+                        <option value="">1. Choose Brand</option>
+                        <?php
+                        $category_model = Mage::getModel('catalog/category')->load(2);
+                        $subcategoryIds = $category_model->getChildren();
+                        $subCatIds = explode(',',$subcategoryIds);
+                        $collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->load();
+
+                        foreach($collection as $item){
+
+                            echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
+                        }
+
+                        ?>
+                    </select>
+				</div>
+			
+			
+				<div class="ti_select_barContainer btcf">
+					<!--<h3>Choose Printer Series</h3>-->
+                    <select name="subCategoriesLeft" id="subCategoriesLeft">
+                        <option value="0">2. Choose Series</option>
+                    </select>
+				</div>
+			
+			
+				<div class="ti_select_barContainer btcf">
+					<!--<h3>Choose Model/Cartridge</h3>-->
+
+                    <select name="groupedProductsLeft" id="groupedProductsLeft">
+                        <option value="0">3. Choose Model</option>
+                    </select>
+				</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    //<![CDATA[
+    function reset_options() {
+        document.getElementById('topCategoriesLeft').selectedIndex = 0;
+        document.getElementById('subCategoriesLeft').disabled = true;
+        document.getElementById('groupedProductsLeft').disabled = true;
+        document.getElementById('subCategoriesLeft').selectedIndex = 0;
+        document.getElementById('groupedProductsLeft').selectedIndex = 0;
+
+        return true;
+    }
+    window.onload=reset_options;
+
+    //var catalogUrl = 'http://127.0.0.1/magento/';
+
+    var urlMappingTable = {};
+    Event.observe($('topCategoriesLeft'), 'change', function() {
+        if (this.value != '') {
+            resetShoppingEasyLeft($('subCategoriesLeft'));
+            resetShoppingEasyLeft($('groupedProductsLeft'));
+            var dataString = this.value;
+            new Ajax.Request("productselector/ajax/index", {
+                method: 'post',
+                parameters: {
+                    id : dataString
+                },
+                cache: true,
+                onSuccess: function(transport) {
+                    var data = transport.responseText.evalJSON();
+                    if (data) {
+                        addDataToShippingEasyLeft(data);
+                    }
+                }
+            })
+        }
+        else{
+            reset_options();
+        }
+    });
+
+    Event.observe($('subCategoriesLeft'), 'change', function() {
+        if (this.value != '') {
+            if (urlMappingTable[this.value]) {
+                document.getElementById('groupedProductsLeft').disabled=false;
+                var sub = this;
+                var data = urlMappingTable[this.value];
+                var prod = $('groupedProductsLeft');
+                resetShoppingEasyLeft(prod);
+                for (var i in data) {
+                    if (data[i]) {
+                        var opt = document.createElement('option');
+                        opt.value = data[i].url;
+                        opt.text = data[i].name;
+                        try {
+                            prod.add(opt, null);
+                        } catch (ex) {
+                            prod.add(opt);
+                        }
+                    }
+                }
+            }
+        }
+
+        sortOptions('groupedProductsLeft');
+    });
+
+    Event.observe($('groupedProductsLeft'), 'change', function() {
+        if (this.value != '') {
+            document.location = this.value;
+        }
+    });
+
+    function resetShoppingEasyLeft(el) {
+
+        if (el != undefined) {
+            for (i = el.options.length - 1; i > 0; i--) {
+                if (i > 0) {
+                    el.remove(i);
+                }
+            }
+        }
+    }
+
+    function addDataToShippingEasyLeft(data)
+    {
+        urlMappingTable = {};
+        var sub = $('subCategoriesLeft');
+        sub.disabled = true;
+        if (data) {
+            for (var i in data) {
+                var opt = document.createElement('option');
+                opt.value = i;
+                opt.text = data[i].name;
+                if (data[i].sub) {
+                    try {
+                        sub.add(opt, null);
+                    } catch (ex) {
+                        sub.add(opt);
+                    }
+                    var map = data[i].sub;
+                    urlMappingTable[i] = {};
+                    for (var j in map) {
+                        if (map[j].id)
+                            urlMappingTable[i][map[j].id] = map[j];
+                    }
+
+                }
+            }
+        }
+        sub.disabled = false;
+        sortOptions('subCategoriesLeft');
+    }
+
+    function sortOptions(name)
+    {
+        var cl = document.getElementById(name);
+        var clTexts = new Array();
+
+        for(i = 1; i < cl.length; i++)
+        {
+            clTexts[i-1] =
+                cl.options[i].text.toUpperCase() + "," +
+                    cl.options[i].text + "," +
+                    cl.options[i].value;
+
+        }
+        clTexts.sort();
+        for(i = 1; i < cl.length; i++)
+        {
+            var parts = clTexts[i-1].split(',');
+
+            cl.options[i].text = parts[1];
+            cl.options[i].value = parts[2];
+        }
+        for (var i = 0; i < cl.length; i++){
+            if (cl.options[i].text.match(/Other/)){
+                var msg1 = cl.options[i];
+                cl.removeChild(cl.options[i]);
+                cl.appendChild(msg1);
+            }
+        }
+    }
+    //]]>
+</script>

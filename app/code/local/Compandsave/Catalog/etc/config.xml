@@ -2,22 +2,50 @@
 <config>
     <modules>
         <Compandsave_Catalog>
-           <version>0.0.1</version>       
+           <version>1.0.0.0</version>
         </Compandsave_Catalog>
     </modules>
     <global>
-        <models>
-            <catalog>
-                <rewrite>
-                    <convert_adapter_category>Compandsave_Catalog_Model_Convert_Adapter_Category</convert_adapter_category>
-                    <product_type_grouped>Compandsave_Catalog_Model_Product_Type_Grouped</product_type_grouped>
-                </rewrite>
-            </catalog>
+        <events>
+            <catalog_product_save_after>
+                <observers>
+                    <compandsave_catalog>
+                        <type>singleton</type>
+                        <class>compandsave_catalog/observer</class>
+                        <method>catalog_product_save</method>
+                   </compandsave_catalog>
+                </observers>
+            </catalog_product_save_after>
+			<!-- <catalog_product_save_commit_after>
+                <observers>
+                    <compandsave_catalog>
+                        <class>compandsave_catalog/observer</class>
+                        <method>applyAllRulesOnBundleProduct</method>
+                    </compandsave_catalog>
+                </observers>
+            </catalog_product_save_commit_after> -->
+			<catalog_product_import_finish_before>
+                <observers>
+                    <compandsave_catalog>
+                        <class>compandsave_catalog/observer</class>
+                        <method>CatalogRelations</method>
+                    </compandsave_catalog>
+                </observers>
+            </catalog_product_import_finish_before>
+        </events>
+    	<models>
+			<catalog>
+				<rewrite>
+					<product_type_grouped>Compandsave_Catalog_Model_Product_Type_Grouped</product_type_grouped>
+					<convert_adapter_category>Compandsave_Catalog_Model_Convert_Adapter_Category</convert_adapter_category>
+					<convert_adapter_product>Compandsave_Catalog_Model_Convert_Adapter_Product</convert_adapter_product>
+				</rewrite>
+			</catalog>
 
             <compandsave_catalog>
                 <class>Compandsave_Catalog_Model</class>
             </compandsave_catalog>
-        </models>
+		</models>
 		<blocks>
 			<adminhtml>
                 <rewrite>
@@ -25,6 +53,14 @@
                 </rewrite>
             </adminhtml>
         </blocks>
+		<resources>
+            <compandsave_catalog_setup>
+                <setup>
+                    <module>Compandsave_Catalog</module>
+					<class>Compandsave_Catalog_Model_Resource_Setup</class>
+                </setup>
+            </compandsave_catalog_setup>
+        </resources>
 		<catalog>
 			<product>
 				<type>

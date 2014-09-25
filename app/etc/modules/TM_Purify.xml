@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config>
+  <modules>
+    <TM_Purify>
+      <active>true</active>
+      <codePool>community</codePool>
+      <version>0.1.0</version>
+    </TM_Purify>
+  </modules>
+</config>

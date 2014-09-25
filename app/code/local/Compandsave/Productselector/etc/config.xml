@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Compandsave_Productselector>
+            <version>0.0.1</version>
+        </Compandsave_Productselector>
+    </modules>
+	<global>
+		<models>
+            <compandsave_productselector>
+			    <class>Compandsave_Productselector_Model</class>
+            </compandsave_productselector>
+		</models>
+		<helpers>
+			<compandsave_productselector>
+				<class>Compandsave_Productselector_Helper</class>
+			</compandsave_productselector>
+		</helpers>
+		<blocks>
+			<compandsave_productselector>
+				<class>Compandsave_Productselector_Block</class>
+			</compandsave_productselector>
+		</blocks>
+	</global>
+	<frontend>
+		<routers>
+			<productselector>
+				<use>standard</use>
+				<args>
+                    <module>Compandsave_Productselector</module>
+                    <frontName>productselector</frontName>
+                </args>
+			</productselector>
+		</routers>
+		<layout>
+            <updates>
+                <productselector>
+                    <file>productselector.xml</file>
+                </productselector>
+            </updates>
+        </layout>
+	</frontend>
+	
+</config>

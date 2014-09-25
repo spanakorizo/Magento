@@ -1,0 +1,148 @@
+<?php 
+$ship_collection = Mage::getModel('sales/order')->getCollection()
+	->addAttributeToFilter('status', 'processing')
+	->addAttributeToFilter('order_type', 'Autoship')
+	->addAttributeToFilter('order_type_value', 'Autoship');
+$ship_count = count($ship_collection);
+
+
+$print_collection = Mage::getModel('sales/order')->getCollection()
+	->addAttributeToFilter('order_type', 'Autoship')
+	->addAttributeToFilter('order_type_value', 'Shipped')
+	->addAttributeToSelect('*');
+
+
+
+$print_count = count($print_collection);
+
+$print_orders = array();
+if ($print_count > 0) {
+foreach ($print_collection as $print_order) {
+
+	$items = $print_order->getAllItems();
+	$printer_orders[] = array($print_order->getId(), $items[0]->getSku(), $print_order->getAutoshipLabel());
+
+}
+$printer_orders = multi_array_sort($printer_orders, 1);
+$label_content = "<html><body>";
+for ($i=0; $i<count($printer_orders); $i++) {
+	//echo $printer_orders[$i][0] . " " . $printer_orders[$i][1] . " " . $printer_orders[$i][2] . "<br>";
+	$label_content .= "<div style='page-break-after:always;'><img src='" . $printer_orders[$i][2] . "' style='width:4in;height:6in;margin-left:-0.1in;'></div>";
+}
+
+$label_content .= "</body></html>";
+
+}
+$error_collection = Mage::getModel('sales/order')->getCollection()
+	->addAttributeToFilter('order_type', 'Error');
+$error_count = count($error_collection);
+
+function multi_array_sort($multi_array,$sort_key,$sort=SORT_ASC){
+if(is_array($multi_array)){
+foreach ($multi_array as $row_array){
+if(is_array($row_array)){
+$key_array[] = $row_array[$sort_key];
+}else{
+return false;
+}
+}
+}else{
+return false;
+}
+array_multisort($key_array,$sort,$multi_array);
+return $multi_array;
+}
+
+?>
+<style>
+	.num {
+		font-size: 200%;
+		color: #0099FF;
+		margin-right: 15px;
+	}
+
+</style>
+<!-- <?php //echo Mage::helper('adminhtml')->getUrl('customize-functions/autoship/ship'); ?>!-->
+<p><span class='num'><?php echo $ship_count; ?></span>Orders Ready to Ship</p>
+<p><span class='num'><?php echo $print_count; ?></span>Orders Ready to Print</p>
+<p><span class='num'><?php echo $error_count; ?></span>Orders Have Error</p>
+<input type="button" id='autoship_buylabel' value="Buy Shipping Lable">
+<br>
+<input type="button" id="autoship_print" value="print">
+<br><br>
+
+
+<input type="text" id="refund_id">
+<input type="button" id="refund_search" value="search order">
+
+<div id="refund_block">
+</div>
+<input type="button" value="refund" id="refund_exec">
+<script type='text/javascript'>
+//var timestamp = new Date().getTime();
+var date = new Date();
+var timestamp = date.getFullYear() + "" + (date.getMonth() + 1) + "" + date.getDate() + "" +  date.getHours() + "" + date.getMinutes() + "" + date.getSeconds();
+
+
+var autoship_url = "<?php echo Mage::helper('adminhtml')->getUrl('customize-functions/autoship/ship'); ?>?batch_id=" + timestamp;
+var packagelist_url = "<?php echo Mage::helper('adminhtml')->getUrl('customize-functions/packagelist/print/'); ?>?print=autoship";
+var ship_count = "<?php echo $ship_count; ?>";
+jQuery('#autoship_buylabel').click(function () {
+
+	if (ship_count > 0) {
+		jQuery.get(autoship_url, function(data){
+			alert(data);
+			location.reload();
+		});
+	}
+	else 
+		alert("We don't have any order could ship!");
+});
+
+
+jQuery('#autoship_print').click(function() {
+
+
+var content = "<?php echo $label_content; ?>";
+
+if (content!="<html><body></body></html>")
+{
+var win_label = window.open("", "shiplabel", "fullscreen");
+var doc_label = win_label.document;
+doc_label.write(content);
+doc_label.close();
+win_label.print();
+}
+
+	jQuery.get(packagelist_url, function(data) {
+		var win_ship = window.open("", "packagelist", "fullscreen");
+		var doc_ship = win_ship.document;
+		doc_ship.write(data);
+		doc_ship.close();
+		win_ship.print();
+	});
+
+});
+
+var order_id
+//refund search
+var search_url = "<?php echo Mage::helper('adminhtml')->getUrl('customize-functions/autoship/search/'); ?>";
+jQuery('#refund_search').click(function() {
+	order_id = jQuery('#refund_id').val();
+	jQuery.get(search_url, {orderid: order_id}, function(data) {
+		jQuery('#refund_block').html(data);
+	});
+});
+
+
+//refund order
+var refund_url = "<?php echo Mage::helper('adminhtml')->getUrl('customize-functions/autoship/refund/'); ?>";
+jQuery('#refund_exec').click(function() {
+
+	jQuery.get(refund_url, {orderid: order_id}, function(data) {
+		jQuery('#refund_block').html(data);
+	});
+});
+
+
+</script>

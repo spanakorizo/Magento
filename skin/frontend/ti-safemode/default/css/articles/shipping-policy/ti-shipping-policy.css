@@ -1,0 +1,41 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Sam Chao
+
+Created for Shipping Policy page at TomatoInk.com
+
+- General
+- Left Column
+- Right Column
+
+Color Reference:
+green: #4ca62e;
+
+Naming convention: add ti_sp_ prefix
+ 
+*/
+/*********************************************************/
+
+.ti_sp_marginBottom-20 {
+	margin-bottom:20px;
+}
+/****Left Column****/
+
+.ti_sp_leftCol {
+	padding-right:60px; 
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+
+/****Right Column****/
+
+.ti_sp_rightCol {
+	padding:20px; 
+	background:#f7f7f7; 
+	border:1px solid #eeeeee; 
+	border-bottom:1px solid #dddddd;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}

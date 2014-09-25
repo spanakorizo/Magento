@@ -1,0 +1,467 @@
+<?php 
+ini_set('display_errors',1);
+ini_set('display_startup_errors',1);
+error_reporting(E_ALL);
+?>
+
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+
+/**
+ * Product view template
+ *
+ * @see Mage_Catalog_Block_Product_View
+ * @see Mage_Review_Block_Product_View
+ */
+?>
+
+<?php $_helper = $this->helper('catalog/output'); ?>
+<?php $_product = $this->getProduct(); ?>
+<?php $formKey = Mage::getSingleton('core/session')->getFormKey();?>
+<script type="text/javascript">
+    var ti_global_pagetype = "<?php echo $_product->getTypeId(); ?>";
+    var ti_global_pagename = "<?php echo $_product->getName(); ?>";
+    var ti_global_productcode = "<?php echo $_product->getSku(); ?>";
+    var ti_global_productprice = "<?php echo number_format($_product->getPrice(), 2); ?>";
+    <?php if ($_product->getTypeId() == "grouped"): ?>
+    var ti_global_printerbrand = "<?php $printer_cats = $_product->getCategoryIds();
+    $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]) ;
+    echo $_printer_cat->getName();
+    ?>";
+    var ti_global_printerbrand_url = "<?php echo $_printer_cat->getUrlKey() ?>";
+     <?php endif; ?>
+     <?php if (($_product->getTypeId() == "simple") || ($_product->getTypeId() == "bundle")): ?>
+        <?php 
+            if ($_GET["printer"] != "") {
+                $printerid = $_GET['printer'];
+                $_printer_model = Mage::getModel('catalog/product')->load($printerid);
+                
+            }
+            else { 
+                $printerid = current(explode( ",", $_product->getCompatibleCatid()));
+                $_printer_model = Mage::getModel('catalog/product')->loadByAttribute('categoryid', $printerid);
+
+        } ?>
+
+            <?php if ($_printer_model != ""): ?>
+
+                var ti_global_prev_printer = "<?php 
+            
+            
+                    echo $_printer_model->getName();
+                    ?>";
+                var ti_global_printerbrand_url = "<?php 
+                $printer_cats = $_printer_model->getCategoryIds();
+                $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]);
+                echo $_printer_cat->getUrlKey();
+                ?>";
+            <?php endif; ?>
+      
+      <?php endif; ?>
+
+</script>
+
+
+
+
+<script type="text/javascript">
+    var optionsPrice = new Product.OptionsPrice(<?php echo $this->getJsonConfig() ?>);
+</script>
+<div id='ajax_loader' style='display:none;z-index:99999;position:fixed;margin:3.5% 40%;'><img src='<?php echo $this->getSkinUrl('images/loading.gif')?>'/></div>
+<div id="show_cart" class="ti_popup_cart_window ti_cms_border_block">
+
+</div>
+
+<?php if ($_product->getTypeId() == "simple" or $_product->getTypeId() == "bundle") :?>
+<div id="ti_cms_product_container" class="btcf">
+    <div class="two_fifth">
+        <?php echo $this->getChildHtml('media') ?>
+    </div>
+    <div class="three_fifth">
+        <div class="ti_block_inner ti_cms_gradient_block">
+            <h1 class="ti_green_head"><?php echo $_product->getName(); ?></h1>
+            <div class="f-left"><?php echo $this->getReviewsSummaryHtml($_product, false, true)?></div>
+            <p class="f-right"><a href="#ti_product_details">See product details</a>
+            </p>
+            
+            <div class="ti_cms_separator"></div>
+            <div class="btcf">
+                <div class="one_half ti_product_infoBlock">
+                    <h2 class="altTxt ti_headerH1" id="ti_product_ourPrice">$<?php echo number_format($_product->getPrice(),2); ?></h2>
+                    <h5>brand-name: <span id="ti_product_brandPrice">$<?php echo number_format($_product->getMsrp(),2); ?></span></h5>
+                    <div class="ti_cms_block_qty">
+                        <form action="<?php echo Mage::getBaseUrl().'productselector/carts/' ?>" method="post" id="product_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+                            <?php echo $this->getBlockHtml('formkey') ?>
+                            <div class="no-display">
+                                <input type="hidden" name="products" value="<?php echo $_product->getId() ?>" />
+                                <input type="hidden" name="related_product" id="related-products-field" value="" />
+                            </div>
+
+                            <p class="lgTxt"><span class="ti_small_text" id="ti_product_stockAlert"><?php $stockItem = $_product->getStockItem(); if($stockItem->getIsInStock()) {echo "In stock!";} else {echo "Out of stock!";} ?></span>
+                                <br>Qty: <input type="text" class="input-text qty" name="qty<?php echo $_product->getId() ?>" maxlength="3" id = "ti_simple_prd_<?php echo $_product->getId(); ?>" value=""/></input>
+                                <input type="button" value="Add To Cart" name="<?php echo $_product->getId(); ?>" onclick="addSimpleToCart('ti_simple_prd_<?php echo $_product->getId(); ?>');add_to_box('product_form','show_cart');" />
+                            <?php
+                            if ($_product->getTypeId() == 'bundle'){
+
+                                $selectionCollection = $_product->getTypeInstance(true)->getSelectionsCollection(
+                                    $_product->getTypeInstance(true)->getOptionsIds($_product), $_product
+                                );
+
+                                foreach($selectionCollection as $option) {
+
+                                    echo '<input type="hidden" name="bundle_option'.$_product->getId().'[' . $option->option_id  . '][]" value="'.$option->selection_id.'" />';
+                                    echo '<input type="hidden" name="bundle_option_qty'.$_product->getId().'[' . $option->option_id . '][]" value="'.$option->selection_qty.'" />';
+
+                                }//end: foreach $selectionCollection
+
+                            } // end: if $_related_item == bundle
+                            ?>
+
+                        </form>
+                    </div>
+                </div>
+                <div class="one_half ti_product_infoBlock">
+                    <ul class="ti_product_checklist">
+                        <?php echo $_product->getShortDescription(); ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="btcf">
+                <div class="one_half ti_product_infoBlock">
+                    <ul>
+                        <li id="ti_product_qtyDiscount"><a rel="nofollow" class="lgTxt"><span>Need 3 or more?</span></a>
+                            <div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_product_qtyDiscountDrop">
+                                <table>
+                                    <tr>
+                                        <td><p><span class="lgTxt">Buy 3 to 4</span></p></td>
+                                        <td><p id="ti_product_qty3" class="dark">$64.82</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p><span class="lgTxt">Buy 5 to 9</span></p></td>
+                                        <td><p id="ti_product_qty5" class="dark">$60.50</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p><span class="lgTxt">Buy 10+</span></p></td>
+                                        <td><p id="ti_product_qty10" class="dark">$59.18</p></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p><span class="lgTxt">Buy 100+</span></p></td>
+                                        <td><p class="dark"><a href="">Get Quote</a></p></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="one_half ti_product_infoBlock">
+                 <div id="fb-root"></div>
+
+                <script>/*(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=406893882783987"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));*/</script> 
+                    <!--AddThis Button BEGIN-->
+                    <p class="addthis_toolbox addthis_default_style">
+                        <div class="fb-like" id = 'ti_product_fb' data-href="" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-count="none">Tweet</a>
+                    <a id = 'ti_product_pin' href="" data-pin-do="buttonPin" data-pin-config="none" data-pin-color="red"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
+                    </p>
+                    <!-- facebook !-->
+                    <script type="text/javascript">
+                        //document.getElementById('ti_product_fb').setAttribute('data-href', window.location.href);
+                    </script> 
+
+                    <!-- tweeter !-->
+                    <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+                    <!-- Pin it !-->
+                    <script>document.getElementById('ti_product_pin').href="//www.pinterest.com/pin/create/button/?url=" + encodeURIComponent(window.location.href) + "&media=" + encodeURIComponent('<?php echo $_product->getImageUrl() ?>') + "&description=TomatoinkTest";</script>
+                    <script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
+                    <!-- AddThis Button END -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php echo $this->getChildHtml('relatedProducts') ?>
+
+<!-- Product Details !-->
+
+<div class="ti_cms_contain btcf">
+                <div class="ti_cms_block_headerBar-green">
+                    <h2 class="white ti_headerH1"><a name="ti_product_details" id="ti_product_details" title="ti_product_details"></a>Product Details</h2>
+                </div>
+                <div class="ti_cms_gradient_block">
+                    <div class="ti_block_inner">
+                        <div class="one_half">
+                            <div class="ti_product_cta">
+                                <h3 class="ti_orange_head icon-ico-warranty">Our ink will never void<br class="ti_hide_479"> your printer's warranty.</h3>
+                            </div>
+                        </div>
+                        <div class="one_half">
+                            <div class="ti_product_cta">
+                                <h3 class="ti_orange_head icon-ico-guarantee">All ink comes with a 1 year<br class="ti_hide_479"> money back guarantee.</h3>
+                            </div>
+                        </div>
+                        <div class="ti_cms_separator"></div>
+                        <h2 class="ti_orange_head"><?php echo $_product->getPhotoAlttext(); ?></h2>
+                        <!--<ul class="ti_bullet">!-->
+                            <!-- ?p hp //echo $_product->getShortDescription(); ? !-->
+                        <!--</ul>!-->
+                        <p>These high quality inkjet cartridges were professionally re-engineered in a manufacturing facility that uses state of the art processes to ensure that this product will print as well as their brand name counterparts. These are equipped with Ink Level Indicator chips that allow the system to monitor remaining ink and help you keep track of your ink consumption. These cartridges are the high yield versions of <?php echo $_product->getMpn(); ?> black, photo black, cyan, magenta, and yellow. The product images are for demonstrating purposes only. Actual appearances may vary.</p>
+                    </div>
+                </div>
+                <div class="ti_cms_block_headerBar-green">
+                    <h2 class="white ti_headerH1">Product Specifications</h2>
+                </div>
+                    <table class="ti_cms_infoTable">
+                        <tr>
+                            <th><p>Model Name:</p></th>
+                            <td><p id="ti_product_name"><?php echo $_product->getVendorPartno(); ?></p></td>
+                        </tr>
+                        <?php if ($_printer_model != ""): ?>
+                        <tr>
+                            <th><p>Color:</p></th>
+                            <td><p id="ti_product_color"><?php echo $_product->getColor(); ?></p></td>
+                        </tr>
+                        <tr>
+                            <th><p>Cartridge Duty Cycle:</p></th>
+                            <td><p id="ti_product_duty"><?php echo $_product->getDutyCycle(); ?></p></td>
+                        </tr>
+                        <tr>
+                            <th><p>Replaces:</p></th>
+                            <td><p id="ti_product_replaces">Not Available</p></td>
+                        </tr>
+                        <tr>
+                            <th><p>Volume:</p></th>
+                            <td><p id="ti_product_volume"><?php echo $_product->getContent(); ?></p></td>
+                        </tr>
+                        <tr>
+                            <th><p>Quantity:</p></th>
+                            <td><p id="ti_product_quantity"><?php if ($_product->getTypeId() == "simple") echo "1 Ink Cartridge"; else {preg_match("/\d$/", $_product->getSku(), $matches); echo $matches[0] . "INK Cartridges"; } ?></p></td>
+                        </tr>
+                    <?php endif; ?>
+                    </table>
+
+<?php if ($_printer_model != ""): ?>
+                <div class="ti_cms_block_headerBar-green">
+                    <h2 class="white ti_headerH1"><a name="ti_product_printerComp" id="ti_product_printerComp" title="ti_product_printerComp"></a>Compatible Printers</h2>
+
+                </div>
+                <table>
+                    <?php 
+                    
+                        $compatiblecatid = $_product->getCompatibleCatid(); 
+                        $related_printer = explode(",", $compatiblecatid);
+                        $printer_count = 1;
+
+
+                    $PrinterCollection = Mage::getModel('catalog/product')->getCollection()
+                    ->addAttributeToSelect('*')//put your custom attribute code here
+                    ->addFieldToFilter('categoryid',$related_printer);
+
+                        foreach($PrinterCollection as $ti_compatible_printer) {
+                            
+                             if ($printer_count == 1) echo "<tr>";
+                             echo "<td><p><a href='" . $this->getUrl('') . "catalog/product/view/id/" . $ti_compatible_printer->getId() . "'>";
+                             echo $ti_compatible_printer->getName();
+                             echo "</a></p></td>";
+
+                             if ($printer_count == 3) echo "</tr>";
+                             $printer_count++;
+                             if ($printer_count > 3) $printer_count = 1;
+                            }
+                            
+
+                    ?>
+
+                </table>
+<?php endif;?>
+</div>
+
+
+
+
+
+
+<!-- Product Review !-->
+
+
+<script type="text/javascript">
+
+jQuery('#ti_product_qtyDiscount').click(function(e) {
+    jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+if (!jQuery("#ti_product_qtyDiscountDrop").is(":visible")) 
+  jQuery("#ti_product_qtyDiscountDrop").stop(true, true).slideDown("fast");
+  e.stopPropagation();
+});
+
+
+</script>
+
+
+<?php elseif ($_product->getTypeId() == "grouped") :?>
+    <?php $ti_printer_brand = $_product->getModelNo(); ?>
+<div id="ti_cms_printer_container" class="btcf">
+        <div class="ti_cms_contain btcf">
+            <div class="two_third ti_cms_gradient_block">
+                <h2 class="ti_green_head ti_headerH1"><span class='ti_printer_brand'></span>&nbsp;<?php echo $ti_printer_brand; ?>&nbsp;Ink Cartridges and Printing Supplies</h2>
+                <p>We carry printer ink cartridges for your <span class='ti_printer_brand'></span>&nbsp;<?php echo $ti_printer_brand; ?>&nbsp;at a discounted price with the same quality and satisfaction you would get from brand name cartridges. Our high quality inkjet cartridges were professionally re-engineered in a manufacturing facility that uses state of the art processes to ensure that this product will print as well as their brand name counterparts.</p>
+                <div class="one_half">
+                    <div class="ti_product_cta">
+                        <a href="javascript:void(0)"><h3 class="ti_orange_head icon-ico-warranty icon-angle-right">Our ink will never void<br class="ti_hide_479"> your printer's warranty.</h3></a>
+                    </div>
+                </div>
+                <div class="one_half">
+                    <div class="ti_product_cta">
+                        <a href="javascript:void(0)"><h3 class="ti_orange_head icon-ico-guarantee icon-angle-right">All ink comes with a 1 year<br class="ti_hide_479"> money back guarantee.</h3></a>
+                    </div>
+                </div>
+            </div>
+            <div class="one_third">
+                <div class="full text_center">
+                    <img src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" class="block_center ti_printer_image"/>
+                    <!--<p><a href="" class="altTxt ti_small_text"><strong><span class='ti_printer_brand'></span>&nbsp; //echo $ti_printer_brand; &nbsp;technical support and driver download support</strong></a></p>!-->
+                </div>
+            </div>
+        </div>
+        <form action="<?php echo Mage::getBaseUrl().'productselector/carts/' ?>" method="post" id="product_add_cart"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+            <?php echo $this->getBlockHtml('formkey') ?>
+
+            <?php echo $this->getChildHtml('product_type_data') ?>
+
+        </form>
+
+
+</div>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+    $('.ti_printer_brand').html(ti_global_printerbrand);
+});
+
+</script>
+
+
+<?php else: ?>
+
+
+<div id="messages_product_view"><?php echo $this->getMessagesBlock()->setEscapeMessageFlag(true)->toHtml() ?></div>
+<div class="product-view">
+    
+    <form action="<?php echo $this->getSubmitUrl($_product) ?>" method="post" id="product_addtocart_form"<?php if($_product->getOptions()): ?> enctype="multipart/form-data"<?php endif; ?>>
+
+        <?php echo $this->getBlockHtml('formkey') ?>
+        <div class="no-display">
+            <input type="hidden" name="product" value="<?php echo $_product->getId() ?>" />
+            <input type="hidden" name="related_product" id="related-products-field" value="" />
+        </div>
+        <div class="product-essential">
+
+                <div class="product-shop">
+                    <div class="product-main-info">
+                        <div class="product-name">
+                            <h2 class="ti_headerH1"><?php echo $_helper->productAttribute($_product, $_product->getName(), 'name') ?></h2>
+                        </div>
+                        <p class="product-ids"><?php echo $this->__('SKU# %s', $this->escapeHtml($_product->getSku())); ?></p>
+                        <?php echo $this->getReviewsSummaryHtml($_product, false, true)?>
+                        <?php echo $this->getChildHtml('alert_urls') ?>
+                        <?php echo $this->getChildHtml('product_type_data') ?>
+                    </div>
+                    <?php echo ($_product->getCanShowPrice() === false) ? '' : $this->getChildHtml('tierprices'); ?>
+                    <?php echo $this->getChildHtml('extrahint') ?>
+
+                    <?php if (!$this->hasOptions()):?>
+                        <?php //if ($_product->getTypeId() != "grouped"): ?>
+                        <div class="add-to-box">
+                            <?php if($_product->isSaleable()): ?>
+                                <?php echo $this->getChildHtml('addtocart') ?>
+                            <?php endif; ?>
+                            <?php echo $this->getChildHtml('addto') ?>
+                        </div>
+                    <?php //endif; ?>
+                    <?php else:?>
+                        <?php if ($_product->isSaleable() && $this->hasOptions() && $this->getChildChildHtml('container1') ):?>
+                            <div class="options-container-small">
+                                <?php echo $this->getChildChildHtml('container1', '', true, true) ?>
+                            </div>
+                        <?php else: ?>
+                            <?php echo $this->getChildHtml('addto') ?>
+                        <?php endif;?>
+                    <?php endif; ?>
+
+                    <?php if ($_product->getShortDescription()):?>
+                        <div class="short-description std">
+                            <h2><?php echo $this->__('Quick Overview') ?></h2>
+                            <?php echo $_helper->productAttribute($_product, nl2br($_product->getShortDescription()), 'short_description') ?>
+                        </div>
+                    <?php endif;?>
+
+                    <?php echo $this->getChildHtml('other');?>
+                </div>
+
+                <div class="product-img-box">
+                    <?php echo $this->getChildHtml('media') ?>
+                </div>
+
+        </div>
+        <div class="product-collateral">
+            <?php if ($detailedInfoGroup = $this->getChildGroup('detailed_info', 'getChildHtml')):?>
+                <dl id="collateral-tabs" class="collateral-tabs">
+                <?php foreach ($detailedInfoGroup as $alias => $html):?>
+                    <dt class="tab"><span><?php echo $this->escapeHtml($this->getChildData($alias, 'title')) ?></span></dt>
+                    <dd class="tab-container">
+                       <div class="tab-content"><?php echo $html ?></div>
+                    </dd>
+                <?php endforeach;?>
+                </dl>
+                <script type="text/javascript">
+                //<![CDATA[
+                    var collateralTabs = new Enterprise.Tabs('collateral-tabs');
+                    Event.observe(window, 'load', function() {
+                        collateralTabs.select();
+                    });
+                //]]>
+                </script>
+            <?php endif; ?>
+            <?php if ($this->canEmailToFriend()): ?>
+                <p class="emailto-link"><a href="<?php echo $this->helper('catalog/product')->getEmailToFriendUrl($_product) ?>"><?php echo $this->__('Email to a Friend') ?></a></p>
+            <?php endif; ?>
+        </div>
+        <div class="clearer"></div>
+        <?php if ($_product->isSaleable() && $this->hasOptions() && $this->getChildChildHtml('container2') ):?>
+            <div class="options-container-big">
+                <?php echo $this->getChildChildHtml('container2', '', true, true) ?>
+            </div>
+        <?php endif;?>
+        <?php //if ($_product->getTypeId() != "grouped"): ?>
+    </form>
+        <?php //endif; ?>
+        <?php echo $this->getChildHtml('relatedProducts') ?>
+        <?php //echo $this->getChildHtml('upsell_products') ?>
+         <?php //echo $this->getChildHtml('productTagList') ?> 
+        <?php //echo $this->getChildHtml('product_additional_data') ?>
+</div>
+
+<?php endif; ?>
+

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <modules>
+            <Compandsave_Ordertracking>
+                <version>0.1.0</version>
+            </Compandsave_Ordertracking>
+        </modules>
+    </global>
+    <frontend>
+        <routers>
+            <!-- the <helloworld> tagname appears to be arbitrary, but by
+            convention is should match the frontName tag below-->
+            <ordertracking>
+                <use>standard</use>
+                <args>
+                    <module>Compandsave_Ordertracking</module>
+                    <frontName>order-tracking</frontName>
+                </args>
+            </ordertracking>
+        </routers>
+    </frontend>
+        <global>
+        <blocks>
+            <ordertracking>
+                <class>Compandsave_Ordertracking_Block</class>
+            </ordertracking>
+        </blocks>
+        <helpers>
+            <ordertracking>
+                <class>Compandsave_Ordertracking_Helper</class>
+            </ordertracking>
+        </helpers>
+    </global>
+<!-- ... -->
+</config>
+

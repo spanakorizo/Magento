@@ -1,0 +1,146 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Megan Prior-Pfeifer
+
+Created for Troubleshooting page at TomatoInk.com
+
+- General
+- Color Troubleshooting section
+- Index Follow
+
+Color Reference:
+green: #4ca62e;
+
+Naming convention: add ti_ts_ prefix
+ 
+*/
+/*********************************************************/
+
+
+.ti_ts_yellow-tab-note {
+	display:inline-block;
+	width:240px; 
+	padding:5px; 
+	border:1px solid #f7e8db; 
+	}
+	
+/*Color troubleshooting section, added by Megan Prior-Pfeifer 8-9-2013*/
+
+table.ti_ts_color-chart{
+	width: 100%;
+	vertical-align:middle;
+	border:none;
+	border-spacing: 3px;
+    border-collapse: separate;
+}
+
+table.ti_ts_color-chart td {
+	text-align:center;
+	vertical-align: middle;
+	padding:5px;
+	border-radius: 1em;
+	width:16%;
+}
+
+table.ti_ts_color-chart td p{
+	margin:0;
+}
+
+span.ti_ts_color {
+	color:#FFF;
+}
+
+.ti_ts_col_1 {
+	width:150px;	
+}
+
+.ti_ts_col_2 {
+	width:75px;	
+}
+
+.ti_ts_col_3 {
+	width:160px;
+        height:32px;	
+}
+
+.ti_ts_blue,
+.ti_ts_red,
+.ti_ts_green{
+	min-width:65px;
+}
+
+.ti_ts_blue {
+	background:#1c0b5b;
+}
+
+.ti_ts_red {
+	background:#c40026;
+}
+
+.ti_ts_green {
+	background:#008742;
+}
+
+.ti_ts_cyan p,
+.ti_ts_magenta p{
+	color:#fff;
+}
+
+.ti_ts_yellow p{
+	color:#009EDB;
+}
+
+.ti_ts_cyan {
+	background:#009EDB;
+}
+
+.ti_ts_magenta {
+	background:#CD0065;
+}
+
+.ti_ts_yellow {
+	background:#FDF200;
+}
+
+/* -- Index Follow --*/
+
+#ti_ts_container{
+		
+}
+
+#ti_ts_section_one,
+#ti_ts_section_two,
+#ti_ts_section_three,
+#ti_ts_indexbox_1,
+#ti_ts_indexbox_2,
+#ti_ts_indexbox_3{
+
+}
+
+#ti_ts_section_two{
+	height:900px 
+}
+
+/* -- Responsive --*/
+
+
+@media only screen and (max-width : 999px) {
+	#ti_ts_container{
+		
+	}
+}
+
+
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+	#ti_ts_container{
+		
+	}
+}
+
+@media only screen and (max-width : 767px) {
+	#ti_ts_container{
+		
+	}
+}

@@ -11,6 +11,11 @@
     		 	<class>Compandsave_Bundle_Model</class>
 			 </compandsave_bundle>
 		</models>
+		<helpers>
+			<compandsave_bundle>
+    		 	<class>Compandsave_Bundle_Helper</class>
+			 </compandsave_bundle>
+		</helpers>
 	</global>
 
 </config>
