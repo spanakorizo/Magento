@@ -3,5 +3,6 @@
 
 !app/
 !skin/
+!js/
 !.gitignore
 !README.md
