@@ -1,0 +1,126 @@
+<div id="ti_cms_home_container" class="btcf">
+<div id="ti_header_imageSplash" class="btcf">{{block type="compandsave_productselector/list" template="productselector/bannerlist.phtml"}} <!--<div id="ti_header_mainSearch" class="ti_input_bar">
+					<div class="ti_input_barContainer">{{block type="core/template" name="homepage.searchbar" template="cas_functions/searchbar.phtml"}}</div>
+		</div>-->
+<div class="flexslider ti_hide_767">
+<ul class="slides">
+<li><img src="{{skin url='images/ti-home/tomatoes-banner.jpg'}}" alt="" /> <!--<h2 class="flex-caption ti_headerH1"><span>Ink freshly squeezed.</span></h2>--></li>
+<li><img src="{{skin url='images/ti-home/hero-banner.jpg'}}" alt="" /> <!--<h2 class="flex-caption ti_headerH1"><span>Harvest the savings.</span></h2>--></li>
+</ul>
+</div>
+<div class="ti_input_bar one ti_hide ti_show_767 ti_hide_479">
+<div class="ti_input_barContainer">{{block type="core/template" name="homepage.searchbar" template="cas_functions/searchbar.phtml"}}</div>
+</div>
+</div>
+<div id="container" class="ti_cms_contain js-masonry" data-masonry-options="{ &quot;columnWidth&quot;: &quot;.ti_cms_home_block&quot;, &quot;itemSelector&quot;: &quot;.ti_cms_pinGrid&quot;, &quot;gutter&quot;:&quot;.ti_cms_block_gutter&quot; }">
+<div class="ti_cms_block_gutter">&nbsp;</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<h2 class="ti_green_head ti_headerH1">Warranty</h2>
+<img src="{{skin url='images/ti-home/warranty.jpg}}" alt="Our ink is backed by a 1 year warranty." />
+<p>Every item you purchase is backed with our 100% satisfaction 1-year money back guarantee.</p>
+<p><a class="lgTxt ti_small_text" href="#"><em>...read more</em></a></p>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<h2 class="ti_green_head ti_headerH1">Free Shipping</h2>
+<img src="{{skin url='images/ti-home/shipping.jpg'}}" alt="Free shipping on all ink and toner orders over $50." />
+<p>We offer free shipping on all orders over $50 and $3.99 regular shipping. All orders made before 3pm PST process and ship within 24 hours!</p>
+<p><a class="lgTxt ti_small_text" href="{{store url='shipping-policy'}}"><em>...read more</em></a></p>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<h2 class="ti_green_head ti_headerH1">Save 80%</h2>
+<img src="{{skin url='images/ti-home/save-big.jpg'}}" alt="Save up to 80% on ink and toner every day." />
+<p>We buy our cartridges directly from the manufacturers at high volumes so we are able to negotiate better deals!</p>
+<p><a class="lgTxt ti_small_text" href="{{store url='low-price-guarantee'}}"><em>...read more</em></a></p>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<blockquote class="ltAlt">
+<h2 class="altTxt">I will keep ordering from this company as long as I need the product.</h2>
+</blockquote>
+<h2 class="ltAlt ltWeight">- Sandy, Silver Spring, FL</h2>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">{{block type="compandsave_productselector/list" template="productselector/list.phtml"}}</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<h2 class="ti_green_head ti_headerH1">Newsletter</h2>
+<img src="{{skin url='images/ti-home/email.jpg'}}" alt="Sign up for our weekly emails to save even more." />
+<p>Receive awesome discounts each month to help you save even more!</p>
+<form id="newsletter-validate-detail-home" action="http://www.866ink.com/magentoEE/Mail_Subscribe/" method="get"><input id="newsletter-home" class="input-text required-entry validate-email" type="email" name="email" /> <button class="button" title="Subscribe" type="submit"> <span><span>Sign Up</span></span> </button></form>
+<script type="text/javascript">// <![CDATA[
+			var newsletterSubscriberFormDetail = new VarienForm('newsletter-validate-detail-home');
+// ]]></script>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<blockquote class="ltAlt">
+<h2 class="altTxt">So far I don't see a difference from the original ink. Except the cost. I had my doubts, but no longer. I will get all of my ink here from now on.</h2>
+</blockquote>
+<h2 class="ltAlt ltWeight">- Joe, Beale AFB, CA</h2>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<h2 class="ti_green_head ti_headerH1">Eco-Friendly</h2>
+<img src="{{skin url='images/ti-home/recycle.jpg'}}" alt="Our ink and toner cartridges are environmentally friendly." />
+<p>Remanufactured cartridges save resources such as rubber, plastic, steel and aluminum cost as much as 80% less than so called genuine or OEM cartridges. It's win-win for the environment and for you.</p>
+<p><a class="lgTxt ti_small_text" href="{{store url='environmentally-friendly-green-ink-and-toner-cartridges'}}"><em>...read more</em></a></p>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<blockquote class="ltAlt">
+<h2 class="altTxt">This is high quality stuff. I will keep buying this for a long time.</h2>
+</blockquote>
+<h2 class="ltAlt ltWeight">- Bob, Georgetown, FL</h2>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<h2 class="ti_green_head ti_headerH1">Security</h2>
+<img src="{{skin url='images/ti-home/security.jpg'}}" alt="Our site is tested daily to pass the Norton Security test." />
+<p>Our site is tested daily to pass the Norton Security test.</p>
+<p><a class="lgTxt ti_small_text" href="{{store url='privacy-policy'}}"><em>...read more</em></a></p>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<h2 class="ti_green_head ti_headerH1">Follow Us</h2>
+<p class="ti_social_media"><a class="ti_social_media_btn fb" href="http://www.facebook.com/tomatoinktoner" target="_blank"><span>Facebook</span></a> <a class="ti_social_media_btn tw" href="http://twitter.com/tomatoinktoner" target="_blank"><span>Twitter</span></a> <a class="ti_social_media_btn gg" href="https://plus.google.com/u/0/112582653541709057320" target="_blank"><span>Google+</span></a> <a class="ti_social_media_btn bl" href="http://blog.tomatoink.com/" target="_blank"><span>Blogger</span></a> <a class="ti_social_media_btn pn" href="http://pinterest.com/tomatoinktoner/" target="_blank"><span>Pinterest</span></a></p>
+</div>
+</div>
+<div class="ti_cms_gradient_block ti_cms_home_block ti_cms_pinGrid">
+<div class="ti_block_inner">
+<blockquote class="ltAlt">
+<h2 class="altTxt">The product came quickly and works great.</h2>
+</blockquote>
+<h2 class="ltAlt ltWeight">- Amy, Austin, TX</h2>
+</div>
+</div>
+</div>
+</div>
+<script type="text/javascript">// <![CDATA[
+jQuery(function(){
+  jQuery("img").load(function() {
+    jQuery("#container").masonry(); //this tweak is a fix on chrome and safari browser
+  });
+
+  /*jQuery('.div_class').masonry({
+    // options
+    itemSelector : '.div_class',
+    isResizable : 'true',
+    columnWidth : 10
+  });*/
+});
+
+jQuery('.main.col1-layout.ti_cms_contain').attr('class', 'main col1-layout');
+// ]]></script>

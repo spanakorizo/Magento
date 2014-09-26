@@ -1,0 +1,220 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+    $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
+    $nameId = $eavAttribute->getIdByCode('catalog_product', 'name');
+    $coreResource = Mage::getSingleton('core/resource');
+    $conn = $coreResource->getConnection('core_read');
+    $entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+    $store_id = 0;//Mage::app()->getStore()->getId();
+    $attrbTable = $coreResource->getTableName('catalog_product_entity_varchar');
+    $CatPrdTable = $coreResource->getTableName('catalog_category_product');
+    $_helper    = $this->helper('catalog/output');
+    $_productCollection = $this->getLoadedProductCollection();
+    $_category  = $this->getCurrentCategory();
+	$currentCategoryId = $_category->getId();
+    $_imgHtml   = '';
+    if ($_imgUrl = $_category->getImageUrl()) {
+        $_imgHtml = '<p class="category-image"><img src="'.$_imgUrl.'" alt="'.$this->escapeHtml($_category->getName()).'" title="'.$this->escapeHtml($_category->getName()).'" /></p>';
+        $_imgHtml = $_helper->categoryAttribute($_category, $_imgHtml, 'image');
+    }
+?> 
+<div class="ti_category_content_container">
+    <div style="width: 73%;position: relative; display: block; float: left; padding: 0 1%">
+        <?php if($this->IsRssCatalogEnable() && $this->IsTopCategory()): ?>
+            <a href="<?php echo $this->getRssLink() ?>" class="link-rss"><?php echo $this->__('Subscribe to RSS Feed') ?></a>
+        <?php endif; ?>
+        <h1 class="ti_header_left_align"><?php echo $_helper->categoryAttribute($_category, $_category->getName(), 'name') ?></h1>
+        <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+
+        <?php if($_imgUrl): ?>
+            <p><?php echo $_imgHtml ?>
+            <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+                <p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
+            <?php endif; ?>
+            </p>
+
+        <?php else: ?>
+            <?php if($_description=$this->getCurrentCategory()->getDescription()): ?>
+            <p><?php echo $_helper->categoryAttribute($_category, $_description, 'description') ?></p>
+            <?php endif; ?>
+
+        <?php endif; ?>
+    </div>
+    <div class="ti_category_one_forth ti_category_product_selector_box">
+        <div class="ti_ink_selector_holder">
+            <h1 class="ti_green_head">Ink Search</h1>
+            <div style="width:100%;position:relative;float:left">
+
+                <div class="ti_ink_selector_div">
+                    <h3>Choose Printer Series</h3>
+                    <div id="ti_ajax_cat_loading_ink"><img src="<?php echo $this->getSkinUrl('images/loading.gif') ?>" /></div>
+                    <select name="" id="ti_series_selector" class="ti_select_text">
+                        <option value="0" selected="">select your printer series</option>
+                        <?php
+                        $category_model = Mage::getModel('catalog/category')->load($currentCategoryId);
+                        $subcategoryIds = $category_model->getChildren();
+                        $subCatIds = explode(',',$subcategoryIds);
+                        $collection = Mage::getResourceModel('catalog/category_collection')->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id','image'))->load();
+
+                        foreach($collection as $item){
+
+                            echo '<option value="'.$item->getId().'">'.$item->getName().'</option>';
+                        }
+
+                        ?>
+                    </select>
+                </div>
+                <div class="ti_ink_selector_div">
+                    <h3>Choose Model/Cartridge</h3>
+
+                    <select disabled="" name="" id="ti_cartridge_selector" class="ti_select_text">
+                        <option value="" selected="">select your printer cartridge</option>
+                    </select>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="ti_category_content_container">
+    <div class="one ti_hide_479">
+        <div class="ti_input_bar">
+            <div class="ti_input_barContainer">
+                <form id="nxt-ac-form" onsubmit="return submitSearch5();" action="http://search.tomatoink.com/search" method="get" name="form5">
+                    <input type="text" name="keywords" autocomplete="off" value="Type your ink or printer model..." id="search_v5_5" onfocus="if(this.value=='Type your ink or printer model...')this.value='';" onblur="if(this.value=='')this.value='Type your ink or printer model...';" onkeypress="return handleEnter5(this,event)">
+                    <input type="submit" border="0" onclick="submitSearch5();" value="Find Ink" name="imageField">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ti_category_content_container">
+    <?php   foreach($collection as $series):?>
+            <div class="ti_series_one_forth" id="<?php echo $series->name; ?>-<?php echo $series->entity_id; ?>">
+                <div style="position:relative; width: 100%; height:170px;float: left;">
+                    <img src="<?php if($series->getImageUrl()) echo $series->getImageUrl(); else echo $this->getSkinUrl('images/dummy-printer.jpg');?>" style="max-height: 160px; max-width: 80%; margin:5px 10%"/>
+                </div>
+
+                <p style="text-align: center"><a href="#" style="text-decoration: none"><?php echo $series->getName(); ?> Series</a></p>
+            </div>
+    <?php   endforeach;?>
+</div>
+<div class="ti_category_content_container">
+	<h1 id="ti_show_all_series-<?php echo $currentCategoryId; ?>" class="ti_show_hide_series">Show/Hide all series</h1>
+</div>
+
+<div class="ti_category_content_container" id="ti_all_series_list" style="display:none">
+	<div style="display:block; width:100%; float: left; position:relative" id="ti_all_model_list" ></div>
+</div>
+
+<div class="ti_category_content_container" id="ti_single_series_list" style="display:none">
+	<div class="ti_cms_block_headerBar-green">
+        <div id="ti_series_name" > </div>
+           <div id="check" style="width:100%; position:relative; float: left; height:auto;">
+		   </div>
+		
+	</div>
+</div>
+
+<script src="http://code.jquery.com/jquery-1.8.3.js" type="text/javascript"></script>
+<script>
+    jQuery.noConflict();
+    jQuery(function(){
+        jQuery(".ti_series_one_forth").click(function(e) {
+			e.preventDefault();
+            var y=jQuery(this).attr("id");
+            var x= y.split("-");
+            var dataString = x[1];
+            var series_name = x[0];
+			
+			jQuery("#ti_single_series_list").toggle(e);
+			jQuery("#ti_series_name").html('<h1 class="white">'+ series_name +' Series </h1>');
+			jQuery.post("productselector/category/index",{id : dataString, name: series_name}, function(data){
+				jQuery("#check").html(data);
+
+            });
+			return false;
+        });
+		jQuery(".ti_show_hide_series").click(function(e) {
+			e.preventDefault();
+            var y=jQuery(this).attr("id");
+            var x= y.split("-");
+            var dataString = x[1];
+            
+            jQuery("#ti_all_series_list").toggle(e);
+
+            jQuery.post("productselector/category/model",{id : dataString},function(data){
+				jQuery("#ti_all_model_list").html(data);
+				
+            });
+			return false;
+        });
+		
+		jQuery("#ti_series_selector").change(function() {
+			
+			var dataString = jQuery(this).val();
+			
+			if(dataString > 0){
+				document.getElementById("ti_series_selector").disabled=true;
+				document.getElementById("ti_cartridge_selector").disabled=true;
+				jQuery("#ti_ajax_cat_loading_ink").show();
+				jQuery(".ti_ink_selector_holder").fadeTo('slow',.4);
+				new Ajax.Request( "productselector/ink/index", {
+					method: "post",
+					parameters: {
+					  id : dataString
+					},
+					cache: false,
+					onSuccess: function(transport) {
+						jQuery('#ti_cartridge_selector').html(transport.responseText);
+						jQuery("#ti_ajax_cat_loading_ink").hide();
+						jQuery(".ti_ink_selector_holder").fadeTo('slow',1.0);
+						document.getElementById("ti_series_selector").disabled=false;
+						document.getElementById("ti_cartridge_selector").disabled=false;
+					}
+				});
+			}
+			
+			return false;
+		});
+
+		jQuery("#ti_cartridge_selector").change(function() {
+			var id=jQuery(this).val();
+			window.open("https://www.866ink.com/magentoEE/index.php/catalog/product/view/id/"+ id, "_self");
+		});
+    });
+</script>

@@ -1,0 +1,22 @@
+<input type="button" value="Add To Cart" name="<?php echo $_item->getId() ?>" onclick="addproduct_query(this.name)">
+
+                <?php
+                // If we have a bundle:
+                $bundle_url = "";
+                    if ($_item->getTypeId() == 'bundle'){
+                        
+                        $selectionCollection = $_item->getTypeInstance(true)->getSelectionsCollection(
+                        $_item->getTypeInstance(true)->getOptionsIds($_item), $_item
+                    );
+
+                    foreach($selectionCollection as $option) {
+                        $bundle_url .= "?bundle_option[" . $option->option_id  . "]=" . $option->selection_id . "&bundle_option_qty[" . $option->option_id . "]=";
+       // echo '<input type="hidden" name="bundle_option[' . $option->option_id  . ']" value="' .  $option->selection_id . '" />';
+       // echo '<input type="hidden" name="bundle_option_qty[' . $option->option_id . ']" value="1" />';
+
+                    }//end: foreach $selectionCollection
+
+                } // end: if $_item == bundle 
+                ?>
+                <input type="hidden" value="<?php echo $bundle_url; ?>" id="bundle_<?php echo $_item->getId() ?>">
+                <br><br> 

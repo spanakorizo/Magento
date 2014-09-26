@@ -1,0 +1,72 @@
+<?php
+//echo '<option value="0" selected="">Series</option>';
+$cat_id = $_REQUEST['id'];
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$category_model = Mage::getModel('catalog/category')->load($cat_id);
+$subcategoryIds = $category_model->getChildren();
+$subCatIds = explode(',',$subcategoryIds);
+$CatPrdTable = $coreResource->getTableName('catalog_category_product');
+$relationtable = $coreResource->getTableName('catalog_product_link');
+
+$collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->addAttributeToSort('name', 'ASC')->load();
+$series = array();
+$series_new = array();
+$model = array();
+if(!empty($collection)){
+    foreach($collection as $item){
+
+        $productCollection = Mage::getModel('catalog/product')
+            ->getCollection()
+            ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
+            ->addAttributeToSelect(array('name','url'))
+            ->addAttributeToFilter('category_id', $item->entity_id)
+            ->addAttributeToFilter('status', 1);
+        if($productCollection->count()){
+            //echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
+
+            $select = $conn->select()
+                ->from($CatPrdTable,array('product_id'))
+                ->where('category_id = ?',$item->entity_id)
+                ->where('position = ? ', '1');
+            $result = $conn->fetchCol($select);
+            $sub_series = array();
+            if(!empty($result)){
+
+                $collection = Mage::getModel('catalog/product')
+                    ->getCollection()
+                    ->addFieldToFilter('entity_id', $result)
+                    ->addAttributeToFilter('status', 1)
+                    ->addAttributeToSelect(array('name','entity_id'))
+                    ->addAttributeToSort('name', 'ASC');
+
+
+                foreach($collection as $product_model){
+                    //echo '<option value="'.$product_model->getId().'">'.$product_model->getName().'</option>';
+
+                        $model[] = array("id" => $product_model->getId(), "name" => $product_model->getName() , "url" => $product_model->getProductUrl() );
+
+                //var_dump($series);
+
+                }
+
+            }
+
+            $series["$item->entity_id"]  =  array("name" => $item->name ,"level" => "3","sub" => $model );
+
+            unset($model);//for flash model array and initialize to empty
+        }
+
+
+
+    }
+
+    echo json_encode($series );
+}
+else{
+  echo '<option value="0">No Product Found</option>';
+  ?><script>
+           document.getElementById("ti_cartridge_selector").disabled=true;
+           document.getElementById("ti_cartridge_selector").innerHTML = '<option value="" selected="">Series</option>';
+    </script><?Php
+}

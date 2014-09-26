@@ -1,0 +1,87 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * @see Mage_Page_Block_Template_Links
+ */
+?>
+<ul class="ti_header_toplinks">
+
+						<li id="ti_header_account"><a rel="nofollow"><span>My Account</span></a>
+							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_accountDrop">
+								<ul class="ti_sub-menu menu_two_col">
+									<li id="ti_header_login"><a href="<?php echo $this->getUrl('') ?>customer/account/login/"><span>Sign In</span></a></li>
+									<li><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a></li>
+									<li><a href="<?php echo $this->getUrl('') ?>customer/account/index/"><span>My Profile</span></a></li>
+									<li><a href="<?php echo $this->getUrl('') ?>sales/order/history/"><span>My Orders</span></a></li>
+									<li id="ti_header_logout"><a href="<?php echo $this->getUrl('') ?>customer/account/logout/"><span>Sign Out</span></a></li>
+								</ul>
+							</div>
+						</li>
+						<li id="ti_header_cart"><a rel="nofollow"><span>Cart</span>(<span id="ti_header_cartcount">0</span>)</a>
+							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_cartDrop">
+								<p><strong>Currently in your cart:</strong></p>
+								<div id="ti_header_cartitems"></div>
+							</div>
+						</li>
+						<li id="ti_header_help"><a rel="nofollow" rel="nofollow"><span>Need help?</span></a>
+							<div class="ti_cms_gradient_block ti_cms_dropContent" id="ti_header_helpDrop">
+								<ul class="ti_sub-menu menu_two_col">
+									<li><a href=""><span>Track Orders</span></a></li>
+									<li><a href=""><span>Call us</span></a></li>
+									<li><a href=""><span>Leave a Ticket</span></a></li>
+									<li><a href="{{store url='troubleshooting-tips'}}" target="_blank">Troubleshooting page</a></li>
+									<li id="scEkiO" style="display:inline; float: left"></li>
+								</ul>
+							</div>
+						</li>
+                        
+					</ul>
+
+
+<!-- BEGIN ProvideSupport.com Custom Images Chat Button Code -->
+<div id="ciEkiO" style="z-index:100;position:absolute"></div>
+<!--<div id="scEkiO" style="display:inline"></div>-->
+<div id="sdEkiO" style="display:none"></div>
+<script type="text/javascript">var seEkiO=document.createElement("script");seEkiO.type="text/javascript";var seEkiOs=(location.protocol.indexOf("https")==0?"https":"http")+"://image.providesupport.com/js/lubu12/safe-standard.js?ps_h=EkiO&ps_t="+new Date().getTime()+"&online-image=<?php echo $this->getSkinUrl('images/ti-chat/live-chat-online.png') ?>&offline-image=<?php echo $this->getSkinUrl('images/ti-chat/live-chat-offline.png') ?>";setTimeout("seEkiO.src=seEkiOs;document.getElementById('sdEkiO').appendChild(seEkiO)",1)</script>
+<noscript><div style="display:inline"><a href="<?php echo Mage::getBaseUrl() ?>productselector/ajax/livechat" onClick="javascript:void window.open('<?php echo Mage::getBaseUrl() ?>productselector/ajax/livechat','Tomatoink Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">Live Chat</a></div></noscript>
+<!-- END ProvideSupport.com Custom Images Chat Button Code -->
+<!-- chat page update !-->
+<script type="text/javascript">
+    function openChat(){
+        window.open(ti_global_url + 'productselector/ajax/livechat','CompandSave Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;
+    }
+    jQuery(document).ready(function() {
+        setTimeout(function() {
+            var livesite_tag = document.getElementById('scEkiO');
+            livesite_tag.innerHTML = "<a href='#' onClick='openChat();' >"  + livesite_tag.firstChild.innerHTML + "</a>";
+        },2000);
+
+    });
+
+</script>
+<!-- chat page update !-->
