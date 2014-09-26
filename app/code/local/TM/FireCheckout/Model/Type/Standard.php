@@ -131,25 +131,35 @@ class TM_FireCheckout_Model_Type_Standard
         if (($customer = Mage::getSingleton('customer/session')->getCustomer())
             && ($addresses = $customer->getAddresses())) {
 
-            if (!$shippingAddress = $customer->getPrimaryShippingAddress()) {
-                foreach ($addresses as $address) {
-                    $shippingAddress = $address;
-                    break;
+            if ($this->getQuote()->getShippingAddress()->getCountryId()) {
+                $shippingAddress = $this->getQuote()->getShippingAddress();
+                if (!$shippingAddress->getSameAsBilling()) {
+                    $billingAddress  = $this->getQuote()->getBillingAddress();
+                } else {
+                    $billingAddress = $shippingAddress;
                 }
-            }
-            if (!$billingAddress = $customer->getPrimaryBillingAddress()) {
-                foreach ($addresses as $address) {
-                    $billingAddress = $address;
-                    break;
+                $result['shipping'] = $shippingAddress->getData();
+                $result['billing']  = $billingAddress->getData();
+                $result['billing']['use_for_shipping'] = $shippingAddress->getSameAsBilling();
+            } else {
+                if (!$shippingAddress = $customer->getPrimaryShippingAddress()) {
+                    foreach ($addresses as $address) {
+                        $shippingAddress = $address;
+                        break;
+                    }
                 }
+                if (!$billingAddress = $customer->getPrimaryBillingAddress()) {
+                    foreach ($addresses as $address) {
+                        $billingAddress = $address;
+                        break;
+                    }
+                }
+                $result['shipping']['country_id']          = $shippingAddress->getCountryId();
+                $result['shipping']['customer_address_id'] = $shippingAddress->getId();
+                $result['billing']['country_id']           = $billingAddress->getCountryId();
+                $result['billing']['customer_address_id']  = $billingAddress->getId();
+                $result['billing']['use_for_shipping']     = $shippingAddress->getId() === $billingAddress->getId();
             }
-            $result['shipping'] = $shippingAddress->getData();
-            $result['shipping']['country_id']          = $shippingAddress->getCountryId();
-            $result['shipping']['customer_address_id'] = $shippingAddress->getId();
-            $result['billing'] = $billingAddress->getData();
-            $result['billing']['country_id']           = $billingAddress->getCountryId();
-            $result['billing']['customer_address_id']  = $billingAddress->getId();
-            $result['billing']['use_for_shipping']     = $shippingAddress->getId() === $billingAddress->getId();
         } else if ($this->getQuote()->getShippingAddress()->getCountryId()) {
             // Estimated shipping cost from shopping cart
             $address = $this->getQuote()->getShippingAddress();
@@ -321,10 +331,12 @@ class TM_FireCheckout_Model_Type_Standard
             $weight += ($item->getWeight() * $item->getQty()) ;
         }
         $shippingAddress->setFreeMethodWeight($weight)->setWeight($weight);
-
-        $shippingAddress->collectTotals()->collectShippingRates()->save();
+        // *** comment below casue we do not need to collect total again as we have collect totals
+        //$shippingAddress->collectTotals()->collectShippingRates()->save();
+        $shippingAddress->collectShippingRates();
         $this->applyShippingMethod();
         // shipping method may affect the total in both sides (discount on using shipping address)
+
         $quote->collectTotals();
 
         if (Mage::getStoreConfig('firecheckout/ajax_update/shipping_method_on_total')) { // shipping methods depends on total (subtotal + discount) without shipping price
@@ -347,6 +359,7 @@ class TM_FireCheckout_Model_Type_Standard
             // to recollect discount rules need to clear previous discount
             // descriptions and mark address as modified
             // see _canProcessRule in Mage_SalesRule_Model_Validator
+            //we do not want to remove our old coupon
             $shippingAddress->setDiscountDescriptionArray(array())->isObjectNew(true);
 
             $quote->setTotalsCollectedFlag(false)->collectTotals();
@@ -991,7 +1004,6 @@ class TM_FireCheckout_Model_Type_Standard
         }
 
         $payment = $quote->getPayment();
-        $payment->setMethod(isset($data['method']) ? $data['method'] : false); // Magebuzz_Rewardpoint fix
         $payment->importData($data);
 
         $quote->save();

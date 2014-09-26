@@ -11,18 +11,18 @@ class  Compandsave_Checkout_Model_Cart extends Mage_Checkout_Model_Cart
         Mage::dispatchEvent('checkout_cart_save_before', array('cart'=>$this));
         $this->getQuote()->getBillingAddress();
         $this->getQuote()->getShippingAddress()->setCollectShippingRates(true);
-		$check = Mage::getSingleton('checkout/cart')->getQuote()->hasItems();
+		/*$check = Mage::getSingleton('checkout/cart')->getQuote()->hasItems();
 		
         if(!strlen($this->getQuote()->getCouponCode()) || !$check){
-			
+
             $this->getQuote()->collectTotals();
 			
 		}
         else{
-			
+
             Mage::getModel('compandsave_productselector/quotes')->collectTotal();
-		}
-            //$this->getQuote()->collectTotals();
+		}*/
+        $this->getQuote()->collectTotals();
         $this->getQuote()->save();
 
         $this->getCheckoutSession()->setQuoteId($this->getQuote()->getId());

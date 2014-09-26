@@ -19,7 +19,7 @@ class Compandsave_Productselector_Model_Quotes extends Mage_Core_Model_Abstract
 
     public function collectTotal($couponcode, $updateflag = 1)
     {
-        $quote = Mage::getSingleton('checkout/cart')->getQuote();
+        $quote = Mage::getSingleton('checkout/session')->getQuote();
 
         if($updateflag==null){
             $quote->setTotalsCollectedFlag(false);

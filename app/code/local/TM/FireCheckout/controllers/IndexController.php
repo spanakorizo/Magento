@@ -125,6 +125,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
          * @var Mage_Sales_Model_Quote
          */
         $quote = $this->getCheckout()->getQuote();
+
         if (!$quote->hasItems() || $quote->getHasError()) {
             $this->_redirect('checkout/cart');
             return;
@@ -155,6 +156,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
         $this->_initLayoutMessages('checkout/session');
         $this->getLayout()->getBlock('head')->setTitle(Mage::getStoreConfig('firecheckout/general/title'));
         $this->renderLayout();
+
     }
 
     protected function _isShippingMethodDependsOnAddress()
@@ -485,8 +487,10 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
 
             // recollect avaialable shipping methods
             $oldMethod = $shippingAddress->getShippingMethod();
-            $shippingAddress->collectTotals()->collectShippingRates()->save();
+            /*  --- comment below due to change in total calculation
+            /*$shippingAddress->collectTotals()->collectShippingRates()->save();*/
             // apply or cancel shipping method
+            $shippingAddress->collectShippingRates()->save();
             $this->getOnepage()->applyShippingMethod();
 
             if ((Mage::getStoreConfig('firecheckout/ajax_update/total_on_shipping_method')
@@ -638,8 +642,10 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
             $sections[] = 'shipping-method';
 
             // recollect avaialable shipping methods
-            $quote->getShippingAddress()->collectTotals()->collectShippingRates()->save();
+            // comment it cause  we handle it in collecttotals of quote
+            //---$quote->getShippingAddress()->collectTotals()->collectShippingRates()->save();
             // apply or cancel shipping method
+            $quote->getShippingAddress()->collectShippingRates();
             $this->getOnepage()->applyShippingMethod();
 
             if (Mage::getStoreConfig('firecheckout/ajax_update/total_on_shipping_method') // @todo: && method was changed
@@ -682,7 +688,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                         // to recollect discount rules need to clear previous discount
                         // descriptions and mark address as modified
                         // see _canProcessRule in Mage_SalesRule_Model_Validator
-                        $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                        //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                         $quote->setTotalsCollectedFlag(false)->collectTotals();
                     }
@@ -727,7 +733,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                     // to recollect discount rules need to clear previous discount
                     // descriptions and mark address as modified
                     // see _canProcessRule in Mage_SalesRule_Model_Validator
-                    $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                    //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                     $quote->setTotalsCollectedFlag(false)->collectTotals();
                 }
@@ -805,7 +811,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                     // to recollect discount rules need to clear previous discount
                     // descriptions and mark address as modified
                     // see _canProcessRule in Mage_SalesRule_Model_Validator
-                    $shippingAddress->setDiscountDescriptionArray(array())->isObjectNew(true);
+                    //$shippingAddress->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                     $quote->setTotalsCollectedFlag(false)->collectTotals();
                 }
@@ -879,7 +885,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                         // to recollect discount rules need to clear previous discount
                         // descriptions and mark address as modified
                         // see _canProcessRule in Mage_SalesRule_Model_Validator
-                        $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                        //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                         $quote->setTotalsCollectedFlag(false)->collectTotals();
                     }
@@ -1227,7 +1233,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                 // to recollect discount rules need to clear previous discount
                 // descriptions and mark address as modified
                 // see _canProcessRule in Mage_SalesRule_Model_Validator
-                $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                 $quote->setTotalsCollectedFlag(false)->collectTotals();
             }
@@ -2053,7 +2059,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                 // to recollect discount rules need to clear previous discount
                 // descriptions and mark address as modified
                 // see _canProcessRule in Mage_SalesRule_Model_Validator
-                $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                 $quote->setTotalsCollectedFlag(false)->collectTotals();
             }
