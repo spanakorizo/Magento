@@ -37,6 +37,8 @@
         <?php foreach($this->getItems() as $_item): ?>
             <?php echo $this->getItemHtml($_item)?>
         <?php endforeach ?>
+		<?php echo $this->getChildHtml('deals'); ?>
+		
         </tbody>
     </table>
 </div>

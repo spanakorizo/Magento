@@ -111,7 +111,9 @@
                     </tr>
                     <?php endif; ?>
                 </thead>
+
                 <tfoot class="ti_cart_table green_cart">
+                <?php echo $this->getChildHtml('deals'); ?>
                     <tr>
                         <td colspan="50">
                           <div class="totals btcf">
@@ -130,10 +132,12 @@
                     </tr>
                 </tfoot>
                 <tbody>
+
                 <?php foreach($this->getItems() as $_item): ?>
                     <?php echo $this->getItemHtml($_item) ?>
                 <?php endforeach ?>
                 </tbody>
+
             </table>
             
             <div class="btcf">
