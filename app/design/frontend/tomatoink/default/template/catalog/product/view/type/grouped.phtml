@@ -161,7 +161,7 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
                     <div class="ti_cms_block_qty">
                         <p class="lgTxt">Qty: <input type="text" class="input-text qty" name="qty<?php echo $_item->getId() ?>" maxlength="3" id = "ti_grp_simple_prd_<?php echo $_item->getId(); ?>" value=""/></input>
 
-                            <input type="button" value="Add To Cart" class="ti_button_large" name="<?php echo $_item->getId(); ?>" onclick="addSimpleToCart('ti_grp_simple_prd_<?php echo $_item->getId(); ?>'); add_to_box('product_add_cart','show_cart');" /></p>
+                            <input type="button" value="Add To Cart" class="ti_button" name="<?php echo $_item->getId(); ?>" onclick="addSimpleToCart('ti_grp_simple_prd_<?php echo $_item->getId(); ?>'); add_to_box('product_add_cart','show_cart');" /></p>
                     </div>
                     <!--<p>We've sold <?php //echo round($_item->getOrderedQty()) ?> of this product.</p>!-->
                     <?php

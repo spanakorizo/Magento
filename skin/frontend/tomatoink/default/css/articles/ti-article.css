@@ -205,6 +205,91 @@ Naming convention: add ti_cms_ prefix
 	
 }
 
+/* --Grid Layout (12 columns)--*/
+
+.ti-cms-row:after {
+            content:"";
+            display:table;
+            clear:both;
+}
+
+.ti-cms-one, .ti-cms-two, .ti-cms-three,
+.ti-cms-four, .ti-cms-five, .ti-cms-six,
+.ti-cms-seven, .ti-cms-eight, .ti-cms-nine,
+.ti-cms-ten, .ti-cms-eleven, .ti-cms-twelve{
+	float:left;
+	min-height: 1px;
+	position: relative;
+	margin: 0 .5%;
+	padding:1%;
+}
+
+.ti-cms-one.firstCol, .ti-cms-two.firstCol, .ti-cms-three.firstCol,
+.ti-cms-four.firstCol, .ti-cms-five.firstCol, .ti-cms-six.firstCol,
+.ti-cms-seven.firstCol, .ti-cms-eight.firstCol, .ti-cms-nine.firstCol,
+.ti-cms-ten.firstCol, .ti-cms-eleven.firstCol{
+	margin-left: 0;
+	padding-right:0;
+}
+
+.ti-cms-one.lastCol, .ti-cms-two.lastCol, .ti-cms-three.lastCol,
+.ti-cms-four.lastCol, .ti-cms-five.lastCol, .ti-cms-six.lastCol,
+.ti-cms-seven.lastCol, .ti-cms-eight.lastCol, .ti-cms-nine.lastCol,
+.ti-cms-ten.lastCol, .ti-cms-eleven.lastCol{
+	margin-right: 0;
+	padding-left: 0;
+}
+
+.ti-cms-one{
+width:5.5%;
+}
+
+.ti-cms-two{
+width:14%;
+}
+
+.ti-cms-three{
+width:22.5%;
+}
+
+.ti-cms-four{
+width:31%;
+}
+
+.ti-cms-five{
+width:39.5%;
+}
+
+.ti-cms-six{
+width:48%;	
+}
+
+.ti-cms-seven{
+width:56.5%;	
+}
+
+.ti-cms-eight{
+width:65%;	
+}
+
+.ti-cms-nine{
+width:73.5%;	
+}
+
+.ti-cms-ten{
+width:82%;	
+}
+
+.ti-cms-eleven{
+width:90.5%;	
+}
+
+.ti-cms-twelve{
+width:99%;	
+margin:0;
+padding:.5%;
+}
+
 /* -----------------------------------*/
 /* ----------->> 5. Text <<<----------*/
 /* -----------------------------------*/
