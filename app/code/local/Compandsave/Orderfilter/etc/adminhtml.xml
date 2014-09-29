@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <sales>
+            <children>
+                <compandsave_orderfilter translate="title" module="compandsave_orderfilter">
+                    <title>Order Filters</title>
+                    <action>adminhtml/orderfilter</action>
+                    <sort_order>18</sort_order>
+                </compandsave_orderfilter>
+            </children>
+        </sales>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <sales>
+                        <children>
+                            <compandsave_orderfilter translate="title" module="compandsave_orderfilter">
+                                <title>Order Filter Section</title>
+                                <sort_order>18</sort_order>
+                            </compandsave_orderfilter>
+                        </children>
+                    </sales>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+</config>

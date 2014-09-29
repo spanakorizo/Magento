@@ -1,0 +1,128 @@
+<div id="ti_home_centerMain">	
+	<div class="one_half">
+		<div class="ti_block_inner">
+			<h2 class="ti_headerH1 white">Sign up for deals:</h2>
+			<form>
+				<label class="ti_cms_labelHide" for="home_email"><span>Your email address</span></label> <input id="home_email" class="one" type="email" placeholder="Enter email address"/> 
+				<label class="ti_cms_labelHide" for="home_name"><span>Your first name</span></label> 
+				<input id="home_name" class="one" type="text" placeholder="Enter your name" /> <input class="ti_altBtn" type="submit" value="Sign up" />
+			</form>
+		</div>
+	</div>
+	<div class="one_half">
+		<div class="ti_block_inner">	
+		<h2 class="ti_headerH1 white">Search for ink:</h2>
+				
+				<div class="ti_select_barContainer btcf">    
+
+					<div id="ti_banner_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>"/></div>
+					<div id="ti_banner_ajax_loading_series"><img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>"/></div>
+				   <!--<h3>Choose Printer Brand</h3>-->
+					<select name="" id="ti_banner_brand_selector">
+						<option value="0">Brand</option>
+						<?php
+						$category_model = Mage::getModel('catalog/category')->load(2);
+						$subcategoryIds = $category_model->getChildren();
+						$subCatIds = explode(',',$subcategoryIds);	
+						$collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->load();
+						
+						foreach($collection as $item){
+					
+							echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
+						}
+
+						?>
+					</select>
+				</div>
+			
+			
+				<div class="ti_select_barContainer btcf">
+					<!--<h3>Choose Printer Series</h3>-->
+					<select disabled="" name="" id="ti_banner_series_selector">
+						<option value="0" selected="">Series</option>
+					</select>
+				</div>
+			
+			
+				<div class="ti_select_barContainer btcf">
+					<!--<h3>Choose Model/Cartridge</h3>-->
+
+					<select disabled="" name="" id="ti_banner_cartridge_selector">
+						<option value="" selected="">Model</option>
+					</select>
+				</div>
+		</div>
+	</div>
+</div>
+<script>
+jQuery.noConflict();
+jQuery(function(){
+
+    jQuery("#ti_banner_brand_selector").change(function() {
+        var option_value = jQuery("#ti_banner_brand_selector option:selected").val();//get select brand option value
+        document.getElementById("ti_banner_series_selector").disabled=true;
+		document.getElementById("ti_banner_cartridge_selector").disabled=true;
+		document.getElementById("ti_banner_brand_selector").disabled=true;
+        var dataString = jQuery(this).val();
+		jQuery.post("productselector/ajax/index",{id : dataString},function(data){
+			jQuery('#ti_banner_series_selector').html(data);
+		});
+		/*jQuery.post("productselector/ink/simple",{id : dataString},function(data){
+			jQuery('#ti_banner_cartridge_selector').html(data);
+		});*/
+        jQuery("#ti_banner_ajax_loading_ink").show();
+        jQuery(".ti_ink_selector_holder").fadeTo('slow',.4);
+        new Ajax.Request("productselector/ink/simple", {
+            method: "post",
+            parameters: {
+              id : dataString
+            },
+            cache: false,
+            onSuccess: function(transport) {
+				jQuery('#ti_banner_cartridge_selector').html(transport.responseText);
+				jQuery("#ti_banner_ajax_loading_ink").hide();
+				jQuery(".ti_ink_selector_holder").fadeTo('slow',1.0);
+                if (option_value != 0){ //if no brand selected series and cartridge are disable
+				    document.getElementById("ti_banner_series_selector").disabled=false;
+				    document.getElementById("ti_banner_cartridge_selector").disabled=false;
+                }
+				document.getElementById("ti_banner_brand_selector").disabled=false;
+            }
+        });
+    });
+    jQuery("#ti_banner_series_selector").change(function() {
+
+        var dataString = jQuery(this).val();
+		
+        if(dataString > 0){
+			document.getElementById("ti_banner_series_selector").disabled=true;
+			document.getElementById("ti_banner_cartridge_selector").disabled=true;
+			document.getElementById("ti_banner_brand_selector").disabled=true;
+            jQuery("#ti_banner_ajax_loading_series").show();
+			jQuery(".ti_ink_selector_holder").fadeTo('slow',.4);
+            new Ajax.Request( "productselector/ink/index", {
+                method: "post",
+                parameters: {
+                  id : dataString
+                },
+                cache: false,
+                onSuccess: function(transport) {
+					jQuery('#ti_banner_cartridge_selector').html(transport.responseText);
+					jQuery("#ti_banner_ajax_loading_series").hide();
+					jQuery(".ti_ink_selector_holder").fadeTo('slow',1.0);
+					document.getElementById("ti_banner_series_selector").disabled=false;
+					document.getElementById("ti_banner_cartridge_selector").disabled=false;
+					document.getElementById("ti_banner_brand_selector").disabled=false;
+                }
+            });
+        }
+    });
+
+    jQuery("#ti_banner_cartridge_selector").change(function() {
+        var id=jQuery(this).val();
+        if(id != 0)
+            window.open(ti_global_url + "catalog/product/view/id/"+ id, "_self");
+    });
+});
+
+</script>

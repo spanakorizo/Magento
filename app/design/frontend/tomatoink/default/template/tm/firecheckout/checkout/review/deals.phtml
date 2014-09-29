@@ -1,0 +1,32 @@
+<tr>
+    <?php if($this->getTotalDiscount() > 0):?>
+	<td colspan="50" style="background-color:#88CC40;border-bottom:none">
+
+		<p>
+            The Following Coupon and deals have been applied to your order and <strong style="color: #FFF;text-shadow: 1px 1px 0px #ccc;"> have saved you
+			<?php echo Mage::helper('core')->currency($this->getTotalDiscount()); ?></strong>
+		</p>
+        <p>
+            <?php $shippingMethod =  $this->getAddressShippingMethod();?>
+            <?php if($shippingMethod === 'freeshipping_freeshipping' ):?>
+            <p> Free Shipping on all order over <strong><?php echo Mage::helper('core')->currency(50);?></strong></p>
+            <?php endif;?>
+        </p>
+        <p>
+            <?php $giftcardarray = $this->getGiftCardInfo();?>
+            <?php if($giftcardarray['code'] != null):?>
+            <p>For Gift Card Code <strong>"<?php echo $giftcardarray['code']?>"</strong> you save <strong><?php echo Mage::helper('core')->currency($giftcardarray['amount']);?></strong></p>
+            <?php endif;?>
+        </p>
+		<p>
+			<?php if(strlen($this->getCouponCode())):?>
+			<?php $couponcodes = explode(',',$this->getCouponCode()); ?>
+			<?php foreach ( $couponcodes as $couponcode ) : ?>
+            <?php $coupondes = $this->getCouponDescription($couponcode);?>
+			<p>For Coupon <?php echo '<b>"'.$couponcode.'"</b>'?> <?php if(strlen($coupondes['description']))echo '- which is'; ?> <?php echo $coupondes['description']?> and you save <strong><?php echo Mage::helper('core')->currency($coupondes['discount_amount']);?></strong></p>
+			<?php endforeach;?>
+			<?php endif;?>
+		</p>
+	</td>
+    <?php endif?>
+</tr>

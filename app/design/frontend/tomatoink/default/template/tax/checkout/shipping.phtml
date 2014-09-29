@@ -62,7 +62,7 @@
     <td style="<?php echo $this->getStyle() ?>" class="a-right">
         <p class="ti-cart-right">
             <?php   if($this->getShippingExcludeTax() == 0)
-                        echo '<span class="altTxt">FREE</span>';
+                        echo '<span class="altTxt">FREE SHIPPING</span>';
                     else
                         echo $this->helper('checkout')->formatPrice($this->getShippingExcludeTax());
             ?>

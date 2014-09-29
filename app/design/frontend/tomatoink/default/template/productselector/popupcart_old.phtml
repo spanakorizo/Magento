@@ -1,0 +1,58 @@
+<div class="ti_block_inner">
+
+<?php
+/*$prdinfo = $_POST['prd'];
+
+$individual_product = explode('#',$prdinfo);
+foreach($individual_product as $productarray){
+    $getItem = explode('*',$productarray);
+}*/
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$cart = Mage::getModel('checkout/cart')->getQuote();
+//$total_num = Mage::getModel('checkout/cart')->getQuote()->getItemsQty();
+//$total_num = $cart->getItemsCount();
+$total_num = round($cart->getItemsQty());
+if ($total_num == "") $total_num=0;
+
+$grandtotal = $cart->getSubtotal();
+
+$select = $conn->select()
+    ->from($coreResource->getTableName('sales_flat_quote_item'),array('product_id'))
+    ->where('parent_item_id IS NULL')
+    ->where('quote_id = ?',$cart->getId());
+$cartItems = $conn->fetchCol($select);
+
+//echo "<div class='ti_cartpopup_block_headerBar-green'><h2 class='white ti_top_margin_hide'> Total Items in Cart : ".$total_num."   <span>Sub Total: $" . round($grandtotal,2) . "</span></h2><span class='ti_close_popup'><a href='#' class='ti_txt_dec_none'><p class='ti_orange_head ti_checkoutStep_close'>X</p></a></span></div>";
+
+echo "<h2> Total Items in Cart : ".$total_num."   <br><strong class='altTxt'>Sub Total: $" . round($grandtotal,2) . "</strong></h2> <span class='ti_close_popup'><a href='#' class='ti_checkoutStep_close altTxt'>X</a></span>";
+
+foreach ($cart->getAllItems() as $item) {
+    $product = $item->getProduct();
+    if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 )
+        echo "<div class='one_fifth'><a href='" . $product->getProductUrl() . "'><img class='block_center' src='" . $this->helper('catalog/image')->init( $product, 'small_image')->resize(75) . "'></img></a></div><div class='two_fifth'><a href='" . $product->getProductUrl() . "'><p class='ti_product_blockName'>" . $product->getName() . "</p></a></div><div class='one_fifth text_center'><p>".$item->getQty()."</p></div><div class='one_fifth'><p>$".$item->getQty() * $item->getPrice()."</p></div><div class='ti_cms_separator'></div>";
+    //$productId = $item->getProduct()->getId();
+    //$productqty = $item->getQty();
+    //$productPrice = $item->getProduct()->getPrice();
+
+}
+echo "<div class='text_center'><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a>";
+//echo "<a class='ti_button ti_altBtn' href='".$this->getContinueShoppingUrl()."' ><strong>Continue Shopping</strong></a></div>";
+?><a class="ti_button ti_altBtn" href="#" id="ti_continue_shopping"><strong>Continue Shopping</strong></a></div>
+
+</div>
+<script>
+    jQuery('.ti_close_popup').click(function(e){
+        e.preventDefault();
+        jQuery('#show_cart').hide(e);
+        jQuery('#ti_hide_body_div').hide();
+         e.stopPropagation();
+    });
+    jQuery('#ti_continue_shopping').click(function(e){
+        e.preventDefault();
+        jQuery('#show_cart').hide(e);
+        jQuery('#ti_hide_body_div').hide();
+        e.stopPropagation();
+    });
+    
+</script>

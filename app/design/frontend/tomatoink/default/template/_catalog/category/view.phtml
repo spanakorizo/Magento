@@ -1,0 +1,158 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Category view template
+ *
+ * @see Mage_Catalog_Block_Category_View
+ */
+?>
+<?php
+    $_category  = $this->getCurrentCategory();
+	$currentCategoryId = $_category->getId();
+?> 
+
+<script type="text/javascript">
+    //online parameter: 
+    var ti_global_pagetype = "brand";
+    var ti_global_pagename = "<?php echo $_category->getName(); ?>";
+</script>
+
+<!--<div class="ti_category_content_container">
+    <div style="width: 73%;position: relative; display: block; float: left; padding: 0 1%">-->
+
+<?php $getModel = Mage::getResourceModel('compandsave_variable/brand_collection')
+    ->addFieldToFilter('brand_id',$currentCategoryId)
+    ->addFieldToFilter('status','1')
+    ->addFieldToFilter('visibility','1')
+    ->getFirstItem()
+    ->load();
+echo $getModel['value'];
+?>
+<script>
+    jQuery.noConflict();
+    jQuery(function(){
+        jQuery(".ti_cms_block_brandVB").click(function(e) {
+			e.preventDefault();
+            var y=jQuery(this).attr("id");
+            var x= y.split("-");
+            var id = x[1];
+            jQuery(".ti_series_header").hide();
+            jQuery("#ti_series_display-" + id).show(e);
+            jQuery(".ti_series_header_sign_minus").html('<a href="#"> + </a>');
+            jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> - </a>');
+            //jQuery("html, body").scrollTop(jQuery(".ti_cms_block_headerBar-green").offset().top);
+            return false;
+        });
+
+        jQuery('.ti_series_header_sign_minus').click(function(e){
+            e.preventDefault();
+            var y=jQuery(this).attr("id");
+            var x= y.split("-");
+            var id = x[1];
+            if(jQuery("#ti_series_display-" + id).is(":visible")){
+                jQuery("#ti_series_display-" + id).hide();
+                jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> + </a>');
+            }
+            else{
+                jQuery("#ti_series_display-" + id).show();
+                jQuery("#ti_series_header_sign-" + id ).html('<a href="#"> - </a>');
+            }
+            return false;
+        });
+
+
+		jQuery(".ti_show_hide_series").click(function(e) {
+			e.preventDefault();
+            /*jQuery(".ti_series_header").hide();
+            jQuery(".ti_cms_block_headerBar-green").toggle();*/
+            if(jQuery(".ti_series_header").is(":visible")){
+                jQuery(".ti_series_header").hide();
+                jQuery(".ti_series_header_sign_minus").html('<a href="#"> + </a>');
+                jQuery(".ti_show_hide_series").html('<a href="#">+ Show All Series</a>');
+            }
+            else{
+                jQuery(".ti_series_header").show();
+                jQuery(".ti_series_header_sign_minus").html('<a href="#">- </a>');
+                jQuery(".ti_show_hide_series").html('<a href="#">- Hide All Series</a>');
+            }
+            //jQuery(".ti_series_header").toggle(e);
+			return false;
+        });
+		
+		jQuery("#ti_series_selector").change(function() {
+			
+			var dataString = jQuery(this).val();
+			
+			if(dataString > 0){
+				document.getElementById("ti_series_selector").disabled=true;
+				document.getElementById("ti_cartridge_selector").disabled=true;
+				jQuery("#ti_ajax_cat_loading_ink").show();
+				jQuery(".ti_ink_selector_holder").fadeTo('slow',.4);
+				new Ajax.Request( "productselector/ink/index", {
+					method: "post",
+					parameters: {
+					  id : dataString
+					},
+					cache: false,
+					onSuccess: function(transport) {
+						jQuery('#ti_cartridge_selector').html(transport.responseText);
+						jQuery("#ti_ajax_cat_loading_ink").hide();
+						jQuery(".ti_ink_selector_holder").fadeTo('slow',1.0);
+						document.getElementById("ti_series_selector").disabled=false;
+						document.getElementById("ti_cartridge_selector").disabled=false;
+					}
+				});
+			}
+			
+			return false;
+		});
+
+		jQuery("#ti_cartridge_selector").change(function() {
+			var id=jQuery(this).val();
+			window.open(ti_global_url + "catalog/product/view/id/"+ id, "_self");
+		});
+    });
+</script>
+
+
+<script type="text/javascript">
+//scroll down js
+
+jQuery(".ti_cms_block_brandVB").click(function() {
+    scroll(document.getElementById('ti_all_series_list'));
+});
+
+
+function scroll(element) {   
+    jQuery('html,body').animate({
+    scrollTop: element.offsetTop},
+    'slow'); 
+
+}
+
+</script>
