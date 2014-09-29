@@ -338,7 +338,8 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
         }
 
         $quote          = $this->getOnepage()->getQuote();
-        $oldTotal       = $quote->getBaseGrandTotal();
+        $oldTotal       = (float) $quote->getBaseGrandTotal();
+        $oldgiftamount =  (float) $quote->getBaseGiftCardsAmountUsed();
         $sections       = array();
         $removeGiftcard = $this->getRequest()->getPost('remove_giftcard', false);
         $giftcardCode   = $this->getRequest()->getPost('giftcard_code');
@@ -347,11 +348,20 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
         }
 
         $sections[] = 'giftcard';
+
+        $balance = Mage::getModel('enterprise_giftcardaccount/giftcardaccount')
+            ->loadByCode($giftcardCode)
+            ->getBalance();
+        /*/*
+         * Add code for handle negative after
+         */
+
         if (!$removeGiftcard) {
             try {
                 Mage::getModel('enterprise_giftcardaccount/giftcardaccount')
                     ->loadByCode($giftcardCode)
                     ->addToCart();
+
                 Mage::getSingleton('checkout/session')->addSuccess(
                     $this->__('Gift Card "%s" was added.', Mage::helper('core')->htmlEscape($giftcardCode))
                 );
@@ -374,6 +384,21 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
         }
 
         $quote->collectTotals();
+        /*$canAddItems = $quote->isVirtual()? ('billing') : ('shipping');
+        foreach ($quote->getAllAddresses() as $address) {
+            if($canAddItems == $address->getAddressType()){
+
+                if($quote->getBaseGrandTotal() <= 0 ){
+                    $address->setGiftCardsAmount($oldTotal)->save();
+                    $address->setBaseGiftCardsAmount($oldTotal)->save();
+
+                    $quote->setGiftCardsAmountUsed($oldgiftamount + $oldTotal)->save();
+                    $quote->setBaseGiftCardsAmountUsed($oldgiftamount + $oldTotal)->save();
+
+                }
+
+            }
+        }*/
         $sections[] = 'review';
 
         if (Mage::getStoreConfig('firecheckout/ajax_update/shipping_method_on_total')) { // shipping methods depends on total (subtotal + discount) without shipping price

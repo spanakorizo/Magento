@@ -86,7 +86,17 @@
 
                                 
 								foreach ($_rates as $_rate){
-                                    if($this->htmlEscape($_rate->getCode()) === 'freeshipping_freeshipping' ){
+
+                                    /*
+                                     * No need to hard code if we chnage title of shiping method
+                                     */
+
+                                    $method_title = $carrier_name.'-'.$this->escapeHtml($_rate->getMethodTitle());
+                                    $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax());
+                                    /*
+                                     * Comment below cause we do not need hard code anymore
+                                     */
+                                    /*if($this->htmlEscape($_rate->getCode()) === 'freeshipping_freeshipping' ){
                                         $method_title = 'Tomato Mail';
                                         $_excl = 'FREE';
                                     }
@@ -97,7 +107,7 @@
                                     else{
                                         $method_title = $carrier_name.'-'.$this->escapeHtml($_rate->getMethodTitle());
                                         $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax());
-                                    }
+                                    }*/
 
 
                                     $_incl = $this->getShippingPrice($_rate->getPrice(), true);
@@ -109,11 +119,28 @@
 									}
 									$method_title .= '] ';
 								?>
-								<option <?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' selected="selected"' ?> value="<?php echo $this->htmlEscape($_rate->getCode()) ?>"><?php echo $method_title;?></option>
-							<?php
-								}
+                                <?php
+                                    /*
+                                     * Do not show free method if not applicable
+                                     */
+                                    $freeshippingflag = Mage::getStoreConfig('carriers/freeshipping/active');
+                                    $freeshippingamount = Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal');
+                                    $subtotal = $this->getAddress()->getBaseSubtotal();
+                                    if($this->htmlEscape($_rate->getCode()) === 'freeshipping_freeshipping'){
+                                        if($freeshippingflag == 1 and $subtotal >=  $freeshippingamount){
+                                            ?>
+                                            <option <?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' selected="selected"' ?> value="<?php echo $this->htmlEscape($_rate->getCode()) ?>"><?php echo $method_title;?></option>
+                                            <?php
+                                        }
+                                    }
+                                    else{
+                                    ?>
+								        <option <?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' selected="selected"' ?> value="<?php echo $this->htmlEscape($_rate->getCode()) ?>"><?php echo $method_title;?></option>
+							        <?php
+                                    }//end else show for all method except free
+								}//end foreach
 
-							}
+						}//foreach parent
 						?>
 					
 					</select>

@@ -61,6 +61,7 @@ var lastPrice='';
     <?php $shippingMe = array(); ?>
 
     <?php
+
     if (isset($_shippingRateGroups['freeshipping'])
         && Mage::getStoreConfigFlag('firecheckout/general/hide_shipping_if_free')) :
 
@@ -80,7 +81,7 @@ var lastPrice='';
         endif;
 
         reset($_shippingRateGroups);
-    endif; ?>
+    endif;?>
     <div class="ti_select_barContainer">
 	<select name="shipping_method" id="ti_shipping_select">
     <?php $_sole = count($_shippingRateGroups) == 1; foreach ($_shippingRateGroups as $code => $_rates): ?>

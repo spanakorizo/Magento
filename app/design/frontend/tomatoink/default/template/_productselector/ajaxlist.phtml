@@ -1,0 +1,29 @@
+<?php
+echo '<option value="0" selected="">Series</option>';
+$cat_id = $_POST['id'];
+$category_model = Mage::getModel('catalog/category')->load($cat_id);
+$subcategoryIds = $category_model->getChildren();
+$subCatIds = explode(',',$subcategoryIds);
+$collection = Mage::getResourceModel('catalog/category_collection')->addAttributeToFilter('is_active', 1)->addFieldToFilter('entity_id',$subCatIds)->addAttributeToSelect(array('name','entity_id'))->addAttributeToSort('name', 'ASC')->load();
+
+if(!empty($collection)){
+    foreach($collection as $item){
+
+        $productCollection = Mage::getModel('catalog/product')
+            ->getCollection()
+            ->joinField('category_id', 'catalog/category_product', 'category_id', 'product_id = entity_id', null, 'left')
+            ->addAttributeToSelect(array('name','url'))
+            ->addAttributeToFilter('category_id', $item->entity_id)
+            ->addAttributeToFilter('status', 1);
+        if($productCollection->count()){
+            echo '<option value="'.$item->entity_id.'">'.$item->name.'</option>';
+        }
+    }
+}
+else{
+  echo '<option value="0">No Product Found</option>';
+  ?><script>
+           document.getElementById("ti_cartridge_selector").disabled=true;
+           document.getElementById("ti_cartridge_selector").innerHTML = '<option value="" selected="">Series</option>';
+    </script><?php
+}

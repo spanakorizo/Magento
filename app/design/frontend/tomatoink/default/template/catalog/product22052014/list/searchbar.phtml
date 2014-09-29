@@ -1,0 +1,16 @@
+            <div class="ti_input_barContainer">
+                <?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
+                    
+                        <form id="search_mini_form2" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
+                            <input type="text" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search2" value="Find your cartridge" onfocus="if (this.value == 'Find your cartridge') {this.value = '';}" onblur="if (this.value == '') {this.value = 'Find your cartridge';}"/>
+                            <input type="submit" name="Submit" id="search_submit2" value="Search" title="<?php echo $this->__('Search') ?>">
+                            <div id="search_autocomplete" class="search-autocomplete"></div>
+            <script type="text/javascript">
+            //<![CDATA[
+                var searchForm2 = new Varien.searchForm('search_mini_form2', 'search2', '<?php echo $this->__('Search entire store here...') ?>');
+                searchForm2.initAutocomplete('<?php echo $catalogSearchHelper->getSuggestUrl() ?>', 'search_autocomplete');
+            //]]>
+            </script>
+                        </form>
+            
+        </div>

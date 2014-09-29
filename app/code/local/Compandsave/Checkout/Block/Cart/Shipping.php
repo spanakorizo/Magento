@@ -46,13 +46,16 @@ class Compandsave_Checkout_Block_Cart_Shipping extends Mage_Checkout_Block_Cart_
             unset($rate_array);
             // Find if our shipping has been included.
             $rates = $address->collectShippingRates()->getGroupedAllShippingRates();
+
             foreach ($rates as $carrier) {
                 foreach ($carrier as $rate) {
 
                     $rate_array[] = $rate->getPrice();
 
                 }
+
                 $m_rate = min($rate_array);
+
                 foreach ($carrier as $rate) {
 
                     if($rate->getPrice() == $m_rate){
@@ -64,7 +67,9 @@ class Compandsave_Checkout_Block_Cart_Shipping extends Mage_Checkout_Block_Cart_
                     }
 
                 }
+
             }
+
         }
         else{
             $this->_shipping_code = '';

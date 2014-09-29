@@ -53,6 +53,8 @@ class Compandsave_Sales_Model_Quote extends Mage_Sales_Model_Quote
 
         $this->getSubtotal(0);
         $this->getBaseSubtotal(0);
+        $this->setBaseGiftCardsAmountUsed(0);
+        $this->setGiftCardsAmountUsed(0);
 
         foreach ($this->getAllAddresses() as $address) {
 
@@ -62,9 +64,11 @@ class Compandsave_Sales_Model_Quote extends Mage_Sales_Model_Quote
             $address->setGrandTotal(0);
             $address->setBaseGrandTotal(0);
 
+
             if($canAddItems == $address->getAddressType()){
 
                 $address->collectTotals();
+
 
                 $this->setSubtotal((float) $address->getSubtotal());
                 $this->setBaseSubtotal((float) $address->getBaseSubtotal());
@@ -138,8 +142,46 @@ class Compandsave_Sales_Model_Quote extends Mage_Sales_Model_Quote
 
                 //total discount amount = $totaldiscount
                 //calculate grand total
-                $grandTotal = $address->getSubtotal() + $address->getTaxAmount() + $address->getShippingAmount() + $address->getShippingTaxAmount() - $address->getShippingDiscountAmount() - $totaldiscount;
-                $basegrandTotal = $address->getBaseSubtotal() + $address->getBaseTaxAmount() + $address->getBaseShippingAmount() + $address->getBaseShippingTaxAmount() - $address->getBaseShippingDiscountAmount() - $basetotaldiscount;
+
+                $grandTotal = $address->getSubtotal() + $address->getTaxAmount() + $address->getShippingAmount() + $address->getShippingTaxAmount() - $address->getShippingDiscountAmount() - $totaldiscount ;
+                $basegrandTotal = $address->getBaseSubtotal() + $address->getBaseTaxAmount() + $address->getBaseShippingAmount() + $address->getBaseShippingTaxAmount() - $address->getBaseShippingDiscountAmount() - $basetotaldiscount ;
+
+                /*
+                 * handle gift card calculation and protect grand total to zero if gift card applied amount
+                 * is greater than grand total
+                 */
+
+                if(($grandTotal - $address->getGiftCardsAmount()) < 0 ){
+
+                    /*
+                     * unserialized giftcard data from Mage_Sales_Quote_Address resource model
+                     */
+                    $array = unserialize($address->getGiftCards());
+
+                    $cards[] = array(
+                        // id
+                        'i' => $array[0][i],
+                        // code
+                        'c' => $array[0][c],
+                        // amount
+                        'a' => (float) $grandTotal,
+                        // base amount
+                        'ba' => (float) $grandTotal,
+                    );
+
+                    $address->setGiftCardsAmount((float) $grandTotal);
+                    $address->setGiftCards(serialize($cards));
+                    $address->setUsedGiftCards(serialize($cards));
+                    $this->setGiftCardsAmountUsed((float) $grandTotal);
+                    $address->setBaseGiftCardsAmount((float) $basegrandTotal);
+                    $this->setBaseGiftCardsAmountUsed((float) $basegrandTotal);
+                    $grandTotal = $grandTotal - $address->getBaseGiftCardsAmount();
+                    $basegrandTotal = $basegrandTotal - $address->getBaseGiftCardsAmount();
+                }
+                else{
+                    $grandTotal = $grandTotal - $address->getGiftCardsAmount();
+                    $basegrandTotal = $basegrandTotal - $address->getGiftCardsAmount();
+                }
 
                 $subtotalwithdiscount = $address->getSubtotal() - $totaldiscount;
                 $basesubtotalwithdiscount = $address->getBaseSubtotal() - $basetotaldiscount;
@@ -149,6 +191,7 @@ class Compandsave_Sales_Model_Quote extends Mage_Sales_Model_Quote
 
                 //=========set Quote Total ==================//
                 //Grand total
+
                 $this->setGrandTotal((float) $grandTotal);
                 $this->setBaseGrandTotal((float) $basegrandTotal);
 
@@ -254,6 +297,7 @@ class Compandsave_Sales_Model_Quote extends Mage_Sales_Model_Quote
         Mage::dispatchEvent($this->_eventPrefix . '_collect_totals_after', array($this->_eventObject => $this));
 
         $this->setTotalsCollectedFlag(true);
+        $this->setGiftCardsTotalCollected(true);
 
         return $this;
     }

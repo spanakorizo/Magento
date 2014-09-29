@@ -1,0 +1,38 @@
+<?php
+$cat_id = $_POST['id'];
+echo '<option value="" selected="">Model</option>';
+
+$coreResource = Mage::getSingleton('core/resource');
+$conn = $coreResource->getConnection('core_read');
+$store_id = 0;//Mage::app()->getStore()->getId();
+$CatPrdTable = $coreResource->getTableName('catalog_category_product');
+$relationtable = $coreResource->getTableName('catalog_product_link');
+//===== get product under series name =====//
+$select = $conn->select()
+		->from($CatPrdTable,array('product_id'))
+		->where('category_id = ?',$cat_id)
+		->where('position = ? ', '1');
+$result = $conn->fetchCol($select);	
+
+if(!empty($result)){
+
+    $collection = Mage::getModel('catalog/product')
+        ->getCollection()
+        ->addFieldToFilter('entity_id', $result)
+        ->addAttributeToFilter('status', 1)
+        ->addAttributeToSelect(array('name','entity_id'))
+        ->addAttributeToSort('name', 'ASC');
+
+
+    foreach($collection as $product_model)
+		  echo '<option value="'.$product_model->getId().'">'.$product_model->getName().'</option>';
+
+
+}
+else{
+	  
+  ?><script>
+           window.open(ti_global_url + "catalog/product/view/id/"+ <?php echo $cat_id; ?>, "_self");
+    </script><?php
+
+}
