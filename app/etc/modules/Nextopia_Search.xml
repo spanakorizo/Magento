@@ -2,7 +2,7 @@
 <config>
   <modules>
     <Nextopia_Search>  
-      <active>true</active>  
+      <active>false</active>  
       <codePool>local</codePool>  
     </Nextopia_Search>  
   </modules>
