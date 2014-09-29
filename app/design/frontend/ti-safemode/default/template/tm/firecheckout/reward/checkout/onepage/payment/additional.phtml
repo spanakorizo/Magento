@@ -26,7 +26,7 @@
 <dl class="sp-methods checkout-reward checkout-onepage-payment-additional-reward" id="reward_placer">
     <dt>
         <input type="checkbox" name="payment[use_reward_points]" value="1" id="use_reward_points"<?php echo $this->useRewardPoints()?' checked="checked"':'' ?> class="checkbox" />
-        <label for="use_reward_points"><div class="ti-checkbox"></div><?php echo Mage::helper('enterprise_reward')->__('Use my reward points, %s available', Mage::helper('enterprise_reward')->formatReward($this->getPointsBalance(), $this->getCurrencyAmount())); ?></label>
+        <label for="use_reward_points"><?php echo Mage::helper('enterprise_reward')->__('Use my reward points, %s available', Mage::helper('enterprise_reward')->formatReward($this->getPointsBalance(), $this->getCurrencyAmount())); ?></label>
     </dt>
 </dl>
 <script type="text/javascript">

@@ -8,39 +8,39 @@
 
             <li class="fields">
                 <div class="field">
-                    <label for="title" class="required ti_cms_labelHide ti-required-entry"><span><?php echo $this->__('Title') ?></span></label>
+                    <label for="title" class="required"><em>*</em><?php echo $this->__('Title') ?></label>
                     <div class="input-box">
-                        <input type="text" name="title" title="<?php echo $this->__('Title') ?>" placeholder="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" />
+                        <input type="text" name="title" title="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" />
                     </div>
                 </div>
 
                 <div class="field">
-                    <label for="email" class="required ti_cms_labelHide ti-required-entry"><span><?php echo Mage::helper('contacts')->__('Email') ?></span></label>
+                    <label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
                     <div class="input-box">
-                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" placeholder="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="email" />
+                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="text" />
                     </div>
                 </div>
             </li>
             <?php else :?>
             <li class="wide">
-                <label for="title" class="ti-required-entry required ti_cms_labelHide"><span><?php echo $this->__('Title') ?></span></label>
+                <label for="title" class="required"><em>*</em><?php echo $this->__('Title') ?></label>
                 <div class="input-box">
-                    <input type="text" name="title" title="<?php echo $this->__('Title') ?>" placeholder="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" />
+                    <input type="text" name="title" title="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" />
                 </div>
             </li>
             <?php endif; ?>
 
             <li class="fields">
-                <div class="ti-required-entry field one_half">
-                    <label for="department" class="required"><?php echo $this->__('Department') ?></label>
-                    <div class="input-box ti_select_barContainer">
+                <div class="field">
+                    <label for="department" class="required"><em>*</em><?php echo $this->__('Department') ?></label>
+                    <div class="input-box">
                         <?php echo $this->getDepartmentHtmlSelect() ?>
                     </div>
                 </div>
                 <?php if(Mage::getStoreConfig("helpmate/ticketForm/usePriorityOnFrontend")) :?>
-                <div class="ti-required-entry field one_half">
-                    <label for="priority" class="required"><?php echo $this->__('Priority') ?></label>
-                    <div class="input-box ti_select_barContainer">
+                <div class="field">
+                    <label for="priority" class="required"><em>*</em><?php echo $this->__('Priority') ?></label>
+                    <div class="input-box">
                         <?php echo $this->getPriorityHtmlSelect() ?>
                     </div>
                 </div>
@@ -48,9 +48,9 @@
             </li>
 
             <li class="wide">
-                <label class="required ti-required-entry ti_cms_labelHide" for="text"><span><?php echo $this->__('Message') ?></span></label>
+                <label class="required" for="text"><?php echo $this->__('Message') ?><em>*</em></label>
                 <div class="input-box">
-                    <textarea id="text" placeholder="<?php echo $this->__('Message') ?>" class="input-text required-entry one" title="<?php echo $this->__('Message') ?>" name="text" rows="3"></textarea>
+                    <textarea id="text" class="input-text required-entry" title="<?php echo $this->__('Message') ?>" name="text" cols="5" rows="3"></textarea>
                 </div>
             </li>
             
@@ -58,10 +58,8 @@
         </ul>
     </div>
     <div class="buttons-set">
-        <div>
-            <p class="required altTxt"><?php echo $this->__('* Required Fields') ?></p>
-        </div>
-        <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link ti_button"><?php echo $this->__('Back') ?></a> &nbsp;
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p class="back-link"><a href="<?php echo $this->getBackUrl() ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
         <button type="submit" title="<?php echo $this->__('Save Ticket') ?>" class="button"><span><span><?php echo $this->__('Save Ticket') ?></span></span></button>
     </div>
 </form>

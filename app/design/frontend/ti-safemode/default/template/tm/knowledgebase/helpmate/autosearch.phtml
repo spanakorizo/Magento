@@ -1,0 +1,42 @@
+<script type="text/javascript">
+
+    function initAutocomplete() {
+
+        $('title').insert(
+            {'after' : '<div class="search-autocomplete" id="ask_autocomplete"></div>'}
+        );
+        Autocomplete.prototype.isBadQuery = function(q) {
+            var i = this.badQueries.length;
+            while (i--) {
+                if (this.badQueries[i] === q) {return true;}
+            }
+            return false;
+        };
+
+        new Autocomplete('title', {
+            serviceUrl:'<?php echo $this->getAjaxAction() ?>',
+            store:'<?php echo Mage::app()->getStore()->getStoreId(); ?>',
+
+            container: 'ask_autocomplete',
+            enableimage:'0',
+            enableloader:'0',
+            enabledescription:'1',
+            descriptionchars:'50',
+            minChars:'5',
+            maxHeight:'300',
+            width:'580',
+            searchtext:'',
+
+            baseUrl:'<?php echo Mage::getBaseUrl(); ?>',
+            secureUrl:'<?php echo Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_LINK, true); ?>',
+            onSelect: onAutocompleteSubmit
+        });
+    }
+        if (Prototype.Browser.IE) {
+            Event.observe(window, 'load', initAutocomplete);
+        } else {
+            document.observe("dom:loaded", initAutocomplete);
+        }
+//]]&gt;
+</script>
+            

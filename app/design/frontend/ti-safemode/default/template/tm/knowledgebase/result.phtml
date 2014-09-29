@@ -1,0 +1,28 @@
+<?php 
+$query = $this->getQuery();
+if (!empty ($query)) : ?>
+    <div class="knowledge-block" id="knowledge-block-result">
+        <div class="knowledgebase-block-title">
+            <strong><span><?php echo $this->__('Results');?> : </span></strong><?php echo $query;?>
+        </div>
+        <div class="knowledgebase-block-content">
+            <?php $collection = $this->getCollection();
+            if( $collection && count($collection) ): ?>
+                <?php $processor = new Mage_Cms_Model_Template_Filter(); ?>
+                <?php foreach ($collection as $_faq) :?>
+                    <div>
+                        <a href="<?php echo $this->getUrl(
+                            'knowledgebase/index/view', array('faq' => $_faq->getIdentifier()))
+                        ?>"><?php echo $_faq->getTitle() ?></a>&nbsp;</td>
+                        <p>
+                        <?php $content = $processor->filter($_faq->getContent());
+                        echo substr(strip_tags($content), 0, 200) . ' ...'; ?>
+                        </p>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p><?php echo $this->__('We\'re sorry but there is no articles for your search term. Please try again with different search request.') ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+<?php endif; ?>

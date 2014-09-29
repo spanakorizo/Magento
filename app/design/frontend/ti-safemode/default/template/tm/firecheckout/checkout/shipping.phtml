@@ -1,16 +1,9 @@
 <?php if ($this->getQuote()->isVirtual() || !Mage::getStoreConfig('firecheckout/general/shipping_address')) : return; endif; ?>
- <div class="one">  
-     <div class="block-content">  
-        <ul class="ti_checkout_inputField">
-    <!--<div class="control one_half">-->
-           <li class="control one_half">
-                <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Ship to the same address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="altTxt" />
-                <label for="shipping:same_as_billing" class="altTxt btcf"><div class="ti-checkbox"></div><span><?php echo $this->__('Ship to the same address') ?></span></label>
-            </li>
-        <!--</div>-->
-        </ul>
-    </div>
-</div>
+<ul class="form-list">
+    <li class="control">
+        <input type="checkbox" name="shipping[same_as_billing]" id="shipping:same_as_billing" value="1"<?php if($this->getAddress()->getSameAsBilling()): ?> checked="checked"<?php endif; ?> title="<?php echo $this->__('Ship to the same address') ?>" onclick="shipping.setSameAsBilling(this.checked)" class="checkbox" /><label for="shipping:same_as_billing"><?php echo $this->__('Ship to the same address') ?></label>
+    </li>
+</ul>
 
 <?php
     $_layout = $this->getLayout();
@@ -26,39 +19,33 @@
         $status['region'] = 'required'; // used to render asterisk
     }
     $fields = array(
-        'name' => array(),
+        'name'  => array(),
         'company' => array(
-            'class' => 'ti_checkout_info',
-            'label' => 'Company',
-            'placeholder' => 'Company'
-        ),
-        'city' => array(
-            'class' => 'ti_checkout_info',
-            'label' => 'City',
-            'placeholder' => 'City'
-        ),
-        'postcode' => array(
-            'class' => 'validate-zip-international ti_checkout_info',
-            'label' => 'Zip/Postal Code',
-            'placeholder' => 'Postal Code'
+            'class' => 'input-text',
+            'label' => 'Company'
         ),
         'fax' => array(
-            'class' => 'ti_checkout_info',
-            'label' => 'Fax',
-            'placeholder' => 'Fax'
+            'class' => 'input-text',
+            'label' => 'Fax'
         ),
         'telephone' => array(
-            'class' => 'ti_checkout_info',
-            'label' => 'Telephone',
-            'placeholder' => 'Telephone'
+            'class' => 'input-text',
+            'label' => 'Telephone'
+        ),
+        'city' => array(
+            'class' => 'input-text',
+            'label' => 'City'
+        ),
+        'postcode' => array(
+            'class' => 'input-text validate-zip-international',
+            'label' => 'Zip/Postal Code'
         ),
         'street1' => array(
-            'class' => 'ti_checkout_info',
+            'class' => 'input-text',
             'label' => 'Address',
             'title' => 'Street Address',
             'name'  => $_prefix . '[street][]',
-            'value' => $_address->getStreet(1) ? $_address->getStreet(1) : '',
-            'placeholder' => 'Address'
+            'value' => $_address->getStreet(1)
         ),
         'country_id' => array(
             'label' => 'Country',
@@ -80,22 +67,22 @@
     }
 ?>
 
-<div id="shipping-address" class="btcf"<?php if($this->getAddress()->getSameAsBilling()): ?> style="display: none;"<?php endif; ?>>
-    <h2 class="lgTxt ti_checkout_headerH1"><?php echo $this->helper('checkout')->__(' Shipping Information'); ?></h2>
+<div id="shipping-address" class="firecheckout-section"<?php if($this->getAddress()->getSameAsBilling()): ?> style="display: none;"<?php endif; ?>>
+    <div class="block-title"><span><?php echo $this->__('Shipping Address') ?></span></div>
     <div class="block-content">
-        <ul class="ti_checkout_inputField">
+        <ul class="form-list">
         <?php if ($this->customerHasAddresses()): ?>
-           <li class="one">
-               <label for="shipping-address-select"><span><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></span></label>
-               <div class="ti_select_barContainer">
+           <li class="wide">
+               <label for="shipping-address-select"><?php echo $this->__('Select a shipping address from your address book or enter a new address.') ?></label>
+               <div class="input-box">
                    <?php echo $this->getAddressesHtmlSelect('shipping') ?>
                </div>
            </li>
         <?php endif ?>
-            <li id="shipping-new-address-form"<?php if ($this->hasCustomerAddressId()): ?> style="display:none;"<?php endif ?>>
-                <fieldset style="width: 98%;display: block; float: left; margin: 0 1%">
+            <li id="shipping-new-address-form"<?php if ($this->customerHasAddresses()): ?> style="display:none;"<?php endif ?>>
+                <fieldset>
                     <input type="hidden" name="shipping[address_id]" value="<?php echo $this->getAddress()->getId() ?>" id="shipping:address_id" />
-                    <!--<ul class="ti_small_text">-->
+                    <ul>
                         <?php foreach (Mage::helper('firecheckout/address')->getSortedFields() as $row) : ?>
                             <?php
                                 $countVisible          = 0;
@@ -122,18 +109,17 @@
                                     }
                                 }
 
+                                $isMulticolumn = ($countVisible > 1 || current($row) == 'name');
                             ?>
 
                             <?php if (!$countVisible && !$countRequiredToRender): continue; endif; ?>
-                            <?php foreach ($row as $field) : ?>
 
-                            <?php //$isMulticolumn = ( $field == 'company' || $field == 'street1' ||  $field == 'name' );?>
-                            <li class="<?php if($field == 'street1' || $field == 'company') echo 'one_checkout'; elseif($field == 'name') echo 'one_name'; else echo 'one_half' ;?>" <?php echo ('hidden' !== $status[$field]) ? '' : 'style = "display: none;"' ?>>
-
+                            <li class="<?php echo $isMulticolumn ? 'fields' : 'wide' ?>"<?php echo $countVisible ? '' : ' style="display: none;"' ?>>
+                                <?php foreach ($row as $field) : ?>
                                     <?php $required = ('required' === $status[$field]); ?>
 
                                     <?php if ('name' === $field) : ?>
-                                        <?php echo $this->getLayout()->createBlock('compandsave_productselector/name')->setObject($_address)->setFieldIdFormat($_prefix . ':%s')->setFieldNameFormat($_prefix . '[%s]')->toHtml() ?>
+                                        <?php echo $this->getLayout()->createBlock('customer/widget_name')->setObject($_address)->setFieldIdFormat($_prefix . ':%s')->setFieldNameFormat($_prefix . '[%s]')->toHtml() ?>
                                     <?php else : ?>
 
                                         <?php if ('hidden' === $status[$field]) :
@@ -149,31 +135,27 @@
                                         <?php endif; ?>
 
                                         <label for="<?php echo $_prefix ?>:<?php echo $field ?>"
-                                               class="ti_cms_labelHide"
-                                            ><span><?php echo $this->__($fields[$field]['label']) ?></span></label>
-                                        <div class="<?php echo $required ? 'ti-required-entry' : '' ?>">
+                                            class="<?php echo $required ? 'required' : '' ?>"
+                                            ><?php if ($required): ?><em>*</em><?php endif; ?><?php echo $this->__($fields[$field]['label']) ?></label>
+                                        <div class="input-box">
                                             <?php if ('country_id' === $field) : ?>
-                                                <div class="ti_select_barContainer ti_checkout_info">
-                                                    <?php echo $this->getCountryHtmlSelect($_prefix) ?>
-                                                </div>
+                                                <?php echo $this->getCountryHtmlSelect($_prefix) ?>
                                             <?php elseif ('region' === $field): ?>
-                                                <div id="ti_hide_shipping_state" class="ti_select_barContainer ti_checkout_info">
-                                                    <select id="<?php echo $_prefix ?>:region_id" name="<?php echo $_prefix ?>[region_id]"
+                                                <select id="<?php echo $_prefix ?>:region_id" name="<?php echo $_prefix ?>[region_id]"
                                                     title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
                                                     class="validate-select<?php echo $required ? ' required-entry' : '' ?>" style="display:none;"
                                                 >
-                                                        <option value=""><?php echo $this->__('Select State/ Province') ?></option>
-                                                    </select>
-                                                </div>
+                                                    <option value=""><?php echo $this->__('Please select region, state or province') ?></option>
+                                                </select>
                                                 <script type="text/javascript">
                                                 //<![CDATA[
                                                     $('<?php echo $_prefix ?>:region_id').setAttribute('defaultValue',  "<?php echo $_address->getRegionId() ?>");
                                                 //]]>
                                                 </script>
                                                 <input type="text" id="<?php echo $_prefix ?>:region" name="<?php echo $_prefix ?>[region]"
-                                                       placeholder="State/Province" value="<?php if($this->escapeHtml($_address->getRegion())) echo $this->escapeHtml($_address->getRegion()); else echo ''; ?>"
-                                                       title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
-                                                       class="<?php echo $required ? ' required-entry' : '' ?> ti_checkout_info" style="display:none;"
+                                                    value="<?php echo $this->htmlEscape($_address->getRegion()) ?>"
+                                                    title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
+                                                    class="input-text<?php echo $required ? ' required-entry' : '' ?>" style="display:none;"
                                                 />
                                             <?php else: ?>
                                                 <?php
@@ -187,7 +169,7 @@
                                                 <input type="text"
                                                     name="<?php echo (empty($fields[$field]['name']) ? $_prefix . '[' . $field . ']' : $fields[$field]['name']) ?>"
                                                     id="<?php echo $_prefix ?>:<?php echo $field ?>"
-                                                    value="<?php echo $this->htmlEscape($value) ?>" placeholder = "<?php if(empty($fields[$field]['placeholder'])) echo $this->escapeHtml($fields[$field]['label']); else  echo $this->escapeHtml($fields[$field]['placeholder']);?>"
+                                                    value="<?php echo $this->htmlEscape($value) ?>"
                                                     title="<?php echo (empty($fields[$field]['title']) ? $this->__($fields[$field]['label']) : $this->__($fields[$field]['title'])) ?>"
                                                     class="<?php echo $fields[$field]['class'] ?><?php echo $required ? ' required-entry' : '' ?>"
                                                 />
@@ -207,9 +189,9 @@
                                     <?php if ('street1' === $field) : ?>
                                         <?php for ($_i = 2, $_n = $this->helper('customer/address')->getStreetLines(); $_i <= $_n; $_i++): ?>
                                             </li>
-                                            <li class="one_checkout">
+                                            <li class="wide">
                                                 <div class="input-box">
-                                                    <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="<?php echo $_prefix ?>[street][]" id="<?php echo $_prefix ?>:street<?php echo $_i?>" value="<?php echo $this->htmlEscape($_address->getStreet($_i)) ?>" class="ti_checkout_info" />
+                                                    <input type="text" title="<?php echo $this->__('Street Address %s', $_i) ?>" name="<?php echo $_prefix ?>[street][]" id="<?php echo $_prefix ?>:street<?php echo $_i?>" value="<?php echo $this->htmlEscape($_address->getStreet($_i)) ?>" class="input-text" />
                                                 </div>
                                         <?php endfor ?>
                                     <?php endif; ?>
@@ -226,13 +208,12 @@
                     <?php endif;?>
 
                     <?php if ($this->isCustomerLoggedIn() && $this->customerHasAddresses()):?>
-                        <li class="control one_half">
-                            <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" <?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?>  />
-                            <label class="altTxt btcf" for="shipping:save_in_address_book"><div class="ti-checkbox"></div><span><?php echo $this->__('Save in address book') ?></span></label></li>
+                        <li class="control">
+                            <input type="checkbox" name="shipping[save_in_address_book]" value="1" title="<?php echo $this->__('Save in address book') ?>" id="shipping:save_in_address_book" <?php if ($this->getAddress()->getSaveInAddressBook()):?> checked="checked"<?php endif;?> class="checkbox" /><label for="shipping:save_in_address_book"><?php echo $this->__('Save in address book') ?></label></li>
                     <?php else:?>
                         <li class="no-display"><input type="hidden" name="shipping[save_in_address_book]" value="1" /></li>
                     <?php endif;?>
-                    <!--</ul>-->
+                    </ul>
                 </fieldset>
             </li>
         </ul>

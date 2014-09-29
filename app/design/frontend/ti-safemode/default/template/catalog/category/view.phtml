@@ -370,6 +370,8 @@ echo $getModel['value'];
     //<![CDATA[
     //jQuery.noConflict();
     jQuery(function(){
+        jQuery(".ti_series_header").hide();
+        jQuery(".ti_series_name").hide();
         jQuery(".ti_cms_block_brandVB").click(function(e) {
 			e.preventDefault();
             var y=jQuery(this).attr("id");

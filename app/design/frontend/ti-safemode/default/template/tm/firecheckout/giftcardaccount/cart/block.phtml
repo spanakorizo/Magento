@@ -1,12 +1,12 @@
-<div id="giftcard-account" class="one btcf">
-    <div class="ti_cms_block_headerBar-green"><h2 class="white ti_headerH1"><?php echo $this->__(' Gift Cards') ?></h2></div>
-    <div class="giftcard-form ti_cms_gradient_block">
+<div id="giftcard-account" class="firecheckout-section">
+    <div class="block-title"><span><?php echo $this->__('Gift Cards') ?></span></div>
+    <div class="giftcard-form">
         <?php
             echo $this->getMessagesBlock()->getGroupedHtml();
             $this->getMessagesBlock()->getMessageCollection()->clear();
         ?>
         <div class="giftcard">
-            <label class="altTxt btcf" for="giftcard_code"><span><?php echo $this->__('Enter the gift card code') ?></span></label>
+            <label for="giftcard_code"><?php echo $this->__('Enter the gift card code') ?></label>
             <div class="input-box">
                 <div class="input-field-wrapper">
                     <input class="input-text" id="giftcard_code" name="giftcard_code" value="" />

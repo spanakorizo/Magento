@@ -2284,8 +2284,8 @@ input.ti_checkout_info {
 	.ti_ink_selector_holder h1,.ti_ink_selector_holder p{padding:0 5px}
 	.ti_ink_selector_div{width:100%;margin:0;float:left;position:relative}
 	.ti_ink_selector_div h3{text-align: left}
-	.ti_select_text{width: 100%; text-align: left;color: #000}*/
-	.ti_series_name{display:none;}
+	.ti_select_text{width: 100%; text-align: left;color: #000}
+	.ti_series_name{display:none;}*/
 
 .ti_cms_block_brandVA a{
 	text-decoration:none;

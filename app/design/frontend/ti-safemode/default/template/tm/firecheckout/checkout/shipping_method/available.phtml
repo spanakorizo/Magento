@@ -57,7 +57,7 @@ var lastPrice='';
 <?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
     <p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
 <?php else: ?>
-<dl class="ti_block_inner">
+<dl class="sp-methods">
     <?php $shippingMe = array(); ?>
 
     <?php
@@ -81,15 +81,13 @@ var lastPrice='';
 
         reset($_shippingRateGroups);
     endif; ?>
-    <div class="ti_select_barContainer">
-	<select name="shipping_method" id="ti_shipping_select">
+
     <?php $_sole = count($_shippingRateGroups) == 1; foreach ($_shippingRateGroups as $code => $_rates): ?>
         <?php if ($code == 'kiala'): ?>
             <?php echo $this->getChildHtml('kiala.locateandselect.kialapoint.wrapper'); ?>
         <?php continue; endif; ?>
-		
-		<?php $carrier_code = $this->escapeHtml($this->getCarrierName($code)); ?>	
-        <!-- <dt><?php //echo $this->escapeHtml($this->getCarrierName($code)) ?></dt> -->
+
+        <dt><?php echo $this->escapeHtml($this->getCarrierName($code)) ?></dt>
         <dd>
             <?php // Lisää SmartPOST-koodi alkaen tästä ?>
             <?php if($code == 'itellaSmartPost'): ?>
@@ -108,29 +106,10 @@ var lastPrice='';
                             $quote = Mage::getSingleton('checkout/session')->getQuote();
                         ?>
                         <?php if ($_sole) : ?>
-                        <option  class="test" value="<?php echo $this->htmlEscape($_rate->getCode()) ?>" id="s_method_<?php echo $_id ?>" selected="selected" ><?php echo $carrier_code.' - '.$this->escapeHtml($_rate->getMethodTitle()) ?><?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
-                            <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
-                            <?php echo $_excl; ?>
-                            <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
-                                (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
-                            <?php endif; ?>
-                        </option>
+                        <span class="no-display"><input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_id ?>" checked="checked" /></span>
                         <?php else: ?>
-						
-                        <option class="test" id="s_method_<?php echo $_id ?>" value="<?php echo $this->htmlEscape($_rate->getCode()) ?>" <?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' selected="selected"' ?> >
+                        <input name="shipping_method" type="radio" value="<?php echo $_rate->getCode() ?>" id="s_method_<?php echo $_id ?>"<?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' checked="checked"' ?> class="radio" onchange="return false; includingShipping('<?php echo $_rate->getCode();?>');"/>
 
-                        <?php echo $carrier_code.' - '.$this->escapeHtml($_rate->getMethodTitle()) ?>
-                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
-                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
-                        <?php echo $_excl; ?>
-                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
-                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
-                        <?php endif; ?>
-                        
-						</option>
-
-                        <?php endif; ?>
-                        
                         <script type="text/javascript">
                         //<![CDATA[
                             <?php if ($_rate->getCode()===$this->getAddressShippingMethod()): ?>
@@ -138,6 +117,16 @@ var lastPrice='';
                             <?php endif; ?>
                         //]]>
                         </script>
+
+                        <?php endif; ?>
+                        <label for="s_method_<?php echo $_id ?>"><?php echo $this->escapeHtml($_rate->getMethodTitle()) ?>
+                        <?php $_excl = $this->getShippingPrice($_rate->getPrice(), $this->helper('tax')->displayShippingPriceIncludingTax()); ?>
+                        <?php $_incl = $this->getShippingPrice($_rate->getPrice(), true); ?>
+                        <?php echo $_excl; ?>
+                        <?php if ($this->helper('tax')->displayShippingBothPrices() && $_incl != $_excl): ?>
+                            (<?php echo $this->__('Incl. Tax'); ?> <?php echo $_incl; ?>)
+                        <?php endif; ?>
+                        </label>
                         <?php if ($_rate->getCode() == 'relaypoint_relaypoint'): ?>
                             <div id="relaypoint" style="display:none">
                                 <ul class="form-list">
@@ -266,9 +255,7 @@ var lastPrice='';
             </div>
             <?php endif ?>
         </dd>
-    <?php endforeach;?>
-	</select>
-    </div>
+    <?php endforeach; ?>
 </dl>
 <script type="text/javascript">
 //<![CDATA[
@@ -276,30 +263,23 @@ var lastPrice='';
         var shippingMe = {<?php echo implode(',',$shippingMe); ?>};
     <?php endif; ?>
 
-    jQuery('#ti_shipping_select').change(function(el){
-			//alert(this.selected);
-		jQuery('#ti_shipping_select option').each(function(){
-            if (this.selected == true) {
-                var getShippingCode = this.value;
-				
-                <?php if (!empty($shippingMe)): ?>
-                    var newPrice = shippingMe[getShippingCode];
-					
-                    if (!lastPrice) {
-                        lastPrice = newPrice;
-                        quoteBaseGrandTotal += newPrice;
-                    }
-                    if (newPrice != lastPrice) {
-                        quoteBaseGrandTotal += (newPrice-lastPrice);
-                        lastPrice = newPrice;
-                    }
-                <?php endif; ?>
-                checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
-				return false;
+    function includingShipping(getShippingCode)
+    {
+        <?php if (!empty($shippingMe)): ?>
+            var newPrice = shippingMe[getShippingCode];
+            if (!lastPrice) {
+                lastPrice = newPrice;
+                quoteBaseGrandTotal += newPrice;
             }
-		});
-    });
-    
+            if (newPrice != lastPrice) {
+                quoteBaseGrandTotal += (newPrice-lastPrice);
+                lastPrice = newPrice;
+
+            }
+        <?php endif; ?>
+        checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
+        return false;
+    }
 //]]>
 </script>
 

@@ -151,7 +151,7 @@ class Compandsave_Variable_Model_Observer
 							<div class="ti_series_name" id="ti_header_series_name_display-'. $item->getId().'">
 								<h2 class="ti_headerH1 white">'.$item->getName().' Series</h2>
 							</div>
-							<div class="ti_series_header" id="ti_series_display-'. $item->getId().'" style="display: none">';
+							<div class="ti_series_header" id="ti_series_display-'. $item->getId().'">';
                     foreach($productCollection as $product_model_len){
                         $test_len = strlen($product_model_len->getName());
                         if($test_len > 15 and $test_len < 26)

@@ -36,7 +36,6 @@
 
         <?php $balance = Mage::helper('core')->currency($this->getBalance()); ?>
         <label for="use_customer_balance">
-            <div class="ti-checkbox"></div>
         <strong>
             <?php echo Mage::helper('enterprise_customerbalance')->__('Use Store Credit'); ?>
             (<span id="customerbalance_available_amount"><?php echo $balance; ?></span>

@@ -49,7 +49,7 @@
 </script>
 
 <li class="wide">
-    <label for="title" ><span><?php echo $this->__('File (allowed %s)', str_ireplace(",", ", ", $extensions)) ?></span></label>
+    <label for="title" ><?php echo $this->__('File (allowed %s)', str_ireplace(",", ", ", $extensions)) ?></label>
     <?php for ($i = 0; $i < 5; $i++) : ?>
         <div class="input-box hidden">
             <input type="file" name="file<?php echo $i;?>" title="<?php echo $this->__('File') ?>" id="file<?php echo $i;?>"/>

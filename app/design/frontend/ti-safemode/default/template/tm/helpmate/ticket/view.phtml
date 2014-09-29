@@ -1,0 +1,146 @@
+<?php
+$_ticket = $this->getTicket();
+if (!$_ticket) {
+    return;
+}
+?>
+
+<div class="page-title">
+    <h1><?php echo $this->__('Ticket #%s - %s', 1000000 + $_ticket->getId(), $_ticket->getTitle()); ?>
+    </h1>
+</div>
+<p class="order-date"><?php echo $this->__('Ticket Date: %s', $this->formatDate($_ticket->getCreatedAt(), 'long')) ?></p>
+<?php $property = array(
+    'Department' => $_ticket->getDepartmentName(),
+    'Status'     => $_ticket->getStatus()
+);
+
+
+if(Mage::getStoreConfig("helpmate/general/usePriorityOnFrontend")) {
+    $property['Priority'] = $_ticket->getPriority();
+}
+
+$field = Mage::getStoreConfig("helpmate/ticketForm/field0");
+if(!empty($field)) {
+    $property[$field] = $_ticket->getField0();
+}
+
+$field = Mage::getStoreConfig("helpmate/ticketForm/field1");
+if(!empty($field)) {
+    $property[$field] = $_ticket->getField1();
+}
+
+$field = Mage::getStoreConfig("helpmate/ticketForm/field2");
+if(!empty($field)) {
+    $property[$field] = $_ticket->getField2();
+}
+?>
+<div class="col<?php echo count($property)?>-set order-info-box">
+    <?php
+    $i =0;
+    foreach ($property as $key => $value) :
+        $i++?>
+    <div class="col-<?php echo $i;?>">
+        <div class="box">
+            <div class="box-title">
+                <h2><?php echo $this->__($key) ?><?php /* | <a href="#"><?php echo $this->__('Track Order') ?></a>*/ ?></h2>
+            </div>
+            <div class="box-content">
+                <?php echo $value ?>
+            </div>
+        </div>
+    </div>
+    <?php    endforeach;?>
+</div>
+
+<?php if ($_ticket->getOrderId()) :?>
+    <div class="col1-set order-info-box">
+        <a href="<?php echo $this->getViewOrderUrl($_ticket->getOrderId()) ?>">
+            <?php echo $this->__('Attached Order') ?>
+        </a>
+    </div>
+<?php endif;?>
+
+<?php
+    $_theards = $_ticket->getTheards();
+    if (empty ($_theards)) {
+        return;
+    }
+?>
+
+<div>
+    <ul>
+    <?php
+    $previosTheard = current($_theards);
+    $diff = array();
+    foreach ($_theards as $_theard): ?>
+        <li class="helpmate-theard">
+            <div class="helpmate-theard-header">
+                <strong>
+                    <?php echo $this->getTheardOwnerTitle($_theard) ?>
+                </strong>
+                <span class="separator">|</span>
+                <strong><?php echo $this->getTheardCreatedAt($_theard) ?></strong>
+                <?php echo $this->getTheardCreatedAt($_theard, 'time') ?>
+                <span class="separator">|</span>
+                <strong title="<?php echo $this->helper('helpmate')->__('Status')?>">
+                    <?php echo $this->getTheardStatus($_theard)?>
+                </strong>
+                <?php if(Mage::getStoreConfig("helpmate/general/usePriorityOnFrontend")) :?>
+                <span class="separator">|</span>
+                <strong title="<?php echo $this->helper('helpmate')->__('Priority')?>">
+                    <?php echo $this->getTheardPriority($_theard) ?>
+                </strong>
+               <?php endif; ?>
+                <span class="separator">|</span>
+                <strong title="<?php echo $this->helper('helpmate')->__('Departament')?>">
+                    <?php echo $this->getTheardDepartment($_theard) ?>
+                </strong>
+            </div>
+
+            <div class="helpmate-theard-content">
+                <?php if ($_text = $this->getTheardText($_theard)): ?>
+                <br/><?php echo nl2br($_text); ?>
+                <?php endif; ?>
+
+                <?php $_fileLinks = $this->getTheardFileUrl($_theard);
+                if (false === empty($_fileLinks)): ?>
+                    <?php foreach ($_fileLinks as $_fileLink) : ?>
+                    <br/><a href="<?php echo $_fileLink ?>"><?php echo $this->helper('helpmate')->__('Attached File')?></a>
+                    <!--<br/><?php echo $_fileLink ?>-->
+                    <?php endforeach;?>
+                <?php endif; ?>
+
+                <?php if ($_theard['status'] !== $previosTheard['status']) :?>
+                    <br/><small><?php echo $this->helper('helpmate')->__(
+                            'Status has been changed from %s to %s',
+                            $this->getTheardStatus($previosTheard),
+                            $this->getTheardStatus($_theard)
+
+                        ) ?>
+                    </small>
+                 <?php endif;
+                 if (//Mage::getStoreConfig("helpmate/general/usePriorityOnFrontend") &&
+                     $_theard['priority'] !== $previosTheard['priority']) : ?>
+                    <br/><small><?php echo $this->helper('helpmate')->__(
+                            'Priority has been changed from %s to %s',
+                            $this->getTheardPriority($previosTheard),
+                            $this->getTheardPriority($_theard)
+                        );?>
+                    </small>
+                 <?php endif;
+                 if ($_theard['department_id'] !== $previosTheard['department_id']) : ?>
+                    <br/><small><?php echo $this->helper('helpmate')->__(
+                            'Department has been changed from %s to %s',
+                            $this->getTheardDepartment($previosTheard),
+                            $this->getTheardDepartment($_theard)
+                        ) ?></small>;
+
+                 <?php endif;?>
+            </div>
+        </li>
+    <?php
+    $previosTheard = $_theard;
+    endforeach; ?>
+    </ul>
+</div>

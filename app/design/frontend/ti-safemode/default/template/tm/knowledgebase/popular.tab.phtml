@@ -1,0 +1,17 @@
+<?php
+    $collection = $this->getCollection();
+    if (!$collection->getSize()) {
+        return false;
+    }
+?>
+<?php
+if( $collection && count($collection) ): ?>
+    <?php $processor = new Mage_Cms_Model_Template_Filter(); ?>
+    <?php foreach ($collection as $_faq) :?>
+         <div class="knowledge-article">
+            <a href="<?php echo $this->getUrl(
+                'knowledgebase/index/view', array('faq' => $_faq->getIdentifier()))
+            ?>"><?php echo $_faq->getTitle() ?></a>&nbsp;
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
