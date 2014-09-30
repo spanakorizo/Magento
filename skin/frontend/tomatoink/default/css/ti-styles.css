@@ -788,10 +788,11 @@ li.ti_bulletNone:before{
 .ti_menu>li{
 	vertical-align:top;
     list-style:none;
-    overflow:hidden;
+    /*overflow:hidden;*/
     display:inline-block;
 	position:relative;
 	padding:0 2em;
+	cursor:pointer;
 }
 
 .ti_menu.vertical_menu>li,
@@ -810,7 +811,14 @@ li.ti_bulletNone:before{
 }
 
 .ti_menu>li>.ti_sub-menu{
-	display:none;
+	visibility:hidden;
+	opacity:0;
+	-moz-transition: visibility 0s linear 0.2s,opacity 0.2s linear;
+	-webkit-transition: visibility 0s linear 0.2s,opacity 0.2s linear;
+	-o-transition: visibility 0s linear 0.2s,opacity 0.2s linear;
+	transition: visibility 0s linear 0.2s,opacity 0.2s linear;
+		-webkit-transition-delay:0s;
+	position:absolute;
 }
 
 .ti_menu>li:hover,
@@ -822,8 +830,9 @@ li.ti_bulletNone:before{
 }
 
 .ti_menu>li:hover>.ti_sub-menu{
-	display:block;
-	position:absolute;
+	opacity: 1;
+	visibility:visible;
+	transition-delay:0s;
 	z-index:999;
 }
 
@@ -1167,7 +1176,7 @@ td, th{
 }
 
 #ti_header_nav_main li .ti_sub-menu{
-	display:block;
+	/*display:block;*/
 	position:absolute;
 	z-index:10;
 	outline:0;
@@ -1472,8 +1481,8 @@ td, th{
 	/* Help Drop */
 
 	#ti_header_helpDrop{
-		width:260px;
-		margin-left:-130px;
+		width:270px;
+		margin-left:-135px;
 	}
 
 	#ti_header_helpDrop .ti_dropHalfBrder{
@@ -2264,8 +2273,8 @@ input.ti_checkout_info {
 	.ti_ink_selector_holder h1,.ti_ink_selector_holder p{padding:0 5px}
 	.ti_ink_selector_div{width:100%;margin:0;float:left;position:relative}
 	.ti_ink_selector_div h3{text-align: left}
-	.ti_select_text{width: 100%; text-align: left;color: #000}*/
-	.ti_series_name{display:none;}
+	.ti_select_text{width: 100%; text-align: left;color: #000}
+	.ti_series_name{display:none;}*/
 
 .ti_cms_block_brandVA a{
 	text-decoration:none;

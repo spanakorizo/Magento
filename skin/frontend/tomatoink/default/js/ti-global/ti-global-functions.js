@@ -274,26 +274,37 @@ function change_readmore(_more, _less) {
 /***********************************************************************/
 
 	$("#ti_header_help").click(function(e){
-		jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-		if (!$("#ti_header_helpDrop").is(":visible")) 
-			$("#ti_header_helpDrop").stop(true, true).slideToggle("fast");
+		//jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+		//if (!$("#ti_header_helpDrop").is(":visible")) 
+	//		$("#ti_header_helpDrop").stop(true, true).slideToggle("fast");
+    jQuery(".ti_cms_dropContent:visible").hide();
+if (!$("#ti_header_helpDrop").is(":visible"))  
+      $("#ti_header_helpDrop").show();
 
 		coupon_slideback();
 		e.stopPropagation();
 	});
 
   $("#ti_header_cart").click(function(e){
-  	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-  	if (!$("#ti_header_cartDrop").is(":visible")) 
-    $("#ti_header_cartDrop").stop(true, true).slideToggle("fast");
+  	//jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  	//if (!$("#ti_header_cartDrop").is(":visible")) 
+    //$("#ti_header_cartDrop").stop(true, true).slideToggle("fast");
+    jQuery(".ti_cms_dropContent:visible").hide();
+ if (!$("#ti_header_cartDrop").is(":visible")) 
+      $("#ti_header_cartDrop").show();
+
   coupon_slideback();
     e.stopPropagation();
   });
 
   $("#ti_header_account").click(function(e){
-  	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-  	if (!$("#ti_header_accountDrop").is(":visible")) 
-    $("#ti_header_accountDrop").stop(true, true).slideToggle("fast");
+  	//jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  	//if (!$("#ti_header_accountDrop").is(":visible")) 
+    //$("#ti_header_accountDrop").stop(true, true).slideToggle("fast");
+
+    jQuery(".ti_cms_dropContent:visible").hide();
+   if (!$("#ti_header_accountDrop").is(":visible"))
+      $("#ti_header_accountDrop").show();
     coupon_slideback();
     e.stopPropagation();
   });
@@ -321,7 +332,7 @@ function change_readmore(_more, _less) {
 //hide drop content when clicking on anywhere else
 jQuery(document).click(function (e) {
 
-  jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  jQuery(".ti_cms_dropContent:visible").hide();
   if (e.target.id != "ti_header_coupon_code")
   coupon_slideback();
 
