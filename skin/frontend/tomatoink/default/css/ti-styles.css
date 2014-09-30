@@ -38,7 +38,8 @@ Table of Contents:
 	- Account Features
 6. Footer
 7. Home Content
-8. Block Content
+8. Account Dashboard
+9. Block Content
 	- Ajax Loaders
 	- Brand
 	- Product
@@ -49,7 +50,7 @@ Table of Contents:
 		- List View
 		- Grid View
 	- Photo Paper
-9. Responsive
+10. Responsive
 	- Max width 999px
 	- 999px to 768px
 	- Max width 767px
@@ -2141,7 +2142,32 @@ input.ti_checkout_info {
 }
 
 /* -----------------------------------*/
-/* ------>> 8. Block Content <<<------*/
+/* --->> 8. Account Dashboard <<<-----*/
+/* -----------------------------------*/
+
+.ti_dashboard li{
+	padding: 0;
+	font-size:.9em;
+	margin:0;
+}
+
+.ti_dashboard > li:after {
+    display: inline-block;
+    content: "|";
+    margin: 0px 0.5em;
+    line-height: 1;
+}
+
+.ti_dashboard li:last-child:after {
+    display: none;
+}
+
+.ti_dashboard li.current{
+	cursor:default;
+}
+
+/* -----------------------------------*/
+/* ------>> 9. Block Content <<<------*/
 /* -----------------------------------*/
 /* --------- Prefix: ti_cms_ ---------*/
 
@@ -2273,8 +2299,8 @@ input.ti_checkout_info {
 	.ti_ink_selector_holder h1,.ti_ink_selector_holder p{padding:0 5px}
 	.ti_ink_selector_div{width:100%;margin:0;float:left;position:relative}
 	.ti_ink_selector_div h3{text-align: left}
-	.ti_select_text{width: 100%; text-align: left;color: #000}
-	.ti_series_name{display:none;}*/
+	.ti_select_text{width: 100%; text-align: left;color: #000}*/
+	.ti_series_name{display:none;}
 
 .ti_cms_block_brandVA a{
 	text-decoration:none;
@@ -2872,7 +2898,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 }
 
 /* -----------------------------------*/
-/* -------->> 9. Responsive <<<-------*/
+/* -------->> 10. Responsive <<<-------*/
 /* -----------------------------------*/
 
 @-ms-viewport{

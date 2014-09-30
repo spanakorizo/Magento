@@ -70,3 +70,56 @@
                     <?php endif; ?>
                     <p><a href="#ti_product_printerComp" class="altTxt ti_small_text"><strong>Will this product work with my printer?</strong></a></p>
                 </div>
+
+
+
+                <div class="ti_image_gallery">
+                    <div id="ti_gallery_close"><a href="javascript:void(0);">close</a></div>
+                    <img id="ti_gallery_large" src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" class="block_center ti_catalog_product_image"/>
+                    <?php foreach ($this->getGalleryImages() as $_image): ?>   
+                        <div class="ti_image_gallery_small">
+                            <a href='javascript:void(0);'>
+                                <img class= "ti_product_thumb" src="<?php echo $this->helper('catalog/image')->init($this->getProduct(), 'image', $_image->getFile()); ?>"/>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+
+
+                </div>
+<!-- In the catalog/product/view/media.phtml !-->
+<style type="text/css">
+    .ti_image_gallery {
+        display: none;
+        position:absolute;
+        width:600px;
+        left: 15%;
+        top: 150px;
+        z-index: 1000;
+        background-color:white;
+        border:solid black 1px;
+
+    }
+    .ti_image_gallery_small {
+        height: 25%;
+        width: 25%;
+        display:inline-block;
+    }
+
+    #ti_gallery_close {
+        float:right;
+        font-size: 1.5em;
+    }
+</style>
+<script type="text/javascript">
+    jQuery('#ti_gallery_close').click(function() {
+        jQuery(".ti_image_gallery").hide();
+    });
+
+    jQuery(".jqzoom.no-dec").click(function() {
+        jQuery(".ti_image_gallery").show();
+    });
+
+    jQuery(".ti_image_gallery_small").click(function() {
+        jQuery("#ti_gallery_large").attr("src", jQuery(this).find('img').attr("src"));
+    });
+</script>
