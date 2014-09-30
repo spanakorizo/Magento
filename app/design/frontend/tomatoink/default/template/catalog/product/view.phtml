@@ -95,7 +95,7 @@ error_reporting(E_ALL);
     <div class="ti_block_inner">
         <div class='text_center'><a class='ti_button' href='http://www.866ink.com/magentoEE/checkout/cart/'><strong>Go To Cart</strong></a><a class="ti_button ti_altBtn" href="#" id="ti_continue_shopping"><strong>Continue Shopping</strong></a></div>
 
-        <h2> You just add <span id="ti_popup_cart_num"></span> item(s) to the cart.<br></h2>
+        <h2> There are <span id="ti_popup_cart_num"></span> item(s) to the cart.<br>You Just Add: </h2>
         <div id="show_cart_content">
 
         </div>
@@ -138,10 +138,28 @@ error_reporting(E_ALL);
                                     $_product->getTypeInstance(true)->getOptionsIds($_product), $_product
                                 );
 
+                                //add bundle product description
+                                $bundle_modelname = "";
+                                $bundle_color = "";
+                                $bundle_dutycycle = "";
+                                
+                                $bundle_volume = "";
+                                $bundle_quantity = "";
+
+
                                 foreach($selectionCollection as $option) {
 
                                     echo '<input type="hidden" name="bundle_option'.$_product->getId().'[' . $option->option_id  . '][]" value="'.$option->selection_id.'" />';
                                     echo '<input type="hidden" name="bundle_option_qty'.$_product->getId().'[' . $option->option_id . '][]" value="'.$option->selection_qty.'" />';
+
+                                    $_item = Mage::getModel('catalog/product')->load($option->product_id);
+                                    //$_item = $this->load($option->product_id);
+                                    $bundle_modelname .= $_item->getVendorPartno() . " ";
+                                    $bundle_color .= $_item->getColor() . " ";
+                                    $bundle_dutycycle .= $_item->getDutyCycle() . " ";
+                                    
+                                    $bundle_volume .= $_item->getContent() . " ";
+                                    $bundle_quantity = $_item->getProductType();
 
                                 }//end: foreach $selectionCollection
 
@@ -187,7 +205,7 @@ error_reporting(E_ALL);
                 <div class="one_half ti_product_infoBlock">
                  <div id="fb-root"></div>
 
-                <script>/*(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=406893882783987"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));*/</script> 
+                <script>(function(d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0&appId=406893882783987"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script> 
                     <!--AddThis Button BEGIN-->
                     <p class="addthis_toolbox addthis_default_style">
                         <div class="fb-like" id = 'ti_product_fb' data-href="" data-layout="button" data-action="like" data-show-faces="true" data-share="false"></div>
@@ -196,7 +214,7 @@ error_reporting(E_ALL);
                     </p>
                     <!-- facebook !-->
                     <script type="text/javascript">
-                        //document.getElementById('ti_product_fb').setAttribute('data-href', window.location.href);
+                        document.getElementById('ti_product_fb').setAttribute('data-href', window.location.href);
                     </script> 
 
                     <!-- tweeter !-->
@@ -246,16 +264,28 @@ error_reporting(E_ALL);
                     <table class="ti_cms_infoTable">
                         <tr>
                             <th><p>Model Name:</p></th>
-                            <td><p id="ti_product_name"><?php echo $_product->getVendorPartno(); ?></p></td>
+                            <td><p id="ti_product_name"><?php if ($_product->getTypeId() == "simple") echo $_product->getVendorPartno();
+                                elseif ($_product->getTypeId() == "bundle") echo $bundle_modelname;
+
+                             ?></p></td>
                         </tr>
                         <?php if ($_printer_model != ""): ?>
                         <tr>
                             <th><p>Color:</p></th>
-                            <td><p id="ti_product_color"><?php echo $_product->getColor(); ?></p></td>
+                            <td><p id="ti_product_color"><?php 
+                            if ($_product->getTypeId() == "simple") 
+                                echo $_product->getColor();
+                            elseif ($_product->getTypeId() == "bundle")
+                                echo $bundle_color;
+                                 ?></p></td>
                         </tr>
                         <tr>
                             <th><p>Cartridge Duty Cycle:</p></th>
-                            <td><p id="ti_product_duty"><?php echo $_product->getDutyCycle(); ?></p></td>
+                            <td><p id="ti_product_duty"><?php 
+                            if ($_product->getTypeId() == "simple")
+                                echo $_product->getDutyCycle();
+                            elseif ($_product->getTypeId() == "bundle") echo $bundle_dutycycle;
+                                 ?></p></td>
                         </tr>
                         <tr>
                             <th><p>Replaces:</p></th>
@@ -263,11 +293,14 @@ error_reporting(E_ALL);
                         </tr>
                         <tr>
                             <th><p>Volume:</p></th>
-                            <td><p id="ti_product_volume"><?php echo $_product->getContent(); ?></p></td>
+                            <td><p id="ti_product_volume"><?php 
+                        if ($_product->getTypeId() == "simple")
+                            echo $_product->getContent();
+                        elseif ($_product->getTypeId() == "bundle") echo "N/A ml"; ?></p></td>
                         </tr>
                         <tr>
                             <th><p>Quantity:</p></th>
-                            <td><p id="ti_product_quantity"><?php if ($_product->getTypeId() == "simple") echo "1 Ink Cartridge"; else {preg_match("/\d$/", $_product->getSku(), $matches); echo $matches[0] . "INK Cartridges"; } ?></p></td>
+                            <td><p id="ti_product_quantity"><?php if ($_product->getTypeId() == "simple") echo "1 " . $_product->getProductType(); else {preg_match("/\d$/", $_product->getSku(), $matches); echo $matches[0] . " " . $bundle_quantity; } ?></p></td>
                         </tr>
                     <?php endif; ?>
                     </table>
