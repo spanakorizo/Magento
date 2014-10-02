@@ -2233,13 +2233,10 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 .addresses-list .col-2 li { padding:0 0 10px; }
 .addresses-list .col-2 li .actions { border:1px solid #e4e4e4; padding:3px 9px 4px; float:left; }
 .addresses-list .col-2 li address { padding:10px; clear:both; }
+.addresses-primary, .addresses-additional{ padding:5px 10px;}
 
 /* Order View */
 
-#my-orders-table th{
-	min-width:15%;
-	word-break:keep-all;
-}
 
 #my-orders-table td{
 	padding:10px;
@@ -2259,11 +2256,13 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 }
 
 .my-account .pager .amount{
-	float:left;
-	width:40%;
+	float:right;
 }
 
-.my-account .pager label,
+.my-account .pager label{
+	float:left;
+	margin:8px 0;
+}
 .my-account .pager .limiter{
 	float:left;
 	width:30%;

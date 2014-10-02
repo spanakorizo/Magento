@@ -25,7 +25,7 @@
  */
 ?>
 <div class="page-title">
-    <h1><?php echo $this->__('Newsletter Subscription') ?></h1>
+    <h1><?php echo $this->__('Newsletter Preferences') ?></h1>
 </div>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
 <?php echo $this->getChildHtml('form_before')?>
@@ -33,9 +33,9 @@
     <?php echo $this->getBlockHtml('formkey')?>
     <ul class="form-list">
         <li class="control">
-            <label for="subscription"><?php echo $this->__('General Subscription') ?></label>
+            <label for="subscription"><?php echo $this->__('General Subscription List') ?></label>
             <div class="input-box">
-                <input type="checkbox" name="is_subscribed" id="subscription" value="1" title="<?php echo $this->__('General Subscription') ?>"<?php if($this->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
+                <input type="checkbox" name="is_subscribed" id="subscription" value="1" title="<?php echo $this->__('General Subscription List') ?>"<?php if($this->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
 
             </div>
         </li>
@@ -55,21 +55,21 @@
 
 <!-- Update section !-->
 <div id="ti_update_form">
-    <div id="success_message"></div>
+    <p id="success_message" class="altTxt"></p>
     <input type="radio" id="regular" name="update_freq" value="0">
     <label for="regular">
         <div class="ti-radio"></div>
-        <span>Regular</span>
+        <span>Once per week</span>
     </label><br>
     <input type="radio" id="once" name="update_freq" value="1">
     <label for="once">
         <div class="ti-radio"></div>
-        <span>Once a Month</span>
+        <span>Once per Month</span>
     </label><br>
     <input type="radio" id="twice" name="update_freq" value="2">
     <label for="twice">
         <div class="ti-radio"></div>
-        <span>Twice a Month</span>
+        <span>Twice per Month</span>
     </label><br>
     <button type="button" onclick="window.history.go(-1);">Back</button>&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
 
@@ -102,9 +102,9 @@
 
 display_freq("<?php echo $customerdata['subscriber_freq']; ?>");
 function display_freq(id) {
-    var text_arr = ["regular frequency", "once a month", "twice a month"];
+    var text_arr = ["once per week.", "once per month.", "twice per month."];
     if (id > -1 && id < 3) {
-    document.getElementById('frequency_message').innerHTML = "You are reveiving email at " + text_arr[id];
+    document.getElementById('frequency_message').innerHTML = "You are currently receiving emails " + text_arr[id];
     var elements = document.getElementsByName('update_freq');
         for (i=0;i<elements.length;i++) {
             if(elements[i].value == id) {
@@ -140,7 +140,7 @@ jQuery.ajax({
         //jQuery('#ti_update_form').hide();
         jQuery("#frequency_loader").hide();
         display_freq(ti_update_freq);
-        document.getElementById('success_message').innerHTML = "You've successfully update email frequency! ";
+        document.getElementById('success_message').innerHTML = "You've successfully updated your email frequency!";
 
 
 

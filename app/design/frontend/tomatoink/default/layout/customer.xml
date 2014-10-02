@@ -232,8 +232,8 @@ Customer account pages, rendered for all tabs in dashboard
             <block type="customer/account_navigation" name="customer_account_navigation" before="-" template="customer/account/navigation.phtml">
                <!-- <action method="addLink" translate="label" module="customer"><name>account</name><path>customer/account/</path><label>Account Dashboard</label></action>
                 <action method="addLink" translate="label" module="customer"><name>account_edit</name><path>customer/account/edit/</path><label>Account Information</label></action>-->
-                <action method="addLink" translate="label" module="customer"><name>ti_rewards</name><path>customer/address/</path><label>My Rewards</label></action>
-                <action method="addLink" translate="label" module="customer"><name>ti_gift_cards</name><path>customer/address/</path><label>My Gift Cards</label></action>
+                <action method="addLink" translate="label" module="customer"><name>ti_rewards</name><path>reward/customer/info/</path><label>My Rewards</label></action>
+                <action method="addLink" translate="label" module="customer"><name>ti_gift_cards</name><path>giftcard/customer/</path><label>My Gift Cards</label></action>
                 <action method="addLink" translate="label" module="customer"><name>address_book</name><path>customer/address/</path><label>Address Book</label></action>
             </block>
             <!--<block type="checkout/cart_sidebar" name="cart_sidebar" template="checkout/cart/sidebar.phtml">
