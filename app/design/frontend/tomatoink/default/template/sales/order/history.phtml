@@ -25,52 +25,136 @@
  */
 ?>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<?php $_orders = $this->getOrders(); ?>
+
 <div class="page-title">
     <h1><?php echo $this->__('My Orders') ?></h1>
 </div>
-<?php echo $this->getPagerHtml(); ?>
+<form id="ti_orderhistory_form" method="GET" action="">
+    <div class="ti_select_barContainer">
+        <select name="view" id="ti_orderhistory_select">
+            <option value="1">Last 30 Days</option>
+            <option value="2">Last Two Months</option>
+            <option value="3">Last Three Months</option>
+            <option value="4">Last Six Months</option>
+            <option value="5">View All</option>
+        </select>
+    </div>
+</form>
+<script type="text/javascript">
+    <?php if (isset($_GET['view']) && $_GET['view'] != '1' ): ?>
+        <?php $view_id = $_GET['view']; ?>
+        var value = "<?php echo $view_id; ?>";
+        jQuery('#ti_orderhistory_select').val(value);
+    <?php else: $view_id = '1'; ?>
+    <?php endif; ?>
+    jQuery("#ti_orderhistory_select").change(function() {
+        jQuery("#ti_orderhistory_form").submit();
+
+    });
+</script>
+<!--<?php //echo $this->getPagerHtml();?>!-->
+
+
+
+<?php 
+
+    $string = "-" . $view_id . " month";
+    date_default_timezone_set('America/Los_Angeles');
+    //$orderview_date = date("m/d/Y",);
+ ?>
+<?php $_orders = $this->getOrders(); ?>
+
 <?php if($_orders->getSize()): ?>
-<table class="data-table" id="my-orders-table">
+
+<div id="my-orders-table">    
+<?php $_odd = ''; ?>
+<?php foreach ($_orders as $_order): ?>
+    <?php  if (strtotime($_order->getCreatedAtStoreDate()) > strtotime($string) ): ?>
+<table class="data-table">
     <col width="1" />
     <col width="1" />
     <col />
     <col width="1" />
     <col width="1" />
     <col width="1" />
-    <thead>
+    <!--<thead>
         <tr>
-            <th><?php echo $this->__('Order #') ?></th>
-            <th><?php echo $this->__('Date') ?></th>
-            <th><?php echo $this->__('Ship To') ?></th>
-            <th><?php echo $this->__('Order Total') ?></th>
-            <th><span><?php echo $this->__('Order Status') ?></span></th>
+            <th><?php //echo $this->__('Order #') ?></th>
+            <th><?php //echo $this->__('Date') ?></th>
+            <th><?php //echo $this->__('Ship To') ?></th>
+            <th><?php //echo $this->__('Order Total') ?></th>
+            <th><span><?php //echo $this->__('Order Status') ?></span></th>
             <th>&nbsp;</th>
         </tr>
-    </thead>
+    </thead>-->
     <tbody>
-        <?php $_odd = ''; ?>
-        <?php foreach ($_orders as $_order): ?>
-        <tr>
-            <td><?php echo $_order->getRealOrderId() ?></td>
-            <td><span><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
-            <td><?php echo $_order->getShippingAddress() ? $this->escapeHtml($_order->getShippingAddress()->getName()) : '&nbsp;' ?></td>
-            <td><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></td>
-            <td><em><?php echo $_order->getStatusLabel() ?></em></td>
-            <td class="a-center">
-                <span><a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
-                    <?php /*<span class="separator">|</span><a href="<?php echo $this->getTrackUrl($_order) ?>"><?php echo $this->__('Track Order') ?></a>&nbsp;*/ ?>
-                    <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
-                    <span class="separator">|</span> <a href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Reorder') ?></a>
-                <?php endif ?>
-                </span>
+
+        <tr class="ti_orderTable_HR">
+            <!--<td><?php //echo $_order->getRealOrderId() ?></td>-->
+            <td class="ti_orderTable_HD">
+                <span class="ti_table_head"><em>Date Ordered</em></span><br>
+                <span><?php echo $this->formatDate($_order->getCreatedAtStoreDate()) ?></span></td>
+            <td class="ti_orderTable_HD">
+                <span class="ti_table_head"><em>Sent to</em></span><br>
+                <span><?php echo $_order->getShippingAddress() ? $this->escapeHtml($_order->getShippingAddress()->getName()) : '&nbsp;' ?></span></td>
+            <td class="ti_orderTable_HD">
+                <span class="ti_table_head"><em>Order Total</em></span><br>
+                <span><?php echo $_order->formatPrice($_order->getGrandTotal()) ?></span></td>
+            <!--<td><em><?php echo $_order->getStatusLabel() ?></em></td>-->
+            <td class="ti_orderTable_HD a-center">
+                <span class="ti_table_head"><em>Order #<?php echo $_order->getRealOrderId() ?></em></span><br>
+                <span><strong><a href="<?php echo $this->getViewUrl($_order) ?>"><?php echo $this->__('View Order') ?></a>
+                    <!--<?php /*<span class="separator">|</span><a href="<?php echo $this->getTrackUrl($_order) ?>"><?php echo $this->__('Track Order') ?></a>&nbsp;*/ ?>
+                    <?php //if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+                    <span class="separator">|</span> <a href="<?php //echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php //echo $this->__('Reorder') ?></a>
+                <?php //endif ?>-->
+                </strong></span>
             </td>
         </tr>
-        <?php endforeach; ?>
+        <tr class="ti_orderTable_IR">
+            <td colspan="4">
+                <p class="altTxt"><em>Order Status: <?php echo $_order->getStatusLabel() ?></em></p>
+                <div class="one_fourth a-center f-right ti_order_actions">
+
+ <?php if ($_order->getTracksCollection()->count()) : ?>
+            <a href="#" class="ti_button ti_button_small" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($_order) ?>','trackorder','top=0,left=0,width=800,height=600,resizable=yes,scrollbars=yes'); return false;" title="<?php echo $this->__('Track this order') ?>"><?php echo $this->__('Track this order') ?></a><br>
+        <?php endif; ?>
+
+                    <!--<a class="ti_button ti_button_small" href="<?php //echo $this->getTrackUrl($_order) ?>"><?php //echo $this->__('Track this order') ?></a>!-->
+                    <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+                    <a class="ti_button ti_button_small" href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Re-Order') ?></a><br>
+                    <?php endif ?>
+
+
+                    <a class="ti_button ti_altBtn ti_button_small" href="<?php echo $this->getUrl(''); ?>helpdesk/index/customer/">File/View an RMA</a>
+                </div>
+                <div class="btcf">
+<?php $order_items = $_order->getAllItems(); ?>
+<?php foreach ($order_items as $item): ?>
+    <?php $sku = $item->getSku(); ?>
+    <?php $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $sku) ?>
+                    <div class="three_fourth"><!--this section will be the loop-->
+                        <img src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(135); ?>" width="135" height="135">
+                        <p><?php echo $product->getName(); ?><br>
+                            <span class="ti_small_text"><?php echo $product->getSku();?> QTY:<?php echo round($item->getQtyOrdered()); ?></span>
+                        </p>
+                        <a class="ti_button ti_button_small ti_altBtn" href="<?php echo $product->getProductUrl();?>">Leave a review</a>
+                    </div><!-- end loop-->
+
+<?php endforeach; ?>        
+
+                </div>
+            </td>
+        </tr>
     </tbody>
 </table>
+    <?php endif; ?>
+<?php endforeach; ?>
+</div>
+
 <script type="text/javascript">decorateTable('my-orders-table');</script>
-<?php echo $this->getPagerHtml(); ?>
+
+<?php //echo $this->getPagerHtml(); ?>
 <?php else: ?>
     <p><?php echo $this->__('You have placed no orders.'); ?></p>
 <?php endif ?>

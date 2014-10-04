@@ -43,13 +43,14 @@ class TM_Helpmate_Block_Ticket_New_Orders extends Mage_Core_Block_Html_Select
             return '';
         }
         $html = parent::_toHtml();
-        return '<li class="wide">
-            <label for="title" >' .
+        return '<li class="wide one">
+            <label for="title"><span>' .
                 Mage::helper('helpmate')->__('Choose related order if applicable') .
-            '</label>
+            '</span></label>
+            <div class="ti_select_barContainer btcf">
             <div class="input-box">' .
                 $html .
-            '</div>
+            '</div></div>
         </li>';
     }
 }

@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <default>
+        <reference name="head">
+            <action method="addItem" ifconfig="knowledgebase/general/enabled">
+                <type>skin_css</type>
+                <name>css/knowledgebase.css</name>
+            </action>
+            <action method="addItem" ifconfig="knowledgebase/general/enabled">
+                <type>skin_js</type>
+                <name>js/ajaxsearch.js</name>
+            </action>
+        </reference>
+
+        <reference name="footer_links">
+            <action method="addLink" translate="label title" module="knowledgebase" ifconfig="knowledgebase/general/enabled">
+                <label>KnowledgeBase</label>
+                <url helper="knowledgebase/getUrl" />
+                <title>KnowledgeBase</title>
+            </action>
+        </reference>
+    </default>
+
+    <knowledgebase_index_index>
+
+        <reference name="head">
+            <action method="setTitle" translate="title" module="knowledgebase">
+                <title>KnowledgeBase</title>
+            </action>
+        </reference>
+
+    	<reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="knowledgebase/ask"        name="knowledgebase"            template="tm/knowledgebase/ask.phtml" />
+            <block type="knowledgebase/result"     name="knowledgebase_result"     template="tm/knowledgebase/result.phtml" />
+            <block type="knowledgebase/categories" name="knowledgebase_categories" template="tm/knowledgebase/categories.phtml" />
+            <block type="knowledgebase/popular"    name="knowledgebase_popular"    template="tm/knowledgebase/popular.phtml" />
+        </reference>
+
+    </knowledgebase_index_index>
+
+    <knowledgebase_index_view>
+    	<reference name="root">
+            <action method="setTemplate">
+                <template>page/1column.phtml</template>
+            </action>
+        </reference>
+
+        <reference name="content">
+            <block type="knowledgebase/ask"     name="knowledgebase"         template="tm/knowledgebase/ask.phtml" />
+            <block type="knowledgebase/faq"     name="knowledgebase_faq"     template="tm/knowledgebase/faq.phtml" />
+            <block type="knowledgebase/popular" name="knowledgebase_popular" template="tm/knowledgebase/popular.phtml" />
+        </reference>
+
+    </knowledgebase_index_view>
+
+    <catalog_product_view>
+        <reference name="product.info.additional">
+            <block type="knowledgebase/product" name="product_kb" before="-" template="tm/knowledgebase/product.phtml"/>
+        </reference>
+    </catalog_product_view>
+
+    <!--
+    <helpmate_index_index>
+        <reference name="content">
+            <block type="knowledgebase/helpmate_autosearch" name="knowledgebase_helpmate_autosearch" template="tm/knowledgebase/helpmate/autosearch.phtml"/>
+        </reference>
+    </helpmate_index_index>
+    -->
+
+    <!--
+    <helpmate_index_knowledgebase>
+
+        <reference name="my.account.wrapper">
+            <block type="knowledgebase/helpmate_result" name="knowledgebase_helpmate_result">
+                <action method="setTemplate" ifconfig="knowledgebase/general/enabled">
+                   <template>tm/knowledgebase/helpmate/result.phtml</template>
+                </action>
+            </block>
+        </reference>
+
+    </helpmate_index_knowledgebase>
+    -->
+
+    <contacts_index_index>
+        <reference name="right">
+            <block type="knowledgebase/popular" name="knowledgebase_popular" template="tm/knowledgebase/popular.phtml" before="-"/>
+            <remove name="catalog.compare.sidebar" />
+            <remove name="cart_sidebar" />
+            <remove name="right.poll" />
+            <remove name="right.permanent.callout" />
+        </reference>
+    </contacts_index_index>
+
+    <helpmate_index_index>
+        <reference name="content">
+            <block type="catalog/product_view_tabs" name="knowledgebase.tabs" as="info_tabs" template="tm/knowledgebase/tabs.phtml">
+                <action method="addTab" translate="title" module="knowledgebase">
+                    <alias>popular_tab</alias>
+                    <title>Popular</title>
+                    <block>knowledgebase/popular</block>
+                    <template>tm/knowledgebase/popular.tab.phtml</template>
+                </action>
+                <action method="addTab" translate="title" module="knowledgebase">
+                    <alias>categories_tab</alias>
+                    <title>Categories</title>
+                    <block>knowledgebase/categories</block>
+                    <template>tm/knowledgebase/categories.tab.phtml</template>
+                </action>
+            </block>
+<!--
+            <block type="knowledgebase/popular"    name="knowledgebase_popular"    template="tm/knowledgebase/popular.phtml" />
+            <block type="knowledgebase/categories" name="knowledgebase_categories" template="tm/knowledgebase/categories.phtml" />
+-->
+        </reference>
+    </helpmate_index_index>
+
+</layout>

@@ -1,56 +1,61 @@
 <form action="<?php echo $this->getAction() ?>" method="post" id="form-ticket" enctype="multipart/form-data">
-    <div class="fieldset block">
+    <div class="fieldset block ti_cms_gradient_block one btcf">
 
         <h2 class="legend"><?php echo $this->__('Add New Ticket') ?></h2>
 
         <ul class="form-list">
             <?php if(!Mage::getSingleton('customer/session')->isLoggedIn()) :?>
 
-            <li class="fields">
+            <li class="fields one_half">
                 <div class="field">
-                    <label for="title" class="required ti_cms_labelHide ti-required-entry"><span><?php echo $this->__('Title') ?></span></label>
-                    <div class="input-box">
-                        <input type="text" name="title" title="<?php echo $this->__('Title') ?>" placeholder="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" />
+                    <label for="title" class="required ti_cms_labelHide"><span><?php echo $this->__('Title') ?></span></label>
+                    <div class="input-box ti-required-entry">
+                        <input type="text" name="title" title="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" placeholder="Name this RMA" />
                     </div>
                 </div>
 
-                <div class="field">
-                    <label for="email" class="required ti_cms_labelHide ti-required-entry"><span><?php echo Mage::helper('contacts')->__('Email') ?></span></label>
-                    <div class="input-box">
-                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" placeholder="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="email" />
+                <div class="field one_half">
+                    <label for="email" class="required ti_cms_labelHide"><span><?php echo Mage::helper('contacts')->__('Email') ?></span></label>
+                    <div class="input-box ti-required-entry">
+                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="email" placeholder="Email" />
                     </div>
                 </div>
             </li>
             <?php else :?>
-            <li class="wide">
-                <label for="title" class="ti-required-entry required ti_cms_labelHide"><span><?php echo $this->__('Title') ?></span></label>
-                <div class="input-box">
-                    <input type="text" name="title" title="<?php echo $this->__('Title') ?>" placeholder="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" />
+            <li class="wide one">
+                <label for="title" class="required ti_cms_labelHide"><span><?php echo $this->__('Title') ?></span></label>
+                <div class="input-box ti-required-entry">
+                    <input type="text" name="title" title="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" placeholder="Name this RMA" />
                 </div>
             </li>
             <?php endif; ?>
 
-            <li class="fields">
-                <div class="ti-required-entry field one_half">
-                    <label for="department" class="required"><?php echo $this->__('Department') ?></label>
-                    <div class="input-box ti_select_barContainer">
-                        <?php echo $this->getDepartmentHtmlSelect() ?>
+            <li class="fields one">
+                <div class="field one_half">
+                    <label for="department" class="required"><span><?php echo $this->__('Department') ?></span></label>
+                    <div class="input-box ti-required-entry btcf">
+                        <div class="ti_select_barContainer btcf">
+                            <?php echo $this->getDepartmentHtmlSelect() ?>
+                        </div>
                     </div>
                 </div>
                 <?php if(Mage::getStoreConfig("helpmate/ticketForm/usePriorityOnFrontend")) :?>
-                <div class="ti-required-entry field one_half">
-                    <label for="priority" class="required"><?php echo $this->__('Priority') ?></label>
-                    <div class="input-box ti_select_barContainer">
-                        <?php echo $this->getPriorityHtmlSelect() ?>
+                <div class="field one_half">
+                    <label for="priority" class="required"><span><?php echo $this->__('Priority') ?></span></label>
+                    <div class="input-box ti-required-entry btcf">
+                        <div class="ti_select_barContainer btcf">
+                            <?php echo $this->getPriorityHtmlSelect() ?>
+                        </div>
                     </div>
                 </div>
                 <?php endif;?>
             </li>
 
-            <li class="wide">
-                <label class="required ti-required-entry ti_cms_labelHide" for="text"><span><?php echo $this->__('Message') ?></span></label>
-                <div class="input-box">
-                    <textarea id="text" placeholder="<?php echo $this->__('Message') ?>" class="input-text required-entry one" title="<?php echo $this->__('Message') ?>" name="text" rows="3"></textarea>
+            <li class="wide one">
+                
+                <div class="input-box one">
+                    <label class="required ti-required-entry" for="text"><span><?php echo $this->__('Message') ?></span></label>
+                    <textarea id="text" class="input-text required-entry one" title="<?php echo $this->__('Message') ?>" name="text" cols="5" rows="10" placeholder="Please type your message"></textarea>
                 </div>
             </li>
             
@@ -58,11 +63,10 @@
         </ul>
     </div>
     <div class="buttons-set">
-        <div>
-            <p class="required altTxt"><?php echo $this->__('* Required Fields') ?></p>
-        </div>
-        <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link ti_button"><?php echo $this->__('Back') ?></a> &nbsp;
-        <button type="submit" title="<?php echo $this->__('Save Ticket') ?>" class="button"><span><span><?php echo $this->__('Save Ticket') ?></span></span></button>
+        <p class="required"><?php echo $this->__('* Required Fields') ?></p>
+        <p><button type="submit" title="<?php echo $this->__('Save Ticket') ?>" class="button"><span><span><?php echo $this->__('Save Ticket') ?></span></span></button>
+        <span class="back-link"><a href="<?php echo $this->getBackUrl() ?>" class="ti_button"><?php echo $this->__('Back') ?></a></span></p>
+        
     </div>
 </form>
 <script type="text/javascript">
