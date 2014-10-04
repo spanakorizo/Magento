@@ -25,7 +25,7 @@
  */
 ?>
 
-<form id="discount-coupon-form" action="<?php echo $this->getUrl('productselector/carts/couponPost') ?>" method="post">
+<form id="discount-coupon-form" action="<?php echo $this->getUrl('multiplecoupon/carts/couponPost') ?>" method="post">
     <div class="one_third">
         <div class="discount ti_cms_gradient_block ti_block_inner btcf">
             <!--<h2 class="ti_green_head ti_headerH1"><?php echo $this->__('Discount') ?></h2>-->
@@ -55,7 +55,7 @@
 									$ruleId = $oCoupon->getRuleId();
 									if($ruleId){
 									?>
-										<form id="discount-coupon-remove_<?php echo $ruleId?>" action="<?php echo $this->getUrl('productselector/carts/removeCoupon') ?>" method="post">
+										<form id="discount-coupon-remove_<?php echo $ruleId?>" action="<?php echo $this->getUrl('multiplecoupon/carts/removeCoupon') ?>" method="post">
 											<?php echo $this->getBlockHtml('formkey'); ?>
 											<input type="hidden" value="<?php echo $ruleId?>" name="ruleid"/>
 											<input type="hidden" value="<?php echo $this->escapeHtml($this->getCouponCode()) ;?>" name="all_coupon_code"/>
