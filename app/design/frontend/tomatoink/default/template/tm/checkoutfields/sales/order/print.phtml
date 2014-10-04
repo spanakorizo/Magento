@@ -25,39 +25,46 @@
  */
 ?>
 <?php $_order = $this->getOrder() ?>
-<h1><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></h1>
-<p>
-    <?php echo $this->getChildHtml('checkoutfields'); ?>
-</p>
-<p class="order-date"><?php echo $this->__('Order Date: %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></p>
-<div class="col2-set">
+<div class="brder-all btcf">
+    <div class="one_half">
+        <p class="altTxt"><span class="ti_small_text"><?php echo $this->__('Order #%s', $_order->getRealOrderId()) ?></span></p>
+        <p><?php echo $this->getChildHtml('checkoutfields'); ?></p>
+    </div>
+    <div class="one_half">
+        <p class="order-date"><span class="ti_small_text"><?php echo $this->__('Order Date: %s', $this->formatDate($_order->getCreatedAtStoreDate(), 'long')) ?></span></p>
+    </div>
+</div>
+
+<div class="brder-all btcf">
+    <div class="col2-set">
+        <?php if (!$_order->getIsVirtual()): ?>
+        <div class="col-1 one_half">
+            <strong><?php echo $this->__('Shipping Address:') ?></strong>
+            <address><?php echo $_order->getShippingAddress()->format('html') ?></address>
+        </div>
+        <div class="col-2">
+        <?php else: ?>
+        <div class="col-1">
+        <?php endif; ?>
+            <strong><?php echo $this->__('Billing Address:') ?></strong>
+            <address><?php echo $_order->getBillingAddress()->format('html') ?></address>
+        </div>
     <?php if (!$_order->getIsVirtual()): ?>
-    <div class="col-1">
-        <h2><?php echo $this->__('Shipping Address') ?></h2>
-        <address><?php echo $_order->getShippingAddress()->format('html') ?></address>
     </div>
-    <div class="col-2">
-    <?php else: ?>
-    <div class="col-1">
+    <div class="col2-set">
+        <div class="col-1 one_half">
+            <strong><?php echo $this->__('Shipping Method:') ?></strong>
+             <?php echo $_order->getShippingDescription() ?>
+        </div>
     <?php endif; ?>
-        <h2><?php echo $this->__('Billing Address') ?></h2>
-        <address><?php echo $_order->getBillingAddress()->format('html') ?></address>
-    </div>
-<?php if (!$_order->getIsVirtual()): ?>
-</div>
-<div class="col2-set">
-    <div class="col-1">
-        <h2><?php echo $this->__('Shipping Method') ?></h2>
-         <?php echo $_order->getShippingDescription() ?>
-    </div>
-<?php endif; ?>
-    <div class="col-2">
-        <h2><?php echo $this->__('Payment Method') ?></h2>
-        <?php echo $this->getPaymentInfoHtml() ?>
+        <div class="col-2">
+            <strong><?php echo $this->__('Payment Method:') ?></strong>
+            <?php echo $this->getPaymentInfoHtml() ?>
+        </div>
     </div>
 </div>
-<h2><?php echo $this->__('Items Ordered') ?></h2>
-<table class="data-table" id="my-orders-table">
+<p class="altTxt"><?php echo $this->__('Items Ordered:') ?></p>
+<table class="data-table my-orders-table-print" id="my-orders-table">
     <col />
     <col width="1" />
     <col width="1" />

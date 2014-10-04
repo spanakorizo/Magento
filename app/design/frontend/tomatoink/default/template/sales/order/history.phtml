@@ -25,16 +25,51 @@
  */
 ?>
 <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-<?php $_orders = $this->getOrders(); ?>
+
 <div class="page-title">
     <h1><?php echo $this->__('My Orders') ?></h1>
 </div>
-<?php echo $this->getPagerHtml(); ?>
+<form id="ti_orderhistory_form" method="GET" action="">
+    <div class="ti_select_barContainer">
+        <select name="view" id="ti_orderhistory_select">
+            <option value="1">Last 30 Days</option>
+            <option value="2">Last Two Months</option>
+            <option value="3">Last Three Months</option>
+            <option value="4">Last Six Months</option>
+            <option value="5">View All</option>
+        </select>
+    </div>
+</form>
+<script type="text/javascript">
+    <?php if (isset($_GET['view']) && $_GET['view'] != '1' ): ?>
+        <?php $view_id = $_GET['view']; ?>
+        var value = "<?php echo $view_id; ?>";
+        jQuery('#ti_orderhistory_select').val(value);
+    <?php else: $view_id = '1'; ?>
+    <?php endif; ?>
+    jQuery("#ti_orderhistory_select").change(function() {
+        jQuery("#ti_orderhistory_form").submit();
+
+    });
+</script>
+<!--<?php //echo $this->getPagerHtml();?>!-->
+
+
+
+<?php 
+
+    $string = "-" . $view_id . " month";
+    date_default_timezone_set('America/Los_Angeles');
+    //$orderview_date = date("m/d/Y",);
+ ?>
+<?php $_orders = $this->getOrders(); ?>
+
 <?php if($_orders->getSize()): ?>
 
 <div id="my-orders-table">    
 <?php $_odd = ''; ?>
 <?php foreach ($_orders as $_order): ?>
+    <?php  if (strtotime($_order->getCreatedAtStoreDate()) > strtotime($string) ): ?>
 <table class="data-table">
     <col width="1" />
     <col width="1" />
@@ -80,19 +115,28 @@
             <td colspan="4">
                 <p class="altTxt"><em>Order Status: <?php echo $_order->getStatusLabel() ?></em></p>
                 <div class="one_fourth a-center f-right ti_order_actions">
-                    <a class="ti_button ti_button_small">Track this order</a><br>
-                    <a class="ti_button ti_altBtn ti_button_small">File/View a claim</a>
+
+ <?php if ($_order->getTracksCollection()->count()) : ?>
+            <a href="#" class="ti_button ti_button_small" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($_order) ?>','trackorder','top=0,left=0,width=800,height=600,resizable=yes,scrollbars=yes'); return false;" title="<?php echo $this->__('Track this order') ?>"><?php echo $this->__('Track this order') ?></a><br>
+        <?php endif; ?>
+
+                    <!--<a class="ti_button ti_button_small" href="<?php //echo $this->getTrackUrl($_order) ?>"><?php //echo $this->__('Track this order') ?></a>!-->
+                    <?php if ($this->helper('sales/reorder')->canReorder($_order)) : ?>
+                    <a class="ti_button ti_button_small" href="<?php echo $this->getReorderUrl($_order) ?>" class="link-reorder"><?php echo $this->__('Re-Order') ?></a><br>
+                    <?php endif ?>
+
+
+                    <a class="ti_button ti_altBtn ti_button_small" href="<?php echo $this->getUrl(''); ?>helpdesk/index/customer/">File/View an RMA</a>
                 </div>
                 <div class="btcf">
 <?php $order_items = $_order->getAllItems(); ?>
 <?php foreach ($order_items as $item): ?>
     <?php $sku = $item->getSku(); ?>
     <?php $product = Mage::getModel('catalog/product')->loadByAttribute('sku', $sku) ?>
-    <?php echo $product->getSku(); ?>
                     <div class="three_fourth"><!--this section will be the loop-->
                         <img src="<?php echo $this->helper('catalog/image')->init($product, 'small_image')->resize(135); ?>" width="135" height="135">
                         <p><?php echo $product->getName(); ?><br>
-                            <span class="ti_small_text"><? echo $item->getQtyOrdered(); ?></span>
+                            <span class="ti_small_text"><?php echo $product->getSku();?> QTY:<?php echo round($item->getQtyOrdered()); ?></span>
                         </p>
                         <a class="ti_button ti_button_small ti_altBtn" href="<?php echo $product->getProductUrl();?>">Leave a review</a>
                     </div><!-- end loop-->
@@ -104,11 +148,13 @@
         </tr>
     </tbody>
 </table>
+    <?php endif; ?>
 <?php endforeach; ?>
 </div>
 
 <script type="text/javascript">decorateTable('my-orders-table');</script>
-<?php echo $this->getPagerHtml(); ?>
+
+<?php //echo $this->getPagerHtml(); ?>
 <?php else: ?>
     <p><?php echo $this->__('You have placed no orders.'); ?></p>
 <?php endif ?>

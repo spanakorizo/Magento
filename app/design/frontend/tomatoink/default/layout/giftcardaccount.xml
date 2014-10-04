@@ -126,7 +126,7 @@
             <action method="addLink" translate="label" module="enterprise_giftcardaccount">
                 <name>enterprise_giftcardaccount</name>
                 <path>enterprise_giftcardaccount/customer/</path>
-                <label>Gift Card</label>
+                <label>My Gift Cards</label>
             </action>
         </reference>
     </customer_account>

@@ -24,18 +24,25 @@
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
 ?>
-<?php
-/**
- * @see Enterprise_Reward_Block_Customer_Reward
- */
+<?php 
+    $_order  = $this->getOrder();
+    $_source = $this->getSource();
+    $_cards  = $this->getGiftCards();
 ?>
-<div class="page-title">
-    <h1><?php echo $this->__('My Rewards') ?></h1>
-</div>
-<div class="my-rewards">
-    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-    <?php echo $this->getChildHtml('', true, true); ?>
-    <div class="buttons-set">
-        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="ti_button"><?php echo Mage::helper('customer')->__('Back') ?></a></p>
-    </div>
-</div>
+<?php if ($_cards):?>
+<?php foreach ($_cards as $_card): ?>
+<tr>
+    <td <?php echo $this->getLabelProperties()?>>
+        <?php echo Mage::helper('enterprise_giftcardaccount')->__('Gift Card (%s)', $_card->getCode()); ?>
+    </td>
+    <td <?php echo $this->getValueProperties()?>>-<?php echo $_order->formatPrice($_card->getAmount()) ?></td>
+</tr>
+<?php endforeach; ?>
+<?php elseif ($_source->getGiftCardsAmount()>0): ?>
+<tr>
+    <td <?php echo $this->getLabelProperties()?>>
+        <?php echo Mage::helper('enterprise_giftcardaccount')->__('Gift Card'); ?>
+    </td>
+    <td <?php echo $this->getValueProperties()?>>-<?php echo $_order->formatPrice($_source->getGiftCardsAmount()) ?></td>
+</tr>
+<?php endif?>

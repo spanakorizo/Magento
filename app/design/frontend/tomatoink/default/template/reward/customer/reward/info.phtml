@@ -35,41 +35,47 @@ $maxBalance = $this->getMaxBalance();
 $minBalance = $this->getMinBalance();
 $expireIn = $this->getExpireIn();
 ?>
+<p class="text_right"><a href="<?php echo $helper->getLandingPageUrl()?>" class="ti_button"><?php echo $this->__('Learn more...')?></a></p>
+
 <div class="box info-box">
-    <h2 class="box-title"><?php echo $this->__('Reward points balance Information'); ?> <span class="separator">|</span> <a href="<?php echo $helper->getLandingPageUrl()?>"><?php echo $this->__('Learn more...')?></a></h2>
-    <dl class="box-content">
-        <dt><?php echo $this->__('Your current balance is %s.', $helper->formatReward($this->getPointsBalance(), $this->getCurrencyBalance()))?></dt>
-        <dt><?php echo $this->__('Current exchange rates:')?></dt>
-<?php if ($this->getPtsToAmountRateAmount() || $this->getAmountToPtsRatePts()): ?>
-    <?php if ($this->getPtsToAmountRateAmount()): ?>
-            <dd><?php echo $this->__('Each %s can be redeemed for %s.', $helper->formatReward($this->getPtsToAmountRatePts(), null, null, '<strong>%s</strong>'), '<strong>' . $helper->formatAmount($this->getPtsToAmountRateAmount()) . '</strong>')?></dd>
+    <!--<h2 class="box-title"><?php echo $this->__('Reward points balance Information'); ?> </h2>-->
+    <dl class="box-content ti_cms_gradient_block btcf">
+        <div class="one_half">
+            <dt><h2><?php echo $this->__('You currently have %s.', $helper->formatReward($this->getPointsBalance(), $this->getCurrencyBalance()))?></h2></dt>
+        </div>
+        <div class="one_half">
+            <dt><h2><?php echo $this->__('Current exchange rates:')?></h2></dt>
+    <?php if ($this->getPtsToAmountRateAmount() || $this->getAmountToPtsRatePts()): ?>
+        <?php if ($this->getPtsToAmountRateAmount()): ?>
+                <dd><p><?php echo $this->__('Each %s can be redeemed for %s.', $helper->formatReward($this->getPtsToAmountRatePts(), null, null, '<strong>%s</strong>'), '<strong>' . $helper->formatAmount($this->getPtsToAmountRateAmount()) . '</strong>')?></p></dd>
+        <?php endif;?>
+        <?php if ($this->getAmountToPtsRatePts()): ?>
+                <dd><p><?php echo $this->__('Each %s spent will earn %s.', '<strong>' . $helper->formatAmount($this->getAmountToPtsRateAmount()) . '</strong>', $helper->formatReward($this->getAmountToPtsRatePts(), null, null, '<strong>%s</strong>'))?></p></dd>
+        <?php endif;?>
+    <?php else:?>
+                 <dd><p><?php echo $this->__('None.')?></p></dd>
     <?php endif;?>
-    <?php if ($this->getAmountToPtsRatePts()): ?>
-            <dd><?php echo $this->__('Each %s spent will earn %s.', '<strong>' . $helper->formatAmount($this->getAmountToPtsRateAmount()) . '</strong>', $helper->formatReward($this->getAmountToPtsRatePts(), null, null, '<strong>%s</strong>'))?></dd>
-    <?php endif;?>
-<?php else:?>
-             <dd><?php echo $this->__('None.')?></dd>
-<?php endif;?>
-<?php if ($maxBalance || $minBalance):?>
-        <dt><?php echo $this->__('Balance limitations:')?></dt>
-    <?php if ($maxBalance):?>
-            <dd><?php echo $this->__('Balance is capped at %s.', $helper->formatReward($maxBalance))?></dd>
-        <?php if ($this->getIsMaxBalanceReached()):?>
-            <dd class="warning"><?php echo $this->__('Maximum balance is reached.')?></dd>
+    <?php if ($maxBalance || $minBalance):?>
+            <dt><h2><?php echo $this->__('Balance limitations:')?></h2></dt>
+        <?php if ($maxBalance):?>
+                <dd><p><?php echo $this->__('Balance is capped at %s.', $helper->formatReward($maxBalance))?></p></dd>
+            <?php if ($this->getIsMaxBalanceReached()):?>
+                <dd class="warning"><p><?php echo $this->__('Maximum balance is reached.')?></p></dd>
+            <?php endif;?>
+        <?php endif;?>
+        <?php if ($minBalance):?>
+                <dd><p><?php echo $this->__('Minimum Balance in order to redeem: %s.', $helper->formatReward($minBalance))?></p></dd>
+            <?php if (!$this->getIsMinBalanceReached()):?>
+                <dd class="warning"><p><?php echo $this->__('Minimum balance for redeeming points is not reached.')?></p></dd>
+            <?php endif;?>
         <?php endif;?>
     <?php endif;?>
-    <?php if ($minBalance):?>
-            <dd><?php echo $this->__('Minimum Balance in order to redeem: %s.', $helper->formatReward($minBalance))?></dd>
-        <?php if (!$this->getIsMinBalanceReached()):?>
-            <dd class="warning"><?php echo $this->__('Minimum balance for redeeming points is not reached.')?></dd>
+    <?php if ($expireIn):?>
+        <dt><h2><?php echo $this->__('Each earned reward points record expires in %s days.', '<span>' . $expireIn . '</span>')?></h2></dt>
+        <?php if ($this->getIsHistoryPublished()):?>
+                <dd><p><?php echo $this->__('Refer to reward points history to see if a specific record expires and when.')?></p></dd>
         <?php endif;?>
     <?php endif;?>
-<?php endif;?>
-<?php if ($expireIn):?>
-    <dt><?php echo $this->__('Each earned reward points record expires in %s days.', '<span>' . $expireIn . '</span>')?></dt>
-    <?php if ($this->getIsHistoryPublished()):?>
-            <dd><?php echo $this->__('Refer to reward points history to see if a specific record expires and when.')?></dd>
-    <?php endif;?>
-<?php endif;?>
+    </div>
     </dl>
 </div>

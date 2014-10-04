@@ -524,6 +524,3 @@ if (!Modernizr.input.placeholder) {
 
 });
 
-
-
-

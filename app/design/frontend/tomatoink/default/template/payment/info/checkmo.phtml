@@ -19,23 +19,20 @@
  * needs please refer to http://www.magentocommerce.com for more information.
  *
  * @category    design
- * @package     enterprise_default
+ * @package     base_default
  * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
 ?>
-<?php
-/**
- * @see Enterprise_Reward_Block_Customer_Reward
- */
-?>
-<div class="page-title">
-    <h1><?php echo $this->__('My Rewards') ?></h1>
-</div>
-<div class="my-rewards">
-    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
-    <?php echo $this->getChildHtml('', true, true); ?>
-    <div class="buttons-set">
-        <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="ti_button"><?php echo Mage::helper('customer')->__('Back') ?></a></p>
-    </div>
-</div>
+<?php echo $this->escapeHtml($this->getMethod()->getTitle()) ?>
+<?php if($this->getInfo()->getAdditionalData()): ?>
+    <?php if($this->getPayableTo()): ?>
+        <p><strong><?php echo $this->__('Make Check payable to:') ?></strong> <?php echo $this->escapeHtml($this->getPayableTo()) ?></p>
+    <?php endif; ?>
+    <?php if($this->getMailingAddress()): ?>
+        <p><strong><?php echo Mage::helper('payment')->__('Send Check to:') ?></strong></p>
+        <address class="checkmo-mailing-address">
+            <?php echo nl2br($this->escapeHtml($this->getMailingAddress())) ?>
+        </address>
+    <?php endif; ?>
+<?php endif; ?>

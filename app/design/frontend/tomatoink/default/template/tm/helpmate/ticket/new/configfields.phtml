@@ -1,3 +1,5 @@
+<div class="one">
+
 <?php
 $field = Mage::getStoreConfig("helpmate/ticketForm/field0");
 if (!empty($field)) :?>
@@ -5,7 +7,7 @@ if (!empty($field)) :?>
     <label for="title" class="ti_cms_labelHide"><span><?php echo $this->__($field) ?></span></label>
 
     <div class="input-box">
-        <input type="text" name="field0" placeholder="<?php echo $this->__($field) ?>" title="<?php echo $this->__($field) ?>" id="field0" class="input-text" />
+        <input type="text" name="field0" title="<?php echo $this->__($field) ?>" id="field0" class="input-text" placeholder="<?php echo $this->__($field) ?>" />
     </div>
 </li>
 <?php endif;?>
@@ -14,10 +16,10 @@ if (!empty($field)) :?>
 $field = Mage::getStoreConfig("helpmate/ticketForm/field1");
 if (!empty($field)) :?>
 <li class="wide">
-    <label for="title" class="ti_cms_labelHide"><span><?php echo $this->__($field) ?></span></label>
+    <label for="title" class="ti_cms_labelHide" ><span><?php echo $this->__($field) ?></span></label>
 
     <div class="input-box">
-        <input type="text" name="field1" placeholder="<?php echo $this->__($field) ?>" title="<?php echo $this->__($field) ?>" id="field1" class="input-text" />
+        <input type="text" name="field1" title="<?php echo $this->__($field) ?>" id="field1" class="input-text" placeholder="<?php echo $this->__($field) ?>"/>
     </div>
 </li>
 <?php endif;?>
@@ -29,8 +31,8 @@ if (!empty($field)) :?>
     <label for="title" class="ti_cms_labelHide"><span><?php echo $this->__($field) ?></span></label>
 
     <div class="input-box">
-        <input type="text" name="field2" title="<?php echo $this->__($field) ?>" id="field2" class="input-text" />
+        <input type="text" name="field2" title="<?php echo $this->__($field) ?>" id="field2" class="input-text" placeholder="<?php echo $this->__($field) ?>" />
     </div>
 </li>
 <?php endif;?>
-
+</div>

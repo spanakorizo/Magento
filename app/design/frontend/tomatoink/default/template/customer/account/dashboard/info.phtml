@@ -24,7 +24,59 @@
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
 ?>
-<div class="col2-set">
+
+<div class="ti_dashboard_wrap btcf">
+    <div class="ti_dashboard_head">
+        <div class="ti_dashboard_content">
+            <span class="icon-profile"></span><h2 class="white strong">Account Info</h2>
+        </div>
+    </div>
+    <div class="ti_dashboard_actions">
+        <div class="ti_dashboard_content">
+            <div class="one_half">
+               <h3><strong>Contact Information:</strong><br><?php echo $this->escapeHtml($this->getCustomer()->getName()) ?><br />
+                <?php echo $this->escapeHtml($this->getCustomer()->getEmail()) ?></h3>
+            </div>
+            <div class="one_half">
+                <a href="<?php echo $this->getUrl('customer/account/edit') ?>" class="ti_button"><?php echo $this->__('Update contact information') ?></a><br>
+                <a href="<?php echo $this->getChangePasswordUrl() ?>" class="ti_button"><?php echo $this->__('Change password') ?></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<?php if( $this->isNewsletterEnabled() ): ?>
+<div class="ti_dashboard_wrap btcf">
+    <div class="ti_dashboard_head">
+        <div class="ti_dashboard_content">
+            <span class="icon-newspaper"></span><h2 class="white strong">Newsletter</h2>
+        </div>
+    </div>
+    <div class="ti_dashboard_actions">
+        <div class="ti_dashboard_content">
+            <div class="one_half">
+                <h3><strong>Current Settings:</strong></h3>
+                <ul class="ti_bullet">
+                    <?php if( $this->getIsSubscribed() ): ?>
+                            <li><?php echo $this->__("You are currently subscribed to 'General Subscription'.") ?></li>
+                    <?php else: ?>
+                        <li><?php echo $this->__('You are currently not subscribed to any newsletter.') ?></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+            <div class="one_half">
+                <a href="<?php echo $this->getUrl('newsletter/manage') ?>" class="ti_button"><?php echo $this->__('Update preferences') ?></a>
+            
+            <?php /* Extensions placeholder */ ?>
+            <?php echo $this->getChildHtml('customer.account.dashboard.info.extra')?>
+            </div>
+        </div>
+    </div>
+</div>
+<?php endif; ?>
+<!--<div class="col2-set">
     <div class="col-1">
         <div class="box one_half">
             <div class="ti_block_inner ti_cms_border_block">
@@ -41,8 +93,8 @@
                 </div>
             </div>
         </div>
-    </div>
-    <?php if( $this->isNewsletterEnabled() ): ?>
+    </div>-->
+    <!--<?php if( $this->isNewsletterEnabled() ): ?>
     <div class="col-2">
         <div class="box one_half">
             <div class="ti_block_inner ti_cms_border_block">
@@ -66,3 +118,4 @@
     </div>
     <?php endif; ?>
 </div>
+-->

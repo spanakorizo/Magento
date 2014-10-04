@@ -36,7 +36,7 @@
 
     Validation.add(
         'validate-extensions',
-        '<?php echo $this->__('Sorry but current file type is not allowed')?>',
+        '<?php echo $this->__('Sorry but the current file type is not allowed')?>',
         function(value){
             var extensions = /(.<?php echo str_ireplace(",", "|.", $extensions);?>)$/i;
             if(extensions.test(value)){
@@ -48,23 +48,24 @@
 //]]>
 </script>
 
-<li class="wide">
-    <label for="title" ><span><?php echo $this->__('File (allowed %s)', str_ireplace(",", ", ", $extensions)) ?></span></label>
+<li class="wide one">
+    <label for="title" ><?php echo $this->__('File types allowed: %s', str_ireplace(",", ", ", $extensions)) ?></label>
     <?php for ($i = 0; $i < 5; $i++) : ?>
         <div class="input-box hidden">
-            <input type="file" name="file<?php echo $i;?>" title="<?php echo $this->__('File') ?>" id="file<?php echo $i;?>"/>
-            <a onclick="removeFileInputBox(this);return false;" href="#">
-                <?php echo $this->__('Remove') ?>
+            <div class="ti_file_wrap">
+                <span>Upload</span>
+                <input type="file" name="file<?php echo $i;?>" title="<?php echo $this->__('File') ?>" id="file<?php echo $i;?>"/>
+            </div>
+            <a onclick="removeFileInputBox(this);return false;" href="#" class="ti_button ti_button_mini">
+                <span class="icon-remove2"></span><?php echo $this->__('Remove') ?>
             </a>
         </div>
     <?php endfor;?>
     <span id="attachprompt">
-        <img border="0" width="15" height="15" src="http://www.gstatic.com/codesite/ph/images/paperclip.gif">
-        <a id="attachafile" href="javascript:showAttache()">
-            <?php echo $this->__("Attach another file") ?>
+        
+        <a id="attachafile" href="javascript:showAttache()" class="ti_button ti_button_small ti_altBtn"><span class="icon-attachment"></span>
+            <?php echo $this->__("Attach file") ?>
         </a>
     </span>
 </li>
 <?php endif;
-
-

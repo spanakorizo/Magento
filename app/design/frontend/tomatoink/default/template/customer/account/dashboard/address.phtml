@@ -24,6 +24,38 @@
  * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
 ?>
+
+<div class="ti_dashboard_wrap btcf">
+    <div class="ti_dashboard_head">
+        <div class="ti_dashboard_content">
+            <span class="icon-address-book"></span><h2 class="white strong"><?php echo $this->__('Address Book') ?></h2>
+        </div>
+    </div>
+    <div class="ti_dashboard_actions">
+        <div class="ti_dashboard_content">
+            <div class="ti_dashboard_content one_third">
+               <h3><strong><?php echo $this->__('Default Billing:') ?></strong></h3>
+                <address>
+                    <h3><?php echo $this->getPrimaryBillingAddressHtml() ?></h3>
+                </address>
+                
+                <a href="<?php echo $this->getPrimaryBillingAddressEditUrl() ?>" class="ti_button ti_button_small"><?php echo $this->__('Edit') ?></a> 
+            </div>
+            <div class="one_third middle">
+               <h3><strong><?php echo $this->__('Default Shipping:') ?></strong></h3>
+                <address>
+                    <h3><?php echo $this->getPrimaryShippingAddressHtml() ?></h3>
+                </address>
+                
+                <a href="<?php echo $this->getPrimaryBillingAddressEditUrl() ?>" class="ti_button ti_button_small"><?php echo $this->__('Edit') ?></a> 
+            </div>
+            <div class="one_third">
+                <a href="<?php echo $this->getAddressBookUrl() ?>" class="ti_button"><?php echo $this->__('Manage addresses') ?></a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--
 <div class="col2-set">
     <div class="box one">
         <div class="ti_block_inner ti_cms_border_block">
@@ -54,3 +86,4 @@
         </div>
     </div>
 </div>
+-->
