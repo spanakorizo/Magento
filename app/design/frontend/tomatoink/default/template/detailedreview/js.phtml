@@ -56,11 +56,11 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
             var $reviewEasytab = $('#product_tabs_review_tabbed_contents');
             var MaxFileInputs = <?php echo $imagesMaxCount; ?>;
             var i = 1;
-            $("#add-more-images").live("click",function () {
-                event.returnValue = false;
+            $("#add-more-images").click(function () {
+                //event.returnValue = false;
                 if(i < MaxFileInputs)
                 {
-                    $('<div class="more-images"><span><input type="file" name="image[]" id="image_field" class="addedInput" value="" /><a href="#" class="remove-img">Remove</a></span></div>').appendTo($('#add-file-input-box'));
+                    $('<div class="more-images"><span><input type="file" name="image[]" id="image_field" class="addedInput" value="" /><a href="#" class="remove-img ti_button ti_altBtn ti_button_mini">Remove</a></span></div>').appendTo($('#add-file-input-box'));
                     i++;
                 } else {
                         $("#add-more-images").css('display','none');

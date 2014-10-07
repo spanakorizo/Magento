@@ -408,6 +408,10 @@ textarea {
 	-o-font-feature-settings: "lnum";
 }
 
+input[type="file"]::-webkit-file-upload-button {
+  -webkit-appearance:none;
+	}
+
 input::-webkit-input-placeholder {color: #ccc; opacity: 1; font-size:1.6rem;}
 input:-moz-placeholder { /* Firefox 18- */color: #ccc; opacity: 1; font-size:1.6rem;}
 input::-moz-placeholder {  /* Firefox 19+ */color: #ccc; opacity: 1; font-size:1.6rem;}

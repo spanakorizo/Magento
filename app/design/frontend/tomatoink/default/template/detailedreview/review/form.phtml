@@ -262,12 +262,12 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                             <div class="more-images">
                                 <span>
                                     <input type="file" name="image[]" id="image_field" class="firstInput" value="<?php echo $this->htmlEscape($data->getImage()) ?>" />
-                                    <a href="#" class="remove-img">Remove</a>
+                                    <a href="#" class="remove-img ti_button ti_altBtn ti_button_mini">Remove</a>
                                 </span>
                             </div>
                         </div>
                         <?php if ((int)Mage::getStoreConfig('detailedreview/image_options/images_max_count') > 1): ?>
-                            <p class="more-images"><a href="#" id="add-more-images">+ Add more files</a></p>
+                            <p class="more-images"><a href="#" id="add-more-images" class="altTxt">+ Add more files</a></p>
                         <?php endif ?>
                     </div>
                 </div>

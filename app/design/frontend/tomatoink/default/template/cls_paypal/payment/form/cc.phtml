@@ -42,9 +42,6 @@
 */ ?>
     <div class="one_half">
         <li class="text_center"><!--these credit spans need a class of ti_checkout_creditSelected when selected. Please refer to ivision notes about how this should function: https://projects.invisionapp.com/d/main#/console/867217/37411155/comments/18995264 -->
-            <span class="ti_checkout_credit mastercard"></span> <span class="ti_checkout_credit visa"></span> <span class="ti_checkout_credit discover"></span> <span class="ti_checkout_credit amex"></span>
-        </li>
-        <li>
             <label for="<?php echo $_code ?>_cc_type" class="required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
             <div class="input-box">
                 <select id="<?php echo $_code ?>_cc_type" name="payment[cc_type]" class="required-entry validate-cc-type-select">
@@ -55,7 +52,35 @@
                     <?php endforeach ?>
                 </select>
             </div>
+            <span class="ti_checkout_credit mastercard" key="MC"></span> <span class="ti_checkout_credit visa" key="VI"></span> <span class="ti_checkout_credit discover" key="DI"></span> <span class="ti_checkout_credit amex" key="AE"></span>
         </li>
+        <script type="text/javascript">
+            jQuery("#<?php echo $_code ?>_cc_type").hide();
+            jQuery(".ti_checkout_credit").click(function() {
+                var key_value = jQuery(this).attr("key");
+                if (jQuery(".ti_checkout_creditSelected").length > 0) {var class_name = jQuery(".ti_checkout_creditSelected").first().attr("class");
+                class_name = class_name.replace(/ ti_checkout_creditSelected/g, '');
+                jQuery(".ti_checkout_creditSelected").first().attr("class", class_name);}
+                var class_name = jQuery(this).attr("class");
+                class_name += " ti_checkout_creditSelected";
+                jQuery(this).attr("class", class_name); 
+                jQuery("#<?php echo $_code ?>_cc_type").val(key_value);
+            });
+
+
+        </script>
+        <!--<li>
+            <label for="<?php //echo $_code ?>_cc_type" class="required"><em>*</em><?php //echo $this->__('Credit Card Type') ?></label>
+            <div class="input-box">
+                <select id="<?php //echo $_code ?>_cc_type" name="payment[cc_type]" class="required-entry validate-cc-type-select">
+                    <option value=""><?php //echo $this->__('--Please Select--')?></option>
+                    <?php //$_ccType = $this->getInfoData('cc_type') ?>
+                    <?php //foreach ($this->getCcAvailableTypes() as $_typeCode => $_typeName): ?>
+                    <option value="<?php //echo $_typeCode ?>"<?php //if($_typeCode==$_ccType): ?> selected="selected"<?php //endif ?>><?php //echo $_typeName ?></option>
+                    <?php //endforeach ?>
+                </select>
+            </div>
+        </li>!-->
         <li><!-- this name input was dropped in from template/payment/form/ccsave.phtml -->
             <div class="ti-required-entry">
                 <label for="<?php echo $_code ?>_cc_owner" class="required ti_cms_labelHide"><span><?php echo $this->__('Name on Card') ?></span></label>
