@@ -118,12 +118,12 @@ p.error-message { color: red; }
 .customer-review-info-table th {  font-weight: bold; }
 .customer-review-info-table td { color: #616161; }
 
-.review-dialog-block #review-form { width:540px; display:block; padding:7px 0 0 0; }
+.review-dialog-block #review-form {  display:block; }
 .review-dialog-block #review-form .form-add { float: left; }
 .review-dialog-block #review-form fieldset > div { width:100%; float:left; clear:both; }
 .review-dialog-block #review-form fieldset div.with-border { padding-bottom:5px; margin-bottom:5px; border-bottom:1px solid #559a13; }
 .review-dialog-block #review-form fieldset div.about-you.with-border { border-bottom:2px solid #cbcbcb; }
-.review-dialog-block #review-form .your-review.overall { margin-top:7px; }
+.review-dialog-block #review-form .your-review.overall {  }
 .review-dialog-block #review-form p { margin:0; font-weight:normal; font-size:13px; }
 
 .review-dialog-block #review-form .header { width:100%; text-align:left; }
@@ -171,6 +171,20 @@ margin:0;}
 .review-dialog-block #review-form .upload-image img { margin-top:10px; }
 .review-dialog-block #review-form .about-you img { height:92px; }
 .review-dialog-block #review-form .upload-video .right { padding-top:10px; }
+
+.review-dialog-block #review-form .ti-required-entry:before{
+	margin-top:8px;
+}
+
+.review-dialog-block #review-form .overall-raiting .ti-required-entry:before,
+.review-dialog-block #review-form .your-review .ti-required-entry:before{
+	margin-left:-15px;
+	margin-top:4px;
+}
+
+.review-dialog-block #review-form .your-review.overall .ti-required-entry:before{
+	margin-left:-10px;
+}
 
 .block-reviewed ul { position: relative; }
 .block-reviewed ul li { height:155px; display: block !important; overflow: hidden; }

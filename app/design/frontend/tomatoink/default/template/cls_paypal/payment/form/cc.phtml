@@ -44,7 +44,7 @@
         <li class="text_center"><!--these credit spans need a class of ti_checkout_creditSelected when selected. Please refer to ivision notes about how this should function: https://projects.invisionapp.com/d/main#/console/867217/37411155/comments/18995264 -->
             <span class="ti_checkout_credit mastercard"></span> <span class="ti_checkout_credit visa"></span> <span class="ti_checkout_credit discover"></span> <span class="ti_checkout_credit amex"></span>
         </li>
-        <!--<li>
+        <li>
             <label for="<?php echo $_code ?>_cc_type" class="required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
             <div class="input-box">
                 <select id="<?php echo $_code ?>_cc_type" name="payment[cc_type]" class="required-entry validate-cc-type-select">
@@ -55,7 +55,7 @@
                     <?php endforeach ?>
                 </select>
             </div>
-        </li>-->
+        </li>
         <li><!-- this name input was dropped in from template/payment/form/ccsave.phtml -->
             <div class="ti-required-entry">
                 <label for="<?php echo $_code ?>_cc_owner" class="required ti_cms_labelHide"><span><?php echo $this->__('Name on Card') ?></span></label>
