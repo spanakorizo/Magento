@@ -86,12 +86,13 @@
                 <div class="one_half">
                     <a href="<?php echo $this->getUrl('customer/storedcard') ?>" class="ti_button"><?php echo $this->__('Manage payment methods') ?></a>
                 </div>
+                <?php endforeach; ?>
         <?php else: ?>
             <h3>No Saved Cards.</h3> 
         <?php endif; ?>
             </div>
         </div>
-    <?php endforeach; ?>
+    
 
     </div>
     <!-- End Payment Methods-->
