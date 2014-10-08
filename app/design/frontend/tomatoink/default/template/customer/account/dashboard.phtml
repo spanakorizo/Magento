@@ -60,7 +60,7 @@
 
     <!-- Payment Methods-->
     <?php $_storedCardHelper = Mage::helper('cls_paypal/storedcard'); ?>
-     <?php $_storedCards = $this->getStoredCards(); ?>
+     <?php $_storedCards = Mage::getModel("cls_paypal/customerstored")->getStoredCards(); ?>
 
     <div class="ti_dashboard_wrap btcf">
          
