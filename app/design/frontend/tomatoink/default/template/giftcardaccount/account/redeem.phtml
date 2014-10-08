@@ -33,25 +33,62 @@
     <h1><?php echo Mage::helper('enterprise_giftcardaccount')->__('Gift Card'); ?></h1>
 </div>
 
+<div class="ti_cms_gradient_block one btcf">
 <!-- balance section !-->
 <div class="account-balance">
-    <h2 class="sub-title"><?php echo Mage::helper('enterprise_customerbalance')->__('Balance'); ?></h2>
-        <?php echo Mage::helper('enterprise_customerbalance')->__('Your current balance is:'); ?>
-        <?php 
+        <h2><?php echo Mage::helper('enterprise_customerbalance')->__('Your current balance is:'); ?>
+        <span class="altTxt"><?php 
             $customer = Mage::getSingleton('customer/session')->getCustomer();
             $balance = Mage::getModel('enterprise_customerbalance/balance')
                 ->setCustomerId($customer->getId())
                 ->loadByCustomer();
 
         ?>
-        <?php echo Mage::helper('core')->currency($balance->getBanlance()); ?>
+        <?php echo Mage::helper('core')->currency($balance->getBanlance()); ?></span></h2>
 </div>
-<div class="ti_cms_separator"></div>
+
+<!-- History Section !-->
+<?php $balance_history = Mage::getModel('enterprise_customerbalance/balance_history'); 
+    $action_label = Array("","updated", "created", "used", "refunded", "reverted");
+
+?>
+<?php //if ($balance_history->canShow() && $balance_history->getEvents() && count($balance_history->getEvents())): ?>
+    <h3 class="table-caption"><?php echo Mage::helper('enterprise_customerbalance')->__('Balance History'); ?></h3>
+    <table id="customerbalance-history" class="data-table">
+        <col />
+        <col />
+        <col />
+        <col />
+        <thead>
+            <tr>
+                <th><?php echo Mage::helper('enterprise_customerbalance')->__('Action'); ?></th>
+                <th><?php echo Mage::helper('enterprise_customerbalance')->__('Balance Change'); ?></th>
+                <th><?php echo Mage::helper('enterprise_customerbalance')->__('Balance'); ?></th>
+                <th><?php echo Mage::helper('enterprise_customerbalance')->__('Date'); ?></th>
+            </tr>
+        </thead>
+        <?php foreach ($balance_history->getHistoryData($customer->getId()) as $event): ?>
+            <?php //print_r($event) ?>
+        <tbody>
+            <tr>
+                <td><p><?php echo $action_label[$event['action']]; ?></p></td>
+                <td><p><?php echo Mage::helper('core')->currency($event['balance_delta']); ?></p></td>
+                <td><p><?php echo Mage::helper('core')->currency($event['balance_amount']); ?></p></td>
+                <td><p><?php echo Mage::helper('core')->formatDate($event['updated_at'], 'short', true); ?></p></td>
+            </tr>
+        </tbody>
+        <?php endforeach; ?>
+    </table>
+    <script type="text/javascript">decorateTable('customerbalance-history')</script>
+<?php //endif; ?>
+
+</div>
 
 
 <!-- Redeem Section !-->
 
-<div class="giftcardaccount">
+<div class="giftcardaccount one">
+    <h2>Redeem a giftcard:</h2>
     <span id="gc-please-wait" class="please-wait" style="display:none;">
         <img src="<?php echo $this->getSkinUrl('images/opc-ajax-loader.gif') ?>" alt="" class="v-middle" /> <?php echo $this->__('Please wait, loading...') ?>
     </span>
@@ -99,40 +136,5 @@
     //]]>
     </script>
 </div>
-<div class="ti_cms_separator"></div>
 
 
-<!-- History Section !-->
-<?php $balance_history = Mage::getModel('enterprise_customerbalance/balance_history'); 
-    $action_label = Array("","updated", "created", "used", "refunded", "reverted");
-
-?>
-<?php //if ($balance_history->canShow() && $balance_history->getEvents() && count($balance_history->getEvents())): ?>
-    <h2 class="table-caption"><?php echo Mage::helper('enterprise_customerbalance')->__('Balance History'); ?></h2>
-    <table id="customerbalance-history" class="data-table">
-        <col />
-        <col width="100" />
-        <col width="100" />
-        <col width="150" />
-        <thead>
-            <tr>
-                <th><?php echo Mage::helper('enterprise_customerbalance')->__('Action'); ?></th>
-                <th><?php echo Mage::helper('enterprise_customerbalance')->__('Balance Change'); ?></th>
-                <th><?php echo Mage::helper('enterprise_customerbalance')->__('Balance'); ?></th>
-                <th><?php echo Mage::helper('enterprise_customerbalance')->__('Date'); ?></th>
-            </tr>
-        </thead>
-        <?php foreach ($balance_history->getHistoryData($customer->getId()) as $event): ?>
-            <?php //print_r($event) ?>
-        <tbody>
-            <tr>
-                <td><?php echo $action_label[$event['action']]; ?></td>
-                <td><?php echo Mage::helper('core')->currency($event['balance_delta']); ?></td>
-                <td><?php echo Mage::helper('core')->currency($event['balance_amount']); ?></td>
-                <td><?php echo Mage::helper('core')->formatDate($event['updated_at'], 'short', true); ?></td>
-            </tr>
-        </tbody>
-        <?php endforeach; ?>
-    </table>
-    <script type="text/javascript">decorateTable('customerbalance-history')</script>
-<?php //endif; ?>

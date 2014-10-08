@@ -36,7 +36,7 @@ $showRating = Mage::helper('detailedreview')->checkFieldAvailable('review_graph'
 ?>
 <div class="review-top">
     <div class="ti_cms_block_headerBar-green"><h2 class="ti_headerH1 white">Reviews</h2></div>
-    <div class="review-average-info">
+    <div class="review-average-info btcf">
         <div class="button-write-review">
             <?php if ( !$helperDetailedreview->isUserAbleToWriteReview() ): ?>
             <span class="error"><?php echo $this->__('You are not Allowed to Write a Review.'); ?></span>
@@ -82,7 +82,7 @@ $showRating = Mage::helper('detailedreview')->checkFieldAvailable('review_graph'
             </div>
         <?php endif;?>
     </div>
-    <div class="filters">
+    <div class="filters one_half">
 
         <?php if($isShowFilters = Mage::getStoreConfig('detailedreview/filters/allow_result_filters')): ?>
         <h4><?php echo $this->__('Result Filters') ?></h4>
@@ -94,8 +94,8 @@ $showRating = Mage::helper('detailedreview')->checkFieldAvailable('review_graph'
                     <?php if ($k == 'feedback' || $k == 'keywords') continue; ?>
                     <input type="hidden" value="<?php echo $v ?>" name="<?php echo $k ?>"/>
                 <?php endforeach; ?>
-                <input type="text" class="input-text ac-off" value="<?php echo isset($_GET['keywords']) ? $_GET['keywords'] : '' ?>" name="keywords" placeholder="<?php echo $helperDetailedreview->__('search in reviews') ?>" id="review-search"/>
-                <button type="submit" class="search-review-button"><span><span><?php echo $this->__('Go') ?></span></span></button>
+                <input type="text" class="input-text ac-off" value="<?php echo isset($_GET['keywords']) ? $_GET['keywords'] : '' ?>" name="keywords" placeholder="<?php echo $helperDetailedreview->__('Search reviews') ?>" id="review-search"/>
+                <button type="submit" class="search-review-button ti_altBtn"><span><span><?php echo $this->__('Go') ?></span></span></button>
                 <script type="text/javascript">
                     //<![CDATA[
 //                        var searchReviewForm = new Varien.searchForm('review_search_mini_form', 'review-search', 'Search in reviews');
@@ -143,7 +143,7 @@ $showRating = Mage::helper('detailedreview')->checkFieldAvailable('review_graph'
     <?php endif; ?>
 
     <?php if ($showRating && $summary && $ratingsEnabled): ?>
-        <div class="review-right">
+        <div class="review-right hidden">
             <div class="separate-rating">
                 <?php for ($key=0;$key<5;$key++){ ?>
                 <div class="mark-rating">
@@ -161,7 +161,7 @@ $showRating = Mage::helper('detailedreview')->checkFieldAvailable('review_graph'
             </div>
         </div>
     <?php endif; ?>
-    <div class="review-sorts">
+    <div class="review-sorts one_half">
     <?php /* <span>Showing <?php echo $sum;?> of <?php echo $tempSum;?> reviews <a href="<?php echo $currentUrl?>?feedback=1#feedback" >Clear Filters</a></span> */ ?>
     <?php $selectedOrder = $this->getCurrentSorting(); ?>
         <?php if ($helperDetailedreview->isInGetParams(array('st', 'vb', 'ir', 'vr', 'hc', 'mr', 'keywords'))): ?>

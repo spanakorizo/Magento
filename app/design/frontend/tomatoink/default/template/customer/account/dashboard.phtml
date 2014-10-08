@@ -60,7 +60,7 @@
 
     <!-- Payment Methods-->
     <?php $_storedCardHelper = Mage::helper('cls_paypal/storedcard'); ?>
-     <?php $_storedCards = $this->getStoredCards(); ?>
+     <?php $_storedCards = Mage::getModel("cls_paypal/customerstored")->getStoredCards(); ?>
 
     <div class="ti_dashboard_wrap btcf">
          
@@ -71,8 +71,10 @@
         </div>
         <div class="ti_dashboard_actions">
             <div class="ti_dashboard_content">
+                <?php $customerId = $this->getCustomer()->getId(); ?>
+                <?php $_storedCards = Mage::getSingleton('cls_paypal/customerstored')->getCustomerstoredCollection($customerId); ?>
         <?php if( $_storedCards && ($_storedCards->count() > 0) ): ?>
-        <?php $_storedCard = $_storedCards[0]; //foreach ($_storedCards as $_storedCard): ?>
+        <?php foreach ($_storedCards as $_storedCard): ?>
         
             
                 <div class="one_half">
@@ -84,12 +86,13 @@
                 <div class="one_half">
                     <a href="<?php echo $this->getUrl('customer/storedcard') ?>" class="ti_button"><?php echo $this->__('Manage payment methods') ?></a>
                 </div>
+                <?php endforeach; ?>
         <?php else: ?>
             <h3>No Saved Cards.</h3> 
         <?php endif; ?>
             </div>
         </div>
-    <?php //endforeach; ?>
+    
 
     </div>
     <!-- End Payment Methods-->

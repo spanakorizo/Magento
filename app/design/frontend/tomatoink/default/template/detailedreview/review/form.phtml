@@ -56,7 +56,7 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                     <span id="input-message-box"></span>
                 <?php if( $this->getRatings() && $this->getRatings()->getSize()): ?>
 
-                    <div class="overall-raiting">
+                    <div class="overall-raiting one">
                         <div class="left ti-required-entry">
                             <h2 class="title altTxt"><?php echo $this->__("Overall Rating:") ?></h2>
                             <!--<p class="desc"><?php echo $this->__("select the number of stars that reflect your overall item rating") ?></p>-->
@@ -120,14 +120,14 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                     </div>-->
                     <div class="">
                         <div class="wide one">
-                            <label for="nickname_field" class="required ti_cms_labelHide one"><span><?php echo $this->__('Nickname') ?> <em>*</em></span></label>
-                            <div class="input-box field-row ti-required-entry">
-                                <input type="text" name="nickname" id="nickname_field" class="input-text required-entry one" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" placeholder="Nickname" />
+                            <label for="nickname_field" class="required ti_cms_labelHide ti-required-entry btcf"><span><?php echo $this->__('Nickname') ?> <em>*</em></span></label>
+                            <div class="input-box field-row">
+                                <input type="text" name="nickname" id="nickname_field" class="one input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" placeholder="Nickname" />
                             </div>
                         </div>
                         <div class="wide one">
-                            <label for="summary_field" class="required ti_cms_labelHide"><span><?php echo $this->__('Review Title:') ?> <em>*</em></span></label>
-                            <div class="input-box field-row ti-required-entry">
+                            <label for="summary_field" class="required ti_cms_labelHide ti-required-entry btcf"><span><?php echo $this->__('Review Title:') ?> <em>*</em></span></label>
+                            <div class="input-box field-row">
                                 <input type="text" name="title" id="summary_field" class="one input-text required-entry" value="<?php echo $this->htmlEscape($data->getTitle()) ?>" placeholder="Review title"/>
                             </div>
                         </div>
@@ -146,8 +146,8 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                     </div>-->
                     
                     <div class="">
-                        <div class="wide ti-required-entry">
-                            <label for="review_field" class="required ti_cms_labelHide"><span><?php echo $this->__('Your comments') ?></span></label>
+                        <div class="wide">
+                            <label for="review_field" class="required ti_cms_labelHide ti-required-entry btcf"><span><?php echo $this->__('Your comments') ?></span></label>
                             <div class="input-box field-row one">
                                 <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry one" placeholder="Your comments: Think about what you like about the product and what you dislike about it, why you chose this rating, and who would you recommend it to."><?php echo $this->htmlEscape($data->getDetail()) ?></textarea>
                             </div>
@@ -261,13 +261,12 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                         <div class="input-box" id="add-file-input-box">
                             <div class="more-images">
                                 <span>
-                                    <input type="file" name="image[]" id="image_field" class="firstInput" value="<?php echo $this->htmlEscape($data->getImage()) ?>" />
-                                    <a href="#" class="remove-img">Remove</a>
+                                    <input type="file" name="image[]" id="image_field" class="firstInput" value="<?php echo $this->htmlEscape($data->getImage()) ?>" /><a href="#" class="remove-img ti_button ti_altBtn ti_button_mini">X</a>
                                 </span>
                             </div>
                         </div>
                         <?php if ((int)Mage::getStoreConfig('detailedreview/image_options/images_max_count') > 1): ?>
-                            <p class="more-images"><a href="#" id="add-more-images">+ Add more files</a></p>
+                            <p class="more-images"><a href="#" id="add-more-images" class="altTxt">+ Add more files</a></p>
                         <?php endif ?>
                     </div>
                 </div>

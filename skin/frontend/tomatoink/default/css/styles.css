@@ -506,7 +506,7 @@ p.error-msg { color:#d91a00; }
 .data-table .link-rss { display:block; }
 */
 .page-popup .data-table td,
-.page-popup .data-table th { border-bottom:1px solid #d9d9d9; }
+.page-popup .data-table th { }
 .page-popup .buttons-set .button { float:right; }
 
 /* Shopping cart total summary row expandable to details */
@@ -600,6 +600,10 @@ ul.disc li { padding-left:10px; background:url(../images/bkg_bulletsm.gif) no-re
 	text-indent:0; 
 	color:#559a13;
 	font-family:'Raleway', Verdana, sans-serif;
+}
+
+.tracking-table-popup td{
+	font-size:1.6rem;
 }
 
 .cards-list dt { margin:5px 0 0; }
@@ -1215,7 +1219,7 @@ p.product-image { cursor:default !important; }
 .rating-box { width:65px; height:13px; font-size:0; line-height:0; background:url(../images/bkg_rating.gif) 0 100% repeat-x; overflow:hidden; }
 .rating-box .rating { float:left; height:13px; background:url(../images/bkg_rating.gif) 0 0 repeat-x; }
 .ratings { margin:5px 0; }
-.ratings .rating-box { float:left; margin-right:5px; }
+.ratings .rating-box {  }
 .ratings .amount { font-size:12px; }
 .ratings .rating-links { margin:0; }
 .ratings .rating-links a {  }

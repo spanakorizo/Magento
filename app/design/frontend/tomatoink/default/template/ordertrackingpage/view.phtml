@@ -32,20 +32,20 @@ if ($check_flag):?>
 	<table border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<th valign="top">Order ID: <?php echo $incrementId; ?></th>
-			<th valign="top" style="text-align:right;">Order Placed: <?php echo $order->getCreatedAt() ?></th>
+			<th valign="top" style="text-align:right;">Order Placed: <?php echo strtotime($order->getCreatedAtStoreDate()) ?></th>
 		</tr>
 	</table>
 	<table border="0" cellspacing="0" cellpadding="0" style="border-left:1px dotted #559a13;border-right:1px dotted #559a13;border-bottom:1px dotted #559a13;">	
 		<tr>
 			<td valign="top" align="left" colspan="2" style=";border-bottom:1px dotted #559a13;">
 				<p><b>Order Status:</b> <?php echo $order->getStatus() ?></p>
-				<p><b>Order Comments:</b></p><!--<<Yiyang>> Need Comments!-->
+				<p><b>Order Comments:</b><?php echo $order->getFirecheckoutCustomerComment() ?></p>
 			</td>
 		</tr>
 		<tr>
 			<td valign="top" width="20%" style=";border-bottom:1px dotted #559a13;">
 				<p><b>Shipping Speed:</b></p>
-				<p>Free USPS Shipping (2-7 business days)</p><!--<<Yiyang>> Need Shipping Speed!-->
+				<p><?php echo $order->getShippingDescription(); ?></p>
 			</td>
 			<td valign="top" width="80%" rowspan="2" style="border-left:1px dotted #559a13;">
 				<!--Dynamic order information table start!-->
@@ -53,15 +53,16 @@ if ($check_flag):?>
 					<tr>
 						<td valign="top"><p><b>Items Ordered:</b></p></td>
 						<td valign="top" width="60"><p><b>Price:</b></p></td>
-						<td valign="top" width="80"><p><b>Status:</b></p></td>
+						<td valign="top" width="80"><p><b>QTY:</b></p></td>
 					</tr>
-					<!--<<Yiyang>> Dynamic part start!-->
+					<?php $items = $order->getAllItems() ?>
+					<?php foreach ($items as $item): ?>
 					<tr>
-						<td valign="top"><p>Hewlett Packard HP 564XL Bulk Set of 11 Packs (3 Black, 2 Photo Black, 2 Cyan, 2 Magenta, 2 Yellow) High Yield Replacement Ink Cartridges</p></td>
-						<td valign="top"><p>$63.69</p></td>
-						<td valign="top"><p>Processing</p></td>
+						<td valign="top"><p><?php echo $item->getName(); ?></p></td>
+						<td valign="top"><p>$<?php echo number_format($item->getPrice(), 2); ?></p></td>
+						<td valign="top"><p><?php echo number_format($item->getQtyOrdered(), 0); ?></p></td>
 					</tr>
-					<!--<<Yiyang>> Dynamic part end!-->
+					<?php endforeach; ?>
 				</table>
 				<!--Dynamic order information table end!-->
 			</td>
@@ -84,9 +85,9 @@ if ($check_flag):?>
 	<div class="ti_block_inner ti_cms_gradient_block">
 		<h3>Let Tomato Help You</h3>
 		<ul class="ti_bullet">
-			<li><a href="{{store direct_url='myaccount'}}" title="Edit your account" target="_blank">Edit your account</a></li>
-			<li><a href="{{store direct_url='shipping-policy'}}" title="All about shipping">All about shipping</a></li>
-			<li><a href="{{store direct_url='contact'}}" title="Contact TomatoInk">Contact TomatoInk</a></li>
+			<li><a href="<?php echo $this->getUrl('customer/account') ?>" title="Edit your account" target="_blank">Edit your account</a></li>
+			<li><a href="<?php echo $this->getUrl('shipping-policy') ?>" title="All about shipping">All about shipping</a></li>
+			<li><a href="<?php echo $this->getUrl('contact') ?>" title="Contact TomatoInk">Contact TomatoInk</a></li>
 		</ul>
 	</div>
 </div>
@@ -111,7 +112,7 @@ if ($check_flag):?>
 <div class="one_half">
 <h2 class="altTxt">Having an Account?</h2>
 <p>If you already have a TomatoInk account, please click the button below to sign in and view your order history. This will tell you the status of all of your recent orders.</p>
-<a class="ti_button btn ti_cms_floatRight" href="{{store direct_url='myaccount'}}" target="_blank">View Account</a> <br class="ti_cms_clear" />
+<a class="ti_button btn ti_cms_floatRight" href="<?php echo $this->getUrl('customer/account') ?>" target="_blank">View Account</a> <br class="ti_cms_clear" />
 <h3>Why Register?</h3>
 <p>With a TomatoInk account you get more from our website:</p>
 <ul class="ti_bullet">
@@ -120,7 +121,7 @@ if ($check_flag):?>
 <li>Members exclusive discounts</li>
 <li>Easy Order Tracking</li>
 </ul>
-<p><a class="lgTxt" href="{{store direct_url='new-account'}}?AddNewCustomer=Y" target="_blank">Click here to join TomatoInk</a> today.</p>
+<p><a class="lgTxt" href="<?php echo $this->getUrl('account/new'); ?>?" target="_blank">Click here to join TomatoInk</a> today.</p>
 </div>
 <!-----General Login---!-->
 <div class="one_half">
