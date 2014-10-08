@@ -1219,7 +1219,7 @@ p.product-image { cursor:default !important; }
 .rating-box { width:65px; height:13px; font-size:0; line-height:0; background:url(../images/bkg_rating.gif) 0 100% repeat-x; overflow:hidden; }
 .rating-box .rating { float:left; height:13px; background:url(../images/bkg_rating.gif) 0 0 repeat-x; }
 .ratings { margin:5px 0; }
-.ratings .rating-box { float:left; margin-right:5px; }
+.ratings .rating-box {  }
 .ratings .amount { font-size:12px; }
 .ratings .rating-links { margin:0; }
 .ratings .rating-links a {  }

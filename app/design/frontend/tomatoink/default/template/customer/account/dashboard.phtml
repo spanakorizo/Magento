@@ -71,8 +71,10 @@
         </div>
         <div class="ti_dashboard_actions">
             <div class="ti_dashboard_content">
+                <?php $customerId = $this->getCustomer()->getId(); ?>
+                <?php $_storedCards = Mage::getSingleton('cls_paypal/customerstored')->getCustomerstoredCollection($customerId); ?>
         <?php if( $_storedCards && ($_storedCards->count() > 0) ): ?>
-        <?php $_storedCard = $_storedCards[0]; //foreach ($_storedCards as $_storedCard): ?>
+        <?php foreach ($_storedCards as $_storedCard): ?>
         
             
                 <div class="one_half">
@@ -89,7 +91,7 @@
         <?php endif; ?>
             </div>
         </div>
-    <?php //endforeach; ?>
+    <?php endforeach; ?>
 
     </div>
     <!-- End Payment Methods-->
