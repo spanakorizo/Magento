@@ -27,7 +27,7 @@
 /**
  * Tax totals calculation model
  */
-class Compandsave_MultipleCoupon_Model_Sales_Total_Quote_Tax extends Mage_Tax_Model_Sales_Total_Quote_Tax
+class Compandsave_Productselector_Model_Sales_Total_Quote_Tax extends Mage_Tax_Model_Sales_Total_Quote_Tax
 {
 
     protected function _calcUnitTaxAmount(
@@ -37,8 +37,10 @@ class Compandsave_MultipleCoupon_Model_Sales_Total_Quote_Tax extends Mage_Tax_Mo
         /*
          * check if discount is originally zero into database
          */
-        $item_discount = Mage::getSingleton('sales/quote_item')->load($item->getId());
+        if(!$item->getDiscountAmount()){
 
+            $item_discount = Mage::getSingleton('sales/quote_item')->load($item->getId());
+        }
         $qty = $item->getTotalQty();
         $inclTax = $item->getIsPriceInclTax();
         $price = $item->getTaxableAmount();
@@ -74,13 +76,15 @@ class Compandsave_MultipleCoupon_Model_Sales_Total_Quote_Tax extends Mage_Tax_Mo
                 break;
             case Mage_Tax_Model_Calculation::CALC_TAX_AFTER_DISCOUNT_ON_EXCL:
             case Mage_Tax_Model_Calculation::CALC_TAX_AFTER_DISCOUNT_ON_INCL:
-                /*
-                * rewrite here
-                */
 
-                $discountAmount = (float) $item_discount->getDiscountAmount() / $qty;
-                $baseDiscountAmount = (float) $item_discount->getBaseDiscountAmount() / $qty;
-
+                if(!$item->getDiscountAmount()){
+                    $discountAmount = $item_discount->getDiscountAmount() / $qty;
+                    $baseDiscountAmount = $item_discount->getBaseDiscountAmount() / $qty;
+                }
+                else{
+                    $discountAmount = $item->getDiscountAmount() / $qty;
+                    $baseDiscountAmount = $item->getBaseDiscountAmount() / $qty;
+                }
                 //We want to remove weee
                 if ($isWeeeEnabled) {
                     $discountAmount = $discountAmount - $item->getWeeeDiscount() / $qty;
@@ -188,8 +192,10 @@ class Compandsave_MultipleCoupon_Model_Sales_Total_Quote_Tax extends Mage_Tax_Mo
         /*
          * check if discount is originally zero into database
          */
+        if(!$item->getDiscountAmount()){
 
-        $item_discount = Mage::getSingleton('sales/quote_item')->load($item->getId());
+            $item_discount = Mage::getSingleton('sales/quote_item')->load($item->getId());
+        }
 
         $inclTax = $item->getIsPriceInclTax();
         $subtotal = $taxSubtotal = $item->getTaxableAmount();
@@ -226,12 +232,14 @@ class Compandsave_MultipleCoupon_Model_Sales_Total_Quote_Tax extends Mage_Tax_Mo
             case Mage_Tax_Model_Calculation::CALC_TAX_AFTER_DISCOUNT_ON_EXCL:
             case Mage_Tax_Model_Calculation::CALC_TAX_AFTER_DISCOUNT_ON_INCL:
 
-                /*
-                *rewrite here
-                 */
-                $discountAmount = $item_discount->getDiscountAmount();
-                $baseDiscountAmount = $item_discount->getBaseDiscountAmount();
-
+                if(!$item->getDiscountAmount()){
+                    $discountAmount = $item_discount->getDiscountAmount();
+                    $baseDiscountAmount = $item_discount->getBaseDiscountAmount();
+                }
+                else{
+                    $discountAmount = $item->getDiscountAmount();
+                    $baseDiscountAmount = $item->getBaseDiscountAmount();
+                }
 
                 if ($isWeeeEnabled) {
                     $discountAmount = $discountAmount - $item->getWeeeDiscount();
@@ -346,9 +354,10 @@ class Compandsave_MultipleCoupon_Model_Sales_Total_Quote_Tax extends Mage_Tax_Mo
         /*
          * check if discount is originally zero into database
          */
+        if(!$item->getDiscountAmount()){
 
-        $item_discount = Mage::getSingleton('sales/quote_item')->load($item->getId());
-
+            $item_discount = Mage::getSingleton('sales/quote_item')->load($item->getId());
+        }
         $inclTax = $item->getIsPriceInclTax();
         $rateKey = ($taxId == null) ? (string)$rate : $taxId;
         $taxSubtotal = $subtotal = $item->getTaxableAmount();
@@ -404,10 +413,14 @@ class Compandsave_MultipleCoupon_Model_Sales_Total_Quote_Tax extends Mage_Tax_Mo
                     $baseDiscount = $item->getBaseOriginalDiscountAmount();
 					
                 } else {
-
+                    if(!$item->getDiscountAmount()){
                         $discount = $item_discount->getDiscountAmount();
                         $baseDiscount = $item_discount->getBaseDiscountAmount();
-
+                    }
+                    else{
+                        $discount = $item->getDiscountAmount();
+                        $baseDiscount = $item->getBaseDiscountAmount();
+                    }
 					
                 }
 				

@@ -45,20 +45,12 @@ class Compandsave_MultipleCoupon_Block_Cart_Shipping extends Mage_Checkout_Block
                 ->setCollectShippingRates(true);
             unset($rate_array);
             // Find if our shipping has been included.
-            $freeshippingflag = Mage::getStoreConfig('carriers/freeshipping/active');
-            $freeshippingamount = Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal');
-            $subtotal = $this->getAddress()->getBaseSubtotal();
-
             $rates = $address->collectShippingRates()->getGroupedAllShippingRates();
 
             foreach ($rates as $carrier) {
                 foreach ($carrier as $rate) {
-                    if($freeshippingflag == 1 and $subtotal <  $freeshippingamount and $rate->getPrice() == 0 ){
-                            continue;
-                    }
 
                     $rate_array[] = $rate->getPrice();
-
 
                 }
 

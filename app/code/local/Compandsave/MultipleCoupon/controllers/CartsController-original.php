@@ -81,6 +81,7 @@ class Compandsave_MultipleCoupon_CartsController extends Mage_Core_Controller_Fr
     public function couponPostAction()
     {
 
+        $flag = 1;
         if (!$this->_getCart()->getQuote()->getItemsCount()) {
             $this->_goBack();
             return;
@@ -90,95 +91,99 @@ class Compandsave_MultipleCoupon_CartsController extends Mage_Core_Controller_Fr
         /* if ($this->getRequest()->getParam('remove') == 1) {
             $couponCode = '';
         } */
-        $flag = 0;
-        $oldcouponcodes = explode(',',$this->_getQuote()->getCouponCode());
-        foreach($oldcouponcodes as $oldcouponcode){
-            if(strpos( $oldcouponcodes, $oldcouponcode ) === FALSE)
-                continue;
-            else
-                $flag = 1;
-        }
-        if($flag == 1){
-            $item_array = array();
-            unset($item_array);
-            if(strlen($couponCode)){
-                $oCoupon = Mage::getModel('salesrule/coupon')->load($couponCode, 'code');
-                if(!empty($oCoupon)){
-                    $oRule = Mage::getModel('salesrule/rule')->load($oCoupon->getRuleId());
-                    $ruleData = $oRule->getData();
-                    $isactive = $ruleData['is_active'];
-                    //$newDescription = $ruleData['description'];
-                    $address = $this->_getQuote()->getShippingAddress();
+        if(strlen($couponCode)){
+            $oCoupon = Mage::getModel('salesrule/coupon')->load($couponCode, 'code');
+            if(!empty($oCoupon)){
+                $oRule = Mage::getModel('salesrule/rule')->load($oCoupon->getRuleId());
+                $address = $this->_getQuote()->getShippingAddress();
 
-                    if (!Mage::getModel('salesrule/validator')->_canProcessRule($oRule, $address) || !$isactive) {
-                        $this->_getSession()->addError(
-                            $this->__('Coupon code "%s" is not valid or active', Mage::helper('core')->escapeHtml($couponCode))
-                        );
-                        $this->_goBack();
-                        return;
-                    }
-                    $discountableitem = 0;
-                    foreach ($this->_getQuote()->getAllVisibleItems() as $item) {
-                        if ($item->getParentItem()) {
-                            continue;
-                        }
-
-                        if (!$oRule->getActions()->validate($item)) {
-                            $this->_getSession()->addError(
-                                $this->__('Coupon code "%s" is not valid for '.$item->getName(), Mage::helper('core')->escapeHtml($couponCode))
-                            );
-                            /*
-                             * Store In array where rule is not applicable and send it total calculation function for not calculate
-                             */
-                            $item_array[] = $item->getId();
-                        }
-                        else{
-
-                            $discountableitem = $discountableitem + 1;
-                        }
-
-                    }
-                    if($discountableitem == 0){
-                        $this->_getSession()->addError(
-                            $this->__('There are no discountable item for Coupon code "%s"', Mage::helper('core')->escapeHtml($couponCode))
-                        );
-                        $this->_goBack();
-                        return;
-                    }
-                }
-
-            }
-
-            //check if the coupon code have , cause we do not accept it
-
-
-            if(strpos($couponCode,',') === FALSE){
-
-                if(! $this->_getCouponStatus($couponCode) ){
+                if (!Mage::getModel('salesrule/validator')->_canProcessRule($oRule, $address)) {
                     $this->_getSession()->addError(
-                        $this->__('Coupon code "%s" Not Found / Expired.', Mage::helper('core')->escapeHtml($couponCode))
+                        $this->__('Coupon code "%s" is not valid.', Mage::helper('core')->escapeHtml($couponCode))
                     );
                     $this->_goBack();
                     return;
                 }
 
+
+
+                foreach ($this->_getQuote()->getAllVisibleItems() as $item) {
+                    if ($item->getParentItem()) {
+                        continue;
+                    }
+
+                    if (!$oRule->getActions()->validate($item)) {
+                        $this->_getSession()->addError(
+                            $this->__('Coupon code "%s" is not valid for '.$item->getName(), Mage::helper('core')->escapeHtml($couponCode))
+                        );
+                        $this->_goBack();
+                        return;
+                    }
+
+                }
+            }
+
+        }
+        //check if the couponcode have , cause we do not accept it
+
+        $pos = strpos($couponCode,',');
+        if($pos === FALSE){
+            $oldCouponCode = $this->_getQuote()->getCouponCode();
+
+            if(! $this->_getCouponStatus($couponCode) ){
+                $this->_getSession()->addError(
+                    $this->__('Coupon code "%s" Not Found / Expired.', Mage::helper('core')->escapeHtml($couponCode))
+                );
+                $this->_goBack();
+                return;
+            }
+
+
+            $oldCouponCodes = explode(',',$oldCouponCode);
+            $allOldCoupon = null;
+            foreach($oldCouponCodes as $oldCouponCode){
+
+                if (!strlen($couponCode) && !strlen($oldCouponCode)) {
+                    $this->_goBack();
+                    return;
+                }
+                elseif(!strcmp($couponCode,$oldCouponCode) ){
+                    $flag = 0;
+                }
+                else{
+                    if(strlen($oldCouponCode)){
+
+                        $allOldCoupon = $oldCouponCode.','.$allOldCoupon;
+
+                    }
+                }
+            }
+
+            $allOldCoupon =  $allOldCoupon.''.$couponCode;//here , is not working
+
+            $this->_getQuote()->setCouponCode($allOldCoupon);
+
+            if($flag){
                 try {
-                    //$totalLength = strlen($allOldCoupon);
+                    $totalLength = strlen($allOldCoupon);
                     $codeLength = strlen($couponCode);
                     $isCodeLengthValid = $codeLength && $codeLength <= Mage_Checkout_Helper_Cart::COUPON_CODE_MAX_LENGTH;
-                    //$isValidlength = $totalLength && $totalLength <= Mage_Checkout_Helper_Cart::COUPON_CODE_MAX_LENGTH;
+                    $isValidlength = $totalLength && $totalLength <= Mage_Checkout_Helper_Cart::COUPON_CODE_MAX_LENGTH;
 
                     $this->_getQuote()->getShippingAddress()->setCollectShippingRates(true);
+                    //$this->_getQuote()->setCouponCode($isCodeLengthValid ? $couponCode : '');
+
+                    //try with set coupon code manually then
+                    //$this->_getQuote()->setCouponCode($allOldCoupon)->save();
+
+
 
                     if ($codeLength) {
-                        if ($isCodeLengthValid  ) {//&& $isValidlength
+                        if ($isCodeLengthValid && $isValidlength && $allOldCoupon == $this->_getQuote()->getCouponCode()) {
                             if (!empty($couponCode)) {
 
-                                $this->_getQuote()->collectTotals($couponCode, $item_array )->save();
-                                //$this->_getQuote()->setCouponCode($allOldCoupon)->save();
-                                //$this->_getQuote()->save();
-
-
+                                $this->_getQuote()->collectTotals($couponCode);
+                                $this->_getQuote()->setCouponCode($allOldCoupon)->save();
 
 
                             }
@@ -202,12 +207,13 @@ class Compandsave_MultipleCoupon_CartsController extends Mage_Core_Controller_Fr
                     Mage::logException($e);
                 }
 
-                $this->_goBack();
 
+
+                $this->_goBack();
             }
             else{
                 $this->_getSession()->addError(
-                    $this->__('Coupon code "%s" Contain Invalid Character.', Mage::helper('core')->escapeHtml($couponCode))
+                    $this->__('Coupon code "%s" already in use.', Mage::helper('core')->escapeHtml($couponCode))
                 );
                 $this->_redirect('checkout/cart');
                 return;
@@ -215,14 +221,14 @@ class Compandsave_MultipleCoupon_CartsController extends Mage_Core_Controller_Fr
         }
         else{
             $this->_getSession()->addError(
-            $this->__('Coupon code "%s" already in use.', Mage::helper('core')->escapeHtml($couponCode))
+                $this->__('Coupon code "%s" Contain Invalid Character.', Mage::helper('core')->escapeHtml($couponCode))
             );
             $this->_redirect('checkout/cart');
             return;
         }
 
-    }
 
+    }
 	public function removeCouponAction(){
 		
 		if (!$this->_validateFormKey()) {
@@ -262,34 +268,9 @@ class Compandsave_MultipleCoupon_CartsController extends Mage_Core_Controller_Fr
 		$this->_getQuote()->setAppliedRuleIds(strrev(rtrim($savedRuleId,',')))
 							->setCouponCode($couponcodes)
 							->save();
-        foreach ($this->_getQuote()->getAllVisibleItems() as $item) {
-            if ($item->getParentItem()) {
-                continue;
-            }
-            /*
-             * If in array of un applicable rule then we do not count discount for it
-             */
 
-            $applieditemruleid = explode(',',$item->getAppliedRuleIds());
-
-            $saveditemRuleId = null;
-            foreach($applieditemruleid as $ruleitemId){
-
-                if(!empty($ruleitemId)){
-
-                    if($ruleitemId == $paramruleid)
-                        continue;
-                    else
-                        $saveditemRuleId = $ruleitemId.','.$saveditemRuleId;
-
-                }
-
-            }
-
-            $item->setAppliedRuleIds(strrev(rtrim($saveditemRuleId,',')))->save();
-        }
         $this->_getQuote()->collectTotals()->save();
-
+		
 		$this->_goBack();
 	
 	}

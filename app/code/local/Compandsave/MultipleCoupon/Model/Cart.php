@@ -8,20 +8,18 @@ class  Compandsave_MultipleCoupon_Model_Cart extends Mage_Checkout_Model_Cart
 */
     public function save()
     {
+
         Mage::dispatchEvent('checkout_cart_save_before', array('cart'=>$this));
         $this->getQuote()->getBillingAddress();
-        $this->getQuote()->getShippingAddress()->setCollectShippingRates(true);
-
-        /*
-         * Hard code here about free shipping for
-         */
         $address = $this->getQuote()->getShippingAddress();
 
         $freeshippingflag = Mage::getStoreConfig('carriers/freeshipping/active');
         $freeshippingamount = Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal');
         $freesubtotalamount = $this->getQuote()->getBaseSubtotal();
         $methods = Mage::getSingleton('shipping/config')->getActiveCarriers();
+
         if($freeshippingflag == 1 and $freesubtotalamount >= $freeshippingamount ){
+
             foreach($methods as $_ccode => $_carrier) { //get all carrier model
                 if($_ccode ==='freeshipping'){ //carrier code
                     if($_methods = $_carrier->getAllowedMethods())  {
@@ -41,7 +39,40 @@ class  Compandsave_MultipleCoupon_Model_Cart extends Mage_Checkout_Model_Cart
 
             }
 
+        }elseif($freeshippingflag == 1 and $freesubtotalamount < $freeshippingamount){
+
+            //if($address->getShippingMethod() === 'freeshipping_freeshipping'){
+                $array = $address->setCountryId($address->getCountryId())
+                    ->setCollectShippingRates(true)->getGroupedAllShippingRates();
+                foreach ($array as $carrier) {
+                    foreach ($carrier as $rate) {
+
+                        $rate_array[] = $rate->getPrice();
+
+                    }
+
+                    $m_rate = min($rate_array);
+
+                    foreach ($carrier as $rate) {
+
+                        if($rate->getPrice() == $m_rate){
+
+                            $shipping_code = $rate->getCode();
+
+
+
+                        }
+
+                    }
+
+                }
+
+            $address->setShippingMethod($shipping_code);
+
+        }else{
+            $address->setCollectShippingRates(true)->collectShippingRates();
         }
+
         $this->getQuote()->collectTotals();
         $this->getQuote()->save();
 

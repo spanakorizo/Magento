@@ -10,8 +10,12 @@
             <compandsave_productselector>
 			    <class>Compandsave_Productselector_Model</class>
             </compandsave_productselector>
-
-		</models>
+            <!--<tax>
+                <rewrite>
+                    <sales_total_quote_tax>Compandsave_Productselector_Model_Sales_Total_Quote_Tax</sales_total_quote_tax>
+                </rewrite>
+            </tax>-->
+        </models>
 		<helpers>
 			<compandsave_productselector>
 				<class>Compandsave_Productselector_Helper</class>

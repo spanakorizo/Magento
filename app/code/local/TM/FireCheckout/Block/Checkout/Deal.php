@@ -66,25 +66,38 @@ class TM_FireCheckout_Block_Checkout_Deal extends Mage_Checkout_Block_Cart_Shipp
         $getdiscountAmount = $ruleData['discount_amount'];
 		$this->_coupondetails['description'] = $ruleData['description'];
 		$actiontype = $ruleData['simple_action'];
-		if($actiontype === 'by_percent'){
-			//add code here for step
-            $totaldiscount = (float) $address->getSubtotal() * $getdiscountAmount / 100;
-			
-			
-		}
-		elseif($actiontype === 'cart_fixed'){ //total deduct from cart
-			$totaldiscount =  $getdiscountAmount; //here total / qty
-			
-		}
-		elseif($actiontype === 'by_fixed'){ //fixed amount for qty
-			$totaldiscount = $quote->getItemsQty() * $getdiscountAmount; 
-			
-		}
+        $totaldiscount = 0;
+
+        foreach($quote->getAllVisibleItems() as $item){
+
+            if ($item->getParentItem()) {
+                continue;
+            }
+            if (!$oRule->getActions()->validate($item)){
+                continue;
+            }
+
+            if($actiontype === 'by_percent'){
+                //add code here for step
+                $totaldiscount += (float) ($item->getQty() * (($item->getPrice() * $getdiscountAmount) / 100));
+
+            }
+            elseif($actiontype === 'cart_fixed'){ //total deduct from cart
+                $totaldiscount +=   ($getdiscountAmount / $quote->getItemsQty()) * $item->getQty(); //here total / qty
+
+            }
+            elseif($actiontype === 'by_fixed'){ //fixed amount for qty
+                $totaldiscount += $item->getQty() * $getdiscountAmount;
+
+            }
+        }
+
 
         $this->_coupondetails['discount_amount'] = $totaldiscount;
 
 		return  $this->_coupondetails;
 	}
+
     public function getGiftCardInfo(){
 
         $address = $this->getQuote()->getShippingAddress();
