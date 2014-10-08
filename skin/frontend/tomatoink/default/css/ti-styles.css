@@ -1,4 +1,3 @@
-@charset "UTF-8";
 /************* CSS Header ******************************/
 /*
 Please refer to http://www.877ink.com/coding-standards.pdf for
@@ -1931,10 +1930,10 @@ td, th {
   content: "\e738"; }
 
 .icon-angle-left:before {
-  content: "ΓÇ╣"; }
+  content: "‹"; }
 
 .icon-angle-right:before {
-  content: "ΓÇ║"; }
+  content: "›"; }
 
 .icon-tab:before {
   content: "\e739"; }
@@ -3966,48 +3965,6 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 .ti-close:hover {
   opacity: 1.0; }
 
-/* Product Ratings*/
-.ti_product_rating {
-  width: 83px;
-  height: 19px;
-  background: url("../images/ti-assets/star-rating.png") no-repeat;
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 5px; }
-
-.star0 {
-  background-position: 0 0; }
-
-.star0_5 {
-  background-position: 0px -18px; }
-
-.star1 {
-  background-position: 0px -36px; }
-
-.star1_5 {
-  background-position: 0px -54px; }
-
-.star2 {
-  background-position: 0px -72px; }
-
-.star2_5 {
-  background-position: 0px -90px; }
-
-.star3 {
-  background-position: 0px -108px; }
-
-.star3_5 {
-  background-position: 0px -126px; }
-
-.star4 {
-  background-position: 0px -144px; }
-
-.star4_5 {
-  background-position: 0px -162px; }
-
-.star5 {
-  background-position: 0px -180px; }
-
 /* Printer Page */
 .ti_printer_sortBar {
   margin: 1% 0; }
@@ -4208,13 +4165,6 @@ a[class^="PIN_"], a[class*=" PIN_"] {
   #ti_footer_row {
     min-width: 600px; }
 
-  .ti_header_top_block,
-  #ti_header_quick_links .ti_header_top_block {
-    margin: 0;
-    width: 50%;
-    text-align: center;
-    font-size: .9em; }
-
   #ti_header_accountDrop {
     margin-left: -48px; }
 
@@ -4241,6 +4191,11 @@ a[class^="PIN_"], a[class*=" PIN_"] {
   #ti_main_coupon {
     z-index: 3;
     top: 65px; }
+
+  .ti_header_toplinks {
+    text-align: left;
+    font-size: .9em;
+    padding: 0 5px; }
 
   #ti_header_quick_links {
     z-index: 10;
