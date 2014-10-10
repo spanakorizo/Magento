@@ -41,9 +41,9 @@
     </li>
 */ ?>
     <div class="one_half">
-        <li class="text_center"><!--these credit spans need a class of ti_checkout_creditSelected when selected. Please refer to ivision notes about how this should function: https://projects.invisionapp.com/d/main#/console/867217/37411155/comments/18995264 -->
-            <label for="<?php echo $_code ?>_cc_type" class="required"><em>*</em><?php echo $this->__('Credit Card Type') ?></label>
-            <div class="input-box">
+        <li><!--these credit spans need a class of ti_checkout_creditSelected when selected. Please refer to ivision notes about how this should function: https://projects.invisionapp.com/d/main#/console/867217/37411155/comments/18995264 -->
+            <!--<label for="<?php //echo $_code ?>_cc_type" class="required"><em>*</em><?php //echo $this->__('Credit Card Type') ?></label>-->
+            <div class="input-box ti-required-entry">
                 <select id="<?php echo $_code ?>_cc_type" name="payment[cc_type]" class="required-entry validate-cc-type-select">
                     <option value=""><?php echo $this->__('--Please Select--')?></option>
                     <?php $_ccType = $this->getInfoData('cc_type') ?>
@@ -52,7 +52,7 @@
                     <?php endforeach ?>
                 </select>
             </div>
-            <span class="ti_checkout_credit mastercard" key="MC"></span> <span class="ti_checkout_credit visa" key="VI"></span> <span class="ti_checkout_credit discover" key="DI"></span> <span class="ti_checkout_credit amex" key="AE"></span>
+            <label for="<?php echo $_code ?>_cc_type" class="required"><span>Select: </span></label><span class="ti_checkout_credit mastercard" key="MC"></span> <span class="ti_checkout_credit visa" key="VI"></span> <span class="ti_checkout_credit discover" key="DI"></span> <span class="ti_checkout_credit amex" key="AE"></span>
         </li>
         <script type="text/javascript">
             jQuery("#<?php echo $_code ?>_cc_type").hide();
@@ -139,9 +139,13 @@
         <div class="input-box">
             <div class="v-fix">
                 <input type="checkbox" id="<?php echo $_code ?>_cc_save_future" name="payment[cc_save_future]" value="Y" />
+                <label for="<?php echo $_code ?>_cc_save_future">
+                    <div class="ti-checkbox"></div>
+                    <span><?php echo $this->__('Save this card for future use') ?></span>
+                </label>
             </div>
         </div>
-        <label for="<?php echo $_code ?>_cc_save_future"><?php echo $this->__('Save this card for future use') ?></label>
+        
     </li>
     <?php endif; ?>
 

@@ -135,13 +135,13 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 </div>
                 <div class="your-review overall">
                     <!--<div class="left">
-                        <p class="desc"><?php echo $this->__("Try to avoid") ?>:</p>
+                        <p class="desc"><?php //echo $this->__("Try to avoid") ?>:</p>
                         <ul class="desc ti_bullet">
-                            <li><?php echo $this->__("Non-product related comments") ?></li>
-                            <li><?php echo $this->__("Price and promotion details")?></li>
-                            <li><?php echo $this->__("Inappropriate language")?></li>
-                            <li><?php echo $this->__("Info about other companies or websites") ?></li>
-                            <li><?php echo $this->__("Any personal info. We want to protect your privacy!") ?></li>
+                            <li><?php //echo $this->__("Non-product related comments") ?></li>
+                            <li><?php //echo $this->__("Price and promotion details")?></li>
+                            <li><?php //echo $this->__("Inappropriate language")?></li>
+                            <li><?php //echo $this->__("Info about other companies or websites") ?></li>
+                            <li><?php //echo $this->__("Any personal info. We want to protect your privacy!") ?></li>
                         </ul>
                     </div>-->
                     
@@ -248,23 +248,26 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                     ?>
                 <div class="upload-image">
                     <!--<div class="left">
-                        <span class="title altTxt"><?php echo $this->__("Upload Your Image") ?></span>
-                        <p class="desc"><?php echo $this->__("Pictures speak a thousand words!") ?></p>
+                        <span class="title altTxt"><?php //echo $this->__("Upload Your Image") ?></span>
+                        <p class="desc"><?php //echo $this->__("Pictures speak a thousand words!") ?></p>
                         <ul class="desc ti_bullet">
-                            <li><?php echo $this->__("PNG, GIF or JPEG format") ?></li>
-                            <li><?php echo $this->__("File size must be %d MB or less", $maxSize) ?></li>
-                            <li><?php echo $this->__("Image must be at least %d px by %d px", $minHeight, $minWidth) ?></li>
-                            <li><?php echo $this->__("Image must be at least %d pixels wide", $minWidth) ?></li>
+                            <li><?php //echo $this->__("PNG, GIF or JPEG format") ?></li>
+                            <li><?php //echo $this->__("File size must be %d MB or less", $maxSize) ?></li>
+                            <li><?php //echo $this->__("Image must be at least %d px by %d px", $minHeight, $minWidth) ?></li>
+                            <li><?php //echo $this->__("Image must be at least %d pixels wide", $minWidth) ?></li>
                         </ul>
                     </div>-->
-                    <div class="">
+                    <div class="one">
                         <div class="input-box" id="add-file-input-box">
                             <div class="more-images">
                                 <span>
-                                    <input type="file" name="image[]" id="image_field" class="firstInput" value="<?php echo $this->htmlEscape($data->getImage()) ?>" /><a href="#" class="remove-img ti_button ti_altBtn ti_button_mini">X</a>
+                                    <label><span>Files allowed are <span class="altTxt">jpeg or png</span> and are limited to <span class="altTxt">100kb</span>.</span>
+                                        <input type="file" name="image[]" id="image_field" class="firstInput" value="<?php echo $this->htmlEscape($data->getImage()) ?>" /><a href="#" class="remove-img ti_button ti_altBtn ti_button_mini">X</a>
+                                    </label>
                                 </span>
                             </div>
                         </div>
+                        <div id="ti_review_image_check" class = "validation-advice"></div>
                         <?php if ((int)Mage::getStoreConfig('detailedreview/image_options/images_max_count') > 1): ?>
                             <p class="more-images"><a href="#" id="add-more-images" class="altTxt">+ Add more files</a></p>
                         <?php endif ?>
@@ -333,10 +336,10 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 <div id="review-captcha">
                 <!--[if IE 7]>
                     <script type="text/javascript"
-                            src="//www.google.com/recaptcha/api/challenge?k=<?php echo $public_key; ?>">
+                            src="//www.google.com/recaptcha/api/challenge?k=<?php //echo $public_key; ?>">
                     </script>
                     <noscript>
-                        <iframe src="//www.google.com/recaptcha/api/noscript?k=<?php echo $public_key; ?>"
+                        <iframe src="//www.google.com/recaptcha/api/noscript?k=<?php //echo $public_key; ?>"
                                 height="300" width="500" frameborder="0"></iframe><br>
                         <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
                         <input type="hidden" name="recaptcha_response_field"

@@ -71,16 +71,17 @@
 							<option value="apple-printer-ink-toner.html">Apple</option>
 							<option value="compaq-printer-ink-toner.html">Compaq</option>
 							<option value="apollo-printer-ink-toner.html">Apollo</option>
-							<option>AstroJet</option>
-							<option>Bryce</option>
-							<option>Hasler</option>
-							<option>Mimaki</option>
-							<option>Mutoh</option>
-							<option>NeoPost</option>
-							<option>Rena</option>
-							<option>Roland</option>
-							<option>Secap</option>
-							<option>Accessories</option>
+							<option value="other-brands-printer-ink-toner-cartridges/astrojet-series-ink-and-toner-cartridges.html">AstroJet</option>
+							<option value="other-brands-printer-ink-toner-cartridges/bryce-series-ink-and-toner-cartridges.html">Bryce</option>
+							<option value="other-brands-printer-ink-toner-cartridges/hasler-series-ink-and-toner-cartridges.html">Hasler</option>
+							<option value="other-brands-printer-ink-toner-cartridges/mimaki-series-ink-and-toner-cartridges.html">Mimaki</option>
+							<option value="other-brands-printer-ink-toner-cartridges/mutoh-series-ink-and-toner-cartridges.html">Mutoh</option>
+							<option value="other-brands-printer-ink-toner-cartridges/neopost-series-ink-and-toner-cartridges.html">NeoPost</option>
+							<option value="other-brands-printer-ink-toner-cartridges/rena-series-ink-and-toner-cartridges.html">Rena</option>
+							<option value="other-brands-printer-ink-toner-cartridges/roland-series-ink-and-toner-cartridges.html">Roland</option>
+							<option value="other-brands-printer-ink-toner-cartridges/secap-series-ink-and-toner-cartridges.html">Secap</option>
+							<option value="usb-printer-cables.html">Cables</option>
+							<option value="printer-supply.html">Photo Paper</option>
 						</select>
 						<script type="text/javascript">
 							jQuery("#ti_header_mininav").change(function() {
@@ -263,7 +264,7 @@
         if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 ) //this for bundle otherwise all product under bundle will show in cart
 		//$shopptingcarthtml .= "<div class='ti_related_item_one_fourth ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
 
-            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
+            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . str_replace('"', '', $product->getName()) . "</p></div></div></a></div>";
 
 
 
@@ -276,6 +277,9 @@
 
     if ($shopptingcarthtml != "") $shopptingcarthtml .= "</div><div class='ti_miniCart_subtotal'><h4 class='ltWeight lgTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
     else $shopptingcarthtml = "<p class='text_center'><span class='altTxt'>You don't have any items inside cart.</span></p>";
+
+
+    $shopptingcarthtml = str_replace('"', '', $shopptingcarthtml);
     
     ?>
 
@@ -290,14 +294,15 @@
 /* Author: Yiyang     Date 4/25/2014     */
 /*****************************************/
 
+(function () {
 var ti_global_islogin = "<?php  if ($this->helper('customer')->isLoggedIn()) echo true; else echo false;  ?>";
 var ti_global_customerid = "";
 if (ti_global_islogin) ti_global_customerid = "<?php if ($this->helper('customer')->isLoggedIn()) echo Mage::getSingleton('customer/session')->getCustomer()->getId(); ?>";
 var ti_global_total   = "<?php echo $total_num ?>";
-jQuery(document).ready(function($) {
+//jQuery(document).ready(function($) {
 //my account signin/signout
-if (ti_global_islogin) {$('#ti_header_login').hide();}
-else {$('#ti_header_logout').hide();}
+if (ti_global_islogin) {jQuery('#ti_header_login').hide();}
+else {jQuery('#ti_header_logout').hide();}
 
 //shopping cart count
 jQuery('#ti_header_cartcount').html(ti_global_total);
@@ -313,14 +318,10 @@ jQuery('#ti_header_cartDrop').contentcarouselhd();
 jQuery('.ti_miniCart_carousel-nav').show();
 <?php endif; ?>
 
+//});
+})();
 
-//jQuery('.ti_miniCart_carousel_wrapper').css('width', '100%');
-//	jQuery('.ti_miniCart_carousel_wrapper').each(function(i) {
-//        jQuery(this).css({
-//            left        : i * 180 + 'px'
-//        });
-//	});
-});
+
 
 </script>
 	<!--Body content follows here-->

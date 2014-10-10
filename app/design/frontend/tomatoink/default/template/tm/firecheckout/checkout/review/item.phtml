@@ -26,6 +26,7 @@
 ?>
 <?php
     $_item = $this->getItem();
+    $_product = $_item->getProduct();
     $_nameAsLink = Mage::getStoreConfig('firecheckout/shopping_cart/name_as_link');
 ?>
 <tr>
@@ -41,7 +42,7 @@
                 $style = 'style="margin-left:' . ($width + 5) . 'px"';
             ?>
                 <!--<div class="product-image"><img src="<?php echo $this->getProductThumbnail()->resize($width, $height); ?>" width="<?php echo $width ?>" height="<?php echo $height; ?>" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /></div>-->
-                <div class="product-image"><img src="<?php echo $this->getProductThumbnail()->resize($width, $height); ?>" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /></div>
+                <div class="product-image"><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(175); ?>" alt="<?php echo $this->htmlEscape($this->getProductName()) ?>" /></div>
             <?php endif; ?>
         </div>
         <div class="ti_cart_desc">
@@ -212,7 +213,7 @@
             </div>-->
         </div>
     <?php else: ?>
-        <?php echo $_item->getQty() ?>
+        <p><?php echo $_item->getQty() ?></p>
     <?php endif; ?>
     </td>
     <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>

@@ -94,8 +94,11 @@ error_reporting(E_ALL);
 <div id="show_cart" class="ti_popup_cart_window ti_cms_border_block">
     <div class="ti_block_inner">
         <div class='text_center'><a class='ti_button' href='<?php echo $this->getUrl('') ?>checkout/cart/'><strong>Go To Cart</strong></a><a class="ti_button ti_altBtn" href="#" id="ti_continue_shopping"><strong>Continue Shopping</strong></a></div>
+        <a class="ti_close_popup ti_checkoutStep_close" id = "ti-popupcart-close">X</a>
 
-        <h2> There are <span id="ti_popup_cart_num"></span> item(s) to the cart.<br>You Just Add: </h2>
+        <h2> There are <span id="ti_popup_cart_num"></span> item(s) in your cart.</h2>
+        <div class="ti_cms_separator"></div>
+        <h2>You just added: </h2>
         <div id="show_cart_content">
 
         </div>
@@ -546,4 +549,9 @@ jQuery(document).ready(function($) {
 </div>
 
 <?php endif; ?>
-
+<!-- Keep in this file !-->
+<style type="text/css">
+    .messages {
+        display:none;
+    }
+</style>

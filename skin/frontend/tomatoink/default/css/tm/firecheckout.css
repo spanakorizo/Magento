@@ -204,16 +204,15 @@
 
 #firecheckout-form .discount-form .messages,
 #firecheckout-form .giftcard-form .messages { width: 97%; }
-#coupon-code, #giftcard_code { margin: 2px 0 2px; width: 125px; }
+#coupon-code, #giftcard_code {  }
 #coupon-cancel, #coupon-apply,
-#giftcard-add { display: inline; margin: 0; }
+#giftcard-add { }
 #firecheckout-form .discount { padding: 0; }
 #coupon-code,
 #giftcard_code,
-#rewardponts .input-text { margin: 2px 0; width: 110px; }
-#rewardponts select.input-text { width: 165px; }
+#rewardponts .input-text { } }
 #firecheckout-form .discount .button,
-#firecheckout-form .giftcard .button { margin: 0; }
+#firecheckout-form .giftcard .button { }
 
 /* gift messages */
 .firecheckout-set .gift-messages { margin-bottom: 5px; text-align: center }
@@ -250,7 +249,7 @@
 /* shipping & payment methods */
 .firecheckout-set .sp-methods { margin: 0; padding: 0; }
 .firecheckout-set .sp-methods .form-list { padding: 0; }
-.firecheckout-set .sp-methods .form-list li { float: none; width: auto; }
+.firecheckout-set .sp-methods .form-list li { text-align:center;float: none; width: auto; line-height: 38px;margin: 5px 0; }
 .firecheckout-set .sp-methods dt { margin: 0 0 5px; }
 .firecheckout-set .sp-methods dd { margin: 0 0 6px; }
 .firecheckout-set .sp-methods .input-box .v-fix { margin-right: 5px; max-width: 50%; }
@@ -262,7 +261,7 @@
 
 .firecheckout-set .discount-form,
 .firecheckout-set .giftcard-form,
-#rewardponts .block-content { padding: 0 0 8px 10px; }
+#rewardponts .block-content {  }
 .discount-form .input-field-wrapper,
 .giftcard-form .input-field-wrapper { float: left; }
 .firecheckout-set .discount-form .input-box,
@@ -270,7 +269,17 @@
 .firecheckout-set .discount-form .input-box:after,
 .firecheckout-set .giftcard-form .input-box:after { content: '.'; display: block; visibility: hidden; height: 0; font-size: 0; clear: both; }
 #customerbalance_placer,
-#reward_placer { padding: 0 10px; }
+#reward_placer,
+#customerbalance_placer dt,
+#reward_placer dt { width:100%; margin:0 auto;padding:1%; -webkit-box-sizing: border-box;-moz-box-sizing: border-box;-ms-box-sizing: border-box;box-sizing: border-box;}
+@media only screen and (max-width : 767px) {
+    #customerbalance_placer,
+    #reward_placer,
+    #customerbalance_placer dt,
+    #reward_placer dt {
+        width:98%;
+    }
+}
 
 /* editable shopping cart */
 .qty-wrapper { position: relative; }
@@ -297,8 +306,9 @@
     background: #fff; opacity: 0; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); } /* IE fix */
 #firecheckout-spinner { position: absolute; z-index: 10000;
     background: #fff url(../../images/tm/firecheckout/ajax-loader.gif) no-repeat 50% 25px;
-    border: 1px solid #dadada; text-align: center; padding: 60px 0 0 0;
-    width: 200px; height: 30px; margin: -60px 0 0 -100px; font-weight: bold; }
+    background-size:25%;
+    border: 1px solid #559a13; text-align: center; padding: 80px 30px 30px; border-radius:5px;
+    width: 150px; height: 50px; margin: -60px 0 0 -100px; font-weight: bold; }
 
 .firecheckout-set #checkout-payment-method-load { padding: 0 10px; }
 

@@ -1,17 +1,17 @@
-<div id="giftcard-account" class="one btcf">
-    <div class="ti_cms_block_headerBar-green"><h2 class="white ti_headerH1"><?php echo $this->__(' Gift Cards') ?></h2></div>
-    <div class="giftcard-form ti_cms_gradient_block">
+<div id="giftcard-account">
+    <div class="one_fourth"><h2 class="altTxt"><?php echo $this->__(' Gift Card (Optional)') ?></h2></div>
+    <div class="giftcard-form three_fourth">
         <?php
             echo $this->getMessagesBlock()->getGroupedHtml();
             $this->getMessagesBlock()->getMessageCollection()->clear();
         ?>
         <div class="giftcard">
-            <label class="altTxt btcf" for="giftcard_code"><span><?php echo $this->__('Enter the gift card code') ?></span></label>
-            <div class="input-box">
-                <div class="input-field-wrapper">
-                    <input class="input-text" id="giftcard_code" name="giftcard_code" value="" />
-                </div>
-                &nbsp; <button class="button" id="giftcard-add" type="button" value="<?php echo $this->__('Add Gift Card') ?>"><span><span><?php echo $this->__('Add Gift Card') ?></span></span></button>
+            <label for="giftcard_code" class="ti_cms_labelHide"><span><?php echo $this->__('Enter your gift card code:') ?></span></label>
+            <div class="input-box ti_input_bar no_border">
+                <!--<div class="input-field-wrapper">-->
+                    <input class="input-text" id="giftcard_code" name="giftcard_code" value="" type="text" placeholder="Enter your code"/>
+                <!--</div>-->
+                <button class="button" id="giftcard-add" type="button" value="<?php echo $this->__('Add Gift Card') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
             </div>
             <script type="text/javascript">
             //<![CDATA[

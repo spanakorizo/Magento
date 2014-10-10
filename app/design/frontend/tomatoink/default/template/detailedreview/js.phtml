@@ -43,14 +43,14 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
 //        document.observe('dom:loaded', function () {
 //            var $ = DRjQuery;
 
-            $("#imageLoading").ajaxStart(function() {
+           /* $("#imageLoading").ajaxStart(function() {
                 $(this).show();
-            });
-
+            }); 
+            
             $("#imageLoading").ajaxStop(function() {
                 $(this).hide();
             });
-
+            */
             var $reviewBlock = $('.reviews-wrapper');
             var $reviewPlaceholder = $('.reviews-placeholder');
             var $reviewEasytab = $('#product_tabs_review_tabbed_contents');
@@ -60,7 +60,7 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
                 //event.returnValue = false;
                 if(i < MaxFileInputs)
                 {
-                    $('<div class="more-images"><span><input type="file" name="image[]" id="image_field" class="addedInput" value="" /><a href="#" class="remove-img ti_button ti_altBtn ti_button_mini">Remove</a></span></div>').appendTo($('#add-file-input-box'));
+                    $('<div class="more-images"><span><input type="file" name="image[]" id="image_field" class="addedInput" value="" /><a href="#" class="remove-img ti_button ti_altBtn ti_button_mini">X</a></span></div>').appendTo($('#add-file-input-box'));
                     i++;
                 } else {
                         $("#add-more-images").css('display','none');
@@ -69,7 +69,7 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
                 return false;
             });
             $("body").on("click",".remove-img", function (e) {
-                event.returnValue = false;
+                //event.returnValue = false;
                 if( i > 0 ) {
                     $(this).parents('span').remove();
                     $("#add-more-images").css('display','block');
@@ -78,6 +78,7 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
                 if (MaxFileInputs == 1) {
                     $('<div class="more-images"><span><input type="file" name="image[]" id="image_field" class="addedInput" value="" /><a href="#" class="remove-img">Remove</a></span></div>').appendTo($('#add-file-input-box'));
                 }
+                return false;
             });
 
             if ($reviewPlaceholder.length) {
@@ -130,11 +131,21 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
 
          <?php if (Mage_Review_Model_Review::STATUS_APPROVED) ?>
             $('#review-form').live("submit", function(event){
+
                 var button = $('#review-form button.button').get(0);
                 var spinner = document.getElementById('review-add-spinner');
 //                button.style.display = 'none';
-//                spinner.style.display = '';
+                spinner.style.display = 'block';
 
+            var image_flag = false;
+            var image_name = $("#image_field").val();
+
+
+            if (image_name == "" || isImage(image_name)) image_flag = true;
+            else {
+                $("#ti_review_image_check").html("please update correct image type(jpg or png). ");
+                $("#add-file-input-box").attr("class", "input-box validation-failed");
+            }
             <?php if (Mage::getStoreConfig('detailedreview/captcha/enabled')): ?>
                 var flag = false;
                 var captchaError = $('.captcha-error');
@@ -169,9 +180,9 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
                     spinner.style.display = 'none';
                 }
             <?php endif; ?>
-
-            if (dataForm.validator.validate() == true){
+            if (dataForm.validator.validate() == true && image_flag == true){
                 $('#review-form .buttons-set button.button:submit').attr('disabled','disabled');
+
                 <?php if ( $reviewAjaxSubmit ): ?>
                     $('#review-form').ajaxSubmit({
                         target:"#upload-img",
@@ -187,15 +198,17 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
                                 $('#review-form .buttons-set button.button:submit').removeAttr('disabled');
                                 dialogClass = 'success';
                                 i = 1;
+                            
+
+
+
                             }
                             reviewDialog.dialog("destroy");
-                            
-                            var temptext = "Your review has been accepted for moderation.";
+                            var temptext = response.content.replace(/\[\[/g, '<');
+                            temptext = temptext.replace(/(<([^>]+)>)/ig,"");
                             $('.review-dialog-submit-result').html(temptext).dialog({
-                                dialogClass: dialogClass
+                                dialogClass: 'success'
                             });
-                            
-                            //$('.review-dialog-submit-result').html('you are successfully updated your review');
                             
                             $('.review-dialog-submit-result').delay(3000).fadeOut(function(){$(this).dialog("close")});
 
@@ -203,6 +216,7 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
                                 var html = response.html.replace(/\[\[/g, '<');
                                 $('.reviews-container').html(html);
                             }
+                            document.getElementById('review-add-spinner').style.display = 'none';
                         }
 
 
@@ -391,4 +405,21 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
         })(jQuery)
     });
     //]]>
+
+function getExtension(filename) {
+    var parts = filename.split('.');
+    return parts[parts.length - 1];
+}
+
+function isImage(filename) {
+    var ext = getExtension(filename);
+    switch (ext.toLowerCase()) {
+    case 'jpg':
+    case 'png':
+        //etc
+        return true;
+    }
+    return false;
+}
+
 </script>

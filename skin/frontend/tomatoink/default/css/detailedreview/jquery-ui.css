@@ -227,7 +227,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .ui-dialog { position: absolute; padding: .2em; width: 300px; overflow: hidden; }
 .ui-dialog .ui-dialog-titlebar { padding: .5em 1em .3em; position: relative;  }
 .ui-dialog .ui-dialog-title { float: left; margin: .1em 16px .2em 0; } 
-.ui-dialog .ui-dialog-titlebar-close { border: ;border-radius:50% !important;position: absolute; right: 0; top: 100%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 19px; }
+.ui-dialog .ui-dialog-titlebar-close { z-index:100;border-radius:50% !important;position: absolute; right: 0; top: 100%; width: 19px; margin: -10px 0 0 0; padding: 1px; height: 19px; }
 .ui-dialog .ui-dialog-titlebar-close span { display: block; margin: 1px; }
 .ui-dialog .ui-dialog-titlebar-close:hover, .ui-dialog .ui-dialog-titlebar-close:focus {  }
 .ui-dialog .ui-dialog-content { position: relative; border: 0; padding: .5em 1em; background: none; overflow: auto; zoom: 1; }

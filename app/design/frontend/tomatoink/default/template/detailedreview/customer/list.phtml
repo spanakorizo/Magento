@@ -33,8 +33,7 @@ $ratingsEnabled = Mage::helper('detailedreview')->checkEnabledRatings();
         <div class="page-title">
             <h1><?php echo $this->__('My Reviews') ?></h1>
         </div>
-        <div class="review-hr"></div>
-        <table class="customer-review-info-table">
+        <table class="customer-review-info-table data-table">
             <thead>
                 <tr>
                     <th><?php echo $this->__('Reviews') ?></th>
@@ -48,47 +47,63 @@ $ratingsEnabled = Mage::helper('detailedreview')->checkEnabledRatings();
             </thead>
             <tbody>
                 <tr>
-                    <td><?php echo $this->getCollection()->count(); ?></td>
+                    <td><p><?php echo $this->getCollection()->count(); ?></p></td>
                     <?php if ($ratingsEnabled): ?>
-                        <td><?php echo $this->getAvaregeRating(); ?></td>
+                        <td><p><?php echo $this->getAvaregeRating(); ?></p></td>
                     <?php endif; ?>
-                    <td><?php echo $this->getHelpfulVotes(); ?></td>
-                    <td><?php echo $this->dateFormat($this->getCollection()->getLastItem()->getReviewCreatedAt()); ?></td>
-                    <td><?php echo $this->dateFormat($this->getCollection()->getFirstItem()->getReviewCreatedAt()); ?></td>
+                    <td><p><?php echo $this->getHelpfulVotes(); ?></p></td>
+                    <td><p><?php echo $this->dateFormat($this->getCollection()->getLastItem()->getReviewCreatedAt()); ?></p></td>
+                    <td><p><?php echo $this->dateFormat($this->getCollection()->getFirstItem()->getReviewCreatedAt()); ?></p></td>
                 </tr>
             </tbody>
         </table>
         <?php $reviewSizing = Mage::getSingleton('detailedreview/review_sizing'); ?>
         <?php $reviewBodyType = Mage::getSingleton('detailedreview/review_bodyType'); ?>
         <?php foreach ($this->getCollection() as $keyReview => $_review): ?>
-            <div class="review-hr"></div>
-            <div class="review-dt account">
+            <div class="ti_cms_border_block one btcf">
+            <div class="review-dt account one_fourth">
                 <a href="<?php echo $_review->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_review, 'small_image'), null, true) ?>" class="product-image">
                     <div class="review-image">
-                        <img src="<?php echo $this->helper('catalog/image')->init($_review, 'small_image')->resize(90); ?>" width="90" height="90" alt="<?php echo $this->stripTags($this->getImageLabel($_review, 'small_image'), null, true) ?>" />
+                        <img src="<?php echo $this->helper('catalog/image')->init($_review, 'small_image')->resize(100); ?>" width="100" height="100" alt="<?php echo $this->stripTags($this->getImageLabel($_review, 'small_image'), null, true) ?>" class="block_center" />
                     </div>
-                    <span><?php echo $this->__($this->htmlEscape($_review->getName())) ?></span>
+                    <h3 class="altTxt"><?php echo $this->__($this->htmlEscape($_review->getName())) ?></h3>
                 </a>
             </div>
             <div class="review-dd">
-                <div class="header-reviews">
-                    <?php if ($ratingsEnabled): ?>
-                        <table class="ratings-table">
-                            <tr>
-                                <td>
-                                    <div class="rating-box">
-                                        <div class="rating" style="width:<?php if($_review->getSum() && $_review->getCount()){ echo $_review->getSum() / $_review->getCount();}else{echo 0;} ?>%;"></div>
+                <div class="one">
+                    <div class="title"><h3><strong><?php echo nl2br($this->htmlEscape($_review->getTitle())) ?></strong></h3></div>
+                    <?php if ( $helperDetailedreview->checkFieldAvailable('sizing', $_review) && ($sizing = $_review->getSizing()) ):?>
+                        <div class="sizing">
+                            <label class="label-review-attr"><?php echo $this->__('Sizing:') ?></label>
+                            <div class="value-review-attr">
+                                <div><?php echo $reviewSizing->getOptionValue($sizing) ?></div>
+                                <div class="sizing-bar">
+                                    <div style="width:<?php echo $reviewSizing->getOptionWidth($sizing) ?>%;">
                                     </div>
-                                </td>
-                            </tr>
-                        </table>
-                    <?php endif; ?>
-                    <?php
-                        $reviewStatus = Mage::getResourceModel('review/review_status_collection')
-                            ->addFieldToFilter('status_id',array('eq' => $_review->getStatusId()))
-                            ->load();
-                    ?>
-                    <div class="title status"><?php echo nl2br($this->__($reviewStatus->getFirstItem()->getStatusCode())); ?></div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif;?>
+                    <div class="header-reviews">
+                        <?php if ($ratingsEnabled): ?>
+                            <table class="ratings-table">
+                                <tr>
+                                    <td>
+                                        <div class="rating-box">
+                                            <div class="rating" style="width:<?php if($_review->getSum() && $_review->getCount()){ echo $_review->getSum() / $_review->getCount();}else{echo 0;} ?>%;"></div>
+                                        </div>
+                                        <?php
+                                                $reviewStatus = Mage::getResourceModel('review/review_status_collection')
+                                                    ->addFieldToFilter('status_id',array('eq' => $_review->getStatusId()))
+                                                    ->load();
+                                            ?>
+                                            <div class="title status"><?php echo nl2br($this->__($reviewStatus->getFirstItem()->getStatusCode())); ?></div>
+                                    </td>
+                                </tr>
+                            </table>
+                        <?php endif; ?>
+                        
+                    </div>
                 </div>
                 <?php if ( $helperDetailedreview->checkFieldAvailable('image', $_review) ): ?>
                     <?php if ( isset($newImageUrl) ) unset ($newImageUrl);
@@ -101,23 +116,11 @@ $ratingsEnabled = Mage::helper('detailedreview')->checkEnabledRatings();
                             <a class="jqueryLightbox" href="<?php echo  $image;?>" >
                                 <img src="<?php echo $newImageUrl;?>" alt=""/>
                             </a>
-                            <div>click for full-size image</div>
+                            <small>click for full-size image</small>
                         </div>
                     <?php endif; ?>
                 <?php endif; ?>
-                <div class="title"><?php echo nl2br($this->htmlEscape($_review->getTitle())) ?></div>
-                <?php if ( $helperDetailedreview->checkFieldAvailable('sizing', $_review) && ($sizing = $_review->getSizing()) ):?>
-                    <div class="sizing">
-                        <label class="label-review-attr"><?php echo $this->__('Sizing:') ?></label>
-                        <div class="value-review-attr">
-                            <div><?php echo $reviewSizing->getOptionValue($sizing) ?></div>
-                            <div class="sizing-bar">
-                                <div style="width:<?php echo $reviewSizing->getOptionWidth($sizing) ?>%;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                <?php endif;?>
+                
                 <div class="review-wrapper">
                     <ul>
                         <?php if ( $detail = $_review->getDetail() ):?>
@@ -150,10 +153,11 @@ $ratingsEnabled = Mage::helper('detailedreview')->checkEnabledRatings();
                 <div class="clearer"></div>
                 <?php if ($allVotes = $_review->getCountHelpful()+$_review->getCountUnhelpful()): ?>
                 <div class="helpful-block">
-                    <div class="helpful-info"><?php echo $_review->getCountHelpful() ?> of <?php echo $allVotes ?> found this review helpful.</div>
+                    <div class="helpful-info"><strong><?php echo $_review->getCountHelpful() ?> of <?php echo $allVotes ?> found this review helpful.</strong></div>
                 </div>
                 <?php endif;?>
             </div>
+        </div>
         <?php endforeach; ?>
     </div>
     <script type="text/javascript">
@@ -182,5 +186,5 @@ $ratingsEnabled = Mage::helper('detailedreview')->checkEnabledRatings();
     <p><?php echo $this->__('This Contributor has not submitted any reviews.') ?></p>
 <?php endif; ?>
 <div class="buttons-set">
-    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>"><small>&laquo; </small><?php echo $this->__('Back') ?></a></p>
+    <p class="back-link"><a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="ti_button"><?php echo $this->__('Back') ?></a></p>
 </div>

@@ -72,9 +72,9 @@
                 </div>
 
 
-
-                <div class="ti_image_gallery">
-                    <div id="ti_gallery_close"><a href="javascript:void(0);">close</a></div>
+                <div class="ti_image_gallery_bg"></div>
+                <div class="ti_image_gallery ti_cms_border_block btcf">
+                    <a id="ti_gallery_close" class="ti_close_popup ti_checkoutStep_close" href="javascript:void(0);">X</a>
                     <img id="ti_gallery_large" src="<?php echo $this->helper('catalog/image')->init($_product, 'image'); ?>" class="block_center ti_catalog_product_image"/>
                     <?php foreach ($this->getGalleryImages() as $_image): ?>   
                         <div class="ti_image_gallery_small">
@@ -87,36 +87,60 @@
 
                 </div>
 <!-- In the catalog/product/view/media.phtml !-->
-<style type="text/css">
+<!--<style type="text/css">
+    .ti_image_gallery_bg{
+        display:none;
+        position:absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+        background:rgba(0,0,0,.4);
+    }
     .ti_image_gallery {
         display: none;
         position:absolute;
-        width:600px;
-        left: 15%;
-        top: 150px;
+        width:700px;
+        height:900px;
+        left: 50%;
+        margin-left:-350px;
+        margin-top:-500px;
         z-index: 1000;
-        background-color:white;
-        border:solid black 1px;
-
+        border-radius:5px;
+        -webkit-border-radius:5px;
+        -moz-border-radius:5px;
     }
     .ti_image_gallery_small {
-        height: 25%;
-        width: 25%;
+        width: 23%;
+        margin:1%;
+        float:left;
         display:inline-block;
+    }
+
+    .ti_image_gallery img{
+        height:600px;
+        width:auto;
+        margin:0 auto;
+    }
+
+    .ti_image_gallery .ti_image_gallery_small img{
+        height:auto;
     }
 
     #ti_gallery_close {
         float:right;
         font-size: 1.5em;
     }
-</style>
+</style>-->
 <script type="text/javascript">
     jQuery('#ti_gallery_close').click(function() {
         jQuery(".ti_image_gallery").hide();
+        jQuery(".ti_image_gallery_bg").hide();
     });
 
     jQuery(".jqzoom.no-dec").click(function() {
         jQuery(".ti_image_gallery").show();
+        jQuery(".ti_image_gallery_bg").show();
     });
 
     jQuery(".ti_image_gallery_small").click(function() {

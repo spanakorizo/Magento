@@ -56,7 +56,15 @@ function add_to_box(id1,id2){
           //pop up cart
           jQuery('#ti_continue_shopping').click(function(e){
             e.preventDefault();
-            jQuery('#show_cart').hide("slow");
+            jQuery('#show_cart').hide();
+            jQuery('#ti_hide_body_div').hide();
+            e.stopPropagation();
+           });
+
+           //pop up cart
+          jQuery('#ti-popupcart-close').click(function(e){
+            e.preventDefault();
+            jQuery('#show_cart').hide();
             jQuery('#ti_hide_body_div').hide();
             e.stopPropagation();
            });
@@ -272,44 +280,47 @@ function change_readmore(_more, _less) {
 /*  top links/coupon code/search help/need more slidetoggle function   */
 /*    Author: Yiyang     5-9-2014                                      */
 /***********************************************************************/
+  $(".ti_cms_dropContent").click(function(e) {
+    e.stopPropagation();
+  });
+
 
 	$("#ti_header_help").click(function(e){
-		//jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-		//if (!$("#ti_header_helpDrop").is(":visible")) 
-	//		$("#ti_header_helpDrop").stop(true, true).slideToggle("fast");
-    jQuery(".ti_cms_dropContent:visible").hide();
-if (!$("#ti_header_helpDrop").is(":visible"))  
-      $("#ti_header_helpDrop").show();
+		jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+		if (!$("#ti_header_helpDrop").is(":visible")) 
+			$("#ti_header_helpDrop").stop(true, true).slideToggle("fast");
+
+
+
+//    jQuery(".ti_cms_dropContent:visible").hide();
+//if (!$("#ti_header_helpDrop").is(":visible"))  
+//    $("#ti_header_helpDrop").show();
 
 		coupon_slideback();
 		e.stopPropagation();
 	});
 
   $("#ti_header_cart").click(function(e){
-  	//jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-  	//if (!$("#ti_header_cartDrop").is(":visible")) 
-    //$("#ti_header_cartDrop").stop(true, true).slideToggle("fast");
-    jQuery(".ti_cms_dropContent:visible").hide();
- if (!$("#ti_header_cartDrop").is(":visible")) 
-      $("#ti_header_cartDrop").show();
+  	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  	if (!$("#ti_header_cartDrop").is(":visible")) 
+    $("#ti_header_cartDrop").stop(true, true).slideToggle("fast");
+  //  jQuery(".ti_cms_dropContent:visible").hide();
+ //if (!$("#ti_header_cartDrop").is(":visible")) 
+   //   $("#ti_header_cartDrop").show();
 
   coupon_slideback();
     e.stopPropagation();
   });
 
   $("#ti_header_account").click(function(e){
-  	//jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
-  	//if (!$("#ti_header_accountDrop").is(":visible")) 
-    //$("#ti_header_accountDrop").stop(true, true).slideToggle("fast");
+  	jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
+  	if (!$("#ti_header_accountDrop").is(":visible")) 
+    $("#ti_header_accountDrop").stop(true, true).slideToggle("fast");
 
-    jQuery(".ti_cms_dropContent:visible").hide();
-   if (!$("#ti_header_accountDrop").is(":visible"))
-      $("#ti_header_accountDrop").show();
+    //jQuery(".ti_cms_dropContent:visible").hide();
+   //if (!$("#ti_header_accountDrop").is(":visible"))
+   //   $("#ti_header_accountDrop").show();
     coupon_slideback();
-    e.stopPropagation();
-  });
-
-  $(".ti_cms_dropContent").click(function(e) {
     e.stopPropagation();
   });
 
@@ -332,7 +343,7 @@ if (!$("#ti_header_helpDrop").is(":visible"))
 //hide drop content when clicking on anywhere else
 jQuery(document).click(function (e) {
 
-  jQuery(".ti_cms_dropContent:visible").hide();
+  jQuery(".ti_cms_dropContent:visible").stop(true, true).slideUp("fast");
   if (e.target.id != "ti_header_coupon_code")
   coupon_slideback();
 
