@@ -1932,10 +1932,10 @@ td, th {
   content: "\e738"; }
 
 .icon-angle-left:before {
-  content: "‹"; }
+  content: "<"; }
 
 .icon-angle-right:before {
-  content: "›"; }
+  content: ">"; }
 
 .icon-tab:before {
   content: "\e739"; }
@@ -3412,7 +3412,10 @@ input.ti_checkout_info {
   float: left;
   width: 25%; }
 
-/* Orders */
+/* Saved Payment Methods */
+#stored-cards-table td {
+  min-width: 25%; }
+
 /* Rewards */
 #customerbalance-history {
   border: 1px solid #559a13; }

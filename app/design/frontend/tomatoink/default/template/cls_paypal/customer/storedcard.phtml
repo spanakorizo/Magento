@@ -64,11 +64,11 @@ $_storedCardHelper = Mage::helper('cls_paypal/storedcard');
         <?php foreach ($_storedCards as $_storedCard): ?>
         <tr>
             <td><?php echo $_storedCardHelper->translateCcType($_storedCard->getCcType()) ?> (<?php echo sprintf('xxxx-%s', $_storedCard->getCcLast4()) ?>)</td>
-            <td class="a-center"><span class="nobr"><?php echo $_storedCard->getCcExpMonth() ?>/<?php echo $_storedCard->getCcExpYear() ?></span></td>
-            <td class="a-center"><span class="nobr"><?php echo $this->formatDate($this->transformDate($_storedCard->getDate())) ?></span></td>
+            <td class="a-center"><p><span class="nobr"><?php echo $_storedCard->getCcExpMonth() ?>/<?php echo $_storedCard->getCcExpYear() ?></span></p></td>
+            <td class="a-center"><p><span class="nobr"><?php echo $this->formatDate($this->transformDate($_storedCard->getDate())) ?></span></p></td>
             <td class="a-center">
                 <span class="nobr">
-                    <a href="<?php echo $this->getDeleteUrl($_storedCard) ?>" onclick="return confirm('<?php echo $this->__('Are you sure?') ?>')"><?php echo $this->__('Delete') ?></a>
+                    <a href="<?php echo $this->getDeleteUrl($_storedCard) ?>" onclick="return confirm('<?php echo $this->__('Are you sure?') ?>')" class="ti_buton ti_button_mini"><span class="icon-remove2"></span><?php echo $this->__('Delete') ?></a>
                 </span>
             </td>
         </tr>
