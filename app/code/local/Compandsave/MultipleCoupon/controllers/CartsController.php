@@ -93,10 +93,14 @@ class Compandsave_MultipleCoupon_CartsController extends Mage_Core_Controller_Fr
         $flag = 0;
         $oldcouponcodes = explode(',',$this->_getQuote()->getCouponCode());
         foreach($oldcouponcodes as $oldcouponcode){
-            if(strpos( $oldcouponcodes, $oldcouponcode ) === FALSE)
-                continue;
-            else
+            if(!strcmp( $couponCode, $oldcouponcode )){
+                $flag = 0;
+                break;
+            }
+            else{
                 $flag = 1;
+            }
+
         }
         if($flag == 1){
             $item_array = array();
@@ -110,7 +114,7 @@ class Compandsave_MultipleCoupon_CartsController extends Mage_Core_Controller_Fr
                     //$newDescription = $ruleData['description'];
                     $address = $this->_getQuote()->getShippingAddress();
 
-                    if (!Mage::getModel('salesrule/validator')->_canProcessRule($oRule, $address) || !$isactive) {
+                    if (!Mage::getModel('compandsave_multiplecoupon/quote')->_canProcessRule($oRule, $address) || !$isactive) {
                         $this->_getSession()->addError(
                             $this->__('Coupon code "%s" is not valid or active', Mage::helper('core')->escapeHtml($couponCode))
                         );
@@ -145,6 +149,7 @@ class Compandsave_MultipleCoupon_CartsController extends Mage_Core_Controller_Fr
                         $this->_goBack();
                         return;
                     }
+
                 }
 
             }
