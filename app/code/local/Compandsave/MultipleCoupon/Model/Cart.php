@@ -39,7 +39,7 @@ class  Compandsave_MultipleCoupon_Model_Cart extends Mage_Checkout_Model_Cart
 
             }
 
-        }elseif($freeshippingflag == 1 and $freesubtotalamount < $freeshippingamount){
+        }/*elseif($freeshippingflag == 1 and $freesubtotalamount < $freeshippingamount){
 
             //if($address->getShippingMethod() === 'freeshipping_freeshipping'){
                 $array = $address->setCountryId($address->getCountryId())
@@ -69,7 +69,7 @@ class  Compandsave_MultipleCoupon_Model_Cart extends Mage_Checkout_Model_Cart
 
             $address->setShippingMethod($shipping_code);
 
-        }else{
+        }*/else{
             $address->setCollectShippingRates(true)->collectShippingRates();
         }
 
