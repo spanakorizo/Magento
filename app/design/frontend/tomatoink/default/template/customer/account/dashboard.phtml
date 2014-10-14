@@ -121,6 +121,7 @@
 
                     ?></strong></h3>
                     <p class="ti_dashboard_amount"><?php echo Mage::helper('core')->currency($balance->getAmount()); ?></p>
+                    <a href="<?php echo $this->getUrl('giftcard/customer') ?>" class="ti_button"><?php echo $this->__('View history') ?></a>
                 </div>
 
             </div>
@@ -129,7 +130,7 @@
                         <div id="giftcard_balance_lookup"></div>
                         <label for="redeem_dash"><span>Redeem code:</span></label>
                         <input class="required-entry input-text" id="redeem_dash" name="giftcard_code" placeholder="Enter gift card code" value="<?php echo $this->getCurrentGiftcard(); ?>" type="text" />
-                        <button class="button" onclick="giftcardForm.submit()" type="button" value="<?php echo $this->__('Redeem Gift Card') ?>"><span><span><?php echo $this->__('Redeem Gift Card') ?></span></span></button>
+                        <button class="button" onclick="giftcardForm.submit()" type="button" value="<?php echo $this->__('Redeem Gift Card') ?>"><span><span><?php echo $this->__('Redeem gift') ?></span></span></button>
                         <button class="button check-gc-status" id="gca_balance_button" type="button" value="<?php echo $this->__('Check status and balance') ?>"><span><span><?php echo $this->__('Check balance') ?></span></span></button>
                 </form>
             </div>

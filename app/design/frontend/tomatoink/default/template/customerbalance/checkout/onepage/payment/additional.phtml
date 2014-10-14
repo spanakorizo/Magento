@@ -1,11 +1,13 @@
 <?php
 /**
- * Magento Commercial Edition
+ * Magento Enterprise Edition
  *
  * NOTICE OF LICENSE
  *
- * This source file is subject to the Magento Commercial Edition License
- * that is available at: http://www.magentocommerce.com/license/commercial-edition
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
  * If you did not receive a copy of the license and are unable to
  * obtain it through the world-wide-web, please send an email
  * to license@magentocommerce.com so we can send you a copy immediately.
@@ -17,9 +19,9 @@
  * needs please refer to http://www.magentocommerce.com for more information.
  *
  * @category    design
- * @package     pro_default
- * @copyright   Copyright (c) 2010 Magento Inc. (http://www.magentocommerce.com)
- * @license     http://www.magentocommerce.com/license/commercial-edition
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
  */
 /* @var $this Enterprise_CustomerBalance_Block_Checkout_Onepage_Payment_Additional */
 ?>
@@ -29,33 +31,27 @@
  */
 ?>
 <?php if ($this->isDisplayContainer()): ?>
-<dl id="customerbalance_placer" class="sp-methods checkout-onepage-payment-additional-customerbalance">
-    <dt>
+    <div class="checkout-onepage-payment-additional-customerbalance" id="customerbalance_placer">
         <input type="hidden" name="payment[use_customer_balance]" value="0" />
         <input type="checkbox" class="checkbox" name="payment[use_customer_balance]" value="1" id="use_customer_balance" <?php echo ($this->isCustomerBalanceUsed() ? 'checked' : '') ?>/>
 
         <?php $balance = Mage::helper('core')->currency($this->getBalance()); ?>
         <label for="use_customer_balance">
-            <div class="ti-checkbox"></div>
-        <span>
-            <?php echo Mage::helper('enterprise_customerbalance')->__('Use store credit'); ?>
-            (<span id="customerbalance_available_amount" class="altTxt"><?php echo $balance; ?></span>
+        <strong>
+            <?php echo Mage::helper('enterprise_customerbalance')->__('Use Store Credit'); ?>
+            (<span id="customerbalance_available_amount"><?php echo $balance; ?></span>
             <?php echo Mage::helper('enterprise_customerbalance')->__('available'); ?>)
-        </span>
+        </strong>
         </label>
-    </dt>
-</dl>
-<script type="text/javascript">
-//<![CDATA[
-
+    </div>
+    <script type="text/javascript">
+    //<![CDATA[
     var isFullyPaidAfterCustomerBalanceApplication = <?php echo ($this->isFullyPaidAfterApplication() ? 'true' : 'false'); ?>;
     var customerBalanceSubstracted = <?php if ($this->isCustomerBalanceUsed()): ?>true<?php else: ?>false<?php endif; ?>;
-    if (typeof quoteBaseGrandTotal == 'undefined') {
-        quoteBaseGrandTotal = <?php echo (float)$this->getQuote()->getBaseGrandTotal(); ?>;
-    }
 
     if (customerBalanceSubstracted) {
-        quoteBaseGrandTotal += <?php echo (float)$this->getQuote()->getBaseCustomerBalanceAmountUsed(); ?>;
+        quoteBaseGrandTotal += <?php echo (float)$this->getQuote()->getBaseCustomerBalAmountUsed(); ?>;
+        checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
         customerBalanceSubstracted = false;
     }
 
@@ -64,41 +60,45 @@
         if (!customerBalanceSubstracted && $('use_customer_balance').checked) {
             quoteBaseGrandTotal -= <?php echo (float)$this->getBalance(); ?>;
             customerBalanceSubstracted = true;
+            checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
         }
         if (customerBalanceSubstracted && !$('use_customer_balance').checked) {
             quoteBaseGrandTotal += <?php echo (float)$this->getBalance(); ?>;
             customerBalanceSubstracted = false;
+            checkQuoteBaseGrandTotal = quoteBaseGrandTotal;
         }
+        if (((checkQuoteBaseGrandTotal < 0.0001 || checkQuoteBaseGrandTotal > 0.0001) && quoteBaseGrandTotal == 0) || (quoteBaseGrandTotal > checkQuoteBaseGrandTotal)) {
+            quoteBaseGrandTotal = checkQuoteBaseGrandTotal;
+        }
+
         if (quoteBaseGrandTotal < 0.0001) {
-            var elements = $$('input[name="payment[method]"]');
+            var elements = Form.getElements(this.form);
             for (var i=0; i<elements.length; i++) {
                 if ($('use_customer_balance').checked) {
-                    elements[i].disabled = true;
+                    if (elements[i].name == 'payment[method]') {
+                        elements[i].disabled = true;
+                    }
                 }
-                if (elements[i].value == 'free') {
+                if (elements[i].name == 'payment[method]' && elements[i].value == 'free') {
                     elements[i].checked = false;
                     elements[i].disabled = true;
                     $(elements[i].parentNode).hide();
                 }
             }
-            //if ($('use_customer_balance').checked) {
-            //    $('checkout-payment-method-load').hide();
-           // }
+            if ($('use_customer_balance').checked) {
+                $('checkout-payment-method-load').hide();
+                payment.switchMethod();
+            }
         } else {
-            var elements = $$('input[name="payment[method]"]');
+            var elements = Form.getElements(this.form);
             for (var i=0; i<elements.length; i++) {
-                elements[i].disabled = false;
+                if (elements[i].name == 'payment[method]') {
+                    elements[i].disabled = false;
+                }
             }
             $('checkout-payment-method-load').show();
+            payment.switchMethod(payment.lastUsedMethod);
         }
-
-        var params = {
-            'review': 1
-        };
-        if (!$('use_customer_balance').checked) {
-            params['remove_storecredit'] = 1
-        }
-        checkout.update(checkout.urls.paymentdata, params);
     }
 
     if (payment) {
@@ -106,7 +106,7 @@
             if ($('use_customer_balance')) {
                 $('use_customer_balance').disabled = false;
             }
-            // this.switchCustomerBalanceCheckbox();
+            this.switchCustomerBalanceCheckbox();
         }
         payment.addAfterInitFunction('customerbalance', customerBalanceInit.bind(payment));
         var customerBalanceValidate = function() {
@@ -119,7 +119,6 @@
     }
 
     Event.observe($('use_customer_balance'), 'click', payment.switchCustomerBalanceCheckbox);
-    //if (jQuery("#use_customer_balance").prop( "checked" )) jQuery("#use_customer_balance").click();
-//]]>
-</script>
+    //]]>
+    </script>
 <?php endif; ?>

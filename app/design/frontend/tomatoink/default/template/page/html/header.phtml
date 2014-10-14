@@ -81,7 +81,7 @@
 							<option value="other-brands-printer-ink-toner-cartridges/roland-series-ink-and-toner-cartridges.html">Roland</option>
 							<option value="other-brands-printer-ink-toner-cartridges/secap-series-ink-and-toner-cartridges.html">Secap</option>
 							<option value="usb-printer-cables.html">Cables</option>
-							<option value="printer-supply.html">Photo Paper</option>
+							<option value="photo-paper">Photo Paper</option>
 						</select>
 						<script type="text/javascript">
 							jQuery("#ti_header_mininav").change(function() {
@@ -215,7 +215,7 @@
 					<li><a href="#"><span>Accessories</span></a>
 						<ul class="ti_sub-menu menu_one_col ti_cms_border_block" id="ti_header_lastMenu">
 							<li><a href="<?php echo $current_url ?>usb-printer-cables.html"><span>Cables</span></a></li>
-							<li><a href="<?php echo $current_url ?>printer-supply.html"><span>Photo Paper</span></a></li>
+							<li><a href="<?php echo $current_url ?>photo-paper"><span>Photo Paper</span></a></li>
 						</ul>
 					</li>
 				</ul>
@@ -264,7 +264,7 @@
         if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 ) //this for bundle otherwise all product under bundle will show in cart
 		//$shopptingcarthtml .= "<div class='ti_related_item_one_fourth ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
 
-            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . str_replace('"', '', $product->getName()) . "</p></div></div></a></div>";
+            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='altTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . str_replace('"', '', $product->getName()) . "</p></div></div></a></div>";
 
 
 
@@ -275,8 +275,8 @@
     }
 
 
-    if ($shopptingcarthtml != "") $shopptingcarthtml .= "</div><div class='ti_miniCart_subtotal'><h4 class='ltWeight lgTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
-    else $shopptingcarthtml = "<p class='text_center'><span class='altTxt'>You don't have any items inside cart.</span></p>";
+    if ($shopptingcarthtml != "") $shopptingcarthtml .= "</div><div class='ti_miniCart_subtotal'><h4 class='ltWeight altTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button ti_altBtn' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
+    else $shopptingcarthtml = "<p class='text_center'><span class='altTxt'>Your cart is empty.</span></p>";
 
 
     $shopptingcarthtml = str_replace('"', '', $shopptingcarthtml);

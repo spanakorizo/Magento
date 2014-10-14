@@ -174,7 +174,7 @@
                         //console.log(cache.totalItems);
                         // add navigation buttons
                         //if( cache.totalItems > 4 )
-                            $el.prepend('<div class="ti_miniCart_carousel-nav" style="display:none"><span class="ti_carousel-nav-prev icon-angle-left"></span><span class="ti_carousel-nav-next icon-angle-right"></span></div>');
+                            $el.prepend('<div class="ti_miniCart_carousel-nav" style="display:none"><span class="ti_carousel-nav-prev icon-arrow-left2"></span><span class="ti_carousel-nav-next icon-arrow-right2"></span></div>');
 
                         // control the scroll value
                         if( settings.scroll < 1 )

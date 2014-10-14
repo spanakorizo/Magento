@@ -1932,10 +1932,10 @@ td, th {
   content: "\e738"; }
 
 .icon-angle-left:before {
-  content: "‹"; }
+  content: "<"; }
 
 .icon-angle-right:before {
-  content: "›"; }
+  content: ">"; }
 
 .icon-tab:before {
   content: "\e739"; }
@@ -2619,7 +2619,7 @@ td, th {
     padding: 0;
     font-size: 1.4rem; }
     .ti_cms_dropContent ul li a {
-      color: #71b62f; }
+      color: #e67921; }
 
 .ti_cms_dropContent p {
   color: #333;
@@ -2627,11 +2627,6 @@ td, th {
 
 .ti_cms_dropContent img {
   width: 100%; }
-
-.ti_cms_dropContent .ti_button,
-.ti_cms_dropContent input {
-  box-shadow: none;
-  text-shadow: none; }
 
 /* Account Drop */
 #ti_header_accountDrop {
@@ -2655,14 +2650,14 @@ td, th {
 
 .ti_miniCart_carousel-nav {
   position: absolute;
-  top: 40px;
+  top: 80px;
   width: 210px;
   z-index: 1; }
 
 .ti_carousel-nav-next,
 .ti_carousel-nav-prev {
   color: #f7e8db;
-  font-size: 6em;
+  font-size: 3em;
   position: absolute;
   cursor: pointer; }
 
@@ -2863,6 +2858,17 @@ ul.ti_cart_review li:last-child {
   background: #559a13;
   color: #fff; }
 
+.ti_deals_text {
+  color: #fff;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8); }
+
+.ti_deals_remove {
+  margin-left: 20px; }
+
+.ti_cart_totalDeals {
+  background-color: #88ce45;
+  border-bottom: none !important; }
+
 .ti_cart_relatedItemBlock {
   margin: 5px 0; }
 
@@ -3011,9 +3017,6 @@ ul.ti_cart_review li:last-child {
 
 #show_cart .two_fifth {
   width: 38%; }
-
-#show_cart .ti_block_inner {
-  padding: 10px 20px; }
 
 #show_cart_content {
   overflow-y: auto;
@@ -3412,7 +3415,10 @@ input.ti_checkout_info {
   float: left;
   width: 25%; }
 
-/* Orders */
+/* Saved Payment Methods */
+#stored-cards-table td {
+  min-width: 25%; }
+
 /* Rewards */
 #customerbalance-history {
   border: 1px solid #559a13; }
@@ -3437,13 +3443,17 @@ input.ti_checkout_info {
 
 /*#ti_ajax_loading_ink img,#ti_ajax_loading_series img,#ti_banner_ajax_loading_ink img,#ti_banner_ajax_loading_series img{display: block;max-width:120px;max-height: 120px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}
 #ti_ajax_cat_loading_ink img{display: block;max-width:80px;max-height: 80px; opacity: 1.0; z-index: 99999;text-align: center; margin: 0 auto;}*/
-#ajax_loader {
+#ajax_loader, .ajax_loader {
   position: fixed;
   z-index: 999;
   top: 50%;
   left: 50%;
   margin-top: -35px;
   margin-left: -35px; }
+
+#ti_subscribe_loading img {
+  width: 75px;
+  height: 75px; }
 
 #ti_back_top img {
   max-width: 100% !important; }

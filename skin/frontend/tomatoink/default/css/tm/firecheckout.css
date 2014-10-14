@@ -249,7 +249,7 @@
 /* shipping & payment methods */
 .firecheckout-set .sp-methods { margin: 0; padding: 0; }
 .firecheckout-set .sp-methods .form-list { padding: 0; }
-.firecheckout-set .sp-methods .form-list li { text-align:center;float: none; width: auto; line-height: 38px;margin: 5px 0; }
+.firecheckout-set .sp-methods .form-list li { float: none; width: auto; line-height: 38px;margin: 5px 0; }
 .firecheckout-set .sp-methods dt { margin: 0 0 5px; }
 .firecheckout-set .sp-methods dd { margin: 0 0 6px; }
 .firecheckout-set .sp-methods .input-box .v-fix { margin-right: 5px; max-width: 50%; }
@@ -406,10 +406,10 @@
     background: #ffffff; /* Old browsers */
     border:1px solid #71b62f;
     border-bottom: 7px solid #71b62f;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 10px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 20px;
     z-index: 999;
     position: absolute;
     text-align: left;
@@ -430,8 +430,8 @@
 }
 .firecheckout-window .close:after {
     position: absolute;
-    top: -8px;
-    right: -8px;
+    top: 5px;
+    right: 5px;
     border: 2px solid #71B62F;
     font-size:16px;
     border-radius:50%;

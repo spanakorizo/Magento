@@ -123,11 +123,11 @@
 
     <customer_account>
         <reference name="customer_account_navigation">
-            <action method="addLink" translate="label" module="enterprise_giftcardaccount">
+            <!--<action method="addLink" translate="label" module="enterprise_giftcardaccount">
                 <name>enterprise_giftcardaccount</name>
                 <path>enterprise_giftcardaccount/customer/</path>
                 <label>My Gift Cards</label>
-            </action>
+            </action>-->
         </reference>
     </customer_account>
 
