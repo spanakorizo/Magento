@@ -28,10 +28,12 @@
 <form id="discount-coupon-form" action="<?php echo $this->getUrl('multiplecoupon/carts/couponPost') ?>" method="post">
     <div class="one_third">
         <div class="discount ti_cms_gradient_block ti_block_inner btcf">
-            <!--<h2 class="ti_green_head ti_headerH1"><?php echo $this->__('Discount') ?></h2>-->
+            <!--<h2 class="ti_green_head ti_headerH1"><?php //echo $this->__('Discount') ?></h2>-->
             <h2 class="ti_green_head ti_headerH1 ti_block_inner">Claim your discount!</h2>
             <!-- This p text will only appear if a stored cookie coupon code was used. -->
+            <?php if ($this->getRequest()->getParam('coupon_code')): ?>
             <p class="text_center altTxt">We saved the last coupon you looked at! Click apply to use it:</p>
+            <?php endif ?>
             <div class="discount-form ti_input_bar no_border">
                 <label for="coupon_code" class="ti_cms_labelHide"><span><?php echo $this->__('Enter your coupon code if you have one.') ?></span></label>
                 <input type="hidden" name="remove" id="remove-coupone" value="0" />
@@ -41,59 +43,60 @@
                             <input class="input-text" id="coupon_code" name="coupon_code" value="<?php //echo $this->escapeHtml($this->getCouponCode()) ?>" placeholder="Type a coupon code" type="text" />
                         <!--</div>
                         <div class="buttons-set">-->
-                            <button type="button" title="<?php echo $this->__('Apply') ?>" class="button ti_altBtn" onclick="discountForm.submit(false)" value="<?php echo $this->__('Apply') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button>
+                            <button type="button" title="<?php echo $this->__('Apply') ?>" class="button ti_altBtn" onclick="discountForm.submit(false)" value="<?php echo $this->__('Apply') ?>"><span><span><?php echo $this->__('Apply') ?></span></span></button></div></div></div>
 </form>
                             <?php if(strlen($this->getCouponCode())): ?>
-							<div style="width:100%">
-							<p class="text_center altTxt"> <?php echo $this->__('Applied Coupon Codes:') ?></p>
-							<!--<p class="text_center altTxt"> <?php /*echo $this->__('Click on Cancel undo Apply coupon code') */?></p>-->
+							<!--<div style="width:100%">
+							<p class="text_center altTxt"> <?php //echo $this->__('Applied Coupon Codes:') ?></p>
+							<p class="text_center altTxt"> <?php /*echo $this->__('Click on Cancel undo Apply coupon code') */?></p>!-->
 							<?php
 								
 								$coupons = explode(",",$this->escapeHtml($this->getCouponCode()));
-								foreach($coupons as $couponcode){
+								foreach($coupons as $couponcode):
 									$oCoupon = Mage::getModel('salesrule/coupon')->load($couponcode, 'code');
 									$ruleId = $oCoupon->getRuleId();
-									if($ruleId){
+									if($ruleId):
 									?>
 										<form id="discount-coupon-remove_<?php echo $ruleId?>" action="<?php echo $this->getUrl('multiplecoupon/carts/removeCoupon') ?>" method="post">
 											<?php echo $this->getBlockHtml('formkey'); ?>
 											<input type="hidden" value="<?php echo $ruleId?>" name="ruleid"/>
 											<input type="hidden" value="<?php echo $this->escapeHtml($this->getCouponCode()) ;?>" name="all_coupon_code"/>
 											<input type="hidden" value="<?php echo $couponcode; ?>" name="remove_coupon_code"/>
-											<p class="text_center ti_green_head"><?php echo $couponcode.'  |  ';?>
-											<a class="text_center altTxt"onclick="submit_form(<?php echo $ruleId?>)" id="submit_coupon-<?php echo $ruleId?>"> <?php echo $this->__('Cancel')?></a></p>
+											<!--<p class="text_center ti_green_head"><?php //echo $couponcode.'  |  ';?>
+											<a class="text_center altTxt"onclick="submit_form(<?php //echo $ruleId?>)" id="submit_coupon-<?php //echo $ruleId?>"> <?php //echo $this->__('Cancel')?></a></p>!-->
 										</form>
 									<?php
-									}
-									else{
-										echo 'invalid coupon code';
-									}
-								}
+									endif;
+                                    endforeach;
+									//else{
+									//	echo 'invalid coupon code';
+									//}
+								//}
 							?>		
-							</div>
+							<!--</div> !-->
                             <?php endif;?>
                         <!--</div>
                     </div>
                 </div>-->
-            </div>
+         <!--   </div>
         </div>
-        <!--
+        
         <div>
             
             <p class="text_center altTxt">We saved the last coupon you looked at for you! Click to apply it:</p>
             <div class="ti-cart-coupon-div">
                 <p class="white ti_headerH1" id="ti_cart_coupon">
     				
-    					<?php $rules = Mage::getResourceModel('salesrule/rule_collection')->load();				
+    					<?php /*$rules = Mage::getResourceModel('salesrule/rule_collection')->load();				
     					
     					
     					foreach ($rules as $rule) {
     						if ($rule->getIsActive()) {
-    							$rule = Mage::getModel('salesrule/rule')->load($rule->getId()); 
+    							$rule = Mage::getModel('salesrule/rule')->load($rule->getId()); */
     							?>
-    							<a onClick="ti_load_coupon('<?php echo $rule->getCouponCode()?>')" class="no-dec ti_cart_coupon_<?php echo $rule->getId()?>"><?php echo $rule->getCouponCode()?></a>
+    							<a onClick="ti_load_coupon('<?php //echo $rule->getCouponCode()?>')" class="no-dec ti_cart_coupon_<?php //echo $rule->getId()?>"><?php //echo $rule->getCouponCode()?></a>
     							<br>
-    							<?php
+    							<?php /*
     						}
     					}
     					if($this->getRequest()->getParam('coupon_code')){
@@ -103,16 +106,16 @@
     						
     						if($rule){
     						
-    							if ($rule->getIsActive()) {
+    							if ($rule->getIsActive()) { */
     							?>
-    								<a onClick="ti_load_coupon('<?php echo $coupon_code; ?>')" class="ti_cart_coupon_<?php echo $rule->getId()?>"><?php echo $coupon_code; ?></a>
-    							<?php
+    								<a onClick="ti_load_coupon('<?php //echo $coupon_code; ?>')" class="ti_cart_coupon_<?php //echo $rule->getId()?>"><?php //echo $coupon_code; ?></a>
+    							<?php /*
     							}
     						}
     						
     						
     					}
-    					
+    					*/
     					?>
     				
     			</p>

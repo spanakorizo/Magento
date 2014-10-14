@@ -29,13 +29,13 @@
 -->
 <layout>
     <customer_account>
-        <reference name="customer_account_navigation">
+        <!--<reference name="customer_account_navigation">
             <action method="addLink" translate="label" module="cls_paypal">
                 <name>customer_stored_cards</name>
                 <path>customer/storedcard/</path>
                 <label>Payment Methods</label>
             </action>
-        </reference>
+        </reference>-->
     </customer_account>
 
     <customer_storedcard_index>

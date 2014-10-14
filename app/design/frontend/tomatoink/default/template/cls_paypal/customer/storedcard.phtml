@@ -43,9 +43,9 @@ $_storedCardHelper = Mage::helper('cls_paypal/storedcard');
 
 <div class="box-account">
     <?php $_storedCards = $this->getStoredCards(); ?>
-    <div class="box-head">
-        <h2><?php echo $this->__('Credit Cards') ?></h2>
-    </div>
+    <!--<div class="box-head">
+        <h2><?php //echo $this->__('Credit Cards') ?></h2>
+    </div>-->
     <?php if( $_storedCards && ($_storedCards->count() > 0) ): ?>
     <table class="data-table" id="stored-cards-table">
         <col />
@@ -63,12 +63,12 @@ $_storedCardHelper = Mage::helper('cls_paypal/storedcard');
         <tbody>
         <?php foreach ($_storedCards as $_storedCard): ?>
         <tr>
-            <td><?php echo $_storedCardHelper->translateCcType($_storedCard->getCcType()) ?> (<?php echo sprintf('xxxx-%s', $_storedCard->getCcLast4()) ?>)</td>
+            <td><p><?php echo $_storedCardHelper->translateCcType($_storedCard->getCcType()) ?> (<?php echo sprintf('xxxx-%s', $_storedCard->getCcLast4()) ?>)</p></td>
             <td class="a-center"><p><span class="nobr"><?php echo $_storedCard->getCcExpMonth() ?>/<?php echo $_storedCard->getCcExpYear() ?></span></p></td>
             <td class="a-center"><p><span class="nobr"><?php echo $this->formatDate($this->transformDate($_storedCard->getDate())) ?></span></p></td>
             <td class="a-center">
                 <span class="nobr">
-                    <a href="<?php echo $this->getDeleteUrl($_storedCard) ?>" onclick="return confirm('<?php echo $this->__('Are you sure?') ?>')" class="ti_buton ti_button_mini"><span class="icon-remove2"></span><?php echo $this->__('Delete') ?></a>
+                    <a href="<?php echo $this->getDeleteUrl($_storedCard) ?>" onclick="return confirm('<?php echo $this->__('Are you sure?') ?>')" class="ti_button ti_button_mini"><span class="icon-remove2"></span><?php echo $this->__('Delete') ?></a>
                 </span>
             </td>
         </tr>

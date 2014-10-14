@@ -1,32 +1,37 @@
 <tr>
     <?php if($this->getTotalDiscount() > 0):?>
-	<td colspan="50" style="background-color:#88CC40;border-bottom:none">
-
+	<td colspan="50" class="ti_cart_totalDeals">
+<?php $shippingMethod =  $this->getAddressShippingMethod();?>
 		<p>
-            The Following Coupon and deals have been applied to your order and <strong style="color: #FFF;text-shadow: 1px 1px 0px #ccc;"> have saved you
-			<?php echo Mage::helper('core')->currency($this->getTotalDiscount()); ?></strong>
+            The following coupons and deals have been applied to your order and have <strong class="ti_deals_text">saved you
+			<?php 
+
+            $discount = $this->getTotalDiscount();
+            if ($shippingMethod === 'freeshipping_freeshipping' ) $discount += 3.99;
+            echo Mage::helper('core')->currency($discount); ?>:</strong>
 		</p>
         <p>
-            <?php $shippingMethod =  $this->getAddressShippingMethod();?>
+            
             <?php if($shippingMethod === 'freeshipping_freeshipping' ):?>
-            <p> Free Shipping on all order over <strong><?php echo Mage::helper('core')->currency(50);?></strong></p>
+            <p><span class="icon-checkmark ti_deals_text"></span> Free Shipping on all orders over <strong><?php echo Mage::helper('core')->currency(50);?></strong></p>
             <?php endif;?>
         </p>
         <p>
             <?php $giftcardarray = $this->getGiftCardInfo();?>
             <?php if($giftcardarray['code'] != null):?>
-            <p>For Gift Card Code <strong>"<?php echo $giftcardarray['code']?>"</strong> you save <strong><?php echo Mage::helper('core')->currency($giftcardarray['amount']);?></strong></p>
+            <p><span class="icon-checkmark ti_deals_text"></span> With gift card code <strong>"<?php echo $giftcardarray['code']?>"</strong> you saved <strong><?php echo Mage::helper('core')->currency($giftcardarray['amount']);?></strong></p>
             <?php endif;?>
         </p>
-		<p>
 			<?php if(strlen($this->getCouponCode())):?>
 			<?php $couponcodes = explode(',',$this->getCouponCode()); ?>
 			<?php foreach ( $couponcodes as $couponcode ) : ?>
             <?php $coupondes = $this->getCouponDescription($couponcode);?>
-			<p>For Coupon <?php echo '<b>"'.$couponcode.'"</b>'?> <?php if(strlen($coupondes['description']))echo '- which is'; ?> <?php echo $coupondes['description']?> and you save <strong><?php echo Mage::helper('core')->currency($coupondes['discount_amount']);?></strong></p>
+            <?php $oCoupon = Mage::getModel('salesrule/coupon')->load($couponcode, 'code');
+                  $ruleId = $oCoupon->getRuleId(); ?>
+                  
+			<p><span class="icon-checkmark ti_deals_text"></span> Coupon code <?php echo '<b>"'.$couponcode.'"</b>'?> <?php if(strlen($coupondes['description']))echo '- '; ?> <?php echo $coupondes['description']?> <a class="ti_deals_remove lgTxt" onclick="submit_form(<?php echo $ruleId?>)" id="submit_coupon-<?php echo $ruleId?>"> <strong>X</strong> <?php echo $this->__('Remove')?></a><!--saved you <strong><?php //echo Mage::helper('core')->currency($coupondes['discount_amount']);?></strong>--></p>
 			<?php endforeach;?>
 			<?php endif;?>
-		</p>
 	</td>
     <?php endif?>
 </tr>
