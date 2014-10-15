@@ -16,12 +16,17 @@
             <p><span class="icon-checkmark ti_deals_text"></span> Free Shipping on all orders over <strong><?php echo Mage::helper('core')->currency(50);?></strong></p>
             <?php endif;?>
         </p>
+
+        <?php $array = $this->getGiftCardInfo();?>
+        <?php foreach($array as $giftcardarray):?>
         <p>
-            <?php $giftcardarray = $this->getGiftCardInfo();?>
-            <?php if($giftcardarray['code'] != null):?>
-            <p><span class="icon-checkmark ti_deals_text"></span> With gift card code <strong>"<?php echo $giftcardarray['code']?>"</strong> you saved <strong><?php echo Mage::helper('core')->currency($giftcardarray['amount']);?></strong></p>
+
+            <?php if($giftcardarray['c'] != null):?>
+            <p><span class="icon-checkmark ti_deals_text"></span> With gift card code <strong>"<?php echo $giftcardarray['c']?>"</strong> you saved <strong><?php echo Mage::helper('core')->currency($giftcardarray['ba']);?></strong></p>
             <?php endif;?>
         </p>
+
+        <?php endforeach;?>
 			<?php if(strlen($this->getCouponCode())):?>
 			<?php $couponcodes = explode(',',$this->getCouponCode()); ?>
 			<?php foreach ( $couponcodes as $couponcode ) : ?>

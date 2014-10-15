@@ -477,13 +477,13 @@ class Compandsave_MultipleCoupon_Model_Quote extends Mage_Sales_Model_Quote
 
                     $grandtotalwithgiftcards = $address->getGrandTotal() + $address->getGiftCardsAmount() + $address->getCustomerBalanceAmount();
 
-                    if($address->getGiftCardsAmount() >= $grandtotalwithgiftcards || $address->getCustomerBalanceAmount() >=   $grandtotalwithgiftcards){
+                    if(($address->getGiftCardsAmount() + $address->getCustomerBalanceAmount()) >= $grandtotalwithgiftcards ){
                         $grandTotal = (float) $address->getGrandTotal() + $address->getGiftCardsAmount() + $address->getCustomerBalanceAmount();
                         $basegrandTotal = (float)  $address->getBaseGrandTotal() + $address->getBaseGiftCardsAmount() + $address->getBaseCustomerBalanceAmount();
                         $subtotalwithdiscount = $address->getSubtotal();
                         $basesubtotalwithdiscount = $address->getBaseSubtotal();
                     }
-                    elseif($address->getGiftCardsAmount() < $grandtotalwithgiftcards || $address->getCustomerBalanceAmount() <   $grandtotalwithgiftcards){
+                    elseif(($address->getGiftCardsAmount() + $address->getCustomerBalanceAmount()) < $grandtotalwithgiftcards ){
                         $grandTotal = (float) $address->getGrandTotal() ;
                         $basegrandTotal = (float)  $address->getBaseGrandTotal();
                         $subtotalwithdiscount = $address->getSubtotal();
@@ -494,7 +494,8 @@ class Compandsave_MultipleCoupon_Model_Quote extends Mage_Sales_Model_Quote
 
                     $grandtotalwithoutdiscount = $address->getGrandTotal() - $this->_TotalAddressDiscount + $address->getGiftCardsAmount() + $address->getCustomerBalanceAmount();
 
-                    if($address->getGiftCardsAmount() >=   $grandtotalwithoutdiscount || $address->getCustomerBalanceAmount() >=   $grandtotalwithoutdiscount){
+
+                    if(($address->getGiftCardsAmount() + $address->getCustomerBalanceAmount()) >=   $grandtotalwithoutdiscount ){
                         $grandTotal = (float) $address->getGrandTotal() - $this->_TotalAddressDiscount + $address->getGiftCardsAmount()+ $address->getCustomerBalanceAmount();
                         $basegrandTotal = (float)  $address->getBaseGrandTotal() - $this->_BaseTotalAddressDiscount + $address->getGiftCardsAmount()+ $address->getBaseCustomerBalanceAmount();
                         $subtotalwithdiscount = $address->getSubtotal() - $this->_TotalAddressDiscount;
@@ -503,7 +504,7 @@ class Compandsave_MultipleCoupon_Model_Quote extends Mage_Sales_Model_Quote
                         $address->setBaseDiscountAmount(- (float) ($this->_BaseTotalAddressDiscount));
                         $discountflag = 1;
                     }
-                    elseif($address->getGiftCardsAmount() <   $grandtotalwithoutdiscount || $address->getCustomerBalanceAmount() <  $grandtotalwithoutdiscount){
+                    elseif(($address->getGiftCardsAmount() + $address->getCustomerBalanceAmount()) <   $grandtotalwithoutdiscount ){
                         $grandTotal = (float) $address->getGrandTotal() - $this->_TotalAddressDiscount;
                         $basegrandTotal = (float)  $address->getBaseGrandTotal() - $this->_BaseTotalAddressDiscount;
                         $subtotalwithdiscount = $address->getSubtotal() - $this->_TotalAddressDiscount;
@@ -517,7 +518,7 @@ class Compandsave_MultipleCoupon_Model_Quote extends Mage_Sales_Model_Quote
 
                     $grandtotalwithgiftcards = $address->getGrandTotal() + $address->getGiftCardsAmount() + $address->getCustomerBalanceAmount();
 
-                    if($address->getGiftCardsAmount() >= $grandtotalwithgiftcards || $address->getCustomerBalanceAmount() >=   $grandtotalwithgiftcards ){
+                    if(($address->getGiftCardsAmount() + $address->getCustomerBalanceAmount()) >= $grandtotalwithgiftcards  ){
 
                         $grandTotal = (float) $address->getGrandTotal() + $address->getGiftCardsAmount() + $address->getCustomerBalanceAmount();
                         $basegrandTotal = (float)  $address->getBaseGrandTotal() + $address->getBaseGiftCardsAmount() + $address->getBaseCustomerBalanceAmount();
@@ -545,24 +546,51 @@ class Compandsave_MultipleCoupon_Model_Quote extends Mage_Sales_Model_Quote
                  */
 
                 if((ceil($grandtotalwithgiftcards - ($address->getGiftCardsAmount() + $address->getCustomerBalanceAmount()) ) <= 0 and $discountflag == 0 ) || (($grandtotalwithoutdiscount - ($address->getGiftCardsAmount() + $address->getCustomerBalanceAmount())) <= 0 and $discountflag == 1) || ( $discountflag == 2 and ceil($grandtotalwithgiftcards - ($address->getGiftCardsAmount() + $address->getCustomerBalanceAmount())) <= 0)){
-                    mage::log($address->getCustomerBalanceAmount());
-                    mage::log($grandTotal);
-                    if($address->getCustomerBalanceAmount() == 0){
+
+                    if($address->getCustomerBalanceAmount() == 0 and $address->getGiftCardsAmount() > 0){
                          /*
                          * unserialized giftcard data from Mage_Sales_Quote_Address resource model
                          */
                         $array = unserialize($address->getGiftCards());
 
-                        $cards[] = array(
-                            // id
-                            'i' => $array[0][i],
-                            // code
-                            'c' => $array[0][c],
-                            // amount
-                            'a' => (float) $grandTotal,
-                            // base amount
-                            'ba' => (float) $grandTotal,
-                        );
+                        $i=0;
+                        $fullgiftcardamount = $grandTotal;
+
+                        foreach($array as $giftarray){
+                            mage::log($giftarray);
+                            mage::log($grandTotal);
+
+                            if($fullgiftcardamount <= 0 )
+                                break;
+
+                            if($giftarray[ba] <= $fullgiftcardamount){
+                                $cards[$i] = array(
+                                    // id
+                                    'i' => $giftarray[i],
+                                    // code
+                                    'c' => $giftarray[c],
+                                    // amount
+                                    'a' => $giftarray[a],
+                                    // base amount
+                                    'ba' => $giftarray[ba],
+                                );
+                                $fullgiftcardamount = $fullgiftcardamount - $giftarray[ba];
+                            }else{
+                                $cards[$i] = array(
+                                    // id
+                                    'i' => $giftarray[i],
+                                    // code
+                                    'c' => $giftarray[c],
+                                    // amount
+                                    'a' => (float) $fullgiftcardamount,
+                                    // base amount
+                                    'ba' => (float) $fullgiftcardamount,
+                                );
+                                $fullgiftcardamount = $fullgiftcardamount - $giftarray[ba];
+                            }
+                            $i++;
+                        }
+
 
                         $address->setGiftCardsAmount((float) $grandTotal);
                         $address->setGiftCards(serialize($cards));
@@ -572,13 +600,84 @@ class Compandsave_MultipleCoupon_Model_Quote extends Mage_Sales_Model_Quote
                         $this->setBaseGiftCardsAmountUsed((float) $basegrandTotal);
                         $grandTotal = $grandTotal - $address->getBaseGiftCardsAmount();
                         $basegrandTotal = $basegrandTotal - $address->getBaseGiftCardsAmount();
-                    }else{
+
+                    }elseif($address->getCustomerBalanceAmount() > 0 and $address->getGiftCardsAmount() == 0){
+
                         $address->setCustomerBalanceAmount((float) $grandTotal);
                         $address->setBaseCustomerBalanceAmount((float) $basegrandTotal);
                         $this->setCustomerBalanceAmountUsed((float) $grandTotal);
                         $this->setBaseCustomerBalAmountUsed((float) $basegrandTotal);
                         $grandTotal = $grandTotal - $address->getCustomerBalanceAmount();
                         $basegrandTotal = $basegrandTotal - $address->getBaseCustomerBalanceAmount();
+
+                    }elseif($address->getCustomerBalanceAmount() > 0 and $address->getGiftCardsAmount() > 0){
+
+                        $customer_balance = $grandTotal - ($address->getBaseGiftCardsAmount()) ;
+                        $basecustomer_balance = $basegrandTotal - ($address->getBaseGiftCardsAmount());
+                        $customer_giftcard = $grandTotal - $customer_balance ;
+                        $Basecustomer_giftcard = $grandTotal - $basecustomer_balance;
+
+                        $array = unserialize($address->getGiftCards());
+
+                        $i=0;
+                        $fullgiftcardamount = $grandTotal;
+
+                        foreach($array as $giftarray){
+                            mage::log($giftarray);
+                            mage::log($grandTotal);
+
+                            if($fullgiftcardamount <= 0 )
+                                break;
+
+                            if($giftarray[ba] <= $fullgiftcardamount){
+                                $cards[$i] = array(
+                                    // id
+                                    'i' => $giftarray[i],
+                                    // code
+                                    'c' => $giftarray[c],
+                                    // amount
+                                    'a' => $giftarray[a],
+                                    // base amount
+                                    'ba' => $giftarray[ba],
+                                );
+                                $fullgiftcardamount = $fullgiftcardamount - $giftarray[ba];
+                            }else{
+                                $cards[$i] = array(
+                                    // id
+                                    'i' => $giftarray[i],
+                                    // code
+                                    'c' => $giftarray[c],
+                                    // amount
+                                    'a' => (float) $fullgiftcardamount,
+                                    // base amount
+                                    'ba' => (float) $fullgiftcardamount,
+                                );
+                                $fullgiftcardamount = $fullgiftcardamount - $giftarray[ba];
+                            }
+                            $i++;
+                        }
+
+                        $grandTotal = $grandTotal - ($address->getBaseGiftCardsAmount()) ;
+                        $basegrandTotal = $basegrandTotal - ($address->getBaseGiftCardsAmount());
+                        $address->setGiftCardsAmount((float) $customer_giftcard);
+                        $address->setGiftCards(serialize($cards));
+                        $address->setUsedGiftCards(serialize($cards));
+                        $this->setGiftCardsAmountUsed((float) $customer_giftcard);
+                        $address->setBaseGiftCardsAmount((float) $Basecustomer_giftcard);
+                        $this->setBaseGiftCardsAmountUsed((float) $Basecustomer_giftcard);
+
+                        $address->setCustomerBalanceAmount((float) $customer_balance);
+                        $address->setBaseCustomerBalanceAmount((float) $basecustomer_balance);
+                        $this->setCustomerBalanceAmountUsed((float) $customer_balance);
+                        $this->setBaseCustomerBalAmountUsed((float) $basecustomer_balance);
+
+                        $grandTotal = $grandTotal - $address->getCustomerBalanceAmount() ;
+                        $basegrandTotal = $basegrandTotal - $address->getBaseCustomerBalanceAmount();
+
+
+
+
+
                     }
 
                 }

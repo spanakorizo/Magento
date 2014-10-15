@@ -102,10 +102,8 @@ class TM_FireCheckout_Block_Checkout_Deal extends Mage_Checkout_Block_Cart_Shipp
 
         $address = $this->getQuote()->getShippingAddress();
 
-        $giftcardarray = unserialize($address->getGiftCards());
+        $this->_giftcardsdetails = unserialize($address->getGiftCards());
 
-        $this->_giftcardsdetails['code'] = (string) $giftcardarray[0][c];
-        $this->_giftcardsdetails['amount'] = (float) $giftcardarray[0][a];
 
         return $this->_giftcardsdetails;
 
