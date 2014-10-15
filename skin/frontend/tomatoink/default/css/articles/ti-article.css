@@ -500,11 +500,11 @@ padding:.5%;
 	font-family: 'Raleway',Verdana,sans-serif;
 	-moz-font-feature-settings: "lnum";
 	font-size:1.8em;
-	border-radius:10px;
-	-webkit-border-radius:10px;
-	-moz-border-radius:10px;
 	padding:10px;
 	box-sizing:border-box;
+	margin: 1% 0;
+	width: 100%;
+	min-height: 200px;
 }
 .ti_cms_inputFull {
 		width:98%;
@@ -1310,11 +1310,11 @@ padding:.5%;
 	font-family: 'Raleway',Verdana,sans-serif;
 	-moz-font-feature-settings: "lnum";
 	font-size:1.8em;
-	border-radius:10px;
-	-webkit-border-radius:10px;
-	-moz-border-radius:10px;
 	padding:10px;
 	box-sizing:border-box;
+	margin: 1% 0;
+	width: 100%;
+	min-height: 200px;
 }
 .ti-cms-inputFull {
 		width:98%;
