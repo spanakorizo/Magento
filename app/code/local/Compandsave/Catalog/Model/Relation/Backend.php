@@ -11,7 +11,7 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 		$product_ids = $product->getCompatibleCatid(); //find the value of Mapping category ID
 		
 		
-		if($product->getTypeId() === 'simple'){// and getCompatibleCatid() != ''
+		if($product->getTypeId() === 'simple' && $product_ids != ''){// and getCompatibleCatid() != ''
 
             $childId = $product->getId(); //get simple product ID
 			
@@ -54,7 +54,7 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 			unset($product);
 
         }
-        else if($product->getTypeId() === 'bundle' ){// and getCompatibleCatid() != ''
+        else if($product->getTypeId() === 'bundle' && $product_ids != ''){// and getCompatibleCatid() != ''
             $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
             $coreResource = Mage::getSingleton('core/resource');
             $conn = $coreResource->getConnection('core_read');
