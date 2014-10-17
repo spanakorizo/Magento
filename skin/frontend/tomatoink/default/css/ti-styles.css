@@ -20,6 +20,7 @@ Table of Contents:
 	- Tables
 	- Sprites
 	- Icons
+	- Tooltips
 4. Header
 	- Navigation
 		-Nav Mini
@@ -82,7 +83,12 @@ body {
   font-size: 10px;
   font: 1rem/1.5 Verdana, Helvetica, sans-serif;
   color: #333;
-  text-align: left; }
+  text-align: left;
+  font-feature-settings: "lnum";
+  -moz-font-feature-settings: "lnum";
+  -webkit-font-feature-settings: "lnum";
+  -ms-font-feature-settings: "lnum";
+  -o-font-feature-settings: "lnum"; }
 
 .clear {
   clear: both; }
@@ -267,11 +273,6 @@ body {
   font-style: normal; }
 h1, h2, h3, h4, h5, h6 {
   font-family: 'raleway';
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum";
   margin: .5em 0; }
 
 h1 {
@@ -432,12 +433,7 @@ textarea {
   border: 1px solid #71b62f;
   transition: color .4s;
   -webkit-transition: color .4s;
-  font-family: 'raleway', Verdana, sans-serif;
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum"; }
+  font-family: 'raleway', Verdana, sans-serif; }
 
 input::-webkit-input-placeholder {
   color: #ccc;
@@ -559,11 +555,6 @@ label span,
 li label span {
   font-size: 1.6rem;
   font-family: 'raleway';
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum";
   vertical-align: middle; }
   label span span,
   li label span span {
@@ -684,11 +675,6 @@ input[type="file"] {
 /* -------- Prefix: ti_select_ --------*/
 select {
   font-family: 'raleway',Verdana,sans-serif;
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum";
   background: none repeat scroll 0% 0% transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
   display: block;
@@ -2363,6 +2349,38 @@ td, th {
 .icon-ico-warranty:before {
   content: "\e600"; }
 
+/* -- Tooltips --*/
+.ti_tooltip {
+  display: inline;
+  position: relative; }
+  .ti_tooltip:hover:after {
+    background: #e67921;
+    background: #e67921;
+    border-radius: 5px;
+    top: 2em;
+    color: #fff;
+    content: attr(data-title);
+    left: 50%;
+    margin-left: -210px;
+    padding: 5px 15px;
+    position: absolute;
+    z-index: 98;
+    width: 420px;
+    font-size: 1.4rem;
+    text-shadow: none;
+    text-align: left;
+    font-family: verdana, sans-serif; }
+  .ti_tooltip:hover:before {
+    border: solid;
+    border-color: #e67921 transparent;
+    border-width: 0px 10px 10px 10px;
+    top: 20px;
+    content: "";
+    left: 50%;
+    margin-left: -5px;
+    position: absolute;
+    z-index: 99; }
+
 /* -----------------------------------*/
 /* -------->> 4. Header <<<-----------*/
 /* -----------------------------------*/
@@ -2779,32 +2797,17 @@ td, th {
 #ti_header_click_coupon,
 #ti_header_coupon_desc {
   font: 300 16px/1em 'raleway', Verdana, sans-serif;
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum";
   color: #e67921;
   margin-top: .5em; }
 
 #ti_header_click_coupon span {
   font: 24px/1em 'oleo_scriptregular', 'raleway',serif;
-  color: #559a13;
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum"; }
+  color: #559a13; }
 
 #ti_header_coupon_code {
   font: bold 24px/1em 'raleway',serif;
   color: #559a13;
-  line-height: 1.3;
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum"; }
+  line-height: 1.3; }
 
 #ti_header_coupon_desc,
 #ti_secondary_coupon {
@@ -3345,21 +3348,25 @@ input.ti_checkout_info {
 .ti_dashboard_amount {
   color: #e67921;
   font-family: 'raleway';
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum";
   font-size: 4em;
   margin: 0;
   line-height: 1; }
 
 /* Orders */
-#my-orders-table .data-table {
+#my-orders-table .data-table,
+#my-orders-table-track td {
   margin: 10px auto;
   border: 1px solid #559a13; }
 
-#my-orders-table td {
+#my-orders-table-track td table td {
+  border: none;
+  border-bottom: 1px dotted #559a13; }
+
+#my-orders-table-track td table tr:last-child td {
+  border: none; }
+
+#my-orders-table td,
+#my-orders-table-track td {
   padding: 5px; }
 
 #my-orders-table.my-orders-table-print {
@@ -3432,7 +3439,7 @@ input.ti_checkout_info {
 /* --------- Prefix: ti_cms_ ---------*/
 /* Ajax loaders */
 #ti_ajax_loading_ink, #ti_ajax_loading_series, #ti_ajax_cat_loading_ink,
-#ti_banner_ajax_loading_ink, #ti_banner_ajax_loading_series {
+#ti_banner_ajax_loading_ink, #ti_banner_ajax_loading_series, #ti_subscribe_loading {
   position: absolute;
   float: left;
   display: none;
@@ -3454,6 +3461,26 @@ input.ti_checkout_info {
 #ti_subscribe_loading img {
   width: 75px;
   height: 75px; }
+
+#ti_ajax_cat_loading_ink img {
+  margin: 10px auto 0;
+  width: 40px;
+  height: auto; }
+
+.ajax_loader_small {
+  position: fixed;
+  z-index: 10000;
+  background: #fff url(../images/agri_loading.gif) no-repeat 50% 25px;
+  background-size: 25%;
+  border: 1px solid #559a13;
+  text-align: center;
+  padding: 80px 30px 30px;
+  border-radius: 5px;
+  width: 150px;
+  top: 50%;
+  left: 50%;
+  margin: -20px 0 0 -75px;
+  font-weight: bold; }
 
 #ti_back_top img {
   max-width: 100% !important; }
@@ -3519,12 +3546,7 @@ input.ti_checkout_info {
   max-height: 150px; }
 
 .ti_cms_block_qty {
-  font: 1.2em/1.5em 'raleway', Verdana, sans-serif;
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum"; }
+  font: 1.2em/1.5em 'raleway', Verdana, sans-serif; }
 
 .ti_cms_block_qty input {
   display: inline;
@@ -3624,7 +3646,7 @@ input.ti_checkout_info {
   text-align: center;
   background: rgba(113, 182, 47, 0.6);
   padding: 3px;
-  z-index: 99999; }
+  z-index: 9999; }
 
 #ti_back_top a {
   color: #FFF; }
@@ -3680,11 +3702,6 @@ ul.ti_product_checklist {
 
 #ti_product_qtyDiscount {
   font-family: 'raleway', Verdana, sans-serif;
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum";
   list-style: none;
   position: relative; }
 
@@ -3696,11 +3713,6 @@ ul.ti_product_checklist {
   font-size: .9em;
   text-align: left;
   font-family: 'raleway', Verdana, sans-serif;
-  font-feature-settings: "lnum";
-  -moz-font-feature-settings: "lnum";
-  -webkit-font-feature-settings: "lnum";
-  -ms-font-feature-settings: "lnum";
-  -o-font-feature-settings: "lnum";
   line-height: 1em; }
 
 #ti_product_qtyDiscountDrop table {

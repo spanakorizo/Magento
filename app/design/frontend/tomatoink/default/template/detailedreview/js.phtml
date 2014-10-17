@@ -143,7 +143,7 @@ if (!($imagesMaxCount = (int)Mage::getStoreConfig('detailedreview/image_options/
 
             if (image_name == "" || isImage(image_name)) image_flag = true;
             else {
-                $("#ti_review_image_check").html("please update correct image type(jpg or png). ");
+                $("#ti_review_image_check").html("please update correct image type(jpg/jpeg or png). ");
                 $("#add-file-input-box").attr("class", "input-box validation-failed");
             }
             <?php if (Mage::getStoreConfig('detailedreview/captcha/enabled')): ?>
@@ -416,6 +416,7 @@ function isImage(filename) {
     switch (ext.toLowerCase()) {
     case 'jpg':
     case 'png':
+    case 'jpeg':
         //etc
         return true;
     }

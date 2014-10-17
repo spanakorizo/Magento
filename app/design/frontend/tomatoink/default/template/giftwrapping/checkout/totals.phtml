@@ -27,7 +27,7 @@
 <?php foreach ($this->getValues() as $label => $value):?>
 <tr>
     <td style="<?php echo $this->getStyle() ?>" class="a-right" colspan="<?php echo $this->getColspan(); ?>">
-        <p><?php echo $label; ?></p>
+        <p><?php echo $label; ?>: </p>
     </td>
     <td style="<?php echo $this->getStyle() ?>">
         <p><?php echo $this->helper('checkout')->formatPrice($value) ?></p>

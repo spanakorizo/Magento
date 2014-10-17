@@ -28,26 +28,27 @@ if ($check_flag):?>
 	<h1 class="lgTxt"><?php echo $this->__('Order Tracking') ?></h1>
 </div>
 	
-<div class="data-table three_fourth">	
-	<table border="0" cellspacing="0" cellpadding="0">
+<div class="data-table two_third">	
+	<table border="0" cellspacing="0" cellpadding="0" class="width100">
 		<tr>
 			<th valign="top">Order ID: <?php echo $incrementId; ?></th>
-			<th valign="top" style="text-align:right;">Order Placed: <?php echo strtotime($order->getCreatedAtStoreDate()) ?></th>
+			<th valign="top" class="a-right">Order Placed: <?php echo strtotime($order->getCreatedAtStoreDate()) ?></th>
 		</tr>
 	</table>
-	<table border="0" cellspacing="0" cellpadding="0" style="border-left:1px dotted #559a13;border-right:1px dotted #559a13;border-bottom:1px dotted #559a13;">	
+	<table border="0" cellspacing="0" cellpadding="0" id="my-orders-table-track" class="width100">	
 		<tr>
-			<td valign="top" align="left" colspan="2" style=";border-bottom:1px dotted #559a13;">
-				<p><b>Order Status:</b> <?php echo $order->getStatus() ?></p>
-				<p><b>Order Comments:</b><?php echo $order->getFirecheckoutCustomerComment() ?></p>
+			<td valign="top" align="left" colspan="2">
+				<p><b>Order placed by:</b> <?php echo $order->getCustomerName() ?></p>
+				<p><b>Order status:</b> <?php echo $order->getStatus() ?></p>
+				<p><b>Order comments:</b><?php echo $order->getFirecheckoutCustomerComment() ?></p>
 			</td>
 		</tr>
 		<tr>
-			<td valign="top" width="20%" style=";border-bottom:1px dotted #559a13;">
+			<td valign="top" width="20%">
 				<p><b>Shipping Speed:</b></p>
 				<p><?php echo $order->getShippingDescription(); ?></p>
 			</td>
-			<td valign="top" width="80%" rowspan="2" style="border-left:1px dotted #559a13;">
+			<td valign="top" width="80%" rowspan="2">
 				<!--Dynamic order information table start!-->
 				<table>
 					<tr>
@@ -70,7 +71,6 @@ if ($check_flag):?>
 		<tr>
 			<td valign="top">
 				<p><b>Tracking Number:</b></p>
-				<p><?php echo $order->getCustomerName() ?></p>
 				<p class="lgTxt">
 					<?php if ($order->getStatus() == 'complete'): ?>
 						<a href="#" onclick="popWin('<?php echo $this->helper('shipping')->getTrackingPopupUrlBySalesModel($order) ?>','trackorder','width=800,height=600,top=0,left=0,resizable=yes,scrollbars=yes'); return false;" title="<?php echo $this->__('Track all shipment(s)') ?>">Track Your Order Now</a>
@@ -81,7 +81,7 @@ if ($check_flag):?>
 	</table>
 	
 </div>
-<div class="one_fourth">
+<div class="one_third">
 	<div class="ti_block_inner ti_cms_gradient_block">
 		<h3>Let Tomato Help You</h3>
 		<ul class="ti_bullet">
@@ -95,7 +95,12 @@ if ($check_flag):?>
 
 <?php else: ?>
 <!-- can't find order !-->
-<p>We can't find your order</p>
+<h1 class="dgTxt">Order Tracking</h1>
+<h2 class="altTxt">We can't find that order</h2>
+<p>Please make sure you used the correct information and resubmit your order lookup request.</p>
+<div class="buttons-set">
+    <a href="<?php echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link ti_button"><?php echo $this->__('Back') ?></a> &nbsp;
+</div>
 <?php endif; 
     else: 
 ?>
@@ -105,12 +110,12 @@ if ($check_flag):?>
 <div class="ti_cms_articleContent_area">
 <h1 class="dgTxt">Order Tracking</h1>
 <!-----Member Login---!-->
-<form action="" method="POST" id='tracking_form'>
+<form action="" method="POST" id='tracking_form' autocomplete="off">
     <input type='hidden' id='ti_method' name='method' value='' />
     <input type='hidden' id='ti_orderid' name='orderid' value='' />
     <input type='hidden' id='ti_value' name='value' value='' />
 <div class="one_half">
-<h2 class="altTxt">Having an Account?</h2>
+<h2 class="altTxt">Have an account?</h2>
 <p>If you already have a TomatoInk account, please click the button below to sign in and view your order history. This will tell you the status of all of your recent orders.</p>
 <a class="ti_button btn ti_cms_floatRight" href="<?php echo $this->getUrl('customer/account') ?>" target="_blank">View Account</a> <br class="ti_cms_clear" />
 <h3>Why Register?</h3>
@@ -125,14 +130,30 @@ if ($check_flag):?>
 </div>
 <!-----General Login---!-->
 <div class="one_half">
-<h2 class="altTxt">Having an Order ID?</h2>
+<h2 class="altTxt">Have an order ID?</h2>
 <p>You can still view your order status without signing in. If you do not have your Order ID Number, please refer to your Order Confirmation email.</p>
-<p id='warning-message' style='color:red'></p>
-<div class="ti-required-entry one"><label class="ti_cms_labelHide" for="order_id_1"> <input id="ti_ot_order_id_1" class="textArea ti_cms_inputFull" onfocus="if(this.value=='Order ID')this.value='';" onblur="if(this.value=='')this.value='Order ID';" type="text" value="Order ID" /> <span>Order ID</span> </label></div>
-<div class="ti-required-entry one"><label class="ti_cms_labelHide" for="email"> <input id="ti_ot_email" class="textArea ti_cms_inputFull" onfocus="if(this.value=='Email Address')this.value='';" onblur="if(this.value=='')this.value='Email Address';" type="text" value="Email Address" /> <span>Email Address</span> </label></div>
+<p id='warning-message' class="error-msg"></p>
+<div class="ti-required-entry one">
+	<label class="ti_cms_labelHide" for="order_id_1"> 
+		<input id="ti_ot_order_id_1" class="ti_cms_inputFull" type="text" placeholder="Order ID" /> <span>Order ID</span> 
+	</label>
+</div>
+<div class="ti-required-entry one">
+	<label class="ti_cms_labelHide" for="email"> 
+		<input id="ti_ot_email" class="ti_cms_inputFull" type="email" placeholder="Email Address" /> <span>Email Address</span> 
+	</label>
+</div>
 <h3 class="altTxt">-----------or-----------</h3>
-<div class="ti-required-entry one"><label class="ti_cms_labelHide" for="order_id_2"> <input id="ti_ot_order_id_2" class="textArea ti_cms_inputFull" onfocus="if(this.value=='Order ID')this.value='';" onblur="if(this.value=='')this.value='Order ID';" type="text" value="Order ID" /> <span>Order ID</span> </label></div>
-<div class="ti-required-entry one"><label class="ti_cms_labelHide" for="postal"> <input id="ti_ot_postal" class="textArea ti_cms_inputFull" onfocus="if(this.value=='Shipping Zipcode')this.value='';" onblur="if(this.value=='')this.value='Shipping Zipcode';" type="text" value="Shipping Zipcode" /> <span>Shipping Zipcode</span> </label></div>
+<div class="ti-required-entry one">
+	<label class="ti_cms_labelHide" for="order_id_2"> 
+		<input id="ti_ot_order_id_2" class="ti_cms_inputFull" type="text" placeholder="Order ID" /> <span>Order ID</span> 
+	</label>
+</div>
+<div class="ti-required-entry one">
+	<label class="ti_cms_labelHide" for="postal"> 
+		<input id="ti_ot_postal" class="ti_cms_inputFull" type="text" placeholder="Shipping Zipcode" /> <span>Shipping Zipcode</span> 
+	</label>
+</div>
 <input class="ti_cms_floatRight" title="Continue" type="button" value="Continue" id='tracking_submit' /></div>
 </form></div>
 
@@ -141,16 +162,21 @@ jQuery('#tracking_submit').click(function() {
     var method = 0; 
     var orderid = 0; 
     var value = "";
-    if ((jQuery('#ti_ot_order_id_1').val() != 'Order ID') && (jQuery('#ti_ot_email').val() != 'Email Address')) {
+    if ((jQuery('#ti_ot_order_id_1').val() != '') && !isNaN(jQuery('#ti_ot_order_id_1').val()) && (jQuery('#ti_ot_email').val() != '') ) {
+
+    	if (validateEmail(jQuery('#ti_ot_email').val())) {
+
         jQuery('#ti_method').val(1); 
         jQuery('#ti_orderid').val(jQuery('#ti_ot_order_id_1').val());
         jQuery('#ti_value').val(jQuery('#ti_ot_email').val());
         jQuery('#tracking_form').submit();
+    	}
+    	else jQuery('#warning-message').html("Wrong email format");
 
 
     }
 
-    else if ((jQuery('#ti_ot_order_id_2').val() != 'Order ID') && (jQuery('#ti_ot_postal').val() != 'Shipping Zipcode')) {
+    else if ((jQuery('#ti_ot_order_id_2').val() != '') && isNaN(jQuery('#ti_ot_order_id_2').val()) && (jQuery('#ti_ot_postal').val() != '')) {
         jQuery('#ti_method').val(2); 
         jQuery('#ti_orderid').val(jQuery('#ti_ot_order_id_2').val());
         jQuery('#ti_value').val(jQuery('#ti_ot_postal').val());
@@ -158,11 +184,17 @@ jQuery('#tracking_submit').click(function() {
     }
 
     else {
-        jQuery('#warning-message').html("We need to fill in orderid and emailaddress both or orderid and postcode both");
+        jQuery('#warning-message').html("Please fill in your Order ID + email address OR your Order ID + zip code to look up your order.");
     }
 
         
 });
+
+
+function validateEmail(email) { 
+    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+} 
 </script>
 
 <?php endif; ?>

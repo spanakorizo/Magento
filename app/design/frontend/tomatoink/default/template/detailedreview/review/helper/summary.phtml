@@ -34,9 +34,9 @@ if ($this->getReviewsCount()):
             </div>
         <?php endif;?>
         <p class="rating-links">
-            <a href="<?php echo $this->getProduct()->getProductUrl() . '?feedback=1';?>"><?php echo $this->__('%d Review(s)', $this->getReviewsCount()) ?></a>
+            <a href="<?php echo '#feedback';?>"><?php echo $this->__('%d Review(s)', $this->getReviewsCount()) ?></a>
         </p>
     </div>
 <?php elseif ($this->getDisplayIfEmpty()): ?>
-    <p class="no-rating"><a href="<?php echo $this->getProduct()->getProductUrl() . '?feedback=1'; ?>"><?php echo $this->__('Be the first reviewer!') ?></a></p>
+    <p class="no-rating"><a href="<?php echo '#feedback'; //echo $this->getProduct()->getProductUrl() . ?>"><?php echo $this->__('Be the first reviewer!') ?></a></p>
 <?php endif; ?>

@@ -15,6 +15,14 @@ Naming convention: add ti_ps_ prefix
 	margin-right:5px;
 }
 
+.ti_ps_table{
+	border: 2px solid #f7e8db;
+}
+
+.ti_ps_table td{
+	border-bottom: 1px solid #f7e8db;
+}
+
 
 @media only screen and (max-width : 767px) {
 /* Styles */

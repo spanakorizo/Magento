@@ -33,7 +33,7 @@
             <li class="fields one">
                 <div class="field one_half">
                     <label for="department" class="required"><span><?php echo $this->__('Department') ?></span></label>
-                    <div class="input-box ti-required-entry btcf">
+                    <div class="input-box btcf">
                         <div class="ti_select_barContainer btcf">
                             <?php echo $this->getDepartmentHtmlSelect() ?>
                         </div>
@@ -42,7 +42,7 @@
                 <?php if(Mage::getStoreConfig("helpmate/ticketForm/usePriorityOnFrontend")) :?>
                 <div class="field one_half">
                     <label for="priority" class="required"><span><?php echo $this->__('Priority') ?></span></label>
-                    <div class="input-box ti-required-entry btcf">
+                    <div class="input-box btcf">
                         <div class="ti_select_barContainer btcf">
                             <?php echo $this->getPriorityHtmlSelect() ?>
                         </div>

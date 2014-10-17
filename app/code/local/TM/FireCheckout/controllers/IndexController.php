@@ -367,8 +367,11 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                 );
             } catch (Mage_Core_Exception $e) {
                 Mage::dispatchEvent('enterprise_giftcardaccount_add', array('status' => 'fail', 'code' => $giftcardCode));
+                if ($e->getMessage() == "Wrong gift card code.") $message = "The promotional code you entered is not valid.";
+                else $message = $e->getMessage();
                 Mage::getSingleton('checkout/session')->addError(
-                    $e->getMessage()
+                    $message
+
                 );
             } catch (Exception $e) {
                 Mage::getSingleton('checkout/session')->addException($e, $this->__('Cannot apply gift card.'));

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <modules>
+            <Compandsave_Becomereseller>
+                <version>0.1.0</version>
+            </Compandsave_Becomereseller>
+        </modules>
+    </global>
+    <frontend>
+        <routers>
+            <!-- the <helloworld> tagname appears to be arbitrary, but by
+            convention is should match the frontName tag below-->
+            <becomereseller>
+                <use>standard</use>
+                <args>
+                    <module>Compandsave_Becomereseller</module>
+                    <frontName>become-reseller</frontName>
+                </args>
+            </becomereseller>
+        </routers>
+    </frontend>
+        <global>
+        <blocks>
+            <becomereseller>
+                <class>Compandsave_Becomereseller_Block</class>
+            </becomereseller>
+        </blocks>
+        <helpers>
+            <becomereseller>
+                <class>Compandsave_Becomereseller_Helper</class>
+            </becomereseller>
+        </helpers>
+    </global>
+<!-- ... -->
+</config>
+

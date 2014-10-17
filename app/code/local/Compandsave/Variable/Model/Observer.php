@@ -48,7 +48,7 @@ class Compandsave_Variable_Model_Observer
 					<div class="one_fourth ti_ink_selector_holder">
                         <div class="ti_cms_gradient_block ti_block_inner">
     						<h2 class="ti_headerH1 ti_green_head">Ink Search</h2>
-    						<div id="ti_ajax_cat_loading_ink"><img src="'.$block->getSkinUrl("images/ti_loading_small.gif").'" /></div>
+    						<div id="ti_ajax_cat_loading_ink"><img src="'.$block->getSkinUrl("images/agri_loading.gif").'" /></div>
     						<div class="ti_select_barContainerBorder btcf">
     							<div class="ti_select_barContainer btcf">
     								<select name="" id="ti_series_selector">

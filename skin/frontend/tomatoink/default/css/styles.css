@@ -317,7 +317,7 @@ a.back-link { color:#999; }
 .messages li { padding:0; word-wrap:break-word; }
 .messages ul { padding:10px 17px 18px; margin:0 0 -11px; background-position:35px 100%; background-repeat:no-repeat; position:relative; }
 .messages ul li { margin:0; padding:0 0 3px; }
-.messages a { text-decoration:underline; }
+.messages a { font-weight:bold; }
 .messages a:hover { text-decoration:none; }
 .messages li.error-msg,
 .messages li.success-msg,
@@ -329,10 +329,10 @@ ul.messages li.note-msg,
 ul.messages li.notice-msg { /*border-style:solid !important; border-width:1px !important; font-size:1.2em;*/ color:#e67921; }
 p.error-msg { /*border-style:solid !important; padding:10px; border-width:1px !important; font-size:1.2em;*/ margin:10px 0; }
 /* Error Message */
-.messages li.error-msg { color:#d91a00; }
-.messages li.error-msg a { color:#d91a00; }
+.messages li.error-msg {  }
+.messages li.error-msg a { font-weight:bold; }
 .messages li.error-msg ul { /* background-image:url(../images/bkg_msg-error.gif); */ }
-p.error-msg { color:#d91a00; }
+p.error-msg { color:#e67921; }
 /* Success Message */
 .messages li.success-msg { color:#e67921; }
 .messages li.success-msg a { color:#e67921; }
@@ -406,7 +406,7 @@ p.error-msg { color:#d91a00; }
 .pages p{
 	float: left;
 	margin: .5em 0 .5em .5em;
-	font-size: 2.4em;
+	font-size: 2.4rem;
 }
 .pager .pages ul,
 .pager .pages li { cursor:pointer; display:inline-block; padding:0 2px; font-family:'raleway'; font-feature-settings: "lnum";-moz-font-feature-settings: "lnum";-webkit-font-feature-settings: "lnum";-ms-font-feature-settings: "lnum";-o-font-feature-settings: "lnum";}
@@ -2274,8 +2274,8 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 	margin:8px 0;
 }
 .my-account .pager .limiter{
-	float:left;
-	width:30%;
+	/*float:left;
+	width:30%;*/
 	padding:0;
 }
 
@@ -2436,7 +2436,7 @@ p.wishlist-empty {border:1px solid #d0d0d0;}
 .giftcardaccount { position:relative; z-index:1; padding-top:1px; }
 .giftcard-status .messages,
 .giftcardaccount .messages { margin-bottom:10px; }
-.giftcardaccount p { margin:15px 0; font-size:12px; }
+.giftcardaccount p { margin:15px 0;  }
 .giftcardaccount .fieldset { margin:0; }
 .giftcardaccount .btn-only { margin:0 0 15px; }
 
@@ -2451,7 +2451,7 @@ p.wishlist-empty {border:1px solid #d0d0d0;}
 .gift-card-info .form-list label {}
 .gift-card-info .btn-only { padding-left:0; }
 
-#gc-please-wait { -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; -moz-opacity:0.8; opacity:0.8; }
+/*#gc-please-wait { -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; -moz-opacity:0.8; opacity:0.8; }*/
 
 /* Print Pages */
 .page-print .print-head {}
@@ -2487,7 +2487,7 @@ p.wishlist-empty {border:1px solid #d0d0d0;}
 .my-rewards .box { }
 .my-rewards .info-box .box-title { margin:10px 10px; }
 .my-rewards .info-box .box-content {  }
-.my-rewards p.error { display:inline; color:#d91a00; }
+.my-rewards p.error { display:inline; color:#e67921; }
 .my-rewards dl {  }
 .my-rewards dl dt { }
 .my-rewards dl dt span { color:#d12c01; }
