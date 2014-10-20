@@ -175,9 +175,10 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 				}
 						
 				//============================================================================//
-				$update_product = Mage::getModel('catalog/product')->loadbyAttribute('sku',$sku);
+				$update_product = Mage::getModel('catalog/product')->setStoreId($store_code)->loadbyAttribute('sku',$sku);
 								
 				if($update_product == ''){ //create new product
+
 					unset($update_product);
 														
 					$new_product->setStoreId($store_code) //change static store code to dynamic
@@ -243,8 +244,8 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 					
 					$item_list_array = explode(',',$importData['bundle_items']);
 					// create first option
-					
-					
+
+
 					foreach($item_list_array as $item_list){
 					
 						$list = explode('/',$item_list);
@@ -345,14 +346,14 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 				}
 				else{
 					//=======================update product=======================//
-					
+
 					if($store_code != ''){
 						$update_product->setStoreId($store_code)
 									->setWebsiteIds(array(Mage::app()->getStore($store_code)->getWebsite()->getId()));
 					}
 					//change static store code to dynamic
 												
-					if($attributeSetId != '')		
+					if($attributeSetId != '')
 						$update_product->setAttributeSetId($attributeSetId);
 					
 					$bundle_product_id = $update_product->getId();	
@@ -375,8 +376,7 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 						$update_product->setIsWeightByWarehouse($is_weight_by_warehouse);
 					if('' != $vendor_partno)
 						$update_product->setVendorPartno($vendor_partno);
-					if($url_key != '')
-						$update_product->setUrlKey($url_key);
+
 					if('' != $meta_title)
 						$update_product->setMetaTitle($meta_title);
 					if('' != $photos_cloned_from)
@@ -552,7 +552,7 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 						}
 						
 					}
-					if($url_key == ''){
+					/*if($url_key == ''){
 						$entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
 						$eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
 						$tablename = $coreResource->getTableName('catalog_product_entity_url_key');
@@ -565,16 +565,24 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 									->where('store_id = ?', $store_code);
 						$url = $conn->fetchAll($select);
 					
-					}
-					
+					}*/
+                    if(!empty($url_key)){
+                        $update_product->setUrlkey($url_key);
+
+                    }
+                    $update_product->setIsMassupdate(true);
+                    $update_product->setExcludeUrlRewrite(true);
+
+
 					$update_product->save();
-					if($url_key == ''){
+
+					/*if($url_key == ''){
 						foreach($url as $urlkey){
 							$conn_write->delete($tablename, array('entity_id = ?' => array($urlkey['entity_id']), 'store_id = ?' => $store_code,'attribute_id = ?' => $urlkey['attribute_id'] ,'entity_type_id = ?'=> $entityTypeId ));
 							
 							$conn_write->insert($tablename, array('value' => $urlkey['value'], 'store_id' => $store_code, 'attribute_id' => $urlkey['attribute_id'],'entity_id' => $bundle_product_id,'entity_type_id'=> $entityTypeId ));
 						}
-					}
+					}*/
 					unset($update_product);
 					return true;
 				}
