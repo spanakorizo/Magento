@@ -150,9 +150,9 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 				}
 				//======================== SET ATTRIBUTE SET ID ========================//
 				
-				if(mysql_real_escape_string($importData['attribute_set']) != ''){
+				if(!empty($importData['attribute_set'])){
 				
-					$attributeSetId = $this->attributeid(mysql_real_escape_string($importData['attribute_set']));
+					$attributeSetId = $this->attributeid($importData['attribute_set']);
 					
 				}
 				else{
@@ -175,7 +175,7 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 				}
 						
 				//============================================================================//
-				$update_product = Mage::getModel('catalog/product')->setStoreId($store_code)->loadbyAttribute('sku',$sku);
+				$update_product = Mage::getModel('catalog/product')->loadbyAttribute('sku',$sku);
 								
 				if($update_product == ''){ //create new product
 
@@ -352,11 +352,11 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 									->setWebsiteIds(array(Mage::app()->getStore($store_code)->getWebsite()->getId()));
 					}
 					//change static store code to dynamic
-												
+
 					if($attributeSetId != '')
 						$update_product->setAttributeSetId($attributeSetId);
-					
-					$bundle_product_id = $update_product->getId();	
+
+                    $bundle_product_id = $update_product->getId();
 							//->setCategoryIds(array($root_id,$child_cat_id)) //cat id will be array
 					if('' != $name)	
 						$update_product->setName($name);
@@ -422,7 +422,7 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 					
 					if($importData['bundle_items'] != ''){
 						//delete existing items from products
-						
+
 						$products_links = Mage::getModel('catalog/product_link_api');
 						$RelationTable = $coreResource->getTableName('catalog/product_relation'); //get table name for catalog_product_relation
 						$RealtionLinkTable = $coreResource->getTableName('catalog/product_link'); //get table name for catalog_product_link
@@ -552,38 +552,15 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 						}
 						
 					}
-					/*if($url_key == ''){
-						$entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
-						$eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
-						$tablename = $coreResource->getTableName('catalog_product_entity_url_key');
-						$urlKeyId = $eavAttribute->getIdByCode('catalog_product', 'url_key');
-						$select = $conn->select()
-									->from($tablename,array('value','attribute_id','entity_id'))
-									->where('attribute_id = ?',$urlKeyId)
-									->where('entity_type_id = ?',$entityTypeId)
-									->where('entity_id = ?',$bundle_product_id)
-									->where('store_id = ?', $store_code);
-						$url = $conn->fetchAll($select);
-					
-					}*/
-                    if(!empty($url_key)){
-                        $update_product->setUrlkey($url_key);
 
-                    }
+                    $update_product->setUrlKey(false);
                     $update_product->setIsMassupdate(true);
                     $update_product->setExcludeUrlRewrite(true);
+                    $update_product->save();
 
 
-					$update_product->save();
+                    unset($update_product);
 
-					/*if($url_key == ''){
-						foreach($url as $urlkey){
-							$conn_write->delete($tablename, array('entity_id = ?' => array($urlkey['entity_id']), 'store_id = ?' => $store_code,'attribute_id = ?' => $urlkey['attribute_id'] ,'entity_type_id = ?'=> $entityTypeId ));
-							
-							$conn_write->insert($tablename, array('value' => $urlkey['value'], 'store_id' => $store_code, 'attribute_id' => $urlkey['attribute_id'],'entity_id' => $bundle_product_id,'entity_type_id'=> $entityTypeId ));
-						}
-					}*/
-					unset($update_product);
 					return true;
 				}
 			}
@@ -608,18 +585,38 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 		return $this->defaultAttributeSetId;
 	}
 	
-	public function attributeid(string $attribute_name){
+	public function attributeid($attribute_name){
 		
 		//@Model to get entity attribute collection
-		$entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
-		$attributeSetCollection = Mage::getResourceModel('eav/entity_attribute_set_collection')
-			->setEntityTypeFilter($entityTypeId)
-			->addFieldToFilter("attribute_set_name", $attribute_name)->getFirstItem()
-			->load();
+		//$entityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+
+        $entityTypeId = Mage::getModel('eav/entity')
+            ->setType('catalog_product')
+            ->getTypeId();
+
+        $attributeSetId     = Mage::getModel('eav/entity_attribute_set')
+            ->getCollection()
+            ->setEntityTypeFilter($entityTypeId)
+            ->addFieldToFilter('attribute_set_name', $attribute_name)
+            ->getFirstItem()
+            ->getAttributeSetId();
+
 		
-		return $attributeSetCollection->getAttributeSetId();
+		return $attributeSetId;
 	}
-	
+
+    protected function _addAffectedEntityIds($ids)
+    {
+        if (is_array($ids)) {
+            foreach ($ids as $id) {
+                $this->_addAffectedEntityIds($id);
+            }
+        } else {
+            $this->_affectedEntityIds[] = $ids;
+        }
+
+        return $this;
+    }
 	
 }
 

@@ -11,7 +11,7 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 		$product_ids = $product->getCompatibleCatid(); //find the value of Mapping category ID
 		
 		
-		if($product->getTypeId() === 'simple' && $product_ids != ''){// and getCompatibleCatid() != ''
+		if($product->getTypeId() === 'simple'){// and getCompatibleCatid() != ''
 
             $childId = $product->getId(); //get simple product ID
 			
@@ -51,10 +51,10 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 
             }
 
-			unset($product);
+
 
         }
-        else if($product->getTypeId() === 'bundle' && $product_ids != ''){// and getCompatibleCatid() != ''
+        else if($product->getTypeId() === 'bundle' ){// and getCompatibleCatid() != ''
             $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
             $coreResource = Mage::getSingleton('core/resource');
             $conn = $coreResource->getConnection('core_read');
@@ -67,6 +67,8 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
             $bundle_product_id = $product->getId(); //get bundle product ID
 			
 			$mapping_product_ids = $product->getCompatibleCatid();
+            mage::log($mapping_product_ids);
+
 
             $attrbTable = $coreResource->getTableName('catalog_product_entity_text');
 			$RelationTable = $coreResource->getTableName('catalog/product_relation'); //get table name for catalog_product_relation
@@ -102,8 +104,11 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 				}
 			}
 			else{
+                /*
+                 * Create Compatible category id and link if the no compatible category id is set
+                 */
 				///code start for delete existing link
-                $compatible_cat_id = '';
+                $compatible_cat_id = null;
 
 				$bundled_items = array(); //items array
 				
@@ -161,14 +166,24 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
                         $compatible_cat_id = $group_product_id.','.$compatible_cat_id;
 					}
 				}
-			}
-            $compatible_cat_id = substr($compatible_cat_id, 0, strlen($compatible_cat_id)-1);
+                $check = null;
+                $compatible_cat_id = rtrim( $compatible_cat_id ,',');
+                $select = $conn->select()
+                    ->from($attrbTable,array('value_id'))
+                    ->where('attribute_id =?',$AttributeId)
+                    ->where('store_id =?',$store_id)
+                    ->where('entity_id =?',$bundle_product_id);
 
-            $conn_write->insert($attrbTable, array('entity_type_id' => $EntityTypeId, 'attribute_id' => $AttributeId,'store_id'=> $store_id,'entity_id'=> $bundle_product_id,'value' => $compatible_cat_id));
+                $check = $conn->fetchCol($select);
+                if(empty($check))
+                    $conn_write->insert($attrbTable, array('entity_type_id' => $EntityTypeId, 'attribute_id' => $AttributeId,'store_id'=> $store_id,'entity_id'=> $bundle_product_id,'value' => $compatible_cat_id));
+                else
+			       $conn_write->update($attrbTable,array('value' => $compatible_cat_id), array('entity_type_id =?' => $EntityTypeId, 'attribute_id =?' => $AttributeId,'store_id =?'=> $store_id,'entity_id =?'=> $bundle_product_id));
+            }
 
-			unset($product);
+
         }
-		
+
 		return true;
 	}
 	
