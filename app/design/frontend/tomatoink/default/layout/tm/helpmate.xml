@@ -31,7 +31,7 @@
             <action method="addLink" translate="label" module="helpmate" ifconfig="helpmate/general/enabled">
                 <name>helpmate</name>
                 <path>helpmate/index/customer</path>
-                <label>My RMAs</label>
+                <label>Support Tickets</label>
             </action>
         </reference>
     </customer_account>
@@ -39,7 +39,7 @@
     <helpmate_index_customer translate="label">
         <reference name="head">
             <action method="setTitle" translate="title" module="helpmate">
-                <title>My RMAs</title>
+                <title>Support Tickets</title>
             </action>
         </reference>
         <label>Ticket</label>

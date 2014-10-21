@@ -1,4 +1,4 @@
-<meta name="viewport" content="width=device-width">
+
 	
 	<!--[if gte IE 9]>
   		<style type="text/css">
@@ -30,10 +30,10 @@
 				
 		?>
 		<div class="ti_cms_contain ti_hide_767" id="ti_main_coupon">
-			<p id="ti_header_click_coupon"><span>Fresh Deals</span><br>Get this month's coupon.</p>
+			<p id="ti_header_click_coupon"><span>Fresh Deals</span><br/>Get this month's coupon.</p>
 			<p id="ti_header_coupon_desc">
-				<span id="ti_header_coupon_info"><?php echo $getCouponModel['description'];?></span><br>
-				<span id="ti_header_coupon_code"><?php echo $getCouponModel['value']; ?></span><br>
+				<span id="ti_header_coupon_info"><?php echo $getCouponModel['description'];?></span><br/>
+				<span id="ti_header_coupon_code"><?php echo $getCouponModel['value']; ?></span><br/>
 				<span id="ti_header_coupon_exp" class="ti_small_text"><?php echo $getCouponModel['expiry_date']; ?></span>
 			</p>
 			<div id="ti_main_coupon_arrow"></div>
@@ -141,7 +141,7 @@
 					<div class="ti_input_bar" id="ti_header_site_search">
 						<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
 							<input type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search" placeholder="Type your printer or ink model..." />
-							<input type="submit" name="Submit" id="search_submit" value="Search" title="<?php echo $this->__('Search') ?>">
+							<input type="submit" name="Submit" id="search_submit" value="Search" title="<?php echo $this->__('Search') ?>"/>
 							<div id="search_autocomplete" class="search-autocomplete"></div>
 	        <script type="text/javascript">
 	        //<![CDATA[
@@ -187,7 +187,7 @@
 					<li><a href="<?php echo $current_url ?>lexmark-printer-cartridges.html"><span>Lexmark</span></a></li>
 					<li><a href="<?php echo $current_url ?>samsung-printer-ink-toner.html"><span>Samsung</span></a></li>
 					<li><a href="<?php echo $current_url ?>dell-cartridges.html"><span>Dell</span></a></li>
-					<li><a href=""><span>More Brands
+					<li><a href="javascript:void(0)"><span>More Brands</span></a>
 						<ul class="ti_sub-menu menu_three_col ti_cms_border_block" id="ti_header_brandsMenu">
 							<li><a href="<?php echo $current_url ?>kodak-printer-ink-toner.html"><span>Kodak</span></a></li>
 							<li><a href="<?php echo $current_url ?>konica-minolta-printer-ink-toner-cartridges.html"><span>Konica-Minolta</span></a></li>
@@ -209,10 +209,10 @@
 							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/neopost-series-ink-and-toner-cartridges.html"><span>NeoPost</span></a></li>
 							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/rena-series-ink-and-toner-cartridges.html"><span>Rena</span></a></li>
 							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/roland-series-ink-and-toner-cartridges.html"><span>Roland</span></a></li>
-							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/secap-series-ink-and-toner-cartridges.html"><span>Secap</span></a></li>
+							<li><a href="<?php echo $current_url ?>other-brands-printer-ink-toner-cartridges/secap-series-ink-and-toner-cartridges.html"><span>Secap</span></li>
 						</ul>
-					</span></a></li>
-					<li><a href="#"><span>Accessories</span></a>
+					</a></li>
+					<li><a href="javascript:void(0)"><span>Accessories</span></a>
 						<ul class="ti_sub-menu menu_one_col ti_cms_border_block" id="ti_header_lastMenu">
 							<li><a href="<?php echo $current_url ?>usb-printer-cables.html"><span>Cables</span></a></li>
 							<li><a href="<?php echo $current_url ?>photo-paper"><span>Photo Paper</span></a></li>
@@ -262,9 +262,9 @@
     	$number_count++;
         $product = $item->getProduct();
         if(in_array($product->getId(),$cartItems) and $item->getPrice() > 0 ) //this for bundle otherwise all product under bundle will show in cart
-		//$shopptingcarthtml .= "<div class='ti_related_item_one_fourth ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
+		//$shopptingcarthtml .= "<div class='ti_related_item_one_fourth ti_hide_767'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='lgTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br/>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . $product->getName() . "</p></div></div></a></div>";
 
-            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='altTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . str_replace('"', '', $product->getName()) . "</p></div></div></a></div>";
+            $shopptingcarthtml .= "<div class='ti_miniCart_carousel_wrapper'><a href='" . $product->getProductUrl() . "'><div class='ti_miniCart_carousel_item'><img src='" . $this->helper('catalog/image')->init( $product, 'small_image') . "'></img></a><strong class='altTxt'>$<span>"  . number_format($item->getPrice(), 2) . "</span><br/>Qty: <span >" . $item->getQty() . "</span></strong></p><div class='one'><p>" . str_replace('"', '', $product->getName()) . "</p></div></div></a></div>";
 
 
 
@@ -275,7 +275,7 @@
     }
 
 
-    if ($shopptingcarthtml != "") $shopptingcarthtml .= "</div><div class='ti_miniCart_subtotal'><h4 class='ltWeight altTxt'><strong>" . $total_num . "</strong> items in your cart<br>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button ti_altBtn' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
+    if ($shopptingcarthtml != "") $shopptingcarthtml .= "</div><div class='ti_miniCart_subtotal'><h4 class='ltWeight altTxt'><strong>" . $total_num . "</strong> items in your cart<br/>Subtotal: $<strong>" . number_format($grandtotal,2) . "</strong></h4><a class='ti_button ti_altBtn' href='" . $this->getUrl('') . "checkout/cart/'><strong>Checkout</strong></a></div>";
     else $shopptingcarthtml = "<p class='text_center'><span class='altTxt'>Your cart is empty.</span></p>";
 
 

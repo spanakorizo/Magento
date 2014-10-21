@@ -33,7 +33,7 @@
     <div class="block-content">
         <nav id="ti_dashboardMenu">
             <div id="ti_dashborad_wrapper" class="ti_dashboard">
-                <ul class="ti_menu ti_dashboard">
+                <ul class="ti_menu ti_dashboard" id="ti_navigation">
                     <?php $_links = $this->getLinks(); ?>
                     <?php $_index = 1; ?>
                     <?php $_count = count($_links); ?>
@@ -46,6 +46,18 @@
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </ul>
+
+                <select class="ti_menu ti_dashboard" id="ti_navigation_mobile" style="display:none">
+                    <?php $_links = $this->getLinks(); ?>
+                    <?php $_index = 1; ?>
+                    <?php $_count = count($_links); ?>
+                    <?php foreach ($_links as $_link): ?>
+                        <?php $_last = ($_index++ >= $_count); ?>
+                        
+                            <option <?php if ($this->isActive($_link)) echo "selected"; ?> value="<?php echo $_link->getUrl() ?>"><?php echo $_link->getLabel() ?></option>
+                        
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="ti_cms_separator"></div>
         </nav>
@@ -56,24 +68,28 @@
 (function ($) {
 $( document ).ready(function() {
     var navigation_flag = true;
-    var navigation_text = "";
+    //start with mobile
+        if ($('#ti_dashboardMenu').width() < 1000) {
+            navigation_flag = false;
+            $("#ti_navigation").hide();
+            $("#ti_navigation_mobile").show();
+            $('#ti_dashborad_wrapper').attr("class", "ti_select_barContainer");
+            //ti_select_barContainer
+        }
+
 
     $(window).resize(function() {
         if ($('#ti_dashboardMenu').width() < 1000 && navigation_flag) {
             navigation_flag = false;
-            navigation_text = $('#ti_dashborad_wrapper').html();
-            navigation_text = navigation_text.replace(/ul/g, "select");
-            navigation_text = navigation_text.replace(/li/g, "option");
-            $('#ti_dashborad_wrapper').html(navigation_text);
+            $("#ti_navigation").hide();
+            $("#ti_navigation_mobile").show();
             $('#ti_dashborad_wrapper').attr("class", "ti_select_barContainer");
             //ti_select_barContainer
         }
         else if ($('#ti_dashboardMenu').width() >= 1000 && !navigation_flag) {
             navigation_flag = true;
-            navigation_text = $('#ti_dashborad_wrapper').html();
-            navigation_text = navigation_text.replace(/select/g, "ul");
-            navigation_text = navigation_text.replace(/option/g, "li");
-            $('#ti_dashborad_wrapper').html(navigation_text);
+            $("#ti_navigation").show();
+            $("#ti_navigation_mobile").hide();
             $('#ti_dashborad_wrapper').attr("class", "ti_dashboard");
 
         }

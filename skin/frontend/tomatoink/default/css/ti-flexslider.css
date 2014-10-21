@@ -47,7 +47,8 @@ html[xmlns] .slides {display: block;}
 	-moz-box-shadow: 0 1px 4px rgba(0,0,0,.2); 
 	-o-box-shadow: 0 1px 4px rgba(0,0,0,.2); 
 	box-shadow: 0 1px 4px rgba(0,0,0,.2); 
-	zoom: 1; 
+	zoom: 1;
+	min-width:1000px\9;
 }
 
 .flex-viewport { max-height: 2000px; -webkit-transition: all 1s ease; -moz-transition: all 1s ease; -o-transition: all 1s ease; transition: all 1s ease; }

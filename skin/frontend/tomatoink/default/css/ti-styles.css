@@ -81,7 +81,9 @@ html {
 body {
   background: #fff;
   font-size: 10px;
-  font: 1rem/1.5 Verdana, Helvetica, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-family: Verdana, Helvetica, sans-serif;
   color: #333;
   text-align: left;
   font-feature-settings: "lnum";
@@ -399,8 +401,12 @@ input[type="submit"],
 .ti_button,
 textarea {
   line-height: 2em;
+  line-height: 2rem;
   height: 2em;
-  font: 300 2rem 'raleway', Verdana, sans-serif;
+  font-size: 20px;
+  font-size: 2rem;
+  font-weight: normal;
+  font-family: 'raleway', Verdana, sans-serif;
   padding: 0 5px;
   margin: 1%;
   max-width: 100%;
@@ -455,7 +461,7 @@ input::-moz-placeholder {
 input:-ms-input-placeholder {
   color: #ccc;
   opacity: 1;
-  font-size: 1.6rem; }
+  font-size: 2rem; }
 
 textarea::-webkit-input-placeholder {
   color: #ccc;
@@ -477,9 +483,9 @@ textarea::-moz-placeholder {
 textarea:-ms-input-placeholder {
   color: #ccc;
   opacity: 1;
-  font-size: 1.6rem; }
+  font-size: 2rem; }
 
-/* fallback for IE8 */
+/* fallback for IE8 and IE9 */
 .ti-cms-hasPlaceholderText {
   color: #ccc; }
 
@@ -553,6 +559,7 @@ input[type="button"].ti_altBtn:hover,
 
 label span,
 li label span {
+  font-size: 16px;
   font-size: 1.6rem;
   font-family: 'raleway';
   vertical-align: middle; }
@@ -567,43 +574,17 @@ label.ti_cms_labelHide span {
 
 input[type="checkbox"],
 input[type="radio"] {
+  display: none;
+  display: inline-block\9;
   -moz-appearance: none;
   display: inline-block;
   margin: 0 5px;
   vertical-align: middle; }
 
-input[type="radio"] {
-  border-radius: 10px;
-  border: 5px solid #559a13;
-  background: none;
-  padding: 2px; }
-
-input[type="radio"]:checked {
-  background: #559a13; }
-
-input[type="checkbox"] {
-  border: 3px solid #e67921;
-  width: 15px;
-  height: 15px;
-  padding: 0;
-  border-radius: 0;
-  background: none; }
-
-input[type="checkbox"]:checked:before {
-  content: "\2713";
-  position: absolute;
-  margin-top: -8px;
-  margin-left: -3px;
-  color: #fd8524; }
-
 /* http://webdesign.tutsplus.com/articles/quick-tip-easy-css3-checkboxes-and-radio-buttons--webdesign-8953 */
-input[type="checkbox"] {
-  display: none;
-  opacity: 0;
-  z-index: 10; }
-
 input[type="checkbox"] + label div.ti-checkbox {
   display: inline-block;
+  display: none\9;
   width: 21px;
   height: 21px;
   background: url("../images/ti-assets/checkbox.png") left top no-repeat;
@@ -613,11 +594,9 @@ input[type="checkbox"] + label div.ti-checkbox {
 input[type="checkbox"]:checked + label div.ti-checkbox {
   background: url("../images/ti-assets/checkbox.png") left -21px no-repeat; }
 
-input[type="radio"] {
-  display: none; }
-
 input[type="radio"] + label div.ti-radio {
   display: inline-block;
+  display: none\9;
   width: 20px;
   height: 20px;
   background: url("../images/ti-assets/radiobox.png") left top no-repeat;
@@ -683,8 +662,10 @@ select {
   color: #559a13;
   overflow: hidden;
   width: 115%;
+  font-size: 20px;
   font-size: 2rem;
   padding: 0 5px;
+  line-height: 45px;
   height: 45px;
   cursor: pointer;
   -webkit-appearance: none;
@@ -769,6 +750,7 @@ select:disabled {
 
 /* -- Lists --*/
 ul, ol {
+  font-size: 16px;
   font-size: 1.6rem; }
 
 ol {
@@ -779,6 +761,7 @@ ol li {
   padding-left: 15px; }
 
 li p {
+  font-size: 14px;
   font-size: 1.4rem; }
 
 ul.ti_bullet {
@@ -2352,27 +2335,31 @@ td, th {
 /* -- Tooltips --*/
 .ti_tooltip {
   display: inline;
-  position: relative; }
+  position: relative;
+  cursor: pointer; }
   .ti_tooltip:hover:after {
-    background: #e67921;
-    background: #e67921;
+    cursor: default;
+    background: #bf6115;
     border-radius: 5px;
     top: 2em;
     color: #fff;
     content: attr(data-title);
     left: 50%;
     margin-left: -210px;
-    padding: 5px 15px;
+    padding: 15px;
     position: absolute;
-    z-index: 98;
+    z-index: 99998;
     width: 420px;
     font-size: 1.4rem;
     text-shadow: none;
     text-align: left;
-    font-family: verdana, sans-serif; }
+    font-family: verdana, sans-serif;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box; }
   .ti_tooltip:hover:before {
     border: solid;
-    border-color: #e67921 transparent;
+    border-color: #bf6115 transparent;
     border-width: 0px 10px 10px 10px;
     top: 20px;
     content: "";
@@ -2635,6 +2622,7 @@ td, th {
     margin: 0 0 10px 0;
     clear: both;
     padding: 0;
+    font-size: 14px;
     font-size: 1.4rem; }
     .ti_cms_dropContent ul li a {
       color: #e67921; }
@@ -2729,6 +2717,7 @@ td, th {
 
 #ti_header_helpDrop .ti_dropHalfBrder h3 {
   line-height: 1;
+  font-size: 18px;
   font-size: 1.8rem; }
 
 #ti_header_helpDrop .ti_dropHalfBrder .icon-bubbles {
@@ -3095,6 +3084,7 @@ input.ti_checkout_info {
   line-height: 44px; }
 
 .ti_checkout_list .ti_select_barContainer {
+  font-size: 16px;
   font-size: 1.6rem;
   width: 80%;
   margin: 0;
@@ -3229,7 +3219,9 @@ input.ti_checkout_info {
   top: 7em;
   left: 50%;
   margin-left: -30%;
+  margin-left: -275px\9;
   width: 55%;
+  width: 550px\9;
   background: url("../images/ti-assets/paper-bg_e67921.jpg") repeat;
   border-radius: 0.25em;
   text-align: center;
@@ -3292,7 +3284,8 @@ input.ti_checkout_info {
 .ti_dashboard li {
   padding: 0;
   font-size: .8em;
-  margin: 0; }
+  margin: 0;
+  letter-spacing: -.2px; }
 
 .ti_dashboard > li:after {
   display: inline-block;
