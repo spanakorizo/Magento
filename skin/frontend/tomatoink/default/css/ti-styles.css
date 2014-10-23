@@ -2332,6 +2332,111 @@ td, th {
 .icon-ico-warranty:before {
   content: "\e600"; }
 
+@font-face {
+  font-family: 'printerLogo';
+  src: url("../fonts/ti-fonts/printerLogo.eot?nfavxp");
+  src: url("../fonts/ti-fonts/printerLogo.eot?#iefixnfavxp") format("embedded-opentype"), url("../fonts/ti-fonts/printerLogo.woff?nfavxp") format("woff"), url("../fonts/ti-fonts/printerLogo.ttf?nfavxp") format("truetype"), url("../fonts/ti-fonts/printerLogo.svg?nfavxp#printerLogo") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+[class^="logo-"], [class*=" logo-"] {
+  font-family: 'printerLogo';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.logo-apollo:before {
+  content: "\e600"; }
+
+.logo-apple:before {
+  content: "\e601"; }
+
+.logo-astrojet:before {
+  content: "\e602"; }
+
+.logo-brother:before {
+  content: "\e603"; }
+
+.logo-bryce:before {
+  content: "\e604"; }
+
+.logo-canon:before {
+  content: "\e605"; }
+
+.logo-compaq:before {
+  content: "\e606"; }
+
+.logo-dell:before {
+  content: "\e607"; }
+
+.logo-epson:before {
+  content: "\e608"; }
+
+.logo-hasler:before {
+  content: "\e609"; }
+
+.logo-hp:before {
+  content: "\e60a"; }
+
+.logo-ibm:before {
+  content: "\e60b"; }
+
+.logo-kodak:before {
+  content: "\e60c"; }
+
+.logo-konica-minolta:before {
+  content: "\e60d"; }
+
+.logo-kyocera-mita:before {
+  content: "\e60e"; }
+
+.logo-lexmark:before {
+  content: "\e60f"; }
+
+.logo-mimaki:before {
+  content: "\e610"; }
+
+.logo-mutoh:before {
+  content: "\e611"; }
+
+.logo-neopost:before {
+  content: "\e612"; }
+
+.logo-okidata:before {
+  content: "\e613"; }
+
+.logo-panasonic:before {
+  content: "\e61c"; }
+
+.logo-pitney-bowes:before {
+  content: "\e614"; }
+
+.logo-rena:before {
+  content: "\e615"; }
+
+.logo-ricoh:before {
+  content: "\e616"; }
+
+.logo-roland:before {
+  content: "\e617"; }
+
+.logo-samsung:before {
+  content: "\e618"; }
+
+.logo-secap:before {
+  content: "\e619"; }
+
+.logo-sharp:before {
+  content: "\e61a"; }
+
+.logo-xerox:before {
+  content: "\e61b"; }
+
 /* -- Tooltips --*/
 .ti_tooltip {
   display: inline;
@@ -2491,7 +2596,7 @@ td, th {
   border: none; }
 
 #ti_header_nav_main li .ti_sub-menu li a span {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #333;
   line-height: 1em;
   text-shadow: none;

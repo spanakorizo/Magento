@@ -1062,8 +1062,13 @@ ul.disc li { padding-left:10px; background:url(../images/bkg_bulletsm.gif) no-re
 .catalogsearch-result-index .note-msg { margin:20px 0; }
 
 .sidebar .category-title { margin:0; }
-.category-image { text-align:center; margin:0 0 1px; }
-.category-image img { display:block; margin:0 auto; }
+.category-image { font-size:0; margin:0; }
+.category-image img { 
+	float: left;
+	margin: 8px 10px 0 0;
+	max-height: 32px;
+	opacity: .8;
+}
 
 .category-products { padding:0; }
 .category-products .price-box { font-size:12px; }

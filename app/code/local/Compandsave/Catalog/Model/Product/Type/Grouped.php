@@ -28,7 +28,7 @@ class Compandsave_Catalog_Model_Product_Type_Grouped extends Mage_Catalog_Model_
             ->addAttributeToFilter('sku', $skus)
             ->setOrder('ordered_qty', 'desc');
             */
-            $write = Mage::getSingleton('core/resource')->getConnection('core_write');
+            $write = Mage::getSingleton('core/resource')->getConnection('core_read');
             foreach ($collection as $item) {
                 $query = "SELECT SUM(`qty_ordered`) as total FROM `sales_flat_order_item` WHERE sku='" . $item->getsku() . "'";
                 $readresult=$write->query($query);

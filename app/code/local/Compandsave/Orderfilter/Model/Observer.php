@@ -132,7 +132,8 @@ $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
 			$order->setOrderType('Special');
     	}
 
-	
+	$order->setOrderTypeValue('Telephone');
+	$order->setOrderType('Special');
     	//$customer_text .= "***Customers***" . $row['FirstName'] . "*" . $row['LastName'] . "*" . $row['CustomerID'] . "*" . $row['EmailAddress'] . "*" . $row['Company'] . "*" . $row['ShippingAddress'] . "*" . $row['BillingAddress'] . "*" . $row['Telephone'] . "*" . $row['entity_id'];
     }
 
