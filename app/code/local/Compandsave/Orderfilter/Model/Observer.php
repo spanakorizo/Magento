@@ -131,9 +131,6 @@ $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
     		$order->setOrderTypeValue('Telephone');
 			$order->setOrderType('Special');
     	}
-
-	$order->setOrderTypeValue('Telephone');
-	$order->setOrderType('Special');
     	//$customer_text .= "***Customers***" . $row['FirstName'] . "*" . $row['LastName'] . "*" . $row['CustomerID'] . "*" . $row['EmailAddress'] . "*" . $row['Company'] . "*" . $row['ShippingAddress'] . "*" . $row['BillingAddress'] . "*" . $row['Telephone'] . "*" . $row['entity_id'];
     }
 
@@ -176,7 +173,7 @@ $query = "SELECT * FROM `compandsave_functions_customerfilter`; ";
 
 
 		//$order->setOrderType($address->getStreetFull());
-
+/*
 if ($filter_priority && $order->getOrderType() == "") {
  
 	//$orderid = "11095";
@@ -212,7 +209,7 @@ if ($filter_priority && $order->getOrderType() == "") {
 		foreach ($collection_items as $single) {
 		
 			if ($count==1) {
-				if ($single->getOrderTypeValue() != "") $duplicate_id =  $single->getOrderTypeValue();
+				if ($single->getOrderTypeValue() != "") {$duplicate_id =  $single->getOrderTypeValue(); $single->getOrderType('Duplicate');}
 				else {
 					$duplicate_id = $single->getId();
 				}
@@ -224,19 +221,19 @@ if ($filter_priority && $order->getOrderType() == "") {
 			if (is_null($single->getOrderTypeValue())) $single->setOrderTypeValue($duplicate_id);
 
 
-			if (is_null($single->getOrderType())) $single->setOrderType('duplicate');
+			if (is_null($single->getOrderType())) $single->setOrderType('Duplicate');
 			$single->save();	
 
 			$count++;
 		} 
-		$order->setOrderTypeValue($duplicate_id)->setOrderType('duplicate');
+		$order->setOrderTypeValue($duplicate_id)->setOrderType('Duplicate');
 		$filter_priority = false;
 	}
 
 
 }
 
-
+*/
 
 
 
@@ -256,13 +253,27 @@ if ($filter_priority && $order->getOrderType() == "") {
 /*  Check Order Shipping City: APO, DPO, FPO, Guam */
 /* Yiyang   Date:5/20/2014                         */
 /***************************************************/
+/*
 $army_city = $shippingaddress->getCity();
 $army_state = $shippingaddress->getState();
 if (strtoupper($army_city) == 'APO' || strtoupper($army_city) == 'DPO' || strtoupper($army_city) == 'FPO' || strtoupper($army_state) == 'GUAM') {
 	$order->setOrderType('Army');
 	$filter_priority = false;
 }
+*/
 
+/***************************************************/
+/* Description: Order Filter-> shipping method         */
+/*  Check Order Shipping method */
+/* Yiyang   Date:10/23/2014                         */
+/***************************************************/
+$shipping_method = $order->getShippingDescription();
+
+if ($filter_priority && $shipping_method != "Free Shipping - Free" && $shipping_method != "Tomato Mail - Fixed") {
+	$order->setOrderType('UPS');
+	$order->setOrderTypeValue($shipping_method);
+	$filter_priority = false;
+}
 
 /***************************************************/
 /* Description: Order Filter-> Large Order         */
@@ -275,7 +286,7 @@ if ($filter_priority && ($order->getGrandTotal() >= 150) && $order->getOrderType
 	$order->setOrderType('Large');
 	$filter_priority = false;
 	if ($shippingstate == "HAWAII" || $shippingstate == "ALASKA" || $shippingstate == "VIRGIN ISLANDS") {
-		$order->setOrderTypeValue('Special');
+		$order->setOrderTypeValue('International');
 	}
 	else {
 		$order->setOrderTypeValue('Regular');}
@@ -292,24 +303,18 @@ if ($filter_priority && ($order->getGrandTotal() >= 150) && $order->getOrderType
 if ($filter_priority && $order->getGrandTotal() < 150 && $order->getOrderType() == '') 	{
 	$shippingstate = strtoupper($shippingaddress->getRegion());
 	$orderweight = $order->getWeight();
-	if ($orderweight < 0.75) {
-		$order->setOrderType('Autoship');
-		$order->setOrderTypeValue('Autoship');
+	if ($orderweight < 0.9375) {
+		$order->setOrderType('Small');
+		$order->setOrderTypeValue('15oz');
 	}
 
 	else {
 		$order->setOrderType('Small');
-			if ($shippingstate == "HAWAII" || $shippingstate == "ALASKA" || $shippingstate == "VIRGIN ISLANDS") {
-				$order->setOrderTypeValue('Special');
-			}
-			else {
-				$order->setOrderTypeValue('Regular');}
+		$order->setOrderTypeValue('Regular');
 
 	}
 
 }
-
-
 
 
 

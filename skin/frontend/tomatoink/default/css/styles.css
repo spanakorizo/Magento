@@ -87,8 +87,8 @@ ul,ol         { list-style:none; }
 /* ======================================================================================= */
 
 /* Layout ================================================================================ */
-/*.wrapper { background:#fff; padding-bottom:20px; }
-.page { width:100%; margin:0 auto; text-align:left; }
+/*.wrapper { background:#fff; padding-bottom:20px; }*/
+.wrapper, .page { min-width:100%;width:100%; margin:0 auto; }/*
 .page-print { background:#fff; padding:20px; text-align:left; }
 .page-popup { padding:20px; text-align:left; }
 .page-empty { background:#fff; padding:20px; text-align:left; }
@@ -223,6 +223,7 @@ p.required {
 .form-list .note { clear:both; font-size:11px; width:380px; margin:0; padding:3px 0 0 240px; }
 .form-list span.label { font-weight:normal; }
 .form-list .input-box input { /* float:right;  width:256px; */ width:98%; }
+.form-list .input-box input[type="radio"],.form-list .input-box input[type="checkbox"]{ /* float:right;  width:256px; */ width:auto; }
 .form-list .input-box a { font-size:11px; margin-top:4px; }
 /*.form-list input.input-text,
 .form-list textarea { float:left; width:374px; vertical-align:top; }

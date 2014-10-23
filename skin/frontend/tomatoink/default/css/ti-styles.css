@@ -75,6 +75,10 @@ Created for global css at TomatoInk.com
 /* -----------------------------------*/
 /* -------->> 1. Global <<<-----------*/
 /* -----------------------------------*/
+html, body {
+  min-width: 100%;
+  width: 100%; }
+
 html {
   font-size: 62.5%; }
 
@@ -575,7 +579,6 @@ label.ti_cms_labelHide span {
 input[type="checkbox"],
 input[type="radio"] {
   display: none;
-  display: inline-block\9;
   -moz-appearance: none;
   display: inline-block;
   margin: 0 5px;
@@ -584,7 +587,6 @@ input[type="radio"] {
 /* http://webdesign.tutsplus.com/articles/quick-tip-easy-css3-checkboxes-and-radio-buttons--webdesign-8953 */
 input[type="checkbox"] + label div.ti-checkbox {
   display: inline-block;
-  display: none\9;
   width: 21px;
   height: 21px;
   background: url("../images/ti-assets/checkbox.png") left top no-repeat;
@@ -596,7 +598,6 @@ input[type="checkbox"]:checked + label div.ti-checkbox {
 
 input[type="radio"] + label div.ti-radio {
   display: inline-block;
-  display: none\9;
   width: 20px;
   height: 20px;
   background: url("../images/ti-assets/radiobox.png") left top no-repeat;
@@ -3324,9 +3325,7 @@ input.ti_checkout_info {
   top: 7em;
   left: 50%;
   margin-left: -30%;
-  margin-left: -275px\9;
   width: 55%;
-  width: 550px\9;
   background: url("../images/ti-assets/paper-bg_e67921.jpg") repeat;
   border-radius: 0.25em;
   text-align: center;
@@ -4267,19 +4266,25 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     font-size: 9px;
     font-size: 0.9rem; }
 
+  .page, .main {
+    width: 100%;
+    min-width: 100%;
+    overflow: hidden; }
+
   .ti_cms_contain {
     width: 790px;
-    min-width: 790px; }
+    min-width: 790px;
+    padding: 0 10px; }
 
   #ti_header_logo {
     margin: 1em 0; }
 
   #ti_header_row,
   #ti_footer_row {
-    min-width: 800px; }
+    min-width: 100%; }
 
   #ti_header_nav_main li {
-    padding: 0px 1.4em; }
+    padding: 0px 1.2em; }
 
   .ti_header_top_block,
   .one_fifth, .two_fifth, .three_fifth, .four_fifth {
@@ -4349,11 +4354,9 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     margin-left: 20px; } }
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  #ti_header_imageSplash {
-    min-width: 800px; }
-
-  #ti_header_row, #ti_footer_row, #ti_cms_home_container, #ti_footer_copyright_row {
-    min-width: 800px; } }
+  #ti_header_row, #ti_footer_row, #ti_cms_home_container, #ti_footer_copyright_row, #ti_header_imageSplash .ti_cms_contain {
+    min-width: 800px;
+    width: 800px; } }
 @media only screen and (max-width: 767px) {
   /* Styles */
   .ti_cms_contain {
@@ -4592,18 +4595,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     height: 320px; } }
 @media only screen and (max-width: 479px) {
   /* Styles */
-  body {
-    width: 100%;
-    min-width: 100%; }
-
   .ti_cms_contain {
     width: 100%;
-    min-width: 100%; }
-
-  .page, .main {
-    width: 100%;
     min-width: 100%;
-    overflow: hidden; }
+    padding: 0 5px; }
 
   .ti_block_inner {
     padding: 4px; }
@@ -4683,7 +4678,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     min-height: 280px; }
 
   .ti_social_media_btn {
-    margin: 0 15px 0 0; }
+    margin: 0 10px 0 0; }
 
   .ti_hide_479, .ti_product_cta .icon-ico-warranty:before,
   .ti_product_cta .icon-ico-guarantee:before,

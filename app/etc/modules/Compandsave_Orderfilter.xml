@@ -2,7 +2,7 @@
     <config>
         <modules>
         <Compandsave_Orderfilter>
-            <active>false</active>
+            <active>true</active>
             <codePool>local</codePool>
         </Compandsave_Orderfilter>
         </modules>

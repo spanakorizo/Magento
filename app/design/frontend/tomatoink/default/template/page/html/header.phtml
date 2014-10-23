@@ -1,4 +1,6 @@
-
+<!--[if lte IE 8]>
+	<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/ti-styles-ie8.css') ?>" />
+<![endif]-->
 	
 	<!--[if gte IE 9]>
   		<style type="text/css">
@@ -29,7 +31,7 @@
 				->load();
 				
 		?>
-		<div class="ti_cms_contain ti_hide_767" id="ti_main_coupon">
+		<div class="ti_hide_767" id="ti_main_coupon">
 			<p id="ti_header_click_coupon"><span>Fresh Deals</span><br/>Get this month's coupon.</p>
 			<p id="ti_header_coupon_desc">
 				<span id="ti_header_coupon_info"><?php echo $getCouponModel['description'];?></span><br/>
