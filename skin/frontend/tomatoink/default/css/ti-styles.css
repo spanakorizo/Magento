@@ -580,7 +580,6 @@ input[type="checkbox"],
 input[type="radio"] {
   display: none;
   -moz-appearance: none;
-  display: inline-block;
   margin: 0 5px;
   vertical-align: middle; }
 

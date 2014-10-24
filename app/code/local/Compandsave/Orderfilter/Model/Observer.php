@@ -5,6 +5,8 @@ class Compandsave_Orderfilter_Model_Observer {
 		$filter_priority = true;
 
 		$order = $observer->getEvent()->getOrder();
+
+if (is_null($single->getOrderTypeValue())) {
 		$addressid = $order->getShippingAddress()->getId();
 		$shippingaddress = Mage::getModel('sales/order_address')->load($addressid);
 		$addressid = $order->getBillingAddress()->getId();
@@ -269,7 +271,7 @@ if (strtoupper($army_city) == 'APO' || strtoupper($army_city) == 'DPO' || strtou
 /***************************************************/
 $shipping_method = $order->getShippingDescription();
 
-if ($filter_priority && $shipping_method != "Free Shipping - Free" && $shipping_method != "Tomato Mail - Fixed") {
+if ($filter_priority && $shipping_method != "Tomato Free " && $shipping_method != "Tomato Mail ") {
 	$order->setOrderType('UPS');
 	$order->setOrderTypeValue($shipping_method);
 	$filter_priority = false;
@@ -318,7 +320,7 @@ if ($filter_priority && $order->getGrandTotal() < 150 && $order->getOrderType() 
 
 
 
-
+		} //end if 
 		
 	} //end of function
 } //end of class
