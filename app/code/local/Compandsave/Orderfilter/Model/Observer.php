@@ -6,7 +6,7 @@ class Compandsave_Orderfilter_Model_Observer {
 
 		$order = $observer->getEvent()->getOrder();
 
-if (is_null($single->getOrderTypeValue())) {
+if (is_null($order->getOrderTypeValue())) {
 		$addressid = $order->getShippingAddress()->getId();
 		$shippingaddress = Mage::getModel('sales/order_address')->load($addressid);
 		$addressid = $order->getBillingAddress()->getId();
