@@ -94,7 +94,7 @@ $numColumns = sizeof($this->getColumns());
                 <?php endforeach ?>
             <?php endif; ?>
             <!-- Customized Filter !-->
-            <div>
+            <div id="customized_filter">
                 <input type="button" value="Order Filter" class="form-button" id="admin_filter_block" style="margin-top:10px;">
                 <div id="admin_order_filter" style="display:none;width:100px; height:500px; background-color:#E0F8F1;position:absolute;border: 1px solid #81BEF7;">
                     <br><input type='button' class='form-button' value='15oz' id='order_filter_autoship'><br>
@@ -282,7 +282,10 @@ if (window.location.href.match("/sales_order/index/")) {
 //$("#"+divname).show("slide", { direction: "left" }, 1000);
 
 } //end if
-
+else {
+    jQuery('#customized_filter').hide();
+    jQuery('#admin_batch').hide();
+}
 
 //start single order print button
     if (window.location.href.match("/admin/sales_order/view/order_id/")) {
