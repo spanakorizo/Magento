@@ -2955,6 +2955,9 @@ ul.ti_cart_review li:last-child {
   background: #559a13;
   color: #fff; }
 
+.ti_cart_total h2 {
+  color: #fff; }
+
 .ti_deals_text {
   color: #fff;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8); }

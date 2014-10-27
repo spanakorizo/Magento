@@ -31,8 +31,8 @@
 <?php echo $this->getMessagesBlock()->toHtml() ?>
 
 <?php if ($this->getShippingAddress()): ?>
-<div class="info-set col2-set">
-    <h2 class="legend"><?php echo $this->__('Shipping Information') ?></h2>
+<div class="info-set col2-set ti_cms_border_block one">
+    <h2 class="legend altTxt"><?php echo $this->__('Shipping Information') ?></h2>
     <div class="col-1 one_half">
         <div class="box">
             <div class="box-title">
@@ -87,8 +87,8 @@
 </div>
 <?php endif; ?>
 
-<div class="info-set col2-set">
-    <h2 class="legend"><?php echo $this->__('Billing Information') ?></h2>
+<div class="info-set col2-set ti_cms_border_block one">
+    <h2 class="legend altTxt"><?php echo $this->__('Billing Information') ?></h2>
     <div class="col-1 one_half">
         <div class="box">
             <div class="box-title">
@@ -101,7 +101,7 @@
             </div>
         </div>
     </div>
-    <div class="col-2">
+    <div class="col-2 one_half">
         <div class="box">
             <div class="box-title">
                 <h3><?php echo $this->__('Billing Address') ?></h3>
@@ -118,7 +118,7 @@
     </div>
 </div>
 
-<div class="info-set">
+<div class="info-set one">
     <h2 class="legend"><?php echo $this->__('Items in Your Shopping Cart') ?><span class="separator"> | </span><a href="<?php echo $this->getUrl('checkout/cart') ?>"><?php echo $this->__('Edit Shopping Cart') ?></a></h2>
     <div id="details-reload">
         <?php echo $this->getChildHtml('details') ?>
