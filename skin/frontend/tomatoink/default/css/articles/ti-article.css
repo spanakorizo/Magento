@@ -705,6 +705,7 @@ a.ti-cms-iconBlock{
 .ti-cms-picture span img{ /*CSS for enlarged image*/
 	border-width: 0;
 	padding: 2px;
+	max-width:400px;
 }
 
 .ti-cms-picture:hover span{ /*CSS for enlarged image on hover*/
