@@ -223,6 +223,9 @@ body {
 .ltNeutral {
   color: #f7e8db !important; }
 
+.neutral {
+  color: #e4b388 !important; }
+
 .ti_cms_gradient_block {
   background: #ffffff;
   /* Old browsers */
@@ -872,7 +875,6 @@ li.ti_bulletNone:before {
   width: 98%; }
 
 .ti_dropHalfBrder {
-  margin: 1% auto;
   border-left: 1px solid #71b62f; }
 
 /* -- Images --*/
@@ -2700,7 +2702,7 @@ td, th {
   position: absolute;
   width: 112px;
   color: #333;
-  padding: 20px 5px 5px;
+  padding: 10px 5px 5px;
   top: 27px; }
   .ti_cms_dropContent::after {
     width: 0px;
@@ -2722,7 +2724,8 @@ td, th {
   opacity: 0; }
 
 .ti_cms_dropContent ul {
-  float: left; }
+  float: left;
+  margin: 0 1em; }
   .ti_cms_dropContent ul li {
     margin: 0 0 10px 0;
     clear: both;

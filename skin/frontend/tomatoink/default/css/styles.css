@@ -2287,6 +2287,8 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 	padding:0;
 }
 
+#my-orders-table .option-label, #my-orders-table .option-value{margin-left:10px;}
+
 .order-items #my-orders-table 
 
 .order-page {}
