@@ -53,7 +53,6 @@ var lastPrice='';
 </script>
 <?php endif ?>
 <?php // infostrates tnt ?>
-
 <?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
     <p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
 <?php else: ?>
@@ -61,10 +60,12 @@ var lastPrice='';
     <?php $shippingMe = array(); ?>
 
     <?php
-
+    foreach ($_shippingRateGroups as $code_temp => $_rates_temp) {
+        echo $code_temp;
+        echo "<br>";
+    }
     if (isset($_shippingRateGroups['freeshipping'])
         && Mage::getStoreConfigFlag('firecheckout/general/hide_shipping_if_free')) :
-
         // check is free method is applicable
         $freeApplicable = true;
         foreach ($_shippingRateGroups['freeshipping'] as $_rate):

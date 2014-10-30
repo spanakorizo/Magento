@@ -1,6 +1,8 @@
+<div class="ti_block_inner">
 <div class="ti_checkoutStep" id="ti_cartlogin_close">
     <a class="ti_checkoutStep_close altTxt" href="#">X</a>
 </div>
+
 <h2><?php echo $this->__('Customer Login') ?></h2>
 
 <form action="<?php echo Mage::getUrl('productselector/cartlogin/index',array('_secure'=>true)) ?>" method="post">
@@ -16,9 +18,12 @@
             <label for="login-password" class="ti_cms_labelHide"><span><?php echo $this->__('Password') ?></span></label>
             <input type="password" name="login[password]" placeholder="<?php echo $this->__('Password') ?>" class="required-entry width100" id="login-password" required="required" />
         </div>
-        <div class="actions">
-            <button type="submit" class="ti_button one_half"><span><span><?php echo $this->__('Login') ?></span></span></button>
-            <a href="" id="ti_show_register_info" class="ti_button ti_altBtn one_half text_center"><?php echo $this->__('Create an Account') ?></a>
+        <div class="actions btcf">
+            <center>
+                <button type="submit" class="ti_button"><span><span><?php echo $this->__('Login') ?></span></span></button>
+                <a href="" id="ti_show_register_info" class="ti_button ti_altBtn text_center"><?php echo $this->__('Create an Account') ?></a>
+            </center>
         </div>
     </div>
 </form>
+</div>

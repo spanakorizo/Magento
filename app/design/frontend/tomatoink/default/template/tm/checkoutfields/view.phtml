@@ -1,4 +1,5 @@
-<?php
+<div class="one">
+	<?php
     $order  = $this->getOrder();
     $fields = Mage::helper('checkoutfields')->getFields();
 ?>
@@ -13,4 +14,4 @@
 
     <p><strong><?php echo $this->escapeHtml($config['label']) ?>:</strong> <?php echo $this->escapeHtml($value) ?></p>
 <?php endforeach; ?>
-<div class="ti_cms_separator"></div>
+</div>

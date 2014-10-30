@@ -87,8 +87,6 @@ $estimatezip = $shippingAddress->getPostcode();
 						<?php foreach ($_shippingRateGroups as $code => $_rates){
 
 								$carrier_name = $this->escapeHtml($this->getCarrierName($code));
-
-                                
 								foreach ($_rates as $_rate){
 
                                     /*

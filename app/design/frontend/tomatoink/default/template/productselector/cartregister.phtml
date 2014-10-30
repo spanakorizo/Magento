@@ -1,3 +1,4 @@
+<div class="ti_block_inner">
 <div class="ti_checkoutStep" id="ti_cartregister_close">
 	<a href="#" class="ti_checkoutStep_close altTxt">X</a>
 </div>
@@ -13,7 +14,8 @@
 			<?php echo $this->getBlockHtml('formkey'); ?>
 			<input type="hidden" name="success_url" value="<?php echo $this->getSuccessUrl() ?>" />
 			<input type="hidden" name="error_url" value="<?php echo $this->getErrorUrl() ?>" />
-			<h2 class="ti_green_head"><?php echo $this->__('Personal Information') ?></h2>
+			<div class="f-half">
+			<h2 class="ti_green_head"><?php echo $this->__('Contact Info') ?></h2>
 				<div class="full ti-required-entry">
 					<label class="ti_cms_labelHide" for="firstname"><span><?php echo $this->__('First Name') ?></span></label>
 					<input type="text" id="firstname" name="firstname" placeholder="<?php echo $this->__('First Name') ?>" title="<?php echo $this->__('First Name') ?>" maxlength="255" required="required" class="required-entry" />
@@ -43,8 +45,10 @@
 						<?php echo $this->getChildHtml('customer.form.register.newsletter')?>
 
 				<?php endif;?>
+			</div>
 
-				<h2 class="ti_green_head"><?php echo $this->__('Login Information') ?></h2>
+			<div class="f-half">
+				<h2 class="ti_green_head"><?php echo $this->__('Login Info') ?></h2>
 
 					<div class="full ti-required-entry">
 						<label class="ti_cms_labelHide" for="password"><span><?php echo $this->__('Password') ?></span></label>
@@ -54,13 +58,15 @@
 						<label class="ti_cms_labelHide" for="confirmation"><span><?php echo $this->__('Confirm Password') ?></span></label>
 						<input type="password" required="required" name="confirmation" title="<?php echo $this->__('Confirm Password') ?>" id="confirmation" class="required-entry validate-cpassword" placeholder="<?php echo $this->__('Confirm Password') ?>"   />
 					</div>
+				</div>
 
 		
 
 			
 		
-		<div class="actions">
+		<div class="actions one">
 			<button type="submit" title="<?php echo $this->__('Submit') ?>" class="ti_button"><span><?php echo $this->__('Submit') ?></span></button>
 		</div>
 	</div>
 </form>
+</div>

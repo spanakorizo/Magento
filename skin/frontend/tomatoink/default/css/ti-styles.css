@@ -947,6 +947,9 @@ td, th {
 .ti_cms_infoTable tr:hover th p {
   color: #e67921; }
 
+.ti_cms_tdNopad {
+  padding: 0; }
+
 /* -- Icons --*/
 @font-face {
   font-family: 'ti-icons';
@@ -2506,6 +2509,22 @@ td, th {
   font-size: 1em;
   margin: .5em auto; }
 
+.ti_header_top_block #search_autocomplete {
+  z-index: 999;
+  font-size: 1.4em;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #559a13; }
+
+.ti_header_top_block #search_autocomplete ul {
+  float: none; }
+
+.ti_header_top_block #search_autocomplete ul li {
+  padding: 5px; }
+
+.ti_header_top_block #search_autocomplete ul li:hover {
+  background-color: #F7FFEF; }
+
 .ti_header_top_block ul li,
 .ti_header_top_block ol li {
   margin: .5em auto;
@@ -3082,8 +3101,8 @@ ul.ti_cart_review li:last-child {
 /*Moved from productselector.css */
 #ti_cartlogin_close, #ti_cartregister_close, #ti_cartforget_close {
   position: absolute;
-  right: 5px;
-  top: 5px; }
+  right: 0px;
+  top: 15px; }
 
 #ti_cart_popup_error_msg, #ti_cart_popup_forget_pass {
   display: none; }
@@ -3329,7 +3348,7 @@ input.ti_checkout_info {
   z-index: 5;
   top: 7em;
   left: 50%;
-  margin-left: -30%;
+  margin-left: -28%;
   width: 55%;
   background: url("../images/ti-assets/paper-bg_e67921.jpg") repeat;
   border-radius: 0.25em;
@@ -4277,8 +4296,8 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     overflow: hidden; }
 
   .ti_cms_contain {
-    width: 790px;
-    min-width: 790px;
+    width: 100%;
+    min-width: 100%;
     padding: 0 10px; }
 
   #ti_header_logo {
@@ -4289,7 +4308,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     min-width: 100%; }
 
   #ti_header_nav_main li {
-    padding: 0px 1.2em; }
+    padding: 0px 1em; }
+
+  #ti_header_brandsMenu.ti_sub-menu {
+    margin-left: -110px; }
 
   .ti_header_top_block,
   .one_fifth, .two_fifth, .three_fifth, .four_fifth {
@@ -4359,18 +4381,19 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     margin-left: 20px; } }
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  #ti_header_row, #ti_footer_row, #ti_cms_home_container, #ti_footer_copyright_row, #ti_header_imageSplash .ti_cms_contain {
-    min-width: 800px;
-    width: 800px; } }
+  /*#ti_header_row, #ti_footer_row, #ti_cms_home_container, #ti_footer_copyright_row,#ti_header_imageSplash .ti_cms_contain{
+  	min-width:800px;
+  	width:800px;
+  }*/ }
 @media only screen and (max-width: 767px) {
   /* Styles */
-  .ti_cms_contain {
-    width: 600px;
-    min-width: 600px; }
-
+  /*.ti_cms_contain{
+  	width:600px;
+  	min-width:600px;
+  }*/
   #ti_header_row,
   #ti_footer_row {
-    min-width: 600px; }
+    min-width: 100%; }
 
   #ti_header_accountDrop {
     margin-left: -48px; }
@@ -4601,8 +4624,8 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 @media only screen and (max-width: 479px) {
   /* Styles */
   .ti_cms_contain {
-    width: 100%;
-    min-width: 100%;
+    /*width:100%;
+    min-width:100%;*/
     padding: 0 5px; }
 
   .ti_block_inner {
