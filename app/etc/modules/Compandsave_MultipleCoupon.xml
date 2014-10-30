@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<config>
-    <modules>
-        <Compandsave_MultipleCoupon>
-            <active>true</active>
-            <codePool>local</codePool>
-        </Compandsave_MultipleCoupon>
-    </modules>
-</config>
