@@ -827,7 +827,10 @@ li.ti_bulletNone:before {
   height: auto;
   overflow: visible; }
 
-.ti_menu > li:hover > .ti_sub-menu {
+.ti_menu > li:hover > .ti_sub-menu,
+.ti_menu > li:active > .ti_sub-menu,
+.ti_menu > li:focus > .ti_sub-menu,
+.ti_menu > li:target > .ti_sub-menu {
   opacity: 1;
   visibility: visible;
   transition-delay: 0s;
@@ -2455,11 +2458,11 @@ td, th {
     color: #fff;
     content: attr(data-title);
     left: 50%;
-    margin-left: -210px;
+    margin-left: -150px;
     padding: 15px;
     position: absolute;
     z-index: 99998;
-    width: 420px;
+    width: 300px;
     font-size: 1.4rem;
     text-shadow: none;
     text-align: left;
@@ -2467,6 +2470,16 @@ td, th {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
+  .ti_tooltip.smallTip:hover:after {
+    width: 150px;
+    margin-left: -75px; }
+  .ti_tooltip.largeTip:hover:after {
+    width: 480px;
+    margin-left: -240px; }
+  .ti_tooltip.greenTip:hover:after {
+    background: #3c6d0d; }
+  .ti_tooltip.neutralTip:hover:after {
+    background: #eecdb1; }
   .ti_tooltip:hover:before {
     border: solid;
     border-color: #bf6115 transparent;
@@ -2477,6 +2490,10 @@ td, th {
     margin-left: -5px;
     position: absolute;
     z-index: 99; }
+  .ti_tooltip.greenTip:hover:before {
+    border-color: #3c6d0d transparent; }
+  .ti_tooltip.neutralTip:hover:before {
+    border-color: #eecdb1 transparent; }
 
 /* -----------------------------------*/
 /* -------->> 4. Header <<<-----------*/
@@ -2630,7 +2647,6 @@ td, th {
   margin: 0 auto;
   height: 25px;
   position: relative;
-  left: 10px;
   float: left;
   transition: all .5s ease-in-out;
   -moz-transition: all .5s ease-in-out;
@@ -2638,20 +2654,23 @@ td, th {
   -o-transition: all .5s ease-in-out; }
 
 #ti_header_nav_mini {
-  background: url("../images/ti-assets/mini-nav-drop.png") 3px 0 no-repeat #31590b !important;
-  background-size: 30px 25px;
-  width: 180px; }
+  background: url("../images/ti-assets/mini-nav-drop.png") 3px 0 no-repeat !important; }
   #ti_header_nav_mini select {
-    font-size: 2em;
-    font-weight: bold;
+    font-family: Verdana, sans-serif;
+    font-size: 2.2em;
     float: left;
     height: 25px;
-    line-height: 25px;
-    width: 230px;
+    line-height: 20px;
     box-shadow: none;
     -webkit-appearance: none;
     padding: 0 0 0 45px;
-    color: #559a13; }
+    color: #fff; }
+    #ti_header_nav_mini select:active {
+      color: #559a13;
+      background: none; }
+    #ti_header_nav_mini select:focus {
+      color: #559a13;
+      background: none; }
 
 #ti_header_search_mini input {
   box-shadow: none;
@@ -2672,6 +2691,7 @@ td, th {
     -o-transition: all .6s ease-in-out; }
   #ti_header_search_mini input[type="submit"] {
     background: url("../images/ti-assets/mini-search-slide.png") 0 0 no-repeat transparent;
+    background-size: 118px 25px;
     width: 118px;
     padding: 0;
     font-size: 0;
@@ -2683,13 +2703,6 @@ td, th {
     -webkit-transition: width .6s ease-in-out, background .6s ease-in-out;
     -o-transition: width .6s ease-in-out, background .6s ease-in-out; }
 
-#ti_header_nav_mini:hover,
-#ti_header_nav_mini:focus,
-#ti_header_nav_mini:active,
-#ti_header_nav_mini:enabled {
-  background: url("../images/ti-assets/mini-nav-drop.png") 3px 0 no-repeat #fff;
-  width: 180px; }
-
 #ti_header_search_mini:hover input[type="submit"],
 #ti_header_search_mini:focus input[type="submit"],
 #ti_header_search_mini:active input[type="submit"],
@@ -2698,7 +2711,8 @@ td, th {
 #ti_header_search_mini input[type="text"]:active input[type="submit"],
 #ti_header_search_mini input[type="text"]:enabled input[type="submit"] {
   width: 30px;
-  background: url("../images/ti-assets/mini-search-slide.png") -90px 0 no-repeat transparent; }
+  background: url("../images/ti-assets/mini-search-slide.png") -90px 0 no-repeat transparent;
+  background-size: 118px 25px; }
 
 /*#ti_header_nav_mini:hover select{
 	margin-left:0;
@@ -3633,7 +3647,8 @@ input.ti_checkout_info {
 
 .ti_block_inner {
   padding: 8px;
-  position: relative; }
+  position: relative;
+  width: 100%; }
 
 .ti_cms_flex_gridContain {
   display: -webkit-flex;
@@ -4335,13 +4350,15 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     float: left; }
 
   .ti_cms_dropContent {
-    margin-left: 0 !important;
+    margin-left: 0;
     left: 0;
     top: 20px; }
 
-  .ti_cms_dropContent::after {
-    left: 0;
+  #ti_header_cartDrop, #ti_header_accountDrop {
     margin-left: 0; }
+    #ti_header_cartDrop:after, #ti_header_accountDrop:after {
+      left: 0;
+      margin-left: 0; }
 
   #ti_product_qtyDiscountDrop.ti_cms_dropContent::after {
     left: 50%;
@@ -4395,29 +4412,14 @@ a[class^="PIN_"], a[class*=" PIN_"] {
   #ti_footer_row {
     min-width: 100%; }
 
-  #ti_header_accountDrop {
-    margin-left: -48px; }
-
-  #ti_header_cartDrop {
-    min-width: 150px;
-    margin-left: -75px; }
-
-  #ti_header_help .ti_sub-menu {
-    margin-left: -208px; }
-
-  #ti_header_cartDrop:after {
-    right: auto; }
-
   .ti_header_top_block ul {
-    float: none;
-    margin: 0 auto; }
+    float: none; }
 
   .ti_header_nav_block {
     display: block;
     overflow: hidden;
-    width: 48%;
-    margin: 2px 1%;
-    padding: 10px 0; }
+    width: 50%;
+    margin: 2px 0; }
 
   #ti_main_coupon {
     z-index: 3;
@@ -4455,8 +4457,8 @@ a[class^="PIN_"], a[class*=" PIN_"] {
   #ti_footer_email_cta.one_fourth,
   .ti_footer_top_block .three_fourth,
   .ti_footer_top_block .one_fourth {
-    width: 98%;
-    min-width: 98%;
+    width: 100%;
+    min-width: 100%;
     margin: 0 auto 15px;
     padding-right: 1%;
     padding-left: 1%; }
@@ -4681,6 +4683,22 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     z-index: 20;
     position: relative; }
 
+  #ti_header_helpDrop:after {
+    left: 50%; }
+
+  #ti_header_cartDrop {
+    width: 150px;
+    margin-left: -75px; }
+
+  #ti_header_cartDrop:after {
+    left: 50%; }
+
+  .ti_carousel_header {
+    display: none; }
+
+  .ti_miniCart_subtotal {
+    width: 140px; }
+
   .ti_cms_block_grid {
     min-height: 0px; }
 
@@ -4700,11 +4718,15 @@ a[class^="PIN_"], a[class*=" PIN_"] {
   .ti_cart_desc {
     width: 100%; }
 
+  .ti_popup_cart_window {
+    width: 300px;
+    margin-left: -150px; }
+
   .ti_cart_relatedItemBlock {
     width: 48%;
     float: left;
     margin: 1%;
-    min-height: 280px; }
+    min-height: 300px; }
 
   .ti_social_media_btn {
     margin: 0 10px 0 0; }

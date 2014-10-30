@@ -125,6 +125,7 @@ $estimatezip = $shippingAddress->getPostcode();
                                     /*
                                      * Do not show free method if not applicable
                                      */
+                                    /*
                                     $freeshippingflag = Mage::getStoreConfig('carriers/freeshipping/active');
                                     $freeshippingamount = Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal');
                                     $subtotal = $this->getAddress()->getBaseSubtotal();
@@ -135,11 +136,12 @@ $estimatezip = $shippingAddress->getPostcode();
                                             <?php
                                         }
                                     }
-                                    else{
+                                    */
+                                    //else{
                                     ?>
 								        <option <?php if($_rate->getCode()===$this->getAddressShippingMethod()) echo ' selected="selected"' ?> value="<?php echo $this->htmlEscape($_rate->getCode()) ?>"><?php echo $method_title;?></option>
 							        <?php
-                                    }//end else show for all method except free
+                                    //}//end else show for all method except free
 								}//end foreach
 
 						}//foreach parent

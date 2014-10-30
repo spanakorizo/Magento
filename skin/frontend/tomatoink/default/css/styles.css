@@ -223,7 +223,14 @@ p.required {
 .form-list .value { float:left; padding:2px 0 0; }
 .form-list .note { clear:both; font-size:11px; width:380px; margin:0; padding:3px 0 0 240px; }
 .form-list span.label { font-weight:normal; }
-.form-list .input-box input { /* float:right;  width:256px; */ width:98%; }
+.form-list .input-box input { 
+	/* float:right;  width:256px; */ 
+	width:100%; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box; 
+}
+
 .form-list .input-box input[type="radio"],.form-list .input-box input[type="checkbox"]{ /* float:right;  width:256px; */ width:auto; }
 .form-list .input-box a { font-size:11px; margin-top:4px; }
 /*.form-list input.input-text,
@@ -279,6 +286,8 @@ ul.add-row .btn-remove,
 /* Combination of fields */
 .form-list li.fields { margin:0; }
 .form-list li.fields .field { /*clear:left; padding:0 0 9px;*/ }
+
+.my-account .input-box {width:98%;}
 
 /* Buttons */
 /*
