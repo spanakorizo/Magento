@@ -404,8 +404,8 @@
 /* window */
 .firecheckout-window {
     background: #ffffff; /* Old browsers */
-    border:1px solid #71b62f;
-    border-bottom: 7px solid #71b62f;
+    border:5px solid #71b62f;
+    border-radius: 5px;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
@@ -415,7 +415,7 @@
     text-align: left;
 }
 .firecheckout-window .page-title span { color: #0A263C; font-size: 20px; margin: 0; }
-.firecheckout-window .content { padding: 0; margin: 0; overflow: hidden; overflow-x: hidden; }
+.firecheckout-window .content {width:auto !important; padding: 5px; margin: 0; overflow: hidden; overflow-x: hidden; }
 .firecheckout-window label { width: auto; text-align: left; }
 .firecheckout-window .form-list .input-box { clear: both; }
 .firecheckout-window .form-list input.input-text,
@@ -531,7 +531,6 @@ iframe#sage-pay-server-iframe { border:none; height:365px; width:687px; }
 }
 .firecheckout-window label,
 #firecheckout-spinner { color: #666; }
-.firecheckout-window { color: #2f2f2f; }
 .firecheckout-window .validation-advice { color: #eb340a; }
 /* clear background and
 .firecheckout-window a { color: #1e7ec8; }

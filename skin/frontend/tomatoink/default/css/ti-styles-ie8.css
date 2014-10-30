@@ -1,0 +1,21 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Megan Prior-Pfeifer
+/*******************************************************/
+
+input[type="checkbox"],
+input[type="radio"]{
+	display:inline-block;
+}
+
+input[type="radio"] + label div.ti-radio,
+input[type="checkbox"] + label div.ti-checkbox{
+    display:none;
+}
+
+#ti_home_centerMain{
+	margin-left:-275px;
+	width:550px;
+}

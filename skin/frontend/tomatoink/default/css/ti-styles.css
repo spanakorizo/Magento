@@ -75,6 +75,10 @@ Created for global css at TomatoInk.com
 /* -----------------------------------*/
 /* -------->> 1. Global <<<-----------*/
 /* -----------------------------------*/
+html, body {
+  min-width: 100%;
+  width: 100%; }
+
 html {
   font-size: 62.5%; }
 
@@ -218,6 +222,9 @@ body {
 
 .ltNeutral {
   color: #f7e8db !important; }
+
+.neutral {
+  color: #e4b388 !important; }
 
 .ti_cms_gradient_block {
   background: #ffffff;
@@ -575,16 +582,13 @@ label.ti_cms_labelHide span {
 input[type="checkbox"],
 input[type="radio"] {
   display: none;
-  display: inline-block\9;
   -moz-appearance: none;
-  display: inline-block;
   margin: 0 5px;
   vertical-align: middle; }
 
 /* http://webdesign.tutsplus.com/articles/quick-tip-easy-css3-checkboxes-and-radio-buttons--webdesign-8953 */
 input[type="checkbox"] + label div.ti-checkbox {
   display: inline-block;
-  display: none\9;
   width: 21px;
   height: 21px;
   background: url("../images/ti-assets/checkbox.png") left top no-repeat;
@@ -596,7 +600,6 @@ input[type="checkbox"]:checked + label div.ti-checkbox {
 
 input[type="radio"] + label div.ti-radio {
   display: inline-block;
-  display: none\9;
   width: 20px;
   height: 20px;
   background: url("../images/ti-assets/radiobox.png") left top no-repeat;
@@ -872,7 +875,6 @@ li.ti_bulletNone:before {
   width: 98%; }
 
 .ti_dropHalfBrder {
-  margin: 1% auto;
   border-left: 1px solid #71b62f; }
 
 /* -- Images --*/
@@ -944,6 +946,9 @@ td, th {
 .ti_cms_infoTable tr:hover th h3,
 .ti_cms_infoTable tr:hover th p {
   color: #e67921; }
+
+.ti_cms_tdNopad {
+  padding: 0; }
 
 /* -- Icons --*/
 @font-face {
@@ -2332,6 +2337,111 @@ td, th {
 .icon-ico-warranty:before {
   content: "\e600"; }
 
+@font-face {
+  font-family: 'printerLogo';
+  src: url("../fonts/ti-fonts/printerLogo.eot?nfavxp");
+  src: url("../fonts/ti-fonts/printerLogo.eot?#iefixnfavxp") format("embedded-opentype"), url("../fonts/ti-fonts/printerLogo.woff?nfavxp") format("woff"), url("../fonts/ti-fonts/printerLogo.ttf?nfavxp") format("truetype"), url("../fonts/ti-fonts/printerLogo.svg?nfavxp#printerLogo") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+[class^="logo-"], [class*=" logo-"] {
+  font-family: 'printerLogo';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+.logo-apollo:before {
+  content: "\e600"; }
+
+.logo-apple:before {
+  content: "\e601"; }
+
+.logo-astrojet:before {
+  content: "\e602"; }
+
+.logo-brother:before {
+  content: "\e603"; }
+
+.logo-bryce:before {
+  content: "\e604"; }
+
+.logo-canon:before {
+  content: "\e605"; }
+
+.logo-compaq:before {
+  content: "\e606"; }
+
+.logo-dell:before {
+  content: "\e607"; }
+
+.logo-epson:before {
+  content: "\e608"; }
+
+.logo-hasler:before {
+  content: "\e609"; }
+
+.logo-hp:before {
+  content: "\e60a"; }
+
+.logo-ibm:before {
+  content: "\e60b"; }
+
+.logo-kodak:before {
+  content: "\e60c"; }
+
+.logo-konica-minolta:before {
+  content: "\e60d"; }
+
+.logo-kyocera-mita:before {
+  content: "\e60e"; }
+
+.logo-lexmark:before {
+  content: "\e60f"; }
+
+.logo-mimaki:before {
+  content: "\e610"; }
+
+.logo-mutoh:before {
+  content: "\e611"; }
+
+.logo-neopost:before {
+  content: "\e612"; }
+
+.logo-okidata:before {
+  content: "\e613"; }
+
+.logo-panasonic:before {
+  content: "\e61c"; }
+
+.logo-pitney-bowes:before {
+  content: "\e614"; }
+
+.logo-rena:before {
+  content: "\e615"; }
+
+.logo-ricoh:before {
+  content: "\e616"; }
+
+.logo-roland:before {
+  content: "\e617"; }
+
+.logo-samsung:before {
+  content: "\e618"; }
+
+.logo-secap:before {
+  content: "\e619"; }
+
+.logo-sharp:before {
+  content: "\e61a"; }
+
+.logo-xerox:before {
+  content: "\e61b"; }
+
 /* -- Tooltips --*/
 .ti_tooltip {
   display: inline;
@@ -2398,6 +2508,22 @@ td, th {
   float: right;
   font-size: 1em;
   margin: .5em auto; }
+
+.ti_header_top_block #search_autocomplete {
+  z-index: 999;
+  font-size: 1.4em;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #559a13; }
+
+.ti_header_top_block #search_autocomplete ul {
+  float: none; }
+
+.ti_header_top_block #search_autocomplete ul li {
+  padding: 5px; }
+
+.ti_header_top_block #search_autocomplete ul li:hover {
+  background-color: #F7FFEF; }
 
 .ti_header_top_block ul li,
 .ti_header_top_block ol li {
@@ -2491,7 +2617,7 @@ td, th {
   border: none; }
 
 #ti_header_nav_main li .ti_sub-menu li a span {
-  font-size: 1.2em;
+  font-size: 1.1em;
   color: #333;
   line-height: 1em;
   text-shadow: none;
@@ -2595,7 +2721,7 @@ td, th {
   position: absolute;
   width: 112px;
   color: #333;
-  padding: 20px 5px 5px;
+  padding: 10px 5px 5px;
   top: 27px; }
   .ti_cms_dropContent::after {
     width: 0px;
@@ -2617,7 +2743,8 @@ td, th {
   opacity: 0; }
 
 .ti_cms_dropContent ul {
-  float: left; }
+  float: left;
+  margin: 0 1em; }
   .ti_cms_dropContent ul li {
     margin: 0 0 10px 0;
     clear: both;
@@ -2850,6 +2977,9 @@ ul.ti_cart_review li:last-child {
   background: #559a13;
   color: #fff; }
 
+.ti_cart_total h2 {
+  color: #fff; }
+
 .ti_deals_text {
   color: #fff;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8); }
@@ -2971,8 +3101,8 @@ ul.ti_cart_review li:last-child {
 /*Moved from productselector.css */
 #ti_cartlogin_close, #ti_cartregister_close, #ti_cartforget_close {
   position: absolute;
-  right: 5px;
-  top: 5px; }
+  right: 0px;
+  top: 15px; }
 
 #ti_cart_popup_error_msg, #ti_cart_popup_forget_pass {
   display: none; }
@@ -3218,10 +3348,8 @@ input.ti_checkout_info {
   z-index: 5;
   top: 7em;
   left: 50%;
-  margin-left: -30%;
-  margin-left: -275px\9;
+  margin-left: -28%;
   width: 55%;
-  width: 550px\9;
   background: url("../images/ti-assets/paper-bg_e67921.jpg") repeat;
   border-radius: 0.25em;
   text-align: center;
@@ -4162,19 +4290,28 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     font-size: 9px;
     font-size: 0.9rem; }
 
+  .page, .main {
+    width: 100%;
+    min-width: 100%;
+    overflow: hidden; }
+
   .ti_cms_contain {
-    width: 790px;
-    min-width: 790px; }
+    width: 100%;
+    min-width: 100%;
+    padding: 0 10px; }
 
   #ti_header_logo {
     margin: 1em 0; }
 
   #ti_header_row,
   #ti_footer_row {
-    min-width: 800px; }
+    min-width: 100%; }
 
   #ti_header_nav_main li {
-    padding: 0px 1.4em; }
+    padding: 0px 1em; }
+
+  #ti_header_brandsMenu.ti_sub-menu {
+    margin-left: -110px; }
 
   .ti_header_top_block,
   .one_fifth, .two_fifth, .three_fifth, .four_fifth {
@@ -4192,7 +4329,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     float: left; }
 
   .ti_cms_home_block {
-    width: 49%; }
+    width: 47%; }
 
   .ti_header_top_block ul {
     float: left; }
@@ -4244,20 +4381,19 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     margin-left: 20px; } }
 /* iPads (portrait and landscape) ----------- */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
-  #ti_header_imageSplash {
-    min-width: 800px; }
-
-  #ti_header_row, #ti_footer_row, #ti_cms_home_container, #ti_footer_copyright_row {
-    min-width: 800px; } }
+  /*#ti_header_row, #ti_footer_row, #ti_cms_home_container, #ti_footer_copyright_row,#ti_header_imageSplash .ti_cms_contain{
+  	min-width:800px;
+  	width:800px;
+  }*/ }
 @media only screen and (max-width: 767px) {
   /* Styles */
-  .ti_cms_contain {
-    width: 600px;
-    min-width: 600px; }
-
+  /*.ti_cms_contain{
+  	width:600px;
+  	min-width:600px;
+  }*/
   #ti_header_row,
   #ti_footer_row {
-    min-width: 600px; }
+    min-width: 100%; }
 
   #ti_header_accountDrop {
     margin-left: -48px; }
@@ -4487,18 +4623,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     height: 320px; } }
 @media only screen and (max-width: 479px) {
   /* Styles */
-  body {
-    width: 100%;
-    min-width: 100%; }
-
   .ti_cms_contain {
-    width: 100%;
-    min-width: 100%; }
-
-  .page, .main {
-    width: 100%;
-    min-width: 100%;
-    overflow: hidden; }
+    /*width:100%;
+    min-width:100%;*/
+    padding: 0 5px; }
 
   .ti_block_inner {
     padding: 4px; }
@@ -4578,7 +4706,7 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     min-height: 280px; }
 
   .ti_social_media_btn {
-    margin: 0 15px 0 0; }
+    margin: 0 10px 0 0; }
 
   .ti_hide_479, .ti_product_cta .icon-ico-warranty:before,
   .ti_product_cta .icon-ico-guarantee:before,

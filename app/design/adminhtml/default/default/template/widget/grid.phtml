@@ -93,6 +93,20 @@ $numColumns = sizeof($this->getColumns());
                 <span class="separator">|</span><a href="<?php echo $_rss->getUrl() ?>" class="link-feed"><?php echo $_rss->getLabel() ?></a>
                 <?php endforeach ?>
             <?php endif; ?>
+            <!-- Customized Filter !-->
+            <div id="customized_filter">
+                <input type="button" value="Order Filter" class="form-button" id="admin_filter_block" style="margin-top:10px;">
+                <div id="admin_order_filter" style="display:none;width:100px; height:500px; background-color:#E0F8F1;position:absolute;border: 1px solid #81BEF7;">
+                    <br><input type='button' class='form-button' value='15oz' id='order_filter_autoship'><br>
+                    <br><input type='button' class='form-button' value='Small Order' id='order_filter_small'><br>
+                    <br><input type='button' class='form-button' value='Large Order' id='order_filter_large'><br>
+                    <br><input type='button' class='form-button' value='Ready To Ship' id='order_filter_readytoship'><br>
+                </div>
+            </div>
+            <!-- create batch !-->
+            <input type="button" value="Create Batch" id="admin_batch" class="form-button" style="margin-top:10px;">
+
+
         </td>
     <?php endif ?>
     <?php if($this->getExportTypes()): ?>
@@ -226,3 +240,88 @@ $numColumns = sizeof($this->getColumns());
 </script>
 <?php endif; ?>
 <?php endif ?>
+
+
+
+
+<script type="text/javascript">
+jQuery('document').ready(function() {
+
+if (window.location.href.match("/sales_order/index/")) {
+
+    jQuery('#admin_filter_block').click(function() {
+        jQuery("#admin_order_filter").toggle();
+    });
+
+//sales_order_grid_filter_status
+
+    jQuery('#order_filter_small').click(function() {
+        jQuery('#sales_order_grid_filter_order_type').val("Small");
+        jQuery('#sales_order_grid_filter_status option[value="processing"]').attr("selected", "selected");
+        sales_order_gridJsObject.doFilter();
+    });
+
+    jQuery('#order_filter_autoship').click(function() {
+        jQuery('#sales_order_grid_filter_order_type').val("Autoship");
+        jQuery('#sales_order_grid_filter_status option[value="processing"]').attr("selected", "selected");
+        sales_order_gridJsObject.doFilter();
+    });
+
+    jQuery('#order_filter_large').click(function() {
+        jQuery('#sales_order_grid_filter_order_type').val("Large");
+        jQuery('#sales_order_grid_filter_status option[value="processing"]').attr("selected", "selected");
+        sales_order_gridJsObject.doFilter();
+    });
+    //order_filter_readytoship
+    jQuery('#order_filter_readytoship').click(function() {
+        //jQuery('#sales_order_grid_filter_order_type').val("Large");
+        jQuery('#sales_order_grid_filter_status option[value="readytoship"]').attr("selected", "selected");
+        sales_order_gridJsObject.doFilter();
+    });
+
+//$("#"+divname).show("slide", { direction: "left" }, 1000);
+
+} //end if
+else {
+    jQuery('#customized_filter').hide();
+    jQuery('#admin_batch').hide();
+}
+
+//start single order print button
+    if (window.location.href.match("/admin/sales_order/view/order_id/")) {
+        jQuery('#order_print').show();
+
+    } //end of order print
+
+
+    jQuery('#admin_batch').click(function() {
+        var batch_orders = "";
+        var batch_count = 0;
+        jQuery('.massaction-checkbox:checked').each(function() {
+            batch_orders += jQuery(this).val() + ",";
+            batch_count++;
+
+        });
+
+        if (batch_orders == "") {alert("Not Select Any Order!");}
+        else {
+            if (confirm("You've selected " + batch_count + " orders, continue? ")) {
+                jQuery.get(batch_url, {orders: batch_orders}, function(data) {
+                    alert(data);
+                    location.reload();
+                });
+            }
+
+
+        }
+
+
+    });
+
+
+
+});
+
+
+
+</script>
