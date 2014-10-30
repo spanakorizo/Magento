@@ -60,10 +60,6 @@ var lastPrice='';
     <?php $shippingMe = array(); ?>
 
     <?php
-    foreach ($_shippingRateGroups as $code_temp => $_rates_temp) {
-        echo $code_temp;
-        echo "<br>";
-    }
     if (isset($_shippingRateGroups['freeshipping'])
         && Mage::getStoreConfigFlag('firecheckout/general/hide_shipping_if_free')) :
         // check is free method is applicable

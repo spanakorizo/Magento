@@ -2638,23 +2638,20 @@ td, th {
   -o-transition: all .5s ease-in-out; }
 
 #ti_header_nav_mini {
-  background: url("../images/ti-assets/mini-nav-drop.png") -45px 0 no-repeat transparent;
-  width: 100px; }
-
-#ti_header_nav_mini select {
-  font-size: 2em;
-  float: left;
-  height: 25px;
-  margin-left: 250px;
-  width: 230px;
-  box-shadow: none;
-  -webkit-appearance: none;
-  padding: 1% 0 1% 45px;
-  color: transparent;
-  transition: color .6s ease-in-out;
-  -moz-transition: color .6s ease-in-out;
-  -webkit-transition: color .6s ease-in-out;
-  -o-transition: color .6s ease-in-out; }
+  background: url("../images/ti-assets/mini-nav-drop.png") 3px 0 no-repeat #31590b !important;
+  background-size: 30px 25px;
+  width: 180px; }
+  #ti_header_nav_mini select {
+    font-size: 2em;
+    font-weight: bold;
+    float: left;
+    height: 25px;
+    line-height: 25px;
+    width: 230px;
+    box-shadow: none;
+    -webkit-appearance: none;
+    padding: 0 0 0 45px;
+    color: #559a13; }
 
 #ti_header_search_mini input {
   box-shadow: none;
@@ -2686,7 +2683,10 @@ td, th {
     -webkit-transition: width .6s ease-in-out, background .6s ease-in-out;
     -o-transition: width .6s ease-in-out, background .6s ease-in-out; }
 
-#ti_header_nav_mini:hover {
+#ti_header_nav_mini:hover,
+#ti_header_nav_mini:focus,
+#ti_header_nav_mini:active,
+#ti_header_nav_mini:enabled {
   background: url("../images/ti-assets/mini-nav-drop.png") 3px 0 no-repeat #fff;
   width: 180px; }
 
@@ -2700,10 +2700,10 @@ td, th {
   width: 30px;
   background: url("../images/ti-assets/mini-search-slide.png") -90px 0 no-repeat transparent; }
 
-#ti_header_nav_mini:hover select {
-  margin-left: 0;
-  color: #559a13; }
-
+/*#ti_header_nav_mini:hover select{
+	margin-left:0;
+	color:$lt-green;
+}*/
 #ti_header_search_mini:hover input[type="text"],
 #ti_header_search_mini input[type="text"]:focus,
 #ti_header_search_mini input[type="text"]:hover {
@@ -4416,7 +4416,8 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     display: block;
     overflow: hidden;
     width: 48%;
-    margin: 1%; }
+    margin: 2px 1%;
+    padding: 10px 0; }
 
   #ti_main_coupon {
     z-index: 3;
@@ -4508,27 +4509,27 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 
   .ti_cms_home_block .ti_image_sprite {
     float: right;
-    width: 150px;
-    height: 150px;
-    background-size: 900px 150px; }
+    width: 100px;
+    height: 100px;
+    background-size: 600px 100px; }
 
   .ie-old .ti_cms_home_block .ti_image_sprite {
     background-image: url("../images/ti-home/image-sprite-sm.jpg"); }
 
   .ti_cms_home_block .ti_image_sprite.ship {
-    background-position: -150px 0; }
+    background-position: -100px 0; }
 
   .ti_cms_home_block .ti_image_sprite.save {
-    background-position: -300px 0; }
+    background-position: -200px 0; }
 
   .ti_cms_home_block .ti_image_sprite.newsletter {
-    background-position: -450px 0; }
+    background-position: -300px 0; }
 
   .ti_cms_home_block .ti_image_sprite.eco {
-    background-position: -600px 0; }
+    background-position: -400px 0; }
 
   .ti_cms_home_block .ti_image_sprite.secure {
-    background-position: -750px 0; }
+    background-position: -500px 0; }
 
   .ti_cms_home_block p {
     font-size: 1.3em; }
