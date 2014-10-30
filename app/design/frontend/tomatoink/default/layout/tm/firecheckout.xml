@@ -66,7 +66,7 @@
                         <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>tm/firecheckout/checkout/review/item.phtml</template></action>
                         <action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>tm/firecheckout/downloadable/checkout/review/item.phtml</template></action>
                         <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="tm/firecheckout/checkout/review/totals.phtml"/>
-						<block type="firecheckout/checkout_deal" name="firecheckout.deals" as="deals" template="tm/firecheckout/checkout/review/deals.phtml"/>
+                        <block type="compandsave_coupon/deal" name="compandsave_coupon.deal" as="deals" template="coupon/checkout/review/deals.phtml"/>
                         <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
                             <label>Items Before</label>
                         </block>
@@ -105,7 +105,7 @@
             <action method="addItemRender"><type>bundle</type><block>bundle/checkout_cart_item_renderer</block><template>tm/firecheckout/checkout/review/item.phtml</template></action>
             <action method="addItemRender"><type>downloadable</type><block>downloadable/checkout_cart_item_renderer</block><template>>tm/firecheckout/downloadable/checkout/review/item.phtml</template></action>
             <block type="checkout/cart_totals" name="checkout.onepage.review.info.totals" as="totals" template="checkout/onepage/review/totals.phtml"/>
-			<block type="firecheckout/checkout_deal" name="firecheckout.deals" as="deals" template="tm/firecheckout/checkout/review/deals.phtml"/>
+            <block type="compandsave_coupon/deal" name="compandsave_coupon.deal" as="deals" template="coupon/checkout/review/deals.phtml"/>
             <block type="core/text_list" name="checkout.onepage.review.info.items.before" as="items_before" translate="label">
                 <label>Items Before</label>
             </block>

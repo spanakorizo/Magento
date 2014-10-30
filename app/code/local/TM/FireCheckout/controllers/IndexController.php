@@ -125,7 +125,6 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
          * @var Mage_Sales_Model_Quote
          */
         $quote = $this->getCheckout()->getQuote();
-
         if (!$quote->hasItems() || $quote->getHasError()) {
             $this->_redirect('checkout/cart');
             return;
@@ -156,7 +155,6 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
         $this->_initLayoutMessages('checkout/session');
         $this->getLayout()->getBlock('head')->setTitle(Mage::getStoreConfig('firecheckout/general/title'));
         $this->renderLayout();
-
     }
 
     protected function _isShippingMethodDependsOnAddress()
@@ -338,8 +336,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
         }
 
         $quote          = $this->getOnepage()->getQuote();
-        $oldTotal       = (float) $quote->getBaseGrandTotal();
-        $oldgiftamount =  (float) $quote->getBaseGiftCardsAmountUsed();
+        $oldTotal       = $quote->getBaseGrandTotal();
         $sections       = array();
         $removeGiftcard = $this->getRequest()->getPost('remove_giftcard', false);
         $giftcardCode   = $this->getRequest()->getPost('giftcard_code');
@@ -348,30 +345,18 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
         }
 
         $sections[] = 'giftcard';
-
-        $balance = Mage::getModel('enterprise_giftcardaccount/giftcardaccount')
-            ->loadByCode($giftcardCode)
-            ->getBalance();
-        /*/*
-         * Add code for handle negative after
-         */
-
         if (!$removeGiftcard) {
             try {
                 Mage::getModel('enterprise_giftcardaccount/giftcardaccount')
                     ->loadByCode($giftcardCode)
                     ->addToCart();
-
                 Mage::getSingleton('checkout/session')->addSuccess(
                     $this->__('Gift Card "%s" was added.', Mage::helper('core')->htmlEscape($giftcardCode))
                 );
             } catch (Mage_Core_Exception $e) {
                 Mage::dispatchEvent('enterprise_giftcardaccount_add', array('status' => 'fail', 'code' => $giftcardCode));
-                if ($e->getMessage() == "Wrong gift card code.") $message = "The promotional code you entered is not valid.";
-                else $message = $e->getMessage();
                 Mage::getSingleton('checkout/session')->addError(
-                    $message
-
+                    $e->getMessage()
                 );
             } catch (Exception $e) {
                 Mage::getSingleton('checkout/session')->addException($e, $this->__('Cannot apply gift card.'));
@@ -387,21 +372,6 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
         }
 
         $quote->collectTotals();
-        /*$canAddItems = $quote->isVirtual()? ('billing') : ('shipping');
-        foreach ($quote->getAllAddresses() as $address) {
-            if($canAddItems == $address->getAddressType()){
-
-                if($quote->getBaseGrandTotal() <= 0 ){
-                    $address->setGiftCardsAmount($oldTotal)->save();
-                    $address->setBaseGiftCardsAmount($oldTotal)->save();
-
-                    $quote->setGiftCardsAmountUsed($oldgiftamount + $oldTotal)->save();
-                    $quote->setBaseGiftCardsAmountUsed($oldgiftamount + $oldTotal)->save();
-
-                }
-
-            }
-        }*/
         $sections[] = 'review';
 
         if (Mage::getStoreConfig('firecheckout/ajax_update/shipping_method_on_total')) { // shipping methods depends on total (subtotal + discount) without shipping price
@@ -515,10 +485,8 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
 
             // recollect avaialable shipping methods
             $oldMethod = $shippingAddress->getShippingMethod();
-            /*  --- comment below due to change in total calculation
-            /*$shippingAddress->collectTotals()->collectShippingRates()->save();*/
+            $shippingAddress->collectTotals()->collectShippingRates()->save();
             // apply or cancel shipping method
-            $shippingAddress->collectShippingRates()->save();
             $this->getOnepage()->applyShippingMethod();
 
             if ((Mage::getStoreConfig('firecheckout/ajax_update/total_on_shipping_method')
@@ -670,10 +638,8 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
             $sections[] = 'shipping-method';
 
             // recollect avaialable shipping methods
-            // comment it cause  we handle it in collecttotals of quote
-            //---$quote->getShippingAddress()->collectTotals()->collectShippingRates()->save();
+            $quote->getShippingAddress()->collectTotals()->collectShippingRates()->save();
             // apply or cancel shipping method
-            $quote->getShippingAddress()->collectShippingRates();
             $this->getOnepage()->applyShippingMethod();
 
             if (Mage::getStoreConfig('firecheckout/ajax_update/total_on_shipping_method') // @todo: && method was changed
@@ -716,7 +682,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                         // to recollect discount rules need to clear previous discount
                         // descriptions and mark address as modified
                         // see _canProcessRule in Mage_SalesRule_Model_Validator
-                        //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                        $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                         $quote->setTotalsCollectedFlag(false)->collectTotals();
                     }
@@ -761,7 +727,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                     // to recollect discount rules need to clear previous discount
                     // descriptions and mark address as modified
                     // see _canProcessRule in Mage_SalesRule_Model_Validator
-                    //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                    $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                     $quote->setTotalsCollectedFlag(false)->collectTotals();
                 }
@@ -839,7 +805,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                     // to recollect discount rules need to clear previous discount
                     // descriptions and mark address as modified
                     // see _canProcessRule in Mage_SalesRule_Model_Validator
-                    //$shippingAddress->setDiscountDescriptionArray(array())->isObjectNew(true);
+                    $shippingAddress->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                     $quote->setTotalsCollectedFlag(false)->collectTotals();
                 }
@@ -913,7 +879,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                         // to recollect discount rules need to clear previous discount
                         // descriptions and mark address as modified
                         // see _canProcessRule in Mage_SalesRule_Model_Validator
-                        //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                        $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                         $quote->setTotalsCollectedFlag(false)->collectTotals();
                     }
@@ -1261,7 +1227,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                 // to recollect discount rules need to clear previous discount
                 // descriptions and mark address as modified
                 // see _canProcessRule in Mage_SalesRule_Model_Validator
-                //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                 $quote->setTotalsCollectedFlag(false)->collectTotals();
             }
@@ -2087,7 +2053,7 @@ class TM_FireCheckout_IndexController extends Mage_Checkout_OnepageController
                 // to recollect discount rules need to clear previous discount
                 // descriptions and mark address as modified
                 // see _canProcessRule in Mage_SalesRule_Model_Validator
-                //$quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
+                $quote->getShippingAddress()->setDiscountDescriptionArray(array())->isObjectNew(true);
 
                 $quote->setTotalsCollectedFlag(false)->collectTotals();
             }

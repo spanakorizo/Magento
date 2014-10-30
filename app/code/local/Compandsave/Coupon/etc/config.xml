@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Compandsave_Coupon>
+            <version>0.0.1</version>
+        </Compandsave_Coupon>
+    </modules>
+	<global>
+		<models>
+            <compandsave_coupon>
+			    <class>Compandsave_Coupon_Model</class>
+            </compandsave_coupon>
+            <salesrule>
+                <rewrite>
+                    <validator>Compandsave_Coupon_Model_Validator</validator>
+                    <quote_discount>Compandsave_Coupon_Model_Quote_Discount</quote_discount>
+                    <observer>Compandsave_Coupon_Model_Observer</observer>
+                </rewrite>
+            </salesrule>
+
+            <sales>
+                <rewrite>
+                    <quote_address_total_discount>Compandsave_Coupon_Model_Quote_Address_Total_Discount</quote_address_total_discount>
+                </rewrite>
+            </sales>
+
+        </models>
+        <blocks>
+            <compandsave_coupon>
+                <class>Compandsave_Coupon_Block</class>
+            </compandsave_coupon>
+            <checkout>
+                <rewrite>
+                    <cart_shipping>Compandsave_Coupon_Block_Cart_Shipping</cart_shipping>
+                </rewrite>
+            </checkout>
+        </blocks>
+  	</global>
+    <frontend>
+        <routers>
+            <coupon>
+                <use>standard</use>
+                <args>
+                    <module>Compandsave_Coupon</module>
+                    <frontName>coupon</frontName>
+                </args>
+            </coupon>
+        </routers>
+    </frontend>
+</config>

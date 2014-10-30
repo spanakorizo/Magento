@@ -1,0 +1,56 @@
+<tr>
+    <?php if($this->getTotalDiscount() > 0): ?>
+	<td colspan="50" class="ti_cart_totalDeals">
+    <?php $shippingMethod =  $this->getAddressShippingMethod();?>
+		<p>
+            The following coupons and deals have been applied to your order and have <strong class="ti_deals_text">saved you
+			<?php 
+
+            $discount = $this->getTotalDiscount();
+            $flatshippingflag = Mage::getStoreConfig('carriers/flatrate/active');
+            $freeshippingamount = Mage::getStoreConfig('carriers/flatrate/price');
+            if ($shippingMethod === 'freeshipping_freeshipping' and $flatshippingflag == 1 ) $discount += $freeshippingamount;
+            echo Mage::helper('core')->currency($discount); ?>:</strong>
+		</p>
+        <p>
+            
+            <?php if($shippingMethod === 'freeshipping_freeshipping' ):?>
+            <p><span class="icon-checkmark ti_deals_text"></span> Free Shipping on all orders over <strong><?php echo Mage::helper('core')->currency(50);?></strong></p>
+            <?php endif;?>
+        </p>
+
+        <?php $array = $this->getGiftCardInfo();?>
+        <?php foreach($array as $giftcardarray):?>
+        <p>
+
+            <?php if($giftcardarray['c'] != null):?>
+            <p>
+                <span class="icon-checkmark ti_deals_text"></span> With gift card code <strong>"<?php echo $giftcardarray['c']?>"</strong> you saved <strong><?php echo Mage::helper('core')->currency($giftcardarray['ba']);?></strong>
+
+
+                <?php $_title = $this->__('Remove'); ?>
+                <?php $_url = Mage::getUrl('enterprise_giftcardaccount/cart/remove', array('code'=> $giftcardarray['c'] )); ?>
+                <a href="<?php echo $_url; ?>" title="<?php echo $_title; ?>" class="ti_deals_remove lgTxt" ><strong>X</strong> <?php echo $this->__('Remove')?></a>
+
+
+            </p>
+
+            <?php endif;?>
+        </p>
+
+        <?php endforeach;?>
+
+        <?php if(strlen($this->getRuleId())):?>
+        <?php $ruleids = explode(',',$this->getRuleId()); ?>
+            <?php foreach ( $ruleids as $ruleid ) : ?>
+            <?php $ruledes = $this->getRuleDescription($ruleid);?>
+                <?php if($ruledes['coupon_code'] != '') : ?>
+                    <p><span class="icon-checkmark ti_deals_text"></span> Coupon code <?php echo '<b>"'.$ruledes['coupon_code'].'"</b>'?> <?php if(strlen($ruledes['description']))echo '- '; ?> <?php echo $ruledes['description']?> <a class="ti_deals_remove lgTxt" onclick="submit_form(<?php echo $ruledes['rule_id']?>)" id="submit_coupon-<?php echo $ruledes['rule_id'] ?>"> <?php if (!strcmp(Mage::getUrl('checkout/cart'),Mage::helper('core/url')->getCurrentUrl())) echo  '<strong>X </strong>'.$this->__('Remove') ;?></a><!--saved you <strong><?php //echo Mage::helper('core')->currency($coupondes['discount_amount']);?></strong>--></p>
+                <?php else: ?>
+                    <p><span class="icon-checkmark ti_deals_text"></span> Auto Discount Applied <?php if(strlen($ruledes['description']))echo '- '; ?> <?php echo $ruledes['description']?> </p>
+                <?php endif;?>
+            <?php endforeach;?>
+        <?php endif;?>
+	</td>
+    <?php endif?>
+</tr>
