@@ -1,5 +1,4 @@
 <?php
-<?php
 /**
  * Magento Enterprise Edition
  * @category    Compandsave
