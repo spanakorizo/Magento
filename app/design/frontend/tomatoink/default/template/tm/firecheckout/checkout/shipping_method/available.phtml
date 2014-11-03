@@ -53,17 +53,17 @@ var lastPrice='';
 </script>
 <?php endif ?>
 <?php // infostrates tnt
-    $address = Mage::getSingleton('checkout/cart')->getQuote()->getShippingAddress()->getCountryId();
-    echo "this is coutry code: " . $address . "<br>"; 
-    echo "another country code: " . $this->getAddress()->getCountryId() . "<br>";
-    echo "shipping method: " . $this->getAddressShippingMethod() . "<br>";
+    //$address = Mage::getSingleton('checkout/cart')->getQuote()->getShippingAddress()->getCountryId();
+    //echo "this is coutry code: " . $address . "<br>"; 
+    //echo "another country code: " . $this->getAddress()->getCountryId() . "<br>";
+    //echo "shipping method: " . $this->getAddressShippingMethod() . "<br>";
 
             //$address->setCountryId($code)
                 //->setCollectShippingRates(true);
-$freeshippingflag = Mage::getStoreConfig('carriers/freeshipping/active');
-$freeshippingamount = Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal');
-$subtotal = $this->getAddress()->getBaseSubtotal();   
-    echo $freeshippingflag . " " . $freeshippingamount . " " . $subtotal . "<br>";
+//$freeshippingflag = Mage::getStoreConfig('carriers/freeshipping/active');
+//$freeshippingamount = Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal');
+//$subtotal = $this->getAddress()->getBaseSubtotal();   
+ //   echo $freeshippingflag . " " . $freeshippingamount . " " . $subtotal . "<br>";
 
  ?>
 <?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>

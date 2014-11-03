@@ -37,9 +37,9 @@ $estimatezip = $shippingAddress->getPostcode();
            <form action="<?php echo $this->getUrl('checkout/cart/estimatePost') ?>" method="post" id="shipping-zip-form">
             <label for="postcode" class="ti_cms_labelHide ti-required-entry<?php //if ($this->isZipCodeRequired()) echo ' required ti-required-entry' ?>"><span><?php echo $this->__('Zip/Postal Code') ?></span></label>
                         <div class="input-box ti_cart_ship_option">
-                            <input title="Please enter your zip code for Shipping and Tax estimation" class="input-text ti_cart_zip validate-postcode<?php //if ($this->isZipCodeRequired()):?> required-entry <?php //endif;?>" type="text" id="postcode" name="estimate_postcode" placeholder="Zip code" class="ti_cart_zip" <?php if ($estimatezip >0) echo "value='".$estimatezip."'"; ?>/>
+                            <input title="Please enter your zip code for Shipping and Tax estimation" class="input-text ti_cart_zip validate-postcode<?php //if ($this->isZipCodeRequired()):?> required-entry <?php //endif;?>" type="text" id="postcode" name="estimate_postcode" placeholder="Zip code" <?php if ($estimatezip >0) echo "value='".$estimatezip."'"; ?>/>
                         </div>
-                <!--<p><?php echo $this->__('Enter your destination to get a shipping estimate.') ?></p>-->
+                <!--<p><?php //echo $this->__('Enter your destination to get a shipping estimate.') ?></p>-->
                 <!--<ul class="form-list">
                     <li>-->
                         <label for="country" class="ti_cms_labelHide required ti-required-entry"><span><?php echo $this->__('Country') ?></span></label>
