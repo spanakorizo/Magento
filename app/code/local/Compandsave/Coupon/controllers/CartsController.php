@@ -91,6 +91,14 @@ class Compandsave_Coupon_CartsController extends Mage_Core_Controller_Front_Acti
                 $ruleData = $oRule->getData();
                 $isactive = $ruleData['is_active'];
 
+                if( Mage::getModel('core/date')->timestamp(Mage::getModel('core/date')->date()) > Mage::getModel('core/date')->timestamp($oCoupon->getExpirationDate())){
+                    $this->_getSession()->addError(
+                        $this->__('Coupon code "%s" is Expired', Mage::helper('core')->escapeHtml($couponCode))
+                    );
+                    $this->_goBack();
+                    return;
+                }
+
                 $address = $this->_getQuote()->getShippingAddress();
 
                 if (!Mage::getModel('compandsave_coupon/validator')->_canProcessRule($oRule, $address) || !$isactive) {
