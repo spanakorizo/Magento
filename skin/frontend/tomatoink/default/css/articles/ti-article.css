@@ -497,7 +497,7 @@ padding:.5%;
 	cursor: text;
 	border: 1px solid #559A13;
 	transition: color 0.4s ease 0s;
-	font-family: 'Raleway',Verdana,sans-serif;
+	font-family: 'Raleway',Arial,sans-serif;
 	-moz-font-feature-settings: "lnum";
 	font-size:1.8em;
 	padding:10px;

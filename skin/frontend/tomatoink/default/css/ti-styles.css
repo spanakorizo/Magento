@@ -87,7 +87,6 @@ body {
   font-size: 10px;
   font-size: 1rem;
   line-height: 1.5;
-  font-family: Verdana, Helvetica, sans-serif;
   color: #333;
   text-align: left;
   font-feature-settings: "lnum";
@@ -413,7 +412,7 @@ textarea {
   font-size: 20px;
   font-size: 2rem;
   font-weight: normal;
-  font-family: 'raleway', Verdana, sans-serif;
+  font-family: 'raleway', Arial, sans-serif;
   padding: 0 5px;
   margin: 1%;
   max-width: 100%;
@@ -446,7 +445,7 @@ textarea {
   border: 1px solid #71b62f;
   transition: color .4s;
   -webkit-transition: color .4s;
-  font-family: 'raleway', Verdana, sans-serif; }
+  font-family: 'raleway', Arial, sans-serif; }
 
 input::-webkit-input-placeholder {
   color: #ccc;
@@ -656,7 +655,7 @@ input[type="file"] {
 /*--Select--*/
 /* -------- Prefix: ti_select_ --------*/
 select {
-  font-family: 'raleway',Verdana,sans-serif;
+  font-family: 'raleway',Arial,sans-serif;
   background: none repeat scroll 0% 0% transparent;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3) inset;
   display: block;
@@ -2466,7 +2465,7 @@ td, th {
     font-size: 1.4rem;
     text-shadow: none;
     text-align: left;
-    font-family: verdana, sans-serif;
+    font-family: Arial, sans-serif;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box; }
@@ -2548,7 +2547,7 @@ td, th {
   padding: 0; }
 
 .ti_header_top_block > ul > li > a {
-  font: bold 1.6em/1em 'Verdana';
+  font: bold 1.6em/1em 'Arial';
   color: #ffeddd;
   text-decoration: none; }
 
@@ -2656,7 +2655,7 @@ td, th {
 #ti_header_nav_mini {
   background: url("../images/ti-assets/mini-nav-drop.png") 3px 0 no-repeat !important; }
   #ti_header_nav_mini select {
-    font-family: Verdana, sans-serif;
+    font-family: Arial, sans-serif;
     font-size: 2.2em;
     float: left;
     height: 25px;
@@ -2926,7 +2925,7 @@ td, th {
 
 #ti_header_click_coupon,
 #ti_header_coupon_desc {
-  font: 300 16px/1em 'raleway', Verdana, sans-serif;
+  font: 300 16px/1em 'raleway', Arial, sans-serif;
   color: #e67921;
   margin-top: .5em; }
 
@@ -3346,7 +3345,7 @@ input.ti_checkout_info {
   background: #fff; }
 
 #ti_footer_email_cta {
-  font: bold 1.2em/1.5em "raleway", Verdana, sans-serif; }
+  font: bold 1.2em/1.5em "raleway", Arial, sans-serif; }
 
 .ti-footer-security {
   float: right;
@@ -3425,7 +3424,7 @@ input.ti_checkout_info {
 /* Nav */
 .ti_dashboard li {
   padding: 0;
-  font-size: .8em;
+  font-size: .75em;
   margin: 0;
   letter-spacing: -.2px; }
 
@@ -3647,8 +3646,7 @@ input.ti_checkout_info {
 
 .ti_block_inner {
   padding: 8px;
-  position: relative;
-  width: 100%; }
+  position: relative; }
 
 .ti_cms_flex_gridContain {
   display: -webkit-flex;
@@ -3662,6 +3660,8 @@ input.ti_checkout_info {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex; }
+  .ti_cms_flex_grid .ti_cms_inner {
+    width: 100%; }
 
 .ti_cms_block_related,
 .ti_cms_block_grid,
@@ -3682,13 +3682,13 @@ input.ti_checkout_info {
   max-height: 150px; }
 
 .ti_cms_block_qty {
-  font: 1.2em/1.5em 'raleway', Verdana, sans-serif; }
+  font: 1.2em/1.5em 'raleway', Arial, sans-serif; }
 
 .ti_cms_block_qty input {
   display: inline;
   width: auto;
   font-size: 1em;
-  font-family: 'raleway', Verdana, sans-serif; }
+  font-family: 'raleway', Arial, sans-serif; }
 
 .ti_cms_block_qty input[type="text"],
 .ti_cms_block_qty input[type="number"] {
@@ -3837,7 +3837,7 @@ ul.ti_product_checklist {
   text-decoration: line-through; }
 
 #ti_product_qtyDiscount {
-  font-family: 'raleway', Verdana, sans-serif;
+  font-family: 'raleway', Arial, sans-serif;
   list-style: none;
   position: relative; }
 
@@ -3848,7 +3848,7 @@ ul.ti_product_checklist {
 #ti_product_qtyDiscountDrop p {
   font-size: .9em;
   text-align: left;
-  font-family: 'raleway', Verdana, sans-serif;
+  font-family: 'raleway', Arial, sans-serif;
   line-height: 1em; }
 
 #ti_product_qtyDiscountDrop table {
