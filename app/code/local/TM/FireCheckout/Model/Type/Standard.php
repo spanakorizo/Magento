@@ -332,8 +332,8 @@ class TM_FireCheckout_Model_Type_Standard
         }
         $shippingAddress->setFreeMethodWeight($weight)->setWeight($weight);
         // *** comment below casue we do not need to collect total again as we have collect totals
-        //$shippingAddress->collectTotals()->collectShippingRates()->save();
-        $shippingAddress->collectShippingRates();
+        $shippingAddress->collectTotals()->collectShippingRates()->save();
+        //$shippingAddress->collectShippingRates();
         $this->applyShippingMethod();
         // shipping method may affect the total in both sides (discount on using shipping address)
 

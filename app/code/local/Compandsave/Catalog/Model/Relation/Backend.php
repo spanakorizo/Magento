@@ -1,4 +1,10 @@
 <?php
+/**
+ * Magento Enterprise Edition
+ * @category    Compandsave
+ * @package     Compandsave_Catalog
+ * @copyright   Copyright (c) 2014 Compandsave.com Inc. (http://www.compandsave.com)
+ */
 
 Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstract{
 
@@ -7,21 +13,27 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 	}
 	
 	public function MappingAutoAfterProductCreate($product){
-		
+
+        $coreResource = Mage::getSingleton('core/resource');
+        $conn = $coreResource->getConnection('core_read');
+        $conn_write = $coreResource->getConnection('core_write');
+        $RelationTable = $coreResource->getTableName('catalog/product_relation'); //get table name for catalog_product_relation
+        $RealtionLinkTable = $coreResource->getTableName('catalog/product_link');
+
+        $product_ids = null;
+
 		$product_ids = $product->getCompatibleCatid(); //find the value of Mapping category ID
 		
 		
-		if($product->getTypeId() === 'simple'){// and getCompatibleCatid() != ''
+		if($product->getTypeId() === 'simple' and strlen($product_ids) ){// and getCompatibleCatid() != ''
 
             $childId = $product->getId(); //get simple product ID
-			
+
             $products_links = Mage::getModel('catalog/product_link_api');
 
-            $coreResource = Mage::getSingleton('core/resource');
-            $conn = $coreResource->getConnection('core_read');
-			$conn_write = $coreResource->getConnection('core_write');
-			$RelationTable = $coreResource->getTableName('catalog/product_relation'); //get table name for catalog_product_relation
-            $RealtionLinkTable = $coreResource->getTableName('catalog/product_link'); //get table name for catalog_product_link
+
+            //get table name for catalog_product_link
+
             $select = $conn->select()
                 ->from($RealtionLinkTable, array('product_id'))
                 ->where('linked_product_id = ?', $childId)
@@ -30,50 +42,50 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
             $result = $conn->fetchCol($select); //get group product id (product_id) for linked product id (simple/bundle) called child
 
             foreach($result as $item_list){
+
                 $products_links->remove ("grouped",$item_list,$childId); //remove all link due to save or update
                 //delete all link which has link for child product(simple) and parent product id ($item_list) group
                 $conn_write->delete($RelationTable, array('child_id = ?' => $childId, 'parent_id = ?' => $item_list));
 
             }
 
-			
-            if($product_ids != null){
-                $map_prd_id_arr = explode(',',$product_ids);
-                foreach($map_prd_id_arr as $item){
 
-                    $get_product = Mage::getModel('catalog/product')->loadByAttribute('categoryid',$item);
-                    if(!empty($get_product)){
-                        $parentId = $get_product->getId(); //get group product ID
+            $map_prd_id_arr = explode(',',$product_ids);
 
-                        $products_links->assign ("grouped",$parentId,$childId); //insert new link only
-                    }
+            foreach($map_prd_id_arr as $item){
+
+                $get_product = Mage::getModel('catalog/product')->loadByAttribute('categoryid',$item);
+                if(!empty($get_product)){
+                    $parentId = $get_product->getId(); //get group product ID
+
+                    $products_links->assign("grouped",$parentId,$childId); //insert new link only
+
                 }
-
             }
 
-
-
         }
-        else if($product->getTypeId() === 'bundle' ){// and getCompatibleCatid() != ''
+        else if($product->getTypeId() === 'bundle' ){
+            /**
+             * do not add getCompatibleCatid() != '' cause we can create link based on bundle items if no CompatibleCatid
+             */
+
             $eavAttribute = new Mage_Eav_Model_Mysql4_Entity_Attribute();
-            $coreResource = Mage::getSingleton('core/resource');
-            $conn = $coreResource->getConnection('core_read');
-            $conn_write = $coreResource->getConnection('core_write');
+
             $AttributeId = $eavAttribute->getIdByCode('catalog_product', 'compatible_catid');
+            $groupAttributeId = $eavAttribute->getIdByCode('catalog_product', 'categoryid');
+
             $EntityTypeId = Mage::getModel('eav/entity')->setType('catalog_product')->getTypeId();
+
             $store_id = Mage::app()->getStore()->getId();
 
 
             $bundle_product_id = $product->getId(); //get bundle product ID
 			
 			$mapping_product_ids = $product->getCompatibleCatid();
-            mage::log($mapping_product_ids);
-
 
             $attrbTable = $coreResource->getTableName('catalog_product_entity_text');
-			$RelationTable = $coreResource->getTableName('catalog/product_relation'); //get table name for catalog_product_relation
-			$RealtionLinkTable = $coreResource->getTableName('catalog/product_link'); //get table name for catalog_product_link
-			
+            $attrbvarTable = $coreResource->getTableName('catalog_product_entity_varchar');
+
 			$products_links = Mage::getModel('catalog/product_link_api');
 			
 			$select = $conn->select()
@@ -115,17 +127,13 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 				$select = $conn->select()
 							->from($coreResource->getTableName('bundle/selection'),array('product_id'))
 							->where('parent_product_id =?',$bundle_product_id);
-							
-				$bundled_items = $conn->fetchCol($select);
+
+                $bundled_items = $conn->fetchCol($select);
 				
 				$count = 0;
 				
 				$count = count($bundled_items);
-				/* foreach($selectionCollection as $option)
-				{
-					$bundled_items[] = $option->product_id;
-					$count++; //count number of items in bundle
-				} */
+
 				$group_product = array();
 				
 				foreach($bundled_items as $simple_product){
@@ -145,6 +153,7 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 					$maximum_occurance_group_product = max($group_product_count); //get maximum value of occurrence
 					
 					foreach( $group_product_count as $group_product_id => $times_number_occurred){
+
 						if($times_number_occurred == $maximum_occurance_group_product){ //if maximum number is equal to count 
 							if($maximum_occurance_group_product == $count){ //ensure maximum occurrence is equal to maximum counter
 								$products_links->assign ("grouped",$group_product_id,$bundle_product_id);
@@ -167,18 +176,42 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
 					}
 				}
                 $check = null;
+
                 $compatible_cat_id = rtrim( $compatible_cat_id ,',');
+                $group_product_ids = explode(',',$compatible_cat_id);
+
+                $prd_compatible_cat_id = null;
+
+                foreach($group_product_ids as $cateids){
+
+                    $select = $conn->select()
+                        ->from($attrbvarTable,array('value'))
+                        ->where('attribute_id =?',$groupAttributeId)
+                        ->where('entity_type_id =?',$EntityTypeId)
+                        ->where('store_id =?',$store_id)
+                        ->where('entity_id =?',$cateids);
+
+                    $getCompatibleCatid = $conn->fetchOne($select);
+
+
+                    $prd_compatible_cat_id = $getCompatibleCatid.','.$prd_compatible_cat_id;
+                }
+
+                $prd_compatible_cat_id = rtrim($prd_compatible_cat_id, ',');
+
                 $select = $conn->select()
-                    ->from($attrbTable,array('value_id'))
+                    ->from($attrbTable,array('value'))
                     ->where('attribute_id =?',$AttributeId)
+                    ->where('entity_type_id =?',$EntityTypeId)
                     ->where('store_id =?',$store_id)
                     ->where('entity_id =?',$bundle_product_id);
 
-                $check = $conn->fetchCol($select);
+                $check = $conn->fetchOne($select);
+
                 if(empty($check))
-                    $conn_write->insert($attrbTable, array('entity_type_id' => $EntityTypeId, 'attribute_id' => $AttributeId,'store_id'=> $store_id,'entity_id'=> $bundle_product_id,'value' => $compatible_cat_id));
+                    $conn_write->insert($attrbTable, array('entity_type_id' => $EntityTypeId, 'attribute_id' => $AttributeId,'store_id'=> $store_id,'entity_id'=> $bundle_product_id,'value' => $prd_compatible_cat_id));
                 else
-			       $conn_write->update($attrbTable,array('value' => $compatible_cat_id), array('entity_type_id =?' => $EntityTypeId, 'attribute_id =?' => $AttributeId,'store_id =?'=> $store_id,'entity_id =?'=> $bundle_product_id));
+			       $conn_write->update($attrbTable,array('value' => $prd_compatible_cat_id), array('entity_type_id =?' => $EntityTypeId, 'attribute_id =?' => $AttributeId,'store_id =?'=> $store_id,'entity_id =?'=> $bundle_product_id));
             }
 
 
@@ -198,11 +231,13 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
         }
 		foreach($affectedEntityIds as $id){
 
+            $product_ids = null;
+
 			$product = Mage::getModel('catalog/product')->load($id);
 			
 			$product_ids = $product->getCompatibleCatid();
 
-			if($product->getTypeId() === 'simple' && $product_ids != ''){// and getCompatibleCatid() != ''
+			if($product->getTypeId() === 'simple' && strlen($product_ids)){// and getCompatibleCatid() != ''
 
                 $childId = $product->getId(); //get simple product ID
 
@@ -228,20 +263,20 @@ Class Compandsave_Catalog_Model_Relation_Backend extends Mage_Core_Model_Abstrac
                 }
 
 				
-				if( $product_ids != ''){
-					$map_prd_id_arr = explode(',',$product_ids);
-					foreach($map_prd_id_arr as $item){
 
-						$get_product = Mage::getModel('catalog/product')->loadByAttribute('categoryid',$item);
-						if(!empty($get_product)){
-							$parentId = $get_product->getId(); //get group product ID
+                $map_prd_id_arr = explode(',',$product_ids);
 
-							$products_links->assign ("grouped",$parentId,$childId); //insert new link only
+                foreach($map_prd_id_arr as $item){
 
-						}
-					}
+                    $get_product = Mage::getModel('catalog/product')->loadByAttribute('categoryid',$item);
+                    if(!empty($get_product)){
+                        $parentId = $get_product->getId(); //get group product ID
 
-				}
+                        $products_links->assign ("grouped",$parentId,$childId); //insert new link only
+
+                    }
+                }
+
 
 			}
 			unset($product);

@@ -49,6 +49,15 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 							
 				$vendor_partno = mysql_real_escape_string($importData['vendor_partno']);
 				$name = mysql_real_escape_string($importData['name']);
+
+                $mapping_sku = null;
+
+                if($importData['compatible_catid'] != '' )
+                    $mapping_sku = $importData['compatible_catid'];
+                elseif($importData['mapping_sku'] != '')
+                    $mapping_sku = $importData['mapping_sku'];
+                else
+                    $mapping_sku = null;
 				
 				if($importData['status'] === '' || !isset($importData['status']))
 					$status = 1; 
@@ -180,13 +189,13 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 				if($update_product == ''){ //create new product
 
 					unset($update_product);
-														
-					$new_product->setStoreId($store_code) //change static store code to dynamic
+
+					$new_product->setStoreIds(Mage::app()->getStores($store_code)) //change static store code to dynamic
 							->setTypeId($typeId)
 							->setAttributeSetId($attributeSetId)
 							->setWebsiteIds(array(Mage::app()->getStore($store_code)->getWebsite()->getId()))
-							//->setCategoryIds(array($root_id,$child_cat_id)) //cat id will be array
-							->setName($name)
+                            ->setName($name)
+                            ->setCompatibleCatid($mapping_sku)
 							->setDescription($description)
 							->setShortDescription($short_description)
 							->setStatus($status)
@@ -300,10 +309,13 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 							
 						}
 					}
+                    $new_product->setIsMassupdate(true);
+                    $new_product->setExcludeUrlRewrite(true);
 					$new_product->save();
+
 					unset($new_product);
 					//=================== 
-					if($store_code > 0){
+					/*if($store_code > 0){
 						
 						$alter_product = Mage::getModel('catalog/product')->loadbyAttribute('sku',$importData['sku']);
 						$bundle_product_id = $alter_product->getId();
@@ -340,7 +352,7 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 	
 						}
 
-					}
+					}*/
 					
 					return true;
 				}
@@ -348,7 +360,7 @@ class Compandsave_Bundle_Model_Convert_Adapter_Bundle
 					//=======================update product=======================//
 
 					if($store_code != ''){
-						$update_product->setStoreId($store_code)
+						$update_product->setStoreIds(array($store_code))
 									->setWebsiteIds(array(Mage::app()->getStore($store_code)->getWebsite()->getId()));
 					}
 					//change static store code to dynamic
