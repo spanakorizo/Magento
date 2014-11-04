@@ -16,14 +16,7 @@
                    </compandsave_catalog>
                 </observers>
             </catalog_product_save_after>
-			<!-- <catalog_product_save_commit_after>
-                <observers>
-                    <compandsave_catalog>
-                        <class>compandsave_catalog/observer</class>
-                        <method>applyAllRulesOnBundleProduct</method>
-                    </compandsave_catalog>
-                </observers>
-            </catalog_product_save_commit_after> -->
+
 			<catalog_product_import_finish_before>
                 <observers>
                     <compandsave_catalog>
@@ -41,7 +34,6 @@
 					<convert_adapter_product>Compandsave_Catalog_Model_Convert_Adapter_Product</convert_adapter_product>
 				</rewrite>
 			</catalog>
-
             <compandsave_catalog>
                 <class>Compandsave_Catalog_Model</class>
             </compandsave_catalog>
