@@ -1,0 +1,157 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     enterprise_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<div class="page-title">
+    <h1><?php echo $this->__('Newsletter Preferences') ?></h1>
+</div>
+<?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+<?php echo $this->getChildHtml('form_before')?>
+<div class="fieldset">
+    <?php echo $this->getBlockHtml('formkey')?>
+    <ul class="form-list">
+        <li class="control">
+            <label for="subscription"><?php echo $this->__('General Subscription List') ?></label>
+            <div class="input-box">
+                <input type="checkbox" name="is_subscribed" id="subscription" value="1" title="<?php echo $this->__('General Subscription List') ?>"<?php if($this->getIsSubscribed()): ?> checked="checked"<?php endif; ?> class="checkbox" />
+
+            </div>
+        </li>
+        <li><?php $customer_email = $this->getCustomer()->getEmail(); ?>
+            <?php $customerdata = Mage::getModel('newsletter/subscriber')->loadByEmail($customer_email)->getData();?>
+            <?php echo "<div id = 'frequency_message'></div>";//echo "Your frequency: " . $customerdata['subscriber_freq']; ?>
+            <!--<form action="" method="post">
+
+
+        <input name="email" type="hidden" value="<?php //echo $customer_email ?>" />
+        <input type="radio" name="subscriber_freq" value="0" checked>Regular<br>
+        <input type="radio" name="subscriber_freq" value="1">Once a Month<br>
+        <input type="radio" name="subscriber_freq" value="2">Twice a Month<br>
+        <button type="button" class="button" id="ti_update_submit"><span><?php //echo $this->__('Update') ?></span></button>
+
+</form> !-->
+
+<!-- Update section !-->
+<div id="ti_update_form">
+    <p id="success_message" class="altTxt"></p>
+    <input type="radio" id="regular" name="update_freq" value="0">
+    <label for="regular">
+        <div class="ti-radio"></div>
+        <span>Once per week</span>
+    </label><br>
+    <input type="radio" id="once" name="update_freq" value="1">
+    <label for="once">
+        <div class="ti-radio"></div>
+        <span>Once per Month</span>
+    </label><br>
+    <input type="radio" id="twice" name="update_freq" value="2">
+    <label for="twice">
+        <div class="ti-radio"></div>
+        <span>Twice per Month</span>
+    </label><br>
+    <button type="button" onclick="window.history.go(-1);">Back</button>&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
+
+</div>
+<div id='frequency_loader' style='display:none;' class="ajax_loader"><img src='<?php echo $this->getUrl(''); ?>skin/frontend/tomatoink/default/images/agri_loading.gif'/></div
+
+
+
+
+        </li>
+        <?php /* Extensions placeholder */ ?>
+        <?php echo $this->getChildHtml('customer.form.newsletter.extra')?>
+    </ul>
+</div>
+ <!--<div class="buttons-set form-buttons">
+    <a href="<?php //echo $this->escapeUrl($this->getBackUrl()) ?>" class="back-link ti_button"><?php //echo $this->__('Back') ?></a>
+
+</div> !-->
+
+<?php /* Extensions placeholder */ ?>
+<?php echo $this->getChildHtml('customer.form.newsletter.extra2')?>
+<script type="text/javascript">
+//<![CDATA[
+    var dataForm = new VarienForm('form-validate', true);
+//]]>
+</script>
+
+
+<script type="text/javascript">
+
+display_freq("<?php echo $customerdata['subscriber_freq']; ?>");
+function display_freq(id) {
+    var text_arr = ["once per week.", "once per month.", "twice per month."];
+    if (id > -1 && id < 3) {
+    document.getElementById('frequency_message').innerHTML = "You are currently receiving emails " + text_arr[id];
+    var elements = document.getElementsByName('update_freq');
+        for (i=0;i<elements.length;i++) {
+            if(elements[i].value == id) {
+                elements[i].checked = true;
+            }
+        }
+    }
+}
+
+
+
+
+var ti_subpage_url   = "<?php echo $this->getUrl(''); ?>newsletter/subscriber/new/";
+ti_subpage_url = ti_subpage_url.replace("http:", "");
+var ti_update_email = "<?php echo $customer_email ?>";
+jQuery('#ti_update_submit').click(function() {
+
+    jQuery("#frequency_loader").show();
+    var ti_update_freq  = jQuery('input[name=update_freq]:checked').val();
+
+    var formdata = { 
+        email:ti_update_email, 
+        subscriber_freq: ti_update_freq
+    };
+
+jQuery.ajax({
+    url : ti_subpage_url,
+    type: "POST",
+    data : formdata,
+    success: function(data, textStatus, jqXHR) {
+        //jQuery('#ti_subpage_message').html('Thank you for updating!!!');
+        //jQuery('#ti_subpage_form').hide();
+        //jQuery('#ti_update_form').hide();
+        jQuery("#frequency_loader").hide();
+        display_freq(ti_update_freq);
+        document.getElementById('success_message').innerHTML = "You've successfully updated your email frequency!";
+
+
+
+    },
+    error: function(data, textStatus, jqXHR) {
+        console.log(data.error);
+        console.log(textStatus);
+        console.log(jqXHR);
+    }
+
+
+});
+});
+</script>

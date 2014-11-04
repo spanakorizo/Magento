@@ -117,7 +117,7 @@ $customerid = $order->getCustomerId();
 
 
 
-$print_text = "<html><body bgcolor='#FFFFFF' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'><table width='100%' border='0' cellspacing='0' cellpadding='0' align='center' valign='top' style='page-break-after:always;'><tr> <td width='100%' bgcolor='#FFFFFF' valign='top'><style type='text/css'>BODY {FONT: 11px Verdana; COLOR: #000000; letter-spacing: -0.1em;}TABLE {FONT: 11px Verdana; COLOR: #000000; letter-spacing: -0.1em;}TD {FONT: 11px Verdana; COLOR: #000000; letter-spacing: -0.1em;}.pos_receipt td {FONT: 11px Courier; COLOR: #000000; letter-spacing: -0.1em;}</style></td></tr><tr><td><table cellpadding='0' cellspacing='0' width='100%' align='center'><tr> <td align='center'><table cellpadding='0' cellspacing='0' width='600'><tr><td width='100%'><table width='600' border='0' cellspacing='0' cellpadding='0'><tr> <td width='400'><img src='//www.tomatoink.com/v/vspfiles/templates/10/images/company/logo.gif'></td><td width='200' align='right'><table width='180' border='0' cellpadding='0' cellspacing='0'><tr> <td width='90' align='left' colspan='2'><b><font style='font-size:18px;font-weight:bolder;'>PACKING SLIP</font></b></td></tr><tr><td width='90' align='left'><b>Date:</b></td><td width=90><b>Order#:</b></td></tr><tr> <td width='75' align='left'>" . $orderdate . "</td><td><font size='3'><b>" . $orderid . "</b></font></td></tr></table></td></tr></table></td></tr><tr> <td width='100%'><img src='//www.compandsave.com/v/vspfiles/templates/10/images/clear1x1.gif' width='1' height='1' border=0></td></tr></table><br><table width='602' border='0' cellspacing='0' cellpadding='1' bgcolor='#EEEEEE'><tr> <td> <table border='0' cellspacing='0' cellpadding='2' width='100%' bgcolor='#FFFFFF'><tr> <td width='50%' bgcolor='#EEEEEE'><b>Bill To:</b> (CustomerID# " . $customerid . ")</td><td width='50%' bgcolor='#EEEEEE'><b>Ship To:</b></td></tr></table><table cellspacing='0' cellpadding='2' width='100%' border=0><tr> <td colspan=2><img src='//www.compandsave.com/v/vspfiles/templates/10/images/pixel_black.gif' height='2' width='100%'></td></tr></table><table cellspacing='0' cellpadding='5' width='100%' border='0' bgcolor='#FFFFFF'><tr valign='top'><td width='50%' bgcolor='#F9F9F9'>";
+$print_text = "<html><body bgcolor='#FFFFFF' text='#000000' leftmargin='0' topmargin='0' marginwidth='0' marginheight='0'><table width='100%' border='0' cellspacing='0' cellpadding='0' align='center' valign='top' style='page-break-after:always;'><tr> <td width='100%' bgcolor='#FFFFFF' valign='top'><style type='text/css'>BODY {FONT: 11px Verdana; COLOR: #000000; letter-spacing: -0.1em;}TABLE {FONT: 11px Verdana; COLOR: #000000; letter-spacing: -0.1em;}TD {FONT: 11px Verdana; COLOR: #000000; letter-spacing: -0.1em;}.pos_receipt td {FONT: 11px Courier; COLOR: #000000; letter-spacing: -0.1em;}</style></td></tr><tr><td><table cellpadding='0' cellspacing='0' width='100%' align='center'><tr> <td align='center'><table cellpadding='0' cellspacing='0' width='600'><tr><td width='100%'><table width='600' border='0' cellspacing='0' cellpadding='0'><tr> <td width='400'><img src='//www.tomatoink.com/v/vspfiles/templates/10/images/company/logo.gif'></td><td width='200' align='right'><table width='180' border='0' cellpadding='0' cellspacing='0'><tr> <td width='90' align='left' colspan='2'><b><font style='font-size:18px;font-weight:bolder;'>PACKING SLIP</font></b></td></tr><tr><td width='90' align='left'><b>Date:</b></td><td width=90><b>Order#:</b></td></tr><tr> <td width='75' align='left'>" . date('Y-m-d', strtotime($orderdate)) . "</td><td><font size='3'><b>" . $orderid . "</b></font></td></tr></table></td></tr></table></td></tr><tr> <td width='100%'><img src='//www.compandsave.com/v/vspfiles/templates/10/images/clear1x1.gif' width='1' height='1' border=0></td></tr></table><br><table width='602' border='0' cellspacing='0' cellpadding='1' bgcolor='#EEEEEE'><tr> <td> <table border='0' cellspacing='0' cellpadding='2' width='100%' bgcolor='#FFFFFF'><tr> <td width='50%' bgcolor='#EEEEEE'><b>Bill To:</b> (CustomerID# " . $customerid . ")</td><td width='50%' bgcolor='#EEEEEE'><b>Ship To:</b></td></tr></table><table cellspacing='0' cellpadding='2' width='100%' border=0><tr> <td colspan=2><img src='//www.compandsave.com/v/vspfiles/templates/10/images/pixel_black.gif' height='2' width='100%'></td></tr></table><table cellspacing='0' cellpadding='5' width='100%' border='0' bgcolor='#FFFFFF'><tr valign='top'><td width='50%' bgcolor='#F9F9F9'>";
 
 
 // bcomname is billing company name 
@@ -147,9 +147,19 @@ if ($shippingaddress->getCompany() != "") {
 
 
 //set shipping address
-$cclast = $payment->getLast4();
-if ($cclast != Null) $cclast = "**** **** **** " . $cclast;
-else $cclast = "";
+
+
+    $cclast = "";
+    $payment_method = $payment->getMethod();
+    if ($payment_method == "verisign") {
+        
+        $payment_method = $payment->getCcType();
+        $cclast = "**** **** **** " . $payment->getCcLast4();
+        $cclast .= " (" . $payment->getCcExpMonth . "/" . $payment->getCcExpYear() . ")";
+
+    }
+    
+
     $print_text .= $shippingaddress->getFirstname() . "&nbsp" . $shippingaddress->getLastname() . "<br>" . $shippingaddress->getStreetFull() . "<br>" . $shippingaddress->getCity() . "," . $shippingaddress->getRegion() . "&nbsp;" . $shippingaddress->getPostcode() . "<br>" . $shippingaddress->getCountryId() . "<br>" . $shippingaddress->getTelephone() . "</b></font></td></tr></table></td></tr></table><br><table width='602' border='0' cellspacing='0' cellpadding='1' bgcolor='#EEEEEE'> <tr> <td><table cellspacing='0' cellpadding='2' width='100%' border='0' bgcolor='#FFFFFF'><tr> <td width='50%' bgcolor='#EEEEEE'><b>Payment Method:</b></td><td width='50%' bgcolor='#EEEEEE'><b>Shipping Method:</b></td></tr></table><table cellspacing='0' cellpadding='2' width='100%' border='0'> <tr> <td colspan=2><img src='//www.compandsave.com/v/vspfiles/templates/10/images/pixel_black.gif' height='2' width='100%'></td></tr></table><table cellspacing='0' cellpadding='5' width='100%' border='0' bgcolor='#FFFFFF'><tr valign='top'><td width='50%' bgcolor='#F9F9F9'><input type='hidden' class='pciaas_NumberPart'/><b>Credit Card</b>:&nbsp;<span class='span_CardType'>" . $payment->getMethod() . "</span><br>" . $cclast . "<br></td><td width='50%' bgcolor='#F9F9F9'>" . $order->getShippingDescription() . "</td></tr></table></td></tr></table><br>";
 
     $print_text.= "<table width='602' border='0' cellspacing='0' cellpadding='1' bgcolor='#EEEEEE'><tr><td> <table cellspacing='0' cellpadding='2' width='100%' border='0'><td align='LEFT'  width='12%' bgcolor='#EEEEEE'><b>Code</b></td> <td align='LEFT'  width='67%' bgcolor='#EEEEEE'><b>Description</b></td><td align='LEFT'  width='6%' bgcolor='#EEEEEE'><b>Qty</b></td><td align='right' width='7%' bgcolor='#EEEEEE'><b>Loc</b></td><tr><td colspan=5><img src='//www.compandsave.com/v/vspfiles/templates/10/images/pixel_black.gif' height='2' width='100%'></td></tr>";
@@ -175,7 +185,7 @@ else $cclast = "";
 
         $product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
         if ($product)
-        $productinfo = "<tr><td bgcolor='#F9F9F9' width='12%' valign='TOP'><nobr>" . $sku . "</nobr></td><td bgcolor='#F9F9F9' align='LEFT' width='67%' valign='TOP'><b>" . $item->getName() . "</b></td><td bgcolor='#F9F9F9' width='6%'  valign='CENTER'><span style='font-size:15px'><b>" . $item->getQtyOrdered() . "</b></span></td><td bgcolor='#F9F9F9' align='right'  width='7%'  valign='CENTER'>" . $product->getWarehouseLocation() . "</td></tr>";
+        $productinfo = "<tr><td bgcolor='#F9F9F9' width='12%' valign='TOP'><nobr>" . $sku . "</nobr></td><td bgcolor='#F9F9F9' align='LEFT' width='67%' valign='TOP'><b>" . $item->getName() . "</b></td><td bgcolor='#F9F9F9' width='6%'  valign='CENTER'><span style='font-size:15px'><b>" . number_format($item->getQtyOrdered()) . "</b></span></td><td bgcolor='#F9F9F9' align='right'  width='7%'  valign='CENTER'>" . $product->getWarehouseLocation() . "</td></tr>";
 
 
         $print_text.= $productinfo;
@@ -185,27 +195,32 @@ $Arr=explode("-", $sku);
 
     //'count ink
     If (($code == "WINK") || ($code == "ZINK") || ($code=="INK")) {
-        $ink_count += $item->getQtyOrdered();
+        $ink_count += number_format($item->getQtyOrdered());
     } 
 
     //count toner
     If (($code == "WTONER") || ($code == "ZTONER") || ($code == "ZTNDR") || ($code == "TONER") || ($code=="DRUM")) {
-        $toner_count += $item->getQtyOrdered();
+        $toner_count += number_format($item->getQtyOrdered());
     } 
 
     //count ribbon
     If ($code == "RIBBON") {
-        $ribbon_count += $item->getQtyOrdered();
+        $ribbon_count += number_format($item->getQtyOrdered());
     } 
 
 
     //count usb
     If ($code == "USB") {
-        $usb_count += $item->getQtyOrdered();
+        $usb_count += number_format($item->getQtyOrdered());
     }
 
-    
-    $sum += $item->getQtyOrdered();
+     //count photo paper
+    If ($code == "PH") {
+        $paper_count += number_format($item->getQtyOrdered());
+    }
+
+
+    $sum += number_format($item->getQtyOrdered());
 
 
     }

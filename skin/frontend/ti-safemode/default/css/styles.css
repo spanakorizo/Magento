@@ -277,6 +277,15 @@ ul.add-row .btn-remove,
 /* Combination of fields */
 .form-list li.fields { margin:0; }
 .form-list li.fields .field { /*clear:left; padding:0 0 9px;*/ }
+.form-list .input-box input {
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.my-account .input-box {
+	width: 98%;
+}
 
 /* Buttons */
 /*
