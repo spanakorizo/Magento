@@ -271,7 +271,7 @@ if (strtoupper($army_city) == 'APO' || strtoupper($army_city) == 'DPO' || strtou
 /***************************************************/
 $shipping_method = $order->getShippingDescription();
 
-if ($filter_priority && (strpos($shipping_method,'Tomato') == false)) {
+if ($filter_priority && (strpos($shipping_method,'Tomato') === false)) {
 	$order->setOrderType('UPS');
 	$order->setOrderTypeValue($shipping_method);
 	$filter_priority = false;
