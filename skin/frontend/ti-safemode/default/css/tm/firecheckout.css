@@ -25,16 +25,16 @@
 /* block styles */
 .firecheckout-section {
     background: #fff url(../../images/tm/firecheckout/sprite.png) repeat-x 0 -102px;
-    border: 1px solid #ccc;
+    border: 1px solid #559a13;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
     border-radius: 6px;
     margin-bottom: 10px;
 }
 .firecheckout-section .block-title {
-    background: #e8ebed url(../../images/tm/firecheckout/sprite.png) repeat-x 0 -56px;
-    border-bottom: 1px solid #ccc;
-    height: 19px;
+    background: #559a13;
+    /*border-bottom: 1px solid #ccc;
+    height: 19px;*/
     font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
@@ -43,18 +43,20 @@
     -moz-border-radius: 6px 6px 0 0;
     -webkit-border-radius: 6px 6px 0 0;
     border-radius: 6px 6px 0 0;
-    color: #333;
+    color: #fff;
     position: relative;
 }
 .firecheckout-section .block-title .num {
-    border: 1px solid #888;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    border-radius: 4px;
+    /*border: 1px solid #888;*/
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
     padding: 1px 5px;
     margin: 0 5px 0 0;
-    background: #ccc;
+    background: #fff;
+    color:#559a13;
 }
+
 .firecheckout-set #shipping-method-reset,
 .firecheckout-set #payment-method-reset {
     text-transform: lowercase;
@@ -72,10 +74,11 @@
     margin: 0;
     z-index:99999;
     float:right;
+    display:none;
 }
 .firecheckout-set #shipping-method-reset:hover,
 .firecheckout-set #payment-method-reset:hover { color: #777; }
-.firecheckout-set .block-content {  }
+.firecheckout-set .block-content { padding:2px; }
 /* input field styles */
 .firecheckout-set input.input-text,
 /*.firecheckout-set select,*/
@@ -123,7 +126,7 @@
 .firecheckout-set .form-list li.wide input.input-text,
 .firecheckout-set .gift-messages-form .item .details .form-list input.input-text,
 .firecheckout-set .gift-messages-form .item .details .form-list li.wide textarea {
-    width: 100%; /* rewrite theme styles */
+    /*width: 100%;  rewrite theme styles */
 }
 
 /* fluid form styles */
@@ -168,7 +171,7 @@
 .firecheckout-set .form-list .name-middlename .input-box,
 .firecheckout-set .form-list .name-suffix .input-box,
 .firecheckout-set .form-list .name-firstname .input-box,
-.firecheckout-set .form-list .name-lastname .input-box { width: 100% !important; }
+.firecheckout-set .form-list .name-lastname .input-box { /*width: 100% !important;*/ }
  /* all is shown */
 .firecheckout-set .form-list .customer-name-prefix-middlename-suffix .name-prefix .input-box,
 .firecheckout-set .form-list .customer-name-prefix-middlename-suffix .name-middlename .input-box,
@@ -204,13 +207,13 @@
 
 #firecheckout-form .discount-form .messages,
 #firecheckout-form .giftcard-form .messages { width: 97%; }
-#coupon-code, #giftcard_code { margin: 2px 0 2px; width: 125px; }
+#coupon-code, #giftcard_code { /*margin: 2px 0 2px; width: 125px;*/ }
 #coupon-cancel, #coupon-apply,
 #giftcard-add { display: inline; margin: 0; }
 #firecheckout-form .discount { padding: 0; }
 #coupon-code,
 #giftcard_code,
-#rewardponts .input-text { margin: 2px 0; width: 110px; }
+#rewardponts .input-text { /*margin: 2px 0; width: 110px;*/ }
 #rewardponts select.input-text { width: 165px; }
 #firecheckout-form .discount .button,
 #firecheckout-form .giftcard .button { margin: 0; }
@@ -253,7 +256,7 @@
 .firecheckout-set .sp-methods .form-list li { float: none; width: auto; }
 .firecheckout-set .sp-methods dt { margin: 0 0 5px; }
 .firecheckout-set .sp-methods dd { margin: 0 0 6px; }
-.firecheckout-set .sp-methods .input-box .v-fix { margin-right: 5px; max-width: 50%; }
+.firecheckout-set .sp-methods .input-box .v-fix { margin-right: 1%; max-width: 49%; }
 .firecheckout-set .sp-methods .checkmo-list label { float: left; padding-right: 10px; text-align: right; width: 110px; }
 .firecheckout-set .sp-methods .checkmo-list address { float: left; }
 .firecheckout-set #advice-required-entry-ccsave_expiration_yr { width: 8em; }
@@ -368,7 +371,7 @@
     #firecheckout-form .col3-set #checkout-coupon-discount-load,
     #firecheckout-form .col3-set #checkout-giftcard-load { clear: both; width: 100%; }
 
-    .firecheckout-set .product-name { font-size:.9em; }
+    .firecheckout-set .product-name {  }
     .firecheckout-set .data-table tfoot,
     .firecheckout-set .data-table strong { font-size: 1em; }
     .firecheckout-set .qty-wrapper .qty-spinner { display: none; }
@@ -507,11 +510,11 @@ iframe#sage-pay-server-iframe { border:none; height:365px; width:687px; }
 #firecheckout-form div,
 .firecheckout-window *,
 #firecheckout-spinner {
-    -webkit-box-sizing: content-box;
+    /*-webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     -ms-box-sizing: content-box;
     -o-box-sizing: content-box;
-    box-sizing: content-box;
+    box-sizing: content-box;*/
 }
 #firecheckout-form .col2-set,
 #firecheckout-form .col3-set,

@@ -30,15 +30,15 @@ $isVisibleProduct = $_item->getProduct()->isVisibleInSiteVisibility();
 $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage_Catalog_Model_Product_Attribute_Source_Msrp_Type::TYPE_BEFORE_ORDER_CONFIRM);
 ?>
 <tr>
-    <td><?php if ($this->hasProductUrl()):?><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->escapeHtml($this->getProductName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(75); ?>" width="75" height="75" alt="<?php echo $this->escapeHtml($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?></td>
-    <td>
-        <h2 class="product-name">
+    <td><?php if ($this->hasProductUrl()):?><div class="ti_cart_image"><a href="<?php echo $this->getProductUrl() ?>" title="<?php echo $this->escapeHtml($this->getProductName()) ?>" class="product-image"><?php endif;?><img src="<?php echo $this->getProductThumbnail()->resize(75); ?>" alt="<?php echo $this->escapeHtml($this->getProductName()) ?>" /><?php if ($this->hasProductUrl()):?></a><?php endif;?></div><!--</td>
+    <td>-->
+        <div class="ti_cart_desc"><p class="product-name">
         <?php if ($this->hasProductUrl()):?>
             <a href="<?php echo $this->getProductUrl() ?>"><?php echo $this->escapeHtml($this->getProductName()) ?></a>
         <?php else: ?>
             <?php echo $this->escapeHtml($this->getProductName()) ?>
         <?php endif; ?>
-        </h2>
+        </p></div>
         <?php if ($_options = $this->getOptionList()):?>
         <dl class="item-options">
             <?php foreach ($_options as $_option) : ?>
@@ -67,38 +67,38 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
             <?php echo $addInfoBlock->setItem($_item)->toHtml() ?>
         <?php endif;?>
     </td>
-    <td class="a-center">
-        <?php if ($isVisibleProduct): ?>
-        <a href="<?php echo $this->getConfigureUrl() ?>" title="<?php echo $this->__('Edit item parameters') ?>"><?php echo $this->__('Edit') ?></a>
-        <?php endif ?>
+    <!--<td class="a-center">
+        <?php //if ($isVisibleProduct): ?>
+        <a href="<?php //echo $this->getConfigureUrl() ?>" title="<?php //echo $this->__('Edit item parameters') ?>"><?php //echo $this->__('Edit') ?></a>
+        <?php //endif ?>
     </td>
-    <?php if ($this->helper('wishlist')->isAllowInCart()) : ?>
+    <?php //if ($this->helper('wishlist')->isAllowInCart()) : ?>
     <td class="a-center">
-        <?php if ($isVisibleProduct): ?>
-            <a href="<?php echo $this->helper('wishlist')->getMoveFromCartUrl($_item->getId()); ?>" class="link-wishlist use-ajax"><?php echo $this->__('Move'); ?></a>
-        <?php endif ?>
+        <?php //if ($isVisibleProduct): ?>
+            <a href="<?php //echo $this->helper('wishlist')->getMoveFromCartUrl($_item->getId()); ?>" class="link-wishlist use-ajax"><?php //echo $this->__('Move'); ?></a>
+        <?php //endif ?>
     </td>
-    <?php endif ?>
+    <?php //endif ?>-->
 
     <?php if ($canApplyMsrp): ?>
-        <td class="a-right"<?php if ($this->helper('tax')->displayCartBothPrices()): ?> colspan="2"<?php endif; ?>>
-            <span class="cart-price">
+        <td class="ti_table_productPrice"<?php if ($this->helper('tax')->displayCartBothPrices()): ?> colspan="2"<?php endif; ?>>
+            <p class="cart-price">
                 <span class="cart-msrp-unit"><?php echo $this->__('See price before order confirmation.'); ?></span>
                 <?php $helpLinkId = 'cart-msrp-help-' . $_item->getId(); ?>
                 <a id="<?php echo $helpLinkId ?>" href="#" class="map-help-link"><?php echo $this->__("What's this?"); ?></a>
                 <script type="text/javascript">
-                    Catalog.Map.addHelpLink($('<?php echo $helpLinkId ?>'), "<?php echo $this->__("What's this?") ?>");
+                    Catalog.Map.addHelpLink($('<?php echo $helpLinkId ?>'), "<?php echo $this->__("What&#39; this?") ?>");
                 </script>
-            </span>
+            </p>
         </td>
     <?php else: ?>
 
         <?php if ($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()): ?>
-        <td class="a-right">
+        <td class="ti_table_productPrice">
             <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
-                <span class="cart-tax-total" onclick="taxToggle('eunit-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
+                <p class="cart-tax-total" onclick="taxToggle('eunit-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
             <?php else: ?>
-                <span class="cart-price">
+                <p class="cart-price">
             <?php endif; ?>
                 <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
                     <?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()+$_item->getWeeeTaxAppliedAmount()+$_item->getWeeeTaxDisposition()); ?>
@@ -106,7 +106,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                     <?php echo $this->helper('checkout')->formatPrice($_item->getCalculationPrice()) ?>
                 <?php endif; ?>
 
-            </span>
+            </p>
 
             <?php if (Mage::helper('weee')->getApplied($_item)): ?>
 
@@ -138,9 +138,9 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <td>
             <?php $_incl = $this->helper('checkout')->getPriceInclTax($_item); ?>
             <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
-                <span class="cart-tax-total" onclick="taxToggle('unit-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
+                <p class="cart-tax-total" onclick="taxToggle('unit-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
             <?php else: ?>
-                <span class="cart-price">
+                <p class="cart-price">
             <?php endif; ?>
 
                 <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
@@ -149,7 +149,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                     <?php echo $this->helper('checkout')->formatPrice($_incl-$_item->getWeeeTaxDisposition()) ?>
                 <?php endif; ?>
 
-            </span>
+            </p>
             <?php if (Mage::helper('weee')->getApplied($_item)): ?>
 
                 <div class="cart-tax-info" id="unit-item-tax-details<?php echo $_item->getId(); ?>" style="display:none;">
@@ -177,17 +177,22 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         </td>
         <?php endif; ?>
     <?php endif; ?>
-    <td class="a-center">
-        <input name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="4" title="<?php echo $this->__('Qty') ?>" class="input-text qty" maxlength="12" />
+    <td class="ti_cart_qty ti_table_productQTY">
+        <p>
+            <input name="cart[<?php echo $_item->getId() ?>][qty]" value="<?php echo $this->getQty() ?>" size="1" title="<?php echo $this->__('Qty') ?>" class="input-text qty ti_cms_block_qty" maxlength="3" type="text" />
+
+            <a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('X<br>delete')?>" class="btn-remove btn-remove2"><?php echo $this->__('X<br>delete')?></a>
+            <button type="submit" name="update_cart_action" value="update_qty" title="<?php echo $this->__('Update'); ?>" class="button btn-update ti_button_mini"><span><?php echo $this->__('Update'); ?></span></button>
+        </p>
     </td>
 
     <!--Sub total starts here -->
     <?php if (($this->helper('tax')->displayCartPriceExclTax() || $this->helper('tax')->displayCartBothPrices()) && !$_item->getNoSubtotal()): ?>
     <td class="a-right">
         <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
-            <span class="cart-tax-total" onclick="taxToggle('esubtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
+            <p class="cart-tax-total" onclick="taxToggle('esubtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
         <?php else: ?>
-            <span class="cart-price">
+            <p class="cart-price">
         <?php endif; ?>
 
             <?php if ($canApplyMsrp): ?>
@@ -200,7 +205,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                 <?php endif; ?>
             <?php endif; ?>
 
-        </span>
+        </p>
         <?php if (Mage::helper('weee')->getApplied($_item)): ?>
 
             <div class="cart-tax-info" id="esubtotal-item-tax-details<?php echo $_item->getId(); ?>" style="display:none;">
@@ -231,13 +236,13 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
     <td>
         <?php $_incl = $this->helper('checkout')->getSubtotalInclTax($_item); ?>
         <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
-            <span class="cart-tax-total" onclick="taxToggle('subtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
+            <p class="cart-tax-total" onclick="taxToggle('subtotal-item-tax-details<?php echo $_item->getId(); ?>', this, 'cart-tax-total-expanded');">
         <?php else: ?>
-            <span class="cart-price">
+            <p class="cart-price">
         <?php endif; ?>
 
             <?php if ($canApplyMsrp): ?>
-                <span class="cart-msrp-subtotal">--</span>
+                <p class="cart-msrp-subtotal">--</p>
             <?php else: ?>
                 <?php if (Mage::helper('weee')->typeOfDisplay($_item, array(0, 1, 4), 'sales') && $_item->getWeeeTaxAppliedAmount()): ?>
                     <?php echo $this->helper('checkout')->formatPrice($_incl + Mage::helper('weee')->getRowWeeeTaxInclTax($_item)); ?>
@@ -246,7 +251,7 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
                 <?php endif; ?>
             <?php endif; ?>
 
-        </span>
+        </p>
 
 
         <?php if (Mage::helper('weee')->getApplied($_item)): ?>
@@ -275,5 +280,5 @@ $canApplyMsrp = Mage::helper('catalog')->canApplyMsrp($_item->getProduct(), Mage
         <?php endif; ?>
     </td>
     <?php endif; ?>
-    <td class="a-center"><a href="<?php echo $this->getDeleteUrl()?>" title="<?php echo $this->__('Remove item')?>" class="btn-remove btn-remove2"><?php echo $this->__('Remove item')?></a></td>
+    <!--<td class="a-center"><a href="<?php //echo $this->getDeleteUrl()?>" title="<?php //echo $this->__('Remove item')?>" class="btn-remove btn-remove2"><?php //echo $this->__('Remove item')?></a></td>-->
 </tr>
