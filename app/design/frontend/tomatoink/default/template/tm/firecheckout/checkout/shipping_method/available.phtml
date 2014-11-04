@@ -52,20 +52,7 @@ function fenetreCent(url,nom,largeur,hauteur,options) {
 var lastPrice='';
 </script>
 <?php endif ?>
-<?php // infostrates tnt
-    //$address = Mage::getSingleton('checkout/cart')->getQuote()->getShippingAddress()->getCountryId();
-    //echo "this is coutry code: " . $address . "<br>"; 
-    //echo "another country code: " . $this->getAddress()->getCountryId() . "<br>";
-    //echo "shipping method: " . $this->getAddressShippingMethod() . "<br>";
 
-            //$address->setCountryId($code)
-                //->setCollectShippingRates(true);
-//$freeshippingflag = Mage::getStoreConfig('carriers/freeshipping/active');
-//$freeshippingamount = Mage::getStoreConfig('carriers/freeshipping/free_shipping_subtotal');
-//$subtotal = $this->getAddress()->getBaseSubtotal();   
- //   echo $freeshippingflag . " " . $freeshippingamount . " " . $subtotal . "<br>";
-
- ?>
 <?php if (!($_shippingRateGroups = $this->getShippingRates())): ?>
     <p><?php echo $this->__('Sorry, no quotes are available for this order at this time.') ?></p>
 <?php else: ?>
@@ -286,12 +273,6 @@ var lastPrice='';
     <?php if (!empty($shippingMe)): ?>
         var shippingMe = {<?php echo implode(',',$shippingMe); ?>};
     <?php endif; ?>
-    //refresh page when there is shiping method showing at dropdown but doesn't show at grand total
-    <?php //if (($this->getAddressShippingMethod() == '') && ($quote->getShippingAddress()->getPostcode() != '')): ?>
-        //alert('done');
-        //jQuery('#ti_shipping_select').click();
-        //location.reload();
-    <?php //endif; ?>
 
     jQuery('#ti_shipping_select').change(function(el){
 		jQuery('#ti_shipping_select option').each(function(){

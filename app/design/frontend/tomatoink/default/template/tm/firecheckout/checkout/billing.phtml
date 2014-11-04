@@ -316,20 +316,3 @@
     </script>
     </div>
 </div>
-
-
-<?php if ($this->getAddress()->getPostcode() != ""): ?>
-<script type="text/javascript">
-jQuery(document).ready(function() {
-    var element = document.getElementById('billing:postcode');
-    if ("createEvent" in document) {
-    var evt = document.createEvent("HTMLEvents");
-    evt.initEvent("change", false, true);
-    element.dispatchEvent(evt);
-    }
-    else
-        element.fireEvent("onchange");
-});
-
-</script>
-<?php endif;?>
