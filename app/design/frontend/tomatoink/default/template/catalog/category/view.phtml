@@ -45,7 +45,7 @@
 
 <!--<div class="ti_category_content_container">
     <div style="width: 73%;position: relative; display: block; float: left; padding: 0 1%">-->
-<?php if ($currentCategoryId == 35 || $currentCategoryId == 36):  ?>
+<?php if ($currentCategoryId == 35 || ($currentCategoryId >=180 && $currentCategoryId <=187 ) ):  ?>
 
 <?php 
 $products = Mage::getModel('catalog/category')->load($currentCategoryId)
@@ -164,7 +164,7 @@ $products = Mage::getModel('catalog/category')->load($currentCategoryId)
         <?php endforeach ?>
         <!--<script type="text/javascript">decorateGeneric($$('ul.products-grid'), ['odd','even','first','last'])</script>!-->
 
-
+        <br>
             <div class="btcf">
                 <div class="ti_printer_sortBar btcf">
                     <div class="one_third sort-by">

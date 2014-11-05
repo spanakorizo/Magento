@@ -1,0 +1,113 @@
+<?php
+/**
+ * Magento Enterprise Edition
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magento Enterprise Edition License
+ * that is bundled with this package in the file LICENSE_EE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://www.magentocommerce.com/license/enterprise-edition
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@magentocommerce.com so we can send you a copy immediately.
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade Magento to newer
+ * versions in the future. If you wish to customize Magento for your
+ * needs please refer to http://www.magentocommerce.com for more information.
+ *
+ * @category    design
+ * @package     base_default
+ * @copyright   Copyright (c) 2013 Magento Inc. (http://www.magentocommerce.com)
+ * @license     http://www.magentocommerce.com/license/enterprise-edition
+ */
+?>
+<?php
+/**
+ * Customer login form template
+ *
+ * @see app/design/frontend/base/default/template/customer/form/login.phtml
+ */
+/** @var $this Mage_Customer_Block_Form_Login */
+?>
+<div class="account-login">
+    <div class="page-title">
+        <h1><?php echo $this->__('TomatoInk Login') ?></h1>
+		<h4><?php echo $this->__('To access your account, please enter your e-mail address and password below.') ?></h4>
+    </div>
+    <?php echo $this->getMessagesBlock()->getGroupedHtml() ?>
+    <form action="<?php echo $this->getPostActionUrl() ?>" method="post" id="login-form">
+	
+	<div class="one_half ti_cms_borderRight">
+		<?php echo $this->getBlockHtml('formkey'); ?>
+        <div class="col2-set">
+
+            <div class="col-2 registered-users">
+                <div class="content">
+                    <h2 class="altTxt"><?php echo $this->__('Returning Customers') ?></h2>
+                    <p><?php echo $this->__('If you&#39;ve purchased from us before, please login with your email address and password.') ?></p>
+					
+                    <ul class="form-list">
+                        <li>
+                            <label for="email" class="required"><?php echo $this->__('Email Address') ?></label>
+                            <div class="input-box one">
+                                <input type="text" name="login[username]" value="<?php echo $this->escapeHtml($this->getUsername()) ?>" id="email" class="one textArea" title="<?php echo $this->__('Email Address') ?>" />
+                            </div>
+                        </li>
+                        <li>
+                            <label for="pass" class="required"><?php echo $this->__('Password') ?></label>
+                            <div class="input-box one">
+                                <input type="password" name="login[password]" class="one textArea" id="pass" title="<?php echo $this->__('Password') ?>" />
+                            </div>
+                        </li>
+                        <?php echo $this->getChildHtml('form.additional.info'); ?>
+                        <?php echo $this->getChildHtml('persistent.remember.me'); ?>
+                    </ul>
+					
+                    <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
+                    <!--<p class="required text_left"><?php echo $this->__('* Required Fields') ?></p>-->
+					<div class="col-2 registered-users">
+						<div class="buttons-set">
+							<p>
+								<a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
+							</p>
+							<button type="submit" class="button one_fourth clear title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
+						</div>
+					</div>
+					<?php if (Mage::helper('checkout')->isContextCheckout()): ?>
+						<input name="context" type="hidden" value="checkout" />
+					<?php endif; ?>
+                </div>
+            </div>
+        </div>
+	</div>
+	
+	<div class="one_half">
+	    <div class="col-1 new-users">
+            <div class="content">
+                <h2 class="altTxt"><?php echo $this->__('New Customers') ?></h2>
+				<p><?php echo $this->__('If this is your <b>first</b> purchase with us, please proceed by clicking the following button to continue first-time registration.') ?></p>
+            </div>
+        </div>
+	</div>
+        
+        <div class="col2-set">
+            <div class="col-1 new-users">
+                <div class="buttons-set">
+                    <button type="button" title="<?php echo $this->__('Create an Account') ?>" class="button one_third" onclick="window.location='<?php echo Mage::helper('persistent')->getCreateAccountUrl($this->getCreateAccountUrl()) ?>';"><span><span><?php echo $this->__('Create an Account') ?></span></span></button>
+                </div>
+            </div>
+
+        </div>
+        
+		
+		
+    </form>
+    <script type="text/javascript">
+    //<![CDATA[
+        var dataForm = new VarienForm('login-form', true);
+    //]]>
+    </script>
+</div>

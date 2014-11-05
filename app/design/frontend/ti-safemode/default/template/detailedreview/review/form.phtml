@@ -50,15 +50,16 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 <input type="hidden" name="id" value="<?php echo $productID; ?>" />
 
                 <?php echo $this->getChildHtml('form_fields_before')?>
-                    <div class="header">
+                    <!--<div class="header">
                         <h3 class="tell-us"><?php echo $this->__("Tell us what you think about this item") ?>:</h3>
-                    </div>
+                    </div>-->
                     <span id="input-message-box"></span>
                 <?php if( $this->getRatings() && $this->getRatings()->getSize()): ?>
-                    <div class="overall-raiting with-border">
-                        <div class="left">
-                            <div class="title"><span><?php echo $this->__("Overall Rating") ?></span> <em class="required">*</em></div>
-                            <p class="desc"><?php echo $this->__("select the number of stars that reflect your overall item rating") ?></p>
+
+                    <div class="overall-raiting one">
+                        <div class="left ti-required-entry">
+                            <h2 class="title altTxt"><?php echo $this->__("Overall Rating:") ?></h2>
+                            <!--<p class="desc"><?php echo $this->__("select the number of stars that reflect your overall item rating") ?></p>-->
                         </div>
 
 
@@ -113,41 +114,42 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 </div>
                 <?php endif; ?>
                 <div class="your-review">
-                    <div class="left">
+                    <!--<div class="left">
                         <span class="title altTxt"><?php echo $this->__("Your Review") ?></span>
                         <p class="desc"><?php echo $this->__("Share your opinion with others by writing a detailed review") ?></p>
-                    </div>
-                    <div class="right">
-                        <div class="wide">
-                            <label for="nickname_field" class="required ti_cms_labelHide"><span><?php echo $this->__('Nickname') ?> <em>*</em></span></label>
-                            <div class="input-box field-row ti-required-entry">
-                                <input type="text" name="nickname" id="nickname_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" placeholder="Nickname" />
+                    </div>-->
+                    <div class="">
+                        <div class="wide one">
+                            <label for="nickname_field" class="required ti_cms_labelHide ti-required-entry btcf"><span><?php echo $this->__('Nickname') ?> <em>*</em></span></label>
+                            <div class="input-box field-row">
+                                <input type="text" name="nickname" id="nickname_field" class="one input-text required-entry" value="<?php echo $this->htmlEscape($data->getNickname()) ?>" placeholder="Nickname" />
                             </div>
                         </div>
-                        <div class="wide">
-                            <label for="summary_field" class="required ti_cms_labelHide"><span><?php echo $this->__('Review Title:') ?> <em>*</em></span></label>
-                            <div class="input-box field-row ti-required-entry">
-                                <input type="text" name="title" id="summary_field" class="input-text required-entry" value="<?php echo $this->htmlEscape($data->getTitle()) ?>" placeholder="Review title"/>
+                        <div class="wide one">
+                            <label for="summary_field" class="required ti_cms_labelHide ti-required-entry btcf"><span><?php echo $this->__('Review Title:') ?> <em>*</em></span></label>
+                            <div class="input-box field-row">
+                                <input type="text" name="title" id="summary_field" class="one input-text required-entry" value="<?php echo $this->htmlEscape($data->getTitle()) ?>" placeholder="Review title"/>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="your-review overall with-border">
-                    <div class="left">
-                        <p class="desc"><?php echo $this->__("Try to avoid") ?>:</p>
+                <div class="your-review overall">
+                    <!--<div class="left">
+                        <p class="desc"><?php //echo $this->__("Try to avoid") ?>:</p>
                         <ul class="desc ti_bullet">
-                            <li><?php echo $this->__("Non-product related comments") ?></li>
-                            <!--<li><?php echo $this->__("Price and promotion details")?></li>-->
-                            <li><?php echo $this->__("Inappropriate language")?></li>
-                            <li><?php echo $this->__("Info about other companies or websites") ?></li>
-                            <li><?php echo $this->__("Any personal info. We want to protect your privacy!") ?></li>
+                            <li><?php //echo $this->__("Non-product related comments") ?></li>
+                            <li><?php //echo $this->__("Price and promotion details")?></li>
+                            <li><?php //echo $this->__("Inappropriate language")?></li>
+                            <li><?php //echo $this->__("Info about other companies or websites") ?></li>
+                            <li><?php //echo $this->__("Any personal info. We want to protect your privacy!") ?></li>
                         </ul>
-                    </div>
-                    <div class="right">
+                    </div>-->
+                    
+                    <div class="">
                         <div class="wide">
-                            <label for="review_field" class="required ti_cms_labelHide"><span><?php echo $this->__('Your comments') ?></span></label>
-                            <div class="input-box field-row ti-required-entry">
-                                <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry" placeholder="Your comments"><?php echo $this->htmlEscape($data->getDetail()) ?></textarea>
+                            <label for="review_field" class="required ti_cms_labelHide ti-required-entry btcf"><span><?php echo $this->__('Your comments') ?></span></label>
+                            <div class="input-box field-row one">
+                                <textarea name="detail" id="review_field" cols="5" rows="3" class="required-entry one" placeholder="Your comments: Think about what you like about the product and what you dislike about it, why you chose this rating, and who would you recommend it to."><?php echo $this->htmlEscape($data->getDetail()) ?></textarea>
                             </div>
                         </div>
                         <?php if ( $helperDetailedreview->checkFieldAvailable('good_and_bad_detail') ): ?>
@@ -164,6 +166,7 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                             </div>
                         </div>
                         <?php endif; ?>
+                        
                         <?php if ( $helperDetailedreview->checkFieldAvailable('pros_and_cons') ):
                             $consCollection = $this->getProsConsCollection(MageWorkshop_DetailedReview_Model_Source_EntityType::CONS);
                             $prosCollection = $this->getProsConsCollection(MageWorkshop_DetailedReview_Model_Source_EntityType::PROS);
@@ -223,9 +226,9 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                     </div>
                     <?php if(Mage::getStoreConfig('detailedreview/social_share_optios/recommended_product') && $fieldVariableArr = Mage::getStoreConfig('detailedreview/social_share_optios/recommend_qty_available')): ?>
                         <?php $fieldVariableArr = explode(',', $fieldVariableArr); ?>
-                        <div class="right">
-                            <label for="review_field"><?php echo $this->__('Would you recommend this product to a friend?') ?></label>
-                            <div class="input-box">
+                        <div class="one">
+                            <label for="review_field"><span><?php echo $this->__('Would you recommend this product to a friend?') ?></span></label>
+                            <div class="input-box ti_select_barContainer">
                                 <select class="recommendation" name="recommend_to">
                                     <option value="" selected="selected"><?php echo $this->__('Please select'); ?></option>
                                     <?php foreach ($fieldVariableArr as $option): ?>
@@ -236,6 +239,7 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                         </div>
                     <?php endif; ?>
                 </div>
+
                 <?php if ( $helperDetailedreview->checkFieldAvailable('image') ): ?>
                    <?php
                     $maxSize = Mage::getStoreConfig('detailedreview/image_options/max_image_size');
@@ -243,27 +247,29 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                     $minHeight = Mage::getStoreConfig('detailedreview/image_options/min_image_height');
                     ?>
                 <div class="upload-image">
-                    <div class="left">
-                        <span class="title altTxt"><?php echo $this->__("Upload Your Image") ?></span>
-                        <p class="desc"><?php echo $this->__("Pictures speak a thousand words!") ?></p>
+                    <!--<div class="left">
+                        <span class="title altTxt"><?php //echo $this->__("Upload Your Image") ?></span>
+                        <p class="desc"><?php //echo $this->__("Pictures speak a thousand words!") ?></p>
                         <ul class="desc ti_bullet">
-                            <li><?php echo $this->__("PNG, GIF or JPEG format") ?></li>
-                            <li><?php echo $this->__("File size must be %d MB or less", $maxSize) ?></li>
-                            <li><?php echo $this->__("Image must be at least %d px by %d px", $minHeight, $minWidth) ?></li>
-                            <!--<li><?php echo $this->__("Image must be at least %d pixels wide", $minWidth) ?></li>-->
+                            <li><?php //echo $this->__("PNG, GIF or JPEG format") ?></li>
+                            <li><?php //echo $this->__("File size must be %d MB or less", $maxSize) ?></li>
+                            <li><?php //echo $this->__("Image must be at least %d px by %d px", $minHeight, $minWidth) ?></li>
+                            <li><?php //echo $this->__("Image must be at least %d pixels wide", $minWidth) ?></li>
                         </ul>
-                    </div>
-                    <div class="right">
+                    </div>-->
+                    <div class="one">
                         <div class="input-box" id="add-file-input-box">
                             <div class="more-images">
                                 <span>
-                                    <input type="file" name="image[]" id="image_field" class="firstInput" value="<?php echo $this->htmlEscape($data->getImage()) ?>" />
-                                    <a href="#" class="remove-img">Remove</a>
+                                    <label><span>Files allowed are <span class="altTxt">jpg (jpeg) or png</span> and are limited to <span class="altTxt">100kb</span>.</span>
+                                        <input type="file" name="image[]" id="image_field" class="firstInput" value="<?php echo $this->htmlEscape($data->getImage()) ?>" /><a href="#" class="remove-img ti_button ti_altBtn ti_button_mini">X</a>
+                                    </label>
                                 </span>
                             </div>
                         </div>
+                        <div id="ti_review_image_check" class = "validation-advice"></div>
                         <?php if ((int)Mage::getStoreConfig('detailedreview/image_options/images_max_count') > 1): ?>
-                            <p class="more-images"><a href="#" id="add-more-images">+ Add more files</a></p>
+                            <p class="more-images"><a href="#" id="add-more-images" class="altTxt">+ Add more files</a></p>
                         <?php endif ?>
                     </div>
                 </div>
@@ -330,10 +336,10 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 <div id="review-captcha">
                 <!--[if IE 7]>
                     <script type="text/javascript"
-                            src="//www.google.com/recaptcha/api/challenge?k=<?php echo $public_key; ?>">
+                            src="//www.google.com/recaptcha/api/challenge?k=<?php //echo $public_key; ?>">
                     </script>
                     <noscript>
-                        <iframe src="//www.google.com/recaptcha/api/noscript?k=<?php echo $public_key; ?>"
+                        <iframe src="//www.google.com/recaptcha/api/noscript?k=<?php //echo $public_key; ?>"
                                 height="300" width="500" frameborder="0"></iframe><br>
                         <textarea name="recaptcha_challenge_field" rows="3" cols="40"></textarea>
                         <input type="hidden" name="recaptcha_response_field"
@@ -348,8 +354,8 @@ $public_key = Mage::getStoreConfig('detailedreview/captcha/public_key');
                 <button type="submit" title="<?php echo $this->__('Submit') ?>" class="button">
                     <span><span><?php echo $this->__('Submit') ?></span></span>
                 </button>
-                <span id="review-add-spinner" class="please-wait" style="display:none;">
-                    <img src="<?php echo $this->getSkinUrl('images/detailedreview/ajax-loader.gif') ?>" alt="<?php echo $this->__('Please, wait...') ?>" title="<?php echo $this->__('Please, wait...') ?>" class="v-middle" /> <?php echo $this->__('Please, wait...') ?>
+                <span id="review-add-spinner" class="ajax_loader_small" style="display:none;">
+                    <!--<img src="<?php //echo $this->getSkinUrl('images/agri_loading.gif') ?>" alt="<?php //echo $this->__('Please, wait...') ?>" title="<?php //echo $this->__('Please, wait...') ?>" class="v-middle" />--> <?php echo $this->__('Please, wait...') ?>
                 </span>
             </div>
         </form>

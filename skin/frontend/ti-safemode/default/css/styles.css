@@ -79,6 +79,7 @@ ul,ol         { list-style:none; }
 .right        { float:right !important; }
 .f-none       { float:none !important; }
 .f-fix        { float:left; width:100%; }
+.f-half		  { float:left; width:50%;}
 .no-display   { display:none; }
 .no-margin    { margin:0 !important; }
 .no-padding   { padding:0 !important; }
@@ -377,7 +378,7 @@ p.error-msg { color:#d91a00; }
 	text-shadow: -0.5px -0.5px 0px #333, 1px 1px 0px #ECECEC;
 	text-align: left;
 }
-.title-buttons { text-align:right; }
+.title-buttons { }
 .title-buttons h1,
 .title-buttons h2,
 .title-buttons h3,
@@ -415,7 +416,7 @@ p.error-msg { color:#d91a00; }
 .pages p{
 	float: left;
 	margin: .5em 0 .5em .5em;
-	font-size: 2.4em;
+	font-size: 2.4rem;
 }
 .pager .pages ul,
 .pager .pages li { cursor:pointer; display:inline-block; padding:0 2px; font-family:'raleway'; font-feature-settings: "lnum";-moz-font-feature-settings: "lnum";-webkit-font-feature-settings: "lnum";-ms-font-feature-settings: "lnum";-o-font-feature-settings: "lnum";}
@@ -897,14 +898,14 @@ ul.disc li { padding-left:10px; background:url(../images/bkg_bulletsm.gif) no-re
 .col-main .block .block-content { padding:20px; }
 */
 /* Generic box */
-.info-box { border:1px solid #cfcfcf; margin-top:-1px; background:#f5f5f5 url(../images/bkg_block.gif) repeat-x 0 0; position:relative; z-index:1; }
+/*.info-box { border:1px solid #cfcfcf; margin-top:-1px; background:#f5f5f5 url(../images/bkg_block.gif) repeat-x 0 0; position:relative; z-index:1; }
 .info-box .box-title { margin:17px 17px 0 17px; font:14px/1.25 Arial, Helvetica, sans-serif; padding:0; color:#222; }
 .info-box .box-title a { font-size:11px; text-transform:lowercase; }
 .info-box .box-content { padding:10px 17px 17px; color:#555; }
 
 .info-table th { font-weight:bold; padding:2px 15px 2px 0; }
 .info-table td { padding:2px 0; }
-
+*/
 /* Block: Account */
 .sidebar .block-account { }
 .sidebar .block.block-account .block-title { background:#e67921; border-bottom: 7px solid #fd8524; }
@@ -2253,9 +2254,8 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 
 /* Order View */
 
-#my-orders-table th{
-	min-width:15%;
-	word-break:keep-all;
+.order-info-box .box-content{
+	font-size:1.4em;
 }
 
 #my-orders-table td{
@@ -2265,8 +2265,9 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 
 #my-orders-table h3{
 	font-size:1.2em;
-	font-family: Verdana,Helvetica,sans-serif;
+	font-family: Arial,Helvetica,sans-serif;
 	font-weight:normal;
+	margin:0;
 }
 
 .my-account .pager{
@@ -2275,16 +2276,20 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 }
 
 .my-account .pager .amount{
-	float:left;
-	width:40%;
+	float:right;
 }
 
-.my-account .pager label,
-.my-account .pager .limiter{
+.my-account .pager label{
 	float:left;
-	width:30%;
+	margin:8px 0;
+}
+.my-account .pager .limiter{
+	/*float:left;
+	width:30%;*/
 	padding:0;
 }
+
+#my-orders-table .option-label, #my-orders-table .option-value{margin-left:10px;}
 
 .order-items #my-orders-table 
 
@@ -2303,7 +2308,7 @@ li#remember-me-box.control .link-tip { display:inline-block; font-size:11px; lin
 .order-details .gift-message dd { border:1px solid #c7c7c7; background:#fff; padding:10px; margin:0 0 10px; white-space:pre-wrap; word-wrap:break-word }
 
 .order-links { margin:0 0 10px; text-align:right; padding-bottom:5px; background:url(../images/bkg_dots.gif) repeat-x 0 100%; text-align:right; }
-.order-info { margin-bottom:5px; border-bottom:1px solid #fd8524; }
+.order-info { margin-bottom:5px; border-bottom:1px solid #fd8524; display:none; }
 .order-info dt { /*padding:6px 20px 0 10px; color:#6c6c6c; float:left; */}
 .order-info dd { /*float:left; */}
 .order-info ul { /*float:left;*/ }
@@ -2491,12 +2496,12 @@ p.wishlist-empty {border:1px solid #d0d0d0;}
 #my-tags-table .last p { margin:10px 0; }
 
 /* Reward Points */
-.my-rewards .box { margin:0 0 30px; }
+.my-rewards .box { }
 .my-rewards .info-box .box-title { margin:10px 10px; }
-.my-rewards .info-box .box-content { padding:0 10px 10px; }
-.my-rewards p.error { display:inline; color:#d91a00; }
-.my-rewards dl { font-size:12px; }
-.my-rewards dl dt { font-weight:bold; font-size:13px; margin-top:10px; }
+.my-rewards .info-box .box-content {  }
+.my-rewards p.error { display:inline; color:#e67921; }
+.my-rewards dl {  }
+.my-rewards dl dt { }
 .my-rewards dl dt span { color:#d12c01; }
 .my-rewards dl dd.last { margin:7px 0 0; }
 .my-rewards .form-list label { width:auto; }

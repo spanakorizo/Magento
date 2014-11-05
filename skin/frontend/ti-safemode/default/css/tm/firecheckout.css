@@ -24,7 +24,7 @@
 
 /* block styles */
 .firecheckout-section {
-    background: #fff url(../../images/tm/firecheckout/sprite.png) repeat-x 0 -102px;
+    background: #fff;
     border: 1px solid #559a13;
     -moz-border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -78,7 +78,7 @@
 }
 .firecheckout-set #shipping-method-reset:hover,
 .firecheckout-set #payment-method-reset:hover { color: #777; }
-.firecheckout-set .block-content { padding:2px; }
+.firecheckout-set .block-content { padding:0 10px; }
 /* input field styles */
 .firecheckout-set input.input-text,
 /*.firecheckout-set select,*/
@@ -251,7 +251,7 @@
 .gift-message-form .fieldset textarea { width: 100%; }
 
 /* shipping & payment methods */
-.firecheckout-set .sp-methods { margin: 0; padding: 0; }
+.firecheckout-set .sp-methods { margin: 0; padding: 0 10px; }
 .firecheckout-set .sp-methods .form-list { padding: 0; }
 .firecheckout-set .sp-methods .form-list li { float: none; width: auto; }
 .firecheckout-set .sp-methods dt { margin: 0 0 5px; }
@@ -300,8 +300,9 @@
     background: #fff; opacity: 0; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); } /* IE fix */
 #firecheckout-spinner { position: absolute; z-index: 10000;
     background: #fff url(../../images/tm/firecheckout/ajax-loader.gif) no-repeat 50% 25px;
-    border: 1px solid #dadada; text-align: center; padding: 60px 0 0 0;
-    width: 200px; height: 30px; margin: -60px 0 0 -100px; font-weight: bold; }
+    background-size:25%;
+    border: 1px solid #559a13; text-align: center; padding: 80px 30px 30px; border-radius:5px;
+    width: 150px; height: 50px; margin: -60px 0 0 -100px; font-weight: bold; }
 
 .firecheckout-set #checkout-payment-method-load { padding: 0 10px; }
 

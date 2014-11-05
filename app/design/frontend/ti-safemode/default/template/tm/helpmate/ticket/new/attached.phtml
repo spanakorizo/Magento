@@ -1,0 +1,71 @@
+
+<?php if (true == Mage::getStoreConfig('helpmate/general/enabledAttached')) :
+    $extensions = Mage::getStoreConfig('helpmate/general/attachedAllowedExtensions');
+?>
+<script type="text/javascript">
+//<![CDATA[
+
+    function showAttache() {
+
+        var hiddenAttaches = $('attachprompt').up()
+            .childElements()
+            .filter(function(el) {
+                if (false === el.hasClassName('input-box')) {
+                    return false;
+                }
+                if (false === el.hasClassName('hidden')) {
+                    return false;
+                }
+                return true;
+            })
+        ;
+        if (hiddenAttaches.length) {
+            var el = hiddenAttaches.first();
+            el.removeClassName('hidden');
+            el.down('[type="file"]').addClassName('validate-extensions');
+
+        } else {
+            $('attachprompt').hide();
+        }
+    }
+
+    function removeFileInputBox(el)
+    {
+        el.up().remove();
+    }
+
+    Validation.add(
+        'validate-extensions',
+        '<?php echo $this->__('Sorry but the current file type is not allowed')?>',
+        function(value){
+            var extensions = /(.<?php echo str_ireplace(",", "|.", $extensions);?>)$/i;
+            if(extensions.test(value)){
+                return true;
+            }
+            return false;
+    });
+
+//]]>
+</script>
+
+<li class="wide one">
+    <label for="title" ><?php echo $this->__('File types allowed: %s', str_ireplace(",", ", ", $extensions)) ?></label>
+    <?php for ($i = 0; $i < 5; $i++) : ?>
+        <div class="input-box hidden">
+            <div class="ti_file_wrap">
+                <span>Upload</span>
+                <input type="file" name="file<?php echo $i;?>" title="<?php echo $this->__('File') ?>" id="file<?php echo $i;?>"/>
+            </div>
+            <a onclick="removeFileInputBox(this);return false;" href="#" class="ti_button ti_button_mini">
+                <span class="icon-remove2"></span><?php echo $this->__('Remove') ?>
+            </a>
+        </div>
+    <?php endfor;?>
+    <span id="attachprompt">
+        
+        <a id="attachafile" href="javascript:showAttache()" class="ti_button ti_button_small ti_altBtn"><span class="icon-attachment"></span>
+            <?php echo $this->__("Attach file") ?>
+        </a>
+    </span>
+</li>
+<?php endif;

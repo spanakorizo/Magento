@@ -47,7 +47,7 @@ class Compandsave_Productselector_CartsController extends Mage_Core_Controller_F
                         
                         $cart->getQuote()->addProduct($product,$qty);
                         //return added product information
-                        $html_response .= "<div class='one_fifth'><a href='" . $product->getProductUrl() . "'><img class='block_center' style='width:75px;height:75px;' src='" . $product->getImageUrl() . "'></img></a></div><div class='two_fifth'><a href='" . $product->getProductUrl() . "'><p class='ti_product_blockName'>" . $product->getName() . "</p></a></div><div class='one_fifth text_center'><p>".$qty."</p></div><div class='one_fifth'><p>$".$qty * $product->getPrice()."</p></div><div class='ti_cms_separator'></div>";
+                        $html_response .= "<div class='one_fifth'><a href='" . $product->getProductUrl() . "'><img class='block_center' style='width:75px;height:75px;' src='" . $product->getImageUrl() . "'></img></a></div><div class='two_fifth'><a href='" . $product->getProductUrl() . "'><p class='ti_product_blockName'>" . $product->getName() . "</p></a></div><div class='two_fifth text_center'><div class='f-half'><p>Qty: ".$qty."</p></div><div class='f-half'><p>$".$qty * $product->getPrice()."</p></div></div><div class='ti_cms_separator'></div>";
 
 
                     } catch (Exception $e){
@@ -77,7 +77,7 @@ class Compandsave_Productselector_CartsController extends Mage_Core_Controller_F
                                                 
                         $cart->addProduct($product,$params);
                          //return added product information
-                        $html_response .= "<div class='one_fifth'><a href='" . $product->getProductUrl() . "'><img class='block_center' style='width:75px;height:75px;' src='" . $product->getImageUrl() . "'></img></a></div><div class='two_fifth'><a href='" . $product->getProductUrl() . "'><p class='ti_product_blockName'>" . $product->getName() . "</p></a></div><div class='one_fifth text_center'><p>".$qty."</p></div><div class='one_fifth'><p>$".$qty * $product->getPrice()."</p></div><div class='ti_cms_separator'></div>";
+                        $html_response .= "<div class='one_fifth'><a href='" . $product->getProductUrl() . "'><img class='block_center' style='width:75px;height:75px;' src='" . $product->getImageUrl() . "'></img></a></div><div class='two_fifth'><a href='" . $product->getProductUrl() . "'><p class='ti_product_blockName'>" . $product->getName() . "</p></a></div><div class='two_fifth text_center'><div class='f-half'><p>Qty: ".$qty."</p></div><div class='f-half'><p>$".$qty * $product->getPrice()."</p></div></div><div class='ti_cms_separator'></div>";
 
 
                         

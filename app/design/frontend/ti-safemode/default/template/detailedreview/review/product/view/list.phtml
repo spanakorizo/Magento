@@ -79,28 +79,7 @@ $_product = Mage::app()->getLayout()->getBlock('product.info')->getProduct();
                     ?>
                     <p itemprop="datePublished" class="date"><?php echo $date->get($dateFormat) ?></p>
                     <p class="date"><?php echo $date->get($timeFormat); if(!isset($clientTimezone)) {echo ' (GMT)';}?></p>
-                    <div class="images-box">
-                        <?php if ( $helperDetailedreview->checkFieldAvailable('image') ):
-                            $images = explode(",",$_review->getImage());
-                            foreach($images as $img):
-                                if ( isset($newImageUrl) ) unset ($newImageUrl);
-                                if ( $image = str_replace('\\','/',$img) ) {
-                                    $image = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $image;
-                                    $newImageUrl = $this->helper('detailedreview')->getResizedImage($image,100,100);
-                                }
-                                if ( isset($newImageUrl) && $newImageUrl ): ?>
-                                    <div class="image-review">
-                                        <hr>
-                                        <p class="date">Uploaded pics:</p>
-                                        <a class="jqueryLightbox" href="<?php echo  $image;?>" >
-                                            <img src="<?php echo $newImageUrl;?>" alt=""/>
-                                        </a>
-                                        <div>click for full-size</div>
-                                    </div>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </div>
+                    
 
                     <?php $isAllowAboutYou = $helperDetailedreview->checkFieldAvailable('about_you'); ?>
                     <?php if ( $isAllowAboutYou || $ownership ): ?>
@@ -169,6 +148,7 @@ $_product = Mage::app()->getLayout()->getBlock('product.info')->getProduct();
                     </div>
                     <?php endif;?>
                     <div class="review-wrapper">
+                        <p>Overall review:</p>
                         <ul>
                             <?php if ( $detail = $_review->getDetail() ):?>
                             <li><div itemprop="description" class="value-review-attr"><?php echo nl2br($detail) ?></div></li>
@@ -210,15 +190,37 @@ $_product = Mage::app()->getLayout()->getBlock('product.info')->getProduct();
 
 
                         </ul>
+                        <div class="images-box">
+                        <?php if ( $helperDetailedreview->checkFieldAvailable('image') ):
+                            $images = explode(",",$_review->getImage());
+                            foreach($images as $img):
+                                if ( isset($newImageUrl) ) unset ($newImageUrl);
+                                if ( $image = str_replace('\\','/',$img) ) {
+                                    $image = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . $image;
+                                    $newImageUrl = $this->helper('detailedreview')->getResizedImage($image,100,100);
+                                }
+                                if ( isset($newImageUrl) && $newImageUrl ): ?>
+                                    <div class="image-review">
+                                        <hr>
+                                        <p class="date">Uploaded pics:</p>
+                                        <a class="jqueryLightbox" href="<?php echo  $image;?>" >
+                                            <img src="<?php echo $newImageUrl;?>" alt=""/>
+                                        </a>
+                                        <div>click for full-size</div>
+                                    </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    </div>
                     </div>
                     <div class="clearer"></div>
-
+                    <div class="ti_cms_separator"></div>
                     <?php if(Mage::getStoreConfig('detailedreview/social_share_optios/recommended_product') && $_review->getRecommendTo()): ?>
                     <div class="recommend">
-                        <?php echo '<span>' .$this->__('Would you recommend this product to a friend?') .'</span> '. $_review->getRecommendTo(); ?>
+                        <?php echo '<strong>' .$this->__('Would you recommend this product to a friend?') .'</strong> '. $_review->getRecommendTo(); ?>
                     </div>
                     <?php endif; ?>
-
+                    <br>
                     <div class="helpful-block">
                         <form class="helpful-form" action="<?php echo $this->getUrl('detailedreview/helpful/vote'); ?>" method="post" >
                             <div>
@@ -240,7 +242,7 @@ $_product = Mage::app()->getLayout()->getBlock('product.info')->getProduct();
         <!--                            <button onclick="return false;" type="button" name="is_helpful" value="0">--><?php //echo $this->__('no') ?><!--</button>-->
 
         <!--                        --><?php //else:?>
-                                        <span class="helpful-question"><?php echo $this->__('Was this review helpful?') ?></span><br>
+                                        <strong class="helpful-question"><?php echo $this->__('Was this review helpful?') ?></strong><br>
                                         <a class="review-vote-rating helpful-btn"  title="1" href="#" onclick="return false;"><span><?php echo $this->__('Helpful') ?></span><span class="helpful-qty voting-qty"><?php echo $_review->getCountHelpful() ?></span></a>
                                         <a class="review-vote-rating unhelpful-btn" title="0" href="#" onclick="return false;"><span><?php echo $this->__('Unhelpful') ?></span><span class="unhelpful-qty voting-qty"><?php echo $_review->getCountUnhelpful() ?></span></a>
         <!--                        --><?php //endif;?>
@@ -253,7 +255,7 @@ $_product = Mage::app()->getLayout()->getBlock('product.info')->getProduct();
                     <?php if(Mage::getStoreConfig('detailedreview/social_share_optios/share_review_to_facebook')): ?>
                          <?php $image = Mage::getBaseUrl(Mage_Core_Model_Store::URL_TYPE_MEDIA) . 'catalog/product' . $_product->getSmallImage()?>
                          <div class="share-fb">
-                            <a onClick="window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]=<?php echo urlencode($_product->getName()); ?>&amp;p[summary]=<?php echo urlencode($_review->getDetail()); ?>&amp;p[url]=<?php echo urlencode(Mage::helper("core/url")->getCurrentUrl().'#rw_'.$_review->getId()); ?>&amp;p[images][0]=<?php echo urlencode($image); ?>','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)">Comment on this review</a>
+                            <a onClick="window.open('http://www.facebook.com/sharer.php?s=100&amp;p[title]=<?php echo urlencode($_product->getName()); ?>&amp;p[summary]=<?php echo urlencode($_review->getDetail()); ?>&amp;p[url]=<?php echo urlencode(Mage::helper("core/url")->getCurrentUrl().'#rw_'.$_review->getId()); ?>&amp;p[images][0]=<?php echo urlencode($image); ?>','sharer','toolbar=0,status=0,width=700,height=400');" href="javascript: void(0)">Share</a>
                         </div>
                      <?php endif; ?>
 
@@ -268,7 +270,14 @@ $_product = Mage::app()->getLayout()->getBlock('product.info')->getProduct();
         </div>
                     <?php endforeach; ?>
     </div>
+<script type="text/javascript">// <![CDATA[
+jQuery(function(){
 
+    jQuery("#container").masonry(); //this tweak is a fix on chrome and safari browser
+});
+
+
+// ]]></script>
     <div class="clearer"></div>
     <?php echo $this->getChildHtml('toolbar') ?>
     <?php else:
@@ -294,11 +303,3 @@ endif;
 </div>
 
 
-<script type="text/javascript">// <![CDATA[
-jQuery(function(){
-
-    jQuery("#container").masonry(); //this tweak is a fix on chrome and safari browser
-});
-
-
-// ]]></script>
