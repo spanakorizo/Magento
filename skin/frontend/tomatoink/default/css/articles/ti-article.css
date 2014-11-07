@@ -294,66 +294,6 @@ padding:.5%;
 /* ----------->> 5. Text <<<----------*/
 /* -----------------------------------*/
 
-/*.ti-cms-articleContent_area, .ti-cms-articleContent_area p, 
-.ti-cms-articleContent_area h1, .ti-cms-articleContent_area h2, 
-.ti-cms-articleContent_area h3, .ti-cms-articleContent_area a{
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-.ti-cms-articleContent_area h1, .ti-cms-articleContent_area h2,
-.ti-cms-articleContent_area h3{
-	color:#4ca62e; 
-	margin:1.5em 0; 
-	font-weight:bold;
-}
-
-.ti-cms-articleContent_area h1{
-	font-size:2em;
-}
-
-.ti-cms-articleContent_area h2{
-	font-size:1.7em;
-}
-
-.ti-cms-articleContent_area h3{
-	font-size:1.2em;
-	color:#3f3a39;
-}
-
-.ti-cms-articleContent_area p{
-	margin: 0 0 1.5em 0;
-	padding:0;
-    line-height:1.5em;
-	font-size:12px;
-	color:#555555;
-}
-
-.ti-cms-small-font {
-	font-size:0.9em;
-}
-
-.ti-cms-articleContent_area .ti-cms-heading1{
-	color:#4ca62e;
-	font-size:1.5em;
-}
-
-.ti-cms-articleContent_area .ti-cms-heading2{
-	color:#3f3a39;
-	font-size:1.2em;
-}
-
-.ti-cms-articleContent_area ul, .ti-cms-articleContent_area ol{
-	margin:1.5em 0;
-	}
-	
-.ti-cms-articleContent_area ul li {
-	padding-bottom:4px; 
-	list-style:disc;
-	}
-
-.ti-cms-articleContent_area ul li {
-	margin-left:20px;
-}*/
 .ti-cms-articleContent_area .ti_required-entry {
 	margin-left:5px;
 }	
@@ -415,80 +355,11 @@ padding:.5%;
 
 /* --Buttons--*/
 
-/*.ti-cms-articleContent_area input[type=submit],
-.ti-cms-articleContent_area input[type=submit]:link,
-.ti-cms-articleContent_area a.btn {
-	border:1px solid #34740e;
-	border-radius:20px;
-	-moz-border-radius:20px;
-	-webkit-border-radius:20px;
-	font-weight:bold;
-	color:#fff;
-	text-shadow: 1px 1px rgba(0, 0, 0,.5);
-	padding: 5px; 
-	text-decoration:none; 
-	display:inline-block;
-	text-shadow: -1px -1px 0 rgba(0,0,0,0.3);
-	background:#4ca62e;
- 	background-image: -webkit-gradient(linear, left top, left bottom, from(#4ca62e), to(#008c00));
- 	background-image: -webkit-linear-gradient(top, #4ca62e, #008c00);
- 	background-image: -moz-linear-gradient(top, #4ca62e, #008c00);
- 	background-image: -ms-linear-gradient(top, #4ca62e, #008c00);
- 	background-image: -o-linear-gradient(top, #4ca62e, #008c00);
- 	background-image: linear-gradient(to bottom, #4ca62e, #008c00);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#4ca62e, endColorstr=#008c00);
- 	transition:.6s;
- 	height:auto;
-}
-.ti-cms-articleContent_area input[type=submit]:hover,
-.ti-cms-articleContent_area input[type=submit]:focus,
-.ti-cms-articleContent_area input[type=submit]:active,
-.ti-cms-articleContent_area a.btn:hover,
-.ti-cms-articleContent_area a.btn:focus,
-.ti-cms-articleContent_area a.btn:active {
-	border:1px solid #224b09;
- 	background-color: #36780f; 
- 	background-image: -webkit-gradient(linear, left top, left bottom, from(#36780f), to(#005900));
- 	background-image: -webkit-linear-gradient(top, #36780f, #005900);
- 	background-image: -moz-linear-gradient(top, #36780f, #005900);
- 	background-image: -ms-linear-gradient(top, #36780f, #005900);
- 	background-image: -o-linear-gradient(top, #36780f, #005900);
- 	background-image: linear-gradient(to bottom, #36780f, #005900);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#36780f, endColorstr=#005900);
-}
-
-.ti-cms-articleContent_area p.more, 
-.ti-cms-articleContent_area a.more, 
-.ti-cms-articleContent_area h1.more,
-.ti-cms-articleContent_area h2.more,
-.ti-cms-articleContent_area h3.more, 
-.ti-cms-articleContent_area ul.more {
-    display:none;
-}
-*/
-.ti-cms-articleContent_area .readmorebtn {
-    cursor:pointer;
-}
-
 .ti_articleContent_area input {
 	width:100%;
 }
 /* --Inputs--*/
 
-/*.ti-cms-articleContent_area input,
-.ti-cms-articleContent_area textarea,
-.ti-cms-articleContent_area select{
-	border: 1px solid #CCC;
-	border-radius: 3px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.14) inset;
-	color: #666;
-}
-
-.ti-cms-articleContent_area select,
-.ti-cms-articleContent_area input{
-	height:25px;
-}
-*/
 
 .ti-cms-articleContent_area textarea{
 	resize:none;
@@ -509,24 +380,6 @@ padding:.5%;
 .ti-cms-inputFull {
 		width:98%;
 	}
-/*.ti-cms-articleContent_area .textArea {
-	width:100%;
-}*/
-/* --Dividers--*/
-/*.ti-cms-divider {
-	border-top: 2px dotted #cccccc;
-	border-bottom: 2px dotted #dddddd;
-	clear:both;
-	margin: .5em auto;
-	height:0;
-}
-
-.ti-cms-articleSeparator{
-	height:1px; background:#ffffff;
-	border-top:1px solid #dddddd;
-	width:100%;
-	margin:15px 0;
-}*/
 
 /* --Tables--*/
 
@@ -572,105 +425,6 @@ padding:.5%;
 	background:url(../../images/ti-assets/tomato.png) no-repeat;
 }
 
-/* --Icons--*/
-
-/*
-a.ti-cms-iconBlock{
-  display:inline-block;
-  text-align:center;
-  margin:0 1em;
-}
-
-.ti-cms-icon{
-	display:inline-block;
-	background:url(../../images/ti-assets/ti-icons.png) transparent no-repeat left top;
-}
-
-.ti-cms-icon.ti_generalIcon{
-	width:48px;
-	height:48px;
-	margin-right:10px;
-}
-
-.ti-cms-icon.ti_socialIcon{
-	width:41px;
-	height:41px;
-}
-
-#ti_tomato.ti-cms-icon{
-	background-position:-570px -10px;
-	width:53px;
-	height:61px;
-}
-
-#ti_brush.ti-cms-icon{
-	background-position:-16px -17px;
-}
-
-#ti_tag.ti-cms-icon{
-	background-position:-96px -19px;
-}
-
-#ti_note.ti-cms-icon{
-	background-position:-179px -15px;
-}
-
-#ti_truck.ti-cms-icon{
-	background-position:-256px -24px;
-}
-
-#ti_money.ti-cms-icon{
-	background-position:-340px -15px;
-}
-
-#ti_support.ti-cms-icon{
-	background-position:-420px -16px;
-}
-
-#ti_checkmark.ti-cms-icon{
-	background-position:-585px -107px;
-}
-
-#ti_like.ti-cms-icon{
-	background-position:-497px -19px;
-}
-
-#ti_paint.ti-cms-icon{
-	background-position:-655px -16px;
-}
-
-#ti_facebook.ti-cms-icon{
-	background-position:-18px -99px;
-}
-
-#ti_twitter.ti-cms-icon{
-	background-position:-98px -99px;
-}
-
-#ti_linkedin.ti-cms-icon{
-	background-position:-178px -99px;
-}
-
-#ti_google.ti-cms-icon{
-	background-position:-259px -99px;
-}
-
-#ti_pinterest.ti-cms-icon{
-	background-position:-340px -99px;
-}
-
-#ti_youtube.ti-cms-icon{
-	background-position:-419px -99px;
-}
-
-#ti_blogger.ti-cms-icon{
-	background-position:-498px -99px;
-}
-
-.ti-cms-icon.ti_socialIcon:hover{
-	background-position: inherit -179px !important;
-}
-*/
 /* --Resizable images --*/
 
 .ti-cms-pictureFirst{
@@ -762,12 +516,6 @@ a.ti-cms-iconBlock{
 /* -----------------------------------*/
 
 
-/* iPhone 5 (portrait & landscape)----------- */
-@media only screen and (min-device-width : 320px) and (max-device-width : 568px){
-
-
-}
-
 @media only screen and (max-width : 568px), @media only screen and (max-device-width : 568px){
 	
 	.ti-cms-hide568 {
@@ -784,6 +532,10 @@ a.ti-cms-iconBlock{
 
 }
 
+@media only screen and (max-width: 999px) and (min-width: 768px) {
+
+}
+
 @media only screen and (max-width : 767px), @media only screen and (max-device-width : 767px){
 
 	.ti-cms-height767 {
@@ -797,14 +549,4 @@ a.ti-cms-iconBlock{
 		margin-bottom:0 !important;
 	} 
 
-}
-
-@media only screen and (min-width : 768px) and (max-width : 1024px) {
-
-
-}
-
-@media only screen and (min-width : 320px) and (max-width : 568px){
-
-	
 }

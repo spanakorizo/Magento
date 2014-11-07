@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<config>
+
+    <modules>
+
+        <Compandsave_Promotemplate>
+
+            <active>true</active>
+
+            <codePool>local</codePool>
+
+        </Compandsave_Promotemplate>
+
+    </modules>
+
+</config>

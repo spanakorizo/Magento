@@ -59,17 +59,17 @@
     <input type="radio" id="regular" name="update_freq" value="0">
     <label for="regular">
         <div class="ti-radio"></div>
-        <span>Once per week</span>
+        <span>3-4 times per month</span>
     </label><br>
     <input type="radio" id="once" name="update_freq" value="1">
     <label for="once">
         <div class="ti-radio"></div>
-        <span>Once per Month</span>
+        <span>Once a Month</span>
     </label><br>
     <input type="radio" id="twice" name="update_freq" value="2">
     <label for="twice">
         <div class="ti-radio"></div>
-        <span>Twice per Month</span>
+        <span>Twice a Month</span>
     </label><br>
     <button type="button" onclick="window.history.go(-1);">Back</button>&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
 
@@ -102,7 +102,7 @@
 
 display_freq("<?php echo $customerdata['subscriber_freq']; ?>");
 function display_freq(id) {
-    var text_arr = ["once per week.", "once per month.", "twice per month."];
+    var text_arr = ["3 to 4 times per month.", "once per month.", "twice per month."];
     if (id > -1 && id < 3) {
     document.getElementById('frequency_message').innerHTML = "You are currently receiving emails " + text_arr[id];
     var elements = document.getElementsByName('update_freq');

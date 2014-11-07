@@ -1,18 +1,27 @@
-<div id="ti_home_centerMain">	
-	<div class="one_half">
+<div id="ti_home_centerMain" class="ti_cms_flex_gridContain">	
+	<div class="one_half ti_cms_flex_grid">
 		<div class="ti_block_inner">
 			<h2 class="ti_headerH1 white">Sign up for deals:</h2>
 			<form action="<?php echo $this->getUrl(''); ?>newsletter/subscriber/new/" method="POST">
-				<label class="ti_cms_labelHide" for="home_email"><span>Your email address</span></label> <input id="home_email" class="one" name = "email" type="email" placeholder="Enter email address"/> 
-				<label class="ti_cms_labelHide" for="home_name"><span>Your first name</span></label> 
-				<input id="home_name" class="one" type="text" name="subscriber_firstname" placeholder="Enter your name" /> <input class="ti_altBtn" type="submit" value="Sign up" />
+                <div class="f-half">
+                    <div class="one">
+        				<label class="ti_cms_labelHide" for="home_email"><span>Email</span></label> <input id="home_email" class="one" name = "email" type="email" placeholder="Enter your email"/> 
+                    </div>
+                </div>
+                <div class="f-half">
+                    <div class="one">
+        				<label class="ti_cms_labelHide" for="home_name"><span>First name</span></label> 
+        				<input id="home_name" class="one" type="text" name="subscriber_firstname" placeholder="Enter your name" />
+                    </div>
+                </div>
+                <input class="ti_altBtn" type="submit" value="Sign up" />
 			</form>
 		</div>
 	</div>
-	<div class="one_half">
+	<div class="one_half ti_cms_flex_grid">
 		<div class="ti_block_inner">	
 		<h2 class="ti_headerH1 white">Search for ink:</h2>
-				
+			<div class="one">
 				<div class="ti_select_barContainer btcf">    
 
 					<div id="ti_banner_ajax_loading_ink"><img src="<?php echo $this->getSkinUrl('images/ti_loading_small.gif') ?>"/></div>
@@ -51,6 +60,7 @@
                         <option value="0">3. Choose Model</option>
                     </select>
 				</div>
+            </div>
 		</div>
 	</div>
 </div>

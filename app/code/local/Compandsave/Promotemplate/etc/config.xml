@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <modules>
+            <Compandsave_Promotemplate>
+                <version>0.1.0</version>
+            </Compandsave_Promotemplate>
+        </modules>
+    </global>
+    <frontend>
+        <routers>
+            <!-- the <helloworld> tagname appears to be arbitrary, but by
+            convention is should match the frontName tag below-->
+            <Promotemplate>
+                <use>standard</use>
+                <args>
+                    <module>Compandsave_Promotemplate</module>
+                    <frontName>promo-template</frontName>
+                </args>
+            </Promotemplate>
+        </routers>
+    </frontend>
+        <global>
+        <blocks>
+            <Promotemplate>
+                <class>Compandsave_Promotemplate_Block</class>
+            </Promotemplate>
+        </blocks>
+        <helpers>
+            <Promotemplate>
+                <class>Compandsave_Promotemplate_Helper</class>
+            </Promotemplate>
+        </helpers>
+    </global>
+<!-- ... -->
+</config>
+
