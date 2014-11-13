@@ -1,0 +1,138 @@
+
+
+
+
+
+
+<?php 
+
+$email = $_POST["email"];
+if ($email != null && $email != "" && filter_var($email, FILTER_VALIDATE_EMAIL)) :
+
+    //Mage::getModel('newsletter/subscriber')->loadByEmail($email)->unsubscribe();
+    $subscriber = Mage::getModel('newsletter/subscriber')->loadByEmail($email);
+    if ($subscriber->getSubscriberEmail()) {
+        echo $email . " exsits<br>"; 
+        $subscriber->unsubscribe();
+    }
+
+    else {
+        echo $email . " does not exsits.<br>";
+    }
+
+    ?>
+    <p>Sorry to see you go. <?php echo $email; ?></p>
+    <?php
+
+else: 
+    //echo $email . " " . filter_var($email, FILTER_VALIDATE_EMAIL) . "LALALALLA<br>"; 
+//echo Mage::getModel('newsletter/subscriber')->loadByEmail('yiyangh@compandsave.com')->getUnsubscriptionLink();
+?>
+<p id="success_message"></p>
+Actually, I still want to receive email. 
+<div id="ti_update_form">
+    <p id="success_message" class="altTxt"></p>
+    <input type="radio" id="once" name="update_freq" value="1">
+    <label for="once">
+        <div class="ti-radio"></div>
+        <span>Once a Month</span>
+    </label><br>
+    <input type="radio" id="twice" name="update_freq" value="2">
+    <label for="twice">
+        <div class="ti-radio"></div>
+        <span>Twice a Month</span>
+    </label><br>
+    <p id = "error_message"></p>
+    <p>E-mail Address: <input id="ti_change_fre" type="text"></p>
+    <button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
+
+</div>
+
+
+I want to unsubscribe. 
+
+<div class="ti_cms_eight ti_cms_centerTxt ti_cms_center ti_cms_borderAll ti_cms_bgGrey">
+    <form id="ti_unsub_form" method="POST" action = "<?php echo $this->getUrl('') ?>Mail_Subscribe/unsubscribe/">
+      <h2>Please unsubscribe me, because:</h2>
+      <ul>
+        <li><input name="reason" value="I no longer wish to receive these emails" type="radio" checked/>I no longer wish to receive these emails</li>
+        <li><input name="reason" value="The emails are no longer for content that I originally signed up for" type="radio"/>The emails are no longer for content that I originally signed up for</li>
+        <li><input name="reason" value="I never gave my permission to receive these emails" type="radio"/>I never gave my permission to receive these emails</li>
+        <li><input name="reason" value="I cannot properly view those emails on my mobile device" type="radio"/>I cannot properly view those emails on my mobile device</li>
+        <li><input name="reason" value="5" type="radio"/>Other: <input id="otherReason_input" class="otherReason" value="other reason here..." onfocus="if(this.value=='other reason here...')this.value='';" onblur="if(this.value=='')this.value='other reason here...';" type="text"/></li>
+      </ul>
+      <p id="unsuccess_text_unsub"></p>
+      <p id="ti_unsub_errormessage"></p>
+      <p>E-mail Address: <input id="ti_unsub_text" type="text" name="email"></p>
+      <p><input id="ti_unsub_button" type="button" type="button" value="Remove me from the list"></p>
+    </form>
+    </div>
+
+
+<script type="text/javascript">
+    var email = getUrlVars()['email'];
+    if (validateEmail(email)) {
+        jQuery("#ti_unsub_text").val(email);
+        jQuery("#ti_change_fre").val(email);
+
+    }
+        
+    jQuery("#ti_update_submit").click(function() {
+
+        var emailaddress = jQuery("#ti_change_fre").val();
+        console.log(emailaddress);
+        if (validateEmail(emailaddress)) {
+        var ti_update_freq  = jQuery('input[name=update_freq]:checked').val();
+
+        var ti_update_url   = "<?php echo $this->getUrl(''); ?>newsletter/subscriber/new/";
+        ti_update_url = ti_update_url.replace("http:", "");
+
+        var formdata = { 
+        email:emailaddress, 
+        subscriber_freq: ti_update_freq
+        };
+        jQuery.ajax({
+            url : ti_update_url,
+            type: "POST",
+            data : formdata,
+            success: function(data, textStatus, jqXHR) {
+    
+
+            document.getElementById('error_message').innerHTML = "You've successfully updated your email frequency!";
+
+
+
+            },
+            error: function(data, textStatus, jqXHR) {
+                console.log(data.error);
+                console.log(textStatus);
+                console.log(jqXHR);
+            }
+
+
+        });
+
+        }
+        else {
+            jQuery("#error_message").html("sorry, your email address is not valid");
+        }
+    });
+
+    jQuery("#ti_unsub_button").click(function() {
+        var emailaddress = jQuery("#ti_unsub_text").val();
+        console.log(emailaddress);
+
+        if (validateEmail(emailaddress)) {
+            jQuery("#ti_unsub_form").submit();
+        }
+        else {
+            jQuery("#ti_unsub_errormessage").html("sorry, your email address is not valid");
+        }
+
+
+    });
+
+</script>
+
+
+<?php endif; ?>

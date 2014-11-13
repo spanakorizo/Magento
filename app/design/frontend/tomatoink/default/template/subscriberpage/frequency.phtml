@@ -1,0 +1,28 @@
+<?php 
+//require_once('/var/www/html/staging_magentohome/stag_EE_1.14.0.1/app/Mage.php');
+    $emailaddress = $this->getEmail();
+   $subscribers = Mage::getModel('newsletter/subscriber')->getCollection()
+    ->addFieldToFilter('subscriber_email', $emailaddress)
+    ->addFieldToSelect('*');
+    foreach ($subscribers as $subscriber) {
+
+    $frequency = $subscriber->getSubscriberFreq();
+
+    if ( $frequency === 0 || $frequency === "") {
+        $email_group = "General Email List.";
+    }
+
+    else if ($frequency == 1) {
+        $email_group = "Once a month Email List.";
+    }
+    else if ($frequency == 2) {
+        $email_group = "Twice a month Email List.";
+    }
+    else 
+        $email_group = "Email Newsletter";
+
+    echo $email_group;
+    break;
+    }
+
+?>

@@ -1,10 +1,51 @@
 <!-- https://www.866ink.com/magentoEE/index.php/newsletter/subscriber/new/ !-->
+
+<?php 
+    $email = $_POST['email'];
+
+    if ($_POST['firstname'] != null) $firstname = $_POST['firstname'];
+    else $firstname = "";
+
+    if ($_POST['lastname'] != null) $lastname = $_POST['lastname'];
+    else $lastname = "";
+
+    if ($_POST['update_freq'] != null) $update_freq = $_POST['update_freq'];
+    else $update_freq = "";
+
+    if ($email != null) {
+         $subscribers = Mage::getModel('newsletter/subscriber')->getCollection()
+        ->addFieldToFilter('subscriber_email', $email);
+        foreach ($subscribers as $subscriber) {
+            if ($firstname != "")
+            $subscriber->setSubscriberFname($firstname);
+            if ($lastname != "")
+            $subscriber->setSubscriberLname($lastname);
+            if ($update_freq != "")
+                $subscriber->setSubscriberFreq($update_freq);
+
+            $subscriber->save();
+
+            break;
+
+
+        }
+
+        echo "<style type='text/css'>#ti_subpage_form {display:none;} #ti_update_message_success {display:block !important;} </style>";
+        echo "<script type='text/javascript'>setTimeout(function(){window.location = " . $this->getUrl('') . "},5000)</script>";
+    }
+
+?>
+
 <style type="text/css">
 #ti_subpage_message {
     display:none;
 }
 
 #ti_update_form {
+    display: none;
+}
+
+#ti_update_message_success {
     display: none;
 }
 
@@ -19,6 +60,8 @@
     </div>
     <div class="two_third">
         <h2 id="ti_subpage_message">Thank you for subscribing!</h2>
+        <div id="ti_update_message_success"><h2>Thank you for subscribing!</h2>
+        <p>After 5 seconds, you will be redirect to home page, or you can <a href='" . $this->getUrl('') . "'>click here</a></p></div>
         <form action="" method="post" id="ti_subpage_form">
             <div class="form-subscribe">
                 <div class="form-subscribe-header">
@@ -36,14 +79,21 @@
 
         <!-- Update section !-->
         <div id="ti_update_form">
-            <p>Do you want to update your subscription information? </p>
-            <input id="ti_update_fname" type="text" placeholder="<?php echo $this->__('Enter your first name') ?>"><label for="ti_update_fname" class="ti_cms_labelHide"><span>Enter your first name</span></label><br>
-            <input id="ti_update_lname" type="text" placeholder="<?php echo $this->__('Enter your last name') ?>"><label for="ti_update_lname" class="ti_cms_labelHide"><span>Enter your last name</span></label><br>
-            <input type="radio" id="update_subscribe_3-4" name="update_freq" value="0" checked="checked"><label for="update_subscribe_3-4"><div class="ti-radio"></div><span>3-4 times per month</span></label><br>
-            <input type="radio" id="update_subscribe_2" name="update_freq" value="2"><label for="update_subscribe_2"><div class="ti-radio"></div><span>Twice a Month</span></label><br>
-            <input type="radio" id="update_subscribe_1" name="update_freq" value="1"><label for="update_subscribe_1"><div class="ti-radio"></div><span>Once a Month</span></label>
-            <br>
-            <input type="button" value="Back" onclick="window.history.go(-1);">&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
+            <form id="update_form" method="post" action="<?php echo $this->getUrl(''); ?>Mail_Subscribe/">
+                <p>Do you want to update your subscription information? </p>
+                <div id="ti_update_message" style="display:none">
+                    <h2 class="validation-advice"><?php echo $this->__('Please fill in all the information') ?></h2>
+                </div>
+                <input type="hidden" name="email" id="update_email_address" value="">
+                <input id="ti_update_fname" name="firstname"type="text" placeholder="<?php echo $this->__('Enter your first name') ?>"><label for="ti_update_fname" class="ti_cms_labelHide"><span>Enter your first name</span></label>
+                <br>
+                <input id="ti_update_lname" name="lastname" type="text" placeholder="<?php echo $this->__('Enter your last name') ?>"><label for="ti_update_lname" class="ti_cms_labelHide"><span>Enter your last name</span></label><br>
+                <input type="radio" id="update_subscribe_3-4" name="update_freq" value="0" checked="checked"><label for="update_subscribe_3-4"><div class="ti-radio"></div><span>3-4 times per month</span></label><br>
+                <input type="radio" id="update_subscribe_2" name="update_freq" value="2"><label for="update_subscribe_2"><div class="ti-radio"></div><span>Twice a Month</span></label><br>
+                <input type="radio" id="update_subscribe_1" name="update_freq" value="1"><label for="update_subscribe_1"><div class="ti-radio"></div><span>Once a Month</span></label>
+                <br>
+                <input type="button" value="Back" onclick="window.history.go(-1);">&nbsp;<button type="button" class="button" id="ti_update_submit"><span><span><?php echo $this->__('Update') ?></span></span></button><br>
+            </form>
         </div>
     </div>
 </div>
@@ -59,9 +109,12 @@
 var ti_subpage_url   = "<?php echo $this->getUrl(''); ?>newsletter/subscriber/new/";
 var ti_update_email = decodeURIComponent(getUrlVars()["email"]);
 console.log(ti_update_email);
-if (ti_update_email != "undefined" && ti_update_email != "") {
-    jQuery('#ti_subscribe_loading').show();
 
+if (ti_update_email != "undefined" && ti_update_email != "" && validateEmail(ti_update_email)) {
+
+
+    jQuery('#ti_subscribe_loading').show();
+    jQuery('#update_email_address').val(ti_update_email);
     jQuery('#ti_subpage_form').hide();
     jQuery.ajax({
         url : ti_subpage_url,
@@ -72,7 +125,7 @@ if (ti_update_email != "undefined" && ti_update_email != "") {
             jQuery('#ti_subpage_message').show('slow');
             jQuery('#ti_update_form').show('slow');
 
- jQuery('#ti_subscribe_loading').hide();
+            jQuery('#ti_subscribe_loading').hide();
 
         }
 
@@ -85,27 +138,14 @@ jQuery('#ti_update_submit').click(function() {
     var ti_update_lname = jQuery('#ti_update_lname').val();
     var ti_update_freq  = jQuery('input[name=update_freq]:checked').val();
 
-    var formdata = { 
-        email:ti_update_email, 
-        subscriber_firstname: ti_update_fname, 
-        subscriber_lastname: ti_update_lname, 
-        subscriber_freq: ti_update_freq
-    };
- jQuery('#ti_subscribe_loading').show();
-jQuery.ajax({
-    url : ti_subpage_url,
-    type: "POST",
-    data : formdata,
-    success: function(data, textStatus, jqXHR) {
-        jQuery('#ti_subpage_message').html('Thank you for updating!');
-        jQuery('#ti_subpage_form').hide();
-        jQuery('#ti_update_form').hide();
-         jQuery('#ti_subscribe_loading').hide();
+    if (ti_update_fname == "" || ti_update_lname == "" || ti_update_freq == null)
+        jQuery("#ti_update_message").show();
+    else 
+        jQuery("#update_form").submit();
 
 
-    }
 });
-});
+
 
 
 
