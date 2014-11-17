@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <modules>
+            <Compandsave_Campaign>
+                <version>0.1.0</version>
+            </Compandsave_Campaign>
+        </modules>
+    </global>
+    <frontend>
+        <routers>
+            <!-- the <helloworld> tagname appears to be arbitrary, but by
+            convention is should match the frontName tag below-->
+            <Campaigns>
+                <use>standard</use>
+                <args>
+                    <module>Compandsave_Campaign</module>
+                    <frontName>campaign</frontName>
+                </args>
+            </Campaigns>
+        </routers>
+    </frontend>
+        <global>
+        <blocks>
+            <Campaignblock>
+                <class>Compandsave_Campaign_Block</class>
+            </Campaignblock>
+        </blocks>
+        <helpers>
+            <Campaignhelper>
+                <class>Compandsave_Campaign_Helper</class>
+            </Campaignhelper>
+        </helpers>
+    </global>
+<!-- ... -->
+</config>
+

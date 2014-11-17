@@ -20,28 +20,29 @@
 
 <script type="text/javascript">document.cookie ="couponcode=CODE; expires=Sun, 7 September 2014 23:59:59 UTC; path=/";</script>
 
-<div class="ti-cms-articleContent_area ti-qqq-contain">
-	<div class="ti-cms-row">
-		<div class="ti-cms-twelve">
+<div class="container-fluid ti-cms-articleContent_area ti-qqq-contain">
+	<div class="row">
+		<div class="col-xs-12">
 			<h1>Only use one H1 tag.</h1>
 			<h2>Here is a subhead! This is a 12 column layout. This row spans all 12 columns. We swears on the precious.</h2>
 			<p>This is our barebones search bar. Stick it where you want and style away!</p>
 			<div class="ti_input_bar">
 				<form id="nxt-ac-form" onsubmit="return submitSearch5();" action="http://search.tomatoink.com/search" method="get" name="form5">
 					<input type="text" name="keywords" autocomplete="off" placeholder="Type your printer or ink model..." id="search_v5_5" onkeypress="return handleEnter5(this,event)">
-					<input type="submit" border="0" onclick="submitSearch5();" value="Search" name="imageField" class="ti-cms-greenBtn">
+					<input type="submit" border="0" onclick="submitSearch5();" value="Search" name="imageField">
 				</form>
 			</div>
-			<p>Check our style guide for other built in features: <a class="ti_button ti_altBtn" href="<?php echo $this->getUrl('style-guide');?>" target="_blank">Style Guide</a></p>
+			<ul class="ti_bullet">
+				<li>We use the Bootstrap grid system. Read up on how to use it here: <a class="ti_button ti_altBtn" href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grid</a></li>
+				<li>Check our style guide for other built in features: <a class="ti_button ti_altBtn" href="<?php echo $this->getUrl('style-guide');?>" target="_blank">Style Guide</a></li>
+			</ul>
 		</div>
 	</div>
-	<div class="ti-cms-row">
-		<div class="ti-cms-six firstCol">
-			<h3>The first column needs the class "firstCol."</h3>
-			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur malesuada dui vitae suscipit. Vivamus sollicitudin vulputate nibh tempor varius. Donec sit amet est lacinia, cursus orci scelerisque, mattis lectus. Cras vulputate nisi nec neque tincidunt sagittis laoreet et nunc. Suspendisse mollis nec eros id mattis. Praesent nec neque a turpis bibendum ultrices. Aenean id enim felis.</p>
+	<div class="row">
+		<div class="col-xs-12 col-sm-6 col-md-8">
+			<p>Also included in the Bootrap css are <a class="altTxt" href="http://getbootstrap.com/components/#jumbotron" target="_blank">Jumbotrons</a>, <a class="altTxt" href="http://getbootstrap.com/components/#wells" target="_blank">Wells</a>, and <a class="altTxt" href="http://getbootstrap.com/components/#responsive-embed" target="_blank">Responsive Embeds</a>.</p>
 		</div>
-		<div class="ti-cms-six lastCol">
-			<h3>The last column needs the class "lastCol."</h3>
+		<div class="col-xs-12 col-sm-6 col-md-4">
 			<ul class="ti_bullet">
 				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
 				<li>Phasellus quis nisl egestas, placerat libero sed, mollis augue.</li>
@@ -51,12 +52,11 @@
 			</ul>
 		</div>
 	</div>
-	<div class="ti-cms-row">
-		<div class="ti-cms-four firstCol">
+	<div class="row">
+		<div class="col-md-4">
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur malesuada dui vitae suscipit. Vivamus sollicitudin vulputate nibh tempor varius. Donec sit amet est lacinia, cursus orci scelerisque, mattis lectus. Cras vulputate nisi nec neque tincidunt sagittis laoreet et nunc. Suspendisse mollis nec eros id mattis. Praesent nec neque a turpis bibendum ultrices. Aenean id enim felis.</p>
 		</div>
-		<div class="ti-cms-four">
-			<h4>The columns in the middle don't need any additional classes.</h4>
+		<div class="col-md-4">
 			<ul>
 				<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</li>
 				<li>Phasellus quis nisl egestas, placerat libero sed, mollis augue.</li>
@@ -65,48 +65,48 @@
 				<li>In feugiat nisl sed justo ultrices, in maximus nulla consectetur.</li>
 			</ul>
 		</div>
-		<div class="ti-cms-four lastCol">
+		<div class="col-md-4">
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed consectetur malesuada dui vitae suscipit. Vivamus sollicitudin vulputate nibh tempor varius. Donec sit amet est lacinia, cursus orci scelerisque, mattis lectus. Cras vulputate nisi nec neque tincidunt sagittis laoreet et nunc. Suspendisse mollis nec eros id mattis. Praesent nec neque a turpis bibendum ultrices. Aenean id enim felis.</p>
 		</div>
 	</div>
-	<div class="ti-cms-row">
-		<div class="ti-cms-three firstCol">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
+	<div class="row">
+		<div class="col-md-3 col-lg-6">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
 		</div>
-		<div class="ti-cms-three">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
+		<div class="col-md-3 col-lg-6">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
 		</div>
-		<div class="ti-cms-three">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
+		<div class="col-md-3 col-lg-6">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
 		</div>
-		<div class="ti-cms-three lastCol">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
-		</div>
-	</div>
-	<div class="ti-cms-row">
-		<div class="ti-cms-two firstCol">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
-		</div>
-		<div class="ti-cms-two">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
-		</div>
-		<div class="ti-cms-two">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
-		</div>
-		<div class="ti-cms-two">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
-		</div>
-		<div class="ti-cms-two">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
-		</div>
-		<div class="ti-cms-two lastCol">
-			<p>Just make sure your columns add up to twelve and you'll be golden.</p>
+		<div class="col-md-3 col-lg-6">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
 		</div>
 	</div>
-	<div class="ti-cms-row ti-qqq-disclaimer">
-		<div class="ti-cms-one firstCol"></div>
-		<div class="ti-cms-ten">
-			<p><strong>Disclaimer:</strong> Update the disclaimer as needed. Coupon codes will expire on dates stated. Coupon codes cannot be combined with any other offers or promotions and cannot be applied to past purchases. Offers valid online at CompAndSave.com only. CompAndSave.com reserves the right to remove, add or change items on this promotion without prior notice.</p>
+	<div class="row">
+		<div class="col-sm-2 col-lg-4">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
+		</div>
+		<div class="col-sm-2 col-lg-4">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
+		</div>
+		<div class="col-sm-2 col-lg-4">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
+		</div>
+		<div class="col-sm-2 col-lg-4">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
+		</div>
+		<div class="col-sm-2 col-lg-4">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
+		</div>
+		<div class="col-sm-2 col-lg-4">
+			<p>Mix and match these breakpoint classes to get the responsive effect you want!</p>
+		</div>
+	</div>
+	<div class="row ti-qqq-disclaimer">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-10">
+			<p><strong>Disclaimer:</strong> Update the disclaimer as needed. Coupon codes will expire on dates stated. Coupon codes cannot be combined with any other offers or promotions and cannot be applied to past purchases. Offers valid online at TomatoInk.com only. TomatoInk.com reserves the right to remove, add or change items on this promotion without prior notice.</p>
 			<a class="readmorebtn ti_button ti_button_mini">Read more</a>
 			<p class="more">Too many rules? Just add this read more section!</p>
 			<ul class="more">
@@ -116,7 +116,7 @@
 				<li>Have fun!</li>
 			</ul>
 		</div>
-		<div class="ti-cms-one lastCol"></div>
+		<div class="col-xs-1"></div>
 	</div>
 </div>
 

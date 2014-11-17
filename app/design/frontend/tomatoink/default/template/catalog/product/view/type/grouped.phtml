@@ -113,8 +113,14 @@
 <div class="ti_cms_flex_grid ti_cms_block_grid one_fourth"> 
     <div class="ti_block_inner ti_cms_border_block btcf">       
     <?php //get product url ?>
-    <?php $product_url = $_item->getProductUrl();
+    <?php 
+
+            $product_url = $this->getUrl('') . $_item->getUrlKey() . ".html";
+          /*$product_url = $_item->getProductUrl();
+            
           $pro_url_array = explode("/", $product_url);
+          print_r($pro_url_array);
+          echo ($_item->getUrlKey() . "<br>");
           $product_url = "";    
           $checkout_url = "";     
           //print_r($pro_url_array); 
@@ -129,6 +135,7 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
             $checkout_url = $product_url;
             //$product_url .= $_item->getUrlKey() . ".html";
             $product_url .= $pro_url_array[count($pro_url_array)-1];
+            */
   ?>
     <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
      <div class="ti_product_blockName">

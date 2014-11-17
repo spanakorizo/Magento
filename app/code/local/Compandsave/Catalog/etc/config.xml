@@ -29,7 +29,6 @@
     	<models>
 			<catalog>
 				<rewrite>
-					<product_type_grouped>Compandsave_Catalog_Model_Product_Type_Grouped</product_type_grouped>
 					<convert_adapter_category>Compandsave_Catalog_Model_Convert_Adapter_Category</convert_adapter_category>
 					<convert_adapter_product>Compandsave_Catalog_Model_Convert_Adapter_Product</convert_adapter_product>
 				</rewrite>
