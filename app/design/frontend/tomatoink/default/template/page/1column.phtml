@@ -38,7 +38,7 @@
 <body<?php echo $this->getBodyClass()?' class="'.$this->getBodyClass().'"':'' ?>>
 <div id="ti_hide_body_div"></div>
 <?php echo $this->getChildHtml('after_body_start') ?>
-<div class="wrapper">
+<div id="toggle-container" class="wrapper">
     <?php echo $this->getChildHtml('global_notices') ?>
     <div class="page">
         <?php echo $this->getChildHtml('header') ?>

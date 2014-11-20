@@ -29,75 +29,82 @@
  * @see Mage_Page_Block_Template_Links
  */
 ?>
-<ul class="ti_header_toplinks">
+<span class="ti_show_767">
+	<a href="#" class="toggle-nav">
+		<h2 class="icon-menu2 white"> Hide menu</h2>
+	</a>
+</span>
+<ul class="ti_header_toplinks" id="toggle">
 
-						<li id="ti_header_account"><a rel="nofollow"><span>My Account</span></a>
-							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_accountDrop">
-								<div class="one_half">
-									<ul>
-										<li id="ti_header_login"><a href="<?php echo $this->getUrl('') ?>customer/account/login/"><span>Sign In</span></a></li>
-										<li id="ti_header_logout"><a href="<?php echo $this->getUrl('') ?>customer/account/logout/"><span>Sign Out</span></a></li>
-										<li><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a></li>
-									</ul>
-								</div>
-								<div class="one_half ti_dropHalfBrder btcf">
-									<ul>
-										<li><a href="<?php echo $this->getUrl('') ?>customer/account/edit/"><span>My Profile</span></a></li>
-										<li><a href="<?php echo $this->getUrl('') ?>sales/order/history/"><span>My Orders</span></a></li>
-									</ul>
-								</div>
-							</div>
-						</li>
-						<li id="ti_header_cart"><a rel="nofollow"><span>Cart</span>(<span id="ti_header_cartcount">0</span>)</a>
-							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_cartDrop">
-								<!--<div class="ti_miniCart_carousel-nav ti_hide_767">
-										<span class="ti_carousel-nav-next icon-angle-left"></span>
-										<span class="ti_carousel-nav-prev icon-angle-right"></span>
-									</div>!-->
-									<!--<div class="ti_miniCart_carousel_wrapper ti_hide_767">
-										<div class="ti_miniCart_carousel_item">
-											<img src="thumb.jpg">
-											<strong class="lgTxt">$<span id="">3.99</span><br/>Qty: <span id="">3</span></strong>
-											<div class="one"><p id="">The name of the product goes here.</p></div>
-										</div>
-									</div>!-->
-									<!--<div class="ti_miniCart_subtotal">
-										<h4 class="ltWeight lgTxt"><strong id="">13</strong> items in your cart<br/>Subtotal: $<strong id="">129.99</strong></h4>
-										<a class="ti_button">Checkout</a>
-									</div>!-->
-								<!--<p><strong>Currently in your cart:</strong></p>
-								<div id="ti_header_cartitems"></div>-->
-							</div>
-						</li>
-						<li id="ti_header_help"><a rel="nofollow"><span>Need help?</span></a>
-							<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_helpDrop">
-								<p>We're available M-F, 8am-5pm PST</p>
-								<div class="one_half">
-									<ul>
-										<li><a href="<?php echo $this->getUrl('') ?>order-tracking"><span>Track Orders</span></a></li>
-										<li><a href="<?php echo $this->getUrl('') ?>ink-toner-troubleshooting" target="_blank">Troubleshooting</a></li>
-										<li><a href="<?php echo $this->getUrl('helpdesk/index/customer/');?>"><span>Support Ticket</span></a></li>
-										<li><a href="mailto:customercare@tomatoink.com"><span>Email us</span></a></li>
-									</ul>
-								</div>
-								<div class="one_half ti_dropHalfBrder">
-									<div id="scEkiO"></div>
-									<p><a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','Comboink Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">
-										<!-- The altTxt class should change to lgTxt when offline -->
-										<span class="icon-bubbles lgTxt">&nbsp;</span>
-									</a></p>
-										<!-- The text in id="ti_liveChat" should change to Live Chat is offline. The altTxt class should change to lgTxt -->
-									<h3 class="lgTxt ltWeight" id="ti_liveChat"><a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','Comboink Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">Live Chat<br/>is online</a></h3>
-									<h4 class="ltWeight">
-										<!-- The text in id="ti_phoneMessage" should change to Leave a message. The altTxt class should change to lgTxt -->
-										<span id="ti_phoneMessage">Or call us:<br/><a href="tel:877-777-0127" class="altTxt strong">877-777-0127</a></span>
-									</h4>
-								</div>
-							</div>
-						</li>
-                        
-					</ul>
-
+	<li id="ti_header_account"><a rel="nofollow"><span class="toggle-btn icon-plus"></span> <span>My Account</span></a>
+		<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_accountDrop">
+			<div class="one_half">
+				<ul>
+					<li id="ti_header_login"><a href="<?php echo $this->getUrl('') ?>customer/account/login/"><span>Sign In</span></a></li>
+					<li id="ti_header_logout"><a href="<?php echo $this->getUrl('') ?>customer/account/logout/"><span>Sign Out</span></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>customer/account/"><span>My Account</span></a></li>
+				</ul>
+			</div>
+			<div class="one_half ti_dropHalfBrder btcf">
+				<ul>
+					<li><a href="<?php echo $this->getUrl('') ?>customer/account/edit/"><span>My Profile</span></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>sales/order/history/"><span>My Orders</span></a></li>
+				</ul>
+			</div>
+		</div>
+	</li>
+	<li id="ti_header_cart"><a rel="nofollow"><span class="toggle-btn icon-plus"></span> <span>Cart</span>(<span id="ti_header_cartcount">0</span>)</a>
+		<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_cartDrop">
+			<!--<div class="ti_miniCart_carousel-nav ti_hide_767">
+					<span class="ti_carousel-nav-next icon-angle-left"></span>
+					<span class="ti_carousel-nav-prev icon-angle-right"></span>
+				</div>!-->
+				<!--<div class="ti_miniCart_carousel_wrapper ti_hide_767">
+					<div class="ti_miniCart_carousel_item">
+						<img src="thumb.jpg">
+						<strong class="lgTxt">$<span id="">3.99</span><br/>Qty: <span id="">3</span></strong>
+						<div class="one"><p id="">The name of the product goes here.</p></div>
+					</div>
+				</div>!-->
+				<!--<div class="ti_miniCart_subtotal">
+					<h4 class="ltWeight lgTxt"><strong id="">13</strong> items in your cart<br/>Subtotal: $<strong id="">129.99</strong></h4>
+					<a class="ti_button">Checkout</a>
+				</div>!-->
+			<!--<p><strong>Currently in your cart:</strong></p>
+			<div id="ti_header_cartitems"></div>-->
+		</div>
+	</li>
+	<li id="ti_header_help"><a rel="nofollow"><span class="toggle-btn icon-plus"></span> <span>Need help?</span></a>
+		<div class="ti_cms_border_block ti_cms_dropContent" id="ti_header_helpDrop">
+			<p>We're available M-F, 8am-5pm PST</p>
+			<div class="one_half">
+				<ul>
+					<li><a href="<?php echo $this->getUrl('') ?>order-tracking"><span>Track Orders</span></a></li>
+					<li><a href="<?php echo $this->getUrl('') ?>ink-toner-troubleshooting" target="_blank">Troubleshooting</a></li>
+					<li><a href="<?php echo $this->getUrl('helpdesk/index/customer/');?>"><span>Support Ticket</span></a></li>
+					<li><a href="mailto:customercare@tomatoink.com"><span>Email us</span></a></li>
+				</ul>
+			</div>
+			<div class="one_half ti_dropHalfBrder">
+				<div id="scEkiO"></div>
+				<p><a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','Comboink Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">
+					<!-- The altTxt class should change to lgTxt when offline -->
+					<span class="icon-bubbles lgTxt">&nbsp;</span>
+				</a></p>
+					<!-- The text in id="ti_liveChat" should change to Live Chat is offline. The altTxt class should change to lgTxt -->
+				<h3 class="lgTxt ltWeight" id="ti_liveChat"><a href="http://www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html" onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','Comboink Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;">Live Chat<br/>is online</a></h3>
+				<h4 class="ltWeight">
+					<!-- The text in id="ti_phoneMessage" should change to Leave a message. The altTxt class should change to lgTxt -->
+					<span id="ti_phoneMessage">Or call us:<br/><a href="tel:877-777-0127" class="altTxt strong">877-777-0127</a></span>
+				</h4>
+			</div>
+		</div>
+	</li>
+    <li id="ti_secondary_coupon">
+    	<p><strong>This month's deal:</strong></p>
+    	<p><span id="ti_header_coupon_info">Coupon info goes here</span><br>Use code: <strong class="ti_header_coupon_code" id="ti_header_coupon_code">COUPON CODE</strong><br><span class="ti_small_text">exp. <span id="ti_header_coupon_exp">date</span></span></p>
+    </li>
+</ul>
 
 <!-- BEGIN ProvideSupport.com Custom Images Chat Button Code -->
 <div id="ciEkiO" style="z-index:100;position:absolute"></div>

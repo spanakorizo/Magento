@@ -6,12 +6,20 @@ class Compandsave_Catalog_Model_Observer
     {
         $product = $observer->getProduct();
 
+    if ($product->getNeedMapping() == 'yes' && $product_in->getTypeId() === 'simple') {
+
 		Mage::getModel('compandsave_catalog/relation_backend')->MappingAutoAfterProductCreate($product);
+    }
+
+    else if ($product_in->getTypeId() === 'bundle')
+        Mage::getModel('compandsave_catalog/relation_backend')->MappingAutoAfterProductCreate($product);
         
         return true;
 
     }
 	
+
+
 	/* public function applyAllRulesOnBundleProduct($observer)
     {
         $product = $observer->getEvent()->getProduct();
@@ -20,14 +28,14 @@ class Compandsave_Catalog_Model_Observer
 
     } */
 	
-	public function CatalogRelations(Varien_Event_Observer $observer)
-    {
-        $adapter = $observer->getEvent()->getAdapter();
-        $affectedEntityIds = $adapter->getAffectedEntityIds();
+	//public function CatalogRelations(Varien_Event_Observer $observer)
+    //{
+    //    $adapter = $observer->getEvent()->getAdapter();
+    //    $affectedEntityIds = $adapter->getAffectedEntityIds();
 		
-		Mage::getModel('compandsave_catalog/relation_backend')->MappingAutoAfterProductImport($affectedEntityIds);
+	//	Mage::getModel('compandsave_catalog/relation_backend')->MappingAutoAfterProductImport($affectedEntityIds);
         
-		return true;
-    }
+	//	return true;
+    //}
 
 }

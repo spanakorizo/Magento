@@ -1,14 +1,12 @@
-<!--[if lte IE 8]>
-	<link rel="stylesheet" type="text/css" href="<?php echo $this->getSkinUrl('css/ti-styles-ie8.css') ?>" />
-<![endif]-->
-	
+
 	<!--[if gte IE 9]>
   		<style type="text/css">
     		.gradient, .ti_cms_gradient_block {
-       		filter: none;
+       		filter: none !important;
    			 }
   		</style>
-	<![endif]-->
+	<![endif]--> 
+
 <script type="text/javascript" src="<?php echo $this->getSkinUrl('js/jquery.contentcarousel.header.js') ?>"></script>
 	<?php $current_url = $this->getUrl(''); ?>
 	<script type="text/javascript">
@@ -41,11 +39,11 @@
 			<div id="ti_main_coupon_arrow"></div>
 		</div>
 		<div id="ti_header_quick_links">
-			<div class="ti_cms_contain btcf">
+			<div class="ti_cms_contain btcf" id="toggle-canvas">
 				<div class="ti_header_top_block ti_hide_767">
 					<p><a href="<?php echo $current_url;?>shipping-policy"><strong>Free shipping on orders of $50 or more!</strong> Reg: $3.99</a></p>
 				</div>
-				<div class="ti_header_top_block ti_header_toplinks">
+				<div class="ti_header_top_block ti_header_toplinks" id="toggle-nav">
 					
 						<?php echo $this->getChildHtml('topLinks') ?>
 					
@@ -127,7 +125,12 @@
 
 				<a href="<?php echo $current_url ?>" class="ti_header_logo_border"><img src="<?php echo $this->getSkinUrl('images/ti-assets/ti-logo.png') ?>" alt="Save up to 80% on ink cartridges, toner, and printer accessories at TomatoInk!" id="ti_header_logo"/></a>
 			</div>
-			<div class="ti_header_top_block ti_hide_767 ti_logo_bar">
+			<div class="ti_header_top_block ti_logo_bar" id="nav-topLinks">
+				<span class="ti_show_767">
+					<a href="#" class="toggle-nav right" id="ti_header_bars">
+						<span class="icon-menu2 lgTxt"></span>
+					</a>
+				</span>
 				<?php //if ($this->getIsHomePage()):?>
 				<!--<div class="ti_input_bar" id="ti_header_home_email">
 
@@ -140,7 +143,7 @@
 				</div>!-->
 				<?php //else:?>
 				<?php $catalogSearchHelper =  $this->helper('catalogsearch'); ?>
-					<div class="ti_input_bar" id="ti_header_site_search">
+					<div class="ti_input_bar ti_hide_767" id="ti_header_site_search">
 						<form id="search_mini_form" action="<?php echo $catalogSearchHelper->getResultUrl() ?>" method="get">
 							<input type="search" name="<?php echo $catalogSearchHelper->getQueryParamName() ?>" id="search" placeholder="Type your printer or ink model..." />
 							<input type="submit" name="Submit" id="search_submit" value="Search" title="<?php echo $this->__('Search') ?>"/>
@@ -221,7 +224,6 @@
 						</ul>
 					</li>
 				</ul>
-				<!--<p id="ti_secondary_coupon" class="clear"><strong>This month's special offer:</strong> <span id="ti_secondary_coupon_info"></span> <strong class="ti_secondary_coupon_code" id="ti_secondary_coupon_code"></strong>. <span id="ti_secondary_coupon_exp"></span></p>-->
 			</div>
 		</div>
 	<div class="ti_cms_contain btcf">

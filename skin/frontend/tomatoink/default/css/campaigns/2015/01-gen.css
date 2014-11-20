@@ -24,7 +24,17 @@ Naming convention prefix: ti-gen-
 /*-- Page fixes --*/
 
 /*-- Text --*/
+.ti-gen-coupon{
+	font-size:3em;
+	display:inline-block;
+	border:2px dashed #e67921;
+	padding:.5em;
+	margin:0 auto;
+}
 
+.ti-gen-intro{
+	font:1.5em/1em "oleo_scriptregular","raleway",serif;
+}
 /*-- Layout --*/
 
 /*-- Images --*/

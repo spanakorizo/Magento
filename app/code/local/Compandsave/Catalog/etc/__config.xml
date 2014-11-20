@@ -17,14 +17,14 @@
                 </observers>
             </catalog_product_save_after>
 
-			<!--<catalog_product_import_finish_before>
+			<catalog_product_import_finish_before>
                 <observers>
                     <compandsave_catalog>
                         <class>compandsave_catalog/observer</class>
                         <method>CatalogRelations</method>
                     </compandsave_catalog>
                 </observers>
-            </catalog_product_import_finish_before>!-->
+            </catalog_product_import_finish_before>
         </events>
     	<models>
 			<catalog>

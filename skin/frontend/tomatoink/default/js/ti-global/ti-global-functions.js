@@ -558,3 +558,51 @@ function fix()
     par.removeChild(el);
     setTimeout(function() {par.insertBefore(el, next);}, 0)
 }
+
+
+/*******************************************************/
+/* */
+/* Description: Mini Nav toggle*/
+/* Author: Megan */
+/* http://designmodo.com/canvas-sliding-navigation-menu/?utm_medium=email&utm_campaign=Newsletter%20Issue%2063&utm_content=Newsletter%20Issue%2063+CID_d9a65224c8fef00c46ba33d17557f709&utm_source=eWebDesigncom%20Newsletter */
+/* Version: 0.0.1 */
+/*******************************************************/
+
+// Calling the function
+jQuery(document).ready(function() {
+    jQuery('.toggle-nav').click(function() {
+        toggleNavigation();
+    });
+});
+ 
+// The toggleNav function itself
+function toggleNavigation() {
+    if (jQuery('#toggle-container').hasClass('display-nav')) {
+        // Close Nav
+        jQuery('#toggle-container').removeClass('display-nav');
+    } else {
+        // Open Nav
+        jQuery('#toggle-container').addClass('display-nav');
+    }
+}
+
+// Sliding codes
+jQuery(document).ready(function($) {
+  $("#toggle > li > a").click(function () {
+      if (false == $(this).next().is(':visible')) {
+          $('#toggle div.ti_cms_dropContent').slideUp();
+      }
+   
+      var $currIcon=$(this).find("span.toggle-btn");
+   
+      $("span.toggle-btn").not($currIcon).addClass('icon-plus').removeClass('icon-minus');
+   
+      $currIcon.toggleClass('icon-minus icon-plus');
+   
+      $(this).next().slideToggle();
+   
+      $("#toggle > li > a").removeClass("active");
+      $(this).toggleClass('active');
+   
+  });
+});(jQuery)

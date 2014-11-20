@@ -1,0 +1,117 @@
+/************* CSS Header ******************************/
+/*
+Please refer to our brand guidelines for
+the most up to date coding standards for TomatoInk.com
+Author: Megan Prior-Pfeifer
+
+Table of Contents:
+0. Page fixes
+1. Text
+2. Layout
+3. Images
+4. Search
+5. Responsive
+
+Created for site launch at TomatoInk.com
+
+Naming convention prefix: ti-new-
+ 
+*/
+/*********************************************************/
+
+/*-- Page fixes --*/
+
+/*-- Text --*/
+
+.ti-new-vertC{
+	margin:4em 0 0;
+}
+
+/*-- Layout --*/
+
+.ti-new-hide{
+	filter:progid:DXImageTransform.Microsoft.Alpha(opacity=60);
+	background:#333;
+	background:rgba(0,0,0,.4);
+	position:fixed;
+	top:0;
+	bottom:0;
+	left:0;
+	right:0;
+	z-index:1000000000;
+}
+
+.ti-new-contain{
+	display:block;
+	position:absolute;
+	z-index:5;
+	top:26em;
+	left:50%;
+	margin-left:-28%;
+	width:55%;
+	background:url("../../../images/ti-assets/paper-bg_e67921.jpg") repeat;
+	border-radius:0.25em;
+	text-align:center;
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
+}
+
+.ti-new-containAlt{
+	position:fixed;
+	width:400px;
+	left:50%;
+	top:50%;
+	margin-top:-200px;
+	margin-left:-200px;
+	z-index:1000000001;
+}
+
+/*-- Images --*/
+
+.ti-new-contain img,
+.ti-new-containAlt img{
+	max-width:100%;
+	margin:20px auto;
+}
+
+/*-- Search --*/
+
+/*-- Responsive --*/
+
+@media only screen and (max-width: 999px) and (min-width: 768px) {
+
+}
+
+@media only screen and (max-width: 767px) {
+	.ti-new-contain{
+		width:80%;
+		margin-left:-40%;
+		top:18em;
+	}
+
+	.ti-new-containAlt{
+		margin-top:-300px;
+	}
+
+
+	.ti-new-vertC{
+		margin:.5em 0;
+	}
+
+}
+
+@media only screen and (max-width: 479px) {
+	.ti-new-contain .ti_button,
+	.ti-new-containAlt .ti_button{
+		height:auto;
+		line-height:1.2;
+		min-height:2rem;
+	}
+
+	.ti-new-containAlt{
+		width:300px;
+		margin-left:-150px;
+		position:absolute;
+	}
+
+}
+
