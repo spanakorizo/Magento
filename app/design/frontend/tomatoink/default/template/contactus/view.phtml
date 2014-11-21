@@ -1,0 +1,77 @@
+
+<?php 
+
+//require(Mage::getBaseDir().DS.'yy'.DS.'recaptchalib.php');
+
+$message = '';
+ if (isset($_POST['CustomerEmail'])) {
+    	//  $privatekey = "6LciLvwSAAAAALA7fGlCyeRb4Qp8S68dw3uW5Ei4";
+  //$resp = recaptcha_check_answer ($privatekey,
+  //                              $_SERVER["REMOTE_ADDR"],
+  //                              $_POST["recaptcha_challenge_field"],
+   //                             $_POST["recaptcha_response_field"]);
+
+  //if (!$resp->is_valid) {
+    // What happens when the CAPTCHA was entered incorrectly
+   // $secure_message = "Sorry, Security Code is wrong";
+ // } else {
+    $secure_message = "Thanks for contacting us, we will reply you soon";
+    //send email
+    $name = $_POST["CustomerName"];
+    $howfindus = $_POST["HowFindUs"];
+    $email = $_POST["CustomerEmail"];
+    $phone = $_POST["CompanyPhone"];
+    $questiontype = $_POST["QuestionType"];
+    $message = $_POST["CustomerComments"];
+
+
+$to      = 'yiyangh@compandsave.com';
+$subject = 'Contact Us Form';
+$message = "Name: " . $name . "\nEmail: " . $email . "\nPhone: " . $phone . "\nQuestionType: " . $questiontype . "\nHow Do you find us: " . $howfindus . "\nMessage: " . $message; 
+$headers = 'From: contact-us@compandsave.com' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
+
+mail($to, $subject, $message, $headers);
+//  }
+
+    }
+
+?>
+
+
+
+
+<div class="ti-cms-articleContent_area">
+<h1 class="dgTxt">Contact Us</h1>
+<div class="two_third">
+<h2 class="altTxt">TomatoInk.com</h2>
+<h3 class="lgTxt">Address:</h3>
+<address>
+<p>39120 Argonaut Way<br /> Fremont Hub #532<br /> Fremont, CA 94538</p>
+</address>
+<p><strong>Call us toll free:</strong> 1.877.777.0127</p>
+<p><strong>Fax:</strong> 1.877.838.9869</p>
+<h3 class="lgTxt">Heavy Ink User?</h3>
+<p>For resellers or large volume purchase: Please call 1.877.777.0127 Ext. 115 or fill out the online form <a class="lgTxt" href="http://www.866ink.com/magentoEE/become-reseller">here</a> for our competitive price quote.</p>
+<h2 class="altTxt">Live Chat</h2>
+<p>For an immediate response, we recommend that you use the Live Chat. Currently, our <span class="lgTxt">Live Support is Online</span>. <a onclick="javascript:void window.open('//www.tomatoink.com/v/dc/yy/chat_page/tomatoink_chat.html','Comboink Chat Page','width=637,height=660,toolbar=0,menubar=0,location=0,status=0,scrollbars=0,resizable=0,left=0,top=0');return false;" href=" ">Click here to chat now.</a></p>
+<!--
+		Change link to <span class="altTxt">Live Support is Offline</span>. Please try back between the hours of 8 AM to 5 PM PST.
+		-->
+<h2 class="altTxt">Questions?</h2>
+<p>For any assistance on existing orders or product information, click <a class="lgTxt" href="http://www.866ink.com/magentoEE/helpdesk/index/customer/" target="_blank">here</a> to create a new ticket. We strive to respond to all of our email messages within 24 hours, Monday - Friday, excluding holidays. For urgent requests, we suggest using live chat when the operator is online.</p>
+</div>
+<div class="one_third ti_cms_gradient_block text_center">
+<h3>Send us a message:</h3>
+<form class="text_left" method="POST" action="">
+<div class="one"><label class="ti-required-entry"><span>Your name:</span> <input class="one" type="text" name="CustomerName" value="" /> </label></div>
+<div class="one"><label class="ti-required-entry"><span>Email Address:</span> <input class="one" type="email" name="CustomerEmail" value="" /> </label></div>
+<div class="one"><label><span>Phone:</span> <input class="one" type="text" name="CustomerPhone" value="" /> </label></div>
+<div class="one"><label><label><span>How did you find us?</span></label></label>
+<div class="ti_select_barContainer"><select class="selectBox" name="HowFindUs"> <option value="Not Specify">Please select...</option> <option value="Google">Google</option> <option value="Yahoo!">Yahoo!</option> <option value="MSN">MSN</option> <option value="Facebook">Facebook</option> <option value="Twitter">Twitter</option> <option value="Referral">Referred by friends</option> <option value="Others">Others</option> </select></div>
+</div>
+<div class="one"><label><label><span>Question type:</span></label></label>
+<div class="ti_select_barContainer"><select class="selectBox" name="QuestionType"> <option value="Not Specify">Please select...</option> <option value="Item Not Working">Item not working</option> <option value="Order Status">Order Status</option> <option value="Billing Inquiry">Billing Inquiry</option> <option value="Suggestion For Our Site">Suggestion for our site</option> <option value="Others">Others</option> </select></div>
+</div>
+<div class="one"><label class="ti-required-entry"><span>Comments/Question:</span> <textarea class="ti-cms-inputFull" name="CustomerComments" rows="8"></textarea> </label></div>
+<input type="submit" value="Send message" /></form></div>
+</div>

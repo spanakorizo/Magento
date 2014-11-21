@@ -6,12 +6,12 @@ class Compandsave_Catalog_Model_Observer
     {
         $product = $observer->getProduct();
 
-    if ($product->getNeedMapping() == 'yes' && $product_in->getTypeId() === 'simple') {
+    if ($product->getNeedMapping() == 'yes' && $product->getTypeId() === 'simple') {
 
 		Mage::getModel('compandsave_catalog/relation_backend')->MappingAutoAfterProductCreate($product);
     }
 
-    else if ($product_in->getTypeId() === 'bundle')
+    else if ($product->getTypeId() === 'bundle')
         Mage::getModel('compandsave_catalog/relation_backend')->MappingAutoAfterProductCreate($product);
         
         return true;

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config>
+    <global>
+        <modules>
+            <Compandsave_Contactus>
+                <version>0.1.0</version>
+            </Compandsave_Contactus>
+        </modules>
+    </global>
+    <frontend>
+        <routers>
+            <contactpage>
+                <use>standard</use>
+                <args>
+                    <module>Compandsave_Contactus</module>
+                    <frontName>contact-us</frontName>
+                </args>
+            </contactpage>
+        </routers>
+    </frontend>
+        <global>
+        <blocks>
+            <contactblock>
+                <class>Compandsave_Contactus_Block</class>
+            </contactblock>
+        </blocks>
+        <helpers>
+            <contacthelper>
+                <class>Compandsave_Contactus_Helper</class>
+            </contacthelper>
+        </helpers>
+    </global>
+<!-- ... -->
+</config>
+
