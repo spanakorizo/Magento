@@ -1,0 +1,89 @@
+/************* CSS Header ******************************/
+/*
+Please refer to our brand guidelines for
+the most up to date coding standards for TomatoInk.com
+Author: Megan Prior-Pfeifer
+
+Table of Contents:
+0. Page fixes
+1. Text
+2. Layout
+3. Images
+4. Search
+5. Responsive
+
+Created for 2014 November Survey for July non-responders landing page at TomatoInk.com: 
+http://www.tomatoink.com/campaigns/surveynorespond
+
+Naming convention prefix: ti-sur-non-
+ 
+*/
+/*********************************************************/
+/*-- Page fixes --*/
+/*-- Text --*/
+.ti-sur-non-contain h1 {
+  color: #e67921;
+  font-size: 5em;
+  line-height: 1.1; }
+
+.ti-sur-non-contain h1 .ti_small_text {
+  color: #f0b07d;
+  font-size: .6em; }
+
+#ti_sur_alert {
+  color: #F00;
+  text-align: center; }
+
+.ti-sur-non-coupon {
+  color: #e67921;
+  border: 2px dashed #f0b07d;
+  padding: 10px;
+  display: inline-block; }
+
+/*-- Layout --*/
+.ti-sur-non-surveyContain {
+  position: relative;
+  top: -50px; }
+
+.ti-cms-articleContent_area .ti-sur-non-survey,
+.ti-cms-articleContent_area .ti-sur-non-info {
+  background: #d6e6c6;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #559a13; }
+
+.ti-cms-articleContent_area .ti-sur-non-survey .frequency-block {
+  background: #fff;
+  padding: 5px;
+  margin: 2%;
+  border: 2px solid #f7e8db; }
+
+/*-- Images --*/
+.ti-sur-non-timer {
+  background: url("../../../images/campaigns/2014/12-sur-non/ti-timer.jpg") no-repeat center center;
+  position: relative; }
+
+img.ti-sur-non-timer {
+  margin-top: -10px; }
+
+/*-- Elements --*/
+.ti-sur-non-survey #display-search-results {
+  position: absolute;
+  z-index: 1;
+  background: #FFF;
+  padding: 10px;
+  margin-top: -15px;
+  margin-left: 20px;
+  box-shadow: 1px 1px 2px rgba(112, 191, 68, 0.4); }
+
+.ti-sur-non-info input {
+  width: 100%;
+  margin: 1% 0; }
+
+/*-- Search --*/
+/*-- Responsive --*/
+@media only screen and (max-width: 999px) {
+  .ti-sur-non-surveyContain {
+    top: 0px; } }
+
+/*# sourceMappingURL=12-sur-non.css.map */

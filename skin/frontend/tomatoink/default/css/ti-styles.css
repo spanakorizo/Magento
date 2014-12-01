@@ -250,7 +250,7 @@ body {
   border: 1px solid #71b62f;
   border-bottom: 7px solid #71b62f; }
 
-.ti_hide, .ti_show_767, .ti_show_479 {
+.ti_hide, .ti_show_999, .ti_show_767, .ti_show_479 {
   display: none; }
 
 /* -----------------------------------*/
@@ -792,7 +792,6 @@ li.ti_bulletNone:before {
 .ti_menu > li {
   vertical-align: top;
   list-style: none;
-  /*overflow:hidden;*/
   display: inline-block;
   position: relative;
   padding: 0 2em;
@@ -4395,6 +4394,9 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 
   .ti_hide_999 {
     display: none; }
+
+  .ti_show_999 {
+    display: block; }
 
   .ti_footer_top_block .two_third,
   .ti_footer_top_block .one_third {

@@ -1,0 +1,207 @@
+<!--
+	5. Update content as needed
+	7. Delete instructions!
+-->
+
+<!-- Page canonical name: /survey-respond -->
+
+<!-- CSS -->
+<link href="<?php echo $this->getSkinUrl('css')?>/articles/ti-article.css" type="text/css" rel="stylesheet" />
+<link href="<?php echo $this->getSkinUrl('css')?>/campaigns/2014/12-sur-re.css" type="text/css" rel="stylesheet" />
+
+<!-- JS - Only include what you need-->
+<script src="<?php echo $this->getSkinUrl("js")?>/campaigns/2014/12-sur-re-beginFunctions.js" type="text/javascript"></script>
+
+<script type="text/javascript">document.cookie ="couponcode=REORDER15T; expires=Mon, 15 December 2014 23:59:59 UTC; path=/";</script>
+
+<div class="ti-cms-articleContent_area">
+	<div class="container-fluid ti-sur-re-contain">
+		<div class='row'>
+			<div class='col-xs-12'>
+				<h1 class='lgTxt'>Re-order now to save an extra 15% on any order!<br><span class='ti-sur-re-coupon altTxt'>QQQ</span></h1>
+			</div>
+		</div>
+		<div class="row ti-re-updateRow">
+			<div class="col-xs-12">
+				<p><a id="ti-cms-stepNo" class="ti-cms-centerTxt" onclick="">Click here if we are not displaying the correct product information for you below.</a>
+				<a id="ti-cms-stepOK" class="ti-cms-centerTxt" style="display:none;" onclick="">Nevermind! You are showing the products I usually purchase. Please hide this.</a>
+				</p>
+				<div id="search-box" style="" class="col-sm-10 col-sm-offset-1">
+					<div class="row">
+						<div class="col-sm-6">
+							<input type="text" id="ti-re-name" class="ti-re-update" placeholder="Type your name" value="<% response.write(username) %>" />
+						</div>
+						<div class="col-sm-6">
+							<input type="text" id="ti-re-email" class="ti-re-update" placeholder="Type your email" value="<% response.write(useremail) %>" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-sm-4">
+							<div id="brand_div" class="ti_select_barContainer">
+								<select name="brand" id="brand" width="230" onchange="getresult()" disabled=false>
+									<option value="" SELECTED>Select the Brand</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div id="series_div" class="ti_select_barContainer">
+								<select name="series" id="series" disabled=true onchange="getresult2()">
+									<option value="" SELECTED>Printer Series</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-sm-4">
+							<div id="cartridge_div" class="ti_select_barContainer">
+								<select name="cartridge" id="cartridge" disabled=true onchange="JumpToSearch(this.value, 2)">
+									<option value="" SELECTED>Printer Model #</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<input type="hidden" name="val" id="val" value="">
+					<p id="ti_sur_re_alert"></p>
+					<input type="submit" value="Please update my printer" onclick="goChangePrinter(3)">
+				</div>
+			</div>
+			<br class="clear">
+			<div id="ti_re_no" class="row">
+				<div class="ti-cms-eight lastCol" id="ti-cms-step2" style="display:none;">
+					<p>We will update your printer model information!</p>
+				</div>
+			</div>
+			<br class="clear">
+		</div>
+		<div class='row ti-sur-re-topProduct'>
+			<div class='col-sm-4'>
+				<a target='_blank' href=' '>
+					<img src=' ' class='ti-sur-re-productImg' alt='This product works with your printer model.'>
+				</a>
+			</div>
+			<div class='col-sm-8'>
+				<a target='_blank' href=' '>
+					<h2 class='ti-sur-re-productName'> Product QQQ </h2>
+				</a>
+				<div class='row'>
+					<div class='col-sm-6'>
+						<h2 class='ti-sur-re-dollar'>Our price: <sup>$</sup><span class='ti-sur-re-price'>QQQ</span></h2>
+						<p>Retail price: <sup>$</sup><span class='ti-sur-re-retail'>QQQ</span></p>
+						<p><label><span>Qty: </span><input type='text' value='1' maxlength='3' class='ti-sur-re-qty' id='ti_qty_0'></input></label>
+						<input type="hidden" id='ti_productcode_0' value='<% Response.write(product) %>'>
+						<input class='btn ti-cms-orangeBtn' type='button' onclick='addtocart(0)' value='Add To Cart'></input></p>
+					</div>
+					<div class='col-sm-6'>
+						<ul class='ti-sur-re-checklist'>
+							<li><span class='icon-checkmark ti-sur-re-check'></span><span class='ti-sur-re-check'>For 15% off, use code <span class='ti-sur-re-coupon'>QQQ</span></span></li>
+							<li><span class='icon-checkmark ti-sur-re-check'></span><span class='ti-sur-re-check'>One year money back guarantee</span></li>
+							<li><span class='icon-checkmark ti-sur-re-check'></span><span class='ti-sur-re-check'>Ships in 24 hours!</span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--<% if RelatedProducts <> "" AND RelatedProducts <> "," then 
+			response.write(RelatedProducts)
+		%>-->
+	    <h2>Customers also purchased:</h2>
+	    <!--<% End if %>-->
+		<div class='row'>
+			<div class='col-xs-12 jcarousel-wrapper'>
+				<div class='jcarousel'>
+					<ul>
+						<!--<% 
+
+					    if RelatedProducts <> "" then 
+						related_arr = split(RelatedProducts, ",")
+							For each single_node in related_arr
+								if single_node <> "" and LCase(single_node) <> LCase(product) then 
+									result = Collector.ExtractProduct(single_node)
+									single_info = Split(result, "@@@")
+									if Ubound(single_info) > 1 then 
+									ProductName  = single_info(0)
+									ProductPrice = FormatNumber(round(single_info(1),2),2)
+						    		ListPrice    = FormatNumber(round(single_info(2),2),2)
+						    		count = count + 1 
+						    		end if 
+
+
+
+
+
+						 %>-->
+						<li class="col-sm-4 text_center">
+					        <a target='_blank' href='//www.tomatoink.com/ProductDetails.asp?ProductCode=QQQ'><h3 class='ti-sur-re-productName'>QQQ</h3>
+					        <div class="row">
+						        <div class="col-xs-4">
+						        	<img src=' ' class='ti-sur-re-productImg'></a>
+						        </div>
+						        <div class="col-xs-8">
+						        	<p class='ti-sur-re-dollar'>Our price: <sup>$</sup><span class='ti-sur-re-price'>QQQ</span></p>
+									<p>Retail price: <sup>$</sup><span class='ti-sur-re-retail'>QQQ</span></p>
+								</div>
+							</div>
+					        <label><span>Qty: </span><input type='text' id='ti_qty_<%=count%>' value='1' maxlength='3' class='ti-sur-re-qty'></input></label>
+					        <input type="hidden" id="ti_productcode_<%=count%>" value='<%=single_node%>'>
+					        <input type='button' class="ti-cms-orangeBtn" onclick='addtocart(<%=count%>)' value='Add to cart'></input>
+						</li>
+
+						<!--<% 	end if 
+	 						next 
+	 					    end if  %>-->
+
+					</ul>
+				</div>
+				<!--<% if count > 3 then %>-->
+				<div class='jcarousel-controls'>
+					<a href='#' class='jcarousel-control-prev'><span class='icon-arrow-left3'></span></a>
+		    		<a href='#' class='jcarousel-control-next'><span class='icon-arrow-right3'></span></a>
+		    	</div>
+		    	<!--<% end if %>
+		    	<% if count > 0 then %>-->
+		    	<h2>The products above are compatible with your <strong><span class='ti-sur-re-printerBrand'>S</span> <span class='ti-sur-re-printerModel'>printer model</span></strong>.</h2>
+		    	<!--<% end if %>-->
+			</div>
+		</div>
+		<div class='row'>
+			<div class='col-xs-12 ti-sur-re-disclaim'>
+				<div class='ti_cms_separator'></div>
+				<p>TomatoInk.com is proud to offer wallet friendly prices on high quality ink cartridges for your <span class='ti-sur-re-printerModel'>printer model</span>. We specialize in providing ink cartridges for any <span class='ti-sur-re-printerBrand'><%=brandname%></span> printer. Our ink cartridges are diligently re-engineered at our manufacturing facility to ensure the same print quality as brand name cartridges. Our high print quality and low prices are backed with a <strong>1 year money back guarantee</strong>, as well as our <strong>99% customer satisfaction rate</strong>!</p>
+				<p>Using compatible or remanufactured printer cartridges will never void your printer warranty.  Feel free to contact us at <a href="mailto:customercare@tomatoink.com">customercare@tomatoink.com</a> if you have any further questions or if you need help finding your replacement cartridges from the compatible <span class='ti-sur-re-printerModel'>printer model</span> ink cartridges above. Hurry and take advantage of our great prices now!</p>
+				<p><strong>Disclaimer:</strong> This offer cannot be combined with any other offer or coupon code and cannot be applied to past purchases. Coupon must be applied at checkout to receive your discount. Other restrictions may apply. Each coupon code may only be used once. Coupon expires 12/15/2014 11:59 PM <span title='Pacific Standard Time' class='ti-sur-re-help'>PST</span>.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="ti-cms-articleContent_area">
+	<div class="container-fluid ti-sur-re-contain">
+		<div class='row'>
+			<div class='col-sm-8 col-sm-offset-2 ti_cms_gradient_block'>
+				<h1 class="altTxt">We are missing some info from you...</h1>
+				<p class='text_left'>There seems to be an issue processing your request for your 15% off coupon. Please send us an email and we will help you resolve the problem. Please include your name, email address, and any other details you think we may need to know.</p>
+				<p class='text_center'><a href='mailto:mehmet@tomatoink.com?Subject=Help%20with%20my%2014%25%20off%20coupon&Body=Name%3A%0AEmail%20address%3A'>Email us</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="ti-cms-articleContent_area">
+	<div class="container-fluid ti-sur-re-contain">
+		<div class='row'>
+			<div class='col-sm-8 col-sm-offset-2 ti_cms_gradient_block'>
+				<h1 class="altTxt">Darn, we don't carry cartridges for your printer model!</h1>
+				<br/>
+				<h2>You told us <b><% Response.write(displayprintermodel) %></b> is your printer model.</h2>
+				<p class='text_left'>If this is not correct, please <b>click the back button</b> on your browser to update your information.</p>
+				<div class="ti_cms_separator"></div>
+				<p class='text_left'>We apologize for not carrying the cartridges you need for the printer model that you use at home. You can still use your 15% off coupon on these items that may interest you:</p>
+				<p class='text_left'>Code: <span class='ti-sur-re-coupon'><%=couponcode%></span> &nbsp; &nbsp;<a href='<?php echo $this->getUrl('photo-paper');?>'>Photo Paper</a> &nbsp; &nbsp;<a href='<?php echo $this->getUrl('usb-printer-cables.html');?>'>Cables &amp; Accessories</a></p>
+				<div class="ti-sur-re-disclaim">
+					<p><strong>Disclaimer:</strong> This offer cannot be combined with any other offer or coupon code and cannot be applied to past purchases. Coupon must be applied at checkout to receive your discount. Other restrictions may apply. Each coupon code may only be used once. Coupon expires 12/15/2014 11:59 PM <span title='Pacific Standard Time' class='ti-sur-re-help'>PST</span>.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- JS - Only include what you need-->
+<script src="<?php echo $this->getSkinUrl("js")?>/campaigns/2014/12-sur-re-endFunctions.js" type="text/javascript"></script>

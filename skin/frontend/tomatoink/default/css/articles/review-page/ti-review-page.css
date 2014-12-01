@@ -1,0 +1,138 @@
+/************* CSS Header ******************************/
+/*
+Please refer to http://www.877ink.com/coding-standards.pdf for
+the most up to date coding standards for TomatoInk.com
+Author: Megan Prior-Pfeifer
+
+Table of Contents:
+
+1. Layout
+2. Text
+3. Elements
+4. Recaptcha
+5. Responsive
+
+Created for Social Media review landing pages at TomatoInk.com: 
+http://www.tomatoink.com/facebook-review
+http://www.tomatoink.com/google-review
+
+Naming convention prefix: ti-fbr-
+
+green: #4ca62e
+orange: #f88625
+purple: #9F5FDF
+ 
+*/
+/*********************************************************/
+
+
+/* 1. Layout */
+
+.ti-cms-picture span img{
+	width:100%;
+}
+
+/* 2. Text */
+
+.ti-fbr-contain [class^="icon-"], .ti-fbr-contain [class*=" icon-"]{
+	font-size: 9.2em;
+	text-align: center;
+	display: block;
+}
+
+.ti-fbr-contain h3{
+	color:#333;
+}
+
+.ti-fbr-step1Txt{
+	color:#4ca62e;
+}
+
+.ti-fbr-step2Txt{
+	color:#f88625;
+}
+
+.ti-fbr-step3Txt{
+	color:#9F5FDF;
+}
+
+strong.ti-fbr-step3Txt:hover{
+	color:#d0a700;
+}
+
+/* 3. Elements */
+
+.ti-fbr-contain .ti_button{
+	margin:0;
+}
+
+.ti-fbr-contain a.step3Btn,
+.ti-fbr-contain a.step3Btn:hover,
+.ti-fbr-contain a.step3Btn:focus{
+	display: block;
+	clear: both;
+	height: auto;
+	text-align: center;
+	font-size: 18px;
+	margin: 0;
+	width: 98%;
+	padding: 5px 1%;
+	line-height: 1.5;
+}
+
+.ti-fbr-contain a.step3Btn{
+	background:#9F5FDF;
+}
+
+.ti-fbr-contain a.step3Btn:hover,
+.ti-fbr-contain a.step3Btn:focus{
+	background:#5C3780;
+}
+
+.ti-fbr-contain a.greyBtn{
+	background:#999;
+	border:none;
+	text-align:center;
+	padding:10px 0;
+}
+
+.ti-fbr-contain a.greyBtn:hover,
+.ti-fbr-contain a.greyBtn:focus{
+	background:#666;
+	border:none;
+}
+
+/* 4. Recaptcha */
+
+#recaptcha_image{
+	overflow:hidden;
+	width:290px !important;
+	margin:30px 0 0 ;
+}
+
+#recaptcha_widget [class^="icon-"], #recaptcha_widget [class*=" icon-"]{
+	font-size: 1.5em;
+	display: inline;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+
+.recaptcha_only_if_image, .recaptcha_only_if_audio{
+	margin:10px 0;
+}
+
+.ti-fbr-contain img{
+	margin:0;
+}
+
+
+/* 5. Responsive */
+
+@media only screen and (max-width: 767px) {
+}
+
+@media only screen and (max-width: 479px) {
+
+}
+
+

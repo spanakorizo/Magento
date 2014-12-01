@@ -29,5 +29,35 @@ class Compandsave_Campaign_IndexController extends Mage_Core_Controller_Front_Ac
 		$this->renderLayout();
 	}
 
+	public function surveyrespondAction()
+	{
+		//Get current layout state
+		
+		$this->loadLayout();
+		$block = $this->getLayout()->createBlock(
+		'Mage_Core_Block_Template',
+		'general-expired-campaign',
+		array('template' => 'campaigns/2014/12-sur-re.phtml')
+		);
+		$this->getLayout()->getBlock('content')->append($block);
+		
+		$this->renderLayout();
+	}
+
+	public function surveynorespondAction()
+	{
+		//Get current layout state
+		
+		$this->loadLayout();
+		$block = $this->getLayout()->createBlock(
+		'Mage_Core_Block_Template',
+		'general-expired-campaign',
+		array('template' => 'campaigns/2014/12-sur-non.phtml')
+		);
+		$this->getLayout()->getBlock('content')->append($block);
+		
+		$this->renderLayout();
+	}
+
 }
 ?>

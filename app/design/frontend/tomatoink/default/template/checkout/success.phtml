@@ -59,6 +59,36 @@
 </ul>
 <?php endif;?>
 
+
+<link rel="stylesheet" href="<?php echo $this->getSkinUrl(); ?>css/articles/confirmation-page/ti-confirmation-page.css" type="text/css" />
+</head>
+<div class="ti-cms-articleContent_area">
+    <div class="container-fluid">
+       <div class="row">
+          <div class="col-xs-12">
+             <h2>Do you like to read up before you buy? So do other customers just like you!</h2>
+             <p>Leave feedback for us at any one of our customer feedback sites and you'll receive an awesome reward!</p>
+          </div>
+       </div>
+       <div class="row ti-conf-linkRow">
+          <a href="<?php echo $this->getUrl('facebook-review');?>" target="_blank">
+            <div class="col-sm-4 col-sm-offset-1 ti_cms_border_block btcf">
+                <div class="ti-conf-padding ti-conf-link">
+                   <p class="ti-conf-FB text_center"><span class="fbLogo icon-facebook2"></span> Rate us on Facebook<br><span class="ti_small_text">and receive a $5 coupon</span></p>
+                </div>
+            </div>
+            </a>
+          <a href="<?php echo $this->getUrl('google-review');?>" target="_blank">
+            <div class="col-sm-4 col-sm-offset-2 ti_cms_border_block btcf">
+                <div class="ti-conf-padding ti-conf-link">
+                   <p class="ti-conf-GG text_center"><span class="ggLogo icon-googleplus3"></span> Rate us on Google+<br><span class="ti_small_text">and receive a $5 coupon</span></p>
+                 </div>
+            </div>
+          </a>
+       </div>
+   </div>
+</div>
+
 <div class="buttons-set">
     <button type="button" class="button" title="<?php echo $this->__('Continue Shopping') ?>" onclick="window.location='<?php echo $this->getUrl() ?>'"><span><span><?php echo $this->__('Continue Shopping') ?></span></span></button>
 </div>

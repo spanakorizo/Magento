@@ -1,0 +1,189 @@
+/************* CSS Header ******************************/
+/*
+Please refer to our brand guidelines for
+the most up to date coding standards for TomatoInk.com
+Author: Megan Prior-Pfeifer
+
+Table of Contents:
+0. Page fixes
+1. Text
+2. Layout
+3. Images
+4. Elements
+5. Carousel
+6. Responsive
+
+Created for Survey responder landing page at TomatoInk.com: 
+http://www.tomatoink.com/compaigns/surveyrespond
+
+Thank you to http://sorgalla.com/jcarousel/
+
+Naming convention prefix: ti-sur-re-
+ 
+*/
+/*********************************************************/
+/*-- Page fixes --*/
+/*-- Text --*/
+.ti-sur-re-contain h1 {
+  text-align: center; }
+
+.ti-sur-re-contain h3 {
+  margin: 20px 0; }
+
+.ti-sur-re-contain sup {
+  font-size: .8em;
+  vertical-align: top; }
+
+.ti-sur-re-contain p {
+  text-align: center; }
+
+.ti-sur-re-contain p.ti-cms-alignLeft {
+  text-align: left; }
+
+.ti-sur-re-contain a {
+  color: #488310; }
+
+.ti-sur-re-contain a:hover {
+  color: #559a13;
+  text-decoration: none; }
+
+.ti-sur-re-contain .ti-sur-re-disclaim p {
+  text-align: left;
+  font-size: 12px;
+  font-size: 1.2rem; }
+
+.ti-sur-re-coupon {
+  font-size: 1.5em;
+  line-height: 0.8;
+  padding: 10px;
+  display: inline-block;
+  border: 2px dashed #e67921; }
+
+h2.ti-sur-re-dollar, p.ti-sur-re-dollar, .ti-sur-re-price {
+  font-weight: bold;
+  margin: 0;
+  font-size: 1.5em; }
+
+h2.ti-sur-re-dollar {
+  color: #f87a15;
+  font-size: 2em; }
+
+.ti-sur-re-retail {
+  text-decoration: line-through; }
+
+/*-- Layout --*/
+.ti-sur-re-topProduct {
+  background: #d6e6c6;
+  padding: 10px;
+  margin: 10px 0;
+  border: 2px solid #559a13; }
+
+/*-- Images --*/
+.ti-sur-re-topProduct img {
+  width: 90%;
+  display: block;
+  background: #fff;
+  padding: 8px; }
+
+/*-- Elements --*/
+.ti-sur-re-help {
+  cursor: help; }
+
+ul.ti-sur-re-checklist {
+  text-align: left;
+  margin: 0;
+  padding: 0; }
+
+.ti-sur-re-checklist .ti-sur-re-check {
+  vertical-align: middle; }
+
+.ti-sur-re-contain .ti-sur-re-checklist li {
+  text-align: left;
+  list-style: none outside none;
+  display: inline-block; }
+
+.ti-sur-re-qty {
+  width: 30%; }
+
+.ti-sur-re-contain .ti-sur-re-checklist .icon-checkmark {
+  color: #f87a15;
+  width: 10px;
+  margin-right: 15px;
+  margin-top: 3px; }
+
+.ti-sur-re-contain .ti_select_barContainer {
+  width: 98%; }
+
+#search-box {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #559a13;
+  background: #eff4eb; }
+
+.ti-re-update {
+  width: 98%;
+  margin: 0 1% 3%; }
+
+/*-- Carousel --*/
+.ti-sur-re-contain .jcarousel {
+  position: relative;
+  overflow: hidden;
+  min-height: 350px; }
+
+.ti-sur-re-contain .jcarousel ul {
+  width: 2000em;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  display: -webkit-flex;
+  display: flex; }
+
+.ti-sur-re-contain .jcarousel li {
+  float: left;
+  list-style: none outside none;
+  border: 2px solid #e67921;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #fbe8d8;
+  margin: 2px; }
+
+.ti-sur-re-contain .jcarousel img {
+  padding: 10px;
+  background: #fff;
+  height: 100px; }
+
+.ti-sur-re-contain .jcarousel-controls {
+  top: 30%;
+  position: absolute;
+  z-index: 0;
+  width: 100%; }
+
+.ti-sur-re-contain .jcarousel-controls .jcarousel-control-prev,
+.ti-sur-re-contain .jcarousel-controls .jcarousel-control-next {
+  background: #FFF;
+  border-radius: 50%;
+  line-height: 0;
+  border-bottom: 0;
+  padding: 3px 3px 0;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+  position: absolute; }
+
+.ti-sur-re-contain .jcarousel-controls .jcarousel-control-prev {
+  left: -1.5em; }
+
+.ti-sur-re-contain .jcarousel-controls .jcarousel-control-next {
+  right: 0; }
+
+.ti-sur-re-contain .jcarousel-controls .inactive {
+  display: none; }
+
+.ti-sur-re-contain .jcarousel-controls span {
+  font-size: 3em; }
+
+/*-- Responsive --*/
+@media only screen and (max-width: 767px) {
+  .ti-sur-re-contain .jcarousel ul {
+    display: block; } }
+
+/*# sourceMappingURL=12-sur-re.css.map */

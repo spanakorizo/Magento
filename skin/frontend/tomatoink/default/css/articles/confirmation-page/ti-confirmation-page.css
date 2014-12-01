@@ -1,0 +1,70 @@
+@charset "utf-8";
+
+/************* CSS Header **************/
+/*
+Please refer to http://www.877ink.com/public_html/coding-standards.pdf for
+the most up to date coding standards for TomatoInk
+Author: Megan Prior-Pfeifer
+
+Table of Contents:
+0. Page fixes
+1. Layout
+2. Text
+3. Images
+
+Created for the order confirmation module: template/checkout/success.phtml
+*/
+/*********************************************************/
+
+
+/*  1. Layout  */
+
+.ti-conf-padding{
+	padding:5px;
+}
+
+.ti-conf-link{
+	opacity:.8;
+	transition:opacity ease .2s;
+	-webkit-transition:opacity ease .2s;
+	-moz-transition:opacity ease .2s;
+	-o-transition:opacity ease .2s;
+	padding:5px;
+}
+
+.ti-conf-link:hover{
+	opacity:1;
+}
+
+.ti-conf-linkRow{
+	margin-bottom:1.5em;
+}
+
+/*  2. Text  */
+
+.ti-conf-link p.ti-conf-FB,
+.ti-conf-link p.ti-conf-GG{
+	margin: 1.5em 0px;
+}
+
+.ti-conf-link p.ti-conf-FB,
+.ti-conf-FB span.fbLogo{
+	color:#3b5998;
+}
+
+.ti-conf-link p.ti-conf-GG,
+.ti-conf-GG span.ggLogo{
+	color:#c30907;
+}
+
+.ti-conf-FB span.fbLogo,
+.ti-conf-GG span.ggLogo{
+	font-size:3em;
+	float:left;
+	vertical-align:middle;
+	margin: 0 -.5em 0 1em;
+}
+
+.ti-conf-link p.ti-conf-BR{
+	color:#333;
+}

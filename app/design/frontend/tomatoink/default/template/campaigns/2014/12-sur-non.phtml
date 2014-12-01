@@ -1,0 +1,244 @@
+<!-- Page canonical name: campaigns/index/surveynorespond -->
+
+<!-- CSS -->
+<link href="<?php echo $this->getSkinUrl('css')?>/articles/ti-article.css" type="text/css" rel="stylesheet" />
+<link href="<?php echo $this->getSkinUrl('css')?>/campaigns/2014/12-sur-non.css" type="text/css" rel="stylesheet" />
+<!-- JS - Only include what you need-->
+
+<script type="text/javascript">document.cookie ="couponcode=ESURVEY12; expires=Sun, 28 December 2014 23:59:59 UTC; path=/";</script>
+
+<div class="ti-cms-articleContent_area">
+	<div class="container-fluid ti-sur-non-contain">
+		<div id="ti_sur_non_form_display">
+			<div class="row ti-sur-non-headline-contain">
+				<div class="col-sm-6 ti_hide_479">
+					<img src="<?php echo $this->getSkinUrl('images/campaigns/2014/12-sur-non/ti-timer-dial.gif'); ?>" alt="It's the final countdown!" class="ti-sur-non-timer"/>
+				</div>
+				<div class="col-sm-6">
+					<h1>Get a FREE magnet frame + 25% off code<br><span class="ti_small_text">if you take our short survey</span></h1>
+				</div>	
+			</div>
+			<div class="row ti-sur-non-surveyContain">
+				<div class="col-md-7">
+					<div class="ti-sur-non-survey">
+						<ol>
+							<!--<% IF ProductCode <> "" THEN %>-->
+							<li id='product_code_radio'><strong>Is the product shown the product that you usually order?</strong><br>
+								<input type="radio" value="yes" name="product-type" id="product-yes"/>
+								<label for="product-yes">
+									<div class="ti-radio"></div>
+									<span>Yes</span>
+								</label>
+								<input type="radio" value="no" name="product-type" id="product-no"/>
+								<label for="product-no">
+									<div class="ti-radio"></div>
+									<span>No</span> 
+								</label>
+							</li>
+							<input type='hidden' value='<% Response.write(ProductCode)%>' id ="product_code_input">
+							<!--<% END IF %> -->					
+							<li>
+								<label>
+								<strong>Please type your printer model:</strong>
+								<br />
+								<input type="text" autocomplete="off" id="printer_model_input" placeholder="Printer Model" onblur="document.getElementById('display-search-results').style.display='hidden';">
+								<div id="display-search-results" style="display:none;"></div>
+								<span class="ui-helper-hidden-accessible" aria-live="polite" role="status"></span>
+								</label>
+								<p>You will receive an exclusive 25% off coupon on January 6<sup>th</sup> which you can use to buy products related to the printer model you type above. Please double check that you are typing the correct printer model.</p>
+							</li>
+							<li>
+								<label>
+								<strong>Last time you purchased a printer cartridge:</strong>
+								<br />
+								<input type="text" id="purchase_date" placeholder="MM/DD/YYYY">
+								</label>
+							</li>
+							<li>
+								<label>
+									<strong>How often do you order replacement printer cartridges?</strong> 
+									<br />
+									<div class="ti_select_barContainer">
+										<select id="select_freq_options">
+											<option selected="" disabled="">Please select</option>
+											<option value="1">Every month or less</option>
+											<option value="2">Every 45 days</option>
+											<option value="3">Every 60 days</option>
+											<option value="4">Every 90 days</option>
+											<option value="5">Every 6 months</option>
+											<option value="6">Every year or longer</option>
+										</select>
+									</div>
+								</label>
+							</li>
+							<li>
+								<strong>Are you happy with the frequency in which you receive emails from TomatoInk.com?</strong>
+								<br />
+								<input id="email_freq_radio1" value="yes" name="email-freq" type="radio" checked="checked" onclick="document.getElementById('frequency_block').style.display='none';">
+								<label for="email_freq_radio1">
+									<div class="ti-radio"></div><span>Yes</span>
+								</label>
+								<input id="email_freq_radio2" value="no" name="email-freq" type="radio" onclick="document.getElementById('frequency_block').style.display='block';">
+								<label id="email_freq_radio2">
+									<div class="ti-radio"></div><span>No</span>
+								</label>
+									<div style=" " id="frequency_block" class="frequency-block">
+										<p>Actually, I do not want to receive emails more than:</p> 
+										<input id="frequency1" name="frequency" value="1" checked="checked" type="radio">
+										<label for="frequency1"><div class="ti-radio"></div><span>Once a month</span>
+										</label><br class="ti_show_767"/>
+										<input id="frequency2" name="frequency" value="2" type="radio">
+										<label for="frequency2" ><div class="ti-radio"></div><span>Twice a month</span>
+										</label>
+										<p id="unsuccess_text_frequency"></p>
+									</div>
+							</li>
+						</ol>
+						<p class="ti-sur-non-alert"></p>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<img id="product_image" src="<?php echo $this->getSkinUrl('images/campaigns/2014/12-sur-non/ink-group.jpg'); ?>" alt="Shop ink and toner and save up to 80% every day!" class="cas_cms_width100"/>
+					<h3 id="product_name" class="ti-sur-non-couponReminder">QQQ</h3>
+				</div>				
+			</div>	
+			<div class="row">
+				<div class="col-md-7">
+					<div class="ti-sur-non-info">
+						<p>Enter your information below to receive your free magnet frame from TomatoInk.com!<br><em>(U.S. and Canada only)</em></p>
+						<div class="row">
+							<div class="col-sm-6">
+								<input id="ti-sur-non-firstname" value="<% Response.write(FirstName_text) %>" placeholder="First Name" type="text">
+							</div>
+							<div class="col-sm-6">
+								<input id="ti-sur-non-lastname" value="<% Response.write(LastName_text) %>" placeholder="Last Name" type="text">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<input id="ti-sur-non-address" value="<% Response.write(Address_text) %>" placeholder="Address" type="text">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<input id="ti-sur-non-city" value="<% Response.write(City_text) %>" placeholder="City" type="text">
+							</div>
+							<div class="col-sm-6">
+								<input id="ti-sur-non-state" value="<% Response.write(State_text) %>" placeholder="State" type="text">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								<input id="ti-sur-non-zip" value="<% Response.write(ZipCode_text) %>" placeholder="Zip Code" type="text">
+							</div>
+							<div class="col-sm-6">
+								<input id="ti-sur-non-country" value="<% Response.write(Country_text) %>" placeholder="Country" type="text">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<input id="ti-sur-non-email" value="<% Response.write(Email_text) %>" placeholder="Email" type="text">
+							</div>
+						</div>
+						<div id="ti_sur_alert"></div>
+						<input id="agree_check" value="agree" type="checkbox" />
+						<label for="agree_check"><div class="ti-checkbox"></div><span>I confirm that the information provided is accurate, and I would like to receive a 25% off coupon code associated with my printer model via email.</span></label>
+						<div class="row">
+							<div class="col-xs-12">
+								<input class="ti-sur-non-submitEntry ti-cms-greenBtn" value="Submit" onclick="subForm(3)" type="submit">
+							</div>
+						</div>
+						<p class="ti-sur-non-alert"></p>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<img src="<?php echo $this->getSkinUrl('images/campaigns/2014/12-sur-non/ti-frame-non.jpg'); ?>" alt="Free magnet frame from TomatoInk.com">
+				</div>
+			</div>
+			<div class="row ti-sur-non-disclaimer">
+				<div class="col-xs-10 col-xs-offset-1">
+					<p><strong>Disclaimer:</strong> Only current TomatoInk.com customers and subscribers are eligible to receive this offer. Limit one magnet frame per household. Multiple entries will not result in multiple frames being sent to the same household or multiple coupon codes being sent to the same email address. Magnets will be sent January 6<sup>th</sup> business days at no cost to the user. Your 25% off coupon code will be emailed January 6<sup>th</sup>. For additional questions or comments, please contact <a href="mailto:customercare@tomatoink.com" target="_blank">customercare@tomatoink.com</a>. <a href="<?php echo $this->getUrl('privacy-policy');?>" target="_blank">Click here</a> for more information about our privacy policy. TomatoInk.com reserves the right to cancel this promotion without prior notice. Offer ends 12/28/2014 11:59 PST or while supplies last.</p>
+				</div>
+			</div>
+		</div>
+
+		<div id="ti-cms-thankyou" style="">
+			<div class="row" style="" id="thanks">
+				<div class="col-xs-12 ti_cms_gradient_block ti-sur-non-disclaimer text_center">
+					<h3>Thank you for your time.<br>Your 25% off exclusive coupon code and magnetic frame will be sent Jan 6<sup>th</sup>.</h3>
+					<h2>In the meantime, please enjoy this 12% off coupon code:</h2>
+					<h1 class="ti-sur-non-coupon">ESURVEY12</h1>
+					<p class="text_left">Coupon code ESURVEY12 expires Dec 28<sup>th</sup>, 2014. Coupon codes cannot be combined with any other offers or promotions and cannot be applied to past purchases. Offers valid online at TomatoInk.com only. TomatoInk.com reserves the right to remove, add or change items on this promotion without prior notice.</p>
+				</div>
+			</div>
+		</div>
+		<!--<% elseif isValidUser=0 then %>-->
+		<div id="ti-cms-sub">
+			<div class="row" style="display:block" id="newsletter_signup">
+				<div class="col-xs-12 ti_cms_gradient_block text_center">
+					<h3>Sorry, you are not currently subscribed to TomatoInk.com's Newsletter List!<br>This promotion is exclusive to our customers &amp; current subscribers!</h3>
+					<h1>Please sign up to our newsletter list<br><span class="ti_small_text">so you don't miss any future offers:</span></h1>			
+					<h2><a href='<?php echo $this->getUrl('Mail_Subscribe');?>' target='_blank' class="ti_button">Sign up for offers</a> or <a href='<?php echo $this->getUrl('');?>' class="ti_button">Return home</a></h2>
+				</div>
+			</div>
+		</div>
+		<!--
+		<script type="text/javascript">
+			document.getElementById('ti-cms-second-search').style.display="block";
+		</script>
+		<% elseif flag_run=0 then %>-->
+		<div id="ti-cms-expired">
+			<div class="row" style="" id="expired">
+				<div class="col-xs-12 ti_cms_gradient_block ti-sur-non-disclaimer text_center">
+					<h3>Thank you for your interest.</h3>
+					<h3>Unfortunately this survey has ended since we've reached our maximum amount of entries.</h3>
+					<h3>If you answered the questions correctly, look forward to your exclusive discount coupon via email.</h3>
+					<h2>Otherwise, please enjoy the 12% off coupon code below:</h2>	
+					<h1 class="ti-sur-non-coupon">ESURVEY12</h1>
+					<p class="text_left">Coupon code ESURVEY12 expires Dec 28<sup>th</sup>, 2014. Coupon codes cannot be combined with any other offers or promotions and cannot be applied to past purchases. Offers valid online at TomatoInk.com only. TomatoInk.com reserves the right to remove, add or change items on this promotion without prior notice.</p>			
+				</div>
+			</div>
+		</div>
+		<!--
+		<script type="text/javascript">
+			document.getElementById('ti-cms-second-search').style.display="block";
+		</script>
+		<% end if %>-->
+		<div id="ti-cms-second-search"  style="">
+			<div class="row" style="display:block" id="search_bar">
+				<div class="col-xs-12">
+					<div class="ti_input_bar">
+					<?php $catalogSearchHelper = $this->helper('catalogsearch'); ?>
+						<form id="search_mini_form-2" action="<?php echo $catalogSearchHelper->getResultUrl();?>" method="get">
+							<input type="search" name="<?php echo $catalogSearchHelper->getQueryParamName(); ?>" id="search2" placeholder="Type your printer or ink model..." />
+							<input type="submit" name="Submit" id="search_submit2" value="Search" title="<?php echo $this->__('Search'); ?>"/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- JS - Only include what you need-->
+<script src="<?php echo $this->getSkinUrl("js")?>/campaigns/2014/12-sur-non-endFunctions.js" type="text/javascript"></script>
+
+<!-- JS below was copied over from the original asp file. can we remove what's not needed and move the rest to the 12-sur-non-endFunctions.js file? -->
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+
+<script type="text/javascript">
+	$('input[name="product-type"]').change(function() {
+		if ($('input[name="product-type"]:checked').val() == "no") {
+			$('#product_image').attr('src', "/v/newsletter/2014-11-sur/images/product-group.jpg");
+			$('#product_name').html("Save 25% on your next ink purchase!");
+			
+		}
+		else if ($('input[name="product-type"]:checked').val() == "yes") {
+			$('#product_image').attr('src', "<% Response.write(image_url) %>");
+			$('#product_name').html("<% Response.write(product_text) %>");
+		}
+	});
+	$('#purchase_date').datepicker();
+</script>

@@ -67,13 +67,13 @@
                     </ul>
 					
                     <?php echo $this->getChildHtml('persistent.remember.me.tooltip'); ?>
-                    <!--<p class="required text_left"><?php echo $this->__('* Required Fields') ?></p>-->
+                    <!--<p class="required text_left"><?php //echo $this->__('* Required Fields') ?></p>-->
 					<div class="col-2 registered-users">
 						<div class="buttons-set">
 							<p>
 								<a href="<?php echo $this->getForgotPasswordUrl() ?>" class="f-left"><?php echo $this->__('Forgot Your Password?') ?></a>
 							</p>
-							<button type="submit" class="button one_fourth clear title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
+							<button type="submit" class="button one_fourth clear" title="<?php echo $this->__('Login') ?>" name="send" id="send2"><span><span><?php echo $this->__('Login') ?></span></span></button>
 						</div>
 					</div>
 					<?php if (Mage::helper('checkout')->isContextCheckout()): ?>
@@ -111,3 +111,4 @@
     //]]>
     </script>
 </div>
+

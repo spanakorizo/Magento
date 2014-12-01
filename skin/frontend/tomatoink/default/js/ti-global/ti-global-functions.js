@@ -542,24 +542,65 @@ if (!Modernizr.input.placeholder) {
 
 });
 
-/*******************************************************/
-/* */
-/* Description: Hover fix for touch devices*/
-/* Author: Megan */
-/* http://stackoverflow.com/questions/17233804/how-to-prevent-sticky-hover-effects-for-buttons-on-touch-devices */
-/* Version: 0.0.1 */
-/*******************************************************/
+/* For touch devices */
+/*http://www.hnldesign.nl/work/code/mouseover-hover-on-touch-devices-using-jquery/*/
+ jQuery(document).ready(function($) {
 
-function fix()
-{
-    var el = this;
-    var par = el.parentNode;
-    var next = el.nextSibling;
-    par.removeChild(el);
-    setTimeout(function() {par.insertBefore(el, next);}, 0)
+$('.taphover').on("touchstart", function (e) {
+  'use strict'; //satisfy code inspectors
+  var link = $(this); //preselect the link
+  if (link.hasClass('hover')) {
+    return true;
+  } else {
+    link.addClass('hover');
+    $('.taphover').not(this).removeClass('hover');
+    e.preventDefault();
+    return false; //extra, and to make sure the function has consistent return points
+  }
+});
+
+/*$('.taphover').bind("touchstart", function (e) {
+  'use strict'; //satisfy code inspectors
+  var link = $(this); //preselect the link
+  var touched = false;;
+  var timeout = setTimeout(function() { touched = true }, 3000);
+}).bind("touchend", function() {
+  if (touched) {
+    if (!link.hasClass('hover')) {
+      link.addClass('hover'); 
+      //e.preventDefault();
+    } else {
+      link.removeClass('hover');
+    }
+  }
+  touched = false;
+  clearTimeout(timeout);
+});*/
+  
+});(jQuery)
+
+
+/*$('.taphover').on("touchstart", function (e) {
+  'use strict'; //satisfy code inspectors
+  var link = $(this); //preselect the link
+  if (link.hasClass('hover')) {
+    return true;
+  } else {
+    var timeout = setTimeout(link.addClass('hover'), 3000);
+    if(clearTimeout(timeout)) {
+      $('.taphover').not(this).removeClass('hover');
+    }
+    //setTimeout(next(), 3000);
+   
+    e.preventDefault();
+    return false; //extra, and to make sure the function has consistent return points
+  }
+});*/
+
+function next() {
+  link.addClass('hover');
+
 }
-
-
 /*******************************************************/
 /* */
 /* Description: Mini Nav toggle*/
@@ -587,22 +628,22 @@ function toggleNavigation() {
 }
 
 // Sliding codes
-jQuery(document).ready(function($) {
-  $("#toggle > li > a").click(function () {
-      if (false == $(this).next().is(':visible')) {
-          $('#toggle div.ti_cms_dropContent').slideUp();
-      }
-   
-      var $currIcon=$(this).find("span.toggle-btn");
-   
-      $("span.toggle-btn").not($currIcon).addClass('icon-plus').removeClass('icon-minus');
-   
-      $currIcon.toggleClass('icon-minus icon-plus');
-   
-      $(this).next().slideToggle();
-   
-      $("#toggle > li > a").removeClass("active");
-      $(this).toggleClass('active');
-   
-  });
-});(jQuery)
+//jQuery(document).ready(function($) {
+//  $("#toggle > li > a").click(function () {
+//      if (false == $(this).next().is(':visible')) {
+//          $('#toggle div.ti_cms_dropContent').slideUp();
+//      }
+//  
+//      var $currIcon=$(this).find("span.toggle-btn");
+//   
+//      $("span.toggle-btn").not($currIcon).addClass('icon-plus').removeClass('icon-minus');
+//   
+//      $currIcon.toggleClass('icon-minus icon-plus');
+//   
+//      $(this).next().slideToggle();
+//   
+//      $("#toggle > li > a").removeClass("active");
+//      $(this).toggleClass('active');
+//   
+//  });
+//});(jQuery)
