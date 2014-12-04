@@ -8,23 +8,32 @@
 <script type="text/javascript">document.cookie ="couponcode=ESURVEY12; expires=Sun, 28 December 2014 23:59:59 UTC; path=/";</script>
 
 <?php
-
-	getProductIdByCustomerEmail("yiyangh@compandsave.com");
+	$inputemail="yiyangh@compandsave.com";
+	$Customer_Firstname = "";
+	$Customer_Lastname = "";
+	$Customer_Address = "";
+	$Customer_City = "";
+	$Customer_State = "";
+	$Customer_Zipcode = "";
+	$Customer_Country = "";
+	$Customer_Email = "";
+	
+	//getProductIdByCustomerEmail("yiyangh@compandsave.com");
 	
 	/***************************************************
-	// function for 14-non-survey Magento
 	// Author Shuoran in Dec 4, 2014
 	// input: customer's email.
-	// output: the latest item which the user purchased.
+	// output1: the latest item which the user purchased.
+	// output2: the user's information for Survey.
 	***************************************************/
-	function getProductIdByCustomerEmail($email)
-	{
+	//function getProductIdByCustomerEmail($email)
+	//{
 		// get the latest order by email
 		$orderID = 0;
 		$shippingId = 0;
 		$orderCollection = Mage::getModel('sales/order')
 		->getCollection()
-		->addFieldToFilter('customer_email', $email)
+		->addFieldToFilter('customer_email', $inputemail)
 		->setOrder('created_at', 'desc')
 		->setPageSize(1)
 		->setCurPage(1);
@@ -34,7 +43,17 @@
 			$shippingId = $order->getShippingAddress()->getId();
 		}
 		$address = Mage::getModel('sales/order_address')->load($shippingId);
-		echo var_dump($address)."<br/>";
+		//echo var_dump($address)."<br/>";
+		$Customer_Firstname = $address->getFirstname();
+		$Customer_Lastname = $address->getLastname();
+		$address_temp = $address->getStreet();
+		$Customer_Address = $address_temp[0]." ".$address_temp[1];
+		$Customer_City = $address->getCity();
+		$Customer_State = $address->getRegion();
+		$Customer_Zipcode = $address->getPostcode();
+		$Customer_Country = $address->getCountryId();
+		$Customer_Email = $address->getEmail();
+		/*
 		echo $address->getFirstname()."<br/>";
 		echo $address->getLastname()."<br/>";
 		foreach ($address->getStreet() as $userAddress)
@@ -46,6 +65,7 @@
 		echo $address->getPostcode()."<br/>";
 		echo $address->getCountryId()."<br/>";
 		echo $address->getEmail()."<br/>";
+		*/
 		if ($orderID != 0)
 		{
 			// Now do whatever you want with your order item.
@@ -64,7 +84,7 @@
 		{
 		
 		}
-	}
+	//}
 ?>
 <br/>
 <br/>
@@ -169,36 +189,36 @@
 						<p>Enter your information below to receive your free magnet frame from TomatoInk.com!<br><em>(U.S. and Canada only)</em></p>
 						<div class="row">
 							<div class="col-sm-6">
-								<input id="ti-sur-non-firstname" value="<% Response.write(FirstName_text) %>" placeholder="First Name" type="text">
+								<input id="ti-sur-non-firstname" value="<?php echo $Customer_Firstname; ?>" placeholder="First Name" type="text">
 							</div>
 							<div class="col-sm-6">
-								<input id="ti-sur-non-lastname" value="<% Response.write(LastName_text) %>" placeholder="Last Name" type="text">
+								<input id="ti-sur-non-lastname" value="<?php echo $Customer_Lastname; ?>" placeholder="Last Name" type="text">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-12">
-								<input id="ti-sur-non-address" value="<% Response.write(Address_text) %>" placeholder="Address" type="text">
+								<input id="ti-sur-non-address" value="<?php echo $Customer_Address; ?>" placeholder="Address" type="text">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
-								<input id="ti-sur-non-city" value="<% Response.write(City_text) %>" placeholder="City" type="text">
+								<input id="ti-sur-non-city" value="<?php echo $Customer_City; ?>" placeholder="City" type="text">
 							</div>
 							<div class="col-sm-6">
-								<input id="ti-sur-non-state" value="<% Response.write(State_text) %>" placeholder="State" type="text">
+								<input id="ti-sur-non-state" value="<?php echo $Customer_State; ?>" placeholder="State" type="text">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-sm-6">
-								<input id="ti-sur-non-zip" value="<% Response.write(ZipCode_text) %>" placeholder="Zip Code" type="text">
+								<input id="ti-sur-non-zip" value="<?php echo $Customer_Zipcode; ?>" placeholder="Zip Code" type="text">
 							</div>
 							<div class="col-sm-6">
-								<input id="ti-sur-non-country" value="<% Response.write(Country_text) %>" placeholder="Country" type="text">
+								<input id="ti-sur-non-country" value="<?php echo $Customer_Country; ?>" placeholder="Country" type="text">
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-xs-12">
-								<input id="ti-sur-non-email" value="<% Response.write(Email_text) %>" placeholder="Email" type="text">
+								<input id="ti-sur-non-email" value="<?php echo $Customer_Email; ?>" placeholder="Email" type="text">
 							</div>
 						</div>
 						<div id="ti_sur_alert"></div>

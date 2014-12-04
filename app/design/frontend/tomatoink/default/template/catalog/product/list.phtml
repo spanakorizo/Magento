@@ -87,23 +87,22 @@
                 <div class="ti_block_inner ti_cms_border_block btcf">  
 
                     <!--<li class="item<?php if(($i-1)%$_columnCount==0): ?> first<?php elseif($i%$_columnCount==0): ?> last<?php endif; ?>">!-->
+
+
+
+            
+                            <div class="ti_product_blockName">
+                                <p><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?phpif ($_product->getProductNameShort() != "") 
+                                        echo $_helper->productAttribute($_product, $_product->getProductNameShort() , 'name'); 
+                                    else 
+                                        echo $_helper->productAttribute($_product, $_product->getName() , 'name'); 
+
+                                    ?></a></p> 
+                            </div>
                     <?php //product image ?>
                     <div class="ti_product_blockImg">
                     <a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" ><img src="<?php echo $this->helper('catalog/image')->init($_product, 'small_image')->resize(135); ?>" width="135" height="135" alt="<?php echo $this->stripTags($this->getImageLabel($_product, 'small_image'), null, true) ?>" /></a>
                     </div>
-
-
-                            
-                    <?php //product name ?>
-                            <div class="ti_product_blockName">
-                                <p><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php echo $_helper->productAttribute($_product, $_product->getName() , 'name'); ?></a></p> 
-                            </div>
-                        <?php //if($_product->getRatingSummary()): ?>
-                        <?php //echo $this->getReviewsSummaryHtml($_product, 'short') ?>
-                        <?php //endif; ?>
-                        <?php //echo $this->getPriceHtml($_product, true) ?>
-
-                        <?php //product price ?>
 
                          <div class="ti_product_blockPrice">           
                         <?php if ($this->getCanShowProductPrice($_product)): ?>

@@ -190,7 +190,7 @@ $collection = Mage::getResourceModel('catalog/product_collection')->addFieldToFi
                         <img class="ti_cart_thumbRelate" src="<?php echo $this->helper('catalog/image')->init($_item, 'image')->resize(75); ?>" width="75" height="75" alt="<?php echo $this->escapeHtml($_item->getName()) ?>"/>
                     </div>
                     <div class="ti_cart_relateBlock two_third">
-                        <p><span class="ti_small_text"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getName()) ?></a></span></p><?php //echo $this->getPriceHtml($_item, true) //uncomment if wanna show price ?>
+                        <p><span class="ti_small_text"><a href="<?php echo $_item->getProductUrl() ?>"><?php echo $this->escapeHtml($_item->getProductNameShort()) ?></a></span></p><?php //echo $this->getPriceHtml($_item, true) //uncomment if wanna show price ?>
                         <div class="ti_cms_block_qty">
         
                                 <p class="lt_green"><input type="text" name="qty<?php echo $_item->getId() ?>" maxlength="3" id = "ti_simple_prd_<?php echo $_item->getId(); ?>" value=""></input> <input class="ti_altBtn" type="button" value="Add To Cart" name="<?php echo $_item->getId(); ?>" onclick="addSimpleToCart('ti_simple_prd_<?php echo $_item->getId(); ?>');product_form_<?php echo $_item->getId(); ?>.submit()"></input></p>
