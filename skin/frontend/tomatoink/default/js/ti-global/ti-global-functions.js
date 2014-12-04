@@ -628,22 +628,22 @@ function toggleNavigation() {
 }
 
 // Sliding codes
-//jQuery(document).ready(function($) {
-//  $("#toggle > li > a").click(function () {
-//      if (false == $(this).next().is(':visible')) {
-//          $('#toggle div.ti_cms_dropContent').slideUp();
-//      }
-//  
-//      var $currIcon=$(this).find("span.toggle-btn");
-//   
-//      $("span.toggle-btn").not($currIcon).addClass('icon-plus').removeClass('icon-minus');
-//   
-//      $currIcon.toggleClass('icon-minus icon-plus');
-//   
-//      $(this).next().slideToggle();
-//   
-//      $("#toggle > li > a").removeClass("active");
-//      $(this).toggleClass('active');
-//   
-//  });
-//});(jQuery)
+jQuery(document).ready(function($) {
+  $("#toggle > li > a").click(function () {
+      if (false == $(this).next().is(':visible')) {
+          $('#toggle div.ti_cms_minidropContent').slideUp();
+      }
+  
+      var $currIcon=$(this).find("span.toggle-btn");
+   
+      $("span.toggle-btn").not($currIcon).addClass('icon-plus').removeClass('icon-minus');
+   
+      $currIcon.toggleClass('icon-minus icon-plus');
+   
+      $(this).next().slideToggle();
+   
+      $("#toggle > li > a").removeClass("active");
+      $(this).toggleClass('active');
+   
+  });
+});(jQuery)

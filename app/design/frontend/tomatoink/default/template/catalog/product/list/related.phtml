@@ -62,7 +62,7 @@
              <div class="ti_related_item_one_fourth ti_cms_block_related ti_related_item_one_fourth-<?php echo $i + 1; ?>">
                 <!--<div class="ti_related_content_container ti_block_inner">
                     <div class="ti_related_product_title">-->
-                <p><a href="<?php echo $_related_item->getProductUrl() ?>"><?php echo $this->__($_related_item->getName()) ?></a></p>
+                <p><a href="<?php echo $_related_item->getProductUrl() ?>"><?php echo $this->__($_related_item->getProductNameShort()) ?></a></p>
                     <!--</div>-->
                 <a href="<?php echo $_related_item->getProductUrl() ?>"><img src="<?php echo $_related_item->getImageUrl(); ?>" alt="<?php echo $this->stripTags($this->getImageLabel($_related_item, 'small_image'), null, true) ?>" /></a>
 

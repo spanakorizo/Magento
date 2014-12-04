@@ -27,6 +27,10 @@ Naming convention prefix: ti-new-
 	margin:4em 0 0;
 }
 
+.ti-new-fine-print{
+	font-size:1em;
+}
+
 /*-- Layout --*/
 
 .ti-new-hide{

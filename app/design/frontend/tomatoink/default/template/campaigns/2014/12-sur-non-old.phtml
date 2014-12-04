@@ -7,64 +7,6 @@
 
 <script type="text/javascript">document.cookie ="couponcode=ESURVEY12; expires=Sun, 28 December 2014 23:59:59 UTC; path=/";</script>
 
-<?php
-
-	getProductIdByCustomerEmail("yiyangh@compandsave.com");
-	
-	/***************************************************
-	// function for 14-non-survey Magento
-	// Author Shuoran in Dec 4, 2014
-	// input: customer's email.
-	// output: the latest item which the user purchased.
-	***************************************************/
-	function getProductIdByCustomerEmail($email)
-	{
-		// get the latest order by email
-		$orderID = 0;
-		$shippingId = 0;
-		$orderCollection = Mage::getModel('sales/order')
-		->getCollection()
-		->addFieldToFilter('customer_email', $email)
-		->setOrder('created_at', 'desc')
-		->setPageSize(1)
-		->setCurPage(1);
-		// there is only one order in this foreach loop, the latest one.
-		foreach ($orderCollection as $order) {
-			$orderID = $order->getId();
-			$shippingId = $order->getShippingAddress()->getId();
-		}
-		$address = Mage::getModel('sales/order_address')->load($shippingId);
-		//echo var_dump($address);
-		echo $address->getFirstname()."<br/>";
-		echo $address->getLastname()."<br/>";
-		echo $address->getCountryId()."<br/>";
-		echo $address->getCity()."<br/>";
-		echo $address->getStateId()."<br/>";
-		echo $address->getAddress()."<br/>";
-		echo $address->getZipCode()."<br/>";
-		echo $address->getEmail()."<br/>";
-		if ($orderID != 0)
-		{
-			// Now do whatever you want with your order item.
-			$itemCollection = Mage::getModel('sales/order_item')
-			->getCollection()
-			->addFieldToFilter('order_id',$orderID);
-			//->addFieldToFilter('order_id', array('in' => $orderCollection->getAllIds()));
-			foreach ($itemCollection as $item) {
-				$sku = $item->getSku();
-				echo $sku."<br/>";
-				$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
-				echo $product->getName();
-			}
-		}
-		else
-		{
-		
-		}
-	}
-?>
-<br/>
-<br/>
 <div class="ti-cms-articleContent_area">
 	<div class="container-fluid ti-sur-non-contain">
 		<div id="ti_sur_non_form_display">
