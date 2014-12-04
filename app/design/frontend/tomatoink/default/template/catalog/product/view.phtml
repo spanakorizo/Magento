@@ -43,7 +43,7 @@ error_reporting(E_ALL);
 <?php $formKey = Mage::getSingleton('core/session')->getFormKey();?>
 <script type="text/javascript">
     var ti_global_pagetype = "<?php echo $_product->getTypeId(); ?>";
-    var ti_global_pagename = "<?php echo $_product->getName(); ?>";
+    var ti_global_pagename = "<?php echo $_product->getProductNameShort(); ?>";
     var ti_global_productcode = "<?php echo $_product->getSku(); ?>";
     var ti_global_productprice = "<?php echo number_format($_product->getPrice(), 2); ?>";
     <?php if ($_product->getTypeId() == "grouped"): ?>

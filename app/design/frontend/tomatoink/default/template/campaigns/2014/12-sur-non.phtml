@@ -34,14 +34,17 @@
 			$shippingId = $order->getShippingAddress()->getId();
 		}
 		$address = Mage::getModel('sales/order_address')->load($shippingId);
-		//echo var_dump($address);
+		echo var_dump($address)."<br/>";
 		echo $address->getFirstname()."<br/>";
 		echo $address->getLastname()."<br/>";
-		echo $address->getCountryId()."<br/>";
+		foreach ($address->getStreet() as $userAddress)
+		{
+			echo $userAddress."<br/>";
+		}
 		echo $address->getCity()."<br/>";
-		echo $address->getStateId()."<br/>";
-		echo $address->getAddress()."<br/>";
-		echo $address->getZipCode()."<br/>";
+		echo $address->getRegion()."<br/>";
+		echo $address->getPostcode()."<br/>";
+		echo $address->getCountryId()."<br/>";
 		echo $address->getEmail()."<br/>";
 		if ($orderID != 0)
 		{

@@ -403,7 +403,7 @@ var ti_qty_previous="";
 /* Author: Yiyang     Date: 5/5/2014   */
 /* Version 2: clickable     5/9/2014   */
 /***************************************/
-
+jQuery(document).ready(function() {
 var ti_breadcrumb_home = "<p><a href='" + ti_global_url + "'>Home</a> &gt; "
 
 var ti_header_smallnav = document.getElementById('ti_header_breadcrumbs');
@@ -420,6 +420,10 @@ else if (typeof ti_global_pagetype != "undefined" && (ti_global_pagetype == "sim
   else 
     ti_header_smallnav.innerHTML = ti_breadcrumb_home + "<a href='" + ti_global_url + ti_global_printerbrand_url + ".html'>" + ti_header_sku_arr[1] + "</a> &gt; " + ti_global_pagename + "</p> ";
 }
+
+  
+});
+
 
 
 
