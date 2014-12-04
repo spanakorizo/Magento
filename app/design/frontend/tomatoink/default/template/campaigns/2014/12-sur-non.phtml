@@ -8,83 +8,65 @@
 <script type="text/javascript">document.cookie ="couponcode=ESURVEY12; expires=Sun, 28 December 2014 23:59:59 UTC; path=/";</script>
 
 <?php
-	$inputemail="yiyangh@compandsave.com";
-	$Customer_Firstname = "";
-	$Customer_Lastname = "";
-	$Customer_Address = "";
-	$Customer_City = "";
-	$Customer_State = "";
-	$Customer_Zipcode = "";
-	$Customer_Country = "";
-	$Customer_Email = "";
-	
-	//getProductIdByCustomerEmail("yiyangh@compandsave.com");
-	
+
+
 	/***************************************************
 	// Author Shuoran in Dec 4, 2014
 	// input: customer's email.
 	// output1: the latest item which the user purchased.
 	// output2: the user's information for Survey.
 	***************************************************/
-	//function getProductIdByCustomerEmail($email)
-	//{
-		// get the latest order by email
-		$orderID = 0;
-		$shippingId = 0;
-		$orderCollection = Mage::getModel('sales/order')
+	$inputemail="yiyangh@compandsave.com";
+	$Customer_Firstname = $Customer_Lastname = $Customer_Address = $Customer_City = $Customer_State = $Customer_Zipcode = $Customer_Country = $Customer_Email = $Product_Name = "";
+	$Product_Img_url = "//www.tomatoink.com/v/newsletter/2014-11-sur/images/ink-group.jpg";
+	// get the latest order by email
+	$orderID = 0;
+	$shippingId = 0;
+	$orderCollection = Mage::getModel('sales/order')
+	->getCollection()
+	->addFieldToFilter('customer_email', $inputemail)
+	->setOrder('created_at', 'desc')
+	->setPageSize(1)
+	->setCurPage(1);
+	
+	// Only one order in each foreach loop.
+	foreach ($orderCollection as $order) 
+	{
+		$orderID = $order->getId();
+		$shippingId = $order->getShippingAddress()->getId();
+	}
+	$address = Mage::getModel('sales/order_address')->load($shippingId);
+	//echo var_dump($address)."<br/>";
+	$Customer_Firstname = $address->getFirstname();
+	$Customer_Lastname = $address->getLastname();
+	$address_temp = $address->getStreet();
+	$Customer_Address = $address_temp[0]." ".$address_temp[1];
+	$Customer_City = $address->getCity();
+	$Customer_State = $address->getRegion();
+	$Customer_Zipcode = $address->getPostcode();
+	$Customer_Country = $address->getCountryId();
+	$Customer_Email = $address->getEmail();
+
+	if ($orderID != 0)
+	{
+		// Now do whatever you want with your order item.
+		$itemCollection = Mage::getModel('sales/order_item')
 		->getCollection()
-		->addFieldToFilter('customer_email', $inputemail)
-		->setOrder('created_at', 'desc')
-		->setPageSize(1)
-		->setCurPage(1);
-		// there is only one order in this foreach loop, the latest one.
-		foreach ($orderCollection as $order) {
-			$orderID = $order->getId();
-			$shippingId = $order->getShippingAddress()->getId();
+		->addFieldToFilter('order_id',$orderID);
+		//->addFieldToFilter('order_id', array('in' => $orderCollection->getAllIds()));
+		foreach ($itemCollection as $item) {
+			$sku = $item->getSku();
+			//echo $sku."<br/>";
+			$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
+			//$Product_Name = $product->getName();
+			//echo $product_id = Mage::getModel("catalog/product")->getIdBySku($sku);
+			$Product_Img_url = "//www.tomatoink.com/v/vspfiles/photos/".$sku."-2.jpg";
 		}
-		$address = Mage::getModel('sales/order_address')->load($shippingId);
-		//echo var_dump($address)."<br/>";
-		$Customer_Firstname = $address->getFirstname();
-		$Customer_Lastname = $address->getLastname();
-		$address_temp = $address->getStreet();
-		$Customer_Address = $address_temp[0]." ".$address_temp[1];
-		$Customer_City = $address->getCity();
-		$Customer_State = $address->getRegion();
-		$Customer_Zipcode = $address->getPostcode();
-		$Customer_Country = $address->getCountryId();
-		$Customer_Email = $address->getEmail();
-		/*
-		echo $address->getFirstname()."<br/>";
-		echo $address->getLastname()."<br/>";
-		foreach ($address->getStreet() as $userAddress)
-		{
-			echo $userAddress."<br/>";
-		}
-		echo $address->getCity()."<br/>";
-		echo $address->getRegion()."<br/>";
-		echo $address->getPostcode()."<br/>";
-		echo $address->getCountryId()."<br/>";
-		echo $address->getEmail()."<br/>";
-		*/
-		if ($orderID != 0)
-		{
-			// Now do whatever you want with your order item.
-			$itemCollection = Mage::getModel('sales/order_item')
-			->getCollection()
-			->addFieldToFilter('order_id',$orderID);
-			//->addFieldToFilter('order_id', array('in' => $orderCollection->getAllIds()));
-			foreach ($itemCollection as $item) {
-				$sku = $item->getSku();
-				echo $sku."<br/>";
-				$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
-				echo $product->getName();
-			}
-		}
-		else
-		{
-		
-		}
-	//}
+	}
+	else
+	{
+	
+	}
 ?>
 <br/>
 <br/>
@@ -317,8 +299,8 @@
 			
 		}
 		else if ($('input[name="product-type"]:checked').val() == "yes") {
-			$('#product_image').attr('src', "<% Response.write(image_url) %>");
-			$('#product_name').html("<% Response.write(product_text) %>");
+			$('#product_image').attr('src', "<?php echo $Product_Img_url; ?>");
+			$('#product_name').html("<?php echo $Product_Name; ?>");
 		}
 	});
 	$('#purchase_date').datepicker();
