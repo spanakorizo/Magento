@@ -61,7 +61,7 @@ error_reporting(E_ALL);
                 
             }
             else { 
-                $printerid = current(explode( ",", $_product->getCompatibleCatid()));
+                $printerid = current(explode( "-", $_product->getCompatibleCatid()));
                 $_printer_model = Mage::getModel('catalog/product')->loadByAttribute('categoryid', $printerid);
 
         } ?>
