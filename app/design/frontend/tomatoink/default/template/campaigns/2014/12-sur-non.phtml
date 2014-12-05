@@ -36,7 +36,6 @@
 		$shippingId = $order->getShippingAddress()->getId();
 	}
 	$address = Mage::getModel('sales/order_address')->load($shippingId);
-	//echo var_dump($address)."<br/>";
 	$Customer_Firstname = $address->getFirstname();
 	$Customer_Lastname = $address->getLastname();
 	$address_temp = $address->getStreet();
@@ -56,9 +55,8 @@
 		//->addFieldToFilter('order_id', array('in' => $orderCollection->getAllIds()));
 		foreach ($itemCollection as $item) {
 			$sku = $item->getSku();
-			//echo $sku."<br/>";
 			$product = Mage::getModel('catalog/product')->loadByAttribute('sku',$sku);
-			//$Product_Name = $product->getName();
+			$Product_Name = $product->getName();
 			//echo $product_id = Mage::getModel("catalog/product")->getIdBySku($sku);
 			$Product_Img_url = "//www.tomatoink.com/v/vspfiles/photos/".$sku."-2.jpg";
 		}

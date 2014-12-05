@@ -76,9 +76,7 @@ error_reporting(E_ALL);
                 var ti_global_printerbrand_url = "<?php 
                 $printer_cats = $_printer_model->getCategoryIds();
                 $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]);
-                $_printer_brands = $_printer_cat->getCategoryIds();
-                $_printer_brand = Mage::getModel('catalog/category')->load($_printer_brands[0]);
-                echo $_printer_brand->getUrlKey();
+                echo $_printer_cat->getUrlKey();
                 ?>";
             <?php endif; ?>
       
