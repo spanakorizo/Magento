@@ -10,14 +10,14 @@
                 <div class="field">
                     <label for="title" class="required"><em>*</em><?php echo $this->__('Title') ?></label>
                     <div class="input-box">
-                        <input type="text" name="title" title="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" />
+                        <input type="text" name="title" title="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" value="<?php echo  $this->getValue('title')?>"/>
                     </div>
                 </div>
 
                 <div class="field">
                     <label for="email" class="required"><em>*</em><?php echo Mage::helper('contacts')->__('Email') ?></label>
                     <div class="input-box">
-                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo $this->htmlEscape($this->helper('contacts')->getUserEmail()) ?>" class="input-text required-entry validate-email" type="text" />
+                        <input name="email" id="email" title="<?php echo Mage::helper('contacts')->__('Email') ?>" value="<?php echo  $this->getValue('email', $this->htmlEscape($this->helper('contacts')->getUserEmail()))?>" class="input-text required-entry validate-email" type="text" />
                     </div>
                 </div>
             </li>
@@ -25,7 +25,7 @@
             <li class="wide">
                 <label for="title" class="required"><em>*</em><?php echo $this->__('Title') ?></label>
                 <div class="input-box">
-                    <input type="text" name="title" title="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" />
+                    <input type="text" name="title" title="<?php echo $this->__('Title') ?>" id="title" class="input-text required-entry" value="<?php echo  $this->getValue('title')?>"/>
                 </div>
             </li>
             <?php endif; ?>
@@ -34,14 +34,14 @@
                 <div class="field">
                     <label for="department" class="required"><em>*</em><?php echo $this->__('Department') ?></label>
                     <div class="input-box">
-                        <?php echo $this->getDepartmentHtmlSelect() ?>
+                        <?php echo $this->getDepartmentHtmlSelect($this->getValue('department_id')) ?>
                     </div>
                 </div>
                 <?php if(Mage::getStoreConfig("helpmate/ticketForm/usePriorityOnFrontend")) :?>
                 <div class="field">
                     <label for="priority" class="required"><em>*</em><?php echo $this->__('Priority') ?></label>
                     <div class="input-box">
-                        <?php echo $this->getPriorityHtmlSelect() ?>
+                        <?php echo $this->getPriorityHtmlSelect($this->getValue('priority')) ?>
                     </div>
                 </div>
                 <?php endif;?>
@@ -50,10 +50,10 @@
             <li class="wide">
                 <label class="required" for="text"><?php echo $this->__('Message') ?><em>*</em></label>
                 <div class="input-box">
-                    <textarea id="text" class="input-text required-entry" title="<?php echo $this->__('Message') ?>" name="text" cols="5" rows="3"></textarea>
+                    <textarea id="text" class="input-text required-entry" title="<?php echo $this->__('Message') ?>" name="text" cols="5" rows="3"><?php echo  $this->getValue('text')?></textarea>
                 </div>
             </li>
-            
+
             <?php echo $this->getChildHtml('form.additional.info'); ?>
         </ul>
     </div>

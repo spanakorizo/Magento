@@ -1,0 +1,171 @@
+<?xml version="1.0"?>
+<config>
+    <api2>
+        <resource_groups>
+            <helpdesk translate="title" module="api2">
+                <title>TM Helpdesk</title>
+                <sort_order>1</sort_order>
+            </helpdesk>
+        </resource_groups>
+        <resources>
+            <helpdesk_tickets translate="title" module="api2">
+                <group>helpdesk</group>
+                <model>helpmate/api2_ticket</model>
+                <working_model>helpmate/ticket</working_model>
+                <title>TM Helpdesk Tickets</title>
+                <sort_order>10</sort_order>
+                <privileges>
+                    <customer>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                    </customer>
+                </privileges>
+
+                <attributes translate="id number customer_id email status title priority created_at modified_at department_id user_id store_id notes field0 field1 field2" module="api2">
+                    <id>Id</id>
+                    <number>Number</number>
+                    <customer_id>Customer ID</customer_id>
+                    <email>Email</email>
+                    <status>Status</status>
+                    <title>Title</title>
+                    <priority>Priority</priority>
+                    <created_at>created_at</created_at>
+                    <modified_at>modified_at</modified_at>
+                    <department_id>Department</department_id>
+                    <user_id>Admin user id</user_id>
+                    <user_name>Admin Name</user_name>
+                    <store_id>Store</store_id>
+
+                    <text>Create Ticket Text</text>
+                </attributes>
+                <routes>
+                    <route_collection>
+                        <route>/helpdesk/tickets</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+
+                    <route_entity>
+                        <route>/helpdesk/tickets/:id</route>
+                        <action_type>entity</action_type>
+                    </route_entity>
+                </routes>
+                <versions>1</versions>
+            </helpdesk_tickets>
+
+            <helpdesk_ticket_theards translate="title" module="api2">
+                <group>helpdesk</group>
+                <model>helpmate/api2_theard</model>
+                <working_model>helpmate/theard</working_model>
+                <title>TM Helpdesk Tickets Theards</title>
+                <sort_order>20</sort_order>
+                <privileges>
+                    <customer>
+                        <create>1</create>
+                        <retrieve>1</retrieve>
+                    </customer>
+                </privileges>
+
+                <attributes translate="id ticket_id message_id created_at text user_id status priority department_id enabled" module="api2">
+                    <id>Id</id>
+                    <ticket_id>Ticket</ticket_id>
+                    <!--<message_id>Message ID</message_id>-->
+                    <created_at>Created At</created_at>
+                    <text>Text</text>
+                    <user_id>Admin user id</user_id>
+                    <user_name>Admin Name</user_name>
+                    <status>Status</status>
+                    <priority>Priority</priority>
+                    <department_id>Department</department_id>
+                    <!--<enabled>Store</enabled>-->
+                </attributes>
+
+                <routes>
+                    <route_collection>
+                        <route>/helpdesk/tickets/:ticket_id/theards</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </helpdesk_ticket_theards>
+            
+            <helpdesk_departments translate="title" module="api2">
+                <group>helpdesk</group>
+                <model>helpmate/api2_department</model>
+                <working_model>helpmate/department</working_model>
+                <title>TM Helpdesk Departments</title>
+                <sort_order>30</sort_order>
+                <privileges>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                </privileges>
+
+                <attributes translate="id active name store_id gateway_id created_at modified_at sender email_template_new email_template_answer email_template_admin" module="api2">
+                    <id>Id</id>
+                    <name>Name</name>
+                </attributes>
+
+                <routes>
+                    <route_collection>
+                        <route>/helpdesk/departments</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </helpdesk_departments>
+
+            <helpdesk_statuses translate="title" module="api2">
+                <group>helpdesk</group>
+                <model>helpmate/api2_status</model>
+                <working_model>helpmate/status</working_model>
+                <title>TM Helpdesk Statuses</title>
+                <sort_order>40</sort_order>
+                <privileges>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                </privileges>
+
+                <attributes translate="id name" module="api2">
+                    <id>Code</id>
+                    <name>Label</name>
+                </attributes>
+
+                <routes>
+                    <route_collection>
+                        <route>/helpdesk/statuses</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                </routes>
+                <versions>1</versions>
+            </helpdesk_statuses>
+
+            <helpdesk_priorities translate="title" module="api2">
+                <group>helpdesk</group>
+                <model>helpmate/api2_priority</model>
+                <working_model>helpmate/priority</working_model>
+                <title>TM Helpdesk Priorities</title>
+                <sort_order>50</sort_order>
+                <privileges>
+                    <customer>
+                        <retrieve>1</retrieve>
+                    </customer>
+                </privileges>
+
+                <attributes translate="id name" module="api2">
+                    <id>Code</id>
+                    <name>Label</name>
+                </attributes>
+
+                <routes>
+                    <route_collection>
+                        <route>/helpdesk/priorities</route>
+                        <action_type>collection</action_type>
+                    </route_collection>
+                 </routes>
+                 <versions>1</versions>
+            </helpdesk_priorities>
+            
+        </resources>
+    </api2>
+</config>

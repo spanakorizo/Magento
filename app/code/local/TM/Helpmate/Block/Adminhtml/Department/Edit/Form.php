@@ -127,7 +127,7 @@ class TM_Helpmate_Block_Adminhtml_Department_Edit_Form extends Mage_Adminhtml_Bl
             'value' => '',
             'label' => ''
         ));
-        foreach (Mage::getModel('helpmate/gateway')->getOptionArray() as $value => $label) {
+        foreach (Mage::getModel('tm_email/gateway_storage')->getOptionArray() as $value => $label) {
             $gateways[] = array(
                 'value' => $value,
                 'label' => $label

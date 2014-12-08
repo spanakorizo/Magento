@@ -43,13 +43,19 @@ error_reporting(E_ALL);
 <?php $formKey = Mage::getSingleton('core/session')->getFormKey();?>
 <script type="text/javascript">
     var ti_global_pagetype = "<?php echo $_product->getTypeId(); ?>";
-    var ti_global_pagename = "<?php echo $_product->getProductNameShort(); ?>";
+    var ti_global_pagename = "<?php if ($_product->getProductNameShort() != "") echo $_product->getProductNameShort();
+    else echo $_product->getName();
+     ?>";
     var ti_global_productcode = "<?php echo $_product->getSku(); ?>";
     var ti_global_productprice = "<?php echo number_format($_product->getPrice(), 2); ?>";
     <?php if ($_product->getTypeId() == "grouped"): ?>
     var ti_global_printerbrand = "<?php $printer_cats = $_product->getCategoryIds();
-    $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]) ;
-    echo $_printer_cat->getName();
+    $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]);
+    $printer_brand = $_printer_cat->getParentCategory();
+    if ($printer_brand->getName() != "")
+        echo $printer_brand->getName();
+    else 
+        echo $_printer_cat->getName();
     ?>";
     var ti_global_printerbrand_url = "<?php echo $_printer_cat->getUrlKey() ?>";
      <?php endif; ?>
@@ -61,7 +67,12 @@ error_reporting(E_ALL);
                 
             }
             else { 
+
+                if (strpos($_product->getCompatibleCatid(),'-') != 0 )
                 $printerid = current(explode( "-", $_product->getCompatibleCatid()));
+                else 
+                    $printerid = current(explode( ",", $_product->getCompatibleCatid()));
+
                 $_printer_model = Mage::getModel('catalog/product')->loadByAttribute('categoryid', $printerid);
 
         } ?>
@@ -256,7 +267,10 @@ error_reporting(E_ALL);
                             </div>
                         </div>
                         <div class="ti_cms_separator"></div>
-                        <h2 class="ti_orange_head"><?php echo $_product->getNameLong(); ?></h2>
+                        <h2 class="ti_orange_head"><?php if ($_product->getNameLong() != "") echo $_product->getNameLong(); 
+                        else 
+                            echo $_product->getName();
+                        ?></h2>
                         <!--<ul class="ti_bullet">!-->
                             <!-- ?p hp //echo $_product->getShortDescription(); ? !-->
                         <!--</ul>!-->
@@ -270,7 +284,7 @@ error_reporting(E_ALL);
                     <table class="ti_cms_infoTable">
                         <tr>
                             <th><p>Model Name:</p></th>
-                            <td><p id="ti_product_name"><?php if ($_product->getTypeId() == "simple") echo $_product->getVendorPartno();
+                            <td><p id="ti_product_name"><?php if ($_product->getTypeId() == "simple" && $_product->getVendorPartno() != "") echo $_product->getVendorPartno();
                                 elseif ($_product->getTypeId() == "bundle") echo $bundle_modelname;
 
                              ?></p></td>
@@ -331,7 +345,15 @@ error_reporting(E_ALL);
                     <?php 
                     
                         $compatiblecatid = $_product->getCompatibleCatid(); 
-                        $related_printer = explode("-", $compatiblecatid);
+
+                if (strpos($compatiblecatid,'-') != 0 )
+                    $related_printer = explode("-", $compatiblecatid);
+                else 
+                    $related_printer = explode(",", $compatiblecatid);
+
+
+
+                        //$related_printer = explode("-", $compatiblecatid);
                         $printer_count = 1;
 
 

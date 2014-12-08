@@ -20,6 +20,28 @@
         </helpers>
     </global>
     
+    <frontend>
+        <events>
+            <controller_action_predispatch_contacts_index_post>
+                <observers>
+                    <akismet_post_contacts>
+                        <class>akismet/observer</class>
+                        <method>postContactUs</method>
+                    </akismet_post_contacts>
+                </observers>
+            </controller_action_predispatch_contacts_index_post>
+            
+            <controller_action_predispatch_review_product_post>
+                <observers>
+                    <akismet_post_product_review>
+                        <class>akismet/observer</class>
+                        <method>postProductReview</method>
+                    </akismet_post_product_review>
+                </observers>
+            </controller_action_predispatch_review_product_post>
+        </events>
+    </frontend>
+    
     <adminhtml>
         <acl>
             <resources>

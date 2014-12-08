@@ -92,7 +92,8 @@
 
             
                             <div class="ti_product_blockName">
-                                <p><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?phpif ($_product->getProductNameShort() != "") 
+                                <p><a href="<?php echo $_product->getProductUrl() ?>" title="<?php echo $_productNameStripped; ?>"><?php 
+                                    if ($_product->getProductNameShort() != "") 
                                         echo $_helper->productAttribute($_product, $_product->getProductNameShort() , 'name'); 
                                     else 
                                         echo $_helper->productAttribute($_product, $_product->getName() , 'name'); 

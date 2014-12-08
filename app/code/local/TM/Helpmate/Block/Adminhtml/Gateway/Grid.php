@@ -14,7 +14,7 @@ class TM_Helpmate_Block_Adminhtml_Gateway_Grid extends Mage_Adminhtml_Block_Widg
 
     protected function _prepareCollection()
     {
-        $collection = Mage::getModel('helpmate/gateway')->getCollection();
+        $collection = Mage::getModel('tm_email/gateway_storage')->getCollection();
 
         $this->setCollection($collection);
         return parent::_prepareCollection();

@@ -8,6 +8,7 @@
         <table class="data-table" id="my-tickets-table">
             <thead>
                 <tr>
+                    <th><?php echo $this->__('Number') ?></th>
                     <th><?php echo $this->__('Title') ?></th>
                     <th><?php echo $this->__('Department') ?></th>
                     <?php if(Mage::getStoreConfig("helpmate/general/usePriorityOnFrontend")) :?>
@@ -21,6 +22,7 @@
             <tbody>
                 <?php foreach ($this->getCollection() as $_ticket): ?>
                 <tr>
+                    <td><?php echo $_ticket->getNumber()?></td>
                     <td><?php echo $_ticket->getTitle()?></td>
                     <td><?php echo $_ticket->getDepartmentName()?></td>
                     <?php if(Mage::getStoreConfig("helpmate/general/usePriorityOnFrontend")) :?>

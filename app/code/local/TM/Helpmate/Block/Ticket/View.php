@@ -1,11 +1,45 @@
 <?php
 class TM_Helpmate_Block_Ticket_View extends Mage_Customer_Block_Account_Dashboard
 {
-//    protected $_ticket;
+    /**
+     *
+     * @var TM_Helpmate_Model_Ticket
+     */
+    protected  $_ticket = null;
+
+    /**
+     *
+     * @return null|TM_Helpmate_Model_Ticket mixed
+     */
+    public function getTicket()
+    {
+        if (null === $this->_ticket) {
+            $ticketNumber = $this->getRequest()->getParam('ticket', 0);
+            $this->_ticket = Mage::getModel('helpmate/ticket')->loadByNumber($ticketNumber);
+        }
+        return $this->_ticket;
+    }
+
+    protected function _prepareLayout()
+    {
+        $head = $this->getLayout()->getBlock('head');
+        $ticket = $this->getTicket();
+        if ($head && $ticket) {
+            $head->setTitle(
+                Mage::helper('helpmate')->__('Ticket # %s', $ticket->getNumber())
+            );
+            $head->setKeywords('helpdesk,ticket');
+            $head->setDescription('Helpdesk ticket');
+        }
+
+        return parent::_prepareLayout();
+    }
+
     protected function _beforeToHtml()
     {
-        $ticketNumber = $this->getRequest()->getParam('ticket', 0);
-        $ticket = Mage::getModel('helpmate/ticket')->loadByNumber($ticketNumber);
+        $ticket = $this->getTicket();
+//        $ticketNumber = $this->getRequest()->getParam('ticket', 0);
+//        $ticket = Mage::getModel('helpmate/ticket')->loadByNumber($ticketNumber);
         $customerId = Mage::getSingleton('customer/session')->getCustomerId();
         if ($ticket->getCustomerId() !== $customerId) {
 //            Mage::getSingleton('core/session')->addError(
@@ -26,13 +60,8 @@ class TM_Helpmate_Block_Ticket_View extends Mage_Customer_Block_Account_Dashboar
             ->addEnabledFilter()
             ->addTicketFilter($ticket->getId())
             ;
-        $theards = array();
-        foreach ($rowset as $row) {
-            $theards[] = $row->toArray();
-        }
 
-        $ticket->setTheards($theards);
-        $this->setTicket($ticket);
+        $ticket->setTheards($rowset);
     }
 
 
@@ -119,12 +148,25 @@ class TM_Helpmate_Block_Ticket_View extends Mage_Customer_Block_Account_Dashboar
 
     public function getTheardText(array $theard)
     {
-        return (isset($theard['text']) ? $theard['text'] : '');
+        $ticket = $theard->getTicket();
+        
+        $name = $ticket->getEmail();
+        if (null !== $ticket->getCustomerId()) {
+            $name = Mage::getModel('customer/customer')
+                ->load($ticket->getCustomerId())
+                ->getName();
+        }
+        $vars = new Varien_Object(array(
+            'name'   => $name
+        ));
+
+        $html = $theard->getPrecessedText(array('vars' => $vars));
+        return $html;
     }
 
     public function getTheardFileUrl(array $theard)
     {
-        $path = Mage::getBaseUrl('media') . 'helpmate' . DS;
+        $path = Mage::getUrl('helpmate/index/file') . 'filename/';
         $files = array_filter(explode(';', $theard['file']));
 
         foreach ($files as &$file) {

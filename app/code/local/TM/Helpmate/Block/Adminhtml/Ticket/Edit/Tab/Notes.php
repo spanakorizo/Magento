@@ -1,11 +1,12 @@
 <?php
 
 class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_Notes extends Mage_Adminhtml_Block_Widget_Form
+ implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
     protected function _prepareForm()
     {
         $id = $this->getRequest()->getParam('id');
-        
+
         $form = new Varien_Data_Form(array(
             'id' => 'edit_form',
             'action' => $this->getUrl('*/*/save', array('id' => $id)),
@@ -48,7 +49,7 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_Notes extends Mage_Adminhtml_B
 //            $data['order_number'] = $_order->getNumber();
 //        }
 //        $fieldset->addType(
-//            'helpmate_autocompleter', 
+//            'helpmate_autocompleter',
 //            'TM_Helpmate_Block_Adminhtml_Ticket_Edit_Form_Element_Autocompleter'
 //        );
 //        $fieldset->addField('order_id', 'helpmate_autocompleter', array(
@@ -99,5 +100,46 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_Notes extends Mage_Adminhtml_B
            'onclick' => $onclick
         ));
         return parent::_prepareForm();
+    }
+
+
+    /**
+    * Prepare label for tab
+    *
+    * @return string
+    */
+    public function getTabLabel()
+    {
+        return Mage::helper('helpmate')->__('Notes');
+    }
+
+    /**
+    * Prepare title for tab
+    *
+    * @return string
+    */
+    public function getTabTitle()
+    {
+        return Mage::helper('helpmate')->__('Notes');
+    }
+
+    /**
+    * Returns status flag about this tab can be shown or not
+    *
+    * @return true
+    */
+    public function canShowTab()
+    {
+        return true;
+    }
+
+    /**
+    * Returns status flag about this tab hidden or not
+    *
+    * @return true
+    */
+    public function isHidden()
+    {
+        return false;
     }
 }

@@ -142,7 +142,7 @@ class TM_Helpmate_Model_Mail_MessageParser
         $file = '';
         $attachedAllowedExtensions = explode(',', Mage::getStoreConfig('helpmate/general/attachedAllowedExtensions'));
 
-        $path = Mage::getBaseDir('media') . DS . 'helpmate' . DS;
+        $path = Mage::getBaseDir('var') . DS . 'helpmate' . DS;
 
         foreach (new RecursiveIteratorIterator($this->_message) as $part) {
             /* @var $part Zend_Mail_Part */
@@ -180,7 +180,9 @@ class TM_Helpmate_Model_Mail_MessageParser
                 $content = $this->_decode($content, $encoding);
 
                 $fileExtension = substr($name, strrpos($name, '.') + 1);
-                $name =  date("Y-m-d") . '_' . $name;
+//                $name =  date("Y-m-d") . '_' . $name;
+
+                $name = Varien_File_Uploader::getNewFileName($path . $name);
 
 		if (!in_array(strtolower($fileExtension), $attachedAllowedExtensions)) {
                     throw new Exception('Disallowed file type.');
@@ -288,10 +290,9 @@ class TM_Helpmate_Model_Mail_MessageParser
          * Helpmate (ticket# {{var vars.id}})  helpmate_notify_customer_ticket_create
          * : Re:(ticket# {{var vars.id}})      helpmate_send_ticket_answer
          */
-        preg_match("/\s*\(ticket#\s*(?P<ticketId>\d+)\)/", $subject, $matches);
+        preg_match("/\s*\(ticket#\s*[A-Z]{3}-(?P<ticketId>\d+)\)/", $subject, $matches);
 
-        return isset($matches['ticketId']) ?
-           (int) $matches['ticketId'] - 1000000 : null;
+        return isset($matches['ticketId']) ? (int) $matches['ticketId']  : null;
     }
 
 }

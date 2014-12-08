@@ -259,6 +259,8 @@ class TM_Helpmate_Model_Observer
         /* @var $mailTemplate Mage_Core_Model_Email_Template */
         $mailTemplate = Mage::getModel('core/email_template');
 
+        $this->_prepareEmailTemplate($mailTemplate);
+
         $emailTemplateId = $department->getEmailTemplateNew();
         if (0 == $emailTemplateId) {
             $emailTemplateId = Mage::getStoreConfig('helpmate/email/ticket_notification');
@@ -273,10 +275,17 @@ class TM_Helpmate_Model_Observer
 
         $vars = new Varien_Object(array(
             'name'   => $name,
-            'id'     => 1000000 + $ticket->getId(),
             'number' => $ticket->getNumber(),
             'ticket' => $ticket->getTitle()
         ));
+
+        $email = $ticket->getEmail();
+
+        $archiveEmail = Mage::getStoreConfig('helpmate/email/archive_email');
+        if (Zend_Validate::is($archiveEmail, 'EmailAddress')) {
+            $name = array($email => $name, $archiveEmail => $archiveEmail);
+            $email = array($email, $archiveEmail);
+        }
 
         $mailTemplate->setDesignConfig(array(
                 'area' => 'frontend',
@@ -286,7 +295,7 @@ class TM_Helpmate_Model_Observer
             ->sendTransactional(
                     $emailTemplateId,
                     $department->getSender(),
-                    $ticket->getEmail(),
+                    $email,
                     $name,
                     array('vars' => $vars)
         );
@@ -319,6 +328,8 @@ class TM_Helpmate_Model_Observer
         /* @var $mailTemplate Mage_Core_Model_Email_Template */
         $mailTemplate = Mage::getModel('core/email_template');
 
+        $this->_prepareEmailTemplate($mailTemplate);
+
         $messageId = $ticket->getLastMessageId();
         if (false === empty($messageId)) {
             $mailTemplate->getMail()->addHeader('In-Reply-To', '<' . $messageId . '>');
@@ -344,7 +355,7 @@ class TM_Helpmate_Model_Observer
                 ->getName();
         }
         list($url) = explode('/key/', Mage::helper('adminhtml')->getUrl(
-            'helpmate_admin/adminhtml_ticket/edit/', array('id' => $ticket->getId())
+            'adminhtml/helpmate_ticket/edit/', array('id' => $ticket->getId())
         ));
         $_theard = nl2br($theard->getText());
         $_helper = Mage::helper('purify');
@@ -353,7 +364,6 @@ class TM_Helpmate_Model_Observer
         }
         $vars = new Varien_Object(array(
             'name'   => $name,
-            'id'     => 1000000 + $ticket->getId(),
             'number' => $ticket->getNumber(),
             'url'    => $url,
             'ticket' => $ticket->getTitle(),
@@ -361,6 +371,15 @@ class TM_Helpmate_Model_Observer
         ));
 //        $emails = //Mage::getModel('admin/user')
         foreach ($users as $user) {
+
+            $email = $user->getEmail();
+
+            $archiveEmail = Mage::getStoreConfig('helpmate/email/archive_email');
+            if (Zend_Validate::is($archiveEmail, 'EmailAddress')) {
+                $name = array($email => $name, $archiveEmail => $archiveEmail);
+                $email = array($email, $archiveEmail);
+            }
+
             $mailTemplate->setDesignConfig(array(
                     'area' => 'frontend',
                     'store' => $ticket->getStoreId()
@@ -369,7 +388,7 @@ class TM_Helpmate_Model_Observer
                 ->sendTransactional(
                     $emailTemplateId,
                     $department->getSender(),
-                    $user->getEmail(),
+                    $email,
                     $name,
                     array('vars' => $vars)
                 );
@@ -402,6 +421,8 @@ class TM_Helpmate_Model_Observer
         $mailTemplate = Mage::getModel('core/email_template');
         /* @var $mailTemplate Mage_Core_Model_Email_Template */
 
+        $this->_prepareEmailTemplate($mailTemplate);
+
         $messageId = $ticket->getLastMessageId();
         if (false === empty($messageId)) {
             $mailTemplate->getMail()->addHeader('In-Reply-To', '<' . $messageId . '>');
@@ -422,14 +443,12 @@ class TM_Helpmate_Model_Observer
         }
         $vars = new Varien_Object(array(
             'name'   => $name,
-            'id'     => 1000000 + $ticket->getId(),
             'number' => $ticket->getNumber(),
             'ticket' => $ticket->getTitle(),
-            'theard' => nl2br($theard->getText())
         ));
         $file = $theard->getFile();
         if (!empty($file)) {
-            $path = Mage::getBaseUrl('media') . 'helpmate' . DS;
+            $path = Mage::getUrl('helpmate/index/file') . 'filename/';
             $files = array_filter(explode(';', $file));
             foreach ($files as &$file) {
                 $file = '<p><a href="' . $path . $file . '" style="color:#1E7EC8;">' .
@@ -439,6 +458,16 @@ class TM_Helpmate_Model_Observer
             $file = implode('', $files);
         }
         $vars['file'] = $file;
+        $vars['theard'] = $theard->getPrecessedText(array('vars' => $vars));
+        $vars['theard_text'] = strip_tags($vars['theard']);
+
+        $email = $ticket->getEmail();
+        
+        $archiveEmail = Mage::getStoreConfig('helpmate/email/archive_email');
+        if (Zend_Validate::is($archiveEmail, 'EmailAddress')) {
+            $name = array($email => $name, $archiveEmail => $archiveEmail);
+            $email = array($email, $archiveEmail);
+        }
 
         $mailTemplate->setDesignConfig(array(
                 'area' => 'frontend',
@@ -448,7 +477,7 @@ class TM_Helpmate_Model_Observer
             ->sendTransactional(
                 $emailTemplateId,
                 $department->getSender(),
-                $ticket->getEmail(),
+                $email,
                 $name,
                 array('vars' => $vars)
         );
@@ -480,6 +509,8 @@ class TM_Helpmate_Model_Observer
 
         /* @var $mailTemplate Mage_Core_Model_Email_Template */
         $mailTemplate = Mage::getModel('core/email_template');
+        
+        $this->_prepareEmailTemplate($mailTemplate);
 
         $emailTemplateId = Mage::getStoreConfig('helpmate/email/ticket_autoclose');
 
@@ -502,11 +533,18 @@ class TM_Helpmate_Model_Observer
             }
             $vars = new Varien_Object(array(
                 'name'   => $name,
-                'id'     => 1000000 + $ticket->getId(),
                 'number' => $ticket->getNumber(),
                 'ticket' => $ticket->getTitle(),
                 'x_day'  => $xDays
             ));
+
+            $email = $ticket->getEmail();
+
+            $archiveEmail = Mage::getStoreConfig('helpmate/email/archive_email');
+            if (Zend_Validate::is($archiveEmail, 'EmailAddress')) {
+                $name = array($email => $name, $archiveEmail => $archiveEmail);
+                $email = array($email, $archiveEmail);
+            }
 
             $mailTemplate->setDesignConfig(array(
                     'area' => 'frontend',
@@ -516,7 +554,7 @@ class TM_Helpmate_Model_Observer
                 ->sendTransactional(
                     $emailTemplateId,
                     $department->getSender(),
-                    $ticket->getEmail(),
+                    $email,
                     $name,
                     array('vars' => $vars)
                 );
@@ -542,22 +580,32 @@ class TM_Helpmate_Model_Observer
 
         /* @var $mailTemplate Mage_Core_Model_Email_Template */
         $mailTemplate = Mage::getModel('core/email_template');
+        
+        $this->_prepareEmailTemplate($mailTemplate);
 
         $emailTemplateId = Mage::getStoreConfig('helpmate/email/ticket_assigned');
 
         // send mail
         $department = $ticket->getDepartment();
         list($url) = explode('/key/', Mage::helper('adminhtml')->getUrl(
-            'helpmate_admin/adminhtml_ticket/edit/', array('id' => $ticket->getId())
+            'adminhtml/helpmate_ticket/edit/', array('id' => $ticket->getId())
         ));
         $vars = new Varien_Object(array(
-            'id'     => 1000000 + $ticket->getId(),
             'number' => $ticket->getNumber(),
             'url'    => $url,
             'ticket' => $ticket->getTitle()
         ));
 
         $user = $ticket->getAssignedUser();
+
+        $email = $user->getEmail();
+
+        $archiveEmail = Mage::getStoreConfig('helpmate/email/archive_email');
+        if (Zend_Validate::is($archiveEmail, 'EmailAddress')) {
+            $name = array($email => $name, $archiveEmail => $archiveEmail);
+            $email = array($email, $archiveEmail);
+        }
+
         $mailTemplate->setDesignConfig(array(
                 'area' => 'frontend',
                 'store' => $ticket->getStoreId()
@@ -566,7 +614,7 @@ class TM_Helpmate_Model_Observer
             ->sendTransactional(
                 $emailTemplateId,
                 $department->getSender(),
-                $user->getEmail(),
+                $email,
                 $user->getName(),
                 array('vars' => $vars)
             );
@@ -595,7 +643,7 @@ class TM_Helpmate_Model_Observer
 
         if ($block instanceof Mage_Adminhtml_Block_Customer_Edit) {
             $url = Mage::getModel('adminhtml/url')->getUrl(
-                'helpmate_admin/adminhtml_ticket/new',
+                'adminhtml/helpmate_ticket/new',
                 array('customer_id' => $block->getCustomerId())
             );
             $block->addButton('ticket', array(
@@ -612,7 +660,7 @@ class TM_Helpmate_Model_Observer
                 $params['customer_id'] = $customerId;
             }
             $url = Mage::getModel('adminhtml/url')->getUrl(
-                'helpmate_admin/adminhtml_ticket/new',
+                'adminhtml/helpmate_ticket/new',
                 $params
             );
             $block->addButton('ticket', array(
@@ -631,10 +679,16 @@ class TM_Helpmate_Model_Observer
      */
     public function checkCaptchaOnTicketSave($observer)
     {
+        $notCheck = (bool) Mage::getModel('core/session')->getDisableCheckCaptchaOnTicketSave();
+        Mage::getModel('core/session')->setDisableCheckCaptchaOnTicketSave(null);
+        if ($notCheck) {
+            return $this;
+        }
+
         $formId = 'helpmate_ticket_form';
         $helperClass = Mage::getConfig()->getHelperClassName('captcha');
         if (@!class_exists($helperClass)) {
-            return;
+            return $this;
         }
         $captchaModel = Mage::helper('captcha')->getCaptcha($formId);
         if ($captchaModel->isRequired()) {
@@ -654,6 +708,69 @@ class TM_Helpmate_Model_Observer
                 );
             }
         }
+        return $this;
+    }
+
+
+    /**
+     *
+     *
+     * @param Varien_Event_Observer $observer
+     * @return Mage_Captcha_Model_Observer
+     */
+    public function saveParamsFromRequestToSession($observer)
+    {
+        $controller = $observer->getControllerAction();
+        $key = $controller->getFullActionName();
+        $params = $controller->getRequest()->getParams();
+        Mage::getSingleton('core/session')->setData($key, $params);
+        return $this;
+    }
+
+    protected function _prepareEmailTemplate(&$mailTemplate)
+    {
+        $transportId = Mage::getStoreConfig('helpmate/email/transport');
+        if (!empty($transportId)) {
+            $_transport = Mage::getModel('tm_email/gateway_transport')
+                ->load($transportId)
+            ;
+            if ($_transport) {
+                $transport = $_transport->getTransport();
+                if ($transport instanceof Zend_Mail_Transport_Abstract) {
+                    $mailTemplate->setTransport($transport);
+                }
+            }
+        }
+
+        $queueId = Mage::getStoreConfig('helpmate/email/queue');
+        if (!empty($queueId)) {
+            $_queue = Mage::getModel('tm_email/queue_queue')
+                ->load($queueId)
+            ;
+
+            if ($_queue) {
+                $mailTemplate->setQueueName($_queue->getQueueName());
+            }
+        }
+
+        return $mailTemplate;
+    }
+
+    /**
+     * FIX redirect url
+     *
+     * for more see
+     * Mage_Oauth_AuthorizeController.php line 86
+     * Mage_Customer_AccountController::_loginPostRedirect
+     *
+     * @param Varien_Event_Observer $observer
+     * @return Mage_Captcha_Model_Observer
+     */
+    public function fixOauthAuthorizeRedirectUrl($observer)
+    {
+        $session = Mage::getSingleton('customer/session');
+        $redirectUrl = $session->getBeforeAuthUrl();
+        $session->setAfterAuthUrl($redirectUrl);
         return $this;
     }
 }

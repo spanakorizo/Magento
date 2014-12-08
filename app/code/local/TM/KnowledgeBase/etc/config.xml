@@ -2,19 +2,19 @@
 <config>
     <modules>
         <TM_KnowledgeBase>
-            <version>1.4.0</version>
+            <version>1.5.1</version>
         </TM_KnowledgeBase>
     </modules>
 
     <admin>
-	<routers>
-	     <knowledgebase_admin>
-		<use>admin</use>
-		<args>
-		<module>TM_KnowledgeBase</module>
-		<frontName>knowledgebase_admin</frontName>
-		</args>
-	    </knowledgebase_admin>
+        <routers>
+             <adminhtml>
+                 <args>
+                     <modules>
+                         <knowledgebase before="Mage_Adminhtml">TM_KnowledgeBase_Adminhtml</knowledgebase>
+                     </modules>
+                 </args>
+             </adminhtml>
         </routers>
     </admin>
 
@@ -72,10 +72,10 @@
         <events>
             <catalog_product_prepare_save>
                 <observers>
-                    <soldtogether_observer>
+                    <knowledgebase_observer>
                         <class>knowledgebase/observer</class>
                         <method>prepareProductKnowledgeBaseData</method>
-                    </soldtogether_observer>
+                    </knowledgebase_observer>
                 </observers>
             </catalog_product_prepare_save>
         </events>
@@ -156,7 +156,23 @@
             </knowledgebase_faq_delete_before>
         </events>
 
+        <rewrite>
+            <knowledgebase_index_view_faq_url>
+                <from><![CDATA[/knowledgebase\/faq\/(.*)/]]></from>
+                <to><![CDATA[knowledgebase/index/view/faq/$1/]]></to>
+                <complete>1</complete>
+            </knowledgebase_index_view_faq_url>
+
+            <knowledgebase_index_view_category_url>
+                <from><![CDATA[/knowledgebase\/category\/(.*)/]]></from>
+                <to><![CDATA[knowledgebase/index/view/category/$1/]]></to>
+                <complete>1</complete>
+            </knowledgebase_index_view_category_url>
+        </rewrite>
+
+
     </global>
+
     <default>
         <knowledgebase>
             <general>

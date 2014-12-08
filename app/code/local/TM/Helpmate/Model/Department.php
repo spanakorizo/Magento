@@ -14,7 +14,7 @@ class TM_Helpmate_Model_Department extends Mage_Core_Model_Abstract
 
     public function getGateway()
     {
-        return Mage::getSingleton('helpmate/gateway')->load(
+        return Mage::getSingleton('tm_email/gateway_storage')->load(
             $this->getGatewayId()
         );
     }

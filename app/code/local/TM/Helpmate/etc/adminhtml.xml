@@ -19,28 +19,37 @@
             <children>
                 <helpmate translate="title" module="helpmate">
                     <title>Helpmate</title>
-                    <sort_order>70</sort_order>
+                    <sort_order>830</sort_order>
                     <children>
                         <ticket translate="title">
                             <title>Tickets</title>
-                            <action>helpmate_admin/adminhtml_ticket</action>
+                            <action>adminhtml/helpmate_ticket/index</action>
                             <sort_order>10</sort_order>
                         </ticket>
                         <department translate="title">
                             <title>Department</title>
-                            <action>helpmate_admin/adminhtml_department</action>
+                            <action>adminhtml/helpmate_department</action>
                             <sort_order>20</sort_order>
                         </department>
+                        <department_statistic translate="title">
+                            <title>Department Report</title>
+                            <action>adminhtml/helpmate_department/report</action>
+                            <sort_order>25</sort_order>
+                        </department_statistic>
                         <gateway translate="title">
                             <title>Email Gateways</title>
-                            <action>helpmate_admin/adminhtml_gateway</action>
+                            <action>adminhtml/gateway_storage/index</action>
                             <sort_order>30</sort_order>
                         </gateway>
+                        <status translate="title">
+                            <title>Status</title>
+                            <action>adminhtml/helpmate_status</action>
+                            <sort_order>40</sort_order>
+                        </status>
                     </children>
                 </helpmate>
             </children>
         </templates_master>
-
     </menu>
     <acl>
         <resources>
@@ -63,23 +72,28 @@
                         <children>
                             <helpmate translate="title" module="helpmate">
                                 <title>Helpmate</title>
-                                <sort_order>70</sort_order>
+                                <sort_order>830</sort_order>
                                 <children>
                                     <ticket translate="title">
                                         <title>Tickets</title>
-                                        <action>helpmate_admin/adminhtml_ticket</action>
+                                        <action>adminhtml/helpmate_ticket</action>
                                         <sort_order>10</sort_order>
                                     </ticket>
                                     <department translate="title">
                                         <title>Department</title>
-                                        <action>helpmate_admin/adminhtml_department</action>
+                                        <action>adminhtml/helpmate_department</action>
                                         <sort_order>20</sort_order>
                                     </department>
                                     <gateway translate="title">
                                         <title>Email Gateways</title>
-                                        <action>helpmate_admin/adminhtml_gateway</action>
+                                        <action>adminhtml/gateway_storage/index</action>
                                         <sort_order>30</sort_order>
                                     </gateway>
+                                    <status translate="title">
+                                        <title>Status</title>
+                                        <action>adminhtml/helpmate_status</action>
+                                        <sort_order>40</sort_order>
+                                    </status>
                                 </children>
                             </helpmate>
                         </children>

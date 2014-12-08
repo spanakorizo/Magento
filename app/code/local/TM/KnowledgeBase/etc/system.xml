@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <config>
-    <!-- KnowledgeBase -->
     <tabs>
-        <templates_master translate="label" module="knowledgebase">
+        <templates_master>
             <label>Templates-master</label>
             <sort_order>195</sort_order>
         </templates_master>
@@ -12,7 +11,7 @@
             <label>KnowledgeBase</label>
             <tab>templates_master</tab>
             <frontend_type>text</frontend_type>
-            <sort_order>68</sort_order>
+            <sort_order>1150</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
@@ -47,6 +46,5 @@
                 </general>
             </groups>
         </knowledgebase>
-        
     </sections>
 </config>

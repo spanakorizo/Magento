@@ -19,30 +19,30 @@ class TM_KnowledgeBase_Block_Adminhtml_Faq_Edit_Tabs extends Mage_Adminhtml_Bloc
         }
     }
 
-    protected function _beforeToHtml()
-    {
-        $this->addTab('form_section', array(
-            'label'     => Mage::helper('knowledgebase')->__('Article Information'),
-            'title'     => Mage::helper('knowledgebase')->__('Article Information'),
-            'content'   => $this->getLayout()
-                ->createBlock('knowledgebase/adminhtml_faq_edit_tab_general')
-                ->toHtml(),
-        ));
-        $this->addTab('content_section', array(
-            'label'     => Mage::helper('knowledgebase')->__('Content'),
-            'title'     => Mage::helper('knowledgebase')->__('Content'),
-            'content'   => $this->getLayout()
-                ->createBlock('knowledgebase/adminhtml_faq_edit_tab_content')
-                ->toHtml(),
-        ));
-        $this->addTab('meta_section', array(
-            'label'     => Mage::helper('knowledgebase')->__('Meta'),
-            'title'     => Mage::helper('knowledgebase')->__('Meta'),
-            'content'   => $this->getLayout()
-                ->createBlock('knowledgebase/adminhtml_faq_edit_tab_meta')
-                ->toHtml(),
-        ));
-
-        return parent::_beforeToHtml();
-    }
+//    protected function _beforeToHtml()
+//    {
+//        $this->addTab('form_section', array(
+//            'label'     => Mage::helper('knowledgebase')->__('Article Information'),
+//            'title'     => Mage::helper('knowledgebase')->__('Article Information'),
+//            'content'   => $this->getLayout()
+//                ->createBlock('knowledgebase/adminhtml_faq_edit_tab_general')
+//                ->toHtml(),
+//        ));
+//        $this->addTab('content_section', array(
+//            'label'     => Mage::helper('knowledgebase')->__('Content'),
+//            'title'     => Mage::helper('knowledgebase')->__('Content'),
+//            'content'   => $this->getLayout()
+//                ->createBlock('knowledgebase/adminhtml_faq_edit_tab_content')
+//                ->toHtml(),
+//        ));
+//        $this->addTab('meta_section', array(
+//            'label'     => Mage::helper('knowledgebase')->__('Meta'),
+//            'title'     => Mage::helper('knowledgebase')->__('Meta'),
+//            'content'   => $this->getLayout()
+//                ->createBlock('knowledgebase/adminhtml_faq_edit_tab_meta')
+//                ->toHtml(),
+//        ));
+//
+//        return parent::_beforeToHtml();
+//    }
 }

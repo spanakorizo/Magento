@@ -2,6 +2,8 @@
 
 class TM_Helpmate_Block_Adminhtml_Ticket_Grid extends Mage_Adminhtml_Block_Widget_Grid
 {
+    protected $_defaultFilter = array('status' => -4); // not closed
+
     public function __construct()
     {
 //        new Mage_Adminhtml_Block_Widget_Grid_Container();
@@ -25,6 +27,12 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Grid extends Mage_Adminhtml_Block_Widge
             $storeId = $row->getData('store_id');
             $row->setData('store_id', array($storeId));
         }
+//
+//        $filter = $this->getParam('filter');
+//        $filter_data = Mage::helper('adminhtml')->prepareFilterString($filter);
+//
+//        Zend_Debug::dump($filter_data);
+
         return $return;
     }
 
@@ -36,6 +44,13 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Grid extends Mage_Adminhtml_Block_Widge
           'width'     => '50px',
           'index'     => 'id',
           'type'      => 'number'
+        ));
+
+        $this->addColumn('number', array(
+            'header'        => Mage::helper('helpmate')->__('Number'),
+            'align'         => 'right',
+            'width'         => '50px',
+            'index'         => 'number',
         ));
 
         $this->addColumn('created_at', array(
@@ -114,13 +129,18 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Grid extends Mage_Adminhtml_Block_Widge
             'frame_callback' => array($this, 'decorateStatus')
         ));
 
+        $statuses = $_statuses = Mage::getSingleton('helpmate/status')->getOptionArray();
+        foreach ($_statuses as $id => $name) {
+            $statuses[-1 * $id] = Mage::helper('helpmate')->__('Not ' . $name);
+        }
         $this->addColumn('status', array(
             'header'  => Mage::helper('helpmate')->__('Status'),
             'align'   => 'left',
             'width'   => '80px',
             'index'   => 'status',
             'type'    => 'options',
-            'options' => Mage::getSingleton('helpmate/status')->getOptionArray()
+            'options' => $statuses,
+            'filter_condition_callback' => array($this, '_filterStatusCondition'),
         ));
 
 //
@@ -238,5 +258,21 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Grid extends Mage_Adminhtml_Block_Widge
     public function getRowUrl($row)
     {
         return $this->getUrl('*/*/edit', array('id' => $row->getId()));
+    }
+
+    protected function _filterStatusCondition($collection, $column)
+    {
+        if (!$value = $column->getFilter()->getValue()) {
+            return;
+        }
+        if (0 > $value) {
+            $statuses = Mage::getSingleton('helpmate/status')->getOptionArray();
+            if (isset($statuses[abs($value)])) {
+                unset($statuses[abs($value)]);
+            }
+            $value = array_keys($statuses);
+        }
+
+        $this->getCollection()->addFieldToFilter('status', array('in' => $value));
     }
 }

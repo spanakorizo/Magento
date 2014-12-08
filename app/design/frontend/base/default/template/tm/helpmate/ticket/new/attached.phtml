@@ -50,6 +50,9 @@
 
 <li class="wide">
     <label for="title" ><?php echo $this->__('File (allowed %s)', str_ireplace(",", ", ", $extensions)) ?></label>
+    <br/>
+    <label for="title" ><?php echo $this->__('Upload max filesize: %s', ini_get('upload_max_filesize')) ?></label>
+    <br/>
     <?php for ($i = 0; $i < 5; $i++) : ?>
         <div class="input-box hidden">
             <input type="file" name="file<?php echo $i;?>" title="<?php echo $this->__('File') ?>" id="file<?php echo $i;?>"/>
@@ -59,7 +62,7 @@
         </div>
     <?php endfor;?>
     <span id="attachprompt">
-        <img border="0" width="15" height="15" src="http://www.gstatic.com/codesite/ph/images/paperclip.gif">
+        <img border="0" width="15" height="15" src="<?php echo $this->getSkinUrl('images/tm/helpmate/paperclip.gif') ?>">
         <a id="attachafile" href="javascript:showAttache()">
             <?php echo $this->__("Attach another file") ?>
         </a>

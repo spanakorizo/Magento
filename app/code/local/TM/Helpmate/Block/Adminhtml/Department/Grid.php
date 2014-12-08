@@ -96,7 +96,7 @@ class TM_Helpmate_Block_Adminhtml_Department_Grid extends Mage_Adminhtml_Block_W
           'width'     => '90px',
           'index'     => 'gateway_id',
           'type'      => 'options',
-          'options'   => Mage::getModel('helpmate/gateway')->getOptionArray()
+          'options'   => Mage::getModel('tm_email/gateway_storage')->getOptionArray()
         ));
 
         $this->addColumn('action', array(

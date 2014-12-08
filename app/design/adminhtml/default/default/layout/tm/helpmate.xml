@@ -1,32 +1,109 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
     <!-- -->
-    <helpmate_admin_adminhtml_ticket_index>
+    <adminhtml_helpmate_ticket_index>
         <reference name="content">
-            <!-- -->
             <block type="helpmate/adminhtml_ticket" name="ticket" />
-            <!-- -->
         </reference>
-    </helpmate_admin_adminhtml_ticket_index>
+    </adminhtml_helpmate_ticket_index>
 
-    <helpmate_admin_adminhtml_ticket_edit>
+    <adminhtml_helpmate_ticket_edit>
         <update handle="editor"/>
-    </helpmate_admin_adminhtml_ticket_edit>
 
-    <helpmate_admin_adminhtml_department_index>
         <reference name="content">
-            <!-- -->
+            <block type="helpmate/adminhtml_ticket_edit" name="helpmate_ticket_edit"/>
+        </reference>
+
+        <reference name="left">
+            <block type="helpmate/adminhtml_ticket_edit_tabs" name="helpmate_ticket_edit_tabs">
+                <block type="helpmate/adminhtml_ticket_edit_tab_general" name="helpmate_ticket_edit_tab_general" />
+                <block type="helpmate/adminhtml_ticket_edit_tab_notes" name="helpmate_ticket_edit_tab_notes" />
+                <action method="addTab">
+                    <name>general_section</name>
+                    <block>helpmate_ticket_edit_tab_general</block>
+                </action>
+                <action method="addTab">
+                    <name>notes_section</name>
+                    <block>helpmate_ticket_edit_tab_notes</block>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_helpmate_ticket_edit>
+
+    <adminhtml_helpmate_theard_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="helpmate/adminhtml_theard_edit" name="helpmate_ticket_theard_edit"/>
+        </reference>
+    </adminhtml_helpmate_theard_edit>
+
+    <adminhtml_helpmate_department_index>
+        <reference name="content">
             <block type="helpmate/adminhtml_department" name="department" />
-            <!-- -->
         </reference>
-    </helpmate_admin_adminhtml_department_index>
+    </adminhtml_helpmate_department_index>
 
-    <helpmate_admin_adminhtml_gateway_index>
+    <adminhtml_helpmate_department_edit>
+        <update handle="editor"/>
         <reference name="content">
-            <!-- -->
-            <block type="helpmate/adminhtml_gateway" name="gateway" />
-            <!-- -->
+            <block type="helpmate/adminhtml_department_edit" name="helpmate_department_edit"/>
         </reference>
-    </helpmate_admin_adminhtml_gateway_index>
-    <!-- -->
+    </adminhtml_helpmate_department_edit>
+
+    <adminhtml_helpmate_department_report>
+        <reference name="content">
+            <block type="helpmate/adminhtml_department_report" name="department_report" />
+        </reference>
+    </adminhtml_helpmate_department_report>
+
+    <adminhtml_helpmate_gateway_index>
+        <reference name="content">
+            <block type="helpmate/adminhtml_gateway" name="gateway" />
+        </reference>
+    </adminhtml_helpmate_gateway_index>
+
+    <adminhtml_helpmate_gateway_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="helpmate/adminhtml_gateway_edit" name="helpmate_gateway_edit"/>
+        </reference>
+    </adminhtml_helpmate_gateway_edit>
+
+    <adminhtml_helpmate_status_index>
+        <reference name="content">
+            <block type="helpmate/adminhtml_status" name="helpmate_status" />
+        </reference>
+    </adminhtml_helpmate_status_index>
+
+    <adminhtml_helpmate_status_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="helpmate/adminhtml_status_edit" name="edit_status" />
+        </reference>
+    </adminhtml_helpmate_status_edit>
+
+    <adminhtml_sales_order_view>
+        <reference name="sales_order_tabs">
+            <action method="addTab">
+                <name>order_helpdesk_tickets</name>
+                <block>helpmate/adminhtml_sales_order_view_tab_tickets</block>
+            </action>
+        </reference>
+    </adminhtml_sales_order_view>
+
+    <adminhtml_helpmate_ticket_dashboard>
+        <block type="core/text_list" name="root" output="toHtml">
+            <block type="helpmate/adminhtml_dashboard_tab_ticket" name="adminhtml.dashboard.tab.tickets"/>
+        </block>
+    </adminhtml_helpmate_ticket_dashboard>
+
+    <adminhtml_customer_edit>
+        <reference name="customer_edit_tabs">
+            <action method="addTab">
+                <name>customer_helpdesk_tickets</name>
+                <block>helpmate/adminhtml_customer_customer_edit_tab_tickets</block>
+            </action>
+        </reference>
+    </adminhtml_customer_edit>
+
 </layout>

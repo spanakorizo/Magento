@@ -29,4 +29,22 @@ class TM_Helpmate_Model_Mysql4_Ticket extends Mage_Core_Model_Mysql4_Abstract
         }
         return $this;
     }
+
+    /**
+     *
+     * @param TM_Helpmate_Model_Ticket $ticket
+     * @return array
+     */
+    public function getVisitorInfo(TM_Helpmate_Model_Ticket $ticket)
+    {
+        $visitorId = $ticket->getVisitorId();
+
+        $select = $this->_getReadAdapter()->select()
+            ->from($this->getTable('log/visitor_info'))
+            ->where('visitor_id=?', $visitorId)
+        ;
+        $row = $this->_getReadAdapter()->fetchRow($select);
+        $ticket->setData('visitor_info', $row);
+        return $row;
+    }
 }

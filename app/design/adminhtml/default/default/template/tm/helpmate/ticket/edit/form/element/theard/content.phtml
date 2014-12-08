@@ -44,11 +44,15 @@ document.observe("dom:loaded", function() {
                 </strong>
             <?php endif;?>
             <strong class="right">
-                <a href="<?php echo $this->getUrl('*/adminhtml_theard/delete', array('id' => $_theard['id']))?>"><?php echo $this->helper('helpmate')->__('Delete')?></a>
+                <a href="<?php echo $this->getUrl('*/helpmate_theard/delete', array('id' => $_theard['id']))?>">
+                    <?php echo $this->helper('helpmate')->__('Delete')?>
+                </a>
             </strong>
 
             <strong class="right" style="padding-right: 10px">
-                <a href="<?php echo $this->getUrl('*/adminhtml_theard/edit', array('id' => $_theard['id']))?>"><?php echo $this->helper('helpmate')->__('Edit')?></a>
+                <a href="<?php echo $this->getUrl('*/helpmate_theard/edit', array('id' => $_theard['id']))?>">
+                    <?php echo $this->helper('helpmate')->__('Edit')?>
+                </a>
             </strong>
 
             <?php if ($_text = $this->getTheardText($_theard)): ?>
@@ -73,11 +77,22 @@ document.observe("dom:loaded", function() {
 
         </script>
             <?php $_fileLinks = $this->getTheardFileUrl($_theard);
-            $path = Mage::getBaseUrl('media') . 'helpmate' . DS;
+            $path = Mage::getUrl('helpmate/index/file') . 'filename/';
             if (false === empty($_fileLinks)): ?>
                 <?php foreach ($_fileLinks as $_fileLink) : ?>
-                <br/><a href="<?php echo $_fileLink ?>"><?php echo $this->helper('helpmate')->__('Attached File : %s', str_replace($path, '', $_fileLink))?></a>
-                <!--<br/><?php echo $_fileLink ?>-->
+                    <?php if (in_array(pathinfo($_fileLink, PATHINFO_EXTENSION), array('png', 'gif', 'jpg'))) : ?>
+                    <br/>
+                    <a href="<?php echo $_fileLink ?>">
+                        <img src="<?php echo $_fileLink;?>" width="100" height="100"/>
+                    </a>
+                    <?php  else :?>
+                    <br/>
+                    <a href="<?php echo $_fileLink ?>">
+                        <?php echo $this->helper('helpmate')->__('Attached File : %s', str_replace($path, '', $_fileLink))?>
+                    </a>
+                    <!--<br/><?php echo $_fileLink ?>-->
+                    <?php endif;?>
+
                 <?php endforeach;?>
             <?php endif; ?>
             <?php if ($_theard['status'] !== $previosTheard['status']) :?>

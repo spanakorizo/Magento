@@ -19,23 +19,22 @@
             <children>
                 <knowledgebase translate="title" module="knowledgebase">
                     <title>KnowledgeBase</title>
-                    <sort_order>75</sort_order>
+                    <sort_order>1150</sort_order>
                     <children>
                         <faq translate="title">
                             <title>Article</title>
-                            <action>knowledgebase_admin/adminhtml_faq</action>
+                            <action>adminhtml/knowledgebase_faq</action>
                             <sort_order>10</sort_order>
                         </faq>
                         <category translate="title">
                             <title>Category</title>
-                            <action>knowledgebase_admin/adminhtml_category</action>
+                            <action>adminhtml/knowledgebase_category</action>
                             <sort_order>20</sort_order>
                         </category>
                     </children>
                 </knowledgebase>
             </children>
         </templates_master>
-
     </menu>
     <acl>
         <resources>
@@ -58,16 +57,16 @@
                         <children>
                             <knowledgebase translate="title" module="knowledgebase">
                                 <title>KnowledgeBase</title>
-                                <sort_order>75</sort_order>
+                                <sort_order>1150</sort_order>
                                 <children>
                                     <faq translate="title">
                                         <title>Article</title>
-                                        <action>knowledgebase_admin/adminhtml_faq</action>
+                                        <action>adminhtml/knowledgebase_faq</action>
                                         <sort_order>10</sort_order>
                                     </faq>
                                     <category translate="title">
                                         <title>Category</title>
-                                        <action>knowledgebase_admin/adminhtml_category</action>
+                                        <action>adminhtml/knowledgebase_category</action>
                                         <sort_order>20</sort_order>
                                     </category>
                                 </children>

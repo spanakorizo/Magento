@@ -1,6 +1,7 @@
 <?php
 
 class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_General extends Mage_Adminhtml_Block_Widget_Form
+ implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
     protected function _prepareForm()
     {
@@ -176,6 +177,7 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_General extends Mage_Adminhtml
             );
 
             $fieldsetGeneral->addField('customer_link', 'link', array(
+                'onclick' => 'popWin(this.href,\'_blank\',\'width=800,height=700,resizable=1,scrollbars=1\');return false;',
                 'href'      => $link,
                 'label'     => Mage::helper('helpmate')->__('Customer'),
                 'name'      => 'customer_link'
@@ -258,10 +260,31 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_General extends Mage_Adminhtml
                     array('order_id' => $data['order_id'])
             );
             $fieldsetGeneral->addField('order_link', 'link', array(
+                'onclick' => 'popWin(this.href,\'_blank\',\'width=800,height=700,resizable=1,scrollbars=1\');return false;',
                 'href'      => $link,
                 'label'     => Mage::helper('helpmate')->__('Order Info'),
 //                'disabled'  => true,
                 'name'      => 'order_link'
+            ));
+        }
+        if ($data['visitor_info']) {
+            $visitorInfo = '';
+            if (isset($data['visitor_info']['remote_addr'])) {
+                $ip = $data['visitor_info']['remote_addr'];
+                $ip = long2ip($ip);
+                $visitorInfo .= $ip;
+            }
+
+            if (isset($data['visitor_info']['http_user_agent'])) {
+                $visitorInfo .= " \n" . $data['visitor_info']['http_user_agent'];
+            }
+            
+            $data['visitor_info'] = $visitorInfo;
+            $fieldsetGeneral->addField('visitor_info', 'label', array(
+                'label'    => Mage::helper('helpmate')->__('Visitor Info'),
+                'class'    => 'required-entry',
+                'disabled' => true,
+                'name'     => 'visitor_info',
             ));
         }
 
@@ -316,9 +339,9 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_General extends Mage_Adminhtml
             if (isset($data['store_id']) && (in_array($data['store_id'], $row->getStores())
                 || in_array(0, $row->getStores())) &&  (bool)$row->getStatus()) {
 
-                $_url = Mage::getUrl('knowledgebase/index/view', array(
+                $_url = Mage::getUrl('knowledgebase/faq/' . $row->getIdentifier(), array(
                     '_store' => $data['store_id'],
-                    'faq' => $row->getIdentifier()
+//                    'faq' => $row->getIdentifier()
                 ));
             }
             $_content = $_url . '#delimeter' . $row->content;
@@ -390,9 +413,8 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_General extends Mage_Adminhtml
             if ((in_array($data['store_id'], $row->getStores())
                 || in_array(0, $row->getStores())) &&  (bool)$row->getStatus()) {
 
-                $_url = Mage::getUrl('knowledgebase/index/view', array(
-                    '_store' => $data['store_id'],
-                    'faq' => $row->getIdentifier()
+                $_url = Mage::getUrl('knowledgebase/faq/' . $row->getIdentifier(), array(
+                    '_store' => $data['store_id']
                 ));
             }
             $_content = $_url . '#delimeter' . $row->content;
@@ -436,9 +458,12 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_General extends Mage_Adminhtml
 
         $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig(array(
             'tab_id'        => $this->getTabId(),
-            'add_variables' => false,
-            'add_widgets'   => false,
+            'add_variables' => true,
+            'add_widgets'   => true,
             'width'         => '100%',
+            'files_browser_window_url' => Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index'),
+            'directives_url' => Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive'),
+            'add_directives' => true
         ));
 
         $fieldsetAddComment->addField('text', 'editor', array(
@@ -475,7 +500,49 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Tab_General extends Mage_Adminhtml
     protected function _getAdditionalElementTypes()
     {
         return array(
-            'image' => Mage::getConfig()->getBlockClassName('helpmate/adminhtml_ticket_helper_file')
+            'image' => Mage::getConfig()->getBlockClassName(
+                'helpmate/adminhtml_ticket_helper_file'
+            )
         );
+    }
+
+    /**
+    * Prepare label for tab
+    *
+    * @return string
+    */
+    public function getTabLabel()
+    {
+        return Mage::helper('helpmate')->__('General');
+    }
+
+    /**
+    * Prepare title for tab
+    *
+    * @return string
+    */
+    public function getTabTitle()
+    {
+        return Mage::helper('helpmate')->__('General');
+    }
+
+    /**
+    * Returns status flag about this tab can be shown or not
+    *
+    * @return true
+    */
+    public function canShowTab()
+    {
+        return true;
+    }
+
+    /**
+    * Returns status flag about this tab hidden or not
+    *
+    * @return true
+    */
+    public function isHidden()
+    {
+        return false;
     }
 }

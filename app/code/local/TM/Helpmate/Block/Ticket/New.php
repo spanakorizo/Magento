@@ -2,6 +2,8 @@
 
 class TM_Helpmate_Block_Ticket_New extends Mage_Customer_Block_Account_Dashboard // Mage_Core_Block_Template
 {
+    protected $_params;
+
     public function getAction()
     {
         return $this->getUrl('helpmate/index/save');
@@ -32,5 +34,24 @@ class TM_Helpmate_Block_Ticket_New extends Mage_Customer_Block_Account_Dashboard
             ->setValue($defValue)
             ->setOptions($options)
             ->getHtml();
+    }
+
+    public function getValue($key, $value = null)
+    {
+        if (null == $this->_params) {
+            $this->_params = Mage::getSingleton('core/session')->getData(
+                'helpmate_index_save'
+            );
+        }
+//        Zend_Debug::dump($this->_params);
+//        $value = $default;
+        if (isset($this->_params[$key])) {
+            $value = $this->_params[$key];
+        }
+//
+//        if (empty($value)) {
+//            return '';
+//        }
+        return (string)$value;
     }
 }

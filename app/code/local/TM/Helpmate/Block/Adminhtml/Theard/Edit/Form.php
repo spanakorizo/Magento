@@ -12,7 +12,7 @@ class TM_Helpmate_Block_Adminhtml_Theard_Edit_Form extends Mage_Adminhtml_Block_
             $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
         }
     }
-    
+
     protected function _prepareForm()
     {
         $id = $this->getRequest()->getParam('id');
@@ -31,16 +31,16 @@ class TM_Helpmate_Block_Adminhtml_Theard_Edit_Form extends Mage_Adminhtml_Block_
             'helpmate_form',
             array('legend'=>Mage::helper('helpmate')->__('Answer information'))
         );
-        
+
         $fieldset->addField('id', 'hidden', array(
           'class'     => 'required-entry',
           'name'      => 'id'
         ));
-        
+
         $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig(array(
             'tab_id'        => $this->getTabId(),
-            'add_variables' => false,
-            'add_widgets'   => false,
+            'add_variables' => true,
+            'add_widgets'   => true,
         ));
         $fieldset->addField('text', 'editor', array(
           'label'     => Mage::helper('helpmate')->__('Text'),
@@ -99,11 +99,11 @@ class TM_Helpmate_Block_Adminhtml_Theard_Edit_Form extends Mage_Adminhtml_Block_
             //Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_SHORT)
             'name'      => 'created_at',
         ));
-        
+
         $form->setValues($data);
         $form->setUseContainer(true);
         $this->setForm($form);
-        
+
         return parent::_prepareForm();
     }
 }

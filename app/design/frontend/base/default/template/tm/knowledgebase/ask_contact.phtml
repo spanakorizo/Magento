@@ -51,7 +51,7 @@
                     $$('.knowledge-suport-block').invoke('hide');
                     $('form-ticket-colset').hide();
 
-                    Autocomplete.prototype.isBadQuery = function(q) {
+                    KnowledgebaseAutocomplete.prototype.isBadQuery = function(q) {
 
                         var i = this.badQueries.length;
                         while (i--) {
@@ -65,21 +65,21 @@
                         }
                         return false;
                     };
-                    Autocomplete.prototype.enableKillerFn = function() {
+                    KnowledgebaseAutocomplete.prototype.enableKillerFn = function() {
                         if (true == this.options.disableKiller) {
                             return;
                         }
                         Event.observe(document.body, 'click', this.killerFn);
                     };
 
-                    Autocomplete.prototype.disableKillerFn = function() {
+                    KnowledgebaseAutocomplete.prototype.disableKillerFn = function() {
                         if (true == this.options.disableKiller) {
                             return;
                         }
                         Event.stopObserving(document.body, 'click', this.killerFn);
                     };
 
-                    new Autocomplete('ask', {
+                    new KnowledgebaseAutocomplete('ask', {
                         serviceUrl        : '<?php echo $this->getAjaxAction() ?>',
                         store             : '<?php echo Mage::app()->getStore()->getStoreId(); ?>',
 

@@ -1,8 +1,7 @@
 <?xml version="1.0"?>
 <config>
-    <!-- Helpmate -->
     <tabs>
-        <templates_master translate="label" module="helpmate">
+        <templates_master>
             <label>Templates-master</label>
             <sort_order>195</sort_order>
         </templates_master>
@@ -12,7 +11,7 @@
             <label>Helpmate</label>
             <tab>templates_master</tab>
             <frontend_type>text</frontend_type>
-            <sort_order>67</sort_order>
+            <sort_order>830</sort_order>
             <show_in_default>1</show_in_default>
             <show_in_website>1</show_in_website>
             <show_in_store>1</show_in_store>
@@ -198,6 +197,26 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </enableAdminNotification>
+                        
+                        <transport translate="label">
+                            <label>Transport</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>tm_email/system_config_source_gateway_transport</source_model>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </transport>
+                        
+                        <queue translate="label">
+                            <label>Queue</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>tm_email/system_config_source_queue</source_model>
+                            <sort_order>31</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </queue>
 
                         <!--
                         <admin_email translate="label">
@@ -209,7 +228,7 @@
                             <show_in_store>1</show_in_store>
                         </admin_email>
                         -->
-
+                        <!--
                         <sender translate="label">
                             <label>Default Email Sender</label>
                             <frontend_type>select</frontend_type>
@@ -219,6 +238,7 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </sender>
+                        -->
 
                         <ticket_notification translate="label">
                             <label>Default Email Template User New Ticket Notification</label>
@@ -269,11 +289,20 @@
                             <show_in_website>1</show_in_website>
                             <show_in_store>1</show_in_store>
                         </ticket_assigned>
+                        
+                        <archive_email translate="label">
+                            <label>Archive email</label>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>100</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <validate>validate-email</validate>
+                        </archive_email>
 
                     </fields>
                 </email>
             </groups>
         </helpmate>
-
     </sections>
 </config>

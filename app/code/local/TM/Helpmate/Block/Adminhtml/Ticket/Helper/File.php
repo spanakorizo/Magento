@@ -5,7 +5,7 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Helper_File extends Varien_Data_Form_El
     {
         $url = false;
         if ($this->getValue()) {
-            $url = Mage::getBaseUrl('media') . 'helpmate/'. $this->getValue();
+            $url = Mage::getUrl('helpmate/index/file') . 'filename/' . $this->getValue();
         }
         return $url;
     }

@@ -1,17 +1,19 @@
 <?php
 
-class TM_KnowledgeBase_Block_Adminhtml_Faq_Edit_Tab_General extends Mage_Adminhtml_Block_Widget_Form
+class TM_KnowledgeBase_Block_Adminhtml_Faq_Edit_Tab_General
+    extends Mage_Adminhtml_Block_Widget_Form
+        implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
 
     protected function _prepareForm()
     {
         $id = $this->getRequest()->getParam('id');
-        
+
         $form = new Varien_Data_Form(array(
 //            'id'      => 'edit_form',
 //            'action'  => $this->getUrl('*/*/save', array('id' => $id)),
 //            'method'  => 'post'
-            
+
         ));
         $form->setHtmlIdPrefix('faq_');
         $this->setForm($form);
@@ -69,7 +71,7 @@ class TM_KnowledgeBase_Block_Adminhtml_Faq_Edit_Tab_General extends Mage_Adminht
                     ->getStoreValuesForForm(false, true),
             ));
         }
-        
+
         $authors = array();
         foreach (Mage::getModel('admin/user')->getCollection() as $user) {
             $authors[] = array(
@@ -108,7 +110,7 @@ class TM_KnowledgeBase_Block_Adminhtml_Faq_Edit_Tab_General extends Mage_Adminht
             'name'      => 'modified_at',
             'disabled'  => true
         ));
-        
+
         $fieldset->addField('sort_order', 'text', array(
             'label'     => Mage::helper('knowledgebase')->__('Sort order'),
             'name'      => 'sort_order',
@@ -133,5 +135,45 @@ class TM_KnowledgeBase_Block_Adminhtml_Faq_Edit_Tab_General extends Mage_Adminht
 
         $form->setValues($data);
         return parent::_prepareForm();
+    }
+
+   /**
+    * Prepare label for tab
+    *
+    * @return string
+    */
+    public function getTabLabel()
+    {
+        return Mage::helper('knowledgebase')->__('Article Information');
+    }
+
+   /**
+    * Prepare title for tab
+    *
+    * @return string
+    */
+    public function getTabTitle()
+    {
+        return Mage::helper('knowledgebase')->__('Article Information');
+    }
+
+   /**
+    * Returns status flag about this tab can be shown or not
+    *
+    * @return true
+    */
+    public function canShowTab()
+    {
+        return true;
+    }
+
+   /**
+    * Returns status flag about this tab hidden or not
+    *
+    * @return true
+    */
+    public function isHidden()
+    {
+        return false;
     }
 }

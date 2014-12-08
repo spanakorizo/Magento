@@ -2,18 +2,19 @@
 <config>
     <modules>
         <TM_Helpmate>
-            <version>1.4.0</version>
+            <version>1.5.2</version>
         </TM_Helpmate>
     </modules>
+
     <admin>
-	<routers>
-	    <helpmate_admin>
-                <use>admin</use>
-                <args>
-                    <module>TM_Helpmate</module>
-                    <frontName>helpmate_admin</frontName>
-                </args>
-	    </helpmate_admin>
+        <routers>
+             <adminhtml>
+                 <args>
+                     <modules>
+                         <helpmate before="Mage_Adminhtml">TM_Helpmate_Adminhtml</helpmate>
+                     </modules>
+                 </args>
+             </adminhtml>
         </routers>
     </admin>
 
@@ -53,7 +54,7 @@
                 </TM_Helpmate>
             </modules>
         </translate>
-
+        
     </frontend>
 
     <adminhtml>
@@ -97,20 +98,23 @@
                     <department>
                         <table>tm_helpmate_department</table>
                     </department>
-                    <gateway>
-                        <table>tm_helpmate_gateway</table>
-                    </gateway>
                     <department_user>
                         <table>tm_helpmate_department_user</table>
                     </department_user>
+                    <status>
+                        <table>tm_helpmate_status</table>
+                    </status>
                 </entities>
             </helpmate_mysql4>
-
+           
+            <!-- fix for smtppro aschroder-->
+            <!--
             <core>
                 <rewrite>
-                    <email_template>TM_Helpmate_Model_Mail_Template</email_template>
+                    <email_template>TM_Helpmate_Model_Mail_Template_Aschroder</email_template>
                 </rewrite>
             </core>
+            -->
 
         </models>
 
@@ -235,12 +239,34 @@
                         <class>TM_Helpmate_Model_Observer</class>
                         <method>checkCaptchaOnTicketSave</method>
                     </captcha>
+                    <save_previous>
+                        <class>TM_Helpmate_Model_Observer</class>
+                        <method>saveParamsFromRequestToSession</method>
+                    </save_previous>
                 </observers>
             </controller_action_predispatch_helpmate_index_save>
+            
+            <controller_action_postdispatch_oauth_authorize_index>
+                <observers>
+                    <fix_redirect_url>
+                        <class>TM_Helpmate_Model_Observer</class>
+                        <method>fixOauthAuthorizeRedirectUrl</method>
+                    </fix_redirect_url>
+                </observers>
+            </controller_action_postdispatch_oauth_authorize_index>
 
         </events>
 
+        <blocks>
+            <adminhtml>
+                <rewrite>
+                    <dashboard_grids>TM_Helpmate_Block_Adminhtml_Dashboard_Grids</dashboard_grids>
+                </rewrite>
+            </adminhtml>
+        </blocks>
+        
     </global>
+
     <default>
         <helpmate>
             <general>

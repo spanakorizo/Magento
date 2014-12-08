@@ -2,7 +2,7 @@
 
 class TM_KnowledgeBase_Block_Adminhtml_Faq_Edit_Tab_Content
 extends Mage_Adminhtml_Block_Widget_Form
-//    implements Mage_Adminhtml_Block_Widget_Tab_Interface
+    implements Mage_Adminhtml_Block_Widget_Tab_Interface
 {
     /**
      * Load Wysiwyg on demand and Prepare layout
@@ -12,7 +12,7 @@ extends Mage_Adminhtml_Block_Widget_Form
         parent::_prepareLayout();
         if (Mage::getStoreConfig('helpmate/ticketForm/wysiwyg') &&
             Mage::getSingleton('cms/wysiwyg_config')->isEnabled()) {
-            
+
             $this->getLayout()->getBlock('head')->setCanLoadTinyMce(true);
         }
     }
@@ -45,8 +45,11 @@ extends Mage_Adminhtml_Block_Widget_Form
 
         $wysiwygConfig = Mage::getSingleton('cms/wysiwyg_config')->getConfig(array(
             'tab_id'        => $this->getTabId(),
-            'add_variables' => false,
-            'add_widgets'   => false,
+            'add_variables' => true,
+            'add_widgets'   => true,
+            'files_browser_window_url' => Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg_images/index'),
+            'directives_url' => Mage::getSingleton('adminhtml/url')->getUrl('adminhtml/cms_wysiwyg/directive'),
+            'add_directives' => true
 //            'width' => '200%'
         ));
         $contentField = $fieldset->addField('content', 'editor', array(
@@ -65,5 +68,45 @@ extends Mage_Adminhtml_Block_Widget_Form
 
         $form->setValues($data);
         return parent::_prepareForm();
+    }
+
+        /**
+    * Prepare label for tab
+    *
+    * @return string
+    */
+    public function getTabLabel()
+    {
+        return Mage::helper('knowledgebase')->__('Content');
+    }
+
+    /**
+    * Prepare title for tab
+    *
+    * @return string
+    */
+    public function getTabTitle()
+    {
+        return Mage::helper('knowledgebase')->__('Content');
+    }
+
+    /**
+    * Returns status flag about this tab can be shown or not
+    *
+    * @return true
+    */
+    public function canShowTab()
+    {
+        return true;
+    }
+
+    /**
+    * Returns status flag about this tab hidden or not
+    *
+    * @return true
+    */
+    public function isHidden()
+    {
+        return false;
     }
 }

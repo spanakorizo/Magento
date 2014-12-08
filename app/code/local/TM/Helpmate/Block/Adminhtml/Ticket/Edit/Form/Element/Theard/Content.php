@@ -121,6 +121,21 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Form_Element_Theard_Content extend
             (Mage::getModel('helpmate/priority')->getOptionTitle($theard['priority'])) : '');
     }
 
+    protected function _removeGmailExtraFooter($content, $cssClass = 'gmail_extra')
+    {
+        $dom = new DOMDocument;
+        $dom->loadHTML($content);
+
+        $xpath = new DOMXPath($dom);
+        $pDivs = $xpath->query(".//div[@class='$cssClass']");
+
+        foreach($pDivs as $div) {
+            $div->parentNode->removeChild($div);
+        }
+
+        return htmlspecialchars_decode($dom->saveHTML());
+    }
+
     public function getTheardText(array $theard)
     {
         if (empty($theard['text'])) {
@@ -136,6 +151,8 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Form_Element_Theard_Content extend
 
         $content = $theard['text'];
 
+
+        $content = $this->_removeGmailExtraFooter($content);
         // text/html convert pseudo text/palin
         $tags = array (
             0 => '~<h[123][^>]+>~si',
@@ -183,7 +200,7 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Form_Element_Theard_Content extend
 
     public function getTheardFileUrl(array $theard)
     {
-        $path = Mage::getBaseUrl('media') . 'helpmate' . DS;
+        $path = Mage::getUrl('helpmate/index/file') . 'filename/';
         $files = array_filter(explode(';', $theard['file']));
 
         foreach ($files as &$file) {

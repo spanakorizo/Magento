@@ -139,7 +139,12 @@ for ($i=0;$i<(count($pro_url_array)-2);$i++) {
   ?>
     <?php $_finalPriceInclTax = $this->helper('tax')->getPrice($_item, $_item->getFinalPrice(), true) ?>
      <div class="ti_product_blockName">
-        <p><a href="<?php echo $product_url?>?printer=<?php echo $_product->getId(); ?>"><?php echo $this->escapeHtml($_item->getProductNameShort()) ?></a></p> 
+        <p><a href="<?php echo $product_url?>?printer=<?php echo $_product->getId(); ?>"><?php 
+        if ($_item->getProductNameShort != "")
+            echo $this->escapeHtml($_item->getProductNameShort());
+        else 
+            echo $this->escapeHtml($_item->getName());
+         ?></a></p> 
     </div>
         
         <div class="ti_product_blockImg">

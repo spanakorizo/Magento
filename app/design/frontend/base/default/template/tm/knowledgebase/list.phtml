@@ -1,0 +1,31 @@
+<?php
+    $collection = $this->getCollection();
+    if (!$collection || !$collection->getSize()) {
+        return false;
+    }
+
+    $category = $this->getCategory();
+    $title = $this->__('All articles');
+    if ($category) {
+        $title = $this->__('Articles from %s', $category->getName());
+    }
+//    Zend_Debug::dump($category->getData());
+?>
+<div class="knowledge-block block" id="knowledge-block-result">
+    <div class="knowledgebase-block-title block-title">
+        <strong><span><?php echo $title;?></span></strong>
+    </div>
+    <div class="knowledgebase-block-content block-content">
+        <?php
+        if( $collection && count($collection) ): ?>
+            <?php //$processor = new Mage_Cms_Model_Template_Filter(); ?>
+            <?php foreach ($collection as $_faq) :?>
+                <div class="knowledge-article">
+                    <a href="<?php echo $this->getArticleUrl(
+                        $_faq->getIdentifier()
+                    )?>"><?php echo $_faq->getTitle() ?></a>&nbsp;
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
+    </div>
+</div>

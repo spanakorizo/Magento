@@ -67,7 +67,7 @@ class TM_Akismet_Model_Service
             'user_ip'              => $helper->getRemoteAddr(),
             'user_agent'           => $helper->getHttpUserAgent(),
             'comment_type'         => 'contact',
-            'comment_author'       => $author, 
+            'comment_author'       => $author, //'viagra-test-123',
             'comment_author_email' => $email,
             'comment_content'      => $content
         );
@@ -76,7 +76,7 @@ class TM_Akismet_Model_Service
         if ($service->isSpam($data)) {
             Mage::getSingleton('core/session')->addError(
                 Mage::helper('akismet')->__(
-                    'Sorry, your message has triggered a spam. Please either change message text or contact us in other way.'
+                    'Sorry, but we think you\'re a spammer.'
                 )
             );
             return true;
@@ -84,5 +84,27 @@ class TM_Akismet_Model_Service
 
         return false;
     }
-
+//        USAGE EXAMPLE
+//        $author = (string) $this->getRequest()->getParam('askitCustomer');
+//        $email = (string) $this->getRequest()->getParam('askitEmail');
+//        if (!$author || !$email) {
+//            Mage::getSingleton('core/session')->addError('Email and Name required');
+//            $this->_redirectReferer();
+//            return;
+//        }
+//
+//        $isLoggedIn = Mage::getSingleton('customer/session')->isLoggedIn();
+//        if (!$isLoggedIn && !Mage::getStoreConfig('askit/general/allowedGuestQuestion')) {
+//            Mage::getSingleton('core/session')->addError('Your must login');
+//            $this->_redirectReferer();
+//            return;
+//        }
+//
+//        $question   = (string) $this->getRequest()->getParam('askitQuestion');
+//        if (Mage::getModel('akismet/service')->isSpam($author, $email, $question)) {
+//
+//                Mage::getSingleton('core/session')->addError('Sorry, but we think you\'re a spammer.');
+//                $this->_redirectReferer();
+//                return;
+//        }
 }

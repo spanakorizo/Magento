@@ -75,6 +75,15 @@ class TM_Helpmate_Model_Mysql4_Ticket_Collection extends Mage_Core_Model_Mysql4_
         return $this;
     }
 
+    public function addDepartmentFilter($departmentId)
+    {
+        if (!is_array($departmentId)) {
+            $departmentId = array($departmentId);
+        }
+        $this->getSelect()->where('main_table.department_id IN (?)', $departmentId);
+        return $this;
+    }
+
     public function addFieldToFilter($field, $condition=null)
     {
         if (isset($this->_fields[$field])) {
@@ -82,6 +91,12 @@ class TM_Helpmate_Model_Mysql4_Ticket_Collection extends Mage_Core_Model_Mysql4_
         }
 
         return parent::addFieldToFilter($field, $condition);
+    }
+
+    public function addOrderIdFilter($orderId)
+    {
+        $this->getSelect()->where('main_table.order_id = ?', $orderId);
+        return $this;
     }
 
     public function addStatusFilter($status = true)

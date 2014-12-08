@@ -14,6 +14,13 @@ class TM_KnowledgeBase_IndexController extends Mage_Core_Controller_Front_Action
 
     public function viewAction()
     {
+        $request = $this->getRequest();
+        $isRewrite = $request->getRequestString() != $request->getPathInfo();
+        if (!$isRewrite) {
+            $faq = $request->getParam('faq');
+            $this->_redirect('knowledgebase/faq/' . $faq);
+            return;
+        }
         $this->loadLayout();
         $this->renderLayout();
     }
@@ -68,8 +75,7 @@ class TM_KnowledgeBase_IndexController extends Mage_Core_Controller_Front_Action
         $period = 100;
         foreach ($collection as $item) {
             $_url = Mage::getModel('core/url')->getUrl(
-                'knowledgebase/index/view',
-                array('faq' => $item->getIdentifier())
+                'knowledgebase/faq/' . $item->getIdentifier()
             );
             $_description = $item->getContent();
             $_description = $processor->filter($_description);
@@ -92,7 +98,7 @@ class TM_KnowledgeBase_IndexController extends Mage_Core_Controller_Front_Action
             );
         }
         $this->_sendJson(array(
-			'query'       => $processor->filter($query),
+            'query'       => $processor->filter($query),
             'suggestions' => $suggestions,
         ));
 

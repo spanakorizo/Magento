@@ -23,9 +23,36 @@ class TM_Helpmate_IndexController extends Mage_Core_Controller_Front_Action
         }
     }
 
+    protected function _isAkismetEnabled()
+    {
+        return Mage::getStoreConfig('helpmate/general/enableAkismet')
+            && class_exists('TM_Akismet_Model_Service');
+    }
+
+    protected function _isCaptchaEnabled()
+    {
+        $formId = 'helpmate_ticket_form';
+        $helperClass = Mage::getConfig()->getHelperClassName('captcha');
+        if (@!class_exists($helperClass)) {
+            return $this;
+        }
+        $captchaModel = Mage::helper('captcha')->getCaptcha($formId);
+        return $captchaModel->isRequired();
+    }
+
     public function indexAction()
     {
         $this->loadLayout();
+        
+        if ($this->_isAkismetEnabled() && $this->_isCaptchaEnabled()) {
+            $isShowCapcha = (bool) Mage::getModel('core/session')->getShowCaptcha();
+            Mage::getModel('core/session')->setShowCaptcha(null);
+            if (!$isShowCapcha) {
+                $layout = $this->getLayout();
+                $layout->getBlock('captcha')->setFormId('__broken__' . uniqid());
+                Mage::getModel('core/session')->setDisableCheckCaptchaOnTicketSave(true);
+            }
+        }
         $this->renderLayout();
     }
 
@@ -132,6 +159,7 @@ class TM_Helpmate_IndexController extends Mage_Core_Controller_Front_Action
         $field0       = $this->getRequest()->getParam('field0');
         $field1       = $this->getRequest()->getParam('field1');
         $field2       = $this->getRequest()->getParam('field2');
+        $visitorId    = Mage::getSingleton('log/visitor')->getId();
 
         if (empty ($email)) {
             $email = $this->getRequest()->getParam('email');
@@ -154,14 +182,13 @@ class TM_Helpmate_IndexController extends Mage_Core_Controller_Front_Action
                 $author = $customer->getName();
             }
         }
-        $number = Mage::getModel('helpmate/ticket')->generateNumberByEmail(
-            $email
-        );
-        if (Mage::getStoreConfig('helpmate/general/enableAkismet')
-            && class_exists('TM_Akismet_Model_Service')
-            && $akismet = Mage::getModel('akismet/service')
-            && $akismet->isSpam($author, $email, $text)) {
 
+        if ($this->_isAkismetEnabled() 
+            && ($akismet = Mage::getModel('akismet/service'))
+            && $akismet->isSpam($author, $email, $text)
+            ) {
+
+                Mage::getModel('core/session')->setShowCaptcha(true);
                 $this->_redirectReferer();
                 return;
         }
@@ -185,7 +212,6 @@ class TM_Helpmate_IndexController extends Mage_Core_Controller_Front_Action
         $ticket = Mage::getModel('helpmate/ticket');
         $ticket->setCustomerId( $customerId)
             ->setEmail(         $email)
-            ->setNumber(        $number)
             ->setStatus(        $status)
             ->setTitle(         $title)
             ->setPriority(      $priority)
@@ -198,6 +224,7 @@ class TM_Helpmate_IndexController extends Mage_Core_Controller_Front_Action
             ->setField0(        $field0)
             ->setField1(        $field1)
             ->setField2(        $field2)
+            ->setVisitorId(     $visitorId)
             ->save()
             ;
 
@@ -305,7 +332,7 @@ class TM_Helpmate_IndexController extends Mage_Core_Controller_Front_Action
             return false;
         }
 
-        $path = Mage::getBaseDir('media') . DS . 'helpmate' . DS;
+        $path = Mage::getBaseDir('var') . DS . 'helpmate' . DS;
 
         if (empty($_FILES)) {
             return false;
@@ -347,4 +374,158 @@ class TM_Helpmate_IndexController extends Mage_Core_Controller_Front_Action
         $fileNames = str_replace(DS, '/', $fileNames);
         return $fileNames;
     }
+
+    public function fileAction()
+    {
+        $name = $this->getRequest()->getParam('filename');
+        $name = basename($name);
+
+        $extension = pathinfo($name, PATHINFO_EXTENSION);
+        $allowedExtensions = explode(
+            ',',
+            Mage::getStoreConfig('helpmate/general/attachedAllowedExtensions')
+        );
+
+        if (!in_array($extension, $allowedExtensions)) {
+            Mage::getSingleton('core/session')->addError(
+                Mage::helper('helpmate')->__(
+                    'File not exists'
+            ));
+
+            $this->setFlag('', 'no-dispatch', true);
+            $this->_redirect('noRoute');
+        }
+
+        $path = Mage::getBaseDir('var') . DS . 'helpmate' . DS . $name;
+        if (!file_exists($path)) {
+            $path = Mage::getBaseDir('media') . DS . 'helpmate' . DS . $name;
+            if (!file_exists($path)) {
+                Mage::getSingleton('core/session')->addError(
+                    Mage::helper('helpmate')->__(
+                        'File not exists'
+                ));
+
+                $this->setFlag('', 'no-dispatch', true);
+                $this->_redirect('noRoute');
+            }
+        }
+
+        switch ($extension) {
+            case 'txt':
+                $contentType = 'text/plain';
+                break;
+            case 'csv':
+                $contentType = 'text/csv';
+                break;
+            case 'xml':
+                $contentType = 'text/xml';
+                break;
+            case 'css':
+                $contentType = 'text/css';
+                break;
+            case 'pdf':
+                $contentType = 'application/pdf';
+                break;
+            case 'flv':
+                $contentType = 'video/x-flv';
+                break;
+            case 'avi':
+                $contentType = 'video/mpeg';
+                break;
+            case 'wmv':
+                $contentType = 'video/x-ms-wmv';
+                break;
+            case 'jpg':
+            case 'jpeg':
+                $contentType = 'image/jpeg';
+                break;
+            case 'gif':
+                $contentType = 'image/gif';
+                break;
+            case 'png':
+                $contentType = 'image/png';
+                break;
+            default:
+//                $contentType = 'application/octet-stream';
+                $contentType = 'application/force-download';
+                $this->getResponse()
+                    ->setHeader('Content-Disposition', 'attachment' . '; filename=' . basename($path))
+                ;
+                break;
+        }
+//        Zend_Debug::dump($contentType);
+//        die;
+
+
+        $this->getResponse()
+            ->setHttpResponseCode(200)
+            ->setHeader('Cache-Control', 'must-revalidate, post-check=0, pre-check=0', true)
+            ->setHeader('Pragma', 'public', true)
+            ->setHeader('Content-type', $contentType)
+            ->setHeader('Content-Length', filesize($path))
+//            ->setHeader('Content-Disposition', 'attachment' . '; filename=' . basename($path))
+            ->clearBody()
+        ;
+        $this->getResponse()->sendHeaders();
+        readfile($path);
+        die;
+    }
+
+//
+//    public function apiindexAction()
+//    {
+//
+//        $magentohost = Mage::getBaseUrl();// 'http://templates-master.com';
+//        //Basic parameters that need to be provided for oAuth authentication
+//        //on Magento
+//        $params = array(
+//            'siteUrl'         => "{$magentohost}oauth",
+//            'requestTokenUrl' => "{$magentohost}oauth/initiate",
+//            'accessTokenUrl'  => "{$magentohost}oauth/token",
+//            'authorizeUrl'    => "{$magentohost}oauth/authorize",
+////            'authorizeUrl'    => "{$magentohost}admin/oauth_authorize", //This URL is used only if we authenticate as Admin user type
+//            'consumerKey'     => '094b371d035c101dbaeebbba96e72f46', //Consumer key registered in server administration
+//            'consumerSecret'  => 'b8d13ab7f0f82bdc3dc10a3d508f43a0', //Consumer secret registered in server administration
+//            'callbackUrl'     => "{$magentohost}helpdesk/index/apicallback", //Url of callback action below
+//        );
+//        $oAuthClient = Mage::getModel('tmcore/oauth_client');
+//        $oAuthClient->reset();
+//        $oAuthClient->init($params);
+//        $oAuthClient->authenticate();
+//        return;
+//    }
+//
+//    public function apicallbackAction()
+//    {
+//        $magentohost = Mage::getBaseUrl();// 'http://templates-master.com';
+//
+//        $oAuthClient = Mage::getModel('tmcore/oauth_client');
+//        $params = $oAuthClient->getConfigFromSession();
+//        $oAuthClient->init($params);
+//        $state = $oAuthClient->authenticate();
+//        if ($state == TM_Core_Model_Oauth_Client::OAUTH_STATE_ACCESS_TOKEN) {
+//            $accessToken = $oAuthClient->getAuthorizedToken();
+//        }
+//        $restClient = $accessToken->getHttpClient($params);
+//        /* @var $restClient Zend_Oauth_Client */
+////////////////////////////////////////////////////////////////////////////////
+//         // Set REST resource URL
+//        $_request = "{$magentohost}api/rest/helpdesk/tickets";
+//        $restClient->setUri($_request)
+////            ->setParameterGet('page', 3)
+//        ;
+//        // In Magento it is neccesary to set json or xml headers in order to work
+//        $restClient->setHeaders('Accept', 'application/json');
+//        // Get method
+//        $restClient->setMethod(Zend_Http_Client::GET);
+//        //Make REST request
+//        $response = $restClient->request();
+//        // Here we can see that response body contains json list of products
+//        $body = $response->getBody();
+//        Zend_Debug::dump($body);
+//        $body = json_decode($body);
+//        Zend_Debug::dump($body,$_request);
+//
+//        return;
+//    }
 }

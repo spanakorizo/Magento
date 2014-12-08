@@ -29,10 +29,10 @@ class TM_KnowledgeBase_Model_Faq extends Mage_Core_Model_Abstract
         $this->_getResource()->loadByIdentifier($this, $identifier);
         return $this;
     }
-    
-    public function getStores() 
+
+    public function getStores()
     {
-        // add stores 
+        // add stores
         $stores = array();
         $rowset = Mage::getModel('knowledgebase/faq_store')
             ->getCollection()
@@ -41,7 +41,30 @@ class TM_KnowledgeBase_Model_Faq extends Mage_Core_Model_Abstract
             $stores[] = $row->getStoreId();
         }
         $this->setStores($stores);
-        
+
         return $this->getData('stores');
+    }
+
+    public function getProcessedContent($variables = array())
+    {
+        $storeId = Mage::app()->getStore()->getStoreId();
+        
+        $html = $this->getContent();
+        
+        $processor = Mage::helper('cms')->getBlockTemplateProcessor();
+        $html = $processor->filter($html);
+
+        // email filter
+        $emailProcessor = Mage::getModel('core/email_template_filter')
+            ->setUseAbsoluteLinks(true)
+            ->setStoreId($storeId)
+//            ->setIncludeProcessor(array($this, 'getInclude'))
+        ;
+        if (!empty($variables)) {
+            $emailProcessor->setVariables($variables);
+        }
+        $html = $emailProcessor->filter($html);
+
+        return $html;
     }
 }

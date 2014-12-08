@@ -1,30 +1,10 @@
 <?php
-class TM_KnowledgeBase_Block_Categories extends Mage_Core_Block_Template
+class TM_KnowledgeBase_Block_Categories extends TM_KnowledgeBase_Block_Abstract
 {
-    protected function _prepareLayout()
-    {
-        if (null === $this->getIdentifier()) {
-            return $this;
-        }
-        $category = $this->getCollection()->getFirstItem();
-
-        $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
-        if ($breadcrumbs) {
-            $breadcrumbs->addCrumb(
-                'knowledgebase_category',
-                array(
-                    'label' => $category->getName(),
-                    'title' => $category->getName(),
-                    'link'  => Mage::getUrl("knowledgebase/index/view/category/{$category->getIdentifier()}")
-                )
-            );
-        }
-        return $this;
-    }
-
     public function  __construct()
     {
         parent::__construct();
+
         $identifier = $this->getRequest()->getParam('category', null);
         $this->setIdentifier($identifier);
 
@@ -36,6 +16,25 @@ class TM_KnowledgeBase_Block_Categories extends Mage_Core_Block_Template
             ;
 
         $this->setCollection($collection);
+    }
+
+    protected function _prepareLayout()
+    {
+        if (null === $this->getIdentifier()) {
+            return $this;
+        }
+        $category = $this->getCollection()->getFirstItem();
+
+        $breadcrumbs = $this->getLayout()->getBlock('breadcrumbs');
+        if ($breadcrumbs) {
+            $url = $this->getCategoryUrl($category->getIdentifier());
+            $breadcrumbs->addCrumb('knowledgebase_category', array(
+                'label' => $category->getName(),
+                'title' => $category->getName(),
+                'link'  => $url
+            ));
+        }
+        return $this;
     }
 
     public function getItems()

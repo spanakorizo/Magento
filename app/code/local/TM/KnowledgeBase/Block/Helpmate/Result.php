@@ -1,5 +1,5 @@
 <?php
-class TM_KnowledgeBase_Block_Helpmate_Result extends Mage_Core_Block_Template
+class TM_KnowledgeBase_Block_Helpmate_Result extends TM_KnowledgeBase_Block_Abstract
 {
     protected function _beforeToHtml()
     {

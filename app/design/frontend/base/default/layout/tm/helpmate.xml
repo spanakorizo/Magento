@@ -5,7 +5,7 @@
         <reference name="head">
             <action method="addItem" ifconfig="helpmate/general/enabled">
                 <type>skin_css</type>
-                <name>css/helpmate.css</name>
+                <name>css/tm/helpmate.css</name>
             </action>
         </reference>
     </default>
@@ -113,7 +113,7 @@
 
     <helpmate_formcaptcha>
         <reference name="form.additional.info">
-            <block type="captcha/captcha" name="captcha">
+            <block type="captcha/captcha" name="captcha" as="captcha">
                 <reference name="head">
                     <action method="addJs"><file>mage/captcha.js</file></action>
                 </reference>
@@ -144,5 +144,15 @@
     <helpmate_contacts_add_ticket>
         <update handle="helpmate_ticket_new_additional"/>
     </helpmate_contacts_add_ticket>
+    
+    <!--api oauth validate form key bug was fixed-->
+    <oauth_authorize_index translate="label">
+        <label>OAuth authorization for customer</label>
+        <reference name="oauth.authorize.form">
+            <action method="setTemplate">
+                <template>tm/helpmate/api2/oauth/authorize/form/login.phtml</template>
+            </action>
+        </reference>
+    </oauth_authorize_index>
 
 </layout>

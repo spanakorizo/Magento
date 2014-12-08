@@ -12,7 +12,7 @@ if(null !== $_faq->getId()):?>
         </div>
 		<div class="knowledgebase-block-sub-title">
             <span class="knowledge-block-time">
-                   <?php 
+                   <?php
 			$format = Mage::app()->getLocale()->getDateFormat(Mage_Core_Model_Locale::FORMAT_TYPE_MEDIUM);
 			echo Mage::app()->getLocale()->date($_faq->getCreatedAt())->toString($format);
 		 	?>
@@ -26,7 +26,16 @@ if(null !== $_faq->getId()):?>
 
 
         <div class="knowledgebase-block-content block-content">
-            <?php echo $_faq->getContent(); ?>
+            <?php
+            $name = $this->__('Guest');
+            if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                $customer = Mage::getSingleton('customer/session')->getCustomer();
+                $name = $customer->getName();
+            }
+            $vars = new Varien_Object(array(
+                'name' => $name
+            ));
+            echo $_faq->getProcessedContent(array('vars' => $vars)); ?>
             <?php if (!$this->isRated()) :?>
             <form id="knowledge-faq-rate-form" method="post" action="<?php echo $this->getRateAction() ?>">
                 <input type="hidden" value="<?php echo $_faq->getId();?>" name="faq">

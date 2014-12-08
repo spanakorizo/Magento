@@ -5,11 +5,11 @@
         <reference name="head">
             <action method="addItem" ifconfig="knowledgebase/general/enabled">
                 <type>skin_css</type>
-                <name>css/knowledgebase.css</name>
+                <name>css/tm/knowledgebase.css</name>
             </action>
             <action method="addItem" ifconfig="knowledgebase/general/enabled">
                 <type>skin_js</type>
-                <name>js/ajaxsearch.js</name>
+                <name>js/tm/knowledgebase/autocomplete.js</name>
             </action>
         </reference>
 
@@ -53,9 +53,10 @@
         </reference>
 
         <reference name="content">
-            <block type="knowledgebase/ask"     name="knowledgebase"         template="tm/knowledgebase/ask.phtml" />
-            <block type="knowledgebase/faq"     name="knowledgebase_faq"     template="tm/knowledgebase/faq.phtml" />
-            <block type="knowledgebase/popular" name="knowledgebase_popular" template="tm/knowledgebase/popular.phtml" />
+            <block type="knowledgebase/ask"      name="knowledgebase"          template="tm/knowledgebase/ask.phtml" />
+            <block type="knowledgebase/category" name="knowledgebase_category" template="tm/knowledgebase/list.phtml" />
+            <block type="knowledgebase/faq"      name="knowledgebase_faq"      template="tm/knowledgebase/faq.phtml" />
+            <block type="knowledgebase/popular"  name="knowledgebase_popular"  template="tm/knowledgebase/popular.phtml" />
         </reference>
 
     </knowledgebase_index_view>

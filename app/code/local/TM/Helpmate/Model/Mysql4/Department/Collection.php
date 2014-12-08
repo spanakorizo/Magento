@@ -14,9 +14,15 @@ class TM_Helpmate_Model_Mysql4_Department_Collection extends Mage_Core_Model_Mys
         return $this;
     }
 
+    public function addGatewayIdFilter($gatewayId)
+    {
+        $this->getSelect()->where('main_table.gateway_id=?', $gatewayId);
+        return $this;
+    }
+
     public function addGatewayData()
     {
-        $modelGateway = Mage::getModel('helpmate/gateway');
+        $modelGateway = Mage::getModel('tm_email/gateway_storage');
         foreach ($this as $row) {
             $gateway = $modelGateway->load(
                 $row->getGatewayId()

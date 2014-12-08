@@ -7,11 +7,21 @@
         $processor = new Mage_Cms_Model_Template_Filter(); ?>
         <?php foreach ($collection as $_faq) :?>
             <div>
-                <a href="<?php echo $this->getUrl(
-                    'knowledgebase/index/view', array('faq' => $_faq->getIdentifier()))
-                ?>"><?php echo $_faq->getTitle() ?></a>
-				<p>
-                <?php $content = $processor->filter($_faq->getContent());
+                <a href="<?php echo $this->getArticleUrl(
+                    $_faq->getIdentifier()
+                )?>"><?php echo $_faq->getTitle() ?></a>
+                <p>
+                <?php
+                $name = $this->__('Guest');
+                if (Mage::getSingleton('customer/session')->isLoggedIn()) {
+                    $customer = Mage::getSingleton('customer/session')->getCustomer();
+                    $name = $customer->getName();
+                }
+                $vars = new Varien_Object(array(
+                    'name' => $name
+                ));
+                $content= $_faq->getProcessedContent(array('vars' => $vars));
+                
                 echo substr(strip_tags($content), 0, 200) . ' ...'; ?>
                 </p>
             </div>

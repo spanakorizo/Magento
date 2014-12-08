@@ -30,10 +30,8 @@ class TM_KnowledgeBase_Block_Suggest extends TM_KnowledgeBase_Block_Result
                 $rowClass .= ' last';
             }
             $title = $this->htmlEscape($item->getTitle());
-            $href  = $this->getUrl(
-                'knowledgebase/index/view',
-                array('faq' => $item->getIdentifier())
-            );
+            $href  = $this->getArticleUrl($item->getIdentifier());
+            
             $html .= '<li title="' . $title . '" class="' . $rowClass . '">'
 //                  . '<span class="amount">' . $item['score'] . '</span>'
                   . $title

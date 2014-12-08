@@ -9,7 +9,7 @@ class TM_KnowledgeBase_Block_Adminhtml_Product_Additional extends Mage_Adminhtml
                 ->getBlock('product_tabs')
                 ->addTab('knowledgebase_faq', array(
                     'label' => Mage::helper('knowledgebase')->__('Knowledgebase'),
-                    'url'   => $this->getUrl('knowledgebase_admin/adminhtml_faq/product', array('_current' => true)),
+                    'url'   => $this->getUrl('adminhtml/knowledgebase_faq/product', array('_current' => true)),
                     'class' => 'ajax'
                 ));
         }

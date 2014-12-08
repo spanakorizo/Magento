@@ -1,5 +1,5 @@
 <?php
-class TM_KnowledgeBase_Block_Ask extends Mage_Core_Block_Template
+class TM_KnowledgeBase_Block_Ask extends TM_KnowledgeBase_Block_Abstract
 {
 
     public function _prepareLayout()
@@ -8,15 +8,15 @@ class TM_KnowledgeBase_Block_Ask extends Mage_Core_Block_Template
         if ($breadcrumbs) {
             $breadcrumbs->addCrumb(
                 'home', array(
-                    'label'=>Mage::helper('cms')->__('Home'),
-                    'title'=>Mage::helper('cms')->__('Home Page'),
-                    'link'=>Mage::getBaseUrl()
+                    'label' => Mage::helper('cms')->__('Home'),
+                    'title' => Mage::helper('cms')->__('Home Page'),
+                    'link' => Mage::getBaseUrl()
                 )
             );
             $breadcrumbs->addCrumb(
                 'knowledgebase_home',
-                array('label' => 'Knowledge Base',
-                    'title'   => 'Knowledge Base',
+                array('label' => Mage::helper('knowledgebase')->__('Knowledge Base'),
+                    'title'   => Mage::helper('knowledgebase')->__('Knowledge Base'),
                     'link'    => Mage::getUrl("knowledgebase/index/index")
                 )
             );

@@ -1,30 +1,46 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
-    <!-- -->
-    <knowledgebase_admin_adminhtml_faq_index>
+
+    <adminhtml_knowledgebase_faq_index>
         <reference name="content">
-            <!-- -->
             <block type="knowledgebase/adminhtml_faq" name="faq" />
-            <!-- -->
         </reference>
-    </knowledgebase_admin_adminhtml_faq_index>
-    <!-- -->
+    </adminhtml_knowledgebase_faq_index>
 
-    <knowledgebase_admin_adminhtml_category_index>
+    <adminhtml_knowledgebase_faq_edit>
+    	<update handle="editor"/>
         <reference name="content">
-            <!-- -->
-            <block type="knowledgebase/adminhtml_category" name="category" />
-            <!-- -->
+            <block type="knowledgebase/adminhtml_faq_edit" name="knowledgebase_faq_edit"/>
         </reference>
-    </knowledgebase_admin_adminhtml_category_index>
-
+        <reference name="left">
+            <block type="knowledgebase/adminhtml_faq_edit_tabs" name="knowledgebase_faq_edit_tabs">
+                <block type="knowledgebase/adminhtml_faq_edit_tab_general" name="knowledgebase_faq_edit_tab_general" />
+                <block type="knowledgebase/adminhtml_faq_edit_tab_content" name="knowledgebase_faq_edit_tab_content" />
+                <block type="knowledgebase/adminhtml_faq_edit_tab_meta" name="knowledgebase_faq_edit_tab_meta" />
+                <action method="addTab">
+                    <name>form_section</name>
+                    <block>knowledgebase_faq_edit_tab_general</block>
+                </action>
+                <action method="addTab">
+                    <name>content_section</name>
+                    <block>knowledgebase_faq_edit_tab_content</block>
+                </action>
+                <action method="addTab">
+                    <name>meta_section</name>
+                    <block>knowledgebase_faq_edit_tab_meta</block>
+                </action>
+            </block>
+        </reference>
+    </adminhtml_knowledgebase_faq_edit>
+    <!-- -->
     <adminhtml_catalog_product_edit>
         <reference name="product_tabs">
             <block type="knowledgebase/adminhtml_product_additional" name="product_kb_grid" />
         </reference>
     </adminhtml_catalog_product_edit>
 
-    <knowledgebase_admin_adminhtml_faq_product>
+    <adminhtml_knowledgebase_faq_product>
+        <update handle="editor"/>
         <block type="core/text_list" name="root">
             <block type="knowledgebase/adminhtml_product_grid" name="knowledgebase.adminhtml.product.grid" />
             <block type="adminhtml/widget_grid_serializer" name="knowledgebase_grid_serializer">
@@ -38,6 +54,19 @@
                 </reference>
             </block>
         </block>
-    </knowledgebase_admin_adminhtml_faq_product>
+    </adminhtml_knowledgebase_faq_product>
+
+    <adminhtml_knowledgebase_category_index>
+        <reference name="content">
+            <block type="knowledgebase/adminhtml_category" name="category" />
+        </reference>
+    </adminhtml_knowledgebase_category_index>
+
+    <adminhtml_knowledgebase_category_edit>
+        <update handle="editor"/>
+        <reference name="content">
+            <block type="knowledgebase/adminhtml_category_edit" name="knowledgebase_category_edit"/>
+        </reference>
+    </adminhtml_knowledgebase_category_edit>
 
 </layout>

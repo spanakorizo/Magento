@@ -15,13 +15,13 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Form_Element_Theard extends Varien
     {
 //        return '--- THEARD --';
 //        /* @var $content TM_Helpmate_Block_Adminhtml_Ticket_Edit_Form_Element_Theard_Content */
-//        Mage_Adminhtml_Block_Catalog_Product_Helper_Form_Gallery_Content 
+//        Mage_Adminhtml_Block_Catalog_Product_Helper_Form_Gallery_Content
         $content = Mage::getSingleton('core/layout')
             ->createBlock('helpmate/adminhtml_ticket_edit_form_element_theard_content');
 //
         $content->setId($this->getHtmlId() . '_content')
             ->setElement($this);
-        
+
         return $content->toHtml();
     }
 
@@ -32,6 +32,8 @@ class TM_Helpmate_Block_Adminhtml_Ticket_Edit_Form_Element_Theard extends Varien
 
     public function toHtml()
     {
-        return '<tr><td class="value" style="width:200%" colspan="3">' . $this->getElementHtml() . '</td></tr>';
+        return '<tr><td class="value" style="width:200%" colspan="3">' .
+            $this->getElementHtml() .
+        '</td></tr>';
     }
 }
