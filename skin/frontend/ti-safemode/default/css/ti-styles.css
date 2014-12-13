@@ -430,7 +430,9 @@ textarea {
   display: inline-block;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-feature-settings: "lnum";-moz-font-feature-settings: "lnum";-webkit-font-feature-settings: "lnum";-ms-font-feature-settings: "lnum";-o-font-feature-settings: "lnum";
+ }
 
 a.ti_button {
   padding: 0 8px; }
@@ -648,6 +650,17 @@ input[type="file"] {
 
 .ti_file_wrap span {
   display: none; }
+
+hr{
+  background:currentColor;
+  filter: alpha(opacity=50);
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+  -moz-opacity: 0.50;
+  opacity:0.5;
+  width:80%;
+  border:none;
+  height:2px;
+}
 
 /*--Read more buttons--*/
 .more {

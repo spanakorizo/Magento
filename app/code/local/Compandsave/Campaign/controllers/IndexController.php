@@ -12,6 +12,7 @@ class Compandsave_Campaign_IndexController extends Mage_Core_Controller_Front_Ac
 		//Get current layout state
 		header('Location: http://www.buycheapink.org');
 
+
 	}
 
     public function expiredAction()
@@ -19,13 +20,19 @@ class Compandsave_Campaign_IndexController extends Mage_Core_Controller_Front_Ac
 		//Get current layout state
 		
 		$this->loadLayout();
+
+
 		$block = $this->getLayout()->createBlock(
 		'Mage_Core_Block_Template',
 		'general-expired-campaign',
 		array('template' => 'campaigns/2015/01-gen.phtml')
 		);
 		$this->getLayout()->getBlock('content')->append($block);
-		
+		$head = $this->getLayout()->getBlock('head');
+		$head->setTitle("Your Title");
+		$head->setKeywords("your, keywords, anything");
+		$head->setDescription("Your Description");
+
 		$this->renderLayout();
 	}
 
@@ -36,7 +43,7 @@ class Compandsave_Campaign_IndexController extends Mage_Core_Controller_Front_Ac
 		$this->loadLayout();
 		$block = $this->getLayout()->createBlock(
 		'Mage_Core_Block_Template',
-		'general-expired-campaign',
+		'survey-respond-campaign',
 		array('template' => 'campaigns/2014/12-sur-re.phtml')
 		);
 		$this->getLayout()->getBlock('content')->append($block);
@@ -51,13 +58,14 @@ class Compandsave_Campaign_IndexController extends Mage_Core_Controller_Front_Ac
 		$this->loadLayout();
 		$block = $this->getLayout()->createBlock(
 		'Mage_Core_Block_Template',
-		'general-expired-campaign',
+		'survey-norespond-campaign',
 		array('template' => 'campaigns/2014/12-sur-non.phtml')
 		);
 		$this->getLayout()->getBlock('content')->append($block);
 		
 		$this->renderLayout();
 	}
+
 
 }
 ?>

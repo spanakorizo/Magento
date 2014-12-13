@@ -428,7 +428,12 @@ textarea {
   display: inline-block;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  box-sizing: border-box; }
+  box-sizing: border-box;
+  font-feature-settings: "lnum";
+  -moz-font-feature-settings: "lnum";
+  -webkit-font-feature-settings: "lnum";
+  -ms-font-feature-settings: "lnum";
+  -o-font-feature-settings: "lnum"; }
 
 a.ti_button {
   padding: 0 8px; }
@@ -646,6 +651,16 @@ input[type="file"] {
 
 .ti_file_wrap span {
   display: none; }
+
+hr {
+  background: currentColor;
+  filter: alpha(opacity=50);
+  filter: progid:DXImageTransform.Microsoft.Alpha(opacity=50);
+  -moz-opacity: 0.50;
+  opacity: 0.5;
+  width: 80%;
+  border: none;
+  height: 2px; }
 
 /*--Read more buttons--*/
 .more {
@@ -3493,6 +3508,11 @@ input.ti_checkout_info {
 .ti_dashboard_amount {
   color: #e67921;
   font-family: 'raleway',arial,sans-serif;
+  font-feature-settings: "lnum";
+  -moz-font-feature-settings: "lnum";
+  -webkit-font-feature-settings: "lnum";
+  -ms-font-feature-settings: "lnum";
+  -o-font-feature-settings: "lnum";
   font-size: 4em;
   margin: 0;
   line-height: 1; }
@@ -3854,7 +3874,9 @@ ul.ti_product_checklist {
   position: relative; }
 
 #ti_product_qtyDiscountDrop {
-  margin-left: -75px;
+  /*margin-left: -75px;*/
+  margin-left: 120px;
+  /*updated by Yiyang*/
   width: 150px; }
 
 #ti_product_qtyDiscountDrop p {
@@ -3898,6 +3920,21 @@ ul.ti_product_checklist {
   margin-left: .5em;
   margin-top: -.5em;
   content: "\f105"; }
+
+.ti_product_comboTable p {
+  margin: 0 0 .5em; }
+
+.ti_product_comboTable img {
+  border: 1px solid #fff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%; }
+
+.ti_product_comboTable tr {
+  border-bottom: 2px solid #e67921; }
+  .ti_product_comboTable tr:hover img {
+    border: 1px solid #f0b07d; }
 
 /* Zoom */
 .ti_catalog_product_image {
@@ -4033,7 +4070,8 @@ ul.ti_product_checklist {
   display: none;
   position: absolute;
   width: 700px;
-  height: 800px;
+  /*height: 800px;*/
+  /*hide by yiyang*/
   left: 50%;
   margin-left: -350px;
   margin-top: -500px;
@@ -4673,6 +4711,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
     padding: 3%;
     float: left; }
 
+  .ti_product_comboTable img {
+    width: 50%;
+    min-width: 80px; }
+
   .menu_two_col, .menu_three_col {
     width: 110px; }
 
@@ -4822,6 +4864,10 @@ a[class^="PIN_"], a[class*=" PIN_"] {
 
   .ti_cart_desc {
     width: 100%; }
+
+  .ti_product_comboTable img {
+    width: 100%;
+    min-width: 1px; }
 
   .ti_popup_cart_window {
     width: 300px;

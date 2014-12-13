@@ -49,15 +49,20 @@ error_reporting(E_ALL);
     var ti_global_productcode = "<?php echo $_product->getSku(); ?>";
     var ti_global_productprice = "<?php echo number_format($_product->getPrice(), 2); ?>";
     <?php if ($_product->getTypeId() == "grouped"): ?>
-    var ti_global_printerbrand = "<?php $printer_cats = $_product->getCategoryIds();
+    var ti_global_printerbrand = "<?php 
+    $printer_cats = $_product->getCategoryIds();
     $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]);
     $printer_brand = $_printer_cat->getParentCategory();
-    if ($printer_brand->getName() != "")
+    if ($printer_brand->getName() != 'Default Category')
         echo $printer_brand->getName();
     else 
         echo $_printer_cat->getName();
     ?>";
-    var ti_global_printerbrand_url = "<?php echo $_printer_cat->getUrlKey() ?>";
+    var ti_global_printerbrand_url = "<?php 
+    if ($printer_brand->getName() != 'Default Category') 
+        echo $printer_brand->getUrlKey();
+    else 
+        echo $_printer_cat->getUrlKey() ?>";
      <?php endif; ?>
      <?php if (($_product->getTypeId() == "simple") || ($_product->getTypeId() == "bundle")): ?>
         <?php 
@@ -77,7 +82,7 @@ error_reporting(E_ALL);
 
         } ?>
 
-            <?php if ($_printer_model != ""): ?>
+            <?php if ($_printer_model != undefined): ?>
 
                 var ti_global_prev_printer = "<?php 
             
@@ -87,13 +92,18 @@ error_reporting(E_ALL);
                 var ti_global_printerbrand_url = "<?php 
                 $printer_cats = $_printer_model->getCategoryIds();
                 $_printer_cat = Mage::getModel('catalog/category')->load($printer_cats[0]);
-                echo $_printer_cat->getUrlKey();
+                $printer_brand = $_printer_cat->getParentCategory();
+                if ($printer_brand->getName() != 'Default Category')
+                    echo $printer_brand->getUrlKey();
+                else 
+                    echo $_printer_cat->getUrlKey();
                 ?>";
             <?php endif; ?>
       
       <?php endif; ?>
 
 </script>
+
 
 
 
@@ -329,12 +339,98 @@ error_reporting(E_ALL);
                             if ($_product->getTypeId() == "simple") echo "1 " . $_product->getProductType(); 
                             else {preg_match("/\d$/", $_product->getSku(), $matches); echo $matches[0] . " " . $bundle_quantity; } 
                             */
+                            if ($_product->getNoOfIncludedItems() != "")
                             echo $_product->getNoOfIncludedItems() . " " . $_product->getProductType();
+                            else {
+                                if ($_product->getTypeId() == "simple") 
+                                    {echo "1 " . $_product->getProductType();} 
+                                else 
+                                    {preg_match("/\d$/", $_product->getSku(), $matches); echo $matches[0] . " " . $bundle_quantity; } 
 
+                            }
                             ?></p></td>
                         </tr>
                     <?php endif; ?>
                     </table>
+                <?php if ($_product->getTypeId() == "bundle"): ?>    
+                    <!-- For combo packs -->
+                    <div class="ti_cms_block_headerBar-green">
+                        <h2 class="white ti_headerH1">Combo-Pack Specifications</h2>
+                    </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <h3 class="ltWeight altTxt">Total items included: <b id="">
+                                    <?php 
+                                        if ($_product->getNoOfIncludedItems() != "")
+                                            echo $_product->getNoOfIncludedItems() . " " . $_product->getProductType();
+                                        else {
+                                            
+                                            preg_match("/\d$/", $_product->getSku(), $matches); echo $matches[0];// . " " . $bundle_quantity; 
+                                        }
+                                    ?>
+
+                                </b></h3>
+                            </div>
+                            <div class="col-sm-6">
+                                <h3 class="ltWeight altTxt">Product type: <b id=""><?php 
+                                echo $bundle_quantity;
+                                ?></b></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <table class="ti_cms_infoTable ti_product_comboTable">
+                        <?php 
+                                $productitems = $_product->getTypeInstance(true)->getSelectionsCollection(
+                                    $_product->getTypeInstance(true)->getOptionsIds($_product), $_product
+                                ); 
+                                ?>
+                        <?php foreach ($productitems as $item): ?>
+                        <?php $_item = Mage::getModel('catalog/product')->load($item->product_id); ?>
+                        <tr>
+                            <td>
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-xs-3">
+                                                    <img src="<?php echo $_item->getImageUrl(); ?>" alt="">
+                                                </div>
+                                                <div class="col-xs-9">
+                                                    <p><?php 
+                                                        if ($_item->getProductNameShort() != "")
+                                                            echo $_item->getProductNameShort();
+                                                        else 
+                                                            echo $_item->getName();
+                                                    ?></p>
+                                                    <p><span class="ti_small_text">Model: <b id="ti_combo_model"><?php echo $_item->getVendorPartno(); ?></b></span></p>
+                                                    <p><span class="ti_small_text">Replaces: <b id="ti_combo_model"><?php echo $_item->getReplaceOemModel(); ?></b></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="row">
+                                                <div class="col-xs-9 col-xs-offset-3 col-sm-3 col-sm-offset-0">
+                                                    <p><span class="ti_small_text">Color: <b id="ti_combo_color"><?php echo $_item->getColor(); ?></b></span></p>
+                                                    <p><span class="ti_small_text">Qty: <b id="ti_combo_qty"><?php echo number_format($item->selection_qty, 0); ?></b></span></p>
+                                                </div>
+                                                <div class="col-xs-9 col-xs-offset-3 col-sm-offset-0">
+                                                    <p><span class="ti_small_text">Duty cycle: <b id="ti_combo_duty"><?php echo $_item->getDutyCycle(); ?></b></span></p>
+
+                                                       <p><span class="ti_small_text">Volume: <b id="ti_combo_volume"><?php echo $_item->getContent() . " ml"; ?></b></span></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+                    </table>
+                <?php endif; ?>
+
+                    <!-- end combo packs -->
+
 
 <?php if ($_printer_model != ""): ?>
                 <div class="ti_cms_block_headerBar-green">
