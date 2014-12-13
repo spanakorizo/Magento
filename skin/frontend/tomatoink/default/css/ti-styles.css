@@ -3875,7 +3875,8 @@ ul.ti_product_checklist {
 
 #ti_product_qtyDiscountDrop {
   /*margin-left: -75px;*/
-  margin-left: 120px;
+  margin-left: 64px;
+  margin-top: 16px;
   /*updated by Yiyang*/
   width: 150px; }
 
